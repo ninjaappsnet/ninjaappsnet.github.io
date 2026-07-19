@@ -42,6 +42,7 @@ MANIFEST = [
     "games/smalti/privacy.html",
     "games/smalti/terms.html",
     "games/smalti/support.html",
+    "games/smalti/press.html",
 ]
 
 # Placeholder apps removed 2026-07-19. Guard against a copy-paste revival.
