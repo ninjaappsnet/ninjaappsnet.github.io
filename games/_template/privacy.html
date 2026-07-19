@@ -1,16 +1,19 @@
+<!-- TEMPLATE: copy with the app folder, replace every {{TOKEN}}. -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy — Tatami Trials — NinjaApps</title>
-<meta name="description" content="Privacy policy for Tatami Trials by NinjaApps.">
-<link rel="canonical" href="https://ninjaapps.net/apps/tatami-trials/privacy.html">
+<title>Privacy — {{APP_NAME}} — NinjaApps</title>
+<meta name="description" content="Privacy policy for {{APP_NAME}} by NinjaApps.">
+<link rel="canonical" href="https://ninjaapps.net/games/{{SLUG}}/privacy.html">
 <meta property="og:site_name" content="NinjaApps">
-<meta property="og:title" content="Privacy — Tatami Trials — NinjaApps">
-<meta property="og:description" content="Privacy policy for Tatami Trials by NinjaApps.">
-<meta property="og:url" content="https://ninjaapps.net/apps/tatami-trials/privacy.html">
+<meta property="og:title" content="Privacy — {{APP_NAME}} — NinjaApps">
+<meta property="og:description" content="Privacy policy for {{APP_NAME}} by NinjaApps.">
+<meta property="og:url" content="https://ninjaapps.net/games/{{SLUG}}/privacy.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<!-- remove this noindex line when copying the template -->
+<meta name="robots" content="noindex">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +27,6 @@
   <a class="wordmark" href="../../">忍 NinjaApps</a>
   <nav>
     <a href="../../#games">Games</a>
-    <a href="../../#utilities">Utilities</a>
     <a href="privacy.html">Privacy</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
   </nav>
@@ -33,22 +35,22 @@
 <main>
 
 <section class="page">
-  <div class="kicker">秘 PRIVACY — TATAMI TRIALS</div>
+  <div class="kicker">秘 PRIVACY — {{APP_NAME_UPPER}}</div>
   <h1 class="page-title">Privacy Policy</h1>
-  <p class="effective">EFFECTIVE 2026-07-09</p>
+  <p class="effective">EFFECTIVE {{EFFECTIVE_DATE}}</p>
   <div class="prose">
     <h2>Overview</h2>
-    <p>Tatami Trials is made by NinjaApps. This policy describes what data Tatami Trials handles — which, by design, is very little.</p>
+    <p>{{APP_NAME}} is made by NinjaApps. This policy describes what data {{APP_NAME}} handles — which, by design, is very little.</p>
 
     <h2>Data collection</h2>
-    <p>Tatami Trials does not collect, store, or transmit any personal data. There are no accounts, no analytics, no advertising identifiers, and no tracking of any kind.</p>
+    <p>{{APP_NAME}} does not collect, store, or transmit any personal data. There are no accounts, no analytics, no advertising identifiers, and no tracking of any kind.</p>
     <p>Any progress and settings are stored locally on your device (and in your personal iCloud backup, if you have one), where NinjaApps has no access to them.</p>
 
     <h2>Third-party services</h2>
-    <p>Tatami Trials uses Apple Game Center for optional leaderboards. Game Center is operated by Apple and governed by Apple's privacy policy. Beyond that, the app embeds no third-party SDKs and shares no data with anyone.</p>
+    <p>{{APP_NAME}} does not embed any third-party SDKs. No data is shared with anyone because no data is collected.</p>
 
     <h2>Children's privacy</h2>
-    <p>Tatami Trials does not knowingly collect data from anyone, including children.</p>
+    <p>{{APP_NAME}} does not knowingly collect data from anyone, including children.</p>
 
     <h2>Changes to this policy</h2>
     <p>If a future update changes what data the app handles, this policy will be updated before that version ships. The effective date above always reflects the current version.</p>
@@ -57,7 +59,7 @@
     <!-- TODO: add a support email when available -->
     <p>Questions about this policy can be raised through the app's App Store page.</p>
   </div>
-  <a class="backlink" href="./">← BACK TO TATAMI TRIALS</a>
+  <a class="backlink" href="./">← BACK TO {{APP_NAME_UPPER}}</a>
 </section>
 
 </main>

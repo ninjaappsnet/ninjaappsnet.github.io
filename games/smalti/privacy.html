@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — Smalti — NinjaApps</title>
+<meta name="description" content="Privacy policy for Smalti. The game runs on your device: no account, no server of ours, and no data collected in this version.">
+<link rel="canonical" href="https://ninjaapps.net/games/smalti/privacy.html">
+<meta property="og:site_name" content="NinjaApps">
+<meta property="og:title" content="Privacy — Smalti — NinjaApps">
+<meta property="og:description" content="Privacy policy for Smalti by NinjaApps.">
+<meta property="og:url" content="https://ninjaapps.net/games/smalti/privacy.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+<script src="../../assets/theme.js" defer></script>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="../../">忍 NinjaApps</a>
+  <nav>
+    <a href="../../#games">Games</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
+  </nav>
+</header>
+
+<main>
+
+<section class="page">
+  <div class="kicker">秘 PRIVACY — SMALTI</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="effective">VERSION 1.0 — EFFECTIVE 2026-07-19</p>
+  <div class="prose">
+
+    <p><strong>The short version: the game runs on your device.</strong> There is no account, no sign-up, and no server of ours. This version of Smalti collects nothing about you. The only network connections it makes are to Apple — to process a purchase, to keep a copy of your progress in your own iCloud, and, if you choose to sign in, to post scores to Game Center.</p>
+
+    <p>Smalti is made by NinjaApps, a trading name of cetin.info — the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. In this version it processes none.</p>
+
+    <h2>What the app does not do</h2>
+    <ul>
+      <li>No accounts, no email addresses, no passwords, no profiles.</li>
+      <li>No advertising identifiers and no tracking, across this app or any other. Smalti contains no advertising SDK and shows no ads of any kind.</li>
+      <li>No analytics or crash-reporting SDK in this version. See the marked section below for a change we intend to make.</li>
+      <li>No third-party SDKs at all in the shipping app.</li>
+      <li>No text you type, because there is nowhere in the game to type. No camera, microphone, photo library, contacts, or location access.</li>
+      <li>No servers of ours for anything to be sent to.</li>
+    </ul>
+
+    <h2>Where your progress lives</h2>
+    <p>Your progress — solved levels, stars, streaks, hint and freeze balances, unlocked themes, and your settings — is written to a file in the app's own storage on your device. A second small file holds the board you are part-way through, so a mosaic survives being interrupted; it is discarded after a day. Both are included in your device backups the same way any app's data is.</p>
+
+    <p>If your device is signed into iCloud, the game also mirrors part of that data into your personal iCloud key-value storage, held by Apple under your Apple Account. The purpose is narrow: so that deleting and reinstalling the app, or moving to a new phone, brings back your streak, your daily history and your unspent hints and freezes. What gets mirrored is progress and balances only — your settings, your theme choice, your tutorial state and your patronage tier deliberately stay on the device they belong to. We cannot read that copy. It never passes through anything we operate.</p>
+
+    <p>Deleting the app deletes the local files. If you played without iCloud, those were the only copies, and since we hold none of our own we cannot restore lost progress. Purchases are a separate matter and are always restorable — see below.</p>
+
+    <h2>The widget, Siri and the Lock Screen</h2>
+    <p>If you add the Smalti widget, the app writes a small summary into a shared container that the widget can read: today's date key, whether today's mosaic is solved, your current streak, how many freezes you have banked, and which days of the current month you have completed. The Siri shortcut that answers "what's my streak" reads that same summary and speaks it back without opening the app.</p>
+    <p>This is worth naming because it feels like data leaving the app, and in a sense it does — it crosses into iOS surfaces you can see from the Lock Screen. But it stays on your device, inside the app's own sandbox, and none of it reaches us or anyone else.</p>
+
+    <h2>Motion</h2>
+    <p>The glaze on the tiles catches the light as you tilt the phone. To do that the game reads the device's orientation from the motion sensors while a board is on screen. iOS does not require a permission prompt for this reading, and the values are used by the renderer and then discarded — nothing is stored, and nothing is transmitted.</p>
+
+    <h2>Apple services the app talks to</h2>
+    <ul>
+      <li><strong>App Store</strong> — Apple processes every purchase and restore. We never see your payment details, and we do not store receipts. The app keeps a short local list of transaction identifiers so a hint pack you bought is never credited to you twice.</li>
+      <li><strong>iCloud</strong> — active automatically when your device is signed in, as described above. Apple's iCloud terms and privacy policy govern the storage. Turning iCloud off for Smalti in iOS Settings keeps the game entirely on-device.</li>
+      <li><strong>Game Center</strong> — entirely optional. If you sign in, the game submits three things: your time and move count on the daily mosaic, and your total time on the weekly speedrun, plus your achievement unlocks. That is the whole payload — numbers, and nothing attached to them. The nickname shown beside your score is the one Apple holds for your Game Center account; the app never reads it. Decline or sign out at any time in iOS Settings. The game is complete without it, and every leaderboard button hides when you are signed out.</li>
+    </ul>
+
+    <h2>Notifications</h2>
+    <p>Two optional reminders — a daily nudge, and a warning on an evening when your streak is about to lapse. Both are scheduled on your device, both only after you turn them on inside the game, and iOS asks for your permission the first time. There are no push notifications: the app has no push capability and nothing is sent from anywhere.</p>
+
+    <h2>Sharing a result</h2>
+    <p>When you share a result card, the game hands an image or a block of emoji to the iOS share sheet and you choose where it goes. The card is spoiler-free by design. The app has no share endpoint of its own and never posts anything on your behalf.</p>
+
+    <h2>Children</h2>
+    <p>Smalti is rated for all ages. It collects no data from anyone, including children, contains no third-party content, and has no chat, no user-generated content and no web browsing.</p>
+
+    <div class="notice">
+      <h2>Planned change — analytics and crash reporting (not yet active)</h2>
+      <p><strong>This section describes something we intend to add. It is not in effect today.</strong> We plan to add Google Firebase Analytics and Crashlytics so we can see, in aggregate, how the game is actually played — which levels get finished, where people stop, which purchases happen and at what price and currency — and so that crashes reach us with enough detail to fix them.</p>
+      <p>That data would not be linked to your identity, because the app would still have no accounts. It would not be used to track you across other apps or websites, and no advertising identifier would be involved. Firebase does assign a per-install identifier, which is what makes "one person finished level 40" distinguishable from "forty people finished level 1".</p>
+      <p>When it ships, we will publish a new version of this policy with a new effective date, and update the App Store privacy label in the same release to declare Usage Data, Identifiers and Diagnostics. Until you see that new version, the app is collecting nothing.</p>
+    </div>
+
+    <h2>Your choices, and deleting your data</h2>
+    <ul>
+      <li><strong>Local data</strong> — delete the app.</li>
+      <li><strong>The iCloud copy</strong> — it is not removed when you delete the app, which is the point of it; reinstalling restores from it. To start genuinely fresh, turn iCloud off for Smalti in iOS Settings (your name → iCloud) before reinstalling, or write to us and we will talk you through it.</li>
+      <li><strong>Game Center</strong> — scores and achievements live with your Apple Account and are managed through Apple's Data &amp; Privacy tools, not by us.</li>
+      <li><strong>Purchases</strong> — restorable on any device signed into your Apple Account via Restore Purchases in the game. Refunds are Apple's decision, at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</li>
+    </ul>
+
+    <h2>Your rights under the GDPR</h2>
+    <p>The GDPR gives you rights of access, rectification, erasure, restriction, portability and objection over personal data a controller holds about you. We hold none: there is no account to look up, no identifier we could search on, and no database. If that changes — the analytics section above is the only change on the horizon — this policy will be updated before it does, and the rights described here will have something to attach to.</p>
+    <p>You can raise a concern with us at <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a>, or lodge a complaint with the Polish supervisory authority, the Urząd Ochrony Danych Osobowych (UODO), at <a href="https://uodo.gov.pl">uodo.gov.pl</a>.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>Each version of this policy carries a version number and an effective date, and both change whenever the substance does. We do not edit a published version in place — a change means a new one. The marked section above becomes true only through such an update, and material changes are called out in the App Store release notes of the version that makes them true.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a>. There is more on the <a href="support.html">support page</a>.</p>
+
+  </div>
+  <a class="backlink" href="./">← BACK TO SMALTI</a>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 NinjaApps</span>
+  <a class="footer-privacy" href="privacy.html">PRIVACY POLICY</a>
+</footer>
+
+</body>
+</html>

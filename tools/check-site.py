@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+"""Structural checks for ninjaapps.net.
+
+No build step means no compiler to catch a dead link after a page is renamed
+or deleted. This script is the substitute: run it before every commit.
+
+    python3 tools/check-site.py
+
+Checks:
+  1. Every page the site promises to publish exists (MANIFEST below).
+  2. Pages that were deliberately removed stay removed.
+  3. No unreplaced {{TOKEN}} or <CONFIRM ...> placeholders outside _template/.
+  4. Every internal href/src resolves to a file on disk.
+  5. sitemap.xml and the published pages agree, both directions.
+  6. Each page's <link rel="canonical"> matches its own path.
+  7. The URLs baked into the Smalti binary resolve to real pages.
+"""
+
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+from urllib.parse import urldefrag, urlparse
+
+ROOT = Path(__file__).resolve().parent.parent
+ORIGIN = "https://ninjaapps.net"
+
+# Pages the site commits to publishing.
+MANIFEST = [
+    "index.html",
+    "404.html",
+    "privacy/index.html",
+    "games/smalti/index.html",
+    "games/smalti/privacy.html",
+    "games/smalti/terms.html",
+    "games/smalti/support.html",
+]
+
+# Placeholder apps removed 2026-07-19. Guard against a copy-paste revival.
+REMOVED = [
+    "apps/shadow-dash",
+    "apps/kunai-drop",
+    "apps/tatami-trials",
+    "apps/focus-dojo",
+    "apps/scanblade",
+    "games/shadow-dash",
+    "games/kunai-drop",
+    "games/tatami-trials",
+    "games/focus-dojo",
+    "games/scanblade",
+]
+
+# Hardcoded in the Smalti binary (MosaicRush/UI/Components.swift, enum AppLinks).
+# Changing either side without the other ships a dead legal link to App Review.
+BAKED_IN_URLS = [
+    f"{ORIGIN}/games/smalti/privacy.html",
+    f"{ORIGIN}/games/smalti/terms.html",
+    # ASC's support field needs a web page; the in-app link is a mailto.
+    f"{ORIGIN}/games/smalti/support.html",
+]
+
+# The template is meant to keep its placeholders.
+EXEMPT_DIRS = {"games/_template", "apps/_template"}
+
+errors: list[str] = []
+
+
+def fail(msg: str) -> None:
+    errors.append(msg)
+
+
+def is_exempt(path: Path) -> bool:
+    rel = path.relative_to(ROOT).as_posix()
+    return any(rel.startswith(d + "/") for d in EXEMPT_DIRS)
+
+
+def published_pages() -> list[Path]:
+    return sorted(
+        p for p in ROOT.rglob("*.html")
+        if ".git" not in p.parts and not is_exempt(p)
+    )
+
+
+def url_for(page: Path) -> str:
+    rel = page.relative_to(ROOT).as_posix()
+    return f"{ORIGIN}/{rel[:-len('index.html')] if rel.endswith('index.html') else rel}"
+
+
+def check_manifest() -> None:
+    for rel in MANIFEST:
+        if not (ROOT / rel).is_file():
+            fail(f"manifest: missing page {rel}")
+
+
+def check_removed() -> None:
+    for rel in REMOVED:
+        if (ROOT / rel).exists():
+            fail(f"removed: {rel} is back on disk")
+
+
+def check_placeholders() -> None:
+    for page in published_pages():
+        text = page.read_text(encoding="utf-8")
+        rel = page.relative_to(ROOT).as_posix()
+        for token in set(re.findall(r"\{\{[A-Z0-9_]+\}\}", text)):
+            fail(f"placeholder: {rel} still has {token}")
+        if "<CONFIRM" in text or "&lt;CONFIRM" in text:
+            fail(f"placeholder: {rel} still has a <CONFIRM ...> marker")
+
+
+def check_links() -> None:
+    pattern = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"')
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        for raw in pattern.findall(page.read_text(encoding="utf-8")):
+            target, _ = urldefrag(raw)
+            if not target or urlparse(target).scheme or target.startswith("//"):
+                continue  # external, mailto:, data:, or a same-page anchor
+            base = ROOT if target.startswith("/") else page.parent
+            resolved = (base / target.lstrip("/")).resolve()
+            if resolved.is_dir():
+                resolved = resolved / "index.html"
+            if not resolved.is_file():
+                fail(f"dead link: {rel} -> {raw}")
+
+
+def check_sitemap() -> None:
+    sitemap = ROOT / "sitemap.xml"
+    if not sitemap.is_file():
+        fail("sitemap: sitemap.xml is missing")
+        return
+    listed = set(re.findall(r"<loc>([^<]+)</loc>", sitemap.read_text(encoding="utf-8")))
+    # 404 is intentionally noindex and stays out of the sitemap.
+    actual = {url_for(p) for p in published_pages() if p.name != "404.html"}
+    for url in sorted(listed - actual):
+        fail(f"sitemap: lists {url}, which has no page on disk")
+    for url in sorted(actual - listed):
+        fail(f"sitemap: {url} is published but not listed")
+
+
+def check_canonicals() -> None:
+    pattern = re.compile(r'<link\s+rel="canonical"\s+href="([^"]+)"')
+    for page in published_pages():
+        if page.name == "404.html":
+            continue
+        rel = page.relative_to(ROOT).as_posix()
+        found = pattern.search(page.read_text(encoding="utf-8"))
+        if not found:
+            fail(f"canonical: {rel} has no <link rel=canonical>")
+        elif found.group(1) != url_for(page):
+            fail(f"canonical: {rel} points at {found.group(1)}, expected {url_for(page)}")
+
+
+def check_baked_in_urls() -> None:
+    for url in BAKED_IN_URLS:
+        rel = url[len(ORIGIN) + 1:]
+        page = ROOT / rel
+        if page.is_dir():
+            page = page / "index.html"
+        if not page.is_file():
+            fail(f"binary URL: {url} does not resolve (Smalti ships this link)")
+
+
+def main() -> int:
+    for check in (
+        check_manifest,
+        check_removed,
+        check_placeholders,
+        check_links,
+        check_sitemap,
+        check_canonicals,
+        check_baked_in_urls,
+    ):
+        check()
+
+    if errors:
+        print(f"FAIL — {len(errors)} problem(s):\n")
+        for err in errors:
+            print(f"  · {err}")
+        return 1
+
+    print(f"OK — {len(published_pages())} pages, no problems found.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

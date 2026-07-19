@@ -143,11 +143,27 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 .facts dd { margin: 0; font: 500 11px 'IBM Plex Mono', monospace; color: var(--ink); text-align: right; }
 .facts dd a { color: var(--accent); }
 
-/* ===== Text pages (privacy, 404) ===== */
+/* ===== Text pages (privacy, terms, support, 404) ===== */
 .page { padding: 72px 56px; max-width: 752px; }
 .page-title { margin: 0 0 10px; font: 700 40px/1.15 'Shippori Mincho', serif; letter-spacing: -.01em; }
 .effective { margin: 0 0 44px; font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
 .backlink { display: inline-block; margin-top: 44px; font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+
+/* Marked-up clause in a policy: a change committed to but not yet in effect.
+   Vermillion rule so it reads as "not the rest of the document". */
+.notice { margin: 32px 0; padding: 22px 26px; border-left: 2px solid var(--accent); background: var(--stripe-a); }
+.notice h2 { margin-top: 0; }
+.notice p:last-child { margin-bottom: 0; }
+
+/* Lead contact block on the support page. */
+.contact-box { margin: 0 0 40px; padding: 22px 26px; border: 1px solid var(--line); }
+.contact-box p { margin: 0 0 10px; font: 400 14px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.contact-box p:last-child { margin-bottom: 0; }
+.contact-box strong { color: var(--ink); }
+.contact-box a { color: var(--accent); }
+
+/* Inert variant of .btn — a destination that does not exist yet. */
+.btn-quiet { color: var(--ink-45); border-style: dashed; cursor: default; }
 
 /* ===== 404 ===== */
 .notfound { padding: 120px 56px 140px; text-align: center; }

@@ -1,16 +1,20 @@
+<!-- TEMPLATE: copy this folder to games/<slug>/, replace every {{TOKEN}},
+     then add a card for the app on the landing page and a row on /privacy/. -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tatami Trials — NinjaApps</title>
-<meta name="description" content="Turn-based duels on a nine-tile mat. Easy to learn, deep to master.">
-<link rel="canonical" href="https://ninjaapps.net/apps/tatami-trials/">
+<title>{{APP_NAME}} — NinjaApps</title>
+<meta name="description" content="{{ONE_LINE_BLURB}}">
+<link rel="canonical" href="https://ninjaapps.net/games/{{SLUG}}/">
 <meta property="og:site_name" content="NinjaApps">
-<meta property="og:title" content="Tatami Trials — NinjaApps">
-<meta property="og:description" content="Turn-based duels on a nine-tile mat. Easy to learn, deep to master.">
-<meta property="og:url" content="https://ninjaapps.net/apps/tatami-trials/">
+<meta property="og:title" content="{{APP_NAME}} — NinjaApps">
+<meta property="og:description" content="{{ONE_LINE_BLURB}}">
+<meta property="og:url" content="https://ninjaapps.net/games/{{SLUG}}/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<!-- remove this noindex line when copying the template -->
+<meta name="robots" content="noindex">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +28,6 @@
   <a class="wordmark" href="../../">忍 NinjaApps</a>
   <nav>
     <a href="../../#games">Games</a>
-    <a href="../../#utilities">Utilities</a>
     <a href="privacy.html">Privacy</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
   </nav>
@@ -32,12 +35,12 @@
 
 <main>
 
-<!-- ============ Tatami Trials (sample content — replace with real app) ============ -->
+<!-- ============ {{APP_NAME}} (sample content — replace with real app) ============ -->
 <section class="app-hero">
   <div>
-    <div class="kicker">遊 GAME — 03</div>
-    <h1>Tatami Trials</h1>
-    <p class="lede">Turn-based duels on a nine-tile mat. Easy to learn, deep to master.</p>
+    <div class="kicker">{{遊_OR_道}} {{GAME_OR_UTILITY}} — {{NUMBER}}</div>
+    <h1>{{APP_NAME}}</h1>
+    <p class="lede">{{ONE_LINE_BLURB}}</p>
     <div class="actions">
       <!-- TODO: replace # with the real App Store URL, e.g. https://apps.apple.com/app/id0000000000 -->
       <a class="btn" href="#">APP STORE — COMING SOON</a>
@@ -73,19 +76,18 @@
   <div class="about">
     <div class="prose">
       <!-- PLACEHOLDER COPY — replace with the real store description -->
-      <p>Nine tiles, two duelists. Tatami Trials is a turn-based duel on a three-by-three mat — read your opponent's stance, predict the strike, claim the tiles.</p>
-      <p>Matches take three minutes; mastery takes considerably longer. Face the dojo's AI ranks, or a friend across the table in pass-and-play.</p>
+      <p>{{PARAGRAPH_1}}</p>
+      <p>{{PARAGRAPH_2}}</p>
       <ul>
-        <li>Turn-based duels on a 9-tile mat</li>
-        <li>12 AI ranks from novice to master</li>
-        <li>Local pass-and-play</li>
-        <li>Game Center leaderboards</li>
+        <li>{{FEATURE_1}}</li>
+        <li>{{FEATURE_2}}</li>
+        <li>{{FEATURE_3}}</li>
       </ul>
     </div>
     <dl class="facts">
-      <div><dt>CATEGORY</dt><dd>STRATEGY</dd></div>
-      <div><dt>PRICE</dt><dd>$2.99</dd></div>
-      <div><dt>REQUIRES</dt><dd>iOS 16+</dd></div>
+      <div><dt>CATEGORY</dt><dd>{{CATEGORY}}</dd></div>
+      <div><dt>PRICE</dt><dd>{{PRICE}}</dd></div>
+      <div><dt>REQUIRES</dt><dd>{{IOS_VERSION}}</dd></div>
       <div><dt>PRIVACY</dt><dd><a href="privacy.html">POLICY →</a></dd></div>
     </dl>
   </div>
