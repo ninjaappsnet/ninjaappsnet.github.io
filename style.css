@@ -1,5 +1,10 @@
 /* ===== Design tokens — "Paper Dojo" ===== */
 :root {
+  /* Side padding: 56px until the viewport outgrows --content-max, then the
+     surplus becomes symmetric margins. Bars (header, footer, section rules)
+     stay full-bleed; only their content is constrained. */
+  --content-max: 1160px;
+  --pad-side: max(56px, calc(50% - var(--content-max) / 2));
   --bg: #f6f2e9;            /* warm paper */
   --ink: #1d1a16;           /* warm near-black */
   --ink-60: rgba(29,26,22,.62);
@@ -52,7 +57,7 @@ a:hover { color: var(--accent); }
 /* ===== Nav ===== */
 header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 56px;
+  padding: 24px var(--pad-side);
   border-bottom: 1px solid var(--line);
 }
 .wordmark { font: 700 20px 'Shippori Mincho', serif; letter-spacing: .04em; }
@@ -67,7 +72,7 @@ nav { display: flex; align-items: center; gap: 32px; font: 500 13px 'Zen Kaku Go
 /* ===== Hero (landing) ===== */
 .hero {
   display: grid; grid-template-columns: 1fr 300px; gap: 48px;
-  padding: 80px 56px 64px;
+  padding: 80px var(--pad-side) 64px;
   border-bottom: 1px solid var(--line);
 }
 .kicker { font: 500 12px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); margin-bottom: 20px; }
@@ -75,6 +80,12 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 .lede { margin-top: 24px; max-width: 440px; font: 400 16px/1.75 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 .hero-side { display: flex; justify-content: flex-end; gap: 22px; }
 .tategaki { writing-mode: vertical-rl; font: 600 26px 'Shippori Mincho', serif; letter-spacing: .5em; color: var(--ink-28); }
+
+/* ===== Real app art ===== */
+.app-icon    { width: 160px; height: 160px; border-radius: 36px; flex: none;
+               box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.app-icon-sm { width: 64px; height: 64px; border-radius: 15px; flex: none; }
+.shot img    { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
 
 /* ===== Placeholder art (replace with real assets) ===== */
 .ph {
@@ -90,7 +101,7 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 .ph-shot { width: 100%; aspect-ratio: 9 / 19.5; }
 
 /* ===== App group sections ===== */
-.group { padding: 56px 56px 8px; }
+.group { padding: 56px var(--pad-side) 8px; }
 .group:last-of-type { padding-bottom: 72px; }
 .group-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; }
 .group-kanji { font: 700 15px 'IBM Plex Mono', monospace; letter-spacing: .24em; color: var(--accent); }
@@ -116,7 +127,7 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 /* ===== App detail page ===== */
 .app-hero {
   display: grid; grid-template-columns: 1fr 300px; gap: 48px;
-  padding: 72px 56px 56px;
+  padding: 72px var(--pad-side) 56px;
   border-bottom: 1px solid var(--line);
 }
 .app-hero h1 { font-size: 56px; }
@@ -144,7 +155,7 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 .facts dd a { color: var(--accent); }
 
 /* ===== Text pages (privacy, terms, support, 404) ===== */
-.page { padding: 72px 56px; max-width: 752px; }
+.page { padding: 72px var(--pad-side); max-width: calc(752px + 2 * var(--pad-side)); margin-inline: auto; }
 .page-title { margin: 0 0 10px; font: 700 40px/1.15 'Shippori Mincho', serif; letter-spacing: -.01em; }
 .effective { margin: 0 0 44px; font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
 .backlink { display: inline-block; margin-top: 44px; font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
@@ -166,7 +177,7 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 .btn-quiet { color: var(--ink-45); border-style: dashed; cursor: default; }
 
 /* ===== 404 ===== */
-.notfound { padding: 120px 56px 140px; text-align: center; }
+.notfound { padding: 120px var(--pad-side) 140px; text-align: center; }
 .notfound h1 { font-size: 96px; }
 .notfound .lede { margin: 20px auto 0; }
 .notfound .actions { justify-content: center; }
@@ -174,7 +185,7 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 /* ===== Footer ===== */
 footer {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 56px;
+  padding: 24px var(--pad-side);
   background: var(--footer-bg); color: var(--footer-fg);
   font: 400 12px 'IBM Plex Mono', monospace;
 }

@@ -65,10 +65,17 @@ Moving or renaming those pages ships a dead legal link to App Review and to
 everyone who already installed the app. Change them only alongside a game
 release, and update `BAKED_IN_URLS` in `tools/check-site.py` at the same time.
 
+## Assets
+
+Smalti's icon and screenshots are real (WebP, captured 2026-07-20 from the
+iPhone 16 Pro Max simulator). Source masters live in the game repo at
+`mosaic-rush/marketing/` — icon at 1024, screenshots at 1320×2868, sized for
+App Store reuse. Web copies: `assets/icon-smalti-144.webp` (landing card),
+`games/smalti/icon-320.webp` (hero), `games/smalti/shot-*.webp` (750px wide).
+
 ## Placeholder inventory (TODO)
 
-- Striped boxes (`.ph`) are asset slots: hero art on the landing page, the
-  Smalti app icon (1024×1024), and three screenshots (1290×2796).
+- One striped box (`.ph`) left: the hero art / studio mark on the landing page.
 - Smalti's App Store button is inert (`.btn-quiet`) until the App Store
   Connect record exists — search `TODO` across the repo.
 - `support@ninjaapps.net` must be a live mailbox before submission; the
