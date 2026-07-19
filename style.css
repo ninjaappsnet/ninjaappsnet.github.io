@@ -78,8 +78,15 @@ nav { display: flex; align-items: center; gap: 32px; font: 500 13px 'Zen Kaku Go
 .kicker { font: 500 12px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); margin-bottom: 20px; }
 h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.01em; }
 .lede { margin-top: 24px; max-width: 440px; font: 400 16px/1.75 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
-.hero-side { display: flex; justify-content: flex-end; gap: 22px; }
+.hero-side { display: flex; justify-content: flex-end; align-items: center; gap: 26px; }
 .tategaki { writing-mode: vertical-rl; font: 600 26px 'Shippori Mincho', serif; letter-spacing: .5em; color: var(--ink-28); }
+
+/* Studio mark: a hanko-style seal — vermillion stamp, paper glyph,
+   set a touch off-square like a hand impression. */
+.studio-seal { width: 176px; height: 176px; flex: none; transform: rotate(-2.5deg); }
+.studio-seal .seal-bg { fill: var(--accent); }
+.studio-seal .seal-ring { fill: none; stroke: var(--bg); stroke-opacity: .4; stroke-width: 2; }
+.studio-seal .seal-glyph { fill: var(--bg); font: 700 116px 'Shippori Mincho', serif; }
 
 /* ===== Real app art ===== */
 .app-icon    { width: 160px; height: 160px; border-radius: 36px; flex: none;
@@ -195,7 +202,9 @@ footer a:hover { color: #e05a40; }  /* lifted vermillion: readable on the ink fo
 @media (max-width: 860px) {
   header, .hero, .app-hero, .group, .page, .notfound, footer { padding-left: 24px; padding-right: 24px; }
   .hero, .app-hero, .about { grid-template-columns: 1fr; }
-  .hero-side { justify-content: flex-start; }
+  /* Stacked hero: center the art instead of leaving it dangling at the left rail. */
+  .hero-side { justify-content: center; }
+  footer { flex-wrap: wrap; gap: 8px 24px; justify-content: center; text-align: center; }
   h1 { font-size: 48px; }
   .app-hero h1 { font-size: 44px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
