@@ -50,6 +50,26 @@ Apps that sell anything need `terms.html` and `support.html` too — copy
 Smalti's and rewrite them. App Store Connect's support field will not accept
 a `mailto:`, so the web page is mandatory, not a nicety.
 
+## Legal page versioning
+
+Published privacy/terms are never retro-edited in substance. The canonical
+URL (`games/smalti/privacy.html`) always serves the **latest** version — it
+is baked into the app binary and must not move. To change substance:
+
+1. Snapshot the outgoing page beside it: `privacy-v1.0.html` (keep its
+   `<link rel="canonical">` pointing at itself, add `noindex`).
+2. Rewrite the canonical page with the new version number and effective date.
+3. Add a **Version history** section on the canonical page linking every
+   archived version with its effective date.
+4. Keep archived versions out of `sitemap.xml` (they are `noindex`); list
+   them in `MANIFEST` in `tools/check-site.py` so their existence — and the
+   history links — stay enforced.
+5. Run `python3 tools/check-site.py`.
+
+Typo and navigation fixes don't need a bump; anything touching meaning does.
+The same rule (and the ASC privacy-label same-release requirement) lives in
+the game repo's PUBLISHING_TODO.
+
 ## Load-bearing URLs
 
 Smalti ships these three addresses hardcoded in its binary

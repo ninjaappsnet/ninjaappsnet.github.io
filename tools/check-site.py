@@ -27,6 +27,13 @@ ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = "https://ninjaapps.net"
 
 # Pages the site commits to publishing.
+#
+# Legal versioning (see README): the canonical privacy/terms URL always
+# serves the LATEST version. When substance changes, snapshot the outgoing
+# page as e.g. games/smalti/privacy-v1.0.html (noindex, out of the sitemap),
+# link it from the canonical page's Version history section, and add it HERE
+# so its continued existence is enforced. Never retro-edit a published
+# version's substance in place.
 MANIFEST = [
     "index.html",
     "404.html",
@@ -125,17 +132,26 @@ def check_links() -> None:
                 fail(f"dead link: {rel} -> {raw}")
 
 
+def is_noindex(page: Path) -> bool:
+    return 'name="robots" content="noindex"' in page.read_text(encoding="utf-8")
+
+
 def check_sitemap() -> None:
     sitemap = ROOT / "sitemap.xml"
     if not sitemap.is_file():
         fail("sitemap: sitemap.xml is missing")
         return
     listed = set(re.findall(r"<loc>([^<]+)</loc>", sitemap.read_text(encoding="utf-8")))
-    # 404 is intentionally noindex and stays out of the sitemap.
-    actual = {url_for(p) for p in published_pages() if p.name != "404.html"}
-    for url in sorted(listed - actual):
-        fail(f"sitemap: lists {url}, which has no page on disk")
-    for url in sorted(actual - listed):
+    # noindex pages (404, archived legal versions like privacy-v1.0.html)
+    # deliberately stay out of the sitemap — and must not sneak into it.
+    indexable = {url_for(p) for p in published_pages() if not is_noindex(p)}
+    noindexed = {url_for(p) for p in published_pages() if is_noindex(p)}
+    for url in sorted(listed - indexable):
+        if url in noindexed:
+            fail(f"sitemap: lists {url}, which is noindex")
+        else:
+            fail(f"sitemap: lists {url}, which has no page on disk")
+    for url in sorted(indexable - listed):
         fail(f"sitemap: {url} is published but not listed")
 
 
