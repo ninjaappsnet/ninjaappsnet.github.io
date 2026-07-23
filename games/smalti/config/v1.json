@@ -1,0 +1,3 @@
+{
+  "_doc": "Smalti remote config. Only rc_-prefixed keys with scalar values are read; everything else (including this note) is ignored. Key list and semantics: blocks repo, docs/remote-config-backend.md. Values apply on the app's NEXT launch. An empty set of rc_ keys means every install runs on the defaults shipped in the binary. The app-side reader is SelfHostedRemoteConfig.swift; the URL is pinned by AppLinksTests (app) and tools/check-site.py (here) — never move this file."
+}

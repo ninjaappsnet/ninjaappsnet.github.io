@@ -12,9 +12,6 @@
 <meta property="og:url" content="https://ninjaapps.net/games/smalti/privacy.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../style.css">
 <script src="../../assets/theme.js" defer></script>
 </head>
@@ -38,7 +35,7 @@
   <p class="effective">VERSION 1.0 — EFFECTIVE 2026-07-19</p>
   <div class="prose">
 
-    <p><strong>The short version: the game runs on your device.</strong> There is no account, no sign-up, and no server of ours. This version of Smalti collects nothing about you. The only network connections it makes are to Apple — to process a purchase, to keep a copy of your progress in your own iCloud, and, if you choose to sign in, to post scores to Game Center.</p>
+    <p><strong>The short version: the game runs on your device.</strong> There is no account, no sign-up, and no server of ours. This version of Smalti collects nothing about you. The only network connections it makes are to Apple — to process a purchase, to keep a copy of your progress in your own iCloud, and, if you choose to sign in, to post scores to Game Center — plus one small download from this website: a settings file, described below, that carries nothing about you in either direction.</p>
 
     <p>Smalti is made by NinjaApps, a trading name of cetin.info — the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. In this version it processes none.</p>
 
@@ -46,10 +43,10 @@
     <ul>
       <li>No accounts, no email addresses, no passwords, no profiles.</li>
       <li>No advertising identifiers and no tracking, across this app or any other. Smalti contains no advertising SDK and shows no ads of any kind.</li>
-      <li>No analytics or crash-reporting SDK in this version. See the marked section below for a change we intend to make.</li>
-      <li>No third-party SDKs at all in the shipping app.</li>
+      <li>No analytics and no crash reporting in this version. The binary does contain the Firebase library, but it ships switched off — it is never started, and it collects and sends nothing. See the marked section below for the change we may make.</li>
+      <li>No other third-party SDKs, and no third-party code that runs. Everything the app talks to besides our settings file belongs to Apple.</li>
       <li>No text you type, because there is nowhere in the game to type. No camera, microphone, photo library, contacts, or location access.</li>
-      <li>No servers of ours for anything to be sent to.</li>
+      <li>No servers of ours for anything to be sent to. The settings file described below travels one way — from us to the app, never back.</li>
     </ul>
 
     <h2>Where your progress lives</h2>
@@ -72,6 +69,10 @@
       <li><strong>iCloud</strong> — active automatically when your device is signed in, as described above. Apple's iCloud terms and privacy policy govern the storage. Turning iCloud off for Smalti in iOS Settings keeps the game entirely on-device.</li>
       <li><strong>Game Center</strong> — entirely optional. If you sign in, the game submits three things: your time and move count on the daily mosaic, and your total time on the weekly speedrun, plus your achievement unlocks. That is the whole payload — numbers, and nothing attached to them. The nickname shown beside your score is the one Apple holds for your Game Center account; the app never reads it. Decline or sign out at any time in iOS Settings. The game is complete without it, and every leaderboard button hides when you are signed out.</li>
     </ul>
+
+    <h2>Our website — one settings file</h2>
+    <p>The app periodically downloads a small settings file from this website (ninjaapps.net/games/smalti/config/v1.json). It lets us adjust game balance — how many free relax plays a day allows, how long before a hint nudge appears — show a maintenance notice, or name a minimum supported version, without shipping an app update. The file contains game numbers and switches, never anything about you, and values picked up on one launch apply from the next.</p>
+    <p>The request is a plain download, like your browser fetching this page. It carries no account, no identifier and no cookie — the app does not tell the server who is asking, because there is nothing to tell. This website, including that file, is hosted on GitHub Pages; GitHub logs visitor IP addresses for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>, and we have no access to those logs and keep none of our own. If the file cannot be reached, the game simply runs on its built-in settings.</p>
 
     <h2>Notifications</h2>
     <p>Two optional reminders — a daily nudge, and a warning on an evening when your streak is about to lapse. Both are scheduled on your device, both only after you turn them on inside the game, and iOS asks for your permission the first time. There are no push notifications: the app has no push capability and nothing is sent from anywhere.</p>

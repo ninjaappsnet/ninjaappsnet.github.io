@@ -66,6 +66,10 @@ BAKED_IN_URLS = [
     f"{ORIGIN}/games/smalti/terms.html",
     # ASC's support field needs a web page; the in-app link is a mailto.
     f"{ORIGIN}/games/smalti/support.html",
+    # Self-hosted remote config: every installed copy of Smalti fetches this
+    # (SelfHostedRemoteConfig.swift). Moving or deleting it silently pins all
+    # installs to their shipped defaults forever.
+    f"{ORIGIN}/games/smalti/config/v1.json",
 ]
 
 # The template is meant to keep its placeholders.
