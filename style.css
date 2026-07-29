@@ -994,6 +994,41 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 /* Inert variant of .btn — a destination that does not exist yet. */
 .btn-quiet { color: var(--ink-45); border-style: dashed; cursor: default; }
 
+/* Language row on a translated legal page. Twelve items, so it wraps; banded
+   between hairlines so it reads as navigation, not as part of the document. */
+.langs {
+  display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 40px; padding: 14px 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase;
+}
+.langs a { color: var(--ink-60); }
+.langs a:hover { color: var(--accent); }
+.langs .here { color: var(--accent); }
+
+/* Translated legal pages: the English original is the version that governs. */
+.tnote { margin: 0 0 30px; max-width: 560px; font: 400 12px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-45); }
+.tnote a { color: var(--accent); }
+
+/* Our self-hosted webfonts carry Latin, Latin-ext and Japanese subsets only.
+   On Cyrillic, Hangul and Simplified-Chinese pages the browser would fall back
+   glyph by glyph — mixing two typefaces mid-sentence, and rendering Chinese
+   Han with the Japanese subset's forms. Hand those three a system stack —
+   .wordmark keeps Mincho, since 忍 is in the JP subset and the rest is Latin. */
+html[lang="ru"], html[lang="ko"], html[lang="zh-Hans"] {
+  --face-sans: system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --face-serif: Georgia, 'Times New Roman', serif;
+  --face-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+html[lang="ru"] :is(.page-title, .prose h2, .notice h2),
+html[lang="ko"] :is(.page-title, .prose h2, .notice h2),
+html[lang="zh-Hans"] :is(.page-title, .prose h2, .notice h2) { font-family: var(--face-serif); }
+html[lang="ru"] :is(nav, .prose p, .prose ul, .lede, .tnote),
+html[lang="ko"] :is(nav, .prose p, .prose ul, .lede, .tnote),
+html[lang="zh-Hans"] :is(nav, .prose p, .prose ul, .lede, .tnote) { font-family: var(--face-sans); }
+html[lang="ru"] :is(.kicker, .effective, .backlink, .langs, footer),
+html[lang="ko"] :is(.kicker, .effective, .backlink, .langs, footer),
+html[lang="zh-Hans"] :is(.kicker, .effective, .backlink, .langs, footer) { font-family: var(--face-mono); }
+
 /* ===== 404 ===== */
 .notfound { padding: 120px var(--pad-side) 140px; text-align: center; }
 .notfound h1 { font-size: 96px; }

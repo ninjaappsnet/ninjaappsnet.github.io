@@ -13,7 +13,9 @@ Checks:
   4. Every internal href/src resolves to a file on disk.
   5. sitemap.xml and the published pages agree, both directions.
   6. Each page's <link rel="canonical"> matches its own path.
-  7. The URLs baked into the Smalti binary resolve to real pages.
+  7. Smalti's privacy policy exists in every App Store language, with a
+     matching lang attribute and a complete set of hreflang alternates.
+  8. The URLs baked into the Smalti binary resolve to real pages.
 """
 
 from __future__ import annotations
@@ -43,7 +45,30 @@ MANIFEST = [
     "games/smalti/terms.html",
     "games/smalti/support.html",
     "games/smalti/press.html",
+    *(f"games/smalti/privacy-{s}.html" for s in (
+        "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
+    )),
 ]
+
+# Smalti's privacy policy, per App Store Connect localization. ASC requires a
+# Privacy Policy URL on EVERY localization of the app record, not just English,
+# and blocks review until each one is filled — so each of these pages is a
+# submission dependency, not a nicety. `hreflang code -> page`; English is also
+# x-default. Adding an App Store language means adding a page here.
+LOCALIZED_PRIVACY = {
+    "en": "games/smalti/privacy.html",
+    "de": "games/smalti/privacy-de.html",
+    "es-ES": "games/smalti/privacy-es.html",
+    "fr": "games/smalti/privacy-fr.html",
+    "it": "games/smalti/privacy-it.html",
+    "ja": "games/smalti/privacy-ja.html",
+    "ko": "games/smalti/privacy-ko.html",
+    "pl": "games/smalti/privacy-pl.html",
+    "pt-BR": "games/smalti/privacy-pt-br.html",
+    "ru": "games/smalti/privacy-ru.html",
+    "tr": "games/smalti/privacy-tr.html",
+    "zh-Hans": "games/smalti/privacy-zh-hans.html",
+}
 
 # Placeholder apps removed 2026-07-19. Guard against a copy-paste revival.
 REMOVED = [
@@ -173,6 +198,36 @@ def check_canonicals() -> None:
             fail(f"canonical: {rel} points at {found.group(1)}, expected {url_for(page)}")
 
 
+def check_localized_privacy() -> None:
+    """Every translation exists, declares its own language, and points at all
+    the others. A half-wired set is worse than none: Google would treat the
+    translations as duplicates, and a missing page is a blocked submission."""
+    for code, rel in LOCALIZED_PRIVACY.items():
+        page = ROOT / rel
+        if not page.is_file():
+            fail(f"localized privacy: {code} page {rel} is missing")
+            continue
+        text = page.read_text(encoding="utf-8")
+
+        declared = re.search(r'<html\s+lang="([^"]+)"', text)
+        if not declared:
+            fail(f"localized privacy: {rel} has no lang on <html>")
+        elif declared.group(1) != code:
+            fail(f"localized privacy: {rel} declares lang={declared.group(1)}, expected {code}")
+
+        alts = dict(re.findall(
+            r'<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"', text))
+        expected = {c: f"{ORIGIN}/{p}" for c, p in LOCALIZED_PRIVACY.items()}
+        expected["x-default"] = f"{ORIGIN}/{LOCALIZED_PRIVACY['en']}"
+        for want, url in expected.items():
+            if want not in alts:
+                fail(f"localized privacy: {rel} is missing hreflang={want}")
+            elif alts[want] != url:
+                fail(f"localized privacy: {rel} hreflang={want} points at {alts[want]}, expected {url}")
+        for extra in sorted(set(alts) - set(expected)):
+            fail(f"localized privacy: {rel} declares unknown hreflang={extra}")
+
+
 def check_baked_in_urls() -> None:
     for url in BAKED_IN_URLS:
         rel = url[len(ORIGIN) + 1:]
@@ -191,6 +246,7 @@ def main() -> int:
         check_links,
         check_sitemap,
         check_canonicals,
+        check_localized_privacy,
         check_baked_in_urls,
     ):
         check()

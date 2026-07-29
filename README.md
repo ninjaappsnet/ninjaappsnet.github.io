@@ -70,6 +70,37 @@ Typo and navigation fixes don't need a bump; anything touching meaning does.
 The same rule (and the ASC privacy-label same-release requirement) lives in
 the game repo's PUBLISHING_TODO.
 
+## Localized legal pages
+
+App Store Connect requires a Privacy Policy URL on **every** localization of
+the app record, not just English, and blocks review until each is filled. So
+Smalti's policy ships in all twelve App Store languages:
+
+```
+games/smalti/privacy.html            en  (canonical, baked into the binary)
+games/smalti/privacy-<code>.html     de es fr it ja ko pl pt-br ru tr zh-hans
+```
+
+Rules the checker enforces (`check_localized_privacy`):
+
+- Each page is self-canonical, carries `<html lang>` matching its code, and
+  declares the **full** set of `hreflang` alternates plus `x-default` → English.
+- The map of ASC locale → page lives in `LOCALIZED_PRIVACY` in
+  `tools/check-site.py`. Adding an App Store language means adding a page,
+  a `MANIFEST` entry, a `sitemap.xml` row, and an entry in that map — plus a
+  link in the `.langs` row on all twelve existing pages.
+
+The English page is the authoritative text and every translation says so in a
+`.tnote` line. A substantive change therefore means re-translating: bump the
+version on all twelve, or the set falls out of sync silently. Note the ASC
+locale codes are not the filenames — `es-ES` → `privacy-es.html`,
+`zh-Hans` → `privacy-zh-hans.html`.
+
+The webfont subsets cover Latin, Latin-ext and Japanese only, so `style.css`
+hands the Cyrillic, Hangul and Simplified-Chinese pages a system font stack;
+without it those pages mix two typefaces mid-sentence and render Chinese Han
+with Japanese glyph forms.
+
 ## Load-bearing URLs
 
 Smalti ships these three addresses hardcoded in its binary
