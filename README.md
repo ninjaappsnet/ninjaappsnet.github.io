@@ -127,8 +127,10 @@ App Store reuse. Web copies: `assets/icon-smalti-144.webp` (landing card),
 ## Placeholder inventory (TODO)
 
 - One striped box (`.ph`) left: the hero art / studio mark on the landing page.
-- Smalti's App Store button is inert (`.btn-quiet`) until the App Store
-  Connect record exists — search `TODO` across the repo.
+- Smalti's App Store button is live (id `6792641328`). `.btn-quiet` and the
+  `games/_template/` placeholder stay for the next app — search `TODO`.
+- Smalti's press fact sheet still says `RELEASE — TBD 2026`; set the real
+  date once the app is public.
 - `support@ninjaapps.net` must be a live mailbox before submission; the
   support page promises a 24–48 h reply.
 
