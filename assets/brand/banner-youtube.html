@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<meta charset="utf-8">
+<title>NinjaApps — YouTube channel art</title>
+<!-- Source for ninjaapps-youtube-banner-2560.png. Screenshot at 2560x1440.
+     YouTube crops this per device: 1546x423 centred is all a phone shows,
+     2560x423 is desktop, and only a TV gets the full 2560x1440. Everything
+     that has to be read lives inside the 1546x423 centre band. -->
+<link rel="stylesheet" href="../../style.css">
+<style>
+  html, body { margin: 0; padding: 0; width: 2560px; height: 1440px; overflow: hidden; }
+  body { background: var(--bg); }
+
+  /* The band every device shows. Rules sit on its edges, so on desktop —
+     where the crop is exactly this band — they read as the top and bottom
+     of the artwork. */
+  .band {
+    position: absolute; top: 508.5px; left: 0; width: 2560px; height: 423px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Centred, so it lands centred in the phone crop (1546px wide) too —
+     that crop is taken from the middle of the image. */
+  .mark { display: flex; align-items: center; gap: 52px; }
+  .seal { width: 200px; height: 200px; flex: none; transform: rotate(-2.5deg); }
+  .seal .bg { fill: var(--accent); }
+  .seal .ring { fill: none; stroke: var(--bg); stroke-opacity: .4; stroke-width: 2; }
+  .seal .glyph { fill: var(--bg); font: 700 116px 'Shippori Mincho', serif; }
+
+  .kicker { font: 500 22px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); }
+  h1 { margin: 18px 0 0; font: 700 78px/1.08 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
+  .sub { margin: 22px 0 0; font: 400 24px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+
+  /* Outside the phone crop: desktop and TV get this, phones lose nothing. */
+  .tategaki {
+    position: absolute; right: 180px; top: 50%; transform: translateY(-50%);
+    writing-mode: vertical-rl; white-space: nowrap;
+    font: 600 34px 'Shippori Mincho', serif;
+    letter-spacing: .5em; color: var(--ink-28);
+  }
+</style>
+
+<div class="band">
+  <div class="mark">
+    <svg class="seal" viewBox="0 0 180 180" role="img" aria-label="NinjaApps studio seal">
+      <rect class="bg" x="4" y="4" width="172" height="172" rx="26"/>
+      <rect class="ring" x="14" y="14" width="152" height="152" rx="18"/>
+      <text class="glyph" x="90" y="132" text-anchor="middle">忍</text>
+    </svg>
+    <div>
+      <div class="kicker">NINJAAPPS — GAMES &amp; UTILITIES</div>
+      <h1>Quiet craft, swift play.</h1>
+      <p class="sub">iOS games and small utilities from an independent studio.</p>
+    </div>
+  </div>
+  <div class="tategaki" lang="ja" aria-hidden="true">忍者アプリ</div>
+</div>
+</html>

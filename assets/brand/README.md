@@ -15,6 +15,7 @@ outlines, so nothing here depends on a font being installed or loaded.
 | `ninjaapps-wordmark-light.svg`, `-light-2792.png` | Wordmark in `#f0e9db`, for dark backgrounds |
 | `ninjaapps-avatar.svg`, `-1024/-512/-256.png` | Social avatar — full-bleed, opaque. **Upload this one.** |
 | `ninjaapps-avatar-circle.svg`, `-circle-1024/-512/-256.png` | Free-standing round mark, transparent outside the disc |
+| `ninjaapps-youtube-banner-2560.png` | YouTube channel art, 2560×1440 (source: `banner-youtube.html`) |
 
 ## Avatars
 
@@ -36,6 +37,35 @@ cropped a second time.
 The avatar is not the seal: the seal's rounded-square frame and its corners
 would be eaten by a circular crop, so the avatar uses a circular ring and a
 slightly smaller glyph.
+
+## YouTube channel art
+
+`ninjaapps-youtube-banner-2560.png` is 2560×1440 — YouTube's recommended size,
+above the 2048×1152 minimum, and 65KB against the 6MB ceiling. Upload it as is.
+
+YouTube crops one image differently per device, all crops centred:
+
+| Device | Crop | What it gets |
+| --- | --- | --- |
+| Phone | 1546×423 | The seal, kicker, headline and sub-line, with ~230px of margin either side |
+| Desktop | 2560×423 | The same, plus the vertical 忍者アプリ off to the right |
+| TV | 2560×1440 | The whole image — the band floating in paper |
+
+So everything that has to be read lives in the centre 1546×423, and the band's
+hairline rules sit on that band's edges, which is what reads as the top and
+bottom of the artwork in the dominant desktop crop.
+
+`banner-youtube.html` is the source. It pulls `../../style.css`, so the banner
+uses the site's own tokens and self-hosted fonts — change a colour on the site
+and a re-render picks it up. Re-render with:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --disable-gpu --hide-scrollbars --window-size=2560,1440 \
+  --virtual-time-budget=5000 \
+  --screenshot=ninjaapps-youtube-banner-2560.png \
+  "file://$PWD/assets/brand/banner-youtube.html"
+```
 
 Notes:
 
