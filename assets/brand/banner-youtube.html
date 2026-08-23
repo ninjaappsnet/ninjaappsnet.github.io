@@ -22,21 +22,24 @@
 
   /* Centred, so it lands centred in the phone crop (1546px wide) too —
      that crop is taken from the middle of the image. */
-  .mark { display: flex; align-items: center; gap: 52px; }
-  .seal { width: 200px; height: 200px; flex: none; transform: rotate(-2.5deg); }
+  .mark { display: flex; align-items: center; gap: 60px; }
+  .seal { width: 250px; height: 250px; flex: none; transform: rotate(-2.5deg); }
   .seal .bg { fill: var(--accent); }
   .seal .ring { fill: none; stroke: var(--bg); stroke-opacity: .4; stroke-width: 2; }
   .seal .glyph { fill: var(--bg); font: 700 116px 'Shippori Mincho', serif; }
 
-  .kicker { font: 500 22px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); }
-  h1 { margin: 18px 0 0; font: 700 78px/1.08 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
-  .sub { margin: 22px 0 0; font: 400 24px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+  /* Sized for the phone crop, which is the harshest case: 1546px of artwork
+     squeezed into ~390px of screen, so everything here is read at about a
+     quarter of its nominal size. Hence two short lines instead of one long
+     one, and no small print — a sub-line would be ~8px on a phone. */
+  .kicker { font: 500 34px 'IBM Plex Mono', monospace; letter-spacing: .28em; color: var(--accent); }
+  h1 { margin: 20px 0 0; font: 700 108px/1.06 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
 
   /* Outside the phone crop: desktop and TV get this, phones lose nothing. */
   .tategaki {
     position: absolute; right: 180px; top: 50%; transform: translateY(-50%);
     writing-mode: vertical-rl; white-space: nowrap;
-    font: 600 34px 'Shippori Mincho', serif;
+    font: 600 44px 'Shippori Mincho', serif;
     letter-spacing: .5em; color: var(--ink-28);
   }
 </style>
@@ -50,8 +53,7 @@
     </svg>
     <div>
       <div class="kicker">NINJAAPPS — GAMES &amp; UTILITIES</div>
-      <h1>Quiet craft, swift play.</h1>
-      <p class="sub">iOS games and small utilities from an independent studio.</p>
+      <h1>Quiet craft,<br>swift play.</h1>
     </div>
   </div>
   <div class="tategaki" lang="ja" aria-hidden="true">忍者アプリ</div>

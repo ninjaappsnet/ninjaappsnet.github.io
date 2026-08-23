@@ -17,13 +17,15 @@
      sits optically centred in the space left between the avatar and the
      vertical 忍者アプリ. */
   .plate {
-    position: absolute; left: 590px; right: 56px; top: 50%;
+    position: absolute; left: 615px; right: 56px; top: 50%;
     transform: translateY(-58%);
   }
 
-  .kicker { font: 500 15px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); }
-  h1 { margin: 14px 0 0; font: 700 58px/1.1 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
-  .sub { margin: 16px 0 0; font: 400 17px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+  /* X renders this header about 600px wide on desktop and narrower still in
+     the app, so type here is read at roughly 0.4x — and a third of that on a
+     phone. Two short lines, no small print. */
+  .kicker { font: 500 30px 'IBM Plex Mono', monospace; letter-spacing: .28em; color: var(--accent); }
+  h1 { margin: 16px 0 0; font: 700 104px/1.06 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
 
   /* Quiet hairline along the top, mirroring the site's section rules. */
   .rule { position: absolute; left: 56px; right: 56px; top: 56px; height: 1px; background: var(--line); }
@@ -31,15 +33,14 @@
   .tategaki {
     position: absolute; right: 56px; top: 50%; transform: translateY(-50%);
     writing-mode: vertical-rl; white-space: nowrap;
-    font: 600 24px 'Shippori Mincho', serif; letter-spacing: .5em; color: var(--ink-28);
+    font: 600 34px 'Shippori Mincho', serif; letter-spacing: .5em; color: var(--ink-28);
   }
 </style>
 
 <div class="rule"></div>
 <div class="plate">
-  <div class="kicker">NINJAAPPS.NET — GAMES &amp; UTILITIES</div>
-  <h1>Quiet craft, swift play.</h1>
-  <p class="sub">iOS games and small utilities from an independent studio.</p>
+  <div class="kicker">NINJAAPPS.NET</div>
+  <h1>Quiet craft,<br>swift play.</h1>
 </div>
 <div class="tategaki" lang="ja" aria-hidden="true">忍者アプリ</div>
 </html>

@@ -45,19 +45,24 @@ slightly smaller glyph.
 ## YouTube channel art
 
 `ninjaapps-youtube-banner-2560.png` is 2560×1440 — YouTube's recommended size,
-above the 2048×1152 minimum, and 65KB against the 6MB ceiling. Upload it as is.
+above the 2048×1152 minimum, and 72KB against the 6MB ceiling. Upload it as is.
 
 YouTube crops one image differently per device, all crops centred:
 
 | Device | Crop | What it gets |
 | --- | --- | --- |
-| Phone | 1546×423 | The seal, kicker, headline and sub-line, with ~230px of margin either side |
+| Phone | 1546×423 | The seal, kicker and two-line headline, with ~230px of margin either side |
 | Desktop | 2560×423 | The same, plus the vertical 忍者アプリ off to the right |
 | TV | 2560×1440 | The whole image — the band floating in paper |
 
 So everything that has to be read lives in the centre 1546×423, and the band's
 hairline rules sit on that band's edges, which is what reads as the top and
 bottom of the artwork in the dominant desktop crop.
+
+Type is sized for the phone crop, the harshest case: 1546px of artwork lands in
+roughly 390px of screen, about a quarter scale. That is why the headline breaks
+over two lines rather than running long, and why there is no sub-line — small
+print here would render around 8px on a phone, which is decoration, not text.
 
 `banner-youtube.html` is the source. It pulls `../../style.css`, so the banner
 uses the site's own tokens and self-hosted fonts — change a colour on the site
@@ -74,7 +79,11 @@ and a re-render picks it up. Re-render with:
 ## X header
 
 `ninjaapps-x-banner-1500.png` is 1500×500 — X's recommended header size and its
-3:1 ratio, 29KB against a 2MB ceiling.
+3:1 ratio, 38KB against a 2MB ceiling.
+
+X renders it about 600px wide on desktop and narrower in the app, so type is
+read at roughly 0.4x. Same treatment as the YouTube banner: two short lines, no
+small print.
 
 X shows the whole image rather than cropping it, but it punches the avatar over
 the bottom-left corner and runs the profile controls along the bottom edge. So
