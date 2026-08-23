@@ -17,6 +17,7 @@ games/<slug>/privacy.html    one privacy policy per app
 games/<slug>/terms.html      terms — needed by anything with an IAP
 games/<slug>/support.html    support page — ASC's support field needs a URL
 games/_template/             copy this to add a new app
+assets/brand/                brand exports + the two banner .html sources
 tools/check-site.py          structural checks — run before every commit
 404.html                     not-found page
 CNAME                        custom domain for GitHub Pages

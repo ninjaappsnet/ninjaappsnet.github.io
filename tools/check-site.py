@@ -97,8 +97,11 @@ BAKED_IN_URLS = [
     f"{ORIGIN}/games/smalti/config/v1.json",
 ]
 
-# The template is meant to keep its placeholders.
-EXEMPT_DIRS = {"games/_template", "apps/_template"}
+# The template is meant to keep its placeholders. assets/brand/ holds the two
+# banner sources — 1500x500 and 2560x1440 pages that exist to be screenshotted
+# into PNGs, never linked and never served as pages, so the canonical and
+# sitemap rules below do not apply to them.
+EXEMPT_DIRS = {"games/_template", "apps/_template", "assets/brand"}
 
 errors: list[str] = []
 
