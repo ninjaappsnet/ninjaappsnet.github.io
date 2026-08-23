@@ -13,6 +13,29 @@ outlines, so nothing here depends on a font being installed or loaded.
 | `ninjaapps-seal-dark.svg`, `-dark-1024.png` | Seal, dark theme — `#e05a40` on `#181512` knock-out |
 | `ninjaapps-wordmark.svg`, `-2792.png` | Wordmark in ink `#1d1a16`, for light backgrounds |
 | `ninjaapps-wordmark-light.svg`, `-light-2792.png` | Wordmark in `#f0e9db`, for dark backgrounds |
+| `ninjaapps-avatar.svg`, `-1024/-512/-256.png` | Social avatar — full-bleed, opaque. **Upload this one.** |
+| `ninjaapps-avatar-circle.svg`, `-circle-1024/-512/-256.png` | Free-standing round mark, transparent outside the disc |
+
+## Avatars
+
+The two avatar files differ in a way that matters at upload time.
+
+`ninjaapps-avatar.png` is a full-bleed opaque square: the vermillion runs to
+all four edges and there is no alpha channel. Every platform crops an avatar
+itself — a circle on X and Mastodon, a rounded square on LinkedIn and GitHub —
+and this survives either crop, because the ring sits inside the inscribed
+circle. Use it as the default. A transparent avatar is the usual mistake here:
+platforms flatten alpha against a background you don't control, so the
+knocked-out corners come back as black or white.
+
+`ninjaapps-avatar-circle.png` is transparent outside the disc. It is for places
+that composite a round mark over your own layout — a site header, a slide, a
+README badge — not for an avatar upload field, where its own soft edge would be
+cropped a second time.
+
+The avatar is not the seal: the seal's rounded-square frame and its corners
+would be eaten by a circular crop, so the avatar uses a circular ring and a
+slightly smaller glyph.
 
 Notes:
 
@@ -30,7 +53,8 @@ subsets in `assets/fonts/`. It needs `fonttools`:
 python3 assets/brand/generate.py
 ```
 
-The PNGs are screenshots of those SVGs, rendered with a transparent canvas:
+The 1024px PNGs are screenshots of those SVGs, rendered with a transparent canvas
+(smaller sizes are `sips -Z` downscales of them):
 
 ```sh
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \

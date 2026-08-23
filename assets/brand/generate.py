@@ -74,4 +74,28 @@ def wordmark(ink):
 
 open(f"{OUT}/ninjaapps-wordmark.svg", "w").write(wordmark("#1d1a16"))
 open(f"{OUT}/ninjaapps-wordmark-light.svg", "w").write(wordmark("#f0e9db"))
-print("vb", round(vb_w,1), round(vb_h,1))
+
+# ---------- 3. Avatar marks (circular crop safe) ----------
+# Social platforms crop avatars to a circle, which would eat the seal's corners
+# and clip its ring. These use a circular ring and a glyph sized to sit well
+# inside the inscribed circle.
+AV = 104.0                      # glyph size; bbox corners land ~10px inside the ring
+GX, GY = 0.506, 0.388           # 忍 bbox centre, in em units from origin/baseline
+av_d, _ = text_path(jp, "忍", AV, 90 - GX * AV, 90 + GY * AV)
+
+def avatar(accent, knock, bleed, ring_op=0.4):
+    """bleed=True: opaque full-bleed square, for platforms that crop it themselves.
+    bleed=False: transparent outside a disc, for a free-standing round mark."""
+    ground = (f'<rect x="0" y="0" width="180" height="180" fill="{accent}"/>' if bleed
+              else f'<circle cx="90" cy="90" r="90" fill="{accent}"/>')
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="NinjaApps">
+  {ground}
+  <circle cx="90" cy="90" r="76" fill="none" stroke="{knock}" stroke-opacity="{ring_op}" stroke-width="2"/>
+  <path d="{av_d}" fill="{knock}"/>
+</svg>
+'''
+
+open(f"{OUT}/ninjaapps-avatar.svg", "w").write(avatar("#c73e26", BG_LIGHT, True))
+open(f"{OUT}/ninjaapps-avatar-circle.svg", "w").write(avatar("#c73e26", BG_LIGHT, False))
+
+print("wordmark viewBox", round(vb_w,1), round(vb_h,1))
