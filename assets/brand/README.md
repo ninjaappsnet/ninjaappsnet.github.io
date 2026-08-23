@@ -3,8 +3,11 @@
 Standalone exports of the two marks that live inline in the site: the studio
 seal (`.studio-seal` in `index.html`) and the wordmark (`.wordmark`, `忍 NinjaApps`).
 
-All files have a transparent background. The SVGs carry the letterforms as
-outlines, so nothing here depends on a font being installed or loaded.
+The seal, wordmark and round mark have transparent backgrounds; the avatar and
+the two banners are opaque on purpose, for the reasons given below. The mark
+SVGs carry their letterforms as outlines, so nothing there depends on a font
+being installed or loaded — the banners are the exception, and do use the
+site's own font files.
 
 | File | Use |
 | --- | --- |
@@ -16,6 +19,7 @@ outlines, so nothing here depends on a font being installed or loaded.
 | `ninjaapps-avatar.svg`, `-1024/-512/-256.png` | Social avatar — full-bleed, opaque. **Upload this one.** |
 | `ninjaapps-avatar-circle.svg`, `-circle-1024/-512/-256.png` | Free-standing round mark, transparent outside the disc |
 | `ninjaapps-youtube-banner-2560.png` | YouTube channel art, 2560×1440 (source: `banner-youtube.html`) |
+| `ninjaapps-x-banner-1500.png` | X header, 1500×500 (source: `banner-x.html`) |
 
 ## Avatars
 
@@ -65,6 +69,28 @@ and a re-render picks it up. Re-render with:
   --virtual-time-budget=5000 \
   --screenshot=ninjaapps-youtube-banner-2560.png \
   "file://$PWD/assets/brand/banner-youtube.html"
+```
+
+## X header
+
+`ninjaapps-x-banner-1500.png` is 1500×500 — X's recommended header size and its
+3:1 ratio, 29KB against a 2MB ceiling.
+
+X shows the whole image rather than cropping it, but it punches the avatar over
+the bottom-left corner and runs the profile controls along the bottom edge. So
+that corner is deliberately empty, and the seal is left out of the header
+entirely: the avatar already *is* the seal, and repeating it would read as a
+stutter. The header carries the words instead, set in the space between the
+avatar and the vertical 忍者アプリ.
+
+Re-render with:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --disable-gpu --hide-scrollbars --window-size=1500,500 \
+  --virtual-time-budget=5000 \
+  --screenshot=ninjaapps-x-banner-1500.png \
+  "file://$PWD/assets/brand/banner-x.html"
 ```
 
 Notes:

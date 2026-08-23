@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<meta charset="utf-8">
+<title>NinjaApps — X header</title>
+<!-- Source for ninjaapps-x-banner-1500.png. Screenshot at 1500x500 (X's 3:1).
+     The whole image is shown, but the avatar is punched over the bottom-left
+     corner and the profile controls crowd the bottom edge, so that corner is
+     left empty on purpose. The avatar is the seal, so the seal is not repeated
+     here — the header carries the words instead. -->
+<link rel="stylesheet" href="../../style.css">
+<style>
+  html, body { margin: 0; padding: 0; width: 1500px; height: 500px; overflow: hidden; }
+  body { background: var(--bg); position: relative; }
+
+  /* Avatar sits roughly x 40–380, rising ~170px off the bottom edge; the
+     bottom strip also carries the follow/edit controls. Text clears both, and
+     sits optically centred in the space left between the avatar and the
+     vertical 忍者アプリ. */
+  .plate {
+    position: absolute; left: 590px; right: 56px; top: 50%;
+    transform: translateY(-58%);
+  }
+
+  .kicker { font: 500 15px 'IBM Plex Mono', monospace; letter-spacing: .3em; color: var(--accent); }
+  h1 { margin: 14px 0 0; font: 700 58px/1.1 'Shippori Mincho', serif; letter-spacing: -.01em; color: var(--ink); }
+  .sub { margin: 16px 0 0; font: 400 17px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+
+  /* Quiet hairline along the top, mirroring the site's section rules. */
+  .rule { position: absolute; left: 56px; right: 56px; top: 56px; height: 1px; background: var(--line); }
+
+  .tategaki {
+    position: absolute; right: 56px; top: 50%; transform: translateY(-50%);
+    writing-mode: vertical-rl; white-space: nowrap;
+    font: 600 24px 'Shippori Mincho', serif; letter-spacing: .5em; color: var(--ink-28);
+  }
+</style>
+
+<div class="rule"></div>
+<div class="plate">
+  <div class="kicker">NINJAAPPS.NET — GAMES &amp; UTILITIES</div>
+  <h1>Quiet craft, swift play.</h1>
+  <p class="sub">iOS games and small utilities from an independent studio.</p>
+</div>
+<div class="tategaki" lang="ja" aria-hidden="true">忍者アプリ</div>
+</html>
