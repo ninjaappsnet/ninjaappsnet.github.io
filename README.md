@@ -36,6 +36,38 @@ directions, that canonicals are self-consistent, that no `{{TOKEN}}` or
 `<CONFIRM …>` placeholder escaped the template — and that the URLs **baked
 into the Smalti binary** still resolve. Run it before every commit.
 
+## Social
+
+Every page footer carries the same four profiles, in the same order:
+
+```
+YouTube    https://www.youtube.com/@NinjaAppsnet
+Instagram  https://www.instagram.com/ninjaappsnet/
+TikTok     https://www.tiktok.com/@ninjaapps
+X          https://x.com/NinjaAppsnet
+```
+
+The order is a judgement about the channels, not alphabetical — YouTube and
+Instagram carry the trailer and finished-artwork material, TikTok is the
+widest-reach discovery channel, X is mostly press and dev community. It lives
+in `SOCIAL` in `tools/check-site.py`, and `check_social` enforces that all
+nineteen footers agree with it, so reordering means editing every page. The
+same list is repeated as `sameAs` in the `Organization` JSON-LD on
+`index.html` (that is what ties the profiles to the domain for a search
+engine), and `check_same_as` keeps the two in step.
+
+The marks are inline single-path SVGs in the footer's own ink, not brand
+colours: four saturated logos would outshout the one accent the palette is
+built around, and every one of the four brands permits a single-colour mark.
+Inline, because the site sends no visitor request off-origin — the same reason
+the webfonts are self-hosted. Each link carries its platform name as an
+`aria-label` and each `<svg>` is `aria-hidden`, so the name is announced once;
+the row's own label is translated per page (`NAV_LABEL` in the injector), the
+four brand names are not.
+
+`games/smalti/press.html` repeats the handles as text on the fact sheet, where
+a journalist looks for them.
+
 ## Adding a new app
 
 1. Copy `games/_template/` to `games/<slug>/` and replace every `{{TOKEN}}`
@@ -43,9 +75,11 @@ into the Smalti binary** still resolve. Run it before every commit.
    `noindex` meta line at the top of each copied file.
 2. Add a card on `index.html` under `#games` and bump the `group-count`.
 3. Add a row on `privacy/index.html` and bump its count.
-4. Add every new URL to `sitemap.xml` and to `MANIFEST` in
+4. Copy the footer's `<nav class="social">` block onto every new page —
+   `check_social` will fail the build until you do (see **Social** above).
+5. Add every new URL to `sitemap.xml` and to `MANIFEST` in
    `tools/check-site.py`.
-5. Run the checker.
+6. Run the checker.
 
 Apps that sell anything need `terms.html` and `support.html` too — copy
 Smalti's and rewrite them. App Store Connect's support field will not accept

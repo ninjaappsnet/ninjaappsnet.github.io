@@ -16,6 +16,8 @@ Checks:
   7. Smalti's privacy policy exists in every App Store language, with a
      matching lang attribute and a complete set of hreflang alternates.
   8. The URLs baked into the Smalti binary resolve to real pages.
+  9. Every page's footer carries the same social row, in the same order,
+     and the landing page's sameAs agrees with it.
 """
 
 from __future__ import annotations
@@ -95,6 +97,20 @@ BAKED_IN_URLS = [
     # (SelfHostedRemoteConfig.swift). Moving or deleting it silently pins all
     # installs to their shipped defaults forever.
     f"{ORIGIN}/games/smalti/config/v1.json",
+]
+
+# The studio's profiles, in the order every footer lists them. The order is a
+# judgement about the channels, not alphabetical: YouTube and Instagram carry
+# the trailer and finished-artwork material the games are actually sold on,
+# TikTok is the widest-reach discovery channel, and X is mostly press and dev
+# community. It lives here because reordering it means reordering the footer on
+# every page, and a footer that disagrees with its neighbours is the failure
+# mode this catches. `label -> profile URL`; the label is the accessible name.
+SOCIAL = [
+    ("YouTube", "https://www.youtube.com/@NinjaAppsnet"),
+    ("Instagram", "https://www.instagram.com/ninjaappsnet/"),
+    ("TikTok", "https://www.tiktok.com/@ninjaapps"),
+    ("X", "https://x.com/NinjaAppsnet"),
 ]
 
 # The template is meant to keep its placeholders. assets/brand/ holds the two
@@ -241,6 +257,64 @@ def check_baked_in_urls() -> None:
             fail(f"binary URL: {url} does not resolve (Smalti ships this link)")
 
 
+def check_social() -> None:
+    """Every page carries the same social row, in the same order, with the
+    marks hidden from screen readers and the link carrying the name. A page
+    that quietly falls behind is the whole risk here: nineteen hand-edited
+    footers drift, and a visitor on the Korean privacy page gets a different
+    set of profiles than one on the landing page."""
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        footer = re.search(r"<footer>(.*?)</footer>", text, re.S)
+        if not footer:
+            fail(f"social: {rel} has no <footer>")
+            continue
+        block = footer.group(1)
+
+        nav = re.search(r'<nav class="social" aria-label="[^"]+">(.*?)</nav>', block, re.S)
+        if not nav:
+            fail(f"social: {rel} footer has no labelled <nav class=social>")
+            continue
+
+        links = re.findall(
+            r'<a href="([^"]+)"[^>]*\saria-label="([^"]+)"', nav.group(1))
+        want = [(url, label) for label, url in SOCIAL]
+        if links != want:
+            fail(f"social: {rel} lists {links}, expected {want}")
+
+        # A visible platform mark next to a link that already says "YouTube"
+        # is announced twice unless the mark opts out.
+        marks = re.findall(r"<svg[^>]*>", nav.group(1))
+        if len(marks) != len(SOCIAL):
+            fail(f"social: {rel} has {len(marks)} marks for {len(SOCIAL)} links")
+        for mark in marks:
+            if 'aria-hidden="true"' not in mark:
+                fail(f"social: {rel} has an <svg> mark that is not aria-hidden")
+
+
+def check_same_as() -> None:
+    """The landing page's Organization sameAs is how a search engine learns
+    that these four profiles and this domain are one studio. It only works
+    while it agrees with the footer."""
+    page = ROOT / "index.html"
+    found = re.search(
+        r'<script type="application/ld\+json">(.*?)</script>',
+        page.read_text(encoding="utf-8"), re.S)
+    if not found:
+        fail("sameAs: index.html has no application/ld+json block")
+        return
+    import json
+    try:
+        data = json.loads(found.group(1))
+    except json.JSONDecodeError as exc:
+        fail(f"sameAs: index.html ld+json does not parse ({exc})")
+        return
+    if data.get("sameAs") != [url for _, url in SOCIAL]:
+        fail(f"sameAs: index.html lists {data.get('sameAs')}, "
+             f"expected {[url for _, url in SOCIAL]}")
+
+
 def main() -> int:
     for check in (
         check_manifest,
@@ -251,6 +325,8 @@ def main() -> int:
         check_canonicals,
         check_localized_privacy,
         check_baked_in_urls,
+        check_social,
+        check_same_as,
     ):
         check()
 
