@@ -1,6 +1,6 @@
 # ninjaapps.net
 
-Static site for **NinjaApps** — iOS games & utilities. Design: "Paper Dojo"
+Static site for **NinjaApps** — iOS games & Mac apps. Design: "Paper Dojo"
 (warm paper, ink, vermillion accent, hairline grids). Hosted on GitHub Pages
 at [ninjaapps.net](https://ninjaapps.net). No build step: plain HTML + one
 shared stylesheet.
