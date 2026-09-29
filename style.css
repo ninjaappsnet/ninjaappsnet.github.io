@@ -951,6 +951,13 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
 .shot { background: var(--bg); padding: 24px; }
+/* Desktop screenshots (16:10) sit two across, the first one spanning the row.
+   Captions are mono like the rest of the labelling. */
+figure.shot { margin: 0; }
+figure.shot img { border: 0; filter: drop-shadow(0 6px 18px rgba(0,0,0,.18)); } /* window corners are transparent, so no square hairline */
+.shot-lead { grid-column: 1 / -1; }
+.shot figcaption { margin: 12px 0 0; font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+.shot-note { margin: 14px 0 0; font: 400 12px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 
 .about { display: grid; grid-template-columns: 1fr 300px; gap: 48px; }
 .prose p { margin: 0 0 16px; max-width: 560px; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }

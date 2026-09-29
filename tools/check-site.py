@@ -47,6 +47,10 @@ MANIFEST = [
     "games/smalti/terms.html",
     "games/smalti/support.html",
     "games/smalti/press.html",
+    "apps/dayfolio/index.html",
+    "apps/dayfolio/privacy.html",
+    "apps/dayfolio/terms.html",
+    "apps/dayfolio/support.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
         "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
     )),

@@ -16,6 +16,7 @@ games/<slug>/index.html      one page per app
 games/<slug>/privacy.html    one privacy policy per app
 games/<slug>/terms.html      terms — needed by anything with an IAP
 games/<slug>/support.html    support page — ASC's support field needs a URL
+apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
 tools/check-site.py          structural checks — run before every commit
@@ -152,6 +153,12 @@ everyone who already installed the app. Change them only alongside a game
 release, and update `BAKED_IN_URLS` in `tools/check-site.py` at the same time.
 
 ## Assets
+
+Dayfolio (`apps/dayfolio/`) is a Mac app, so its screenshots are 1440×900 desktop
+captures (WebP with alpha, 1200px wide, `shot-*.webp`) laid out two across by
+`.grid-2` + `figure.shot`. Its App Store button is a dashed `.btn-quiet` span
+until the app is live; swap in the real link (see the TODO comment in
+`apps/dayfolio/index.html`) and add `<meta name="apple-itunes-app">` at release.
 
 Smalti's icon and screenshots are real (WebP, captured 2026-07-20 from the
 iPhone 16 Pro Max simulator). Source masters live in the game repo at
