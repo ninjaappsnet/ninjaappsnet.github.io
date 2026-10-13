@@ -43,6 +43,10 @@ It also guards the daily share link's two halves: the `apple-app-site-associatio
 file must parse, name the Smalti app, and match the daily path (with and without
 the trailing slash) and nothing broader; and the landing page must stay static,
 request nothing off-origin, and carry a social card whose image exists.
+`check-site.py` reads the page; it cannot run it. The `?d=` reader's behaviour
+(strict dates, the visitor's locale, the day never shifting with time zone) is
+covered by a separate dependency-free test: `node tools/test-daily-page.mjs`.
+Run it after touching the script in `games/smalti/daily/index.html`.
 
 The Smalti marketing pages (`STALE_CLAIMS` in the script) are held to the game's
 code, not to last quarter's copy: the check fails on a claim the app has
