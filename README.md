@@ -239,11 +239,18 @@ account, no identifier.
   curl -si  https://app-site-association.cdn-apple.com/a/v1/ninjaapps.net  # what iOS will see
   ```
 
-  Devices read Apple's CDN copy, not the site. It refreshes on its own schedule
-  and answers a miss with `cache-control: max-age=3600`. Here, a probe made
-  before the file existed cached a 404 that was replaced about two minutes after
-  the deploy finished; plan for the slower case. A rejection carries an
-  `apple-failure-reason` header saying what it did not like. While building the app side, `applinks:ninjaapps.net?mode=developer`
+  Devices read Apple's CDN copy, not the site. Two CDNs answer for it (Akamai,
+  `23.196.227.x`, and Fastly, `151.101.x.x`), each with its own cache. A failed
+  fetch is cached for an hour (`cache-control: max-age=3600`) and the response
+  says why in `apple-failure-reason`. What the first deploy (2026-10-13)
+  showed: Akamai had the file about two minutes after the deploy finished and
+  kept it through its hourly refresh. Fastly held a 404, cached by a probe made
+  before the file existed, then a `503 Service Unavailable` from this site that
+  could not be reproduced (Cloudflare was reporting incidents that day), and
+  took the file on its next fetch, an hour later. A bad answer from one edge is
+  therefore not a verdict on the file: pin each edge with
+  `curl -si --resolve app-site-association.cdn-apple.com:443:<ip> https://app-site-association.cdn-apple.com/a/v1/ninjaapps.net`
+  and wait out the hour. Do not probe the CDN before the file is live. While building the app side, `applinks:ninjaapps.net?mode=developer`
   skips the CDN on a development-signed build, on a device with Settings →
   Developer → Associated Domains Development switched on.
 

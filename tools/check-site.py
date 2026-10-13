@@ -161,7 +161,8 @@ STALE_CLAIMS = [
     (r"(?i)hand-?crafted|handmade",
      "levels are generated and the reward art is AI-generated (docs/asset-provenance.md): never claim hand-made"),
     (r"(?i)leaderboards|depth board",
-     "the daily leaderboards were removed 2026-09-12; claim no leaderboards"),
+     "claim no leaderboards: the daily boards were removed 2026-09-12, and the one board the "
+     "game still submits to (Daily Excavation depth) has no in-game screen"),
     (r"\bTBD\b", "Smalti has been on the App Store since August 2026"),
     (r"\biPad\b", "no iPad promise or date (TARGETED_DEVICE_FAMILY = 1)"),
     (r"(?i)two attempts|attempts? left", "the daily has been unmetered since 2026-09-12"),
@@ -206,8 +207,9 @@ KIT_FILES = {
 # SHA-256 of the flat-grid icon Smalti shipped until 1.0.1 (3x3 plain tiles),
 # which was still in the press kit and on the site in October 2026 after the
 # binary had moved to the medallion mark. Retired artwork must not come back
-# from a stale master: the app repo's marketing/press/icons held these same
-# bytes until the icon masters were replaced.
+# from a stale master: the game repo's marketing/press/icons and marketing/icon
+# still hold these same bytes until item 23 of its REVIEW_RESPONSE_PLAN replaces
+# them, so re-exporting the kit from there would bring the old mark back.
 RETIRED_ICONS_SHA256 = {
     "b34a7ad42e080ba68e34ff12476db6a5b58b126c319dd721950ab1b8c01b5e56",  # kit 1024 dark
     "91615eb6a9f4f5622abddc7bab9db9e236667b4aefe9fd7968e53ded8d63a2d6",  # kit 1024 tinted
@@ -505,8 +507,11 @@ def check_aasa() -> None:
     if not isinstance(details, list) or not details:
         fail("aasa: applinks.details is missing or empty")
         return
-    modern = legacy = 0
+    modern = 0
     for detail in details:
+        if not isinstance(detail, dict):
+            fail("aasa: a details entry is not an object")
+            continue
         ids = detail.get("appIDs", [detail["appID"]] if "appID" in detail else [])
         if ids != [APP_ID]:
             fail(f"aasa: a details entry names {ids}, expected exactly [{APP_ID!r}]")
@@ -514,7 +519,6 @@ def check_aasa() -> None:
             modern += 1
             allow = lambda p, d=detail: aasa_components_allow(d["components"], p)
         elif "paths" in detail:
-            legacy += 1
             allow = lambda p, d=detail: aasa_paths_allow(d["paths"], p)
         else:
             fail("aasa: a details entry has neither components nor paths")
