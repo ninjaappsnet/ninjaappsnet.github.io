@@ -21,13 +21,15 @@ Checks:
  10. Universal links: the apple-app-site-association file is publishable,
      parses, names the Smalti app, and matches the daily share path (with and
      without the trailing slash) and nothing broader.
- 11. The daily share page keeps its contract: static, nothing requested
-     off-origin, nothing stored or sent by its script, a social card whose
-     image exists.
+ 11. The daily share page keeps its contract: it says what the app promises
+     and carries a social card whose image exists.
  12. The Smalti marketing pages carry no claim the app has retired, and do
      carry the catalog numbers the code defines (CATALOG below).
  13. The press kit zip keeps its layout and the retired flat-grid icon ships
      nowhere (kit, hero, landing card).
+ 14. No page loads anything from another origin, posts a form, or runs an
+     inline script that talks to the network or stores anything: the site has
+     no analytics, trackers or cookies, and must not get any.
 """
 
 from __future__ import annotations
@@ -528,41 +530,49 @@ def check_aasa() -> None:
         fail("aasa: no components entry (the iOS 13+ format; Smalti requires iOS 17)")
 
 
+def check_no_trackers() -> None:
+    """The site has no analytics, no trackers, no cookies and no third-party
+    requests, and the app's privacy label ("Data Not Collected") is only honest
+    while that stays true. So on EVERY page: nothing is loaded from another
+    origin (outbound <a> links are fine), no form posts anywhere, and no inline
+    script talks to the network or stores anything of its own. The shared theme
+    snippet is exempt: it only reads the visitor's saved light/dark choice.
+    (assets/theme.js, a same-origin file, writes that one preference.)"""
+    fetch_rel = re.compile(
+        r"stylesheet|icon|preload|prefetch|preconnect|dns-prefetch|modulepreload|manifest", re.I)
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        for tag in re.finditer(
+                r"<(script|img|iframe|source|video|audio|embed|object|link)\b([^>]*)>", text, re.I):
+            name, attrs = tag.group(1).lower(), tag.group(2)
+            link_rel = re.search(r'\brel="([^"]*)"', attrs)
+            if name == "link" and not (link_rel and fetch_rel.search(link_rel.group(1))):
+                continue
+            for attr in re.findall(r'\b(?:src|href|data|poster)="([^"]*)"', attrs):
+                if re.match(r"(?:https?:)?//", attr):
+                    fail(f"tracking: {rel} loads {attr} from another origin (<{name}>)")
+        for style in re.findall(r"<style\b[^>]*>(.*?)</style>|\bstyle=\"([^\"]*)\"", text, re.S):
+            if re.search(r"@import|url\(\s*['\"]?(?:https?:)?//", "".join(style)):
+                fail(f"tracking: {rel} has a style rule that requests something off-origin")
+        if re.search(r"<form\b", text, re.I):
+            fail(f"tracking: {rel} has a <form>; the site collects nothing")
+        for script in re.findall(r"<script\b(?![^>]*\bsrc=)[^>]*>(.*?)</script>", text, re.S | re.I):
+            if "ninjaapps-theme" in script:
+                continue  # the shared pre-paint theme snippet, identical on every page
+            for banned in (r"fetch\s*\(", r"XMLHttpRequest", r"sendBeacon", r"new\s+Image\b",
+                           r"document\.cookie", r"localStorage", r"sessionStorage", r"indexedDB",
+                           r"WebSocket", r"EventSource", r"import\s*\("):
+                if re.search(banned, script):
+                    fail(f"tracking: an inline script on {rel} uses {banned}")
+
+
 def check_daily_page() -> None:
     page = ROOT / DAILY_PAGE
     if not page.is_file():
         fail(f"daily: {DAILY_PAGE} is missing")
         return
     text = page.read_text(encoding="utf-8")
-
-    # Nothing the page loads may come from another origin: the app's privacy
-    # label is "Data Not Collected", and a stranger's first contact with Smalti
-    # must not hand their address to a third party. Outbound <a> links are fine.
-    fetch_rel = re.compile(
-        r"stylesheet|icon|preload|prefetch|preconnect|dns-prefetch|modulepreload|manifest", re.I)
-    for tag in re.finditer(r"<(script|img|iframe|source|video|audio|embed|object|link)\b([^>]*)>",
-                           text, re.I):
-        name, attrs = tag.group(1).lower(), tag.group(2)
-        rel = re.search(r'\brel="([^"]*)"', attrs)
-        if name == "link" and not (rel and fetch_rel.search(rel.group(1))):
-            continue
-        for attr in re.findall(r'\b(?:src|href|data|poster)="([^"]*)"', attrs):
-            if re.match(r"(?:https?:)?//", attr):
-                fail(f"daily: <{name}> loads {attr}, which is off-origin")
-    for style in re.findall(r"<style\b[^>]*>(.*?)</style>|\bstyle=\"([^\"]*)\"", text, re.S):
-        if re.search(r"@import|url\(\s*['\"]?(?:https?:)?//", "".join(style)):
-            fail("daily: a style rule requests something off-origin")
-
-    # Inline scripts may format a date and nothing else: no network, no cookies,
-    # no storage of their own (the sitewide theme snippet only reads storage).
-    for script in re.findall(r"<script\b(?![^>]*\bsrc=)[^>]*>(.*?)</script>", text, re.S | re.I):
-        if "ninjaapps-theme" in script:
-            continue  # the shared pre-paint theme snippet, identical on every page
-        for banned in (r"fetch\s*\(", r"XMLHttpRequest", r"sendBeacon", r"new\s+Image\b",
-                       r"document\.cookie", r"localStorage", r"sessionStorage", r"indexedDB",
-                       r"WebSocket", r"EventSource", r"import\s*\("):
-            if re.search(banned, script):
-                fail(f"daily: the inline script uses {banned}")
 
     required = [
         "https://apps.apple.com/app/id6792641328",
@@ -677,6 +687,7 @@ def main() -> int:
         check_social,
         check_same_as,
         check_aasa,
+        check_no_trackers,
         check_daily_page,
         check_social_cards,
         check_stale_claims,

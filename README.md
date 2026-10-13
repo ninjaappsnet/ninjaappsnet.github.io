@@ -220,11 +220,13 @@ account, no identifier.
 - **GitHub Pages.** `/.well-known` is published only because `.nojekyll`
   exists: Jekyll would silently drop dot-directories, so never delete it. Pages
   serves an extensionless file as `application/octet-stream` and cannot set
-  headers. The file is valid JSON regardless, and the zone sits behind
-  Cloudflare, so if Apple's validator ever objects to the content type, a
-  Response Header Transform Rule setting `Content-Type: application/json` for
-  that one path is the fix; not moving the file and not giving it an extension.
-  The URL must answer `200` directly. Apple does not follow redirects.
+  headers. Apple's CDN accepted it anyway on the first deploy (2026-10-13): it
+  re-serves the file byte for byte as `application/json` with
+  `Apple-Origin-Format: json`. Should a later fetch ever be refused over the
+  type, the zone sits behind Cloudflare, so a Response Header Transform Rule
+  setting `Content-Type: application/json` for that one path is the fix; not
+  moving the file and not giving it an extension. The URL must answer `200`
+  directly. Apple does not follow redirects.
 - **Checking it** after every change:
 
   ```sh
@@ -233,13 +235,32 @@ account, no identifier.
   curl -si  https://app-site-association.cdn-apple.com/a/v1/ninjaapps.net  # what iOS will see
   ```
 
-  Devices read Apple's CDN copy, not the site. It refreshes on its own schedule,
-  hours rather than minutes, and answers a miss with `cache-control:
-  max-age=3600`, so a probe made before the file existed can pin a 404 for an
-  hour. A rejection carries an `apple-failure-reason` header saying what it did
-  not like. While building the app side, `applinks:ninjaapps.net?mode=developer`
+  Devices read Apple's CDN copy, not the site. It refreshes on its own schedule
+  and answers a miss with `cache-control: max-age=3600`. Here, a probe made
+  before the file existed cached a 404 that was replaced about two minutes after
+  the deploy finished; plan for the slower case. A rejection carries an
+  `apple-failure-reason` header saying what it did not like. While building the app side, `applinks:ninjaapps.net?mode=developer`
   skips the CDN on a development-signed build, on a device with Settings →
   Developer → Associated Domains Development switched on.
+
+## Tracking
+
+None, and `check-site.py` keeps it that way (`check_no_trackers`): no analytics,
+no cookies, no third-party request, no form, and no inline script that talks to
+the network or stores anything. The one thing kept on a visitor's device is the
+light/dark choice (`ninjaapps-theme` in `localStorage`, written by
+`assets/theme.js`). GitHub Pages logs visitor IP addresses for security, and the
+privacy policy says we cannot see those logs.
+
+What this repo does not control is the zone in front of it. The domain is
+proxied by Cloudflare. Its Email Address Obfuscation rewrites every email address
+in a page into an encoded link and injects its own same-origin
+`/cdn-cgi/scripts/…/email-decode.min.js`: not analytics, but without JavaScript
+the press and support pages show "[email protected]" instead of the address. That
+is a zone setting (Scrape Shield), not a file here. Cloudflare Web Analytics, if
+it were ever switched on, would inject a beacon into every HTML page with no
+commit to this repo, so the live check is
+`curl -s https://ninjaapps.net/ | grep -i beacon` (empty today).
 
 ## Assets
 
