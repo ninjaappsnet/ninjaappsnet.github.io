@@ -249,11 +249,29 @@ captures (WebP with alpha, 1200px wide, `shot-*.webp`) laid out two across by
 until the app is live; swap in the real link (see the TODO comment in
 `apps/dayfolio/index.html`) and add `<meta name="apple-itunes-app">` at release.
 
-Smalti's icon and screenshots are real (WebP, captured 2026-07-20 from the
-iPhone 16 Pro Max simulator). Source masters live in the game repo at
-`mosaic-rush/marketing/` — icon at 1024, screenshots at 1320×2868, sized for
-App Store reuse. Web copies: `assets/icon-smalti-144.webp` (landing card),
-`games/smalti/icon-320.webp` (hero), `games/smalti/shot-*.webp` (750px wide).
+Smalti's screenshots are real (WebP, captured 2026-07-20 from the iPhone 16 Pro
+Max simulator, 750px wide: `games/smalti/shot-*.webp`). The game has moved on
+since: stars and par are gone and the main menu was redesigned, so the set is
+due a recapture alongside the 1.2.2 store screenshots.
+
+Smalti's icon is the **shipping medallion**, exported from the app's asset
+catalog (`MosaicRush/Assets.xcassets/AppIcon.appiconset` in the game repo:
+`AppIcon.png`, `-dark`, `-tinted`) — not from the game repo's `marketing/icon/`
+or `marketing/press/icons/`, which held the retired flat-grid mark until they
+were replaced. Web copies are lossy WebP (q95): `assets/icon-smalti-144.webp`
+(landing card) and `games/smalti/icon-320.webp` (hero, and the daily page).
+
+The press kit, `games/smalti/smalti-press-kit.zip`, keeps one layout:
+`README.txt`, `icons/` (1024 / 180 / 60 px × light, dark, tinted — light and dark
+opaque RGB, tinted RGBA, resized with Lanczos), `wordmark/`, `screenshots/` and
+`smalti-fact-sheet.pdf`. The PDF is the game repo's
+`marketing/press/smalti-fact-sheet.html` rendered with headless Chrome the way
+that repo renders it (A4, no header or footer, the Google Fonts import dropped so
+the Georgia fallback is used, which reproduces its committed PDF pixel for
+pixel), with the icon swapped for the medallion. Re-render and re-zip whenever
+the sheet or the icon changes; the size quoted on the press page must follow.
+`check-site.py` refuses the retired icon, by hash, anywhere on the site and keeps
+the kit's layout and icon sizes.
 
 ## Placeholder inventory (TODO)
 

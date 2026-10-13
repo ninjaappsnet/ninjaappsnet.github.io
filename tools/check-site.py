@@ -26,13 +26,18 @@ Checks:
      image exists.
  12. The Smalti marketing pages carry no claim the app has retired, and do
      carry the catalog numbers the code defines (CATALOG below).
+ 13. The press kit zip keeps its layout and the retired flat-grid icon ships
+     nowhere (kit, hero, landing card).
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
+import struct
 import sys
+import zipfile
 from pathlib import Path
 from urllib.parse import urldefrag, urlparse
 
@@ -180,6 +185,41 @@ REQUIRED_FACTS = {
     ],
 }
 
+# The press kit. Same layout every time it is rebuilt, so a journalist's
+# bookmarked unzip path never moves.
+PRESS_KIT = "games/smalti/smalti-press-kit.zip"
+KIT_ROOT = "smalti-press-kit/"
+KIT_FILES = {
+    f"{KIT_ROOT}README.txt",
+    f"{KIT_ROOT}smalti-fact-sheet.pdf",
+    *(f"{KIT_ROOT}icons/smalti-icon-{size}{tone}.png"
+      for size in (1024, 180, 60) for tone in ("", "-dark", "-tinted")),
+    *(f"{KIT_ROOT}wordmark/smalti-wordmark-{tone}.{ext}"
+      for tone in ("light", "dark") for ext in ("png", "svg")),
+    *(f"{KIT_ROOT}screenshots/{name}.png" for name in (
+        "01-main-menu", "02-gameplay-midlevel", "03-completion-card",
+        "04-daily-puzzle", "05-daily-calendar")),
+}
+
+# SHA-256 of the flat-grid icon Smalti shipped until 1.0.1 (3x3 plain tiles),
+# which was still in the press kit and on the site in October 2026 after the
+# binary had moved to the medallion mark. Retired artwork must not come back
+# from a stale master: the app repo's marketing/press/icons held these same
+# bytes until the icon masters were replaced.
+RETIRED_ICONS_SHA256 = {
+    "b34a7ad42e080ba68e34ff12476db6a5b58b126c319dd721950ab1b8c01b5e56",  # kit 1024 dark
+    "91615eb6a9f4f5622abddc7bab9db9e236667b4aefe9fd7968e53ded8d63a2d6",  # kit 1024 tinted
+    "b746be7fb1a350e6a7f2a795f96e57022c5f2554ce4c31346c53166f4ba51801",  # kit 1024
+    "cef7d1f8366b7090c915cc6c268d7e74a5f57d8d3f41caac66b9b3478315a23f",  # kit 180 dark
+    "2d7357b4ef5fc7b1b16386bcc18e3d2c92cc6179cc50efc51ed5818a8ec4ef28",  # kit 180 tinted
+    "96cedd378ffaccc9619835a13a3ac918b834ef1f230d99a8b871d8b056383932",  # kit 180
+    "13d90cb5921963de4ff811978e1ec57e7ad227bdd978f8503130ac364f37f000",  # kit 60 dark
+    "f81a6e02aff3732b0a40ec494c9543ea93bbd548e00278544fcd1a6f92c687ff",  # kit 60 tinted
+    "5769e2e5b624972af60ba8fc3e78dde4e069bdd0d94765b2de4cb78b035f2c6a",  # kit 60
+    "ab0f1f7dd01895821e2a97b0525479b083b6178775f1a479ba074559d4b61ece",  # assets/icon-smalti-144.webp
+    "05dbfa00c2834e458b7a0b23618ed443da93eae12710b52ed1a759ac57cb17f4",  # games/smalti/icon-320.webp
+}
+WEB_ICONS = ["assets/icon-smalti-144.webp", "games/smalti/icon-320.webp"]
 
 # The studio's profiles, in the order every footer lists them. The order is a
 # judgement about the channels, not alphabetical: YouTube and Instagram carry
@@ -575,6 +615,55 @@ def check_stale_claims() -> None:
                 fail(f"stale claim: {rel} no longer states {fact!r}")
 
 
+def png_size(data: bytes) -> tuple[int, int] | None:
+    if data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
+        return None
+    return struct.unpack(">II", data[16:24])
+
+
+def check_press_kit() -> None:
+    kit = ROOT / PRESS_KIT
+    if not kit.is_file():
+        fail(f"press kit: {PRESS_KIT} is missing")
+        return
+    try:
+        archive = zipfile.ZipFile(kit)
+    except zipfile.BadZipFile:
+        fail("press kit: the zip is corrupt")
+        return
+    with archive:
+        if archive.testzip() is not None:
+            fail("press kit: the zip fails its CRC check")
+        names = {n for n in archive.namelist() if not n.endswith("/")}
+        for missing in sorted(KIT_FILES - names):
+            fail(f"press kit: {missing} is missing from the zip")
+        for extra in sorted(names - KIT_FILES):
+            fail(f"press kit: {extra} is not part of the kit layout")
+        for name in sorted(names & KIT_FILES):
+            data = archive.read(name)
+            if hashlib.sha256(data).hexdigest() in RETIRED_ICONS_SHA256:
+                fail(f"press kit: {name} is the retired flat-grid icon")
+            icon = re.fullmatch(KIT_ROOT + r"icons/smalti-icon-(\d+)(?:-dark|-tinted)?\.png", name)
+            if icon and png_size(data) != (int(icon.group(1)),) * 2:
+                fail(f"press kit: {name} is not a {icon.group(1)}px square PNG")
+
+    # The page quotes the download size; it drifts the moment the kit is rebuilt.
+    quoted = re.search(r"press kit \(zip, (\d+(?:\.\d+)?) MB\)",
+                       (ROOT / "games/smalti/press.html").read_text(encoding="utf-8"))
+    actual = kit.stat().st_size
+    if not quoted:
+        fail("press kit: press.html no longer states the download size")
+    elif not any(abs(float(quoted.group(1)) - actual / unit) <= 1.0 for unit in (1e6, 2**20)):
+        fail(f"press kit: press.html says {quoted.group(1)} MB, the zip is {actual / 1e6:.1f} MB")
+
+    for rel in WEB_ICONS:
+        icon = ROOT / rel
+        if not icon.is_file():
+            fail(f"icon: {rel} is missing")
+        elif hashlib.sha256(icon.read_bytes()).hexdigest() in RETIRED_ICONS_SHA256:
+            fail(f"icon: {rel} is the retired flat-grid icon")
+
+
 def main() -> int:
     for check in (
         check_manifest,
@@ -591,6 +680,7 @@ def main() -> int:
         check_daily_page,
         check_social_cards,
         check_stale_claims,
+        check_press_kit,
     ):
         check()
 
