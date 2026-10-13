@@ -44,6 +44,19 @@ file must parse, name the Smalti app, and match the daily path (with and without
 the trailing slash) and nothing broader; and the landing page must stay static,
 request nothing off-origin, and carry a social card whose image exists.
 
+The Smalti marketing pages (`STALE_CLAIMS` in the script) are held to the game's
+code, not to last quarter's copy: the check fails on a claim the app has
+retired (395 levels, nine packs, Masterpiece Commission, "handcrafted", daily
+leaderboards, two attempts, an iPad date, "TBD") and on a page that stops stating
+the catalog numbers the code defines (`CATALOG`: 411 levels, 10 Rooms, 40 free).
+The source of those numbers is the game repo: `Catalog.packs` in
+`MosaicRush/Model/Content.swift` and `Tunables.freeFourPieceLevels` in
+`MosaicRush/Model/GameConfig.swift`. When the game changes, change `CATALOG`, the
+copy and the check in the same commit. The published privacy policy and terms
+are not in that list on purpose: they are versioned, never retro-edited (see
+below), so a claim they carry that the app has since retired is fixed by a new
+version.
+
 ## Social
 
 Every page footer carries the same four profiles, in the same order:
@@ -247,8 +260,6 @@ App Store reuse. Web copies: `assets/icon-smalti-144.webp` (landing card),
 - One striped box (`.ph`) left: the hero art / studio mark on the landing page.
 - Smalti's App Store button is live (id `6792641328`). `.btn-quiet` and the
   `games/_template/` placeholder stay for the next app — search `TODO`.
-- Smalti's press fact sheet still says `RELEASE — TBD 2026`; set the real
-  date once the app is public.
 - `support@ninjaapps.net` must be a live mailbox before submission; the
   support page promises a 24–48 h reply.
 

@@ -24,6 +24,8 @@ Checks:
  11. The daily share page keeps its contract: static, nothing requested
      off-origin, nothing stored or sent by its script, a social card whose
      image exists.
+ 12. The Smalti marketing pages carry no claim the app has retired, and do
+     carry the catalog numbers the code defines (CATALOG below).
 """
 
 from __future__ import annotations
@@ -122,6 +124,62 @@ APP_ID = "745BCAQCQ4.net.ninjaapps.games.mosaicrush"  # team id . bundle id (pro
 AASA = ".well-known/apple-app-site-association"
 DAILY_PAGE = "games/smalti/daily/index.html"
 DAILY_PATH = "/games/smalti/daily/"
+
+# What the app's code says the catalog is (Model/Content.swift Catalog: 411
+# journey levels in 10 Rooms; Tunables.freeFourPieceLevels = 5 puts the free
+# band at 40). The copy below is checked against these, not the other way round.
+CATALOG = {"levels": 411, "rooms": 10, "free": 40}
+
+# Pages whose copy describes the shipping game. The published privacy policy and
+# terms are deliberately NOT here: they are versioned, never retro-edited (README,
+# "Legal page versioning"), so any claim they carry that the app has since retired
+# is fixed by a new version, not by this list.
+MARKETING_PAGES = [
+    "index.html",
+    "games/smalti/index.html",
+    "games/smalti/press.html",
+    "games/smalti/support.html",
+    DAILY_PAGE,
+]
+
+# Claims the app no longer makes, or never made. A hit means the copy drifted
+# from the code again. `(?i)` patterns ignore case; the rest are exact.
+STALE_CLAIMS = [
+    (r"\b395\b",
+     "the catalog is 411 levels in 10 Rooms (395 is the nine-Room ascent without The Heirloom Set)"),
+    (r"(?i)\b(?:nine|9)\s+packs?\b", "10 Rooms"),
+    (r"(?i)(?<!hint )\bpacks?\b",
+     "the player-facing word is Room (CONTEXT.md); only hint packs keep the word"),
+    (r"(?i)masterpiece commission", "say Commission"),
+    (r"(?i)hand-?crafted|handmade",
+     "levels are generated and the reward art is AI-generated (docs/asset-provenance.md): never claim hand-made"),
+    (r"(?i)leaderboards|depth board",
+     "the daily leaderboards were removed 2026-09-12; claim no leaderboards"),
+    (r"\bTBD\b", "Smalti has been on the App Store since August 2026"),
+    (r"\biPad\b", "no iPad promise or date (TARGETED_DEVICE_FAMILY = 1)"),
+    (r"(?i)two attempts|attempts? left", "the daily has been unmetered since 2026-09-12"),
+    (r"(?i)\bfifty-one\b|\b51 (?:journey )?levels", "the free band is 40 levels"),
+    (r"\bAtelier Endless\b|\bEndless\b", "the mode is called Daily Excavation"),
+    (r"(?i)streak freezes?|\bfreezes\b",
+     "streak freezes retire in 1.2.2; promise or deny nothing until it ships"),
+    (r"(?i)premium unlock|honest premium", "the player-facing word is the Unlock (CONTEXT.md)"),
+]
+
+# Numbers the pages must state, so a fix that only deletes the old claim and
+# never states the new one is caught too.
+REQUIRED_FACTS = {
+    "index.html": [f"{CATALOG['levels']} levels"],
+    "games/smalti/index.html": [
+        f"{CATALOG['levels']} levels", f"{CATALOG['rooms']} Rooms",
+        f"{CATALOG['free']} journey levels",
+    ],
+    "games/smalti/press.html": [
+        f"{CATALOG['levels']} levels", f"{CATALOG['rooms']} Rooms",
+        f"{CATALOG['rooms']} Commissions", f"{CATALOG['free']} journey levels",
+        "August 2026",
+    ],
+}
+
 
 # The studio's profiles, in the order every footer lists them. The order is a
 # judgement about the channels, not alphabetical: YouTube and Instagram carry
@@ -499,6 +557,24 @@ def check_social_cards() -> None:
                 fail(f"social card: {rel} image {url} is not on disk")
 
 
+def check_stale_claims() -> None:
+    for rel in MARKETING_PAGES:
+        page = ROOT / rel
+        if not page.is_file():
+            continue  # check_manifest reports a missing page
+        text = page.read_text(encoding="utf-8")
+        for pattern, why in STALE_CLAIMS:
+            hits: dict[str, int] = {}
+            for hit in re.finditer(pattern, text):
+                hits[hit.group(0)] = hits.get(hit.group(0), 0) + 1
+            for said, count in sorted(hits.items()):
+                times = f" (x{count})" if count > 1 else ""
+                fail(f"stale claim: {rel} says {said!r}{times} — {why}")
+        for fact in REQUIRED_FACTS.get(rel, []):
+            if fact not in text:
+                fail(f"stale claim: {rel} no longer states {fact!r}")
+
+
 def main() -> int:
     for check in (
         check_manifest,
@@ -514,6 +590,7 @@ def main() -> int:
         check_aasa,
         check_daily_page,
         check_social_cards,
+        check_stale_claims,
     ):
         check()
 
