@@ -950,6 +950,23 @@ h1 { margin: 0; font: 700 72px/1.08 'Shippori Mincho', serif; letter-spacing: -.
   background: none; cursor: pointer;
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Daily share page (games/smalti/daily/): the landing for the https link the
+   app shares. One short section, so body.share pins the footer to the bottom of
+   a tall window instead of letting it float halfway up. .share-line is the
+   sharer's sentence (the page script puts the day in it); .share-open is the way
+   back into an app that is already installed. The button label is typed in
+   sentence case and set in capitals here, so the markup reads as a sentence to
+   assistive tech. */
+body.share { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body.share main { flex: 1; }
+.share-line { margin: 22px 0 0; max-width: 440px; font: 700 24px/1.35 'Shippori Mincho', serif; }
+.share-line time { white-space: nowrap; }
+.share-actions .btn { text-transform: uppercase; }
+.share-open { margin: 28px 0 0; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.share-open a { color: var(--accent); }
+.share-open a:hover { text-decoration: underline; }
+
 .shot { background: var(--bg); padding: 24px; }
 /* Desktop screenshots (16:10) sit two across, the first one spanning the row.
    Captions are mono like the rest of the labelling. */

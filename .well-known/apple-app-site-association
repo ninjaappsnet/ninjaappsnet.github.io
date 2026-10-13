@@ -1,0 +1,24 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["745BCAQCQ4.net.ninjaapps.games.mosaicrush"],
+        "components": [
+          {
+            "/": "/games/smalti/daily",
+            "comment": "The daily share link without its trailing slash; GitHub Pages redirects it to the slash form."
+          },
+          {
+            "/": "/games/smalti/daily/*",
+            "comment": "The daily share link, https://ninjaapps.net/games/smalti/daily/?d=YYYY-MM-DD. No query pattern on purpose, so any ?d= value opens the app. Nothing else on the site does."
+          }
+        ]
+      },
+      {
+        "appID": "745BCAQCQ4.net.ninjaapps.games.mosaicrush",
+        "paths": ["/games/smalti/daily", "/games/smalti/daily/*"]
+      }
+    ]
+  }
+}

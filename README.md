@@ -16,6 +16,8 @@ games/<slug>/index.html      one page per app
 games/<slug>/privacy.html    one privacy policy per app
 games/<slug>/terms.html      terms — needed by anything with an IAP
 games/<slug>/support.html    support page — ASC's support field needs a URL
+games/smalti/daily/          landing page for the daily share link (see Universal links)
+.well-known/apple-app-site-association   which URLs iOS hands to the Smalti app
 apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
@@ -36,6 +38,11 @@ links resolve, that `sitemap.xml` and the pages on disk agree in both
 directions, that canonicals are self-consistent, that no `{{TOKEN}}` or
 `<CONFIRM …>` placeholder escaped the template — and that the URLs **baked
 into the Smalti binary** still resolve. Run it before every commit.
+
+It also guards the daily share link's two halves: the `apple-app-site-association`
+file must parse, name the Smalti app, and match the daily path (with and without
+the trailing slash) and nothing broader; and the landing page must stay static,
+request nothing off-origin, and carry a social card whose image exists.
 
 ## Social
 
@@ -151,6 +158,75 @@ https://ninjaapps.net/games/smalti/support.html
 Moving or renaming those pages ships a dead legal link to App Review and to
 everyone who already installed the app. Change them only alongside a game
 release, and update `BAKED_IN_URLS` in `tools/check-site.py` at the same time.
+
+Two more addresses are just as fixed. Every install fetches
+`games/smalti/config/v1.json`. And from Smalti 1.2.2 every share link a player
+sends points at `https://ninjaapps.net/games/smalti/daily/?d=YYYY-MM-DD`, so that
+path is in `BAKED_IN_URLS` as well: links, once sent, cannot be recalled.
+
+## Universal links (the daily share link)
+
+Smalti 1.2.2 shares `https://ninjaapps.net/games/smalti/daily/?d=YYYY-MM-DD`
+in place of the old `mosaicrush://daily/<day>` link, which means nothing to
+anyone without the app and is often not even tappable in a chat app. The link
+carries one thing, the day the sharer played (their own local day key): no
+account, no identifier.
+
+- **App installed:** iOS opens the app and never shows the page. That takes two
+  halves: this site's `/.well-known/apple-app-site-association`, and
+  `applinks:ninjaapps.net` in the app's entitlements (an app-repo change that
+  ships with 1.2.2; the 1.2.1 binary does not have it, so nothing opens in-app
+  until a player updates). The entitlement names the apex: `www.` 301s to it.
+- **Anyone else**, a browser that does not hand links over, or a pasted URL:
+  `games/smalti/daily/index.html`. It is static. One inline script reads an
+  optional `?d=`, accepts it only if it is exactly one real calendar day from
+  2026-07-01 (the first daily) to two days after the visitor's own date (time
+  zones span 26 hours), and prints it in the visitor's locale ("I restored the
+  mosaic for 13 October 2026"). Anything else leaves the default line. The
+  script requests nothing, stores nothing and sets no cookie, and the page loads
+  only same-origin files; `check-site.py` enforces both. (The sitewide theme
+  toggle still keeps its one `ninjaapps-theme` preference in `localStorage`, as
+  on every page.) The App Store link is a plain text button to
+  `https://apps.apple.com/app/id6792641328`, because a badge image would be a
+  third-party request.
+- **"Open today's puzzle"** on that page is `mosaicrush://daily`, not the same
+  https URL. iOS keeps a tap on a same-site link inside Safari rather than
+  handing it to the app, so an https link there would just reload the page. The
+  scheme is registered by 1.2.1 and already opens today's daily (a link's day is
+  ignored on purpose: an old link never resurrects an old board). The page also
+  carries the Smart App Banner like the other Smalti pages, with `app-argument`
+  set to that scheme link, so Safari's own "Open" button lands on the daily too.
+- **The file** is `.well-known/apple-app-site-association`: exact name, no
+  extension, JSON. `appIDs` is `745BCAQCQ4.net.ninjaapps.games.mosaicrush` (team
+  id + bundle id, from the game's `project.yml`). The iOS 13+ `components` list
+  matches `/games/smalti/daily` and `/games/smalti/daily/*`, so with and without
+  the trailing slash and with any query, and nothing else: the privacy policy,
+  support and press pages keep opening in the browser. A legacy `paths` entry
+  repeats it for iOS 12 and older. Smalti requires iOS 17, so it is dead weight
+  kept because it is harmless.
+- **GitHub Pages.** `/.well-known` is published only because `.nojekyll`
+  exists: Jekyll would silently drop dot-directories, so never delete it. Pages
+  serves an extensionless file as `application/octet-stream` and cannot set
+  headers. The file is valid JSON regardless, and the zone sits behind
+  Cloudflare, so if Apple's validator ever objects to the content type, a
+  Response Header Transform Rule setting `Content-Type: application/json` for
+  that one path is the fix; not moving the file and not giving it an extension.
+  The URL must answer `200` directly. Apple does not follow redirects.
+- **Checking it** after every change:
+
+  ```sh
+  curl -sSI https://ninjaapps.net/.well-known/apple-app-site-association   # 200, no Location
+  curl -s   https://ninjaapps.net/.well-known/apple-app-site-association | python3 -m json.tool
+  curl -si  https://app-site-association.cdn-apple.com/a/v1/ninjaapps.net  # what iOS will see
+  ```
+
+  Devices read Apple's CDN copy, not the site. It refreshes on its own schedule,
+  hours rather than minutes, and answers a miss with `cache-control:
+  max-age=3600`, so a probe made before the file existed can pin a 404 for an
+  hour. A rejection carries an `apple-failure-reason` header saying what it did
+  not like. While building the app side, `applinks:ninjaapps.net?mode=developer`
+  skips the CDN on a development-signed build, on a device with Settings →
+  Developer → Associated Domains Development switched on.
 
 ## Assets
 

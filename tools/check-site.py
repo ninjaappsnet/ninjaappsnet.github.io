@@ -18,10 +18,17 @@ Checks:
   8. The URLs baked into the Smalti binary resolve to real pages.
   9. Every page's footer carries the same social row, in the same order,
      and the landing page's sameAs agrees with it.
+ 10. Universal links: the apple-app-site-association file is publishable,
+     parses, names the Smalti app, and matches the daily share path (with and
+     without the trailing slash) and nothing broader.
+ 11. The daily share page keeps its contract: static, nothing requested
+     off-origin, nothing stored or sent by its script, a social card whose
+     image exists.
 """
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -47,6 +54,7 @@ MANIFEST = [
     "games/smalti/terms.html",
     "games/smalti/support.html",
     "games/smalti/press.html",
+    "games/smalti/daily/index.html",
     "apps/dayfolio/index.html",
     "apps/dayfolio/privacy.html",
     "apps/dayfolio/terms.html",
@@ -101,7 +109,19 @@ BAKED_IN_URLS = [
     # (SelfHostedRemoteConfig.swift). Moving or deleting it silently pins all
     # installs to their shipped defaults forever.
     f"{ORIGIN}/games/smalti/config/v1.json",
+    # The daily share link, https://ninjaapps.net/games/smalti/daily/?d=YYYY-MM-DD
+    # (REVIEW_RESPONSE_PLAN_2026-10-13 item 15, shipping in 1.2.2). Every link a
+    # player ever shares points here, forever; the AASA file below is what makes
+    # an installed Smalti open it instead of this page.
+    f"{ORIGIN}/games/smalti/daily/",
 ]
+
+# Universal links for that share link. iOS reads this file (through Apple's
+# CDN) once an app declares applinks:ninjaapps.net in its entitlements.
+APP_ID = "745BCAQCQ4.net.ninjaapps.games.mosaicrush"  # team id . bundle id (project.yml)
+AASA = ".well-known/apple-app-site-association"
+DAILY_PAGE = "games/smalti/daily/index.html"
+DAILY_PATH = "/games/smalti/daily/"
 
 # The studio's profiles, in the order every footer lists them. The order is a
 # judgement about the channels, not alphabetical: YouTube and Instagram carry
@@ -319,6 +339,166 @@ def check_same_as() -> None:
              f"expected {[url for _, url in SOCIAL]}")
 
 
+def aasa_matches(pattern: str, path: str) -> bool:
+    """Apple's path pattern: `*` is zero or more characters, `?` exactly one,
+    anchored at both ends. (The `$(alpha)`-style variables are not used here.)"""
+    rx = "".join(".*" if c == "*" else "." if c == "?" else re.escape(c) for c in pattern)
+    return re.fullmatch(rx, path) is not None
+
+
+def aasa_components_allow(components: list, path: str) -> bool:
+    """iOS 13+ format: the first component whose `/` pattern matches decides;
+    `exclude` turns a match into a refusal."""
+    for comp in components:
+        pattern = comp.get("/")
+        if pattern is None or aasa_matches(pattern, path):
+            return not comp.get("exclude", False)
+    return False
+
+
+def aasa_paths_allow(paths: list, path: str) -> bool:
+    """Pre-iOS-13 format: first match wins; a `NOT ` prefix is a refusal."""
+    for entry in paths:
+        refuse = entry.startswith("NOT ")
+        if aasa_matches(entry[4:] if refuse else entry, path):
+            return not refuse
+    return False
+
+
+# What the daily share path must and must not cover. The negatives matter as
+# much: a pattern that quietly grows to /games/smalti/* would hand the privacy
+# policy and the support page to the app, which cannot show them.
+AASA_OPENS = [DAILY_PATH.rstrip("/"), DAILY_PATH, f"{DAILY_PATH}index.html"]
+AASA_LEAVES = [
+    "/", "/games/smalti/", "/games/smalti/privacy.html", "/games/smalti/support.html",
+    "/games/smalti/press.html", "/games/smalti/dailyx", "/games/smalti/daily-archive/",
+    "/apps/dayfolio/",
+]
+
+
+def check_aasa() -> None:
+    # A Jekyll build drops dot-directories; .nojekyll is what lets GitHub Pages
+    # publish /.well-known at all.
+    if not (ROOT / ".nojekyll").is_file():
+        fail("aasa: .nojekyll is missing, so GitHub Pages would not publish /.well-known")
+    path = ROOT / AASA
+    if not path.is_file():
+        fail(f"aasa: {AASA} is missing (exact name, no extension)")
+        return
+    raw = path.read_bytes()
+    if len(raw) > 128 * 1024:
+        fail("aasa: file is over Apple's 128 KB limit")
+    try:
+        data = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        fail(f"aasa: {AASA} is not valid JSON ({exc})")
+        return
+
+    # Guard the matcher itself, so a bug in it cannot wave a wrong file through.
+    probe = [("/a/*", "/a/", True), ("/a/*", "/a", False), ("/a/*", "/a/b/c", True),
+             ("/a", "/a/", False), ("/a?c", "/abc", True), ("/a?c", "/ac", False)]
+    for pattern, sample, want in probe:
+        if aasa_matches(pattern, sample) != want:
+            fail(f"aasa: internal matcher is wrong for {pattern!r} vs {sample!r}")
+
+    details = data.get("applinks", {}).get("details") if isinstance(data, dict) else None
+    if not isinstance(details, list) or not details:
+        fail("aasa: applinks.details is missing or empty")
+        return
+    modern = legacy = 0
+    for detail in details:
+        ids = detail.get("appIDs", [detail["appID"]] if "appID" in detail else [])
+        if ids != [APP_ID]:
+            fail(f"aasa: a details entry names {ids}, expected exactly [{APP_ID!r}]")
+        if "components" in detail:
+            modern += 1
+            allow = lambda p, d=detail: aasa_components_allow(d["components"], p)
+        elif "paths" in detail:
+            legacy += 1
+            allow = lambda p, d=detail: aasa_paths_allow(d["paths"], p)
+        else:
+            fail("aasa: a details entry has neither components nor paths")
+            continue
+        kind = "components" if "components" in detail else "paths"
+        for sample in AASA_OPENS:
+            if not allow(sample):
+                fail(f"aasa: {kind} do not open the app for {sample}")
+        for sample in AASA_LEAVES:
+            if allow(sample):
+                fail(f"aasa: {kind} are too broad: they also open the app for {sample}")
+    if not modern:
+        fail("aasa: no components entry (the iOS 13+ format; Smalti requires iOS 17)")
+
+
+def check_daily_page() -> None:
+    page = ROOT / DAILY_PAGE
+    if not page.is_file():
+        fail(f"daily: {DAILY_PAGE} is missing")
+        return
+    text = page.read_text(encoding="utf-8")
+
+    # Nothing the page loads may come from another origin: the app's privacy
+    # label is "Data Not Collected", and a stranger's first contact with Smalti
+    # must not hand their address to a third party. Outbound <a> links are fine.
+    fetch_rel = re.compile(
+        r"stylesheet|icon|preload|prefetch|preconnect|dns-prefetch|modulepreload|manifest", re.I)
+    for tag in re.finditer(r"<(script|img|iframe|source|video|audio|embed|object|link)\b([^>]*)>",
+                           text, re.I):
+        name, attrs = tag.group(1).lower(), tag.group(2)
+        rel = re.search(r'\brel="([^"]*)"', attrs)
+        if name == "link" and not (rel and fetch_rel.search(rel.group(1))):
+            continue
+        for attr in re.findall(r'\b(?:src|href|data|poster)="([^"]*)"', attrs):
+            if re.match(r"(?:https?:)?//", attr):
+                fail(f"daily: <{name}> loads {attr}, which is off-origin")
+    for style in re.findall(r"<style\b[^>]*>(.*?)</style>|\bstyle=\"([^\"]*)\"", text, re.S):
+        if re.search(r"@import|url\(\s*['\"]?(?:https?:)?//", "".join(style)):
+            fail("daily: a style rule requests something off-origin")
+
+    # Inline scripts may format a date and nothing else: no network, no cookies,
+    # no storage of their own (the sitewide theme snippet only reads storage).
+    for script in re.findall(r"<script\b(?![^>]*\bsrc=)[^>]*>(.*?)</script>", text, re.S | re.I):
+        if "ninjaapps-theme" in script:
+            continue  # the shared pre-paint theme snippet, identical on every page
+        for banned in (r"fetch\s*\(", r"XMLHttpRequest", r"sendBeacon", r"new\s+Image\b",
+                       r"document\.cookie", r"localStorage", r"sessionStorage", r"indexedDB",
+                       r"WebSocket", r"EventSource", r"import\s*\("):
+            if re.search(banned, script):
+                fail(f"daily: the inline script uses {banned}")
+
+    required = [
+        "https://apps.apple.com/app/id6792641328",
+        "A calm daily mosaic puzzle. No ads, no account, no data collected.",
+        "Get Smalti on the App Store",
+        "Already have it?",
+        "Open today",
+    ]
+    for need in required:
+        if need.lower() not in text.lower():
+            fail(f"daily: the page does not say {need!r}")
+    for meta in (r'property="og:title"', r'property="og:description"', r'property="og:image"',
+                 r'property="og:url"', r'name="twitter:card"', r'name="description"',
+                 r'name="apple-itunes-app" content="app-id=6792641328'):
+        if not re.search(rf"<meta\s+{meta}", text):
+            fail(f"daily: missing <meta {meta}>")
+    if re.search(r'name="robots"[^>]*noindex', text):
+        fail("daily: the share page must stay indexable (it is in the sitemap)")
+
+
+def check_social_cards() -> None:
+    """A card whose image 404s is worse than no card: every chat app that
+    unfurls the link shows a broken box."""
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        for url in re.findall(
+                r'<meta\s+(?:property="og:image"|name="twitter:image")\s+content="([^"]+)"', text):
+            if not url.startswith(ORIGIN + "/"):
+                fail(f"social card: {rel} points its image off-origin: {url}")
+            elif not (ROOT / url[len(ORIGIN) + 1:]).is_file():
+                fail(f"social card: {rel} image {url} is not on disk")
+
+
 def main() -> int:
     for check in (
         check_manifest,
@@ -331,6 +511,9 @@ def main() -> int:
         check_baked_in_urls,
         check_social,
         check_same_as,
+        check_aasa,
+        check_daily_page,
+        check_social_cards,
     ):
         check()
 
