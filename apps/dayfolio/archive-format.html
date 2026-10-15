@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dayfolio archive format — Dayfolio — NinjaApps</title>
+<meta name="description" content="The .dayfolio file format, in full: the container, every record type and key, the versions, and what a restore does, precisely enough to write a reader.">
+<link rel="canonical" href="https://ninjaapps.net/apps/dayfolio/archive-format.html">
+<meta property="og:site_name" content="NinjaApps">
+<meta property="og:title" content="The Dayfolio archive format — Dayfolio — NinjaApps">
+<meta property="og:description" content="The .dayfolio file format, in full: the container, every record type and key, the versions, and what a restore does, precisely enough to write a reader.">
+<meta property="og:url" content="https://ninjaapps.net/apps/dayfolio/archive-format.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
+<link rel="stylesheet" href="../../style.css">
+<script src="../../assets/theme.js" defer></script>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="../../">忍 NinjaApps</a>
+  <nav>
+    <a href="../../#apps">Apps</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
+  </nav>
+</header>
+
+<main>
+
+<section class="page">
+  <div class="kicker">式 FORMAT — DAYFOLIO</div>
+  <h1 class="page-title">The Dayfolio archive format</h1>
+  <div class="prose">
+
+<p>Format version 1, as Dayfolio 1.0 writes it on the Mac, iPhone and iPad. This page is for anyone who wants to read their journals without Dayfolio, or move them somewhere else: it describes the <code>.dayfolio</code> file completely enough to write a reader for it. It was written from the code (<code>Packages/DayfolioKit/Sources/DayfolioStore/Archive/</code> and <code>Sync/SyncSchema.swift</code>), and a test (<code>ArchiveFormatDocTests</code>) checks it against the code: every record type, key, listed value and synced setting the app writes has a row here.</p>
+
+<p>A <strong>Dayfolio archive</strong> holds everything needed to bring journals back on any device: journals, templates, entries with their snapshots, the files added to them, people, projects, places, reminders, saved searches, report presets and Reports, what is in Recently deleted, and the settings that sync. <em>Export…</em> with <em>Dayfolio archive</em> writes one; <em>Import…</em> restores one. Restoring adds only what is missing and never changes or removes anything already there (ADR 0004).</p>
+
+<p><strong>An archive isn't encrypted.</strong> Anyone who has the file can read everything in it, journals you lock included (Dayfolio asks for Face ID or Touch ID before it writes one that holds them).</p>
+
+<h2 id="1-the-container">1. The container</h2>
+
+<ul><li>A ZIP archive (PKZIP 2.0, with Zip64 where a file or the archive needs it). Renamed to <code>.zip</code>, any unzip tool opens it.</li><li>File name extension <code>.dayfolio</code>; uniform type <code>net.ninjaapps.apps.dayfolio.archive</code>, which conforms to <code>public.zip-archive</code>. Dayfolio suggests <code>Dayfolio.dayfolio</code> for everything and the journal's name for one journal (<code>Engineering Log.dayfolio</code>).</li><li>Written owner-only (<code>0600</code>) where the disk keeps permissions.</li></ul>
+
+<pre><code>manifest.json
+records/Attachment.json
+records/DismissedReminderSuggestion.json
+records/Entry.json
+records/Journal.json
+records/JournalTemplate.json
+records/Person.json
+records/Place.json
+records/Project.json
+records/Reminder.json
+records/Report.json
+records/ReportPreset.json
+records/SavedSearch.json
+records/SyncedSetting.json
+records/Template.json
+files/928EB668-2BBC-4C35-88E1-B14FCCEA717D
+files/…</code></pre>
+
+<ul><li><code>manifest.json</code> comes first, then the records files in alphabetical order, then the files.</li><li><code>records/&lt;RecordType&gt;.json</code> holds every record of one type (section 4). Every type is there, an empty one as <code>"records": []</code>.</li><li><code>files/&lt;attachment id&gt;</code> holds the original bytes of one attachment, exactly as they were added, named by the attachment's id (an uppercase UUID).</li><li>The JSON files are deflated. The files are stored uncompressed, and written and read a piece at a time, so an archive can be far larger than memory.</li><li>Every entry in the ZIP has the archive's creation time as its modification time.</li><li>A path is <code>/</code>-separated. A record type is ASCII letters, digits and <code>_</code> only, so a records file can't name a path outside <code>records/</code>.</li></ul>
+
+<p>When it reads an archive, Dayfolio ignores entries it doesn't recognise, never follows a symbolic link, and refuses an archive with more than 100,000 entries, a records file over 256 MB, or records over 512 MB in all, decompressed. A file over 50 MB, the cap on every attachment, isn't restored.</p>
+
+<h2 id="2-versions-and-what-a-reader-should-tolerate">2. Versions, and what a reader should tolerate</h2>
+
+<ul><li><code>formatVersion</code> in the manifest says which format the archive is. This page describes <strong>1</strong>, the only one so far. Dayfolio refuses a higher version ("This archive was made by a newer version of Dayfolio.") and treats an archive with no readable manifest, or a version below 1, as not an archive.</li><li><strong>Format 1 only grows by addition.</strong> A later Dayfolio may add optional manifest keys (as <code>nameOnlyReferences</code> was added), keys on a record, record types, field types and values of a listed key, all without changing the version. A reader should skip what it doesn't know rather than fail. Dayfolio itself does: it keeps a key it doesn't know with its record, and sends it on with it; it keeps a record of a type it doesn't know aside until an update can read it; and it keeps a field, or a field value, of a type it doesn't know in its place.</li><li><code>appVersion</code> names the version of Dayfolio that wrote the archive. It's for people, not for parsing.</li></ul>
+
+<h2 id="3-manifest-json">3. <code>manifest.json</code></h2>
+
+<pre><code>{"appVersion":"1.0.0","counts":{"dismissedReminderSuggestions":1,"entries":318,"files":1,"journalTemplates":14,"journals":4,"people":5,"places":3,"projects":4,"reminders":1,"reportPresets":1,"reports":2,"savedSearches":1,"settings":1,"templates":14},"createdAt":"2026-09-24T14:00:00.000Z","formatVersion":1,"scope":{"kind":"everything"}}</code></pre>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>formatVersion</code></td><td>integer</td><td>The format, <code>1</code>.</td></tr><tr><td><code>appVersion</code></td><td>string</td><td>The version of Dayfolio that wrote it, such as <code>1.0.0</code>.</td></tr><tr><td><code>createdAt</code></td><td>string</td><td>When it was written: ISO 8601 in UTC, with milliseconds.</td></tr><tr><td><code>scope</code></td><td>object</td><td>What it holds: <code>{"kind": "everything"}</code>, <code>{"kind": "journal", "journalID": "&lt;id&gt;"}</code> or <code>{"kind": "templateEntries", "templateID": "&lt;id&gt;"}</code>. See below.</td></tr><tr><td><code>counts</code></td><td>object</td><td>How many records of each kind, by the names in the next table. A kind with none is left out.</td></tr><tr><td><code>nameOnlyReferences</code></td><td>array of strings</td><td>Optional. The ids of people and projects that are in the archive only because its entries still name them: they were in Recently deleted on the device that made it. They come back hidden, so the entries keep the name (section 7).</td></tr></tbody></table></div>
+
+<p>The names in <code>counts</code>:</p>
+
+<div class="table-wrap"><table><thead><tr><th>Name</th><th>Records</th></tr></thead><tbody><tr><td><code>journals</code></td><td>Journal</td></tr><tr><td><code>templates</code></td><td>Template</td></tr><tr><td><code>journalTemplates</code></td><td>JournalTemplate</td></tr><tr><td><code>entries</code></td><td>Entry</td></tr><tr><td><code>files</code></td><td>Attachment, whether or not its bytes are in the archive</td></tr><tr><td><code>places</code></td><td>Place</td></tr><tr><td><code>people</code></td><td>Person</td></tr><tr><td><code>projects</code></td><td>Project</td></tr><tr><td><code>reminders</code></td><td>Reminder</td></tr><tr><td><code>dismissedReminderSuggestions</code></td><td>DismissedReminderSuggestion</td></tr><tr><td><code>savedSearches</code></td><td>SavedSearch</td></tr><tr><td><code>reportPresets</code></td><td>ReportPreset</td></tr><tr><td><code>reports</code></td><td>Report</td></tr><tr><td><code>settings</code></td><td>SyncedSetting</td></tr></tbody></table></div>
+
+<h3 id="scopes">Scopes</h3>
+
+<div class="table-wrap"><table><thead><tr><th><code>scope.kind</code></th><th>Written by</th><th>What it holds</th></tr></thead><tbody><tr><td><code>everything</code></td><td><em>Export…</em> with <em>Everything</em></td><td>Every journal, archived ones too; every template, entry, file, person, project, place, reminder, dismissed reminder suggestion, saved search, report preset and Report; what is in Recently deleted; the settings that sync; and records a newer Dayfolio wrote that this version kept aside.</td></tr><tr><td><code>journal</code></td><td><em>Export…</em> for one journal (Journal settings › Export, the journal's menu)</td><td>The journal; its entries, Recently deleted ones too; its reminders and dismissed reminder suggestions; its template memberships; every template it uses, its entries came from or its reminders name; and the people, projects, places and files its entries refer to. No settings, saved searches, report presets or Reports.</td></tr><tr><td><code>templateEntries</code></td><td><em>Delete template and its entries…</em> › <em>Export entries first…</em></td><td>The template's entries in every journal, archived and Recently deleted ones too, with their files; the template and its memberships; the people, projects and places those entries refer to; and each journal involved as a bare record, with no default template unless it is this one, so the entries can come back into their journals even after those were deleted.</td></tr></tbody></table></div>
+
+<p><strong>Never in an archive.</strong> Places, saved searches, people and projects that are in Recently deleted on the device that made it (a person or project an entry in the archive still names travels for its name, in <code>nameOnlyReferences</code>, and a Place left out leaves its name on the entries that copied it). What Dayfolio rebuilds from the records: tags, the search index, text read from files, the lists of who and what an entry names. Sync's own bookkeeping. Settings that belong to one device, such as the relock time and the quick-entry shortcut. Drafts and running timers.</p>
+
+<h2 id="4-records-recordtype-json">4. <code>records/&lt;RecordType&gt;.json</code></h2>
+
+<pre><code>{"recordType":"Place","records":[{"id":"6E977FB0-ECF9-4A80-882A-D0D6BC910976","values":{"city":{"s":"Warsaw"},"createdAt":{"t":793785600},"latitude":{"d":52.223},"longitude":{"d":21.019},"name":{"s":"Home"},"radius":{"d":150},"street":{"s":"Mokotowska"},"updatedAt":{"t":793785600}}}]}</code></pre>
+
+<ul><li><code>recordType</code> is the file's record type, the name iCloud uses for it too.</li><li>Each record's <code>id</code> is an uppercase UUID: the same id the record has in Dayfolio and in iCloud. Records point at each other by these ids.</li><li><code>values</code> holds the record's keys, each with one typed value. <strong>A key that isn't there has no value.</strong></li><li>The JSON is written with its keys sorted, and <code>/</code> isn't escaped.</li></ul>
+
+<p>Every value is an object with one key that says its type:</p>
+
+<div class="table-wrap"><table><thead><tr><th>Form</th><th>Holds</th></tr></thead><tbody><tr><td><code>{"s": "…"}</code></td><td>A string: text, an id, one of a listed set of words, or JSON written into a string (below).</td></tr><tr><td><code>{"i": 4}</code></td><td>A 64-bit integer. A yes-or-no key is <code>0</code> or <code>1</code>.</td></tr><tr><td><code>{"d": 52.223}</code></td><td>A floating-point number.</td></tr><tr><td><code>{"t": 811951200}</code></td><td>A date: seconds since 1 January 2001, 00:00:00 UTC (Apple's reference date), to the millisecond. Add 978,307,200 for Unix time.</td></tr><tr><td><code>{"b": "…"}</code></td><td>Bytes, in base64.</td></tr></tbody></table></div>
+
+<p><strong>JSON in a string.</strong> Some keys hold JSON written into a string, in canonical form (keys sorted, no white space): the ones whose type below is <em>JSON</em>. Inside them, a date is an ISO 8601 string in UTC with milliseconds (<code>"2026-09-24T09:12:00.000Z"</code>), an id is an uppercase UUID string, and section 6 gives each shape.</p>
+
+<h2 id="5-record-types">5. Record types</h2>
+
+<p>They are listed parents first, the order a restore adds them in. Three keys mean the same thing wherever they appear: <code>createdAt</code> (made), <code>updatedAt</code> (last changed: sync merges by it) and <code>deletedAt</code> (put in Recently deleted; Dayfolio removes it for good 30 days after that, counted by each device). A record in Recently deleted is in the archive with its <code>deletedAt</code>, so a restore brings it back to Recently deleted, not to the journal.</p>
+
+<h3 id="template">Template</h3>
+
+<p>A template of the person's own, made from a Library template or from scratch.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>icon</code></td><td>string</td><td>An SF Symbol name.</td></tr><tr><td><code>color</code></td><td>string</td><td>A journal colour (section 6.8).</td></tr><tr><td><code>cadence</code></td><td>string</td><td>How often it's meant to be used: <code>daily</code>, <code>weekly</code>, <code>onEvent</code> or <code>review</code>. Describes it; schedules nothing.</td></tr><tr><td><code>fields</code></td><td>JSON</td><td>Its fields, in order: an array of fields (6.1).</td></tr><tr><td><code>basedOnLibraryID</code></td><td>string</td><td>The Library template it was made from, such as <code>software-engineering.daily-standup</code>.</td></tr><tr><td><code>basedOnVersion</code></td><td>integer</td><td>That Library template's version when it was made.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr><tr><td><code>deletedAt</code></td><td>date</td><td></td></tr><tr><td><code>purgedAt</code></td><td>date</td><td>Gone from Recently deleted, but kept hidden because entries still came from it.</td></tr></tbody></table></div>
+
+<p>The built-in <strong>Note</strong> template, behind <em>Blank entry</em> and quick notes, has the fixed id <code>D0F01100-0000-4000-8000-000000000001</code>.</p>
+
+<h3 id="journal">Journal</h3>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>color</code></td><td>string</td><td>A journal colour (6.8).</td></tr><tr><td><code>icon</code></td><td>string</td><td>An SF Symbol name.</td></tr><tr><td><code>summary</code></td><td>string</td><td>Its description.</td></tr><tr><td><code>defaultTemplateID</code></td><td>string</td><td>The Template New entry starts with.</td></tr><tr><td><code>isArchived</code></td><td>integer</td><td><code>1</code>: archived, read-only and out of the way.</td></tr><tr><td><code>capturesContext</code></td><td>integer</td><td><code>1</code>: new entries capture location and weather.</td></tr><tr><td><code>isLocked</code></td><td>integer</td><td><code>1</code>: <em>Lock with Face ID</em> (or <em>Touch ID</em>) is on. It says how Dayfolio shows the journal; the archive itself is not encrypted.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr><tr><td><code>deletedAt</code></td><td>date</td><td>The entries deleted with it share this date.</td></tr></tbody></table></div>
+
+<h3 id="journaltemplate">JournalTemplate</h3>
+
+<p>One template's place in one journal.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>journalID</code></td><td>string</td><td>The Journal.</td></tr><tr><td><code>templateID</code></td><td>string</td><td>The Template.</td></tr><tr><td><code>position</code></td><td>integer</td><td>Its order in the journal, from 0.</td></tr><tr><td><code>isEnabled</code></td><td>integer</td><td><code>1</code>: offered in New entry.</td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="person">Person</h3>
+
+<p>Someone you work with, named in Person fields and mentions. There is one Person per name.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>nameKey</code></td><td>string</td><td>The name lowercased: two people with the same <code>nameKey</code> are the same Person.</td></tr><tr><td><code>color</code></td><td>string</td><td>A journal colour (6.8).</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="project">Project</h3>
+
+<p>A piece of work, or the client it's for, named in Project fields. One per name, like a Person.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>nameKey</code></td><td>string</td><td>The name lowercased.</td></tr><tr><td><code>color</code></td><td>string</td><td>A journal colour (6.8).</td></tr><tr><td><code>hourlyRate</code></td><td>number</td><td>Its hourly rate, in its currency's major unit (dollars, not cents): 0 to 1,000,000,000, rounded to the currency's minor units. A Report's amounts are the project's billable hours times it. With <code>rateCurrency</code>, or neither.</td></tr><tr><td><code>rateCurrency</code></td><td>string</td><td>An ISO 4217 code, such as <code>USD</code>, <code>EUR</code> or <code>JPY</code>: any the writing device's system lists. With <code>hourlyRate</code>, or neither.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="place">Place</h3>
+
+<p>A named location, made when someone renames an entry's location.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td>Such as "Warsaw office".</td></tr><tr><td><code>street</code></td><td>string</td><td></td></tr><tr><td><code>city</code></td><td>string</td><td></td></tr><tr><td><code>latitude</code></td><td>number</td><td>Rounded to three decimal places, about 100 m.</td></tr><tr><td><code>longitude</code></td><td>number</td><td>Rounded the same way.</td></tr><tr><td><code>radius</code></td><td>number</td><td>In metres: later entries within it take the Place's name.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="entry">Entry</h3>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>journalID</code></td><td>string</td><td>Its Journal.</td></tr><tr><td><code>templateID</code></td><td>string</td><td>The Template it was made from. Its fields are read from <code>snapshot</code>, never from the Template, which may have changed since.</td></tr><tr><td><code>title</code></td><td>string</td><td>Its own title, if it has one. Without one, Dayfolio shows the first line of its first long field (text, rich text or checklist), else the template's name.</td></tr><tr><td><code>date</code></td><td>date</td><td>The date and time it's for, which it is filed and listed under.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>editedAt</code></td><td>date</td><td>Its content's last edit.</td></tr><tr><td><code>isStarred</code></td><td>integer</td><td><code>1</code>: starred.</td></tr><tr><td><code>snapshot</code></td><td>JSON</td><td>The template as it was when the entry was made (6.3).</td></tr><tr><td><code>context</code></td><td>JSON</td><td>Where it was written and the weather there (6.4). Not there when nothing was captured.</td></tr><tr><td><code>fieldValues</code></td><td>JSON</td><td>Its values, keyed by field id (6.2).</td></tr><tr><td><code>meetingLink</code></td><td>JSON</td><td>The calendar meeting it holds notes for (6.5).</td></tr><tr><td><code>deletedAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="attachment">Attachment</h3>
+
+<p>A file added to an entry. It never changes after it's added. Its bytes are <code>files/&lt;id&gt;</code>; an Attachment with no file in the archive was missing on the device that made it, and comes back as a missing file.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>entryID</code></td><td>string</td><td>The Entry it belongs to.</td></tr><tr><td><code>fileName</code></td><td>string</td><td>The name it was added with.</td></tr><tr><td><code>contentType</code></td><td>string</td><td>A uniform type identifier, such as <code>public.jpeg</code> or <code>com.adobe.pdf</code>.</td></tr><tr><td><code>byteSize</code></td><td>integer</td><td></td></tr><tr><td><code>pixelWidth</code></td><td>integer</td><td>An image's width.</td></tr><tr><td><code>pixelHeight</code></td><td>integer</td><td>An image's height.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<p>An entry shows an attachment either on a line of its own in rich text (6.2) or in an Attachment field.</p>
+
+<h3 id="reminder">Reminder</h3>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>journalID</code></td><td>string</td><td>The Journal it reminds you to write in.</td></tr><tr><td><code>weekdays</code></td><td>JSON</td><td>An array of weekday numbers: 1 is Sunday, 7 is Saturday.</td></tr><tr><td><code>hour</code></td><td>integer</td><td>0–23, wall-clock time wherever the device is.</td></tr><tr><td><code>minute</code></td><td>integer</td><td>0–59.</td></tr><tr><td><code>message</code></td><td>string</td><td>Optional.</td></tr><tr><td><code>templateID</code></td><td>string</td><td>Optional: the Template to use. Without one, any entry that day satisfies it.</td></tr><tr><td><code>isEnabled</code></td><td>integer</td><td><code>1</code>: on.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="dismissedremindersuggestion">DismissedReminderSuggestion</h3>
+
+<p>A Library template's suggested reminder that was dismissed for one journal, so it isn't offered again.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>journalID</code></td><td>string</td><td></td></tr><tr><td><code>templateID</code></td><td>string</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="savedsearch">SavedSearch</h3>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>query</code></td><td>JSON</td><td>The search (6.6).</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="reportpreset">ReportPreset</h3>
+
+<p>A named, saved way of reporting. Its Reports are the Report records that point at it.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>string</td><td></td></tr><tr><td><code>type</code></td><td>string</td><td><code>weekly</code>, <code>monthly</code>, <code>performanceReview</code>, <code>directorUpdate</code> or <code>custom</code>: sets the range rule, the defaults and, for <code>directorUpdate</code>, the sections (This week, Shipped, Risks, Next week).</td></tr><tr><td><code>journalIDs</code></td><td>JSON</td><td>An array of Journal ids, in the order listed.</td></tr><tr><td><code>includedFields</code></td><td>JSON</td><td>An array of the fields it reports, each <code>field:&lt;field id&gt;</code> or <code>label:&lt;field type&gt;:&lt;label&gt;</code>, where the label is trimmed, lowercased and has single spaces (the fields with that label and type in any template). A key that matches nothing is kept and ignored.</td></tr><tr><td><code>grouping</code></td><td>string</td><td><code>date</code> (by day, week or month, as fits the range), <code>project</code> or <code>person</code> (an entry with several people is under each).</td></tr><tr><td><code>entryFilter</code></td><td>JSON</td><td>Which of its journals' entries it reports, when not all: <code>{"people": [ … ], "projects": [ … ], "tags": [ … ]}</code>, each kind optional and holding at most 50 values: Person ids, Project ids, or tag names as Dayfolio keeps them (trimmed, no <code>#</code>, lowercased, spaces as one hyphen). An entry is reported when, for every kind that's there, it has one of its values; it's with a person when a Person field names them or a line @-mentions them. No key: every entry.</td></tr><tr><td><code>usesAI</code></td><td>integer</td><td><code>1</code>: an on-device summary opens the Report as its Highlights.</td></tr><tr><td><code>highlightsFromStars</code></td><td>integer</td><td><code>1</code>: starred entries open the Highlights.</td></tr><tr><td><code>recipient</code></td><td>string</td><td>Optional: who its Reports are for, the <em>For</em> line. Shown as one line of at most 100 characters; absent while empty.</td></tr><tr><td><code>customRange</code></td><td>JSON</td><td>A date range (6.6), when it has one of its own.</td></tr><tr><td><code>timeSplit</code></td><td>JSON</td><td><em>Split time by</em>, when it has one: <code>{"field": …, "billable": [ … ]}</code>. <code>field</code> names a single select the way <code>includedFields</code> does, <code>field:&lt;field id&gt;</code> or <code>label:singleSelect:&lt;label&gt;</code>; each Time table is followed by its time per option. <code>billable</code> lists the options whose time is billable, the time an amount counts, each by its label trimmed, lowercased and with single spaces; it's missing when all time is billable.</td></tr><tr><td><code>createdAt</code></td><td>date</td><td></td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr><tr><td><code>deletedAt</code></td><td>date</td><td>Its Reports deleted with it share this date.</td></tr></tbody></table></div>
+
+<h3 id="report">Report</h3>
+
+<p>One generated Report of a preset, for one range. Its content is frozen when it's generated, so what was sent stays what was sent.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>presetID</code></td><td>string</td><td>Its ReportPreset.</td></tr><tr><td><code>rangeStart</code></td><td>date</td><td>The start of its range, included.</td></tr><tr><td><code>rangeEnd</code></td><td>date</td><td>The end of its range, not included.</td></tr><tr><td><code>generatedAt</code></td><td>date</td><td></td></tr><tr><td><code>document</code></td><td>bytes</td><td>The Report as it reads (6.7).</td></tr><tr><td><code>highlights</code></td><td>JSON</td><td>An array of strings, the Highlights as shown, one per bullet.</td></tr><tr><td><code>highlightsEdited</code></td><td>integer</td><td><code>1</code>: the Highlights were edited by hand.</td></tr><tr><td><code>updatedAt</code></td><td>date</td><td></td></tr><tr><td><code>deletedAt</code></td><td>date</td><td></td></tr></tbody></table></div>
+
+<h3 id="syncedsetting">SyncedSetting</h3>
+
+<p>One of the settings that sync between devices.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>key</code></td><td>string</td><td>Which setting (below).</td></tr><tr><td><code>value</code></td><td>string</td><td>Its value, as text.</td></tr><tr><td><code>updatedAt</code></td><td>date</td><td>The last change: the latest one wins.</td></tr></tbody></table></div>
+
+<p>Each setting has a fixed id, <code>D1340000-0000-4000-8000-0000000000NN</code>:</p>
+
+<div class="table-wrap"><table><thead><tr><th><code>key</code></th><th>NN</th><th><code>value</code></th></tr></thead><tbody><tr><td><code>temperatureUnit</code></td><td>01</td><td><code>system</code>, <code>celsius</code> or <code>fahrenheit</code></td></tr><tr><td><code>launchJournal</code></td><td>02</td><td><code>lastUsed</code>, or the id of the Journal Today opens at launch</td></tr><tr><td><code>editorTheme</code></td><td>03</td><td><code>auto</code>, <code>light</code> or <code>dark</code></td></tr><tr><td><code>entryFont</code></td><td>04</td><td><code>serif</code>, <code>sans</code> or <code>mono</code></td></tr><tr><td><code>textSize</code></td><td>05</td><td>The entry text size in points, such as <code>17</code></td></tr><tr><td><code>lineWidth</code></td><td>06</td><td><code>narrow</code>, <code>medium</code> or <code>wide</code></td></tr><tr><td><code>markdownShortcuts</code></td><td>07</td><td><code>true</code> or <code>false</code></td></tr><tr><td><code>checksSpelling</code></td><td>08</td><td><code>true</code> or <code>false</code></td></tr><tr><td><code>showsWordCount</code></td><td>09</td><td><code>true</code> or <code>false</code></td></tr><tr><td><code>defaultEntryTime</code></td><td>10</td><td><code>whenCreated</code> or <code>startOfDay</code></td></tr><tr><td><code>reportAuthor</code></td><td>12</td><td><em>Prepared by</em> on every Report: one line of at most 100 characters, or empty for none</td></tr></tbody></table></div>
+
+<p><code>11</code> is never used: it was the relock time, which no longer syncs.</p>
+
+<h3 id="records-of-other-types">Records of other types</h3>
+
+<p><code>records/&lt;Type&gt;.json</code> for a type this page doesn't list holds records a newer Dayfolio wrote that the version making the archive kept aside, in the same shape. Skip them, or keep them as they are.</p>
+
+<h2 id="6-the-json-inside-records">6. The JSON inside records</h2>
+
+<h3 id="6-1-a-field">6.1 A field</h3>
+
+<p>What a Template's <code>fields</code> and an entry's <code>snapshot.fields</code> hold, in order.</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>A UUID. It survives renames and reordering; changing a field's type makes a new field.</td></tr><tr><td><code>label</code></td><td></td></tr><tr><td><code>type</code></td><td>One of the field types below.</td></tr><tr><td><code>prompt</code></td><td>Optional: the placeholder.</td></tr><tr><td><code>defaultValue</code></td><td>Optional: the value a new entry starts with, a field value (6.2).</td></tr><tr><td><code>options</code></td><td>For a single or multiple select, its choices in order: <code>{"id", "label", "color", "libraryKey"}</code>, <code>libraryKey</code> optional, <code>color</code> an option colour (6.8).</td></tr><tr><td><code>showInListPreview</code></td><td><code>true</code>: shown in an entry's row in lists.</td></tr><tr><td><code>includeInInsights</code></td><td><code>true</code>: charted in Insights.</td></tr><tr><td><code>carryOver</code></td><td><code>true</code>: a new entry starts with the previous entry's value (for a checklist, its unticked items).</td></tr><tr><td><code>presentation</code></td><td><code>standard</code> or <code>warning</code> (a text field drawn as a warning).</td></tr><tr><td><code>libraryKey</code></td><td>Optional: the Library template field it came from.</td></tr><tr><td><code>isOneOff</code></td><td><code>true</code>: added to this one entry only.</td></tr></tbody></table></div>
+
+<div class="table-wrap"><table><thead><tr><th>Field type</th><th>Its value (6.2)</th></tr></thead><tbody><tr><td><code>text</code></td><td><code>text</code></td></tr><tr><td><code>richText</code></td><td><code>richText</code></td></tr><tr><td><code>checklist</code></td><td><code>checklist</code></td></tr><tr><td><code>heading</code></td><td>none: a sub-heading in the page</td></tr><tr><td><code>divider</code></td><td>none: a line across the page</td></tr><tr><td><code>number</code></td><td><code>number</code></td></tr><tr><td><code>duration</code></td><td><code>duration</code></td></tr><tr><td><code>rating</code></td><td><code>rating</code></td></tr><tr><td><code>mood</code></td><td><code>mood</code></td></tr><tr><td><code>date</code></td><td><code>date</code></td></tr><tr><td><code>timeRange</code></td><td><code>timeRange</code></td></tr><tr><td><code>singleSelect</code></td><td><code>singleSelect</code></td></tr><tr><td><code>multiSelect</code></td><td><code>multiSelect</code></td></tr><tr><td><code>tags</code></td><td><code>tags</code></td></tr><tr><td><code>person</code></td><td><code>people</code></td></tr><tr><td><code>project</code></td><td><code>projects</code></td></tr><tr><td><code>link</code></td><td><code>link</code></td></tr><tr><td><code>attachment</code></td><td><code>attachments</code></td></tr></tbody></table></div>
+
+<p>A field of a type this list doesn't have, written by a newer Dayfolio, is kept in its place: skip it.</p>
+
+<h3 id="6-2-field-values">6.2 Field values</h3>
+
+<p>An entry's <code>fieldValues</code> is an object keyed by field id. Each value is <code>{"type": "&lt;type&gt;", "value": …}</code>, except <code>timeRange</code> and <code>link</code>:</p>
+
+<div class="table-wrap"><table><thead><tr><th><code>type</code></th><th>The rest</th></tr></thead><tbody><tr><td><code>text</code></td><td><code>value</code>: plain text.</td></tr><tr><td><code>richText</code></td><td><code>value</code>: Markdown (below).</td></tr><tr><td><code>checklist</code></td><td><code>value</code>: an array of items, <code>{"id": "&lt;UUID&gt;", "text": "&lt;Markdown&gt;", "isDone": true}</code>.</td></tr><tr><td><code>number</code></td><td><code>value</code>: a number.</td></tr><tr><td><code>duration</code></td><td><code>value</code>: seconds.</td></tr><tr><td><code>rating</code></td><td><code>value</code>: 1–5 (very low, low, okay, high, very high).</td></tr><tr><td><code>mood</code></td><td><code>value</code>: 1–5 (rough, low, okay, good, great).</td></tr><tr><td><code>date</code></td><td><code>value</code>: an ISO 8601 date.</td></tr><tr><td><code>timeRange</code></td><td><code>start</code> and <code>end</code>: ISO 8601 dates.</td></tr><tr><td><code>singleSelect</code></td><td><code>value</code>: an option's id.</td></tr><tr><td><code>multiSelect</code></td><td><code>value</code>: an array of option ids.</td></tr><tr><td><code>tags</code></td><td><code>value</code>: an array of tag names, lowercase, without <code>#</code>.</td></tr><tr><td><code>people</code></td><td><code>value</code>: an array of Person ids.</td></tr><tr><td><code>projects</code></td><td><code>value</code>: an array of Project ids.</td></tr><tr><td><code>link</code></td><td><code>url</code>: the address; <code>title</code>: optional.</td></tr><tr><td><code>attachments</code></td><td><code>value</code>: an array of Attachment ids, in order.</td></tr></tbody></table></div>
+
+<p><strong>Rich text</strong> is Markdown. Two kinds of link in it point inside the archive:</p>
+
+<ul><li>an attachment is a line of its own: <code>![Site visit.jpeg](attachment:&lt;attachment id&gt;)</code> for an image, <code>[Invoice.pdf](attachment:&lt;attachment id&gt;)</code> for any other file;</li><li>a mention of a person is a link to the Person: <code>[@Maya](person:&lt;person id&gt;)</code>.</li></ul>
+
+<p>A value of a type this list doesn't have is kept as it is: skip it.</p>
+
+<h3 id="6-3-an-entry-s-snapshot">6.3 An entry's snapshot</h3>
+
+<p><code>{"templateName": "…", "templateIcon": "…", "templateColor": "…", "fields": [ … ]}</code>: the template's name, SF Symbol and journal colour when the entry was made, and its fields (6.1) with any one-off fields of the entry. Read an entry's labels, types and options from here.</p>
+
+<h3 id="6-4-an-entry-s-context">6.4 An entry's context</h3>
+
+<p><code>{"location": { … }, "weather": { … }, "capture": { … }}</code>, each part optional.</p>
+
+<div class="table-wrap"><table><thead><tr><th><code>location</code> key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>street</code></td><td>Optional, without a house number.</td></tr><tr><td><code>city</code></td><td>Optional.</td></tr><tr><td><code>coordinate</code></td><td><code>{"latitude", "longitude"}</code>, rounded to three decimal places (about 100 m).</td></tr><tr><td><code>placeName</code></td><td>Optional: the name of the Place it matched, copied when it was written.</td></tr><tr><td><code>placeID</code></td><td>Optional: that Place's id.</td></tr><tr><td><code>source</code></td><td><code>thisMac</code>: found by the device that wrote the entry (an iPhone or iPad too, despite the name); <code>manual</code>: chosen by hand.</td></tr></tbody></table></div>
+
+<div class="table-wrap"><table><thead><tr><th><code>weather</code> key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>temperatureCelsius</code></td><td></td></tr><tr><td><code>feelsLikeCelsius</code></td><td>Optional.</td></tr><tr><td><code>condition</code></td><td>In words, such as "Partly cloudy".</td></tr><tr><td><code>symbolName</code></td><td>An SF Symbol name for it.</td></tr><tr><td><code>highCelsius</code></td><td>Optional: the day's high.</td></tr><tr><td><code>lowCelsius</code></td><td>Optional: the day's low.</td></tr><tr><td><code>humidity</code></td><td>Optional: from 0 to 1.</td></tr><tr><td><code>windKilometresPerHour</code></td><td>Optional.</td></tr><tr><td><code>windDirectionDegrees</code></td><td>Optional: where the wind blows from, in degrees.</td></tr><tr><td><code>observedAt</code></td><td>When the weather was read: an ISO 8601 date.</td></tr></tbody></table></div>
+
+<p>The weather is from Apple Weather. Wherever you show it, show "Weather: Apple Weather" with its legal page, <a href="https://weatherkit.apple.com/legal-attribution.html">https://weatherkit.apple.com/legal-attribution.html</a>, as Dayfolio's own exports do.</p>
+
+<p><code>capture</code> says how far capturing location and weather got, as one of:</p>
+
+<ul><li><code>{"complete": {}}</code>: done.</li><li><code>{"removed": {}}</code>: the person removed both; they are never captured again.</li><li><code>{"unavailable": {"_0": "permissionDenied"}}</code>: not captured, for one of three reasons: <code>permissionDenied</code>, Location Services was off or denied for Dayfolio; <code>noCoordinates</code>, no position came in; <code>gaveUp</code>, the address or the weather was still missing 7 days after the entry was made.</li><li><code>{"pending": {"_0": {"firstAttemptAt": "…", "lastAttemptAt": "…", "attemptCount": 2}}}</code>: still being filled in.</li></ul>
+
+<h3 id="6-5-an-entry-s-meeting-link">6.5 An entry's meeting link</h3>
+
+<p><code>{"eventID": "…", "occurrenceStart": "…"}</code>: one occurrence of a calendar meeting, by the calendar's own identifier on the device that linked it, and when that occurrence starts. Nothing else from the calendar is kept.</p>
+
+<h3 id="6-6-a-saved-search-and-a-date-range">6.6 A saved search and a date range</h3>
+
+<p>A date range is <code>{"start": "…", "end": "…"}</code>, from <code>start</code>, included, to <code>end</code>, not included.</p>
+
+<p>A saved search's <code>query</code>:</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>text</code></td><td>What was typed.</td></tr><tr><td><code>sort</code></td><td><code>newest</code>, <code>oldest</code> or <code>bestMatch</code>.</td></tr><tr><td><code>tokens</code></td><td>The filters, all of which an entry must match.</td></tr></tbody></table></div>
+
+<div class="table-wrap"><table><thead><tr><th>A token</th><th>Matches entries</th></tr></thead><tbody><tr><td><code>{"kind": "journal", "ids": [ … ]}</code></td><td>in any of these Journals</td></tr><tr><td><code>{"kind": "template", "ids": [ … ]}</code></td><td>from any of these Templates</td></tr><tr><td><code>{"kind": "field", "field": "&lt;field id&gt;"}</code></td><td>with a value in this field</td></tr><tr><td><code>{"kind": "fieldIs", "field": "&lt;field id&gt;", "options": [ … ]}</code></td><td>with one of these options chosen in this field</td></tr><tr><td><code>{"kind": "date", "date": {"preset": "…"}}</code></td><td>in <code>today</code>, <code>last7Days</code>, <code>last30Days</code>, <code>last3Months</code> or <code>thisYear</code></td></tr><tr><td><code>{"kind": "date", "date": {"start": "…", "end": "…"}}</code></td><td>in this date range</td></tr><tr><td><code>{"kind": "tag", "tags": [ … ]}</code></td><td>with any of these tags</td></tr><tr><td><code>{"kind": "person", "ids": [ … ]}</code></td><td>naming any of these people</td></tr><tr><td><code>{"kind": "project", "ids": [ … ]}</code></td><td>naming any of these projects</td></tr><tr><td><code>{"kind": "starred"}</code></td><td>that are starred</td></tr></tbody></table></div>
+
+<h3 id="6-7-a-report-s-document">6.7 A Report's document</h3>
+
+<p>A Report's <code>document</code> is UTF-8 JSON (base64 in the archive, like all bytes):</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>format</code></td><td><code>1</code>. A higher number is a newer Dayfolio's: show what you can.</td></tr><tr><td><code>document</code></td><td>The Report as it reads, below.</td></tr><tr><td><code>journalIDs</code></td><td>The journals it was generated from.</td></tr><tr><td><code>entryCount</code></td><td>How many entries it was generated from.</td></tr><tr><td><code>entryFingerprint</code></td><td>A digest of those entries' ids, which tells Dayfolio whether the Report is still up to date.</td></tr><tr><td><code>timeSheet</code></td><td>Optional: the Time tables as rows, for <em>Export › CSV</em>: <code>{"splitLabel", "rows"}</code>, <code>splitLabel</code> the split's field label when the preset splits time. Each row is an array, one entry's time in one Time table for one of its projects: <code>[day, journal, field, project, option, seconds, rate, currency, billable]</code> — <code>day</code> such as <code>"2026-10-05"</code>, <code>field</code> the Time table's label, <code>project</code>, <code>option</code> (the split's), <code>rate</code> and <code>currency</code> <code>null</code> when there's none, <code>rate</code> the project's hourly rate when the Report was made, and <code>billable</code> <code>1</code> or <code>0</code>. Left out when the Report would be too large with it.</td></tr></tbody></table></div>
+
+<p>The <code>document</code>:</p>
+
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Meaning</th></tr></thead><tbody><tr><td><code>title</code></td><td></td></tr><tr><td><code>kicker</code></td><td>Optional: the small line above the title, such as "Weekly report" or the preset's own name.</td></tr><tr><td><code>titleNote</code></td><td>Optional: a short note beside the title, such as "Week 41".</td></tr><tr><td><code>metaLine</code></td><td>The line under the title.</td></tr><tr><td><code>properties</code></td><td><code>[{"label", "value", "valueKind"}]</code>; <code>valueKind</code> is <code>text</code> or <code>monospaced</code>.</td></tr><tr><td><code>sections</code></td><td><code>[{"heading", "blocks"}]</code>, the heading optional.</td></tr><tr><td><code>footer</code></td><td>Optional, such as "Generated by Dayfolio from 9 entries · Thu, 24 Sep 2026 at 17:42".</td></tr></tbody></table></div>
+
+<p>The Highlights aren't in the document: the Report's <code>highlights</code> are shown as its first section, headed "Highlights", one bullet each.</p>
+
+<p>Each block is an object with one key, its kind:</p>
+
+<div class="table-wrap"><table><thead><tr><th>Block</th><th>Holds</th></tr></thead><tbody><tr><td><code>paragraph</code></td><td>Markdown text.</td></tr><tr><td><code>bulletList</code></td><td>An array of Markdown items.</td></tr><tr><td><code>numberedList</code></td><td>An array of Markdown items.</td></tr><tr><td><code>checklist</code></td><td><code>[{"text", "isDone", "isOpenNote"}]</code>; <code>isOpenNote</code>: an item still open in its entry's latest occurrence.</td></tr><tr><td><code>table</code></td><td><code>{"header": [ … ], "rows": [{"cells": [ … ], "shareValue", "isTotal", "ratingValue"}], "shareColumnIndex"}</code>, the row's last three optional: a share from 0 to 1 drawn as a bar, the total row, a rating's average. <code>shareColumnIndex</code>, also optional, is the column a row's share is written in, when it isn't the one before the last (a Time table with Billable and Amount columns).</td></tr><tr><td><code>image</code></td><td><code>{"attachmentID", "name", "pixelWidth", "pixelHeight"}</code>, the sizes optional.</td></tr><tr><td><code>fileRow</code></td><td><code>{"attachmentID", "name", "byteSize"}</code>.</td></tr><tr><td><code>heading</code></td><td><code>{"text", "level"}</code>: <code>level</code> is how deep, as Markdown counts <code>#</code>.</td></tr><tr><td><code>divider</code></td><td><code>{}</code>.</td></tr><tr><td><code>codeBlock</code></td><td><code>{"language", "lines"}</code>: a fenced code block's language tag (<code>""</code> when it has none) and its lines, verbatim, never read as Markdown.</td></tr><tr><td><code>quote</code></td><td>An array of Markdown paragraphs, one quote.</td></tr><tr><td><code>nestedList</code></td><td><code>[{"kind", "level", "text", "isDone"}]</code>: a list in which some item nests, every item in order. <code>kind</code> is <code>bullet</code>, <code>numbered</code> or <code>checklist</code>; <code>level</code> is 0 for a top-level item, up to 8 (a deeper one is read as 8); <code>isDone</code> is a checklist item's tick. Numbers count per level from 1.</td></tr></tbody></table></div>
+
+<p>A Report's document only grows by addition: skip a block, or a key, you don't know.</p>
+
+<h3 id="6-8-colours">6.8 Colours</h3>
+
+<ul><li><strong>A journal colour</strong>, used by journals, templates, people and projects: <code>orange</code>, <code>blue</code>, <code>green</code>, <code>purple</code>, <code>teal</code>, <code>pink</code>, <code>amber</code> or <code>slate</code>.</li><li><strong>An option colour</strong>: <code>neutral</code>; a status, <code>success</code>, <code>warning</code>, <code>danger</code> or <code>info</code>, always shown with its word; or a journal colour.</li></ul>
+
+<h2 id="7-what-restoring-does">7. What restoring does</h2>
+
+<p>Dayfolio restores an archive inside one database transaction, record by record in the order of section 5: all of it is added or none of it is. Cancelling, or iOS running out of time, adds nothing. Before you confirm, it shows the archive's journal names and the dates of its entries (never their content, and a journal marked locked doesn't widen the dates), and how much it would add.</p>
+
+<ul><li><strong>A record already on the device wins, untouched</strong>, whether it's live, archived or in Recently deleted. Ids decide: a record is "already here" when a record of that type has its id.</li><li><strong>A missing record is added with its own id and values</strong>, dates included, so something deleted for good since comes back as it was.</li><li><strong>Recently deleted:</strong> a record whose <code>deletedAt</code> is more than 30 days ago comes back with a fresh 30 days from the restore.</li><li><strong>Journal:</strong> a <code>defaultTemplateID</code> that is on neither side is dropped.</li><li><strong>JournalTemplate, DismissedReminderSuggestion:</strong> skipped without both their Journal and their Template. A journal holds a template once, and a suggestion is dismissed once. A membership of a journal that was already on the device goes after the templates it has.</li><li><strong>Person, Project:</strong> one with the same <code>nameKey</code> as one on the device isn't added; the entries that name it name the one on the device, which keeps its own rate, or none. Among the archive's own, the earliest made is kept. One in <code>nameOnlyReferences</code> comes back hidden, for its name only, and never goes up to iCloud as a live record.</li><li><strong>Entry:</strong> skipped without its Journal. A Template neither side has comes back hidden, made from the entry's snapshot. An entry of a journal in Recently deleted joins it there.</li><li><strong>Attachment:</strong> skipped without its Entry. Its file name is made safe for a disk, and its extension follows its <code>contentType</code>. Its bytes come from <code>files/&lt;id&gt;</code> unless the device has them already, and are checked against the ZIP's checksum; a file missing from the archive, damaged or over 50 MB is skipped, and its entry is still restored. A restored file is marked as downloaded, like any file from the internet.</li><li><strong>Reminder:</strong> skipped without its Journal; a <code>templateID</code> on neither side is dropped.</li><li><strong>Report:</strong> skipped without its ReportPreset. A Report of a preset in Recently deleted joins it there. When the device already has a live Report of the same preset for the same range, the archived one goes to Recently deleted.</li><li><strong>SyncedSetting:</strong> only on a device with no journals at all, and a setting changed there later than the archive's stays.</li><li><strong>Keys and records a newer Dayfolio wrote</strong> are kept with their record, or kept aside, as in section 2.</li><li><strong>Afterwards</strong> tags, search, mentions and references are rebuilt for what was added, and text in its files is read again in the background.</li><li>Whatever couldn't come back is listed on the result, each item by what it was ("Nothing was skipped." otherwise). Everything added goes up to iCloud like any other change.</li></ul>
+
+<h2 id="8-reading-an-archive-yourself">8. Reading an archive yourself</h2>
+
+<p>The archive's content is plain JSON and the original files. This Python 3 program (no packages to install) prints every live entry with its journal, template and title, and the text of its text fields:</p>
+
+<pre><code>import datetime, json, sys, zipfile
+
+REFERENCE = datetime.datetime(2001, 1, 1, tzinfo=datetime.timezone.utc)
+
+def plain(typed):
+    """A record's typed value as Python: str, int, float, datetime or bytes."""
+    (kind, value), = typed.items()
+    if kind == "t":
+        return REFERENCE + datetime.timedelta(seconds=value)
+    return value  # "s", "i", "d"; "b" stays base64
+
+with zipfile.ZipFile(sys.argv[1]) as archive:
+    manifest = json.loads(archive.read("manifest.json"))
+    if manifest["formatVersion"] &gt; 1:
+        sys.exit("made by a newer Dayfolio")
+
+    def records(kind):
+        try:
+            data = json.loads(archive.read(f"records/{kind}.json"))
+        except KeyError:
+            return {}
+        return {r["id"]: {k: plain(v) for k, v in r["values"].items()} for r in data["records"]}
+
+    journals = records("Journal")
+    for entry in sorted(records("Entry").values(), key=lambda e: e["date"]):
+        if "deletedAt" in entry:
+            continue  # in Recently deleted
+        snapshot = json.loads(entry["snapshot"])
+        values = json.loads(entry.get("fieldValues", "{}"))
+        journal = journals.get(entry["journalID"], {}).get("name", "?")
+        when = entry["date"].astimezone()  # dates are UTC; this is the computer's own time zone
+        print(f'{when:%Y-%m-%d %H:%M} · {journal} · {snapshot["templateName"]} · {entry.get("title", "")}')
+        for field in snapshot["fields"]:
+            value = values.get(field["id"], {})
+            if value.get("type") in ("text", "richText"):
+                print(f'  {field["label"]}: {value["value"]}')</code></pre>
+
+<p><code>python3 read-dayfolio.py "Engineering Log.dayfolio"</code> prints one line per entry, oldest first, each followed by its text fields.</p>
+
+<h2 id="9-changes">9. Changes</h2>
+
+<div class="table-wrap"><table><thead><tr><th>Format</th><th>Dayfolio</th><th>What changed</th></tr></thead><tbody><tr><td>1</td><td>1.0</td><td>The first format.</td></tr></tbody></table></div>
+
+  </div>
+  <a class="backlink" href="support.html#archive">← BACK TO SUPPORT</a>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 NinjaApps</span>
+  <nav class="social" aria-label="Social media">
+    <a href="https://www.youtube.com/@NinjaAppsnet" rel="me" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    <a href="https://www.instagram.com/ninjaappsnet/" rel="me" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.846-10.405a1.441 1.441 0 0 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg></a>
+    <a href="https://www.tiktok.com/@ninjaapps" rel="me" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+    <a href="https://x.com/NinjaAppsnet" rel="me" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+  </nav>
+  <a class="footer-privacy" href="privacy.html">PRIVACY POLICY</a>
+</footer>
+
+</body>
+</html>

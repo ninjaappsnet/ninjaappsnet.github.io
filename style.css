@@ -1053,6 +1053,42 @@ html[lang="ru"] :is(.kicker, .effective, .backlink, .langs, footer),
 html[lang="ko"] :is(.kicker, .effective, .backlink, .langs, footer),
 html[lang="zh-Hans"] :is(.kicker, .effective, .backlink, .langs, footer) { font-family: var(--face-mono); }
 
+/* ===== Long-form pages: sub-headings, code, tables, a contents list =====
+   Used by the Dayfolio support page, its privacy policy and the archive
+   format page. Everything draws from the same tokens as the rest of the
+   site, so light and dark follow without a rule of their own. */
+.prose h3 { margin: 28px 0 8px; font: 700 15px 'Shippori Mincho', serif; }
+.prose h2[id], .prose h3[id] { scroll-margin-top: 24px; }
+.prose ol { margin: 0 0 16px; padding-left: 22px; max-width: 560px; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.prose code {
+  font: 400 12.5px 'IBM Plex Mono', monospace; color: var(--ink);
+  background: var(--card-hover); border: 1px solid var(--line); padding: 1px 5px;
+  overflow-wrap: anywhere;
+}
+.prose pre {
+  margin: 0 0 20px; padding: 16px 18px; overflow-x: auto;
+  background: var(--card-hover); border: 1px solid var(--line);
+}
+.prose pre code { padding: 0; border: 0; background: none; font-size: 12.5px; line-height: 1.7; white-space: pre; overflow-wrap: normal; }
+.prose .table-wrap { margin: 0 0 24px; overflow-x: auto; border: 1px solid var(--line); }
+.prose table { width: 100%; border-collapse: collapse; font: 400 13px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.prose th, .prose td { padding: 9px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.prose th { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; background: var(--card-hover); white-space: nowrap; }
+.prose tr:last-child td { border-bottom: 0; }
+.prose td code { font-size: 12px; }
+.prose .num { text-align: right; white-space: nowrap; }
+.callout { margin: 0 0 28px; padding: 18px 24px; border: 1px solid var(--line); border-left: 2px solid var(--accent); }
+.callout p { margin: 0; }
+.toc { margin: 0 0 40px; padding: 18px 26px; border: 1px solid var(--line); }
+.toc-title { margin: 0 0 8px; font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+.toc ul { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; font: 400 13px/2 'Zen Kaku Gothic New', sans-serif; }
+.toc li { break-inside: avoid; }
+.toc a { color: var(--ink-60); }
+.toc a:hover { color: var(--accent); }
+.version-note { margin: 0 0 32px; padding: 14px 20px; border: 1px solid var(--line); font: 400 13px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.version-note a { color: var(--accent); }
+@media (max-width: 860px) { .toc ul { columns: 1; } }
+
 /* ===== 404 ===== */
 .notfound { padding: 120px var(--pad-side) 140px; text-align: center; }
 .notfound h1 { font-size: 96px; }

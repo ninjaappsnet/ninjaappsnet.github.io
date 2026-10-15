@@ -1,6 +1,6 @@
 # ninjaapps.net
 
-Static site for **NinjaApps** — iOS games & Mac apps. Design: "Paper Dojo"
+Static site for **NinjaApps** — games and apps for iPhone, iPad and Mac. Design: "Paper Dojo"
 (warm paper, ink, vermillion accent, hairline grids). Hosted on GitHub Pages
 at [ninjaapps.net](https://ninjaapps.net). No build step: plain HTML + one
 shared stylesheet.
@@ -19,9 +19,13 @@ games/<slug>/support.html    support page — ASC's support field needs a URL
 games/smalti/daily/          landing page for the daily share link (see Universal links)
 .well-known/apple-app-site-association   which URLs iOS hands to the Smalti app
 apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
+apps/dayfolio/archive-format.html   the .dayfolio file format, generated (see Dayfolio)
+apps/dayfolio/privacy-v1.0.html     version 1.0 of the policy, archived (noindex);
+apps/dayfolio/terms-v1.0.html       the same for the terms
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
 tools/check-site.py          structural checks — run before every commit
+tools/archive-page.py        regenerates apps/dayfolio/archive-format.html from the app repo's doc
 404.html                     not-found page
 CNAME                        custom domain for GitHub Pages
 ```
@@ -61,6 +65,21 @@ are not in that list on purpose: they are versioned, never retro-edited (see
 below), so a claim they carry that the app has since retired is fixed by a new
 version.
 
+Dayfolio's pages are held to the app the same way (`check_dayfolio`, `DAYFOLIO_*`
+in the script). The product, support, privacy and terms pages fail on a claim the
+first copy made and the app has outgrown (`$9.99`, "coming soon", the "Mac App
+Store", "premium", "free trial"), and on losing a fact: the five prices, the App
+Store link and Smart App Banner id, the refund sentence, the free tier's "one
+journal and 100 entries", the anchors the app opens (`#quick-note-link`) and one
+anchor per permission on the privacy policy. The policy must name its version
+and link the archived one; the archived versions must stay `noindex` and link
+back. The landing page and the privacy hub are held to the same retired claims
+and must say Dayfolio is for iPhone, iPad and Mac. The prices and ids are the
+app repo's (`docs/product-spec.md` §3.7b, D223–D225); when they change, change
+`DAYFOLIO_PRICES`, the copy and the App Store Connect products in the same
+commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
+also introduces Dayfolio.
+
 ## Social
 
 Every page footer carries the same four profiles, in the same order:
@@ -75,8 +94,8 @@ X          https://x.com/NinjaAppsnet
 The order is a judgement about the channels, not alphabetical — YouTube and
 Instagram carry the trailer and finished-artwork material, TikTok is the
 widest-reach discovery channel, X is mostly press and dev community. It lives
-in `SOCIAL` in `tools/check-site.py`, and `check_social` enforces that all
-nineteen footers agree with it, so reordering means editing every page. The
+in `SOCIAL` in `tools/check-site.py`, and `check_social` enforces that every
+page's footer agrees with it, so reordering means editing every page. The
 same list is repeated as `sameAs` in the `Organization` JSON-LD on
 `index.html` (that is what ties the profiles to the domain for a search
 engine), and `check_same_as` keeps the two in step.
@@ -130,6 +149,17 @@ Typo and navigation fixes don't need a bump; anything touching meaning does.
 The same rule (and the ASC privacy-label same-release requirement) lives in
 the game repo's PUBLISHING_TODO.
 
+Dayfolio's pages follow it. `apps/dayfolio/privacy.html` and `terms.html` are
+version 1.1, effective 2026-10-15, the first to cover iPhone and iPad. Version 1.0
+(effective 2026-09-29, the Mac app) stays readable as `privacy-v1.0.html` and
+`terms-v1.0.html`: `noindex`, self-canonical, a line at the top saying which
+dates it was in force and linking the current version, and each is in `MANIFEST`
+but not in `sitemap.xml`. The canonical page's version history says what 1.1
+changed, including what goes past the permissions the app asks for (what a file
+keeps inside it, the mirror folder and the Spotlight index as second copies of
+your text, where the quick-note key is kept). The next substantive change
+snapshots 1.1 as `privacy-v1.1.html` first.
+
 ## Localized legal pages
 
 App Store Connect requires a Privacy Policy URL on **every** localization of
@@ -175,6 +205,23 @@ https://ninjaapps.net/games/smalti/support.html
 Moving or renaming those pages ships a dead legal link to App Review and to
 everyone who already installed the app. Change them only alongside a game
 release, and update `BAKED_IN_URLS` in `tools/check-site.py` at the same time.
+
+Dayfolio's apps ship addresses too (`AboutCopy` and `HelpMenu` in the app repo's
+`DayfolioFeatures/State/`; the app's tests pin them), and these have no extension,
+which GitHub Pages serves from the `.html` file:
+
+```
+https://ninjaapps.net/apps/dayfolio/support                      Settings › Help and feedback; Help › Dayfolio Help (Mac)
+https://ninjaapps.net/apps/dayfolio/privacy                      Settings › About › Privacy policy
+https://ninjaapps.net/apps/dayfolio/support#quick-note-link      Help › Writing notes from links (Mac)
+```
+
+Keep `support.html`, `privacy.html` and the `quick-note-link` id where they are;
+`check_dayfolio` fails if one goes. The App Store Connect record's privacy,
+support and marketing URLs also point into `apps/dayfolio/`, so no page there
+moves. The store link, `https://apps.apple.com/app/id6817388897`, is on the
+product page and in its Smart App Banner; it answers 404 until the app is
+released.
 
 Two more addresses are just as fixed. Every install fetches
 `games/smalti/config/v1.json`. And from Smalti 1.2.2 every share link a player
@@ -275,11 +322,29 @@ commit to this repo, so the live check is
 
 ## Assets
 
-Dayfolio (`apps/dayfolio/`) is a Mac app, so its screenshots are 1440×900 desktop
-captures (WebP with alpha, 1200px wide, `shot-*.webp`) laid out two across by
-`.grid-2` + `figure.shot`. Its App Store button is a dashed `.btn-quiet` span
-until the app is live; swap in the real link (see the TODO comment in
-`apps/dayfolio/index.html`) and add `<meta name="apple-itunes-app">` at release.
+Dayfolio (`apps/dayfolio/`) is on iPhone, iPad and Mac, but its pictures are still
+the Mac's: four 1440×900 desktop captures (WebP with alpha, 1200px wide,
+`shot-*.webp`) laid out two across by `.grid-2` + `figure.shot`, under a note that
+says so. The library picture (`shot-library.webp`) is no longer used, because it
+shows 74 templates and the app has 75 in 16 packs; the file stays on disk for
+whoever re-shoots it. There are no iPhone or iPad pictures yet: add them as a
+second `.grid` when the App Store set (the captioned, light pictures) is accepted,
+not from the catalogue PNGs. Its App Store button is a plain `.btn` to
+`https://apps.apple.com/app/id6817388897`, with the Smart App Banner in the page's
+head, as Smalti's.
+
+`apps/dayfolio/archive-format.html` is **generated**, never edited. The Dayfolio
+repo's `docs/dayfolio-archive-format.md` is the source (its tests keep it true to
+the code); regenerate the page with
+
+```sh
+python3 tools/archive-page.py /path/to/dayfolio/docs/dayfolio-archive-format.md
+```
+
+and commit the result. The tool is standard library only; it reads the page's
+header, footer and head from `apps/dayfolio/index.html` and stops, rather than
+guesses, at Markdown it does not know. A link to a file that lives only in the
+Dayfolio repo (an ADR) is kept as plain text.
 
 Smalti's screenshots are real (WebP, captured 2026-07-20 from the iPhone 16 Pro
 Max simulator, 750px wide: `games/smalti/shot-*.webp`). The game has moved on
@@ -310,6 +375,9 @@ the kit's layout and icon sizes.
 - One striped box (`.ph`) left: the hero art / studio mark on the landing page.
 - Smalti's App Store button is live (id `6792641328`). `.btn-quiet` and the
   `games/_template/` placeholder stay for the next app — search `TODO`.
+- Dayfolio's App Store button (id `6817388897`) is wired and answers 404 until
+  the app is released; the product page has no iPhone or iPad pictures yet (see
+  Assets). `.btn-quiet` is no longer used on it.
 - `support@ninjaapps.net` must be a live mailbox before submission; the
   support page promises a 24–48 h reply.
 

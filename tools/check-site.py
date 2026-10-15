@@ -30,6 +30,12 @@ Checks:
  14. No page loads anything from another origin, posts a form, or runs an
      inline script that talks to the network or stores anything: the site has
      no analytics, trackers or cookies, and must not get any.
+ 15. Dayfolio's pages say what the app does: the five prices, the App Store
+     link and Smart App Banner, the refund sentence, the free tier and the
+     anchors the app opens, and none of the claims the first copy made
+     ($9.99, "coming soon", the "Mac App Store"). The privacy policy and terms
+     name their version and link the archived one. The URLs the app opens
+     (/apps/dayfolio/support, /privacy, /support#quick-note-link) resolve.
 """
 
 from __future__ import annotations
@@ -68,6 +74,10 @@ MANIFEST = [
     "apps/dayfolio/privacy.html",
     "apps/dayfolio/terms.html",
     "apps/dayfolio/support.html",
+    "apps/dayfolio/archive-format.html",
+    # Dayfolio's published version 1.0 of each (README: Legal page versioning).
+    "apps/dayfolio/privacy-v1.0.html",
+    "apps/dayfolio/terms-v1.0.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
         "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
     )),
@@ -150,7 +160,8 @@ MARKETING_PAGES = [
 ]
 
 # Claims the app no longer makes, or never made. A hit means the copy drifted
-# from the code again. `(?i)` patterns ignore case; the rest are exact.
+# from the code again. `(?i)` patterns ignore case; the rest are exact. An
+# optional third item lists pages the rule does not apply to.
 STALE_CLAIMS = [
     (r"\b395\b",
      "the catalog is 411 levels in 10 Rooms (395 is the nine-Room ascent without The Heirloom Set)"),
@@ -164,7 +175,8 @@ STALE_CLAIMS = [
      "claim no leaderboards: the daily boards were removed 2026-09-12, and the one board the "
      "game still submits to (Daily Excavation depth) has no in-game screen"),
     (r"\bTBD\b", "Smalti has been on the App Store since August 2026"),
-    (r"\biPad\b", "no iPad promise or date (TARGETED_DEVICE_FAMILY = 1)"),
+    # The landing page also introduces Dayfolio, which is an iPhone, iPad and Mac app.
+    (r"\biPad\b", "no iPad promise or date (TARGETED_DEVICE_FAMILY = 1)", ("index.html",)),
     (r"(?i)two attempts|attempts? left", "the daily has been unmetered since 2026-09-12"),
     (r"(?i)\bfifty-one\b|\b51 (?:journey )?levels", "the free band is 40 levels"),
     (r"\bAtelier Endless\b|\bEndless\b", "the mode is called Daily Excavation"),
@@ -187,6 +199,89 @@ REQUIRED_FACTS = {
         "August 2026",
     ],
 }
+
+# Dayfolio (apps/dayfolio/) is one App Store record for iPhone, iPad and Mac. Its
+# pages are held to the app's own decisions, not to the first copy: the five
+# purchases and their US prices are D223-D225 (docs/product-spec.md §3.7b in the
+# app repo), the free tier is D224 as changed by D1623 and D1624, and the website
+# brief is D1625. The privacy policy and terms are versioned like Smalti's: the
+# canonical page serves the latest, the archived ones are only held to exist,
+# stay out of the index and link back.
+DAYFOLIO_DIR = "apps/dayfolio"
+DAYFOLIO_STORE_ID = "6817388897"
+DAYFOLIO_STORE_URL = f"https://apps.apple.com/app/id{DAYFOLIO_STORE_ID}"
+DAYFOLIO_PRICES = ["$7.99", "$19.99", "$24.99", "$4.99", "$16.99"]
+DAYFOLIO_MARKETING = ["index.html", "support.html", "privacy.html", "terms.html"]
+
+DAYFOLIO_STALE_CLAIMS = [
+    (r"\$9\.99", "the first copy's Mac price; the purchases are $7.99, $19.99 and $24.99, with two upgrades (D225)"),
+    (r"(?i)coming soon", "Dayfolio links the App Store (D1625)"),
+    (r"(?i)mac app store", "one App Store record serves iPhone, iPad and Mac"),
+    (r"(?i)\b(?:premium|pro version|dayfolio pro)\b",
+     "the glossary's word is the purchase, or the full version (CONTEXT.md, Purchase)"),
+    (r"(?i)\b(?:free trial|trial period|lite version|demo version)\b",
+     "the free version is the Free tier, not a trial (CONTEXT.md, Free tier)"),
+]
+
+# What each page must still say. A rewrite that only deletes the old claim and
+# never states the new one is caught too. Plain substrings, case-sensitive.
+DAYFOLIO_REQUIRED = {
+    "index.html": [
+        *DAYFOLIO_PRICES,
+        DAYFOLIO_STORE_URL,
+        f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STORE_ID}">',
+        "https://reportaproblem.apple.com",
+        "one journal and 100 entries",
+        "Buy Dayfolio for iPhone and iPad, for Mac, or for all three; "
+        "if you own one, the other is an upgrade at the difference",
+        'id="price"',
+        'href="archive-format.html"',
+    ],
+    "support.html": [
+        *DAYFOLIO_PRICES,
+        "Restore purchases",
+        "Not what you need? Apple handles refunds at",
+        "https://reportaproblem.apple.com",
+        'href="archive-format.html"',
+        *(f'id="{anchor}"' for anchor in (
+            "free-version", "prices", "upgrades", "restore-purchases", "refunds", "archive",
+            "mirror-folder", "quick-note-link", "shortcuts", "widgets", "share", "spotlight",
+            "handoff", "reminders", "reports")),
+    ],
+    "privacy.html": [
+        "VERSION 1.1",
+        "Dayfolio collects nothing",
+        'href="privacy-v1.0.html"',
+        'id="version-history"',
+        # A paragraph per permission and system feature (D1625), plus iCloud and the two Mac features.
+        *(f'id="{anchor}"' for anchor in (
+            "icloud", "location", "calendar", "camera", "microphone", "notifications", "siri-shortcuts",
+            "spotlight", "widgets", "share-extension", "handoff", "focus", "ai", "mirror-folder",
+            "quick-note-link")),
+        "Advanced Data Protection",
+    ],
+    "terms.html": ['href="terms-v1.0.html"'],
+}
+
+# The landing page and the privacy hub carry a line about Dayfolio too. They are not Dayfolio's pages, so only what
+# the first copy got wrong is held against them, and what they must now say.
+DAYFOLIO_ELSEWHERE_STALE = DAYFOLIO_STALE_CLAIMS + [
+    (r"(?i)\bfor (?:the|your) mac\b", "Dayfolio is on iPhone, iPad and Mac"),
+    (r"(?i)\bmac apps\b", "the studio makes games and apps for iPhone, iPad and Mac"),
+]
+DAYFOLIO_ELSEWHERE_REQUIRED = {
+    "index.html": ["calm work journal for iPhone, iPad and Mac"],
+    "privacy/index.html": ["iPhone, iPad and Mac"],
+}
+
+# Pages the app itself opens (Packages/DayfolioKit/.../SettingsOverview.swift `AboutCopy`, HelpMenu.swift).
+# GitHub Pages serves /support from support.html, so the app's address has no extension. Each is the page and
+# the anchor the app opens on it; losing either ships a dead Help item.
+DAYFOLIO_APP_URLS = [
+    (f"{ORIGIN}/{DAYFOLIO_DIR}/support", "support.html", None),
+    (f"{ORIGIN}/{DAYFOLIO_DIR}/privacy", "privacy.html", None),
+    (f"{ORIGIN}/{DAYFOLIO_DIR}/support#quick-note-link", "support.html", "quick-note-link"),
+]
 
 # The press kit. Same layout every time it is rebuilt, so a journalist's
 # bookmarked unzip path never moves.
@@ -617,7 +712,9 @@ def check_stale_claims() -> None:
         if not page.is_file():
             continue  # check_manifest reports a missing page
         text = page.read_text(encoding="utf-8")
-        for pattern, why in STALE_CLAIMS:
+        for pattern, why, *exempt in STALE_CLAIMS:
+            if rel in (exempt[0] if exempt else ()):
+                continue
             hits: dict[str, int] = {}
             for hit in re.finditer(pattern, text):
                 hits[hit.group(0)] = hits.get(hit.group(0), 0) + 1
@@ -627,6 +724,63 @@ def check_stale_claims() -> None:
         for fact in REQUIRED_FACTS.get(rel, []):
             if fact not in text:
                 fail(f"stale claim: {rel} no longer states {fact!r}")
+
+
+def check_dayfolio() -> None:
+    """Dayfolio's pages say what the app does (see DAYFOLIO_* above), the archived
+    legal versions stay archived, and the addresses the app opens still resolve."""
+    for name in DAYFOLIO_MARKETING:
+        rel = f"{DAYFOLIO_DIR}/{name}"
+        page = ROOT / rel
+        if not page.is_file():
+            continue  # check_manifest reports a missing page
+        text = page.read_text(encoding="utf-8")
+        for pattern, why in DAYFOLIO_STALE_CLAIMS:
+            hits: dict[str, int] = {}
+            for hit in re.finditer(pattern, text):
+                hits[hit.group(0)] = hits.get(hit.group(0), 0) + 1
+            for said, count in sorted(hits.items()):
+                times = f" (x{count})" if count > 1 else ""
+                fail(f"dayfolio: {rel} says {said!r}{times}: {why}")
+        for need in DAYFOLIO_REQUIRED.get(name, []):
+            if need not in text:
+                fail(f"dayfolio: {rel} no longer says {need!r}")
+
+    for rel, required in DAYFOLIO_ELSEWHERE_REQUIRED.items():
+        page = ROOT / rel
+        if not page.is_file():
+            continue
+        text = page.read_text(encoding="utf-8")
+        for pattern, why in DAYFOLIO_ELSEWHERE_STALE:
+            for said in sorted({hit.group(0) for hit in re.finditer(pattern, text)}):
+                fail(f"dayfolio: {rel} says {said!r}: {why}")
+        for need in required:
+            if need not in text:
+                fail(f"dayfolio: {rel} no longer says {need!r}")
+
+    # The archived versions: published as they were, kept out of the index, and a way back to the current one.
+    for name in ("privacy", "terms"):
+        archived = ROOT / DAYFOLIO_DIR / f"{name}-v1.0.html"
+        if not archived.is_file():
+            continue
+        text = archived.read_text(encoding="utf-8")
+        if not is_noindex(archived):
+            fail(f"dayfolio: {name}-v1.0.html must be noindex (an archived version)")
+        if f'href="{name}.html"' not in text:
+            fail(f"dayfolio: {name}-v1.0.html does not link the current version")
+
+    # The addresses the app opens: the page, and the anchor on it.
+    for url, target, anchor in DAYFOLIO_APP_URLS:
+        page = ROOT / DAYFOLIO_DIR / target
+        if not page.is_file():
+            fail(f"dayfolio: the app opens {url}, but {DAYFOLIO_DIR}/{target} is missing")
+        elif anchor and f'id="{anchor}"' not in page.read_text(encoding="utf-8"):
+            fail(f"dayfolio: the app opens {url}, but {target} has no id={anchor!r}")
+
+    # The archive format page is generated (tools/archive-page.py); if it is missing its title it was hand-edited or broken.
+    archive_page = ROOT / DAYFOLIO_DIR / "archive-format.html"
+    if archive_page.is_file() and "The Dayfolio archive format" not in archive_page.read_text(encoding="utf-8"):
+        fail("dayfolio: archive-format.html no longer carries its title; regenerate it with tools/archive-page.py")
 
 
 def png_size(data: bytes) -> tuple[int, int] | None:
@@ -695,6 +849,7 @@ def main() -> int:
         check_daily_page,
         check_social_cards,
         check_stale_claims,
+        check_dayfolio,
         check_press_kit,
     ):
         check()
