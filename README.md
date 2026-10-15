@@ -216,8 +216,11 @@ https://ninjaapps.net/apps/dayfolio/privacy                      Settings › Ab
 https://ninjaapps.net/apps/dayfolio/support#quick-note-link      Help › Writing notes from links (Mac)
 ```
 
-Keep `support.html`, `privacy.html` and the `quick-note-link` id where they are;
-`check_dayfolio` fails if one goes. The App Store Connect record's privacy,
+The `#quick-note-link` section of `support.html` carries the two shell snippets
+from the app repo's `docs/quick-note-link.md`, which a test there keeps equal to
+the line the Mac's Settings shows. When that doc changes, change the section's
+two `<pre>` blocks to match. Keep `support.html`, `privacy.html` and the
+`quick-note-link` id where they are; `check_dayfolio` fails if one goes. The App Store Connect record's privacy,
 support and marketing URLs also point into `apps/dayfolio/`, so no page there
 moves. The store link, `https://apps.apple.com/app/id6817388897`, is on the
 product page and in its Smart App Banner; it answers 404 until the app is
