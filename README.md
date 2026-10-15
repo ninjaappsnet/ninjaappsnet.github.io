@@ -392,19 +392,27 @@ the product page has them, and the Dayfolio sub-navigation (Overview, Guide,
 Templates, Articles, Support), a band under the header. The guide, template and
 article pages are Markdown in `content/dayfolio/<section>/`: each section's
 `index.md` is the section page, and every other file a page at
-`/apps/dayfolio/<section>/<slug>/`. Front matter:
+`/apps/dayfolio/<section>/<slug>/`. Front matter, one `name: value` per line
+(no quotes, no comments):
 
 ```
 ---
-title: Getting started              # the <title> adds " — Dayfolio — NinjaApps"; 60 characters at most
-heading: Your first journal         # optional: the h1, when it says more than the title
-description: One sentence, 50 to 160 characters, for search results and the social card.
-slug: getting-started               # the URL; lowercase words and hyphens (not on index.md)
-date: 2026-10-20                    # published (not on index.md); updated: is optional
-order: 1                            # guide and templates: the reading order
-image: iphone-today.webp            # optional social card, next to the page; with image_alt:
+title: Getting started
+description: Make your first journal, write today’s page and choose the templates that fit your work.
+slug: getting-started
+date: 2026-10-20
+order: 1
 ---
 ```
+
+- `title`: 60 characters at most; the `<title>` adds " — Dayfolio — NinjaApps".
+- `description`: 50 to 160 characters, for search results and the social card.
+- `slug`: the URL, lowercase words and hyphens. `date`: the day it was published,
+  `YYYY-MM-DD`; `updated` is optional. Neither goes on an `index.md`.
+- `order`: the reading order, on guide and template pages; articles list newest first.
+- Optional: `heading` (the h1, when it says more than the title), and `image` with
+  `image_alt` (a social card of the page's own, next to it; the default is
+  `social-card.png`).
 
 Pictures live next to the page they are on (`apps/dayfolio/guide/<slug>/`), as WebP
 under 500 KB, and the Markdown names them by a relative path:
