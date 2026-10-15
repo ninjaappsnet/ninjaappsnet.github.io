@@ -446,6 +446,17 @@ close, JSON-LD that parses, and anchors that exist. The product page's
   --screenshot=apps/dayfolio/social-card.png "file://$PWD/assets/brand/dayfolio-card.html"
 ```
 
+An article's own card, `apps/dayfolio/articles/<slug>/card.png` (its `image`), is a
+screenshot of that article's section of `assets/brand/dayfolio-article-cards.html`,
+which shows one card at a time, picked by the slug after `#`:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  --hide-scrollbars --window-size=1200,630 --virtual-time-budget=5000 \
+  --screenshot=apps/dayfolio/articles/brag-document/card.png \
+  "file://$PWD/assets/brand/dayfolio-article-cards.html#brag-document"
+```
+
 ## Placeholder inventory (TODO)
 
 - One striped box (`.ph`) left: the hero art / studio mark on the landing page.
