@@ -1,0 +1,211 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "general",
+    "industry": "General",
+    "name": "General",
+    "journalName": "Work Log",
+    "summary": "Weekly reviews, 1:1s and decisions that fit any kind of work.",
+    "icon": "square.grid.2x2",
+    "color": "slate",
+    "order": 0,
+    "defaultTemplate": "general.weekly-review",
+    "templates": [
+      {
+        "id": "general.weekly-review",
+        "version": 1,
+        "name": "Weekly review",
+        "icon": "arrow.counterclockwise",
+        "color": "slate",
+        "cadence": "review",
+        "summary": "Energy, mood, wins and lessons — a personal check-in for any job.",
+        "includedByDefault": true,
+        "reminder": { "weekdays": [6], "hour": 17, "minute": 0 },
+        "fields": [
+          { "key": "energy", "label": "Energy", "type": "rating" },
+          { "key": "mood", "label": "Mood", "type": "mood" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "wins", "label": "Wins", "type": "checklist", "prompt": "What went well this week?" },
+          {
+            "key": "challenges", "label": "Challenges", "type": "text", "includeInInsights": true,
+            "prompt": "What was hard, and why?"
+          },
+          {
+            "key": "lessons-learned", "label": "Lessons learned", "type": "richText",
+            "prompt": "What will you do differently next week?"
+          },
+          {
+            "key": "notes", "label": "Notes", "type": "richText",
+            "prompt": "Anything else worth remembering about this week?"
+          }
+        ]
+      },
+      {
+        "id": "general.1-1-notes",
+        "version": 2,
+        "name": "1:1 notes",
+        "icon": "bubble.left.and.bubble.right",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "Any recurring one-on-one — with a manager, a mentor, a peer or a report.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "topics", "label": "Topics", "type": "checklist", "showInListPreview": true, "prompt": "What do you want to cover?" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did you talk about, and what stood out?" },
+          {
+            "key": "action-items", "label": "Action items", "type": "checklist", "carryOver": true, "showInListPreview": true,
+            "prompt": "What’s still open from last time, and what’s new?"
+          }
+        ]
+      },
+      {
+        "id": "general.brag-document",
+        "version": 1,
+        "name": "Brag document",
+        "icon": "trophy",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "Capture a win when it happens, so review season isn’t a memory test.",
+        "includedByDefault": true,
+        "fields": [
+          {
+            "key": "impact", "label": "Impact", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "high", "label": "High", "color": "success" },
+              { "key": "medium", "label": "Medium", "color": "warning" },
+              { "key": "low", "label": "Low", "color": "neutral" }
+            ]
+          },
+          { "key": "evidence", "label": "Evidence", "type": "link" },
+          { "key": "kudos-from", "label": "Kudos from", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "win", "label": "Win", "type": "richText", "showInListPreview": true,
+            "prompt": "What did you do, and what changed because of it?"
+          },
+          { "key": "evidence-attachment", "label": "Evidence", "type": "attachment" }
+        ]
+      },
+      {
+        "id": "general.decision-log",
+        "version": 1,
+        "name": "Decision log",
+        "icon": "checkmark.seal",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "The context, the decision and who signed off — for any decision worth remembering.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "project", "label": "Project", "type": "project", "carryOver": true },
+          { "key": "decided-by", "label": "Decided by", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "context", "label": "Context", "type": "richText", "prompt": "What’s the background, and why now?" },
+          { "key": "decision", "label": "Decision", "type": "richText", "prompt": "What was decided, and why?" }
+        ]
+      },
+      {
+        "id": "general.meeting-notes",
+        "version": 1,
+        "name": "Meeting notes",
+        "icon": "person.2",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "The generic meeting record: attendees, agenda and what’s next.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "attendees", "label": "Attendees", "type": "person" },
+          { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "agenda", "label": "Agenda", "type": "checklist", "showInListPreview": true, "prompt": "What do you want to cover?" },
+          {
+            "key": "notes", "label": "Notes", "type": "richText",
+            "prompt": "What happened, and what’s the context for next time?"
+          },
+          {
+            "key": "action-items", "label": "Action items", "type": "checklist", "carryOver": true,
+            "prompt": "What’s next, and who owns it?"
+          }
+        ]
+      },
+      {
+        "id": "general.learning-log",
+        "version": 1,
+        "name": "Learning log",
+        "icon": "book",
+        "color": "slate",
+        "cadence": "daily",
+        "summary": "A short, frequent \"today I learned\" log, useful in any discipline.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "topic", "label": "Topic", "type": "tags" },
+          { "key": "source", "label": "Source", "type": "link" },
+          { "key": "time-spent", "label": "Time spent", "type": "duration", "includeInInsights": true },
+          { "key": "confidence", "label": "Confidence", "type": "rating", "includeInInsights": true },
+          { "key": "takeaway", "label": "Takeaway", "type": "richText", "prompt": "What did you learn, and how will you use it?" }
+        ]
+      },
+      {
+        "id": "general.cpd-log",
+        "version": 1,
+        "name": "CPD log",
+        "icon": "graduationcap",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "Continuing professional development: hours logged, plus a reflection.",
+        "includedByDefault": false,
+        "fields": [
+          {
+            "key": "type", "label": "Type", "type": "singleSelect",
+            "options": [
+              { "key": "course", "label": "Course", "color": "info" },
+              { "key": "reading", "label": "Reading", "color": "neutral" },
+              { "key": "conference", "label": "Conference", "color": "info" },
+              { "key": "mentoring", "label": "Mentoring", "color": "neutral" },
+              { "key": "practice", "label": "Practice", "color": "info" }
+            ]
+          },
+          { "key": "hours", "label": "Hours", "type": "duration", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "activity", "label": "Activity", "type": "text", "showInListPreview": true, "prompt": "What was the activity?" },
+          {
+            "key": "what-you-learned", "label": "What you learned", "type": "richText",
+            "prompt": "What did you learn, and how does it change your practice?"
+          }
+        ]
+      },
+      {
+        "id": "general.year-end-self-review",
+        "version": 2,
+        "name": "Year-end self-review",
+        "icon": "rosette",
+        "color": "amber",
+        "cadence": "review",
+        "summary": "Your year in your own words, wins first, for review season.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "evidence", "label": "Evidence", "type": "link" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "biggest-wins", "label": "Biggest wins", "type": "richText", "showInListPreview": true,
+            "prompt": "What are you proudest of this year, and what changed because of it?"
+          },
+          {
+            "key": "growth", "label": "Growth", "type": "richText", "showInListPreview": true,
+            "prompt": "What can you do now that you couldn’t a year ago?"
+          },
+          {
+            "key": "feedback-received", "label": "Feedback received", "type": "richText", "showInListPreview": true,
+            "prompt": "What did people tell you about your work?"
+          },
+          {
+            "key": "next-year", "label": "Next year", "type": "richText", "showInListPreview": true,
+            "prompt": "What do you want to get better at, or take on, next year?"
+          }
+        ]
+      }
+    ]
+  }
+}

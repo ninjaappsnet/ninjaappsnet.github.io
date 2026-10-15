@@ -1,0 +1,170 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "product-management",
+    "industry": "Product",
+    "name": "Product Management",
+    "journalName": "Product Log",
+    "summary": "Customer conversations, specs, roadmap and launch reviews for people who decide what gets built.",
+    "icon": "scope",
+    "color": "blue",
+    "order": 3,
+    "defaultTemplate": "product-management.customer-interview-notes",
+    "keywords": ["roadmap", "prd", "spec", "interview", "customer", "discovery", "launch", "prioritise", "prioritize", "stakeholder", "okr", "backlog", "persona"],
+    "templates": [
+      {
+        "id": "product-management.customer-interview-notes",
+        "version": 1,
+        "name": "Customer interview notes",
+        "icon": "person.wave.2",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "What a customer actually said, before it’s rounded off into a feature request.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "contact", "label": "Contact", "type": "person" },
+          { "key": "account", "label": "Account", "type": "project", "carryOver": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "pain-points", "label": "Pain points", "type": "text", "includeInInsights": true,
+            "prompt": "What problem are they trying to solve?"
+          },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did they say, in their words?" },
+          { "key": "feature-requests", "label": "Feature requests", "type": "checklist", "prompt": "What did they ask for?" }
+        ]
+      },
+      {
+        "id": "product-management.prd-spec-review",
+        "version": 1,
+        "name": "PRD review",
+        "icon": "doc.text.magnifyingglass",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "The spec’s open questions, and the calls made to close them.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "doc", "label": "Doc", "type": "link" },
+          { "key": "reviewers", "label": "Reviewers", "type": "person" },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "draft", "label": "Draft", "color": "neutral" },
+              { "key": "in-review", "label": "In review", "color": "warning" },
+              { "key": "approved", "label": "Approved", "color": "success" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "open-questions", "label": "Open questions", "type": "richText", "presentation": "warning",
+            "prompt": "What’s still unresolved?"
+          },
+          { "key": "decision", "label": "Decision", "type": "richText", "prompt": "What was decided, and why?" }
+        ]
+      },
+      {
+        "id": "product-management.roadmap-review",
+        "version": 1,
+        "name": "Roadmap review",
+        "icon": "map",
+        "color": "purple",
+        "cadence": "review",
+        "summary": "Where the roadmap stands, and what’s putting it at risk.",
+        "includedByDefault": true,
+        "fields": [
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "on-track", "label": "On track", "color": "success" },
+              { "key": "at-risk", "label": "At risk", "color": "warning" },
+              { "key": "blocked", "label": "Blocked", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "highlights", "label": "Highlights", "type": "text", "includeInInsights": true, "prompt": "What moved forward this period?" },
+          { "key": "risks", "label": "Risks", "type": "text", "includeInInsights": true, "prompt": "What could get in the way?" },
+          {
+            "key": "next-steps", "label": "Next steps", "type": "checklist", "carryOver": true,
+            "prompt": "What happens before the next review?"
+          }
+        ]
+      },
+      {
+        "id": "product-management.weekly-okr-check-in",
+        "version": 1,
+        "name": "Weekly OKR check-in",
+        "icon": "target",
+        "color": "teal",
+        "cadence": "weekly",
+        "summary": "A weekly pulse on each objective, so quarter-end isn’t the first check on progress.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "objective", "label": "Objective", "type": "project" },
+          { "key": "progress", "label": "Progress", "type": "number", "includeInInsights": true },
+          { "key": "confidence", "label": "Confidence", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "update", "label": "Update", "type": "text", "includeInInsights": true, "prompt": "What moved the needle this week?" },
+          {
+            "key": "blockers", "label": "Blockers", "type": "text", "presentation": "warning", "includeInInsights": true,
+            "prompt": "What’s in the way?"
+          }
+        ]
+      },
+      {
+        "id": "product-management.feature-launch-retro",
+        "version": 1,
+        "name": "Feature launch retro",
+        "icon": "flag.checkered",
+        "color": "green",
+        "cadence": "review",
+        "summary": "Did it land? A short retro right after a feature ships, while it’s fresh.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "feature", "label": "Feature", "type": "project" },
+          {
+            "key": "outcome", "label": "Outcome", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "success", "label": "Success", "color": "success" },
+              { "key": "mixed", "label": "Mixed", "color": "warning" },
+              { "key": "missed-target", "label": "Missed target", "color": "danger" }
+            ]
+          },
+          { "key": "adoption", "label": "Adoption", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "what-worked", "label": "What worked", "type": "richText", "prompt": "What worked, and why?" },
+          {
+            "key": "what-wed-change", "label": "What we’d change", "type": "richText",
+            "prompt": "What would you do differently next launch?"
+          }
+        ]
+      },
+      {
+        "id": "product-management.user-feedback-synthesis",
+        "version": 1,
+        "name": "User feedback synthesis",
+        "icon": "bubble.left.and.text.bubble.right",
+        "color": "pink",
+        "cadence": "weekly",
+        "summary": "Rolling up scattered feedback into the one theme worth acting on this week.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "volume", "label": "Volume", "type": "number", "includeInInsights": true },
+          {
+            "key": "sentiment", "label": "Sentiment", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "positive", "label": "Positive", "color": "success" },
+              { "key": "mixed", "label": "Mixed", "color": "neutral" },
+              { "key": "negative", "label": "Negative", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "theme", "label": "Theme", "type": "text", "includeInInsights": true,
+            "prompt": "What’s the top thing customers are saying?"
+          },
+          { "key": "evidence", "label": "Evidence", "type": "richText", "prompt": "What are people actually saying? Quote them." },
+          { "key": "action", "label": "Action", "type": "checklist", "carryOver": true, "prompt": "What will you do about it?" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "software-engineering",
+    "industry": "Engineering",
+    "name": "Software Engineering",
+    "journalName": "Engineering Log",
+    "summary": "Standups, incidents, plans and reviews for people who ship software.",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "color": "orange",
+    "order": 1,
+    "defaultTemplate": "software-engineering.daily-standup",
+    "includes": ["general.weekly-review", "general.brag-document", "general.decision-log", "devops-on-call.incident-postmortem"],
+    "keywords": ["pr", "code", "review", "retry", "queue", "fix", "fixing", "flaky", "deploy", "test", "bug", "merge", "refactor", "api", "build", "ship", "release", "backend", "frontend", "sprint", "standup", "commit", "branch", "endpoint", "debug", "codebase", "compiler"],
+    "templates": [
+      {
+        "id": "software-engineering.daily-standup",
+        "version": 3,
+        "name": "Daily standup",
+        "icon": "checklist",
+        "color": "orange",
+        "cadence": "daily",
+        "summary": "What you shipped, what you’re on and what’s in the way.",
+        "includedByDefault": true,
+        "reminder": { "weekdays": [2, 3, 4, 5, 6], "hour": 9, "minute": 0 },
+        "fields": [
+          { "key": "energy", "label": "Energy", "type": "rating", "showInListPreview": true, "includeInInsights": true },
+          { "key": "focus-time", "label": "Focus time", "type": "duration", "showInListPreview": true, "includeInInsights": true },
+          { "key": "project", "label": "Project", "type": "project", "showInListPreview": true, "carryOver": true },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "showInListPreview": true,
+            "options": [
+              { "key": "on-track", "label": "On track", "color": "success" },
+              { "key": "at-risk", "label": "At risk", "color": "warning" },
+              { "key": "blocked", "label": "Blocked", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "shipped", "label": "Shipped", "type": "checklist",
+            "prompt": "What did you finish since the last standup?"
+          },
+          {
+            "key": "working-on", "label": "Working on", "type": "richText", "carryOver": true,
+            "prompt": "What are you working on today?"
+          },
+          {
+            "key": "blockers", "label": "Blockers", "type": "text", "presentation": "warning",
+            "includeInInsights": true, "prompt": "Anything in your way?"
+          },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "Anything else worth remembering?" }
+        ]
+      },
+      {
+        "id": "software-engineering.code-review-notes",
+        "version": 3,
+        "name": "Code review notes",
+        "icon": "chevron.left.forwardslash.chevron.right",
+        "color": "teal",
+        "cadence": "onEvent",
+        "summary": "PRs you reviewed, the verdict and patterns worth sharing with the team.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "pull-request", "label": "Pull request", "type": "link" },
+          { "key": "author", "label": "Author", "type": "person" },
+          {
+            "key": "verdict", "label": "Verdict", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "approved", "label": "Approved", "color": "success" },
+              { "key": "requested-changes", "label": "Requested changes", "color": "danger" },
+              { "key": "comment-only", "label": "Comment only", "color": "neutral" }
+            ]
+          },
+          { "key": "time-spent", "label": "Time spent", "type": "duration", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "patterns", "label": "Patterns", "type": "richText",
+            "prompt": "What pattern is worth repeating, or fixing, across reviews?"
+          },
+          {
+            "key": "feedback", "label": "Feedback", "type": "richText",
+            "prompt": "What’s worth telling the author directly?"
+          }
+        ]
+      },
+      {
+        "id": "software-engineering.weekly-plan",
+        "version": 3,
+        "name": "Weekly plan",
+        "icon": "calendar",
+        "color": "blue",
+        "cadence": "weekly",
+        "summary": "Your top priorities for the week, and what could get in the way.",
+        "includedByDefault": false,
+        "reminder": { "weekdays": [2], "hour": 9, "minute": 0 },
+        "fields": [
+          { "key": "week-of", "label": "Week of", "type": "date" },
+          { "key": "project", "label": "Project", "type": "project", "carryOver": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "priorities", "label": "Priorities", "type": "checklist", "carryOver": true,
+            "prompt": "What are the three things that matter most this week?"
+          },
+          {
+            "key": "risks", "label": "Risks", "type": "text", "includeInInsights": true,
+            "prompt": "What could get in the way?"
+          }
+        ]
+      },
+      {
+        "id": "software-engineering.sprint-retro",
+        "version": 1,
+        "name": "Sprint retro",
+        "icon": "arrow.triangle.2.circlepath",
+        "color": "purple",
+        "cadence": "review",
+        "summary": "What worked, what didn’t and one experiment for next sprint.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "team-mood", "label": "Team mood", "type": "mood", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "sprint", "label": "Sprint", "type": "text", "showInListPreview": true, "prompt": "e.g. S-39" },
+          { "key": "went-well", "label": "Went well", "type": "checklist", "prompt": "What worked this sprint?" },
+          { "key": "didnt-go-well", "label": "Didn’t go well", "type": "checklist", "prompt": "What got in the way?" },
+          {
+            "key": "try-next-sprint", "label": "Try next sprint", "type": "checklist", "carryOver": true,
+            "prompt": "What’s the one experiment worth trying?"
+          }
+        ]
+      },
+      {
+        "id": "software-engineering.design-doc-log",
+        "version": 1,
+        "name": "Design doc log",
+        "icon": "doc.text",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Technical design docs and RFCs: options weighed, the call made, who signed off.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "doc", "label": "Doc", "type": "link" },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "draft", "label": "Draft", "color": "neutral" },
+              { "key": "in-review", "label": "In review", "color": "warning" },
+              { "key": "approved", "label": "Approved", "color": "success" },
+              { "key": "shipped", "label": "Shipped", "color": "info" }
+            ]
+          },
+          { "key": "reviewers", "label": "Reviewers", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "options-considered", "label": "Options considered", "type": "richText",
+            "prompt": "What approaches did you consider, and why not the others?"
+          },
+          { "key": "decision", "label": "Decision", "type": "richText", "prompt": "What did you decide, and why?" }
+        ]
+      },
+      {
+        "id": "software-engineering.tech-debt-journal",
+        "version": 1,
+        "name": "Tech debt journal",
+        "icon": "wrench.and.screwdriver",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "Shortcuts taken, what they cost you, and when they should be paid down.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "area", "label": "Area", "type": "project" },
+          { "key": "interest", "label": "Interest", "type": "rating", "includeInInsights": true },
+          { "key": "effort", "label": "Effort", "type": "duration", "includeInInsights": true },
+          { "key": "pay-down-by", "label": "Pay down by", "type": "date" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "why", "label": "Why", "type": "richText", "prompt": "What shortcut did you take, and what will it cost later?" }
+        ]
+      }
+    ]
+  }
+}

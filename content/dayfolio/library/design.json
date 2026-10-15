@@ -1,0 +1,144 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "design",
+    "industry": "Design",
+    "name": "Design",
+    "journalName": "Design Log",
+    "summary": "Critique, research and system changes for people who design the product.",
+    "icon": "paintbrush",
+    "color": "pink",
+    "order": 4,
+    "defaultTemplate": "design.design-critique",
+    "includes": ["general.decision-log"],
+    "keywords": ["figma", "sketch", "mockup", "prototype", "wireframe", "critique", "usability", "ux", "ui", "design", "typography", "accessibility"],
+    "templates": [
+      {
+        "id": "design.design-critique",
+        "version": 1,
+        "name": "Design critique",
+        "icon": "paintbrush",
+        "color": "pink",
+        "cadence": "onEvent",
+        "summary": "What came up in critique, and what you’re actually going to change.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "artifact", "label": "Artifact", "type": "link" },
+          { "key": "reviewers", "label": "Reviewers", "type": "person" },
+          {
+            "key": "primary-theme", "label": "Primary theme", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "visual", "label": "Visual", "color": "info" },
+              { "key": "ux-flow", "label": "UX flow", "color": "info" },
+              { "key": "content", "label": "Content", "color": "neutral" },
+              { "key": "accessibility", "label": "Accessibility", "color": "warning" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "work-shown-attachment", "label": "Work shown", "type": "attachment" },
+          {
+            "key": "feedback", "label": "Feedback", "type": "richText",
+            "prompt": "What feedback did you get, and what will you change?"
+          },
+          { "key": "next-steps", "label": "Next steps", "type": "checklist", "carryOver": true, "prompt": "What’s next?" }
+        ]
+      },
+      {
+        "id": "design.user-research-session",
+        "version": 1,
+        "name": "User research session",
+        "icon": "person.text.rectangle",
+        "color": "teal",
+        "cadence": "onEvent",
+        "summary": "Generative research: what you’re learning about people, before you test a design on them.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "participant", "label": "Participant", "type": "person" },
+          {
+            "key": "research-type", "label": "Research type", "type": "singleSelect",
+            "options": [
+              { "key": "interview", "label": "Interview", "color": "info" },
+              { "key": "survey", "label": "Survey", "color": "neutral" },
+              { "key": "diary-study", "label": "Diary study", "color": "info" },
+              { "key": "card-sort", "label": "Card sort", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "key-finding", "label": "Key finding", "type": "text", "includeInInsights": true, "prompt": "What’s the one thing you learned?" },
+          { "key": "full-notes", "label": "Full notes", "type": "richText", "prompt": "What did you see and hear?" }
+        ]
+      },
+      {
+        "id": "design.usability-test-notes",
+        "version": 1,
+        "name": "Usability test notes",
+        "icon": "checkmark.circle",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Evaluative research: did they succeed at the task, and where did they get stuck?",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "participant", "label": "Participant", "type": "person" },
+          {
+            "key": "task-success", "label": "Task success", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "completed", "label": "Completed", "color": "success" },
+              { "key": "completed-with-help", "label": "Completed with help", "color": "warning" },
+              { "key": "failed", "label": "Failed", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "observations", "label": "Observations", "type": "richText", "prompt": "What did they do, and where did they struggle?" },
+          { "key": "screenshots-attachment", "label": "Screenshots", "type": "attachment" },
+          { "key": "follow-ups", "label": "Follow-ups", "type": "checklist", "prompt": "What needs to change before the next round?" }
+        ]
+      },
+      {
+        "id": "design.design-system-changelog",
+        "version": 1,
+        "name": "Design system changelog",
+        "icon": "square.stack.3d.up",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "What changed in the system, so consuming teams don’t find out by breaking.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "component", "label": "Component", "type": "project" },
+          {
+            "key": "change-type", "label": "Change type", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "added", "label": "Added", "color": "success" },
+              { "key": "changed", "label": "Changed", "color": "info" },
+              { "key": "deprecated", "label": "Deprecated", "color": "warning" },
+              { "key": "removed", "label": "Removed", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "summary", "label": "Summary", "type": "richText", "prompt": "What changed, and why?" },
+          { "key": "migration-notes", "label": "Migration notes", "type": "text", "prompt": "What do consumers need to do?" }
+        ]
+      },
+      {
+        "id": "design.accessibility-audit",
+        "version": 1,
+        "name": "Accessibility audit",
+        "icon": "figure.roll",
+        "color": "green",
+        "cadence": "review",
+        "summary": "A periodic pass to catch accessibility regressions before someone else does.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "surface", "label": "Surface", "type": "project" },
+          { "key": "issues-found", "label": "Issues found", "type": "number", "includeInInsights": true },
+          { "key": "severity", "label": "Severity", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "findings", "label": "Findings", "type": "richText", "prompt": "What did you find?" },
+          {
+            "key": "fixes-needed", "label": "Fixes needed", "type": "checklist", "carryOver": true,
+            "prompt": "What needs to be fixed, in priority order?"
+          }
+        ]
+      }
+    ]
+  }
+}

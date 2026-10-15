@@ -1,0 +1,147 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "data-analytics",
+    "industry": "Data",
+    "name": "Data & Analytics",
+    "journalName": "Analytics Log",
+    "summary": "Experiments, pipeline incidents and analysis notes for people who work with data day to day.",
+    "icon": "chart.bar.xaxis",
+    "color": "teal",
+    "order": 5,
+    "defaultTemplate": "data-analytics.ab-experiment-log",
+    "keywords": ["dashboard", "query", "sql", "warehouse", "dataset", "pipeline", "etl", "experiment", "model", "metric", "analysis", "analytics", "cohort", "regression"],
+    "templates": [
+      {
+        "id": "data-analytics.ab-experiment-log",
+        "version": 1,
+        "name": "A/B experiment log",
+        "icon": "flask",
+        "color": "teal",
+        "cadence": "onEvent",
+        "summary": "What you tested, what happened, and whether it’s worth shipping.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "project", "label": "Project", "type": "project" },
+          {
+            "key": "result", "label": "Result", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "significant-win", "label": "Significant win", "color": "success" },
+              { "key": "no-effect", "label": "No effect", "color": "neutral" },
+              { "key": "regression", "label": "Regression", "color": "danger" },
+              { "key": "inconclusive", "label": "Inconclusive", "color": "warning" }
+            ]
+          },
+          { "key": "confidence", "label": "Confidence", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "hypothesis", "label": "Hypothesis", "type": "text", "includeInInsights": true,
+            "prompt": "What are you testing, and what do you expect?"
+          },
+          { "key": "setup", "label": "Setup", "type": "richText", "prompt": "What did you change, and for whom?" },
+          { "key": "takeaway", "label": "Takeaway", "type": "richText", "prompt": "What did you learn, and what’s next?" }
+        ]
+      },
+      {
+        "id": "data-analytics.data-pipeline-incident",
+        "version": 1,
+        "name": "Data pipeline incident",
+        "icon": "exclamationmark.triangle",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "Schema drift, broken joins, stale data — the postmortem for pipelines, not services.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "pipeline", "label": "Pipeline", "type": "project" },
+          {
+            "key": "severity", "label": "Severity", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "critical", "label": "Critical", "color": "danger" },
+              { "key": "degraded", "label": "Degraded", "color": "warning" },
+              { "key": "cosmetic", "label": "Cosmetic", "color": "neutral" }
+            ]
+          },
+          {
+            "key": "detected-by", "label": "Detected by", "type": "singleSelect",
+            "options": [
+              { "key": "monitoring", "label": "Monitoring", "color": "info" },
+              { "key": "downstream-team", "label": "Downstream team", "color": "warning" },
+              { "key": "manual-check", "label": "Manual check", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "impact", "label": "Impact", "type": "text", "includeInInsights": true,
+            "prompt": "What data or dashboards were affected, and for how long?"
+          },
+          { "key": "root-cause", "label": "Root cause", "type": "richText", "prompt": "What actually caused it?" },
+          {
+            "key": "fix", "label": "Fix", "type": "checklist",
+            "prompt": "What needs to happen so this doesn’t happen again?"
+          }
+        ]
+      },
+      {
+        "id": "data-analytics.analysis-notes",
+        "version": 1,
+        "name": "Analysis notes",
+        "icon": "chart.bar.xaxis",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "An ad hoc analysis worth remembering: the question, the method, and how sure you are.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "project", "label": "Project", "type": "project" },
+          { "key": "confidence", "label": "Confidence", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "question", "label": "Question", "type": "text", "includeInInsights": true, "prompt": "What question are you answering?" },
+          { "key": "method", "label": "Method", "type": "richText", "prompt": "What data and method did you use?" },
+          {
+            "key": "findings", "label": "Findings", "type": "richText",
+            "prompt": "What did you find, and what would change your mind?"
+          }
+        ]
+      },
+      {
+        "id": "data-analytics.model-performance-review",
+        "version": 1,
+        "name": "Model performance review",
+        "icon": "waveform.path.ecg",
+        "color": "purple",
+        "cadence": "weekly",
+        "summary": "Is the model — or the dashboard — still telling the truth?",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "model", "label": "Model", "type": "project" },
+          { "key": "metric-drift", "label": "Metric drift", "type": "number", "includeInInsights": true },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "healthy", "label": "Healthy", "color": "success" },
+              { "key": "degrading", "label": "Degrading", "color": "warning" },
+              { "key": "broken", "label": "Broken", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What’s driving the change, and what needs attention?" }
+        ]
+      },
+      {
+        "id": "data-analytics.data-quality-watch",
+        "version": 1,
+        "name": "Data quality watch",
+        "icon": "checkmark.shield",
+        "color": "green",
+        "cadence": "daily",
+        "summary": "A quick daily tally of automated checks, so quality drift shows up early.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "checks-run", "label": "Checks run", "type": "number", "includeInInsights": true },
+          { "key": "checks-failed", "label": "Checks failed", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "text", "prompt": "Anything worth flagging?" }
+        ]
+      }
+    ]
+  }
+}

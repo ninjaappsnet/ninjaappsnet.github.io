@@ -1,0 +1,178 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "consulting-freelance",
+    "industry": "Consulting",
+    "name": "Consulting & Freelance",
+    "journalName": "Clients",
+    "summary": "Meetings, billable time, invoices and status updates for people who work for clients.",
+    "icon": "briefcase",
+    "color": "blue",
+    "order": 9,
+    "defaultTemplate": "consulting-freelance.billable-day",
+    "includes": ["general.decision-log"],
+    "keywords": ["client", "invoice", "billable", "freelance", "retainer", "scope", "proposal", "timesheet", "hours"],
+    "templates": [
+      {
+        "id": "consulting-freelance.client-meeting",
+        "version": 5,
+        "name": "Client meeting",
+        "icon": "person.2",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Who was there, what you decided and what happens next.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "client", "label": "Client", "type": "project", "carryOver": true },
+          { "key": "attendees", "label": "Attendees", "type": "person", "showInListPreview": true },
+          { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
+          { "key": "hours", "label": "Hours", "type": "duration", "showInListPreview": true, "includeInInsights": true },
+          {
+            "key": "category", "label": "Category", "type": "singleSelect", "showInListPreview": true,
+            "options": [
+              { "key": "billable", "label": "Billable", "color": "success" },
+              { "key": "non-billable", "label": "Non-billable", "color": "neutral" },
+              { "key": "internal", "label": "Internal", "color": "info" }
+            ]
+          },
+          {
+            "key": "follow-up", "label": "Follow-up", "type": "singleSelect", "showInListPreview": true,
+            "options": [
+              { "key": "sent", "label": "Follow-up sent", "color": "success" },
+              { "key": "needed", "label": "Follow-up needed", "color": "warning" },
+              { "key": "none", "label": "No follow-up needed", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "notes", "label": "Notes", "type": "richText",
+            "prompt": "What happened, and what’s the context for next time?"
+          },
+          { "key": "decisions", "label": "Decisions", "type": "richText", "prompt": "What was decided? One line each." },
+          {
+            "key": "next-steps", "label": "Next steps", "type": "checklist", "carryOver": true,
+            "prompt": "What happens next, and who owns it?"
+          }
+        ]
+      },
+      {
+        "id": "consulting-freelance.billable-day",
+        "version": 3,
+        "name": "Billable day",
+        "icon": "clock",
+        "color": "teal",
+        "cadence": "daily",
+        "summary": "Hours logged against a client, ready for the invoice.",
+        "includedByDefault": true,
+        "reminder": { "weekdays": [2, 3, 4, 5, 6], "hour": 17, "minute": 30 },
+        "fields": [
+          { "key": "client", "label": "Client", "type": "project", "carryOver": true },
+          { "key": "hours", "label": "Hours", "type": "duration", "includeInInsights": true },
+          {
+            "key": "category", "label": "Category", "type": "singleSelect",
+            "options": [
+              { "key": "billable", "label": "Billable", "color": "success" },
+              { "key": "non-billable", "label": "Non-billable", "color": "neutral" },
+              { "key": "internal", "label": "Internal", "color": "info" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "summary", "label": "Summary", "type": "richText", "prompt": "What did you work on today?" },
+          {
+            "key": "invoice-notes", "label": "Invoice notes", "type": "text",
+            "prompt": "Anything to flag for the invoice?"
+          }
+        ]
+      },
+      {
+        "id": "consulting-freelance.invoice-log",
+        "version": 1,
+        "name": "Invoice log",
+        "icon": "doc.text",
+        "color": "green",
+        "cadence": "onEvent",
+        "summary": "What you billed, to whom, and whether it’s been paid.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "client", "label": "Client", "type": "project", "carryOver": true },
+          { "key": "amount", "label": "Amount", "type": "number", "includeInInsights": true },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "draft", "label": "Draft", "color": "neutral" },
+              { "key": "sent", "label": "Sent", "color": "info" },
+              { "key": "paid", "label": "Paid", "color": "success" },
+              { "key": "overdue", "label": "Overdue", "color": "danger" }
+            ]
+          },
+          { "key": "due-date", "label": "Due date", "type": "date" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "invoice-attachment", "label": "Invoice", "type": "attachment" },
+          { "key": "notes", "label": "Notes", "type": "text", "prompt": "Anything to flag about this invoice?" }
+        ]
+      },
+      {
+        "id": "consulting-freelance.project-status-update",
+        "version": 3,
+        "name": "Project status update",
+        "icon": "chart.bar",
+        "color": "purple",
+        "cadence": "weekly",
+        "summary": "Progress, risks and what’s next, ready to send to the client.",
+        "includedByDefault": false,
+        "reminder": { "weekdays": [6], "hour": 15, "minute": 0 },
+        "fields": [
+          { "key": "client", "label": "Client", "type": "project", "carryOver": true },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "on-track", "label": "On track", "color": "success" },
+              { "key": "at-risk", "label": "At risk", "color": "warning" },
+              { "key": "blocked", "label": "Blocked", "color": "danger" }
+            ]
+          },
+          { "key": "progress", "label": "Progress", "type": "number", "includeInInsights": true },
+          { "key": "due-date", "label": "Due date", "type": "date" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "summary", "label": "Summary", "type": "richText",
+            "prompt": "What’s the headline for this update?"
+          },
+          {
+            "key": "risks", "label": "Risks", "type": "text", "includeInInsights": true,
+            "prompt": "What could get in the way?"
+          },
+          {
+            "key": "next-steps", "label": "Next steps", "type": "checklist", "carryOver": true,
+            "prompt": "What happens before the next update?"
+          }
+        ]
+      },
+      {
+        "id": "consulting-freelance.proposal-scope",
+        "version": 1,
+        "name": "Proposal and scope",
+        "icon": "doc.badge.plus",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "What you proposed, what it’s worth, and whether it landed.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "client", "label": "Client", "type": "project" },
+          { "key": "estimated-value", "label": "Estimated value", "type": "number", "includeInInsights": true },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "draft", "label": "Draft", "color": "neutral" },
+              { "key": "sent", "label": "Sent", "color": "info" },
+              { "key": "won", "label": "Won", "color": "success" },
+              { "key": "lost", "label": "Lost", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "scope", "label": "Scope", "type": "richText", "prompt": "What’s included, and what’s explicitly not?" }
+        ]
+      }
+    ]
+  }
+}

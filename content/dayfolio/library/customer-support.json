@@ -1,0 +1,123 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "customer-support",
+    "industry": "Support",
+    "name": "Customer Support",
+    "journalName": "Support Log",
+    "summary": "Tickets, escalations and shift summaries for people who help customers directly.",
+    "icon": "headphones",
+    "color": "teal",
+    "order": 8,
+    "defaultTemplate": "customer-support.shift-summary",
+    "keywords": ["ticket", "refund", "escalation", "escalated", "helpdesk", "zendesk", "complaint", "customer", "sla", "csat", "shift"],
+    "templates": [
+      {
+        "id": "customer-support.support-ticket-log",
+        "version": 1,
+        "name": "Support ticket log",
+        "icon": "headphones",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "A record of the issue and how it got fixed — searchable next time it comes up.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "customer", "label": "Customer", "type": "person" },
+          {
+            "key": "category", "label": "Category", "type": "singleSelect",
+            "options": [
+              { "key": "technical", "label": "Technical", "color": "info" },
+              { "key": "billing", "label": "Billing", "color": "warning" },
+              { "key": "account", "label": "Account", "color": "neutral" },
+              { "key": "feature-request", "label": "Feature request", "color": "info" }
+            ]
+          },
+          {
+            "key": "priority", "label": "Priority", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "high", "label": "High", "color": "danger" },
+              { "key": "medium", "label": "Medium", "color": "warning" },
+              { "key": "low", "label": "Low", "color": "neutral" }
+            ]
+          },
+          { "key": "time-to-resolve", "label": "Time to resolve", "type": "duration", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "issue", "label": "Issue", "type": "richText", "prompt": "What’s the problem, in the customer’s words?" },
+          { "key": "resolution", "label": "Resolution", "type": "richText", "prompt": "How did you resolve it?" }
+        ]
+      },
+      {
+        "id": "customer-support.escalation-log",
+        "version": 1,
+        "name": "Escalation log",
+        "icon": "arrow.up.forward.circle",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "Why something needed to go up a level, and what would stop it happening again.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "ticket", "label": "Ticket", "type": "link" },
+          { "key": "escalated-to", "label": "Escalated to", "type": "person" },
+          {
+            "key": "reason", "label": "Reason", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "technical-complexity", "label": "Technical complexity", "color": "info" },
+              { "key": "angry-customer", "label": "Angry customer", "color": "warning" },
+              { "key": "policy-exception", "label": "Policy exception", "color": "neutral" },
+              { "key": "sla-breach", "label": "SLA breach", "color": "danger" }
+            ]
+          },
+          { "key": "resolution-time", "label": "Resolution time", "type": "duration", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "what-happened", "label": "What happened", "type": "richText", "prompt": "Why did this need escalation?" },
+          {
+            "key": "lesson", "label": "Lesson", "type": "text", "includeInInsights": true,
+            "prompt": "What would prevent this next time?"
+          }
+        ]
+      },
+      {
+        "id": "customer-support.shift-summary",
+        "version": 1,
+        "name": "Shift summary",
+        "icon": "clock",
+        "color": "teal",
+        "cadence": "daily",
+        "summary": "Volume, speed and satisfaction for your shift, plus the one interaction worth remembering.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "tickets-handled", "label": "Tickets handled", "type": "number", "includeInInsights": true },
+          { "key": "avg-handle-time", "label": "Avg handle time", "type": "duration", "includeInInsights": true },
+          { "key": "customer-satisfaction", "label": "Customer satisfaction", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "toughest-interaction", "label": "Toughest interaction", "type": "text", "presentation": "warning",
+            "includeInInsights": true, "prompt": "What was hardest today, and how did you handle it?"
+          }
+        ]
+      },
+      {
+        "id": "customer-support.weekly-support-metrics",
+        "version": 1,
+        "name": "Weekly support metrics",
+        "icon": "chart.bar",
+        "color": "purple",
+        "cadence": "weekly",
+        "summary": "The trend, not the tally — Shift Summary already charts daily volume and CSAT.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "top-issue", "label": "Top issue", "type": "text", "includeInInsights": true,
+            "prompt": "What’s the most common thing customers are contacting you about?"
+          },
+          {
+            "key": "staffing-gap", "label": "Staffing gap", "type": "text", "includeInInsights": true,
+            "prompt": "Where did you not have enough coverage?"
+          },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "Anything else worth flagging about the week?" }
+        ]
+      }
+    ]
+  }
+}

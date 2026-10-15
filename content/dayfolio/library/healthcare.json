@@ -1,0 +1,78 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "healthcare",
+    "industry": "Healthcare",
+    "name": "Healthcare",
+    "journalName": "Clinical Practice",
+    "summary": "Shift debriefs, reflective practice and CPD for patient-facing roles — never patient records.",
+    "icon": "cross.case",
+    "color": "teal",
+    "order": 11,
+    "defaultTemplate": "healthcare.shift-debrief",
+    "includes": ["general.cpd-log"],
+    "keywords": ["ward", "shift", "handover", "nurse", "patient", "clinic", "clinical", "rota", "cpd", "doctor", "gp", "surgery", "triage"],
+    "templates": [
+      {
+        "id": "healthcare.shift-debrief",
+        "version": 1,
+        "name": "Shift debrief",
+        "icon": "cross.case",
+        "color": "teal",
+        "cadence": "daily",
+        "summary": "How the shift went, in your own terms — never a patient record.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "setting", "label": "Setting", "type": "project" },
+          { "key": "workload", "label": "Workload", "type": "rating", "includeInInsights": true },
+          { "key": "mood", "label": "Mood", "type": "mood", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "highlights", "label": "Highlights", "type": "text", "includeInInsights": true, "prompt": "What went well today?" },
+          {
+            "key": "concerns", "label": "Concerns", "type": "text", "presentation": "warning", "includeInInsights": true,
+            "prompt": "What’s worth flagging, in general terms — never a patient’s name or details?"
+          }
+        ]
+      },
+      {
+        "id": "healthcare.reflective-account",
+        "version": 1,
+        "name": "Reflective account",
+        "icon": "person.text.rectangle",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Gibbs' Reflective Cycle, the format the NMC and HCPC both ask for.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "description", "label": "Description", "type": "richText",
+            "prompt": "What happened? (Keep it general — no identifying details.)"
+          },
+          {
+            "key": "feelings", "label": "Feelings", "type": "richText",
+            "prompt": "What were you thinking and feeling at the time, and since?"
+          },
+          { "key": "evaluation", "label": "Evaluation", "type": "richText", "prompt": "What was good and bad about the experience?" },
+          { "key": "action-plan", "label": "Action plan", "type": "checklist", "prompt": "What will you do differently next time?" }
+        ]
+      },
+      {
+        "id": "healthcare.supervision-prep",
+        "version": 1,
+        "name": "Supervision prep",
+        "icon": "bubble.left.and.bubble.right",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "What you want to raise in your next reflective discussion or clinical supervision.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "topics", "label": "Topics", "type": "checklist", "prompt": "What do you want to discuss?" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What came out of the discussion?" }
+        ]
+      }
+    ]
+  }
+}
