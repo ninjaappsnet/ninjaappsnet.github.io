@@ -2,8 +2,10 @@
 
 Static site for **NinjaApps** — games and apps for iPhone, iPad and Mac. Design: "Paper Dojo"
 (warm paper, ink, vermillion accent, hairline grids). Hosted on GitHub Pages
-at [ninjaapps.net](https://ninjaapps.net). No build step: plain HTML + one
-shared stylesheet.
+at [ninjaapps.net](https://ninjaapps.net). Plain HTML + one shared stylesheet,
+with no build step for the hand-written pages. Dayfolio's guide, template and
+article pages are generated from Markdown by a standard-library script, and the
+output is committed (see **Dayfolio pages**).
 
 ## Structure
 
@@ -26,6 +28,12 @@ games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
 tools/check-site.py          structural checks — run before every commit
 tools/archive-page.py        regenerates apps/dayfolio/archive-format.html from the app repo's doc
+tools/dayfolio-build.py      builds Dayfolio's guide, templates and articles pages, keeps the Dayfolio
+                             sub-navigation current, and writes sitemap.xml and robots.txt
+tools/test_*.py              the Python tools' own tests (python3 -m unittest)
+content/dayfolio/<section>/  Markdown sources of those pages: guide, templates, articles
+apps/dayfolio/guide/ …       generated from content/dayfolio/ (also templates/, articles/): never edit
+apps/dayfolio/social-card.png  the Dayfolio pages' social card (source: assets/brand/dayfolio-card.html)
 404.html                     not-found page
 CNAME                        custom domain for GitHub Pages
 ```
@@ -34,9 +42,11 @@ CNAME                        custom domain for GitHub Pages
 
 ```sh
 python3 tools/check-site.py
+python3 -m unittest discover -s tools -p 'test_*.py'   # after touching a tool
 ```
 
-No build step means no compiler to catch a link that rotted when a page moved.
+`check-site.py` also runs `tools/dayfolio-build.py --check`, so a generated page
+that differs from its source fails it. No build step means no compiler to catch a link that rotted when a page moved.
 This script covers that: it verifies the promised pages exist, that internal
 links resolve, that `sitemap.xml` and the pages on disk agree in both
 directions, that canonicals are self-consistent, that no `{{TOKEN}}` or
@@ -121,8 +131,8 @@ a journalist looks for them.
 3. Add a row on `privacy/index.html` and bump its count.
 4. Copy the footer's `<nav class="social">` block onto every new page —
    `check_social` will fail the build until you do (see **Social** above).
-5. Add every new URL to `sitemap.xml` and to `MANIFEST` in
-   `tools/check-site.py`.
+5. Run `python3 tools/dayfolio-build.py`, which writes `sitemap.xml` from every
+   indexable page, and add every new URL to `MANIFEST` in `tools/check-site.py`.
 6. Run the checker.
 
 Apps that sell anything need `terms.html` and `support.html` too — copy
@@ -372,6 +382,61 @@ pixel), with the icon swapped for the medallion. Re-render and re-zip whenever
 the sheet or the icon changes; the size quoted on the press page must follow.
 `check-site.py` refuses the retired icon, by hash, anywhere on the site and keeps
 the kit's layout and icon sizes.
+
+## Dayfolio pages
+
+Every page under `apps/dayfolio/` shares one shell, `render_page` in
+`tools/dayfolio-build.py`: the head (title, description, canonical, Open Graph
+and Twitter card, JSON-LD, the Smart App Banner), the site header and footer as
+the product page has them, and the Dayfolio sub-navigation (Overview, Guide,
+Templates, Articles, Support), a band under the header. The guide, template and
+article pages are Markdown in `content/dayfolio/<section>/`: each section's
+`index.md` is the section page, and every other file a page at
+`/apps/dayfolio/<section>/<slug>/`. Front matter:
+
+```
+---
+title: Getting started              # the <title> adds " — Dayfolio — NinjaApps"; 60 characters at most
+heading: Your first journal         # optional: the h1, when it says more than the title
+description: One sentence, 50 to 160 characters, for search results and the social card.
+slug: getting-started               # the URL; lowercase words and hyphens (not on index.md)
+date: 2026-10-20                    # published (not on index.md); updated: is optional
+order: 1                            # guide and templates: the reading order
+image: iphone-today.webp            # optional social card, next to the page; with image_alt:
+---
+```
+
+Pictures live next to the page they are on (`apps/dayfolio/guide/<slug>/`), as WebP
+under 500 KB, and the Markdown names them by a relative path:
+`![What the picture shows](iphone-today.webp "An optional caption")`. A picture on
+a line of its own is a figure (a portrait one is drawn phone-sized), consecutive
+picture lines sit side by side, and `> **Tip:** …` is a callout. Links between
+pages are relative URLs (`../reports/#billable`). Then
+
+```sh
+python3 tools/dayfolio-build.py
+```
+
+writes the pages, refreshes the sub-navigation on the hand-written Dayfolio pages,
+and rewrites `sitemap.xml` and `robots.txt`; commit what it wrote. It stops,
+naming the file and line, at a missing field, a picture with no alt text or not in
+WebP, a second h1, or copy against the site's rules: straight quotes (write ’ ‘ “ ”),
+exclamation marks, emoji. A generated page names its source in a comment at its
+top; a page whose source is gone is removed by the next build.
+
+`check-site.py` holds every Dayfolio page, generated or not, to a unique title and
+description, a canonical URL, the banner, a social card (unless noindex), alt text,
+one h1 and headings that step down one level at a time, ids used once, tags that
+close, JSON-LD that parses, and anchors that exist. The product page's
+`SoftwareApplication` JSON-LD must offer what the page states (free, and
+`DAYFOLIO_PRICES`), with no ratings or reviews. The social card is a screenshot of
+`assets/brand/dayfolio-card.html`:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  --hide-scrollbars --window-size=1200,630 --virtual-time-budget=5000 \
+  --screenshot=apps/dayfolio/social-card.png "file://$PWD/assets/brand/dayfolio-card.html"
+```
 
 ## Placeholder inventory (TODO)
 

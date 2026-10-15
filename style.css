@@ -1126,8 +1126,8 @@ body:has(> .subnav) > main { flex: 1; }
 .callout-lead p { max-width: none; font: 400 14px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 .callout-lead strong { color: var(--ink); }
 .callout-lead a { color: var(--accent); }
-.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 48px; background: var(--line); border: 1px solid var(--line); }
-.pager a { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; background: var(--bg); font: 700 15px/1.4 'Shippori Mincho', serif; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.pager a { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; border: 1px solid var(--line); font: 700 15px/1.4 'Shippori Mincho', serif; }
 .pager a:hover { background: var(--card-hover); }
 .pager-next { grid-column: 2; text-align: right; }
 .pager-label { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
