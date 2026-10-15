@@ -295,6 +295,12 @@ def reminder_text(reminder: Optional[dict]) -> str:
     return f"{when} at {time}"
 
 
+def indefinite(name: str) -> str:
+    """"A" or "An" before a template's name, as it sounds: An Incident postmortem, an A/B experiment log, a 1:1 notes
+    entry, a Usability test notes entry (every U in the library sounds as "you")."""
+    return "An" if name[:1].lower() in "aeio" else "A"
+
+
 def listing(words: List[str]) -> str:
     return words[0] if len(words) == 1 else ", ".join(words[:-1]) + " and " + words[-1]
 
@@ -663,7 +669,7 @@ def template_page(root: Path, library: Library, template: Template, example: Exa
         f"<p>{_esc(summary)}</p>",
         '<dl class="facts tpl-facts">' + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in facts) + "</dl>",
         '<h2 id="example">An example entry</h2>',
-        f"<p>A {_esc(template.name)} entry as Dayfolio draws it, filled in for this page. "
+        f"<p>{indefinite(template.name)} {_esc(template.name)} entry as Dayfolio draws it, filled in for this page. "
         "The names, numbers and words are made up.</p>",
         render_entry(template, example),
         '<h2 id="fields">Its fields</h2>',

@@ -174,6 +174,11 @@ class TextTests(unittest.TestCase):
         self.assertEqual(reminder([1, 2, 3, 4, 5, 6, 7]), "Every day at 09:00")
         self.assertEqual(templates.reminder_text(None), "None")
 
+    def test_a_template_name_takes_a_or_an_as_it_sounds(self):
+        self.assertEqual([templates.indefinite(n) for n in ("Incident postmortem", "A/B experiment log", "On-call handover",
+                                                           "Usability test notes", "1:1 notes", "Daily standup")],
+                         ["An", "An", "An", "A", "A", "A"])
+
     def test_straight_quotes_from_the_app_become_curly(self):
         self.assertEqual(templates.smart('A short "today I learned" log, after Gibbs\' cycle'),
                          "A short “today I learned” log, after Gibbs’ cycle")
