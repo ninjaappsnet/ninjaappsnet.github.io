@@ -1,0 +1,56 @@
+{
+  "design.design-critique": {
+    "date": "2026-10-14 16:30",
+    "values": {
+      "artifact": {"title": "Onboarding flow, version 3", "url": "https://design.example.com/files/onboarding-v3"},
+      "reviewers": ["Lena Fischer", "Tom Reid"],
+      "primary-theme": "ux-flow",
+      "tags": ["onboarding", "critique"],
+      "work-shown-attachment": [["onboarding-v3-overview.png", "PNG picture · 420 KB"]],
+      "feedback": "The second step asks for too much at once. Tom suggested moving the team invite to after the first project, when people know what they’d invite someone to.",
+      "next-steps": ["[ ] Move the invite step after the first project", "[ ] Shorten the copy on step two", "[ ] Show the new order to Lena on Friday"]
+    }
+  },
+  "design.user-research-session": {
+    "date": "2026-10-08 13:15",
+    "values": {
+      "participant": ["Participant 4"],
+      "research-type": "interview",
+      "tags": ["research", "scheduling"],
+      "key-finding": "Shift managers plan the week on paper first, then copy it into the app on Monday morning.",
+      "full-notes": "Paper is faster when plans change a lot during the week. The app is where the plan becomes official and the team sees it.\n\n- Wants to see last week’s plan while making this one\n- Prints the final plan for the break room"
+    }
+  },
+  "design.usability-test-notes": {
+    "date": "2026-10-21 11:40",
+    "values": {
+      "participant": ["Participant 2"],
+      "task-success": "completed-with-help",
+      "tags": ["usability", "invoices"],
+      "observations": "Found the invoice list straight away, but looked for the download button at the top of the page, not in each row. Needed a hint after a minute.",
+      "screenshots-attachment": [["p2-invoice-list.png", "PNG picture · 210 KB"]],
+      "follow-ups": ["[ ] Try a download button above the list", "[ ] Test with two more people before deciding"]
+    }
+  },
+  "design.design-system-changelog": {
+    "date": "2026-10-12 10:20",
+    "values": {
+      "component": ["Date picker"],
+      "change-type": "changed",
+      "tags": ["design-system"],
+      "summary": "The date picker now opens on the selected month, not today’s, and the week can start on Monday or Sunday.",
+      "migration-notes": "Nothing to change for most teams. If you set the first day of the week yourself, use the new weekStart setting instead."
+    }
+  },
+  "design.accessibility-audit": {
+    "date": "2026-10-05 15:00",
+    "values": {
+      "surface": ["Checkout"],
+      "issues-found": 7,
+      "severity": 3,
+      "tags": ["accessibility"],
+      "findings": "- Two form errors are shown in colour only\n- The card number field has no visible label\n- Focus jumps to the top of the page after a coupon is applied",
+      "fixes-needed": ["[ ] Error messages in words, next to the field", "[ ] Visible label on the card number field", "[ ] Keep focus on the coupon field"]
+    }
+  }
+}

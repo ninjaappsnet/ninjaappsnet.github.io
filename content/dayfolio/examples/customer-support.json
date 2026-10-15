@@ -1,0 +1,45 @@
+{
+  "customer-support.support-ticket-log": {
+    "date": "2026-10-14 13:50",
+    "values": {
+      "customer": ["Grace Liu"],
+      "category": "billing",
+      "priority": "medium",
+      "time-to-resolve": 25,
+      "tags": ["invoices", "plan-change"],
+      "issue": "“My September invoice disappeared after I changed plans.”",
+      "resolution": "Invoices from an old plan only show under Billing history. Sent her the link and the PDF, and added the ticket to the known issue."
+    }
+  },
+  "customer-support.escalation-log": {
+    "date": "2026-10-09 17:15",
+    "values": {
+      "ticket": {"title": "Ticket 48213: double charge", "url": "https://support.example.com/tickets/48213"},
+      "escalated-to": ["Priya Shah"],
+      "reason": "sla-breach",
+      "resolution-time": 190,
+      "tags": ["billing", "escalation"],
+      "what-happened": "A customer was charged twice and the refund needed a finance approval. The ticket passed the four-hour reply target while it waited.",
+      "lesson": "Billing tickets that need finance should go to them in the first hour, not at the end of the day."
+    }
+  },
+  "customer-support.shift-summary": {
+    "date": "2026-10-15 17:40",
+    "values": {
+      "tickets-handled": 38,
+      "avg-handle-time": 11,
+      "customer-satisfaction": 4,
+      "tags": ["shift"],
+      "toughest-interaction": "A customer who lost an afternoon’s work after a browser crash. Couldn’t get it back, but walked her through autosave so it won’t happen again."
+    }
+  },
+  "customer-support.weekly-support-metrics": {
+    "date": "2026-10-16 16:45",
+    "values": {
+      "tags": ["weekly"],
+      "top-issue": "Invoices after a plan change: 9 tickets this week, up from 3.",
+      "staffing-gap": "Monday morning. Half the week’s backlog arrives before 10:00 and only two of us start before then.",
+      "notes": "The new help page on invoices went live on Thursday. Worth checking next week whether the tickets drop."
+    }
+  }
+}

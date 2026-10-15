@@ -1,0 +1,28 @@
+{
+  "legal.time-recording-log": {
+    "date": "2026-10-15 18:05",
+    "values": {
+      "matter": ["Matter 2026-118"],
+      "duration": 150,
+      "billable": "billable",
+      "tags": ["drafting"],
+      "notes": "Drafting and reviewing a supply agreement; one call with the other side’s counsel."
+    }
+  },
+  "legal.supervision-mentoring-notes": {
+    "date": "2026-10-09 17:30",
+    "values": {
+      "person": ["Ruth Calloway"],
+      "tags": ["mentoring", "development"],
+      "notes": "Talked about planning a contract review before reading it line by line. Ruth suggested writing down the three things the client cares about most first."
+    }
+  },
+  "legal.practice-reflection": {
+    "date": "2026-10-16 19:00",
+    "values": {
+      "area-of-law": "corporate",
+      "tags": ["reflection"],
+      "what-you-learned": "Agree the timetable for comments at the start. Without one, the last round of changes arrived the evening before signing."
+    }
+  }
+}

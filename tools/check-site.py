@@ -49,6 +49,11 @@ Checks:
  20. Every page tools/dayfolio-build.py makes (the guide, templates and
      articles pages, the sub-navigation on the other Dayfolio pages,
      sitemap.xml and robots.txt) is committed as the build makes it.
+ 21. The template gallery (apps/dayfolio/templates/) is what
+     tools/dayfolio-templates.py makes from the app's library copied into
+     content/dayfolio/library/ and the examples beside it: a page for every
+     pack and template, none for one the library dropped. With DAYFOLIO_REPO
+     set to the Dayfolio repository, the copy must also be the app's own.
 """
 
 from __future__ import annotations
@@ -56,6 +61,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import re
 import struct
 import sys
@@ -90,6 +96,7 @@ MANIFEST = [
     "apps/dayfolio/terms.html",
     "apps/dayfolio/support.html",
     "apps/dayfolio/archive-format.html",
+    "apps/dayfolio/templates/index.html",
     # Dayfolio's published version 1.0 of each (README: Legal page versioning).
     "apps/dayfolio/privacy-v1.0.html",
     "apps/dayfolio/terms-v1.0.html",
@@ -984,6 +991,24 @@ def check_dayfolio_build() -> None:
         fail(f"dayfolio build: {problem}")
 
 
+def check_dayfolio_templates() -> None:
+    """The template gallery is what tools/dayfolio-templates.py makes from content/dayfolio/library/; with
+    DAYFOLIO_REPO set, that copy is also the app's own library."""
+    name = "dayfolio_templates"
+    if name not in sys.modules:
+        spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("dayfolio-templates.py"))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    module = sys.modules[name]
+    try:
+        problems = module.check(ROOT, os.environ.get("DAYFOLIO_REPO") or None)
+    except module.LibraryError as error:
+        problems = [str(error)]
+    for problem in problems:
+        fail(f"dayfolio templates: {problem}")
+
+
 def png_size(data: bytes) -> tuple[int, int] | None:
     if data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
         return None
@@ -1056,6 +1081,7 @@ def main() -> int:
         check_dayfolio_app,
         check_robots,
         check_dayfolio_build,
+        check_dayfolio_templates,
         check_press_kit,
     ):
         check()

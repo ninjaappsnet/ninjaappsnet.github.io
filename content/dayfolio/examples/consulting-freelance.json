@@ -1,0 +1,63 @@
+{
+  "consulting-freelance.client-meeting": {
+    "date": "2026-10-14 12:10",
+    "values": {
+      "client": ["Northwind Studio"],
+      "attendees": ["Hannah Weiss", "Marco Bianchi"],
+      "meeting-time": "11:00–12:00",
+      "hours": 60,
+      "category": "billable",
+      "follow-up": "needed",
+      "tags": ["website", "kickoff"],
+      "notes": "Kickoff for the website rebuild. Hannah owns the content; Marco signs off on design.",
+      "decisions": "- Launch before the trade fair on 20 January\n- Keep the current domain and email",
+      "next-steps": ["[ ] Send the timeline and the first invoice", "[ ] Get access to the current hosting", "[ ] Book the content workshop"]
+    }
+  },
+  "consulting-freelance.billable-day": {
+    "date": "2026-10-15 17:30",
+    "values": {
+      "client": ["Northwind Studio"],
+      "hours": 390,
+      "category": "billable",
+      "tags": ["website"],
+      "summary": "Site map and page list for the rebuild. Reviewed the analytics with Hannah to decide which old pages to keep.",
+      "invoice-notes": "The analytics review ran 30 minutes over; bill the full time as agreed."
+    }
+  },
+  "consulting-freelance.invoice-log": {
+    "date": "2026-10-31 16:00",
+    "values": {
+      "client": ["Northwind Studio"],
+      "amount": 6240,
+      "status": "sent",
+      "due-date": "2026-11-30",
+      "tags": ["invoices"],
+      "invoice-attachment": [["invoice-2026-014.pdf", "PDF · 1 page · 64 KB"]],
+      "notes": "October’s hours: discovery and site map. Thirty days to pay, as in the contract."
+    }
+  },
+  "consulting-freelance.project-status-update": {
+    "date": "2026-10-23 15:05",
+    "values": {
+      "client": ["Northwind Studio"],
+      "status": "on-track",
+      "progress": 30,
+      "due-date": "2027-01-15",
+      "tags": ["website", "status"],
+      "summary": "Site map signed off. Page designs start Monday, and the content workshop is booked for 4 November.",
+      "risks": "Product photos aren’t ready yet. If they arrive after 1 December, two pages launch with placeholders.",
+      "next-steps": ["[ ] First page designs to Marco by 30 Oct", "[ ] Content workshop on 4 Nov", "[ ] Confirm the photo shoot date"]
+    }
+  },
+  "consulting-freelance.proposal-scope": {
+    "date": "2026-10-02 10:45",
+    "values": {
+      "client": ["Northwind Studio"],
+      "estimated-value": 18000,
+      "status": "won",
+      "tags": ["proposals"],
+      "scope": "**Included:** site map, design and build of 12 pages, moving the blog posts, two rounds of changes.\n\n**Not included:** writing new content, product photos, hosting after launch."
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "sales.customer-call": {
+    "date": "2026-10-14 11:05",
+    "values": {
+      "contact": ["Daniel Moreau"],
+      "account": ["Bluefield Clinics"],
+      "call-type": "discovery",
+      "duration": 35,
+      "outcome": "next-step-scheduled",
+      "tags": ["discovery", "healthcare"],
+      "notes": "They book appointments for six clinics from one shared inbox. “Mondays are chaos, and we lose requests.” The contract with their current tool ends in March.",
+      "next-steps": ["[ ] Send the two-page overview for clinic groups", "[ ] Demo for their operations lead on 21 Oct", "[ ] Ask about their approval process"]
+    }
+  },
+  "sales.deal-update": {
+    "date": "2026-10-16 16:30",
+    "values": {
+      "deal": ["Bluefield Clinics"],
+      "stage": "proposal",
+      "value": 24000,
+      "tags": ["pipeline"],
+      "summary": "Proposal sent on Wednesday for all six clinics. The operations lead liked the demo; finance wants to see the yearly price first.",
+      "risks": "Their budget is set in January. If we miss it, the deal waits a full quarter."
+    }
+  },
+  "sales.proposal-sent-log": {
+    "date": "2026-10-15 17:10",
+    "values": {
+      "deal": ["Harbor Logistics"],
+      "amount": 18500,
+      "outcome": "won",
+      "tags": ["proposals"],
+      "close-reason": "Depot reporting was the deciding feature. They also liked starting with two depots before the rest."
+    }
+  },
+  "sales.pipeline-review": {
+    "date": "2026-10-12 09:40",
+    "values": {
+      "week-of": "2026-10-12",
+      "open-deals": 14,
+      "pipeline-value": 186000,
+      "forecast-confidence": 3,
+      "tags": ["pipeline", "forecast"],
+      "at-risk": "Northwind Studio has gone quiet since the pricing call. Two other deals are waiting on budgets set in January.",
+      "priorities": ["[ ] Call Northwind Studio before Thursday", "[ ] Move two early deals to qualified or close them", "[ ] Update the forecast for the quarterly review"]
+    }
+  },
+  "sales.weekly-numbers": {
+    "date": "2026-10-16 16:05",
+    "values": {
+      "calls-made": 42,
+      "meetings-booked": 9,
+      "deals-closed": 2,
+      "revenue-closed": 31000,
+      "tags": ["weekly-numbers"],
+      "highlights": "Both closed deals came from the clinic webinar. Most new meetings did too, so it’s worth running again in November.",
+      "next-week-focus": "Turn this week’s nine meetings into demos."
+    }
+  }
+}

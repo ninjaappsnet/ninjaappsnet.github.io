@@ -1,0 +1,54 @@
+{
+  "construction-field.daily-site-log": {
+    "date": "2026-10-14 16:45",
+    "values": {
+      "site": ["Riverside housing, block B"],
+      "crew-size": 14,
+      "tags": ["groundworks"],
+      "progress": "Foundations poured for units 5 to 8. Drainage run on the north side finished and tested.",
+      "delays": "Concrete arrived 90 minutes late; the second pour moved to tomorrow morning.",
+      "deliveries": ["[x] Rebar for units 9 to 12", "[x] Drainage pipe, second load", "[ ] Scaffold boards (due Thursday)"],
+      "photos-attachment": [["north-drainage-run.jpg", "JPEG picture · 2.1 MB"], ["units-5-8-foundations.jpg", "JPEG picture · 2.4 MB"]]
+    }
+  },
+  "construction-field.toolbox-talk-log": {
+    "date": "2026-10-12 07:30",
+    "values": {
+      "attendees": ["Kofi Mensah", "Piotr Zielinski", "Dave Hughes"],
+      "tags": ["safety", "toolbox-talk"],
+      "topic": "Working near open excavations",
+      "notes": "Covered barriers, safe distances and where to cross. A question came up about the ramp by unit 6; it gets a handrail before Wednesday."
+    }
+  },
+  "construction-field.incident-near-miss-report": {
+    "date": "2026-10-13 11:20",
+    "values": {
+      "severity": "near-miss",
+      "site": ["Riverside housing, block B"],
+      "tags": ["near-miss", "lifting"],
+      "what-happened": "A bundle of scaffold tubes slipped from the crane sling while being lowered. It landed inside the exclusion zone; nobody was near.",
+      "photos-attachment": [["sling-and-tubes.jpg", "JPEG picture · 1.8 MB"]],
+      "corrective-action": ["[x] Stop lifts until the slings are checked", "[ ] Brief every crew on double slinging", "[ ] Add the sling check to the morning lift plan"]
+    }
+  },
+  "construction-field.equipment-plant-log": {
+    "date": "2026-10-15 15:10",
+    "values": {
+      "status": "down-for-repair",
+      "tags": ["plant"],
+      "equipment": "Mini excavator, unit 3",
+      "notes": "Leaking hydraulic hose. The hire company is sending a fitter tomorrow; using unit 2 until then."
+    }
+  },
+  "construction-field.site-inspection-log": {
+    "date": "2026-10-16 14:00",
+    "values": {
+      "site": ["Riverside housing, block B"],
+      "result": "minor-issues",
+      "tags": ["inspection"],
+      "findings": "Edge protection missing on one first-floor opening. Fire extinguisher by the site office out of date. Everything else in order.",
+      "photos-attachment": [["first-floor-opening.jpg", "JPEG picture · 1.6 MB"]],
+      "actions": ["[x] Fit edge protection to the opening", "[ ] Replace the extinguisher by the site office"]
+    }
+  }
+}

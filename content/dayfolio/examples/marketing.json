@@ -1,0 +1,45 @@
+{
+  "marketing.campaign-brief": {
+    "date": "2026-10-05 10:30",
+    "values": {
+      "campaign": ["Clinic webinar series"],
+      "channels": ["email", "social", "paid"],
+      "goal-metric": "leads",
+      "budget": 4000,
+      "tags": ["webinars", "q4"],
+      "brief": "Three webinars for clinic managers on running bookings from one inbox. **Goal:** 120 sign-ups and 30 qualified leads by the end of November."
+    }
+  },
+  "marketing.content-log": {
+    "date": "2026-10-13 14:20",
+    "values": {
+      "type": "blog",
+      "status": "published",
+      "link": {"title": "Five ways clinics lose booking requests", "url": "https://blog.example.com/clinic-booking-requests"},
+      "tags": ["blog", "clinics"],
+      "title": "Five ways clinics lose booking requests",
+      "notes": "For clinic managers who run bookings from a shared inbox. It leads into the webinar sign-up."
+    }
+  },
+  "marketing.weekly-marketing-performance": {
+    "date": "2026-10-16 15:30",
+    "values": {
+      "impressions": 48200,
+      "clicks": 1310,
+      "conversions": 86,
+      "tags": ["weekly-numbers"],
+      "top-performer": "The webinar email to past trial users: a third of this week’s sign-ups came from it.",
+      "next-week-focus": "Test a shorter subject line on the second webinar email."
+    }
+  },
+  "marketing.campaign-retrospective": {
+    "date": "2026-12-04 11:30",
+    "values": {
+      "campaign": ["Clinic webinar series"],
+      "outcome": "hit-target",
+      "tags": ["retro", "webinars"],
+      "what-worked": "Inviting past trial users. They signed up more and stayed for the whole session more often than anyone else.",
+      "what-wed-change": "Record the first webinar and share it sooner. The replay brought in almost as many leads as the live sessions."
+    }
+  }
+}

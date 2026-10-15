@@ -1,0 +1,23 @@
+{
+  "education.lesson-reflection": {
+    "date": "2026-10-13 16:10",
+    "values": {
+      "class": ["Year 9 science"],
+      "energy": 3,
+      "tags": ["lessons", "practicals"],
+      "what-went-well": "The pairs practical on reaction rates: almost every group got a result they could plot.",
+      "what-didnt": "The explanation at the start ran long, so the write-up was rushed in the last ten minutes.",
+      "next-time": "Put the method on the board before they come in, and keep my introduction to five minutes."
+    }
+  },
+  "education.observation-feedback-log": {
+    "date": "2026-10-08 15:30",
+    "values": {
+      "person": ["Mr. Adeyemi"],
+      "focus-area": "engagement",
+      "tags": ["observation"],
+      "feedback": "Questioning was strong in the first half. Fewer students answered later on, when the questions were all to the whole class.",
+      "action-items": ["[ ] Try think, pair, share before whole-class questions", "[ ] Ask him to observe again in four weeks"]
+    }
+  }
+}

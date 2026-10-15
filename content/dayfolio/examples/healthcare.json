@@ -1,0 +1,32 @@
+{
+  "healthcare.shift-debrief": {
+    "date": "2026-10-14 20:15",
+    "values": {
+      "setting": ["Ward 7, day shift"],
+      "workload": 4,
+      "mood": 3,
+      "tags": ["shift", "handover"],
+      "highlights": "Handover ran on time all day, and the new admission checklist saved time in the afternoon.",
+      "concerns": "Two staff short after lunch. Breaks ran late for most of the team."
+    }
+  },
+  "healthcare.reflective-account": {
+    "date": "2026-10-10 19:00",
+    "values": {
+      "tags": ["reflection", "communication"],
+      "description": "A family member was upset that a discharge was delayed. I explained what was happening, but I was interrupted twice and the conversation was rushed.",
+      "feelings": "Frustrated with myself at the time. Afterwards I realised I had been trying to answer while doing another task.",
+      "evaluation": "The information I gave was right. The setting wasn’t: a corridor, while I was busy, didn’t help anyone feel heard.",
+      "action-plan": ["[ ] Find a quiet space for difficult conversations", "[ ] Ask a colleague to cover for five minutes when I need it"]
+    }
+  },
+  "healthcare.supervision-prep": {
+    "date": "2026-10-17 12:30",
+    "values": {
+      "person": ["Dr. Helen Park"],
+      "tags": ["supervision"],
+      "topics": ["[x] Managing difficult conversations on a busy shift", "[x] Preparing for the prescribing course", "[ ] Rota changes in December"],
+      "notes": "We talked about setting a time for a conversation rather than having it in passing. Helen suggested a short course on communication skills."
+    }
+  }
+}

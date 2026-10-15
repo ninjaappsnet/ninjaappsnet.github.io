@@ -1,0 +1,71 @@
+{
+  "software-engineering.daily-standup": {
+    "date": "2026-10-15 09:12",
+    "values": {
+      "energy": 4,
+      "focus-time": 330,
+      "project": ["Payments API", "Observability"],
+      "status": "on-track",
+      "tags": ["release", "webhooks"],
+      "shipped": ["[x] Retry queue for webhook delivery, `PR #482`", "[x] Alert thresholds for the checkout service", "[ ] Docs for idempotency keys (moved to tomorrow)"],
+      "working-on": "Dead-letter handling for webhooks that run out of retries. Leaning toward a separate queue and a small admin view, so support can replay events.",
+      "blockers": "Waiting on a fresh staging database snapshot. Asked Olek; it should be there tomorrow morning.",
+      "notes": "Pair with Sam on the replay screen on Thursday."
+    }
+  },
+  "software-engineering.code-review-notes": {
+    "date": "2026-10-14 11:20",
+    "values": {
+      "pull-request": {"title": "Add per-merchant retry limits", "url": "https://git.example.com/payments/pull/491"},
+      "author": ["Sam Ortiz"],
+      "verdict": "requested-changes",
+      "time-spent": 40,
+      "tags": ["retries"],
+      "patterns": "Third time this month a config value is read on every request. Worth a short note in the team guide: read it once at start-up.",
+      "feedback": "The limit logic is clear. Move the config read out of the hot path, and add a test for a merchant at exactly the limit."
+    }
+  },
+  "software-engineering.weekly-plan": {
+    "date": "2026-10-12 09:05",
+    "values": {
+      "week-of": "2026-10-12",
+      "project": ["Payments API"],
+      "tags": ["planning"],
+      "priorities": ["[ ] Ship dead-letter handling behind a flag", "[ ] Finish the retry design write-up", "[ ] Two interviews for the backend role"],
+      "risks": "Staging is shared with the mobile team this week, so load tests may have to wait until Thursday."
+    }
+  },
+  "software-engineering.sprint-retro": {
+    "date": "2026-10-09 15:30",
+    "values": {
+      "team-mood": 4,
+      "tags": ["retro"],
+      "sprint": "S-41",
+      "went-well": ["[x] Every story had a test plan before work started", "[x] Releases went out on Tuesday and Thursday as planned"],
+      "didnt-go-well": ["[x] Two stories were too big and slipped", "[x] Code reviews waited a day on average"],
+      "try-next-sprint": ["[ ] Split any story over three days before we start it", "[ ] Review slot every morning at 11:00"]
+    }
+  },
+  "software-engineering.design-doc-log": {
+    "date": "2026-10-06 17:00",
+    "values": {
+      "doc": {"title": "RFC 12: Webhook retries", "url": "https://docs.example.com/rfc/12"},
+      "status": "approved",
+      "reviewers": ["Maya Lin", "Olek Nowak"],
+      "tags": ["architecture", "webhooks"],
+      "options-considered": "- One shared queue with priorities\n- A queue per merchant\n- A separate retry queue with limits per merchant",
+      "decision": "A separate retry queue with limits per merchant. A queue per merchant was the fairest, but it meant thousands of queues to run."
+    }
+  },
+  "software-engineering.tech-debt-journal": {
+    "date": "2026-10-13 16:45",
+    "values": {
+      "area": ["Checkout"],
+      "interest": 3,
+      "effort": 480,
+      "pay-down-by": "2026-12-15",
+      "tags": ["tech-debt"],
+      "why": "We copied the tax rules into the checkout service to meet the launch date. Every rule change now has to be made in two places, and they have drifted once already."
+    }
+  }
+}

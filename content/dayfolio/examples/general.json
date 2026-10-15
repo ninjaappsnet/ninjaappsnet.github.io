@@ -1,0 +1,88 @@
+{
+  "general.weekly-review": {
+    "date": "2026-10-16 17:05",
+    "values": {
+      "energy": 4,
+      "mood": 4,
+      "tags": ["payments", "hiring"],
+      "wins": ["[x] Shipped the retry queue to every merchant", "[x] Closed the last two review comments on the API guide", "[ ] Interview loop for the new backend role"],
+      "challenges": "Two afternoons went to a flaky checkout test. It only failed on the build servers, so it was slow to pin down.",
+      "lessons-learned": "Ask for help after an hour, not after a day. Olek spotted the clock issue in ten minutes.",
+      "notes": "Next week is quieter. A good time to write up the **retry design** before I forget the details."
+    }
+  },
+  "general.1-1-notes": {
+    "date": "2026-10-13 10:35",
+    "values": {
+      "person": ["Maya Lin"],
+      "meeting-time": "10:00–10:30",
+      "tags": ["career", "planning"],
+      "topics": ["[x] Promotion case: what’s still missing", "[x] Q4 roadmap and where I fit", "[ ] Conference budget"],
+      "notes": "Maya thinks the promotion case needs one more project I led end to end. The payments migration could be it.\n\n- Write a one-page plan for the migration\n- Ask Sam to review it first",
+      "action-items": ["[x] Send Maya the draft case", "[ ] Book time with Sam about the migration plan", "[ ] Share the conference agenda"]
+    }
+  },
+  "general.brag-document": {
+    "date": "2026-10-09 16:20",
+    "values": {
+      "impact": "high",
+      "evidence": {"title": "Checkout error rate dashboard", "url": "https://dashboards.example.com/checkout-errors"},
+      "kudos-from": ["Priya Shah"],
+      "tags": ["reliability", "payments"],
+      "win": "Led the fix for duplicate charges during retries. Errors at checkout fell from about 40 a day to 2, and support stopped seeing refund requests for it.",
+      "evidence-attachment": [["error-rate-before-after.png", "PNG picture · 142 KB"]]
+    }
+  },
+  "general.decision-log": {
+    "date": "2026-10-07 14:10",
+    "values": {
+      "project": ["Payments API"],
+      "decided-by": ["Maya Lin", "Olek Nowak"],
+      "tags": ["architecture"],
+      "context": "Webhook retries share a queue with new events, so one slow merchant delays everyone else. We need a fix before the holiday traffic.",
+      "decision": "Give retries their own queue, with a limit per merchant. A shared queue with priorities was simpler, but it couldn’t stop one merchant from filling it."
+    }
+  },
+  "general.meeting-notes": {
+    "date": "2026-10-14 15:40",
+    "values": {
+      "attendees": ["Amara Okafor", "Jonas Berg", "Lena Fischer"],
+      "meeting-time": "15:00–15:30",
+      "tags": ["launch"],
+      "agenda": ["[x] Launch date for the new onboarding", "[x] Who writes the help pages", "[ ] Translation timeline"],
+      "notes": "The launch moves to 3 November so support has a week with the new flow first. Jonas has the help pages; Lena checks them against the screens.",
+      "action-items": ["[ ] Jonas: draft the three help pages by Friday", "[ ] Lena: book the support walk-through", "[ ] Amara: confirm the date with marketing"]
+    }
+  },
+  "general.learning-log": {
+    "date": "2026-10-12 18:15",
+    "values": {
+      "topic": ["sql", "performance"],
+      "source": {"title": "Reading query plans, chapter 4", "url": "https://books.example.org/query-plans/4"},
+      "time-spent": 45,
+      "confidence": 3,
+      "takeaway": "An index on two columns only helps when the query filters on the first one. Our report query filters on the second, which is why it was slow."
+    }
+  },
+  "general.cpd-log": {
+    "date": "2026-10-08 19:30",
+    "values": {
+      "type": "course",
+      "hours": 180,
+      "tags": ["leadership", "coaching"],
+      "activity": "Online course: Coaching conversations, modules 1 to 3",
+      "what-you-learned": "Ask before advising. In my next three 1:1s I’ll try two open questions before I offer any answer of my own."
+    }
+  },
+  "general.year-end-self-review": {
+    "date": "2026-12-04 11:00",
+    "values": {
+      "evidence": {"title": "My brag document, January to November", "url": "https://notes.example.com/brag-2026"},
+      "tags": ["review-2026"],
+      "biggest-wins": "- Led the retry fix that cut checkout errors from about 40 a day to 2\n- Moved the payments service to the new cluster with no downtime\n- Onboarded two new engineers, who both shipped in their first month",
+      "growth": "I can now plan a project of several months and keep it on track. A year ago I needed someone else to break the work down.",
+      "feedback-received": "Priya said my design reviews are the clearest on the team. Maya asked me to speak up earlier when I see a risk.",
+      "next-year": "Lead a project across two teams, and write more of our decisions down, so new people can find them."
+    }
+  }
+}

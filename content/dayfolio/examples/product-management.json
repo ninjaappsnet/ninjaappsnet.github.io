@@ -1,0 +1,67 @@
+{
+  "product-management.customer-interview-notes": {
+    "date": "2026-10-13 16:10",
+    "values": {
+      "contact": ["Rosa Delgado"],
+      "account": ["Harbor Logistics"],
+      "tags": ["interviews", "reporting"],
+      "pain-points": "Their finance team rebuilds our monthly report in a spreadsheet, because they can’t split costs by depot.",
+      "notes": "“I spend the first two days of every month copying numbers.” They tried filtering by depot, but the totals didn’t match the invoice.",
+      "feature-requests": ["[ ] Costs split by depot", "[ ] Export that matches the invoice line by line"]
+    }
+  },
+  "product-management.prd-spec-review": {
+    "date": "2026-10-07 15:00",
+    "values": {
+      "doc": {"title": "Spec: depot reporting", "url": "https://docs.example.com/specs/depot-reporting"},
+      "reviewers": ["Jonas Berg", "Priya Shah"],
+      "status": "in-review",
+      "tags": ["specs", "reporting"],
+      "open-questions": "Do depots change during a month? If one is renamed, which name does the report show?",
+      "decision": "Version one covers the current month and the six before it. Older months stay in the existing report, so we don’t need to rebuild history."
+    }
+  },
+  "product-management.roadmap-review": {
+    "date": "2026-10-16 11:00",
+    "values": {
+      "status": "at-risk",
+      "tags": ["roadmap", "q4"],
+      "highlights": "Depot reporting is in beta with four customers. The new onboarding is ready for the 3 November launch.",
+      "risks": "The billing export needs the data team, who are busy with the year-end close until mid-November.",
+      "next-steps": ["[ ] Agree a smaller first version of the billing export", "[ ] Share the beta results with sales", "[x] Confirm the onboarding launch date"]
+    }
+  },
+  "product-management.weekly-okr-check-in": {
+    "date": "2026-10-16 16:00",
+    "values": {
+      "objective": ["Grow weekly active teams"],
+      "progress": 45,
+      "confidence": 3,
+      "tags": ["okrs"],
+      "update": "Teams that finish the new onboarding come back in week two more often. Not enough of them finish it yet.",
+      "blockers": "The onboarding emails can’t go out until the legal review is done."
+    }
+  },
+  "product-management.feature-launch-retro": {
+    "date": "2026-10-23 14:00",
+    "values": {
+      "feature": ["Saved filters"],
+      "outcome": "mixed",
+      "adoption": 18,
+      "tags": ["launch", "retro"],
+      "what-worked": "The in-app tip on the filters bar did most of the work. Most saved filters were made the day someone saw it.",
+      "what-wed-change": "Ask five customers to try it in staging first. Two of the top requests in week one were things they would have told us."
+    }
+  },
+  "product-management.user-feedback-synthesis": {
+    "date": "2026-10-16 17:30",
+    "values": {
+      "volume": 37,
+      "sentiment": "mixed",
+      "tags": ["feedback"],
+      "theme": "People can’t find past invoices once they change plans.",
+      "evidence": "“Where did my September invoice go?” came up in 9 tickets. Two customers in interviews said they keep their own copies now, just in case.",
+      "action": ["[ ] Show all invoices, whatever the plan", "[ ] Ask support for the ticket links to add to the spec"]
+    }
+  }
+}
