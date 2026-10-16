@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Dayfolio article cards (1200×630 sources)</title>
+<!-- The Open Graph and Twitter image of each Dayfolio article: apps/dayfolio/articles/<slug>/card.png.
+     Each card is the section whose id is the article's slug, shown alone when this page is opened with #<slug>.
+     Re-render them with headless Chrome (README, Dayfolio pages). Uses the site's own tokens and fonts. -->
+<link rel="stylesheet" href="../../style.css">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+  .card { display: none; box-sizing: border-box; width: 1200px; height: 630px; padding: 0 72px; overflow: hidden;
+          grid-template-columns: 1fr 330px; gap: 64px; border-bottom: 14px solid var(--accent); }
+  .card:target { display: grid; }
+  .card .text { align-self: center; padding-bottom: 8px; }
+  .card .kicker { font-size: 18px; margin-bottom: 26px; }
+  .card h1 { font-size: 60px; line-height: 1.12; }
+  .card .lede { max-width: 620px; margin-top: 26px; font-size: 26px; line-height: 1.5; }
+  .card .where { margin-top: 34px; font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+  .card .phone { width: 330px; margin-top: 64px; border-radius: 44px 44px 0 0; border: 1px solid var(--line);
+                 box-shadow: 0 18px 48px rgba(0,0,0,.18); }
+  .card .icon { width: 300px; height: 300px; align-self: center; border-radius: 68px; box-shadow: 0 18px 48px rgba(0,0,0,.22); }
+</style>
+</head>
+<body>
+
+<section class="card" id="year-end-self-review">
+  <div class="text">
+    <div class="kicker">記 ARTICLE — DAYFOLIO</div>
+    <h1>How to write your year-end self-review</h1>
+    <p class="lede">Gather the evidence, lead with outcomes, and say what’s next.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="phone" src="../../apps/dayfolio/articles/year-end-self-review/iphone-year-end-review.webp" alt="">
+</section>
+
+<section class="card" id="brag-document">
+  <div class="text">
+    <div class="kicker">記 ARTICLE — DAYFOLIO</div>
+    <h1>What goes in a brag document, and how to keep one</h1>
+    <p class="lede">A running record of your wins, written when they happen, with the evidence.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="icon" src="../../apps/dayfolio/icon-320.webp" alt="">
+</section>
+
+<section class="card" id="weekly-update">
+  <div class="text">
+    <div class="kicker">記 ARTICLE — DAYFOLIO</div>
+    <h1>How to write a weekly update people read</h1>
+    <p class="lede">Lead with what changed, raise risks early, and keep the same shape every week.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="phone" src="../../apps/dayfolio/articles/weekly-update/iphone-director-update.webp" alt="">
+</section>
+
+<section class="card" id="one-on-one-notes">
+  <div class="text">
+    <div class="kicker">記 ARTICLE — DAYFOLIO</div>
+    <h1>1:1 notes that carry over from one meeting to the next</h1>
+    <p class="lede">Topics, notes and action items, with what’s still open waiting at the next one.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="phone" src="../../apps/dayfolio/articles/one-on-one-notes/iphone-one-on-one.webp" alt="">
+</section>
+
+</body>
+</html>
