@@ -408,6 +408,9 @@ def check_links() -> None:
             target, _ = urldefrag(raw)
             if not target or urlparse(target).scheme or target.startswith("//"):
                 continue  # external, mailto:, data:, or a same-page anchor
+            target = target.split("?", 1)[0]  # a cache-busting ?v= names the same file
+            if not target:
+                continue
             base = ROOT if target.startswith("/") else page.parent
             resolved = (base / target.lstrip("/")).resolve()
             if resolved.is_dir():
