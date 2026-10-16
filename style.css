@@ -976,11 +976,31 @@ figure.shot img { border: 0; filter: drop-shadow(0 6px 18px rgba(0,0,0,.18)); } 
 .shot figcaption { margin: 12px 0 0; font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
 .shot-note { margin: 14px 0 0; font: 400 12px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 
+/* Dayfolio's pictures (apps/dayfolio/): the App Store's captioned pictures, opaque and light, so a hairline frames
+   each in place of the drop shadow a transparent window capture gets. In a row they share one height: a figure grows
+   by its picture's width over height (x100) from no basis, so what the padding leaves is shared out as each picture
+   needs. Narrower, the two phones pair up and the rest take a row each; on a phone every picture takes a row, a
+   phone's no wider than one in the hand. Captions are typed in sentence case and set in capitals here. */
+.devices { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.devices-row { display: flex; gap: 1px; }
+.devices .shot { flex: 100 1 0; min-width: 0; }
+.devices .device-phone { flex-grow: 46; }     /* 1320 x 2868 */
+.devices .device-tablet { flex-grow: 75; }    /* 2064 x 2752 */
+.devices .device-desktop { flex-grow: 160; }  /* 2880 x 1800 */
+.devices .shot img { border: 1px solid var(--line); filter: none; }
+.devices .shot figcaption { text-transform: uppercase; line-height: 1.6; }
+
+/* The iPhone app preview beside the list of what it shows: the film near a phone's size, never wider. */
+.preview { display: grid; grid-template-columns: 360px 1fr; gap: 48px; align-items: center; }
+.preview-film { border: 1px solid var(--line); }
+.preview-film video { display: block; width: 100%; height: auto; aspect-ratio: 886 / 1920; background: var(--line); }
+.preview-film p { margin: 0; padding: 24px; font: 400 13px/1.6 'Zen Kaku Gothic New', sans-serif; }
+
 .about { display: grid; grid-template-columns: 1fr 300px; gap: 48px; }
 .prose p { margin: 0 0 16px; max-width: 560px; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 .prose h2 { margin: 36px 0 10px; font: 700 18px 'Shippori Mincho', serif; }
 .prose h2:first-child { margin-top: 0; }
-.prose ul { margin: 0 0 16px; padding-left: 20px; max-width: 560px; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.prose ul, .prose ol { margin: 0 0 16px; padding-left: 20px; max-width: 560px; font: 400 14px/1.8 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 .prose a { color: var(--accent); }
 .prose a:hover { text-decoration: underline; }
 
@@ -1124,6 +1144,16 @@ footer a:hover { color: #e05a40; }  /* lifted vermillion: readable on the ink fo
   h1 { font-size: 48px; }
   .app-hero h1 { font-size: 44px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .devices-row { flex-wrap: wrap; }
+  .devices .device-tablet, .devices .device-desktop { flex-basis: 100%; }
+  .devices .device-tablet img { max-width: 560px; margin-inline: auto; }
+  .preview { grid-template-columns: 1fr; gap: 28px; }
+  .preview-film { width: 100%; max-width: 360px; margin-inline: auto; }
+}
+
+@media (max-width: 560px) {
+  .devices .device-phone { flex-basis: 100%; }
+  .devices .device-phone img { max-width: 300px; margin-inline: auto; }
 }
 
 @media (max-width: 480px) {

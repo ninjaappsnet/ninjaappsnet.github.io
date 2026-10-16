@@ -22,6 +22,7 @@ apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
 apps/dayfolio/archive-format.html   the .dayfolio file format, generated (see Dayfolio)
 apps/dayfolio/privacy-v1.0.html     version 1.0 of the policy, archived (noindex);
 apps/dayfolio/terms-v1.0.html       the same for the terms
+apps/dayfolio/media/                the product page's pictures and the iPhone app preview (see Assets)
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
 tools/check-site.py          structural checks — run before every commit
@@ -79,6 +80,14 @@ app repo's (`docs/product-spec.md` §3.7b, D223–D225); when they change, chang
 `DAYFOLIO_PRICES`, the copy and the App Store Connect products in the same
 commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
 also introduces Dayfolio.
+
+`check_dayfolio_media` holds the product page's pictures and film: at least one
+`media/iphone-…`, `ipad-…` and `mac-….webp`, each with alt text and the width and
+height it really is; none of the retired dark Mac captures, or the note that
+excused them; and one `<video>` of `media/app-preview-iphone.mp4` that has
+controls, is muted and plays inline over a poster frame, never by itself. The
+film must be an MP4 whose `moov` box comes before its media, so it plays while it
+downloads. The link check follows `poster` as well as `href` and `src`.
 
 ## Social
 
@@ -226,6 +235,13 @@ moves. The store link, `https://apps.apple.com/app/id6817388897`, is on the
 product page and in its Smart App Banner; it answers 404 until the app is
 released.
 
+One file is fixed the same way. The iPhone app preview,
+`https://ninjaapps.net/apps/dayfolio/media/app-preview-iphone.mp4`, is named in
+the supplemental materials of Dayfolio's App Store featuring nomination (the app
+repo's `docs/buy-listing.md`, D2001, D2091), a link Apple's editors are sent. Keep
+the film at that address and replace it in place when the preview is filmed
+again; `check_dayfolio_media` fails if it goes.
+
 Two more addresses are just as fixed. Every install fetches
 `games/smalti/config/v1.json`. And from Smalti 1.2.2 every share link a player
 sends points at `https://ninjaapps.net/games/smalti/daily/?d=YYYY-MM-DD`, so that
@@ -325,14 +341,23 @@ commit to this repo, so the live check is
 
 ## Assets
 
-Dayfolio (`apps/dayfolio/`) is on iPhone, iPad and Mac, but its pictures are still
-the Mac's: four 1440×900 desktop captures (WebP with alpha, 1200px wide,
-`shot-*.webp`) laid out two across by `.grid-2` + `figure.shot`, under a note that
-says so. The library picture (`shot-library.webp`) is no longer used, because it
-shows 74 templates and the app has 75 in 16 packs; the file stays on disk for
-whoever re-shoots it. There are no iPhone or iPad pictures yet: add them as a
-second `.grid` when the App Store set (the captioned, light pictures) is accepted,
-not from the catalogue PNGs. Its App Store button is a plain `.btn` to
+Dayfolio's product page (`apps/dayfolio/`) shows the App Store's captioned, light
+pictures across iPhone, iPad and Mac, from the app repo's `build/asc-upload/buy/web/`
+(D2091, D2095): `media/iphone-first-page.webp` and `iphone-client-report.webp`
+(880×1912, two thirds of 1320×2868), `media/ipad-person.webp` (1032×1376, half of
+2064×2752), and `media/mac-performance-review.webp` and `mac-quick-entry.webp`
+(1440×900, half of 2880×1800): lossy WebP at quality 90, sRGB. `.devices` lays them
+out. On a desktop the two iPhones and the iPad share a row at one height, and the
+two Macs the next; narrower, the iPhones pair up and the rest take a row each; on a
+phone every picture takes a row, an iPhone's no wider than 300px. They are opaque,
+so a hairline frames each instead of the drop shadow a window capture gets. Above
+them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 25.83 s,
+H.264 with a silent AAC track, copied byte for byte), plays in a `<video>` with
+controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
+its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
+history has them. To swap a picture, convert the new PNG to the same size and keep
+its name, or change the page and its `width` and `height` with it (the checker reads
+the WebP's own size). Its App Store button is a plain `.btn` to
 `https://apps.apple.com/app/id6817388897`, with the Smart App Banner in the page's
 head, as Smalti's.
 
@@ -379,8 +404,7 @@ the kit's layout and icon sizes.
 - Smalti's App Store button is live (id `6792641328`). `.btn-quiet` and the
   `games/_template/` placeholder stay for the next app — search `TODO`.
 - Dayfolio's App Store button (id `6817388897`) is wired and answers 404 until
-  the app is released; the product page has no iPhone or iPad pictures yet (see
-  Assets). `.btn-quiet` is no longer used on it.
+  the app is released. `.btn-quiet` is no longer used on it.
 - `support@ninjaapps.net` must be a live mailbox before submission; the
   support page promises a 24–48 h reply.
 
@@ -392,6 +416,26 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 Pages also open fine directly from disk (`file://`) except `404.html`,
 which uses absolute paths (it can be served from any URL).
+
+To look at a page at a phone's width from the command line, mind that headless
+Chrome never makes its window narrower than 500px: `--window-size=390,1800` lays
+the page out 500px wide and crops the picture to 390, so a phone layout looks cut
+off when it isn't. Draw the page in an iframe that is 390px wide instead, with
+site isolation off so the frame's lazy pictures load before the shot is taken:
+
+```sh
+printf '<body style="margin:0"><iframe src="%s" style="border:0;width:390px;height:9000px"></iframe>' \
+  https://ninjaapps.net/apps/dayfolio/ > /tmp/frame.html
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  --user-data-dir="$(mktemp -d)" --hide-scrollbars --window-size=500,9000 \
+  --disable-site-isolation-trials --disable-features=IsolateOrigins,site-per-process \
+  --blink-settings=preferredColorScheme=1 --virtual-time-budget=15000 \
+  --screenshot=/tmp/phone.png file:///tmp/frame.html
+```
+
+The shot is 500px wide; its left 390px are the phone. `preferredColorScheme=1` asks
+for the light theme and `0` for the dark one; without it the page follows the Mac's
+appearance.
 
 ## Theme
 

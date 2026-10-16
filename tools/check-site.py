@@ -274,6 +274,20 @@ DAYFOLIO_ELSEWHERE_REQUIRED = {
     "privacy/index.html": ["iPhone, iPad and Mac"],
 }
 
+# The product page's pictures and video (the app repo's D1843, D2001, D2091, D2095). The pictures are the App Store's
+# captioned, light set, `media/<platform>-<what>.webp`, at least one for each platform; the four dark Mac captures they
+# replaced, and the note that excused them, stay gone. The iPhone app preview plays on the page, and its address is
+# named in the featuring nomination (the app repo's docs/buy-listing.md), so it is as fixed as the addresses the app
+# opens: moving the file breaks a link Apple's editors were sent.
+DAYFOLIO_MEDIA = f"{DAYFOLIO_DIR}/media"
+DAYFOLIO_PREVIEW = f"{DAYFOLIO_MEDIA}/app-preview-iphone.mp4"
+DAYFOLIO_PREVIEW_URL = f"{ORIGIN}/{DAYFOLIO_PREVIEW}"
+DAYFOLIO_PLATFORMS = ("iphone", "ipad", "mac")
+DAYFOLIO_RETIRED_PICTURES = [
+    "shot-today.webp", "shot-timeline.webp", "shot-calendar.webp", "shot-insights.webp", "shot-library.webp",
+    "dark mode on a Mac",
+]
+
 # Pages the app itself opens (Packages/DayfolioKit/.../SettingsOverview.swift `AboutCopy`, HelpMenu.swift).
 # GitHub Pages serves /support from support.html, so the app's address has no extension. Each is the page and
 # the anchor the app opens on it; losing either ships a dead Help item.
@@ -387,7 +401,7 @@ def check_placeholders() -> None:
 
 
 def check_links() -> None:
-    pattern = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"')
+    pattern = re.compile(r'(?:href|src|poster)\s*=\s*"([^"]+)"')
     for page in published_pages():
         rel = page.relative_to(ROOT).as_posix()
         for raw in pattern.findall(page.read_text(encoding="utf-8")):
@@ -726,9 +740,112 @@ def check_stale_claims() -> None:
                 fail(f"stale claim: {rel} no longer states {fact!r}")
 
 
+def webp_size(data: bytes) -> tuple[int, int] | None:
+    """The pixel size a WebP file declares (lossy, lossless or extended), or None if it is not one."""
+    if data[:4] != b"RIFF" or data[8:12] != b"WEBP" or len(data) < 30:
+        return None
+    chunk = data[12:16]
+    if chunk == b"VP8X":
+        return (int.from_bytes(data[24:27], "little") + 1, int.from_bytes(data[27:30], "little") + 1)
+    if chunk == b"VP8 " and data[23:26] == b"\x9d\x01\x2a":
+        return (int.from_bytes(data[26:28], "little") & 0x3FFF, int.from_bytes(data[28:30], "little") & 0x3FFF)
+    if chunk == b"VP8L" and data[20] == 0x2F:
+        bits = int.from_bytes(data[21:25], "little")
+        return ((bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1)
+    return None
+
+
+def mp4_boxes(path: Path) -> list[bytes]:
+    """The types of an MP4 file's top-level boxes, in file order."""
+    boxes = []
+    with path.open("rb") as f:
+        end = f.seek(0, 2)
+        offset = 0
+        while offset + 8 <= end:
+            f.seek(offset)
+            head = f.read(16)
+            size, kind = struct.unpack(">I4s", head[:8])
+            if size == 1:
+                size = struct.unpack(">Q", head[8:16])[0]
+            elif size == 0:
+                size = end - offset
+            if size < 8:
+                break
+            boxes.append(kind)
+            offset += size
+    return boxes
+
+
+def check_dayfolio_media() -> None:
+    """The product page shows Dayfolio on each platform it is for (DAYFOLIO_PLATFORMS), every picture with alt
+    text and the size it is, none of the retired ones, and plays the iPhone preview the featuring nomination
+    links (DAYFOLIO_PREVIEW_URL): with controls, muted and inline, over a poster frame, never by itself."""
+    rel = f"{DAYFOLIO_DIR}/index.html"
+    page = ROOT / rel
+    if not page.is_file():
+        return  # check_manifest reports a missing page
+    text = page.read_text(encoding="utf-8")
+    for retired in DAYFOLIO_RETIRED_PICTURES:
+        if retired in text:
+            fail(f"dayfolio: {rel} still shows {retired!r}; its pictures are the captioned, light set (D2095)")
+
+    shown: set[str] = set()
+    for tag in re.findall(r"<img\b[^>]*>", text):
+        src = re.search(r'\bsrc="([^"]*)"', tag)
+        name = src.group(1) if src else "?"
+        alt = re.search(r'\balt="([^"]*)"', tag)
+        if not alt or not alt.group(1).strip():
+            fail(f"dayfolio: {rel} shows {name} with no alt text")
+        width, height = (re.search(rf'\b{dim}="(\d+)"', tag) for dim in ("width", "height"))
+        if not (width and height):
+            fail(f"dayfolio: {rel} shows {name} without its width and height")
+        picture = re.fullmatch(r"media/(\w+)-[a-z0-9-]+\.webp", name)
+        if not picture:
+            continue
+        if picture.group(1) in DAYFOLIO_PLATFORMS:
+            shown.add(picture.group(1))
+        file = page.parent / name
+        size = webp_size(file.read_bytes()) if file.is_file() else None
+        if file.is_file() and size is None:
+            fail(f"dayfolio: {DAYFOLIO_DIR}/{name} is not a WebP picture")
+        elif size and width and height and size != (int(width.group(1)), int(height.group(1))):
+            fail(f"dayfolio: {rel} gives {name} as {width.group(1)}x{height.group(1)}, but it is {size[0]}x{size[1]}")
+    for platform in DAYFOLIO_PLATFORMS:
+        if platform not in shown:
+            fail(f"dayfolio: {rel} shows no {platform} picture (media/{platform}-….webp)")
+
+    videos = re.findall(r"<video\b([^>]*)>(.*?)</video>", text, re.S)
+    preview = DAYFOLIO_PREVIEW[len(DAYFOLIO_DIR) + 1:]
+    if len(videos) != 1:
+        fail(f"dayfolio: {rel} has {len(videos)} <video> elements; it plays the iPhone preview, {preview}, once")
+    else:
+        attrs, inner = videos[0]
+        for need in ("controls", "muted", "playsinline"):
+            if not re.search(rf"\b{need}\b", attrs):
+                fail(f"dayfolio: {rel}'s <video> is missing {need}")
+        if re.search(r"\bautoplay\b", attrs):
+            fail(f"dayfolio: {rel}'s <video> plays by itself; a visitor starts it")
+        if not re.search(r'\bposter="[^"]+"', attrs):
+            fail(f"dayfolio: {rel}'s <video> has no poster frame")
+        if preview not in re.findall(r'\bsrc="([^"]+)"', attrs + inner):
+            fail(f"dayfolio: {rel}'s <video> does not play {preview}")
+
+    # The file the nomination links: there, an MP4, and playable while it downloads (moov before mdat).
+    video = ROOT / DAYFOLIO_PREVIEW
+    if not video.is_file():
+        fail(f"dayfolio: the featuring nomination links {DAYFOLIO_PREVIEW_URL}, but {DAYFOLIO_PREVIEW} is missing")
+    else:
+        boxes = mp4_boxes(video)
+        if not boxes or boxes[0] != b"ftyp":
+            fail(f"dayfolio: {DAYFOLIO_PREVIEW} is not an MP4 file")
+        elif b"moov" not in boxes or (b"mdat" in boxes and boxes.index(b"moov") > boxes.index(b"mdat")):
+            fail(f"dayfolio: {DAYFOLIO_PREVIEW} keeps its moov box after the media, so it cannot play until it has all downloaded")
+
+
 def check_dayfolio() -> None:
     """Dayfolio's pages say what the app does (see DAYFOLIO_* above), the archived
     legal versions stay archived, and the addresses the app opens still resolve."""
+    check_dayfolio_media()
     for name in DAYFOLIO_MARKETING:
         rel = f"{DAYFOLIO_DIR}/{name}"
         page = ROOT / rel
