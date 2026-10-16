@@ -241,7 +241,7 @@ class ShellTests(unittest.TestCase):
         self.assertIn('<a class="wordmark" href="../../../../">', page)
         self.assertIn('<a href="../../../../#apps">Apps</a>', page)
         self.assertIn('<a class="footer-privacy" href="../../privacy.html">', page)
-        self.assertIn('<link rel="stylesheet" href="../../../../style.css">', page)
+        self.assertIn(f'<link rel="stylesheet" href="../../../../style.css?v={build.STYLE_VERSION}">', page)
         self.assertIn('<script src="../../../../assets/theme.js" defer></script>', page)
 
     def test_the_sub_navigation_marks_the_section(self):
@@ -371,6 +371,22 @@ class HandWrittenPagesTests(unittest.TestCase):
         self.assertRegex(support, r'<a href="support\.html" aria-current="page">Support</a>')
         self.assertEqual(support.count('class="subnav"'), 1)
 
+    def test_every_dayfolio_page_asks_for_the_stylesheet_by_one_version(self):
+        # Cloudflare keeps style.css at its edge, and browsers keep it, for four hours: a page whose markup needs
+        # a new rule asks for the stylesheet by a new query, and every Dayfolio page asks by the same one.
+        site = Site(self)
+        link = '<link rel="stylesheet" href="../../style.css{}">\n</head>'
+        site.put("apps/dayfolio/index.html", PRODUCT.replace("</head>", link.format("?v=2026-01-01")))
+        site.put("apps/dayfolio/support.html", SUPPORT.replace("</head>", link.format("")))
+        site.put("games/smalti/index.html", f"<html><head>{link.format('')}<body></body></html>")
+        built = site.built()
+        wanted = f'<link rel="stylesheet" href="../../style.css?v={build.STYLE_VERSION}">'
+        for rel in ("apps/dayfolio/index.html", "apps/dayfolio/support.html"):
+            self.assertIn(wanted, built[rel])
+            self.assertEqual(built[rel].count('rel="stylesheet"'), 1)
+        self.assertNotIn("games/smalti/index.html", built)  # the rest of the site links style.css as it chooses
+        self.assertRegex(build.STYLE_VERSION, r"^\d{4}-\d{2}-\d{2}[a-z]?$")  # the day of the change
+
 
 class SitemapTests(unittest.TestCase):
     def test_the_sitemap_lists_every_indexable_page_and_robots_points_to_it(self):
@@ -418,6 +434,15 @@ class WriteAndCheckTests(unittest.TestCase):
         build.write(self.site.root)
         self.site.put("apps/dayfolio/index.html", PRODUCT)
         self.assertTrue(any("apps/dayfolio/index.html" in p for p in build.check(self.site.root)))
+
+    def test_a_hand_written_page_on_another_stylesheet_version_is_reported(self):
+        self.site.put("apps/dayfolio/support.html",
+                      SUPPORT.replace("</head>", '<link rel="stylesheet" href="../../style.css">\n</head>'))
+        build.write(self.site.root)
+        self.assertEqual(build.check(self.site.root), [])
+        text = self.site.read("apps/dayfolio/support.html")
+        self.site.put("apps/dayfolio/support.html", text.replace(f"?v={build.STYLE_VERSION}", "?v=2026-01-01"))
+        self.assertTrue(any("apps/dayfolio/support.html" in p for p in build.check(self.site.root)))
 
 
 class ArchiveMarkdownTests(unittest.TestCase):

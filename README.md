@@ -372,11 +372,15 @@ controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-pos
 its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
 history has them. To swap a picture, convert the new PNG to the same size and keep
 its name, or change the page and its `width` and `height` with it (the checker reads
-the WebP's own size). The page links `style.css?v=2026-10-16`, not `style.css`:
-Cloudflare serves the stylesheet from its edge cache and tells browsers to keep it
-for four hours, so new markup would otherwise meet the old rules (on 2026-10-16 the
-film drew at its full 886×1920 until the query was added). Change the date whenever
-this page's markup needs a rule `style.css` didn't have. Its App Store button is a plain `.btn` to
+the WebP's own size). The page links `style.css?v=…`, not `style.css`, and so does
+every Dayfolio page: Cloudflare serves the stylesheet from its edge cache and tells
+browsers to keep it for four hours, so new markup would otherwise meet the old rules
+(on 2026-10-16 the film drew at its full 886×1920 until the query was added). The
+query is `STYLE_VERSION` in `tools/dayfolio-build.py`, which writes it on the pages it
+generates and keeps it current on the hand-written ones; whenever a Dayfolio page
+needs a rule `style.css` didn't have, change it to the day of the change (a letter
+after it for a second change that day) and run the build. The rest of the site links
+`style.css` as it always has. The product page's App Store button is a plain `.btn` to
 `https://apps.apple.com/app/id6817388897`, with the Smart App Banner in the page's
 head, as Smalti's.
 
@@ -459,8 +463,9 @@ pages are relative URLs (`../reports/#billable`). Then
 python3 tools/dayfolio-build.py
 ```
 
-writes the pages, refreshes the sub-navigation on the hand-written Dayfolio pages,
-and rewrites `sitemap.xml` and `robots.txt`; commit what it wrote. It stops,
+writes the pages, refreshes the sub-navigation and the stylesheet's version (see
+Assets) on the hand-written Dayfolio pages, and rewrites `sitemap.xml` and
+`robots.txt`; commit what it wrote. It stops,
 naming the file and line, at a missing field, a picture with no alt text or not in
 WebP, a second h1, or copy against the site's rules: straight quotes (write ’ ‘ “ ”),
 exclamation marks, emoji. A generated page names its source in a comment at its

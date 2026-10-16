@@ -177,6 +177,7 @@ class TemplateGalleryTests(unittest.TestCase):
         self.assertEqual(self.problems(*ALL, "check_dayfolio_templates", "check_sitemap", "check_canonicals"), [])
         def chrome(problem: str) -> bool:  # the fixture's header and footer: the stylesheet, the site's root
             page, target = problem[len("dead link: "):].split(" -> ")
+            target = target.split("?", 1)[0]  # the stylesheet asks by its version (STYLE_VERSION)
             root = "../" * page.count("/")
             return target.endswith(("style.css", "assets/theme.js", "privacy.html")) or target in (root, root + "#apps")
         dead = [p for p in self.problems("check_links")
