@@ -1109,6 +1109,61 @@ html[lang="zh-Hans"] :is(.kicker, .effective, .backlink, .langs, footer) { font-
 .version-note a { color: var(--accent); }
 @media (max-width: 860px) { .toc ul { columns: 1; } }
 
+/* ===== Dayfolio pages: sub-navigation, breadcrumbs, listings, figures, pager, app box =====
+   Drawn by tools/dayfolio-build.py's shell; the build keeps the same sub-navigation
+   on the hand-written Dayfolio pages. A band under the site header: the app's name
+   (its icon drawn here, so the markup carries no decorative picture) and five links,
+   the current one in ink with a vermillion underline. */
+.subnav {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px;
+  padding: 14px var(--pad-side); border-bottom: 1px solid var(--line);
+  font: 500 13px 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60);
+}
+/* A short Dayfolio page (a section that lists little yet) keeps the footer at the bottom of the window. */
+body:has(> .subnav) { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body:has(> .subnav) > main { flex: 1; }
+.subnav-app { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; font: 700 16px 'Shippori Mincho', serif; color: var(--ink); }
+.subnav-app::before { content: ""; flex: none; width: 24px; height: 24px; border-radius: 6px; background: url(assets/icon-dayfolio-144.webp) center / cover; }
+.subnav a[aria-current] { color: var(--ink); text-decoration: underline 2px var(--accent); text-underline-offset: 7px; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; letter-spacing: .2em; text-transform: uppercase; }
+.crumbs a { color: var(--ink-60); }
+.crumbs a:hover { color: var(--accent); }
+.crumbs-sep { color: var(--ink-28); }
+.listing { margin-top: 12px; }
+.listing .card h2 { margin: 0; font: 700 17px 'Shippori Mincho', serif; }
+.listing .card p { margin: 0; }
+.listing .arrow { margin-top: auto; color: var(--ink-45); }
+.listing-empty { margin: 12px 0 0; padding: 18px 24px; border: 1px dashed var(--ink-28); font: 400 13px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.prose figure { margin: 8px 0 28px; }
+.prose figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); background: var(--card-hover); }
+.prose .figure-portrait img { width: 300px; }   /* a phone's screen, near the size it is in the hand */
+.prose .figure-landscape img { width: 100%; }
+.prose figcaption { margin-top: 10px; max-width: 560px; font: 400 12px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.prose .figure-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 8px 0 28px; align-items: start; }
+.prose .figure-row figure { margin: 0; }
+.prose .figure-row .figure-portrait img { width: 100%; max-width: 300px; }
+.callout p + p { margin-top: 10px; }
+.callout-lead p { max-width: none; font: 400 14px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.callout-lead strong { color: var(--ink); }
+.callout-lead a { color: var(--accent); }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.pager a { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; border: 1px solid var(--line); font: 700 15px/1.4 'Shippori Mincho', serif; }
+.pager a:hover { background: var(--card-hover); }
+.pager-next { grid-column: 2; text-align: right; }
+.pager-label { font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+.appbox { display: flex; gap: 20px; align-items: flex-start; margin-top: 48px; padding: 24px 26px; border: 1px solid var(--line); }
+.appbox p { margin: 0; max-width: 560px; font: 400 14px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
+.appbox strong { color: var(--ink); }
+.appbox .actions { margin-top: 18px; flex-wrap: wrap; }
+@media (max-width: 860px) { .subnav { padding-left: 24px; padding-right: 24px; } }
+@media (max-width: 600px) {
+  .subnav { gap: 8px 18px; padding-top: 12px; padding-bottom: 12px; }
+  .subnav-app { flex-basis: 100%; }
+  .pager { grid-template-columns: 1fr; }
+  .pager-next { grid-column: auto; }
+  .appbox { flex-direction: column; }
+}
+
 /* ===== 404 ===== */
 .notfound { padding: 120px var(--pad-side) 140px; text-align: center; }
 .notfound h1 { font-size: 96px; }

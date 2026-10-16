@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Dayfolio social card (1200×630 source)</title>
+<!-- The default Open Graph and Twitter image of every Dayfolio page: apps/dayfolio/social-card.png.
+     Re-render it with headless Chrome (README, Dayfolio pages). Uses the site's own tokens and fonts. -->
+<link rel="stylesheet" href="../../style.css">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+  .card { box-sizing: border-box; width: 1200px; height: 630px; padding: 72px 80px; display: grid;
+          grid-template-columns: 1fr 300px; gap: 56px; align-items: center; border-bottom: 14px solid var(--accent); }
+  .card .kicker { font-size: 18px; margin-bottom: 28px; }
+  .card h1 { font-size: 112px; line-height: 1; }
+  .card .lede { max-width: 640px; margin-top: 30px; font-size: 30px; line-height: 1.5; }
+  .card .where { margin-top: 40px; font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+  .card img { width: 300px; height: 300px; border-radius: 68px; box-shadow: 0 18px 48px rgba(0,0,0,.22); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <div class="kicker">道 IPHONE · IPAD · MAC</div>
+    <h1>Dayfolio</h1>
+    <p class="lede">A calm work journal. One page a day, in the shape of your job.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img src="../../apps/dayfolio/icon-320.webp" alt="">
+</div>
+</body>
+</html>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ninjaapps.net/</loc></url>
-  <url><loc>https://ninjaapps.net/privacy/</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/archive-format.html</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/articles/</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/guide/</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/privacy.html</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/support.html</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/templates/</loc></url>
+  <url><loc>https://ninjaapps.net/apps/dayfolio/terms.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/daily/</loc></url>
-  <url><loc>https://ninjaapps.net/games/smalti/privacy.html</loc></url>
+  <url><loc>https://ninjaapps.net/games/smalti/press.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/privacy-de.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/privacy-es.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/privacy-fr.html</loc></url>
@@ -16,12 +23,8 @@
   <url><loc>https://ninjaapps.net/games/smalti/privacy-ru.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/privacy-tr.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/privacy-zh-hans.html</loc></url>
-  <url><loc>https://ninjaapps.net/games/smalti/terms.html</loc></url>
+  <url><loc>https://ninjaapps.net/games/smalti/privacy.html</loc></url>
   <url><loc>https://ninjaapps.net/games/smalti/support.html</loc></url>
-  <url><loc>https://ninjaapps.net/games/smalti/press.html</loc></url>
-  <url><loc>https://ninjaapps.net/apps/dayfolio/</loc></url>
-  <url><loc>https://ninjaapps.net/apps/dayfolio/privacy.html</loc></url>
-  <url><loc>https://ninjaapps.net/apps/dayfolio/terms.html</loc></url>
-  <url><loc>https://ninjaapps.net/apps/dayfolio/support.html</loc></url>
-  <url><loc>https://ninjaapps.net/apps/dayfolio/archive-format.html</loc></url>
+  <url><loc>https://ninjaapps.net/games/smalti/terms.html</loc></url>
+  <url><loc>https://ninjaapps.net/privacy/</loc></url>
 </urlset>

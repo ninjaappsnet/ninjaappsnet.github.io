@@ -36,16 +36,31 @@ Checks:
      ($9.99, "coming soon", the "Mac App Store"). The privacy policy and terms
      name their version and link the archived one. The URLs the app opens
      (/apps/dayfolio/support, /privacy, /support#quick-note-link) resolve.
+ 16. Every Dayfolio page (everything under apps/dayfolio/) has a title and a
+     description no other Dayfolio page has, a canonical URL, the Smart App
+     Banner, a social card (Open Graph and Twitter) unless it is noindex, alt
+     text on every picture, one h1 and headings that step down one level at a
+     time, ids used once, tags that close, and JSON-LD that parses.
+ 17. No internal link points at an #anchor its page does not have.
+ 18. The product page's SoftwareApplication JSON-LD names the app, its three
+     systems and a category, offers what the page states (free, and the five
+     prices) and claims no ratings or reviews.
+ 19. robots.txt names the sitemap and does not shut the site.
+ 20. Every page tools/dayfolio-build.py makes (the guide, templates and
+     articles pages, the sub-navigation on the other Dayfolio pages,
+     sitemap.xml and robots.txt) is committed as the build makes it.
 """
 
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import re
 import struct
 import sys
 import zipfile
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urldefrag, urlparse
 
@@ -296,6 +311,15 @@ DAYFOLIO_APP_URLS = [
     (f"{ORIGIN}/{DAYFOLIO_DIR}/privacy", "privacy.html", None),
     (f"{ORIGIN}/{DAYFOLIO_DIR}/support#quick-note-link", "support.html", "quick-note-link"),
 ]
+
+# Every Dayfolio page is held to the website brief's baseline (WEB-6: the head a search engine and a share sheet
+# read, pictures that say what they show, headings that outline the page). The product page's JSON-LD offers are
+# the page's own: free to download, and the five purchases at DAYFOLIO_PRICES.
+DAYFOLIO_BANNER = f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STORE_ID}'
+DAYFOLIO_CARD = ['property="og:title"', 'property="og:description"', 'property="og:url"', 'property="og:image"',
+                 'name="twitter:card"']
+DAYFOLIO_OFFERS = ["0", *(price.lstrip("$") for price in DAYFOLIO_PRICES)]
+VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
 # The press kit. Same layout every time it is rebuilt, so a journalist's
 # bookmarked unzip path never moves.
@@ -903,6 +927,183 @@ def check_dayfolio() -> None:
         fail("dayfolio: archive-format.html no longer carries its title; regenerate it with tools/archive-page.py")
 
 
+class Outline(HTMLParser):
+    """What check_dayfolio_pages reads from a page: tags that do not close, ids, headings and pictures."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.open: list[tuple[str, int]] = []
+        self.problems: list[str] = []
+        self.ids: dict[str, int] = {}
+        self.headings: list[int] = []
+        self.images: list[dict] = []
+
+    def handle_starttag(self, tag: str, attrs: list) -> None:
+        self.note(tag, dict(attrs))
+        if tag not in VOID_TAGS:
+            self.open.append((tag, self.getpos()[0]))
+
+    def handle_startendtag(self, tag: str, attrs: list) -> None:
+        self.note(tag, dict(attrs))
+
+    def note(self, tag: str, attrs: dict) -> None:
+        if attrs.get("id"):
+            self.ids[attrs["id"]] = self.ids.get(attrs["id"], 0) + 1
+        if tag == "img":
+            self.images.append(attrs)
+        if re.fullmatch(r"h[1-6]", tag):
+            self.headings.append(int(tag[1]))
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in VOID_TAGS:
+            return
+        if self.open and self.open[-1][0] == tag:
+            self.open.pop()
+            return
+        inner = self.open[-1][0] if self.open else "nothing"
+        self.problems.append(f"line {self.getpos()[0]}: </{tag}> where <{inner}> is open")
+        for at in range(len(self.open) - 1, -1, -1):
+            if self.open[at][0] == tag:
+                del self.open[at:]
+                break
+
+    def finish(self) -> list[str]:
+        self.close()
+        return self.problems + [f"<{tag}> on line {line} is never closed" for tag, line in self.open]
+
+
+def dayfolio_pages() -> list[Path]:
+    return [p for p in published_pages() if p.relative_to(ROOT).as_posix().startswith(DAYFOLIO_DIR + "/")]
+
+
+def check_dayfolio_pages() -> None:
+    """Every Dayfolio page: unique title and description, canonical, banner, social card, alt text, an
+    outline of headings, ids used once, tags that close and JSON-LD that parses."""
+    titles: dict[str, list[str]] = {}
+    descriptions: dict[str, list[str]] = {}
+    for page in dayfolio_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        for kind, found, seen in (("title", re.findall(r"<title>(.*?)</title>", text, re.S), titles),
+                                  ("description", re.findall(r'<meta name="description" content="([^"]*)">', text),
+                                   descriptions)):
+            if len(found) != 1 or not found[0].strip():
+                fail(f"dayfolio page: {rel} needs one {kind}, and it has {len(found)}")
+            else:
+                seen.setdefault(found[0].strip(), []).append(rel)
+        if not re.search(r'<link\s+rel="canonical"\s+href="[^"]+"', text):
+            fail(f"dayfolio page: {rel} has no canonical URL")
+        if DAYFOLIO_BANNER not in text:
+            fail(f"dayfolio page: {rel} has no Smart App Banner ({DAYFOLIO_BANNER}...>)")
+        if not is_noindex(page):
+            for tag in DAYFOLIO_CARD:
+                if not re.search(rf'<meta\s+{tag}\s+content="[^"]+"', text):
+                    fail(f"dayfolio page: {rel} has no {tag.split('=')[1].strip(chr(34))} for its social card")
+        outline = Outline()
+        outline.feed(text)
+        for problem in outline.finish():
+            fail(f"dayfolio page: {rel} does not parse: {problem}")
+        for image in outline.images:
+            if not (image.get("alt") or "").strip():
+                fail(f"dayfolio page: {rel} has a picture with no alt text: {image.get('src')}")
+        if outline.headings.count(1) != 1:
+            fail(f"dayfolio page: {rel} has {outline.headings.count(1)} h1 headings; a page has one")
+        for before, after in zip(outline.headings, outline.headings[1:]):
+            if after > before + 1:
+                fail(f"dayfolio page: {rel} goes from h{before} to h{after}; headings step down one level")
+                break
+        for ident, count in sorted(outline.ids.items()):
+            if count > 1:
+                fail(f"dayfolio page: {rel} uses the id {ident!r} {count} times")
+        for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
+            try:
+                json.loads(block)
+            except json.JSONDecodeError as exc:
+                fail(f"dayfolio page: {rel} has JSON-LD that does not parse ({exc})")
+    for kind, seen in (("title", titles), ("description", descriptions)):
+        for value, rels in sorted(seen.items()):
+            if len(rels) > 1:
+                fail(f"dayfolio page: the {kind} {value[:60]!r} is on {', '.join(rels)}; each page needs its own")
+
+
+def check_anchors() -> None:
+    """A link to page#anchor (or #anchor on the same page) lands on an id that exists."""
+    ids: dict[Path, set[str]] = {}
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        for raw in re.findall(r'href\s*=\s*"([^"]+)"', page.read_text(encoding="utf-8")):
+            target, fragment = urldefrag(raw)
+            if not fragment or urlparse(raw).scheme or raw.startswith("//"):
+                continue
+            resolved = page
+            if target:
+                resolved = ((ROOT if target.startswith("/") else page.parent) / target.lstrip("/")).resolve()
+                if resolved.is_dir():
+                    resolved = resolved / "index.html"
+            if not resolved.is_file():
+                continue  # check_links reports the page itself
+            if resolved not in ids:
+                ids[resolved] = set(re.findall(r'\bid="([^"]+)"', resolved.read_text(encoding="utf-8")))
+            if fragment not in ids[resolved]:
+                fail(f"dead anchor: {rel} -> {raw}")
+
+
+def check_dayfolio_app() -> None:
+    """The product page tells a search engine what Dayfolio is, with the prices the page states."""
+    page = ROOT / DAYFOLIO_DIR / "index.html"
+    if not page.is_file():
+        return  # check_manifest reports a missing page
+    blocks = []
+    for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page.read_text(encoding="utf-8"), re.S):
+        try:
+            blocks.append(json.loads(raw))
+        except json.JSONDecodeError:
+            continue  # check_dayfolio_pages reports it
+    apps = [b for b in blocks if isinstance(b, dict) and b.get("@type") == "SoftwareApplication"]
+    if len(apps) != 1:
+        fail(f"dayfolio app: index.html has {len(apps)} SoftwareApplication JSON-LD blocks, not one")
+        return
+    app = apps[0]
+    if app.get("name") != "Dayfolio":
+        fail(f"dayfolio app: the name is {app.get('name')!r}, not 'Dayfolio'")
+    for system in ("iOS", "iPadOS", "macOS"):
+        if system not in str(app.get("operatingSystem", "")):
+            fail(f"dayfolio app: operatingSystem does not name {system}")
+    if not app.get("applicationCategory"):
+        fail("dayfolio app: no applicationCategory")
+    offers = app.get("offers") if isinstance(app.get("offers"), list) else []
+    prices = sorted(str(offer.get("price")) for offer in offers if isinstance(offer, dict))
+    if prices != sorted(DAYFOLIO_OFFERS) or any(o.get("priceCurrency") != "USD" for o in offers if isinstance(o, dict)):
+        fail(f"dayfolio app: the offers are {prices} (USD expected); the page states {sorted(DAYFOLIO_OFFERS)}")
+    for key in ("aggregateRating", "review"):
+        if key in app:
+            fail(f"dayfolio app: {key} is set; the page states no ratings or reviews")
+
+
+def check_robots() -> None:
+    robots = ROOT / "robots.txt"
+    if not robots.is_file():
+        fail("robots: robots.txt is missing")
+        return
+    text = robots.read_text(encoding="utf-8")
+    if f"Sitemap: {ORIGIN}/sitemap.xml" not in text:
+        fail(f"robots: robots.txt does not name the sitemap (Sitemap: {ORIGIN}/sitemap.xml)")
+    if re.search(r"(?im)^Disallow:\s*/\s*$", text):
+        fail("robots: robots.txt shuts the whole site")
+
+
+def check_dayfolio_build() -> None:
+    """The committed pages are what tools/dayfolio-build.py makes from content/dayfolio/."""
+    name = "dayfolio_build"
+    if name not in sys.modules:
+        spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("dayfolio-build.py"))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    for problem in sys.modules[name].check(ROOT):
+        fail(f"dayfolio build: {problem}")
+
+
 def png_size(data: bytes) -> tuple[int, int] | None:
     if data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
         return None
@@ -970,6 +1171,11 @@ def main() -> int:
         check_social_cards,
         check_stale_claims,
         check_dayfolio,
+        check_dayfolio_pages,
+        check_anchors,
+        check_dayfolio_app,
+        check_robots,
+        check_dayfolio_build,
         check_press_kit,
     ):
         check()
