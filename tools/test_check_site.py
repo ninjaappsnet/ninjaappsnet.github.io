@@ -150,5 +150,45 @@ class DayfolioRulesTests(unittest.TestCase):
         self.assertProblem("apps/dayfolio/guide/getting-started/index.html", "check_dayfolio_build")
 
 
+class TemplateGalleryTests(unittest.TestCase):
+    """The gallery's pages, as tools/dayfolio-templates.py writes them, pass every Dayfolio rule, and a page that
+    drifted from the library is reported."""
+
+    def setUp(self):
+        import test_dayfolio_templates as tt
+        self.templates = tt.templates
+        self.site = tt.Site(self)
+        self.site.put("apps/dayfolio/index.html", product(APP))
+        self.site.put("apps/dayfolio/support.html", SUPPORT)
+        self.templates.write(self.site.root)
+        build.write(self.site.root)
+        check.ROOT = self.site.root
+        self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
+        self.page = tt.STANDUP
+
+    def problems(self, *names: str) -> list:
+        check.errors = []
+        for name in names:
+            getattr(check, name)()
+        found, check.errors = list(check.errors), []
+        return found
+
+    def test_the_gallery_passes_every_dayfolio_rule(self):
+        self.assertEqual(self.problems(*ALL, "check_dayfolio_templates", "check_sitemap", "check_canonicals"), [])
+        def chrome(problem: str) -> bool:  # the fixture's header and footer: the stylesheet, the site's root
+            page, target = problem[len("dead link: "):].split(" -> ")
+            root = "../" * page.count("/")
+            return target.endswith(("style.css", "assets/theme.js", "privacy.html")) or target in (root, root + "#apps")
+        dead = [p for p in self.problems("check_links")
+                if p.startswith("dead link: apps/dayfolio/templates/") and not chrome(p)]
+        self.assertEqual(dead, [])
+
+    def test_a_page_that_drifted_from_the_library_is_reported(self):
+        text = self.site.read(self.page)
+        self.site.put(self.page, text.replace("Retry queue is in", "Hand edit", 1))
+        found = self.problems("check_dayfolio_templates")
+        self.assertTrue(any(self.page in p for p in found), found)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,42 @@
+{
+  "research-lab.lab-experiment": {
+    "date": "2026-10-14 17:30",
+    "values": {
+      "project": ["Enzyme stability"],
+      "outcome": "supports-hypothesis",
+      "tags": ["assays", "temperature"],
+      "hypothesis": "The enzyme keeps more of its activity at 37 °C with the new buffer than with the standard one.",
+      "method": "- Samples in both buffers, three repeats each\n- Held at 37 °C for 0, 2, 4 and 8 hours\n- Activity measured with the standard assay",
+      "results": "With the new buffer, about twice as much activity remained after 8 hours. Repeats agreed closely.",
+      "images-data-attachment": [["activity-over-time.csv", "CSV · 4 KB"], ["activity-plot.png", "PNG picture · 88 KB"]]
+    }
+  },
+  "research-lab.literature-reading-log": {
+    "date": "2026-10-11 20:00",
+    "values": {
+      "source": {"title": "Buffer effects on enzyme stability, a review", "url": "https://journals.example.org/reviews/buffer-stability"},
+      "relevance": 4,
+      "tags": ["reading", "buffers"],
+      "summary": "Phosphate buffers stabilise many enzymes, but the effect depends strongly on pH.",
+      "notes": "Fits our 37 °C results. Next run, try the new buffer at two pH values to see whether that explains the gain."
+    }
+  },
+  "research-lab.safety-lab-check": {
+    "date": "2026-10-16 09:15",
+    "values": {
+      "lab": ["Lab 2.14"],
+      "status": "minor-issue",
+      "tags": ["safety"],
+      "notes": "Eyewash station tested and fine. One solvent cabinet label is faded; replacement ordered."
+    }
+  },
+  "research-lab.data-management-log": {
+    "date": "2026-10-14 18:10",
+    "values": {
+      "dataset": ["Enzyme stability, October runs"],
+      "backup-status": "backed-up",
+      "tags": ["data"],
+      "notes": "Raw files on the lab drive, in the October folder. A copy goes to the university backup every night, and the analysis notebook is with them."
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "management-leadership",
+    "industry": "Management",
+    "name": "Management & Leadership",
+    "journalName": "Management",
+    "summary": "Feedback, team check-ins and delegation for people who manage other people.",
+    "icon": "person.2",
+    "color": "purple",
+    "order": 10,
+    "defaultTemplate": "general.1-1-notes",
+    "includes": ["general.1-1-notes", "general.brag-document"],
+    "keywords": ["one-on-one", "1-1", "1:1", "1:1s", "report", "reports", "directs", "director", "hiring", "hire", "team", "delegate", "delegation", "feedback", "skip", "skip-level", "manager", "headcount", "promo", "promotion", "perf", "coaching"],
+    "templates": [
+      {
+        "id": "management-leadership.feedback-given",
+        "version": 3,
+        "name": "Feedback given",
+        "icon": "text.bubble",
+        "color": "pink",
+        "cadence": "onEvent",
+        "summary": "What you told them, and what you’ll check on next time.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          {
+            "key": "feedback-type", "label": "Feedback type", "type": "singleSelect",
+            "options": [
+              { "key": "positive", "label": "Positive", "color": "success" },
+              { "key": "constructive", "label": "Constructive", "color": "info" },
+              { "key": "redirect", "label": "Redirect", "color": "warning" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "context", "label": "Context", "type": "text",
+            "prompt": "What’s the situation, and why does it matter?"
+          },
+          {
+            "key": "what-you-said", "label": "What you said", "type": "richText",
+            "prompt": "What did you tell them, in your words?"
+          },
+          {
+            "key": "follow-up", "label": "Follow-up", "type": "text", "includeInInsights": true,
+            "prompt": "What will you check on next time?"
+          }
+        ]
+      },
+      {
+        "id": "management-leadership.team-pulse",
+        "version": 4,
+        "name": "Team pulse",
+        "icon": "waveform.path.ecg",
+        "color": "green",
+        "cadence": "review",
+        "summary": "A quick read on team mood, workload and what needs attention.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "team-mood", "label": "Team mood", "type": "mood", "includeInInsights": true },
+          { "key": "workload", "label": "Workload", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "highlights", "label": "Highlights", "type": "text", "includeInInsights": true,
+            "prompt": "What’s going well right now?"
+          },
+          {
+            "key": "concerns", "label": "Concerns", "type": "text", "includeInInsights": true,
+            "prompt": "What’s worth watching?"
+          },
+          { "key": "actions", "label": "Actions", "type": "checklist", "prompt": "What will you follow up on?", "carryOver": true }
+        ]
+      },
+      {
+        "id": "management-leadership.weekly-review",
+        "version": 3,
+        "name": "Team weekly review",
+        "icon": "arrow.counterclockwise",
+        "color": "blue",
+        "cadence": "review",
+        "summary": "The team’s wins, who needs support and what’s next.",
+        "includedByDefault": false,
+        "reminder": { "weekdays": [6], "hour": 16, "minute": 30 },
+        "fields": [
+          { "key": "energy", "label": "Energy", "type": "rating" },
+          { "key": "meeting-time", "label": "Meeting time", "type": "duration" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "team-wins", "label": "Team wins", "type": "checklist",
+            "prompt": "What did the team ship or land this week?"
+          },
+          {
+            "key": "people-notes", "label": "People notes", "type": "text", "includeInInsights": true,
+            "prompt": "Who needs support, recognition or a course correction?"
+          },
+          {
+            "key": "priorities", "label": "Priorities", "type": "checklist", "carryOver": true,
+            "prompt": "What are the top priorities for the team next week?"
+          }
+        ]
+      },
+      {
+        "id": "management-leadership.skip-level-notes",
+        "version": 2,
+        "name": "Skip-level notes",
+        "icon": "person.3",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "What you hear when you talk to people who don’t report to you directly.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did you hear, and what surprised you?" },
+          { "key": "follow-ups", "label": "Follow-ups", "type": "checklist", "carryOver": true, "prompt": "What’s worth following up on?" }
+        ]
+      },
+      {
+        "id": "management-leadership.delegation-log",
+        "version": 1,
+        "name": "Delegation log",
+        "icon": "arrow.turn.up.right",
+        "color": "teal",
+        "cadence": "onEvent",
+        "summary": "What you handed off, to whom, and whether it needs a check-in.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "assigned-to", "label": "Assigned to", "type": "person" },
+          { "key": "check-in-by", "label": "Check-in by", "type": "date" },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "on-track", "label": "On track", "color": "success" },
+              { "key": "needs-a-nudge", "label": "Needs a nudge", "color": "warning" },
+              { "key": "stalled", "label": "Stalled", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "task", "label": "Task", "type": "text", "showInListPreview": true, "prompt": "What did you hand off?" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did you hand off, and what does done look like?" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "sales",
+    "industry": "Sales",
+    "name": "Sales",
+    "journalName": "Sales Log",
+    "summary": "Calls, deals and pipeline numbers for people who carry a quota.",
+    "icon": "chart.line.uptrend.xyaxis",
+    "color": "green",
+    "order": 6,
+    "defaultTemplate": "sales.customer-call",
+    "keywords": ["call", "deal", "pipeline", "prospect", "demo", "quota", "leads", "renewal", "proposal", "crm", "quote"],
+    "templates": [
+      {
+        "id": "sales.customer-call",
+        "version": 3,
+        "name": "Customer call",
+        "icon": "phone",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Who you spoke with, what they said and what happens next.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "contact", "label": "Contact", "type": "person" },
+          { "key": "account", "label": "Account", "type": "project", "carryOver": true },
+          {
+            "key": "call-type", "label": "Call type", "type": "singleSelect",
+            "options": [
+              { "key": "discovery", "label": "Discovery", "color": "info" },
+              { "key": "demo", "label": "Demo", "color": "info" },
+              { "key": "negotiation", "label": "Negotiation", "color": "warning" },
+              { "key": "check-in", "label": "Check-in", "color": "neutral" }
+            ]
+          },
+          { "key": "duration", "label": "Call length", "type": "duration", "includeInInsights": true },
+          {
+            "key": "outcome", "label": "Outcome", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "next-step-scheduled", "label": "Next step scheduled", "color": "success" },
+              { "key": "needs-follow-up", "label": "Needs follow-up", "color": "warning" },
+              { "key": "no-further-action", "label": "No further action", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did they say, in their words?" },
+          {
+            "key": "next-steps", "label": "Next steps", "type": "checklist", "carryOver": true,
+            "prompt": "What happens before the next touch?"
+          }
+        ]
+      },
+      {
+        "id": "sales.deal-update",
+        "version": 3,
+        "name": "Deal update",
+        "icon": "briefcase",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "What moved this week, and what could stall it.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "deal", "label": "Deal", "type": "project", "carryOver": true },
+          {
+            "key": "stage", "label": "Stage", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "prospecting", "label": "Prospecting", "color": "neutral" },
+              { "key": "qualified", "label": "Qualified", "color": "info" },
+              { "key": "proposal", "label": "Proposal", "color": "info" },
+              { "key": "negotiation", "label": "Negotiation", "color": "warning" },
+              { "key": "closed-won", "label": "Closed won", "color": "success" },
+              { "key": "closed-lost", "label": "Closed lost", "color": "danger" }
+            ]
+          },
+          { "key": "value", "label": "Value", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "summary", "label": "Summary", "type": "richText",
+            "prompt": "What moved this week, and what’s next?"
+          },
+          {
+            "key": "risks", "label": "Risks", "type": "text", "includeInInsights": true,
+            "prompt": "What could stall this deal?"
+          }
+        ]
+      },
+      {
+        "id": "sales.proposal-sent-log",
+        "version": 1,
+        "name": "Proposal sent log",
+        "icon": "paperplane",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "The moment a proposal goes out, and what happens to it.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "deal", "label": "Deal", "type": "project", "carryOver": true },
+          { "key": "amount", "label": "Amount", "type": "number", "includeInInsights": true },
+          {
+            "key": "outcome", "label": "Outcome", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "won", "label": "Won", "color": "success" },
+              { "key": "lost", "label": "Lost", "color": "danger" },
+              { "key": "pending", "label": "Pending", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "close-reason", "label": "Close reason", "type": "text", "includeInInsights": true, "prompt": "Why did they say yes or no?" }
+        ]
+      },
+      {
+        "id": "sales.pipeline-review",
+        "version": 3,
+        "name": "Pipeline review",
+        "icon": "line.3.horizontal.decrease",
+        "color": "purple",
+        "cadence": "weekly",
+        "summary": "Where the pipeline stands, and which deals need attention.",
+        "includedByDefault": true,
+        "reminder": { "weekdays": [2], "hour": 9, "minute": 30 },
+        "fields": [
+          { "key": "week-of", "label": "Week of", "type": "date" },
+          { "key": "open-deals", "label": "Open deals", "type": "number", "includeInInsights": true },
+          { "key": "pipeline-value", "label": "Pipeline value", "type": "number", "includeInInsights": true },
+          { "key": "forecast-confidence", "label": "Forecast confidence", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "at-risk", "label": "At risk", "type": "text", "includeInInsights": true,
+            "prompt": "Which deals need attention, and why?"
+          },
+          {
+            "key": "priorities", "label": "Priorities", "type": "checklist", "carryOver": true,
+            "prompt": "What needs to happen this week to move the pipeline forward?"
+          }
+        ]
+      },
+      {
+        "id": "sales.weekly-numbers",
+        "version": 3,
+        "name": "Weekly numbers",
+        "icon": "chart.line.uptrend.xyaxis",
+        "color": "green",
+        "cadence": "weekly",
+        "summary": "Calls, meetings and deals closed, with the story behind them.",
+        "includedByDefault": true,
+        "reminder": { "weekdays": [6], "hour": 16, "minute": 0 },
+        "fields": [
+          { "key": "calls-made", "label": "Calls made", "type": "number", "includeInInsights": true },
+          { "key": "meetings-booked", "label": "Meetings booked", "type": "number", "includeInInsights": true },
+          { "key": "deals-closed", "label": "Deals closed", "type": "number", "includeInInsights": true },
+          { "key": "revenue-closed", "label": "Revenue closed", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "highlights", "label": "Highlights", "type": "richText",
+            "prompt": "What’s the story behind these numbers?"
+          },
+          {
+            "key": "next-week-focus", "label": "Next week focus", "type": "text",
+            "prompt": "What’s the one thing to focus on next week?"
+          }
+        ]
+      }
+    ]
+  }
+}

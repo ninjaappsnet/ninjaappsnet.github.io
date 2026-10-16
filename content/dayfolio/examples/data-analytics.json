@@ -1,0 +1,56 @@
+{
+  "data-analytics.ab-experiment-log": {
+    "date": "2026-10-20 15:45",
+    "values": {
+      "project": ["Checkout"],
+      "result": "significant-win",
+      "confidence": 4,
+      "tags": ["experiments", "checkout"],
+      "hypothesis": "Showing the delivery date on the cart page means fewer people leave at the shipping step.",
+      "setup": "Half of new visitors saw the delivery date on the cart page, for two weeks. Everyone else saw it at the shipping step, as before.",
+      "takeaway": "Fewer people left at the shipping step, and the difference held in both weeks. Recommend shipping it to everyone."
+    }
+  },
+  "data-analytics.data-pipeline-incident": {
+    "date": "2026-10-09 10:30",
+    "values": {
+      "pipeline": ["Orders nightly load"],
+      "severity": "degraded",
+      "detected-by": "downstream-team",
+      "tags": ["pipelines", "incident"],
+      "impact": "The sales dashboard showed Tuesday’s orders twice for most of Wednesday morning.",
+      "root-cause": "A retried job wrote its batch again after the first attempt had already finished. The load didn’t check for batches it had already written.",
+      "fix": ["[x] Remove the duplicate batch and refresh the dashboard", "[ ] Make the load skip a batch it has already written", "[ ] Alert when a day’s order count doubles"]
+    }
+  },
+  "data-analytics.analysis-notes": {
+    "date": "2026-10-14 17:20",
+    "values": {
+      "project": ["Retention"],
+      "confidence": 3,
+      "tags": ["analysis", "retention"],
+      "question": "Do teams that invite a second person in week one stay longer?",
+      "method": "Teams that signed up from January to June, grouped by whether they invited someone in their first week. Compared how many were still active after 90 days.",
+      "findings": "Teams with an invite stayed noticeably longer. But teams that invite may simply be more serious to begin with; an experiment would settle it."
+    }
+  },
+  "data-analytics.model-performance-review": {
+    "date": "2026-10-16 09:40",
+    "values": {
+      "model": ["Demand forecast"],
+      "metric-drift": 4.2,
+      "status": "degrading",
+      "tags": ["models", "forecasting"],
+      "notes": "Error is up for the last three weeks, mostly in the two new regions. The model hasn’t seen a full season there yet."
+    }
+  },
+  "data-analytics.data-quality-watch": {
+    "date": "2026-10-15 08:50",
+    "values": {
+      "checks-run": 142,
+      "checks-failed": 3,
+      "tags": ["data-quality"],
+      "notes": "All three failures are late files from one supplier. Asked them about it; the checks should pass again once the files arrive."
+    }
+  }
+}

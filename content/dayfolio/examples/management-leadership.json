@@ -1,0 +1,56 @@
+{
+  "management-leadership.feedback-given": {
+    "date": "2026-10-13 15:20",
+    "values": {
+      "person": ["Sam Ortiz"],
+      "feedback-type": "constructive",
+      "tags": ["feedback"],
+      "context": "Sam’s pull requests are often over a thousand lines, so reviews take days and problems are found late.",
+      "what-you-said": "I said his work is careful, and that smaller pull requests would get it merged sooner. We agreed to try splitting the next feature into three parts.",
+      "follow-up": "Look at the size of his next two pull requests in our 1:1 on the 27th."
+    }
+  },
+  "management-leadership.team-pulse": {
+    "date": "2026-10-16 16:00",
+    "values": {
+      "team-mood": 3,
+      "workload": 4,
+      "tags": ["team"],
+      "highlights": "The retry launch went smoothly, and the team is proud of it.",
+      "concerns": "Three people are on call over the holidays. Worth spreading that more evenly.",
+      "actions": ["[ ] Ask for volunteers to swap holiday on-call", "[ ] Thank the team for the launch in Monday’s meeting"]
+    }
+  },
+  "management-leadership.weekly-review": {
+    "date": "2026-10-16 16:40",
+    "values": {
+      "energy": 4,
+      "meeting-time": 45,
+      "tags": ["team", "weekly"],
+      "team-wins": ["[x] Retry queue live for every merchant", "[x] New engineer’s first change shipped", "[x] On-call handbook updated"],
+      "people-notes": "Amara is ready to lead the next project. Jonas has seemed tired since the launch; check in with him on Monday.",
+      "priorities": ["[ ] Plan the dead-letter work", "[ ] Interview loop for the backend role", "[ ] Holiday on-call schedule"]
+    }
+  },
+  "management-leadership.skip-level-notes": {
+    "date": "2026-10-15 14:40",
+    "values": {
+      "person": ["Lena Fischer"],
+      "meeting-time": "14:00–14:30",
+      "tags": ["skip-level"],
+      "notes": "Lena likes the new review slot, but feels design decisions are made before she hears about them. She’d like to join planning once a month.",
+      "follow-ups": ["[ ] Ask her lead about inviting designers to monthly planning", "[ ] Share the Q1 plan with Lena when it’s drafted"]
+    }
+  },
+  "management-leadership.delegation-log": {
+    "date": "2026-10-12 11:30",
+    "values": {
+      "assigned-to": ["Amara Okafor"],
+      "check-in-by": "2026-10-26",
+      "status": "on-track",
+      "tags": ["delegation"],
+      "task": "Run the interview loop for the backend role",
+      "notes": "Amara owns the loop: the schedule, the interviewers and the debrief. Done means a hiring decision by the end of the month."
+    }
+  }
+}

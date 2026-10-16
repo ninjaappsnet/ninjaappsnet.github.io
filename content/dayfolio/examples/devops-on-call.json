@@ -1,0 +1,56 @@
+{
+  "devops-on-call.on-call-handover": {
+    "date": "2026-10-19 09:30",
+    "values": {
+      "pages": 6,
+      "tags": ["on-call"],
+      "rotation": "12–18 Oct",
+      "open-issues": ["[ ] Disk on the search cluster at 81%, cleanup job scheduled for Tuesday", "[ ] Certificate for the status page renews on 24 Oct", "[x] Login latency alert: fixed by Friday’s config change"],
+      "watch-outs": "The nightly backup now runs at 02:00, so the 02:10 backup alert can fire once while it catches up. Acknowledge it and check the job log."
+    }
+  },
+  "devops-on-call.incident-postmortem": {
+    "date": "2026-10-08 13:00",
+    "values": {
+      "severity": "sev-2",
+      "window": "09:14–10:02",
+      "detected-by": "monitoring",
+      "service": ["Checkout"],
+      "tags": ["incident", "database"],
+      "impact": "About 12% of checkout attempts failed for 48 minutes. Customers saw an error and could try again.",
+      "timeline": "- 09:14 Error rate alert fires\n- 09:21 Traced to slow queries on the orders database\n- 09:40 A long-running report query is stopped\n- 10:02 Error rate back to normal",
+      "graphs-screenshots-attachment": [["checkout-errors-0914.png", "PNG picture · 96 KB"], ["orders-db-load.png", "PNG picture · 118 KB"]],
+      "root-cause": "A monthly report ran on the main database rather than the replica after a config change two weeks earlier. Nothing checked where the report connects.",
+      "follow-ups": ["[x] Point the report back at the replica", "[ ] Alert when a report query runs on the main database", "[ ] Add the connection setting to the deploy checklist"]
+    }
+  },
+  "devops-on-call.alert-log": {
+    "date": "2026-10-14 18:00",
+    "values": {
+      "alerts-received": 23,
+      "actionable": 4,
+      "tags": ["alerts"],
+      "noisiest-alert": "Queue depth on the email worker: 11 times, never above the limit for more than two minutes. Worth raising the wait time before it fires."
+    }
+  },
+  "devops-on-call.deploy-log": {
+    "date": "2026-10-15 14:25",
+    "values": {
+      "service": ["Payments API"],
+      "result": "success",
+      "duration": 25,
+      "tags": ["deploy"],
+      "notes": "Release 2.14: retry limits per merchant, behind a flag. Rolled out to 10% of traffic first, then everyone after 15 minutes."
+    }
+  },
+  "devops-on-call.runbook-review": {
+    "date": "2026-10-02 10:00",
+    "values": {
+      "runbook": {"title": "Runbook: restore the orders database", "url": "https://wiki.example.com/runbooks/orders-restore"},
+      "last-tested": "2026-07-18",
+      "status": "needs-update",
+      "tags": ["runbooks"],
+      "gaps-found": "Step 4 still names the old backup bucket. The restore now takes about 40 minutes, not 15, so the time estimate needs updating too."
+    }
+  }
+}

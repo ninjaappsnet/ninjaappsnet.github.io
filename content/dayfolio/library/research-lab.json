@@ -1,0 +1,107 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "research-lab",
+    "industry": "Research",
+    "name": "Research & Lab",
+    "journalName": "Lab Notebook",
+    "summary": "Experiments, reading and lab safety for people doing research or bench work.",
+    "icon": "flask",
+    "color": "purple",
+    "order": 15,
+    "defaultTemplate": "research-lab.lab-experiment",
+    "includes": ["general.meeting-notes"],
+    "keywords": ["assay", "lab", "sample", "experiment", "reagent", "protocol", "research", "paper", "microscope", "pcr", "thesis", "grant", "hypothesis"],
+    "templates": [
+      {
+        "id": "research-lab.lab-experiment",
+        "version": 1,
+        "name": "Lab experiment",
+        "icon": "flask",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "A lab notebook entry: hypothesis, method, results — attributable and dated.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "project", "label": "Project", "type": "project" },
+          {
+            "key": "outcome", "label": "Outcome", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "supports-hypothesis", "label": "Supports hypothesis", "color": "success" },
+              { "key": "inconclusive", "label": "Inconclusive", "color": "neutral" },
+              { "key": "contradicts-hypothesis", "label": "Contradicts hypothesis", "color": "warning" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "hypothesis", "label": "Hypothesis", "type": "text", "includeInInsights": true, "prompt": "What are you testing?" },
+          { "key": "method", "label": "Method", "type": "richText", "prompt": "What did you do, step by step?" },
+          { "key": "results", "label": "Results", "type": "richText", "prompt": "What did you observe?" },
+          { "key": "images-data-attachment", "label": "Images and data", "type": "attachment" }
+        ]
+      },
+      {
+        "id": "research-lab.literature-reading-log",
+        "version": 1,
+        "name": "Reading log",
+        "icon": "book",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "What you read, the key finding, and how it connects to your own work.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "source", "label": "Source", "type": "link" },
+          { "key": "relevance", "label": "Relevance", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "summary", "label": "Summary", "type": "text", "includeInInsights": true, "prompt": "What’s the key finding?" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "How does this relate to your work?" }
+        ]
+      },
+      {
+        "id": "research-lab.safety-lab-check",
+        "version": 1,
+        "name": "Safety check",
+        "icon": "checkmark.shield",
+        "color": "green",
+        "cadence": "weekly",
+        "summary": "A periodic lab safety walk-through, logged.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "lab", "label": "Lab", "type": "project" },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "all-clear", "label": "All clear", "color": "success" },
+              { "key": "minor-issue", "label": "Minor issue", "color": "warning" },
+              { "key": "needs-attention", "label": "Needs attention", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "Anything to flag about equipment, reagents or procedure?" }
+        ]
+      },
+      {
+        "id": "research-lab.data-management-log",
+        "version": 1,
+        "name": "Data management log",
+        "icon": "externaldrive",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "Where a dataset lives and whether it’s backed up — a habit, not an afterthought.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "dataset", "label": "Dataset", "type": "project" },
+          {
+            "key": "backup-status", "label": "Backup status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "backed-up", "label": "Backed up", "color": "success" },
+              { "key": "pending", "label": "Pending", "color": "warning" },
+              { "key": "at-risk", "label": "At risk", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "text", "prompt": "Where does this live, and who else has a copy?" }
+        ]
+      }
+    ]
+  }
+}

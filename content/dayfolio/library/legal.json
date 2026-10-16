@@ -1,0 +1,87 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "legal",
+    "industry": "Legal",
+    "name": "Legal",
+    "journalName": "Legal Practice",
+    "summary": "Time recording, supervision and reflective practice for lawyers — never case files.",
+    "icon": "scalemass",
+    "color": "slate",
+    "order": 13,
+    "defaultTemplate": "legal.time-recording-log",
+    "includes": ["general.cpd-log", "general.weekly-review"],
+    "keywords": ["contract", "clause", "matter", "draft", "counsel", "court", "hearing", "litigation", "deposition", "solicitor", "barrister", "filing", "statute"],
+    "templates": [
+      {
+        "id": "legal.time-recording-log",
+        "version": 1,
+        "name": "Time recording log",
+        "icon": "clock",
+        "color": "slate",
+        "cadence": "daily",
+        "summary": "Time against a matter, the way the SRA and most bars expect it recorded.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "matter", "label": "Matter", "type": "project" },
+          { "key": "duration", "label": "Duration", "type": "duration", "includeInInsights": true },
+          {
+            "key": "billable", "label": "Billable", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "billable", "label": "Billable", "color": "success" },
+              { "key": "non-billable", "label": "Non-billable", "color": "neutral" },
+              { "key": "pro-bono", "label": "Pro bono", "color": "info" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "notes", "label": "Notes", "type": "text",
+            "prompt": "What type of work, in general terms (no privileged detail)?"
+          }
+        ]
+      },
+      {
+        "id": "legal.supervision-mentoring-notes",
+        "version": 1,
+        "name": "Supervision notes",
+        "icon": "bubble.left.and.bubble.right",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "What came up in supervision or mentoring, about your practice — not a client’s matter.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What did you discuss about your practice or development?" }
+        ]
+      },
+      {
+        "id": "legal.practice-reflection",
+        "version": 1,
+        "name": "Practice reflection",
+        "icon": "book.closed",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "A lesson worth keeping from how a matter went, stripped of anything privileged.",
+        "includedByDefault": false,
+        "fields": [
+          {
+            "key": "area-of-law", "label": "Area of law", "type": "singleSelect",
+            "options": [
+              { "key": "litigation", "label": "Litigation", "color": "info" },
+              { "key": "corporate", "label": "Corporate", "color": "info" },
+              { "key": "property", "label": "Property", "color": "neutral" },
+              { "key": "family", "label": "Family", "color": "neutral" },
+              { "key": "other", "label": "Other", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "what-you-learned", "label": "What you learned", "type": "richText",
+            "prompt": "What would you do differently next time, in general terms?"
+          }
+        ]
+      }
+    ]
+  }
+}

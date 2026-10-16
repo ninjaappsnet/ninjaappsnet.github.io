@@ -1,0 +1,137 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "marketing",
+    "industry": "Marketing",
+    "name": "Marketing",
+    "journalName": "Marketing Log",
+    "summary": "Campaigns, content and performance reviews for people who run marketing.",
+    "icon": "megaphone",
+    "color": "orange",
+    "order": 7,
+    "defaultTemplate": "marketing.content-log",
+    "keywords": ["campaign", "copy", "newsletter", "launch", "seo", "brand", "content", "social", "ads", "audience", "conversion", "blog"],
+    "templates": [
+      {
+        "id": "marketing.campaign-brief",
+        "version": 1,
+        "name": "Campaign brief",
+        "icon": "megaphone",
+        "color": "orange",
+        "cadence": "onEvent",
+        "summary": "The goal, channels and budget, written down before the campaign starts.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "campaign", "label": "Campaign", "type": "project", "carryOver": true },
+          {
+            "key": "channels", "label": "Channels", "type": "multiSelect",
+            "options": [
+              { "key": "email", "label": "Email", "color": "info" },
+              { "key": "social", "label": "Social", "color": "info" },
+              { "key": "paid", "label": "Paid", "color": "warning" },
+              { "key": "organic", "label": "Organic", "color": "neutral" },
+              { "key": "content", "label": "Content", "color": "neutral" }
+            ]
+          },
+          {
+            "key": "goal-metric", "label": "Goal metric", "type": "singleSelect",
+            "options": [
+              { "key": "leads", "label": "Leads", "color": "info" },
+              { "key": "signups", "label": "Signups", "color": "info" },
+              { "key": "revenue", "label": "Revenue", "color": "success" },
+              { "key": "engagement", "label": "Engagement", "color": "neutral" }
+            ]
+          },
+          { "key": "budget", "label": "Budget", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "brief", "label": "Brief", "type": "richText", "prompt": "What’s the goal, and how will you know it worked?" }
+        ]
+      },
+      {
+        "id": "marketing.content-log",
+        "version": 1,
+        "name": "Content log",
+        "icon": "doc.richtext",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Every piece of content, from planned to published to reviewed.",
+        "includedByDefault": true,
+        "fields": [
+          {
+            "key": "type", "label": "Type", "type": "singleSelect",
+            "options": [
+              { "key": "blog", "label": "Blog", "color": "info" },
+              { "key": "video", "label": "Video", "color": "info" },
+              { "key": "social", "label": "Social", "color": "neutral" },
+              { "key": "email", "label": "Email", "color": "neutral" },
+              { "key": "whitepaper", "label": "Whitepaper", "color": "info" }
+            ]
+          },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "planned", "label": "Planned", "color": "neutral" },
+              { "key": "published", "label": "Published", "color": "success" },
+              { "key": "reviewed", "label": "Reviewed", "color": "info" }
+            ]
+          },
+          { "key": "link", "label": "Link", "type": "link" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "title", "label": "Title", "type": "text", "showInListPreview": true, "prompt": "What’s this piece called?" },
+          { "key": "notes", "label": "Notes", "type": "text", "prompt": "What’s this piece about, and who’s it for?" }
+        ]
+      },
+      {
+        "id": "marketing.weekly-marketing-performance",
+        "version": 1,
+        "name": "Weekly marketing performance",
+        "icon": "chart.bar",
+        "color": "teal",
+        "cadence": "weekly",
+        "summary": "Impressions, clicks and conversions, with the story behind the numbers.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "impressions", "label": "Impressions", "type": "number", "includeInInsights": true },
+          { "key": "clicks", "label": "Clicks", "type": "number", "includeInInsights": true },
+          { "key": "conversions", "label": "Conversions", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "top-performer", "label": "Top performer", "type": "text", "includeInInsights": true,
+            "prompt": "What worked best this week, and why?"
+          },
+          {
+            "key": "next-week-focus", "label": "Next week focus", "type": "text",
+            "prompt": "What’s the one thing to focus on next week?"
+          }
+        ]
+      },
+      {
+        "id": "marketing.campaign-retrospective",
+        "version": 1,
+        "name": "Campaign retrospective",
+        "icon": "arrow.counterclockwise",
+        "color": "purple",
+        "cadence": "review",
+        "summary": "Did the campaign hit its goal, and what would you change next time?",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "campaign", "label": "Campaign", "type": "project" },
+          {
+            "key": "outcome", "label": "Outcome", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "hit-target", "label": "Hit target", "color": "success" },
+              { "key": "under-target", "label": "Under target", "color": "warning" },
+              { "key": "missed", "label": "Missed", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "what-worked", "label": "What worked", "type": "richText", "prompt": "What worked, and why?" },
+          {
+            "key": "what-wed-change", "label": "What we’d change", "type": "richText",
+            "prompt": "What would you do differently next time?"
+          }
+        ]
+      }
+    ]
+  }
+}

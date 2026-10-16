@@ -1,0 +1,134 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "construction-field",
+    "industry": "Construction",
+    "name": "Construction & Field",
+    "journalName": "Field Log",
+    "summary": "Site logs, safety talks and inspections for people who work on site rather than at a desk.",
+    "icon": "hammer",
+    "color": "amber",
+    "order": 14,
+    "defaultTemplate": "construction-field.daily-site-log",
+    "keywords": ["site", "inspection", "scaffold", "safety", "toolbox", "near-miss", "crane", "concrete", "foreman", "excavation", "rebar", "permit"],
+    "templates": [
+      {
+        "id": "construction-field.daily-site-log",
+        "version": 1,
+        "name": "Daily site log",
+        "icon": "hammer",
+        "color": "amber",
+        "cadence": "daily",
+        "summary": "The site diary, minus weather and location — Dayfolio captures those automatically.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "site", "label": "Site", "type": "project" },
+          { "key": "crew-size", "label": "Crew size", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "progress", "label": "Progress", "type": "text", "includeInInsights": true, "prompt": "What got done today?" },
+          {
+            "key": "delays", "label": "Delays", "type": "text", "presentation": "warning", "includeInInsights": true,
+            "prompt": "What held things up?"
+          },
+          { "key": "deliveries", "label": "Deliveries", "type": "checklist", "prompt": "What arrived on site today?" },
+          { "key": "photos-attachment", "label": "Photos", "type": "attachment" }
+        ]
+      },
+      {
+        "id": "construction-field.toolbox-talk-log",
+        "version": 1,
+        "name": "Toolbox talk log",
+        "icon": "megaphone",
+        "color": "blue",
+        "cadence": "weekly",
+        "summary": "What was covered in the safety briefing, and who was there.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "attendees", "label": "Attendees", "type": "person" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "topic", "label": "Topic", "type": "text", "showInListPreview": true, "prompt": "What’s today’s safety topic?" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What was covered, and what questions came up?" }
+        ]
+      },
+      {
+        "id": "construction-field.incident-near-miss-report",
+        "version": 1,
+        "name": "Near-miss report",
+        "icon": "exclamationmark.triangle",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "An incident or near-miss record, logged while it’s fresh.",
+        "includedByDefault": true,
+        "fields": [
+          {
+            "key": "severity", "label": "Severity", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "near-miss", "label": "Near miss", "color": "neutral" },
+              { "key": "minor", "label": "Minor", "color": "warning" },
+              { "key": "serious", "label": "Serious", "color": "danger" }
+            ]
+          },
+          { "key": "site", "label": "Site", "type": "project" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "what-happened", "label": "What happened", "type": "richText", "prompt": "What happened, in order?" },
+          { "key": "photos-attachment", "label": "Photos", "type": "attachment" },
+          {
+            "key": "corrective-action", "label": "Corrective action", "type": "checklist", "carryOver": true,
+            "prompt": "What needs to change so this doesn’t happen again?"
+          }
+        ]
+      },
+      {
+        "id": "construction-field.equipment-plant-log",
+        "version": 1,
+        "name": "Equipment log",
+        "icon": "wrench.and.screwdriver",
+        "color": "slate",
+        "cadence": "onEvent",
+        "summary": "What’s on site, what’s working, and what’s out of action.",
+        "includedByDefault": false,
+        "fields": [
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "in-use", "label": "In use", "color": "success" },
+              { "key": "down-for-repair", "label": "Down for repair", "color": "danger" },
+              { "key": "idle", "label": "Idle", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "equipment", "label": "Equipment", "type": "text", "showInListPreview": true, "prompt": "Which piece of equipment?" },
+          { "key": "notes", "label": "Notes", "type": "text", "prompt": "What’s the story with this equipment?" }
+        ]
+      },
+      {
+        "id": "construction-field.site-inspection-log",
+        "version": 1,
+        "name": "Site inspection log",
+        "icon": "checkmark.seal",
+        "color": "green",
+        "cadence": "weekly",
+        "summary": "A periodic walk-round, logged before the inspector’s report is the first you hear of a problem.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "site", "label": "Site", "type": "project" },
+          {
+            "key": "result", "label": "Result", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "pass", "label": "Pass", "color": "success" },
+              { "key": "minor-issues", "label": "Minor issues", "color": "warning" },
+              { "key": "fail", "label": "Fail", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "findings", "label": "Findings", "type": "richText", "prompt": "What did the inspection find?" },
+          { "key": "photos-attachment", "label": "Photos", "type": "attachment" },
+          {
+            "key": "actions", "label": "Actions", "type": "checklist", "carryOver": true,
+            "prompt": "What needs fixing before the next inspection?"
+          }
+        ]
+      }
+    ]
+  }
+}

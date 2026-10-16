@@ -1,0 +1,61 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "education",
+    "industry": "Education",
+    "name": "Education",
+    "journalName": "Teaching Log",
+    "summary": "Lesson reflection and professional development for teachers — never student records.",
+    "icon": "graduationcap",
+    "color": "blue",
+    "order": 12,
+    "defaultTemplate": "education.lesson-reflection",
+    "includes": ["general.cpd-log", "general.weekly-review"],
+    "keywords": ["lesson", "marking", "class", "pupil", "student", "teaching", "teach", "curriculum", "homework", "school"],
+    "templates": [
+      {
+        "id": "education.lesson-reflection",
+        "version": 1,
+        "name": "Lesson reflection",
+        "icon": "book.closed",
+        "color": "blue",
+        "cadence": "onEvent",
+        "summary": "Gibbs-style reflection on a single lesson, about your teaching — not a gradebook.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "class", "label": "Class", "type": "project" },
+          { "key": "energy", "label": "Energy", "type": "rating", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "what-went-well", "label": "What went well", "type": "text", "includeInInsights": true, "prompt": "What worked in this lesson?" },
+          { "key": "what-didnt", "label": "What didn’t", "type": "text", "includeInInsights": true, "prompt": "What would you change?" },
+          { "key": "next-time", "label": "Next time", "type": "richText", "prompt": "What will you try differently?" }
+        ]
+      },
+      {
+        "id": "education.observation-feedback-log",
+        "version": 1,
+        "name": "Observation feedback log",
+        "icon": "eye",
+        "color": "purple",
+        "cadence": "onEvent",
+        "summary": "Feedback from being observed teaching, or from observing a colleague.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "person", "label": "With", "type": "person" },
+          {
+            "key": "focus-area", "label": "Focus area", "type": "singleSelect",
+            "options": [
+              { "key": "classroom-management", "label": "Classroom management", "color": "info" },
+              { "key": "engagement", "label": "Engagement", "color": "info" },
+              { "key": "differentiation", "label": "Differentiation", "color": "neutral" },
+              { "key": "assessment", "label": "Assessment", "color": "neutral" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "feedback", "label": "Feedback", "type": "richText", "prompt": "What feedback did you get or give?" },
+          { "key": "action-items", "label": "Action items", "type": "checklist", "carryOver": true, "prompt": "What will change next lesson?" }
+        ]
+      }
+    ]
+  }
+}

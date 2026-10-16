@@ -1,0 +1,147 @@
+{
+  "formatVersion": 1,
+  "pack": {
+    "id": "devops-on-call",
+    "industry": "Engineering",
+    "name": "DevOps & On-call",
+    "journalName": "On-call Log",
+    "summary": "Handovers, incidents, alerts and deploys for people who keep production running.",
+    "icon": "server.rack",
+    "color": "slate",
+    "order": 2,
+    "defaultTemplate": "devops-on-call.on-call-handover",
+    "keywords": ["deploy", "flaky", "incident", "alert", "page", "on-call", "oncall", "outage", "rollback", "infra", "kubernetes", "terraform", "latency", "server", "monitor", "postmortem", "runbook", "handover", "uptime"],
+    "templates": [
+      {
+        "id": "devops-on-call.on-call-handover",
+        "version": 1,
+        "name": "On-call handover",
+        "icon": "arrow.left.arrow.right",
+        "color": "slate",
+        "cadence": "weekly",
+        "summary": "What the next on-call person needs on day one of the rotation.",
+        "includedByDefault": true,
+        "fields": [
+          { "key": "pages", "label": "Pages", "type": "number" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "rotation", "label": "Rotation", "type": "text", "prompt": "e.g. 21–27 Sep" },
+          {
+            "key": "open-issues", "label": "Open issues", "type": "checklist", "carryOver": true, "showInListPreview": true,
+            "prompt": "What’s still open for the next on-call?"
+          },
+          { "key": "watch-outs", "label": "Watch-outs", "type": "richText", "prompt": "What should the next on-call know about?" }
+        ]
+      },
+      {
+        "id": "devops-on-call.incident-postmortem",
+        "version": 1,
+        "name": "Incident postmortem",
+        "icon": "exclamationmark.triangle",
+        "color": "amber",
+        "cadence": "onEvent",
+        "summary": "Severity, timeline, root cause and follow-ups for a blameless incident record.",
+        "includedByDefault": true,
+        "fields": [
+          {
+            "key": "severity", "label": "Severity", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "sev-1", "label": "SEV-1", "color": "danger" },
+              { "key": "sev-2", "label": "SEV-2", "color": "danger" },
+              { "key": "sev-3", "label": "SEV-3", "color": "warning" },
+              { "key": "sev-4", "label": "SEV-4", "color": "neutral" }
+            ]
+          },
+          { "key": "window", "label": "Window", "type": "timeRange" },
+          {
+            "key": "detected-by", "label": "Detected by", "type": "singleSelect",
+            "options": [
+              { "key": "monitoring", "label": "Monitoring alert", "color": "info" },
+              { "key": "customer-report", "label": "Customer report", "color": "warning" },
+              { "key": "internal-report", "label": "Internal report", "color": "neutral" }
+            ]
+          },
+          { "key": "service", "label": "Service", "type": "project" },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "impact", "label": "Impact", "type": "text", "includeInInsights": true,
+            "prompt": "Who or what was affected, and for how long?"
+          },
+          { "key": "timeline", "label": "Timeline", "type": "richText", "prompt": "What happened, in order?" },
+          { "key": "graphs-screenshots-attachment", "label": "Graphs and screenshots", "type": "attachment" },
+          { "key": "root-cause", "label": "Root cause", "type": "richText", "prompt": "What actually caused it — not who?" },
+          {
+            "key": "follow-ups", "label": "Follow-ups", "type": "checklist",
+            "prompt": "What needs to happen so this doesn’t happen again?"
+          }
+        ]
+      },
+      {
+        "id": "devops-on-call.alert-log",
+        "version": 1,
+        "name": "Alert log",
+        "icon": "bell.badge",
+        "color": "slate",
+        "cadence": "daily",
+        "summary": "A running tally of pager noise, so alert fatigue shows up as a chart.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "alerts-received", "label": "Alerts received", "type": "number", "includeInInsights": true },
+          { "key": "actionable", "label": "Actionable", "type": "number", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          {
+            "key": "noisiest-alert", "label": "Noisiest alert", "type": "text", "includeInInsights": true,
+            "prompt": "Which alert fired the most, and is it worth silencing or fixing?"
+          }
+        ]
+      },
+      {
+        "id": "devops-on-call.deploy-log",
+        "version": 1,
+        "name": "Deploy log",
+        "icon": "arrow.up.circle",
+        "color": "teal",
+        "cadence": "onEvent",
+        "summary": "What went out, whether it stuck, and how long it took.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "service", "label": "Service", "type": "project" },
+          {
+            "key": "result", "label": "Result", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "success", "label": "Success", "color": "success" },
+              { "key": "rolled-back", "label": "Rolled back", "color": "danger" },
+              { "key": "partial", "label": "Partial", "color": "warning" }
+            ]
+          },
+          { "key": "duration", "label": "Duration", "type": "duration", "includeInInsights": true },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "notes", "label": "Notes", "type": "richText", "prompt": "What shipped, and did anything go wrong?" }
+        ]
+      },
+      {
+        "id": "devops-on-call.runbook-review",
+        "version": 1,
+        "name": "Runbook review",
+        "icon": "book.closed",
+        "color": "purple",
+        "cadence": "review",
+        "summary": "A periodic check that runbooks stay trustworthy for whoever’s paged next.",
+        "includedByDefault": false,
+        "fields": [
+          { "key": "runbook", "label": "Runbook", "type": "link" },
+          { "key": "last-tested", "label": "Last tested", "type": "date" },
+          {
+            "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
+            "options": [
+              { "key": "up-to-date", "label": "Up to date", "color": "success" },
+              { "key": "needs-update", "label": "Needs update", "color": "warning" },
+              { "key": "missing", "label": "Missing", "color": "danger" }
+            ]
+          },
+          { "key": "tags", "label": "Tags", "type": "tags" },
+          { "key": "gaps-found", "label": "Gaps found", "type": "richText", "prompt": "What’s missing or wrong, and what needs to change?" }
+        ]
+      }
+    ]
+  }
+}
