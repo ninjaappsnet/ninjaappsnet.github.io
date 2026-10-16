@@ -2,7 +2,7 @@
 title: Locked journals and privacy
 description: Lock a journal with Face ID or Touch ID and its entries stay hidden everywhere until you unlock. What the lock hides, and Dayfolio’s privacy settings.
 slug: locked-journals
-date: 2026-10-29
+date: 2026-10-16
 order: 6
 ---
 Some of what you write at work is sensitive: notes from 1:1s, feedback, career plans. You can lock any journal with Face ID or Touch ID, and while it’s locked, its entries don’t show anywhere in Dayfolio. Everything else about Dayfolio is private by default: there’s no account, your journals are stored on your devices and in your own iCloud, and Dayfolio collects nothing.

@@ -2,7 +2,7 @@
 title: People and projects
 description: Keep track of the people and projects in your notes: see everything with one name, what’s still open, and rename or merge names in Dayfolio.
 slug: people-and-projects
-date: 2026-10-29
+date: 2026-10-16
 order: 5
 ---
 The people you work with and the projects or clients you work on run through every journal. Dayfolio keeps one list of each, shared by all your journals, so you can see everything about one name in one place: every entry, the action items still open, and a report about them.

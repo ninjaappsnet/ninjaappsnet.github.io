@@ -2,7 +2,7 @@
 title: Quick capture
 description: Write into Dayfolio without opening it: Mac quick entry with ⌥⌘J, notes from a terminal, drag and drop, answering a reminder, and the Share sheet.
 slug: quick-capture
-date: 2026-10-29
+date: 2026-10-16
 order: 7
 ---
 The best moment to write something down is the moment it happens, usually while you’re in another app. Dayfolio has several ways to capture a note without stopping what you’re doing. Each one makes an ordinary entry, and what you typed is never thrown away, even when it can’t be saved yet.

@@ -2,7 +2,7 @@
 title: Siri, Shortcuts, widgets, Control Center and Focus
 description: Log entries with Siri, rate your day from a widget, time work from Control Center and quiet reminders with Focus. Dayfolio’s system features.
 slug: siri-shortcuts-and-widgets
-date: 2026-10-29
+date: 2026-10-16
 order: 8
 ---
 Dayfolio works from outside the app too: you can log a line by voice, start today’s entry from your Home Screen, stop a timer from the Lock Screen and keep reminders quiet while you focus. None of these ever show or offer a journal you lock.

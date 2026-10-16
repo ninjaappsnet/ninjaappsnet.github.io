@@ -2,7 +2,7 @@
 title: Carry-over between entries
 description: Dayfolio carries open action items, the client and the project into your next entry, following each person and client. Here’s how it works.
 slug: carry-over
-date: 2026-10-29
+date: 2026-10-16
 order: 3
 ---
 Work continues from one day to the next, and from one meeting to the next. Carry-over brings what’s still relevant into your new entry: the project you’re on, the client you’re working for, the action items nobody has ticked yet. You start where you left off instead of copying things across.

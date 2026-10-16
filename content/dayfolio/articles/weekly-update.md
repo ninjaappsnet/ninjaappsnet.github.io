@@ -2,7 +2,7 @@
 title: How to write a weekly update people read
 description: Lead with what changed, name risks early and keep the same shape every week: how to write a weekly update or a director update people read.
 slug: weekly-update
-date: 2026-10-15
+date: 2026-10-16
 image: card.png
 image_alt: The title How to write a weekly update people read, beside an iPhone showing a director update in Dayfolio, with Highlights and This week
 ---

@@ -2,7 +2,7 @@
 title: Reports: weekly, director update and self-review
 description: Turn your entries into a weekly report, a director update, a performance review or a year-end self-review, with filters, billable time and CSV.
 slug: reports
-date: 2026-10-29
+date: 2026-10-16
 order: 4
 ---
 A report turns a week, a month or a review period of entries into a summary you can read, edit and send. Because entries are structured, Dayfolio doesn’t just paste your notes together: it lists what shipped, adds up hours in a time table, counts statuses and puts your starred entries first. Making and reading reports is free.

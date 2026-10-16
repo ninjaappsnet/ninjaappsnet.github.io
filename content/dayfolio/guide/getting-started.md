@@ -2,7 +2,7 @@
 title: Getting started with Dayfolio
 description: Write one line about your work and Dayfolio sets up a journal with the right templates. Your first page, journals, templates and new entries.
 slug: getting-started
-date: 2026-10-29
+date: 2026-10-16
 order: 1
 ---
 Dayfolio is a work journal. You keep a journal for each role, client or area of work, and every entry starts from a template shaped like that work: a standup, a client meeting, a 1:1, a shift debrief. This page takes you from a fresh install to your first entry, and shows where everything else lives.

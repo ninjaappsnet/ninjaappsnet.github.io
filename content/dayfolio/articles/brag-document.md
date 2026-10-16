@@ -2,7 +2,7 @@
 title: What goes in a brag document, and how to keep one
 description: A brag document is a running record of your wins, with evidence. What to put in it, how to write each entry and how to keep it going all year.
 slug: brag-document
-date: 2026-10-15
+date: 2026-10-16
 image: card.png
 image_alt: The title What goes in a brag document, and how to keep one, beside the Dayfolio app icon
 ---

@@ -2,7 +2,7 @@
 title: Import, export and backups
 description: Export journals as Markdown or a Dayfolio archive, restore a backup, import a Markdown folder, and keep a live Markdown copy in a folder on your Mac.
 slug: import-and-export
-date: 2026-10-29
+date: 2026-10-16
 order: 10
 ---
 What you write in Dayfolio stays yours, in formats you can read anywhere. You can export a journal or everything as Markdown files, keep a complete backup you can restore on any device, bring in Markdown notes from elsewhere, and, on a Mac, keep a live Markdown copy of chosen journals in a folder of your own. Exporting and importing are free.

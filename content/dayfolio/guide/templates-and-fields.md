@@ -2,7 +2,7 @@
 title: Templates and fields
 description: Pick templates from Dayfolio’s library of 75, change their fields, and fill an entry fast with the Fill line, last time’s values and a running timer.
 slug: templates-and-fields
-date: 2026-10-29
+date: 2026-10-16
 order: 2
 ---
 Every Dayfolio entry starts from a template, so you write in the shape of your work instead of facing a blank page. A template is an ordered set of fields: a rating for energy, a duration for focus time, a status with coloured options, a checklist of what shipped, a notes field. Because the values are structured, Dayfolio can chart them in Insights, add them up in reports and carry them from one entry to the next.

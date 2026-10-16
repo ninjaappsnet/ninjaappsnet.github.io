@@ -2,7 +2,7 @@
 title: 1:1 notes that carry over from one meeting to the next
 description: Keep topics, notes and action items for each 1:1, carry what’s still open into the next one, and keep the notes private. A practical method.
 slug: one-on-one-notes
-date: 2026-10-15
+date: 2026-10-16
 image: card.png
 image_alt: The title 1:1 notes that carry over from one meeting to the next, beside an iPhone showing a 1:1 notes entry in Dayfolio with its topics and action items
 ---

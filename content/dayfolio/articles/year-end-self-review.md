@@ -2,7 +2,7 @@
 title: How to write your year-end self-review
 description: Gather a year of evidence, lead with outcomes and say what’s next: a practical way to write your year-end self-review, with a template to start from.
 slug: year-end-self-review
-date: 2026-10-15
+date: 2026-10-16
 image: card.png
 image_alt: The title How to write your year-end self-review, beside an iPhone showing Dayfolio’s Year-end self-review with its highlights listed first
 ---

@@ -2,7 +2,7 @@
 title: Sync and iCloud
 description: Dayfolio syncs your journals between iPhone, iPad and Mac through your own iCloud, encrypted, and end to end with Advanced Data Protection.
 slug: sync-and-icloud
-date: 2026-10-29
+date: 2026-10-16
 order: 9
 ---
 Dayfolio keeps your journals the same on your iPhone, iPad and Mac through your own iCloud account. There’s no Dayfolio account to create and no Dayfolio server: your entries go from your devices to your private iCloud storage and back.

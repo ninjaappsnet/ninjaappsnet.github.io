@@ -422,6 +422,19 @@ class WriteAndCheckTests(unittest.TestCase):
         self.assertEqual(len(problems), 1, problems)
         self.assertIn("apps/dayfolio/guide/getting-started/index.html", problems[0])
 
+    def test_a_page_without_a_date_stops_the_build_and_fails_the_check(self):
+        # The date is the day the page went live, from its own front matter: the build never supplies one.
+        for rel, text in (("content/dayfolio/guide/b.md", source(title="B", description=f"B, {LONG}.", slug="b", order="2")),
+                          ("content/dayfolio/articles/c.md", source(title="C", description=f"C, {LONG}.", slug="c"))):
+            with self.subTest(page=rel):
+                site = Site(self)
+                site.put(rel, text)
+                problems = build.check(site.root)
+                self.assertEqual(len(problems), 1, problems)
+                self.assertIn(f"{rel}: the field 'date' is missing", problems[0])
+                with self.assertRaisesRegex(build.BuildError, "'date' is missing"):
+                    build.write(site.root)
+
     def test_a_page_whose_source_is_gone_is_reported_and_removed(self):
         build.write(self.site.root)
         (self.site.root / "content/dayfolio/guide/a.md").unlink()
