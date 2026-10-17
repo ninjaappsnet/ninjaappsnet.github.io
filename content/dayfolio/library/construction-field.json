@@ -14,12 +14,12 @@
     "templates": [
       {
         "id": "construction-field.daily-site-log",
-        "version": 1,
+        "version": 2,
         "name": "Daily site log",
         "icon": "hammer",
         "color": "amber",
         "cadence": "daily",
-        "summary": "The site diary, minus weather and location — Dayfolio captures those automatically.",
+        "summary": "The site diary, minus weather and location — Dayfolio adds those once you turn them on in Journal settings.",
         "includedByDefault": true,
         "fields": [
           { "key": "site", "label": "Site", "type": "project" },

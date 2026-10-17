@@ -22,6 +22,7 @@
   },
   "healthcare.supervision-prep": {
     "date": "2026-10-17 12:30",
+    "page_title": "Clinical supervision prep template",
     "values": {
       "person": ["Dr. Helen Park"],
       "tags": ["supervision"],

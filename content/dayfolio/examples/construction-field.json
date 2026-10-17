@@ -1,6 +1,7 @@
 {
   "construction-field.daily-site-log": {
     "date": "2026-10-14 16:45",
+    "page_title": "Daily site diary template",
     "values": {
       "site": ["Riverside housing, block B"],
       "crew-size": 14,
@@ -13,8 +14,9 @@
   },
   "construction-field.toolbox-talk-log": {
     "date": "2026-10-12 07:30",
+    "page_title": "Toolbox talk record template",
     "values": {
-      "attendees": ["Kofi Mensah", "Piotr Zielinski", "Dave Hughes"],
+      "attendees": ["Kofi Mensah", "Piotr Sadowski", "Dave Rowley"],
       "tags": ["safety", "toolbox-talk"],
       "topic": "Working near open excavations",
       "notes": "Covered barriers, safe distances and where to cross. A question came up about the ramp by unit 6; it gets a handrail before Wednesday."

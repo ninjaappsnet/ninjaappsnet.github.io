@@ -36,12 +36,12 @@
       },
       {
         "id": "healthcare.reflective-account",
-        "version": 1,
+        "version": 2,
         "name": "Reflective account",
         "icon": "person.text.rectangle",
         "color": "blue",
         "cadence": "onEvent",
-        "summary": "Gibbs' Reflective Cycle, the format the NMC and HCPC both ask for.",
+        "summary": "Gibbs’ Reflective Cycle, the format the NMC and HCPC both ask for.",
         "includedByDefault": true,
         "fields": [
           { "key": "tags", "label": "Tags", "type": "tags" },

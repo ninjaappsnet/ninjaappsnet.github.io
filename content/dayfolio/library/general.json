@@ -132,12 +132,12 @@
       },
       {
         "id": "general.learning-log",
-        "version": 1,
+        "version": 2,
         "name": "Learning log",
         "icon": "book",
         "color": "slate",
         "cadence": "daily",
-        "summary": "A short, frequent \"today I learned\" log, useful in any discipline.",
+        "summary": "A short, frequent “today I learned” log, useful in any discipline.",
         "includedByDefault": false,
         "fields": [
           { "key": "topic", "label": "Topic", "type": "tags" },

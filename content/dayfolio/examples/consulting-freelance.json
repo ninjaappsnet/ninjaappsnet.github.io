@@ -1,6 +1,7 @@
 {
   "consulting-freelance.client-meeting": {
     "date": "2026-10-14 12:10",
+    "page_title": "Client meeting notes template",
     "values": {
       "client": ["Northwind Studio"],
       "attendees": ["Hannah Weiss", "Marco Bianchi"],
@@ -16,6 +17,7 @@
   },
   "consulting-freelance.billable-day": {
     "date": "2026-10-15 17:30",
+    "page_title": "Billable hours log template",
     "values": {
       "client": ["Northwind Studio"],
       "hours": 390,

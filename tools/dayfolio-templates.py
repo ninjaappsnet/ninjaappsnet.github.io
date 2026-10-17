@@ -313,6 +313,51 @@ def short_date(day: datetime.date) -> str:
     return f"{day.day} {MONTHS[day.month - 1][:3]} {day.year}"
 
 
+# ----- carry-over -----
+
+def carries(f: Field) -> bool:
+    """Whether a field carries its value into the next entry (the app's FieldType.canCarryOver and the field's own
+    switch; a library field is never one-off)."""
+    return f.carry_over and f.type not in ("heading", "divider", "attachment")
+
+
+def lead_field(fields: List[Field]) -> Optional[Field]:
+    """The field carry-over follows, as the app's EntryFactory.leadField(in:) picks it (D1638, D2071, D2075): the
+    template's first property row, when it is a Person field (the entry is with someone), or a Project field that
+    carries over or whose template carries something else (a client meeting's Client, a site inspection's Site).
+    Anything else, or a Project field on a template that carries nothing else, leads nothing."""
+    first = next((f for f in fields if f.type not in PAGE_FIELDS), None)
+    if first is None or first.type not in ("person", "project"):
+        return None
+    if first.type == "person" or first.carry_over or any(f is not first and carries(f) for f in fields):
+        return first
+    return None
+
+
+def carry_note(fields: List[Field], f: Field) -> Optional[str]:
+    """What a carried field's note says: which earlier entry it comes from. With no lead, the last entry of the
+    template; on a template that leads with a person, the last entry with the same people, once they are chosen; on
+    one that leads with a Project field, the last entry for the same project (a client, a site): at once when the
+    lead carries over itself, and once it is chosen when it doesn't. None for a field that doesn't carry."""
+    if not carries(f):
+        return None
+    what = "the items you haven’t ticked in" if f.type == "checklist" else "the value from"
+    lead = lead_field(fields)
+    if lead is None or lead is f:
+        return f"Carries over: a new entry starts with {what} your last entry with this template."
+    if lead.type == "person":
+        plural = lead.label.endswith("s") and not lead.label.endswith("ss")
+        same, choose, other = f"with the same {'people' if plural else 'person'}", "who it’s with", "someone else"
+        theirs = "theirs"
+    else:
+        noun = smart(lead.label).lower()
+        same, choose, other, theirs = f"for the same {noun}", f"the {noun}", f"another {noun}", f"that {noun}’s"
+    if lead.carry_over:
+        return (f"Carries over: a new entry starts with {what} your last entry {same}; choose {other} and you get "
+                f"{theirs} instead.")
+    return f"Carries over: once you choose {choose}, it fills with {what} your last entry {same}."
+
+
 # ----- examples -----
 
 @dataclass
@@ -321,6 +366,7 @@ class Example:
     title: str
     values: dict
     source: str
+    page_title: str = ""           # the page's title, when people search for the template by other words
 
 
 def _check_value(f: Field, value, where: str) -> Optional[str]:
@@ -424,8 +470,12 @@ def load_examples(folder: Path, library: Library) -> Dict[str, Example]:
                 problems.append(f"{where}: the date is “YYYY-MM-DD HH:MM”")
                 continue
             values = raw.get("values", {})
-            for key in sorted(set(raw) - {"date", "title", "values"}):
-                problems.append(f"{where}: unknown key '{key}' (an example has date, title and values)")
+            for key in sorted(set(raw) - {"date", "title", "page_title", "values"}):
+                problems.append(f"{where}: unknown key '{key}' (an example has date, title, page_title and values)")
+            page_title = raw.get("page_title", "")
+            if len(page_title) > build.TITLE_MAX:
+                problems.append(f"{where}: page_title: the page title is {len(page_title)} characters; "
+                                f"keep it to {build.TITLE_MAX}")
             keys = {f.key for f in template.fields}
             for key in sorted(set(values) - keys):
                 problems.append(f"{where}: {key}: the template has no such field")
@@ -438,10 +488,10 @@ def load_examples(folder: Path, library: Library) -> Dict[str, Example]:
                 problem = _check_value(f, values[f.key], f"{where}: {f.key}")
                 if problem:
                     problems.append(problem)
-            for key, value in [("title", raw.get("title", ""))] + list(values.items()):
+            for key, value in [("title", raw.get("title", "")), ("page_title", page_title)] + list(values.items()):
                 for text in _copy(value):
                     problems += [p.replace(":1: ", ": ", 1) for p in build.lint_copy(text, f"{where}: {key}")]
-            examples[tid] = Example(when, raw.get("title", ""), values, rel)
+            examples[tid] = Example(when, raw.get("title", ""), values, rel, page_title)
     for tid in sorted(set(library.templates) - set(examples)):
         problems.append(f"{EXAMPLES}/{library.templates[tid].pack}.json: {tid}: no example; "
                         "write one filled-in entry for it")
@@ -622,26 +672,36 @@ def _generator(*sources: str) -> str:
     return f"{GENERATED} from {' and '.join(sources)}: run the tool, never edit this page."
 
 
-def _titles(library: Library) -> Dict[str, str]:
-    """Each template's page title: "<name> template", with the pack's name when two templates share a name."""
+def _titles(library: Library, examples: Dict[str, Example]) -> Dict[str, str]:
+    """Each template's page title: its example's page_title, the words people search for when they differ from the
+    template's name ("1:1 meeting notes template"), or "<name> template", with the pack's name when two templates share
+    a name. No two pages share a title."""
     names: Dict[str, int] = {}
     for t in library.templates.values():
         names[t.name.lower()] = names.get(t.name.lower(), 0) + 1
-    return {t.id: f"{t.name} template" + (f" for {library.owner(t).name}" if names[t.name.lower()] > 1 else "")
-            for t in library.templates.values()}
+    titles = {t.id: examples[t.id].page_title or f"{t.name} template" + (
+        f" for {library.owner(t).name}" if names[t.name.lower()] > 1 else "") for t in library.templates.values()}
+    seen: Dict[str, str] = {}
+    for tid, title in titles.items():
+        other = seen.get(title.lower())
+        if other:
+            culprit, kept = (tid, other) if examples[tid].page_title else (other, tid)
+            raise LibraryError(f"{examples[culprit].source}: {culprit}: the page title “{title}” is already "
+                               f"{kept}’s; each page needs its own")
+        seen[title.lower()] = tid
+    return titles
 
 
-def _field_item(f: Field) -> str:
+def _field_item(template: Template, f: Field) -> str:
     parts = [f'<p class="tpl-field-head"><span class="tpl-field-name">{_esc(smart(f.label))}</span>'
              f'<span class="tpl-type">{TYPE_NAMES[f.type]}</span></p>']
     if f.prompt:
         parts.append(f'<p class="tpl-prompt">{_esc(smart(f.prompt))}</p>')
     if f.options:
         parts.append('<p class="tpl-options">' + "".join(pill(o) for o in f.options) + "</p>")
-    if f.carry_over:
-        what = ("the items you haven’t ticked in your previous entry with this template" if f.type == "checklist"
-                else "the value from your previous entry with this template")
-        parts.append(f'<p class="tpl-note">Carries over: a new entry starts with {what}.</p>')
+    note = carry_note(template.fields, f)
+    if note:
+        parts.append(f'<p class="tpl-note">{_esc(note)}</p>')
     if f.warning:
         parts.append('<p class="tpl-note">Drawn in an amber well, so it stands out on the page.</p>')
     return "<li>" + "".join(parts) + "</li>"
@@ -675,7 +735,7 @@ def template_page(root: Path, library: Library, template: Template, example: Exa
         '<h2 id="fields">Its fields</h2>',
         "<p>Values sit at the top of an entry and the writing fields below them, full width. A field’s prompt is "
         "the hint you see while it’s empty.</p>",
-        '<ol class="tpl-fields">' + "".join(_field_item(f) for f in template.fields) + "</ol>",
+        '<ol class="tpl-fields">' + "".join(_field_item(template, f) for f in template.fields) + "</ol>",
         '<h2 id="add">Add it to a journal</h2>',
         "<ol>"
         "<li>Open the template library: on a Mac, choose View › Template Library (⇧⌘L); on iPhone and iPad, "
@@ -796,7 +856,7 @@ def build(root: Path) -> Dict[str, str]:
                            "remove it (tools/dayfolio-build.py would make the same pages)")
     library = load_library(root / LIBRARY)
     examples = load_examples(root / EXAMPLES, library)
-    titles = _titles(library)
+    titles = _titles(library, examples)
     pages = {GALLERY: gallery_page(root, library)}
     for pack in library.packs:
         pages[pack_path(pack)] = pack_page(root, library, pack)

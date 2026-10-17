@@ -84,7 +84,8 @@ version.
 Dayfolio's pages are held to the app the same way (`check_dayfolio`, `DAYFOLIO_*`
 in the script). The product, support, privacy and terms pages fail on a claim the
 first copy made and the app has outgrown (`$9.99`, "coming soon", the "Mac App
-Store", "premium", "free trial"), and on losing a fact: the five prices, the App
+Store", "premium", "free trial"), and on losing a fact: the product page's title
+("Dayfolio: Work Journal for iPhone, iPad and Mac — NinjaApps", and its `og:title`), the five prices, the App
 Store link and Smart App Banner id, the refund sentence, the free tier's "one
 journal and 100 entries", the anchors the app opens (`#quick-note-link`) and one
 anchor per permission on the privacy policy. The policy must name its version
@@ -366,7 +367,7 @@ out. On a desktop the two iPhones and the iPad share a row at one height, and th
 two Macs the next; narrower, the iPhones pair up and the rest take a row each; on a
 phone every picture takes a row, an iPhone's no wider than 300px. They are opaque,
 so a hairline frames each instead of the drop shadow a window capture gets. Above
-them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 25.83 s,
+them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 24.37 s,
 H.264 with a silent AAC track, copied byte for byte), plays in a `<video>` with
 controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
 its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
@@ -513,8 +514,14 @@ repo's `Packages/DayfolioKit/Sources/DayfolioDomain/Resources/Library/` (format:
 `Library/PackFormat.md` there), copied into `content/dayfolio/library/` so this
 site can be checked and rebuilt on its own, and the sample values in
 `content/dayfolio/examples/<pack-id>.json`: one made-up entry per template, every
-field filled, names and numbers plainly examples, links only on example.com, .net
-or .org. **After the app's library changes:**
+field filled, names and numbers plainly examples (and no famous person's name), links
+only on example.com, .net or .org. An entry's optional `page_title` titles its template's
+page with the words people search for when they differ from the template's name
+("1:1 meeting notes template" for 1:1 notes); without it the page is "<name> template".
+The generator stops at a page title over 60 characters, against the copy rules, or
+another page's. A carried field's note says which earlier entry it comes from, by the
+lead the app's `EntryFactory.leadField(in:)` picks: the last entry with the same
+person, for the same client or site, or of the template. **After the app's library changes:**
 
 ```sh
 python3 tools/dayfolio-templates.py --library /path/to/dayfolio   # copy the packs in, write the pages

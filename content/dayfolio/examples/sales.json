@@ -1,6 +1,7 @@
 {
   "sales.customer-call": {
     "date": "2026-10-14 11:05",
+    "page_title": "Sales call notes template",
     "values": {
       "contact": ["Daniel Moreau"],
       "account": ["Bluefield Clinics"],

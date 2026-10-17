@@ -13,8 +13,9 @@
   },
   "general.1-1-notes": {
     "date": "2026-10-13 10:35",
+    "page_title": "1:1 meeting notes template",
     "values": {
-      "person": ["Maya Lin"],
+      "person": ["Maya Ferreira"],
       "meeting-time": "10:00–10:30",
       "tags": ["career", "planning"],
       "topics": ["[x] Promotion case: what’s still missing", "[x] Q4 roadmap and where I fit", "[ ] Conference budget"],
@@ -37,7 +38,7 @@
     "date": "2026-10-07 14:10",
     "values": {
       "project": ["Payments API"],
-      "decided-by": ["Maya Lin", "Olek Nowak"],
+      "decided-by": ["Maya Ferreira", "Olek Nowak"],
       "tags": ["architecture"],
       "context": "Webhook retries share a queue with new events, so one slow merchant delays everyone else. We need a fix before the holiday traffic.",
       "decision": "Give retries their own queue, with a limit per merchant. A shared queue with priorities was simpler, but it couldn’t stop one merchant from filling it."

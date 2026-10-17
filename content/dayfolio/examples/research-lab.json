@@ -1,6 +1,7 @@
 {
   "research-lab.lab-experiment": {
     "date": "2026-10-14 17:30",
+    "page_title": "Lab notebook entry template",
     "values": {
       "project": ["Enzyme stability"],
       "outcome": "supports-hypothesis",

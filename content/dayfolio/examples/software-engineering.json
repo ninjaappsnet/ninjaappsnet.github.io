@@ -37,6 +37,7 @@
   },
   "software-engineering.sprint-retro": {
     "date": "2026-10-09 15:30",
+    "page_title": "Sprint retrospective template",
     "values": {
       "team-mood": 4,
       "tags": ["retro"],
@@ -51,7 +52,7 @@
     "values": {
       "doc": {"title": "RFC 12: Webhook retries", "url": "https://docs.example.com/rfc/12"},
       "status": "approved",
-      "reviewers": ["Maya Lin", "Olek Nowak"],
+      "reviewers": ["Maya Ferreira", "Olek Nowak"],
       "tags": ["architecture", "webhooks"],
       "options-considered": "- One shared queue with priorities\n- A queue per merchant\n- A separate retry queue with limits per merchant",
       "decision": "A separate retry queue with limits per merchant. A queue per merchant was the fairest, but it meant thousands of queues to run."

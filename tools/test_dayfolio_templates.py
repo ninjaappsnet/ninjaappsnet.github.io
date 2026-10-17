@@ -83,8 +83,8 @@ EXAMPLES = {
             "wins": ["[x] Shipped the retry queue", "[ ] Wrote the runbook"],
             "challenges": "Two days lost to a flaky test.",
             "notes": "Pairing helped.\n\n- Keep Friday demos\n- Ask for **one** reviewer"}},
-        "general.1-1-notes": {"date": "2026-10-13 10:30", "values": {
-            "person": ["Maya Lin"], "meeting-time": "10:00–10:30",
+        "general.1-1-notes": {"date": "2026-10-13 10:30", "page_title": "1:1 meeting notes template", "values": {
+            "person": ["Maya Ferreira"], "meeting-time": "10:00–10:30",
             "action-items": ["[ ] Draft the hiring plan"]}}},
     "software-engineering": {
         "software-engineering.daily-standup": {"date": "2026-10-15 09:12", "title": "Retry queue is in", "values": {
@@ -222,6 +222,75 @@ class ExampleTests(unittest.TestCase):
         message = self.problem(examples_with(lambda d: d["general"]["general.weekly-review"]["values"].update(
             challenges='Two days lost to a "flaky" test!')))
         self.assertIn("challenges", message)
+
+
+def field(key: str, kind: str, carry: bool = False, label: str = "") -> "templates.Field":
+    return templates.Field(key, label or key.capitalize(), kind, carry_over=carry)
+
+
+class CarryOverTests(unittest.TestCase):
+    """Which entry a carried field comes from, as the app's EntryFactory picks it (D1638, D2071, D2075)."""
+
+    def test_the_lead_is_the_first_property_row_a_person_or_a_project_carry_over_follows(self):
+        person, notes = field("with", "person", label="With"), field("notes", "text")
+        self.assertIs(templates.lead_field([notes, person, field("actions", "checklist", True)]), person)
+        client = field("client", "project", True)
+        self.assertIs(templates.lead_field([client, field("hours", "duration")]), client)
+        site = field("site", "project")
+        self.assertIs(templates.lead_field([site, field("actions", "checklist", True)]), site)
+        self.assertIsNone(templates.lead_field([site, field("result", "singleSelect"), notes]))
+        self.assertIsNone(templates.lead_field([site, field("photos", "attachment", True)]))
+        self.assertIsNone(templates.lead_field([field("energy", "rating"), person, field("x", "checklist", True)]))
+
+    def test_a_carried_fields_note_names_the_entry_it_comes_from(self):
+        note = templates.carry_note
+        project, working = field("project", "project", True), field("working-on", "richText", True)
+        standup = [field("energy", "rating"), project, working]
+        self.assertEqual(note(standup, project),
+                         "Carries over: a new entry starts with the value from your last entry with this template.")
+        with_, items = field("with", "person", label="With"), field("action-items", "checklist", True)
+        self.assertEqual(note([with_, items], items),
+                         "Carries over: once you choose who it’s with, it fills with the items you haven’t ticked "
+                         "in your last entry with the same person.")
+        attendees = field("attendees", "person", label="Attendees")
+        self.assertIn("your last entry with the same people.", note([attendees, items], items))
+        client, steps = field("client", "project", True, "Client"), field("next-steps", "checklist", True)
+        self.assertEqual(note([client, steps], client),
+                         "Carries over: a new entry starts with the value from your last entry with this template.")
+        self.assertEqual(note([client, steps], steps),
+                         "Carries over: a new entry starts with the items you haven’t ticked in your last entry for "
+                         "the same client; choose another client and you get that client’s instead.")
+        site, actions = field("site", "project", label="Site"), field("actions", "checklist", True)
+        self.assertEqual(note([site, field("result", "singleSelect"), actions], actions),
+                         "Carries over: once you choose the site, it fills with the items you haven’t ticked in your "
+                         "last entry for the same site.")
+
+    def test_the_template_page_carries_the_note_and_a_field_that_cannot_carry_has_none(self):
+        one_on_one = Site(self).pages()["apps/dayfolio/templates/general/1-1-notes/index.html"]
+        self.assertIn("your last entry with the same person.", one_on_one)
+        self.assertNotIn("previous entry with this template", one_on_one)
+        self.assertIsNone(templates.carry_note([field("photos", "attachment", True)], field("photos", "attachment", True)))
+
+
+class SearchTitleTests(unittest.TestCase):
+    def test_a_template_can_be_titled_by_the_words_people_search_for(self):
+        pages = Site(self).pages()
+        one_on_one = pages["apps/dayfolio/templates/general/1-1-notes/index.html"]
+        self.assertIn("<title>1:1 meeting notes template — Dayfolio — NinjaApps</title>", one_on_one)
+        self.assertIn('<h1 class="page-title">1:1 meeting notes template</h1>', one_on_one)
+        self.assertIn("A 1:1 notes entry as Dayfolio draws it", one_on_one)
+        self.assertIn("<title>Daily standup template — Dayfolio — NinjaApps</title>", pages[STANDUP])
+
+    def test_a_page_title_keeps_the_builds_rules(self):
+        for title, needle in (("1:1 meeting notes template for every kind of recurring one-on-one", "60"),
+                              ('"1:1" meeting notes template', "straight quote"),
+                              ("Daily standup template", "already")):
+            with self.subTest(title=title):
+                examples = examples_with(lambda d: d["general"]["general.1-1-notes"].update(page_title=title))
+                with self.assertRaises(templates.LibraryError) as caught:
+                    Site(self, examples=examples).pages()
+                self.assertIn("general.1-1-notes", str(caught.exception))
+                self.assertIn(needle, str(caught.exception))
 
 
 class PageTests(unittest.TestCase):
