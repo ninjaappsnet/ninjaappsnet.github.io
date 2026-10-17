@@ -4,7 +4,7 @@ description: A brag document is a running record of your wins, with evidence. Wh
 slug: brag-document
 date: 2026-10-16
 image: card.png
-image_alt: The title What goes in a brag document, and how to keep one, beside the Dayfolio app icon
+image_alt: The title What goes in a brag document, and how to keep one, beside an iPhone showing a brag document entry in Dayfolio with its impact, evidence, kudos and the win
 ---
 
 A brag document is a running list of the work you’re proud of, written down when it happens, with enough detail and evidence that someone else could understand it later. The name makes some people wince, but the practice is ordinary record keeping. It’s for you first. When review season, a promotion case, a job search or a hard week comes along, you have facts instead of a vague feeling that you did good work.
@@ -72,6 +72,8 @@ Each brag document entry has:
 - **Evidence,** a link, and a second **Evidence** field for files, such as a screenshot or a PDF. Adding files comes with the purchase.
 - **Kudos from,** the person who noticed.
 - **Tags,** for your themes.
+
+![A brag document entry on iPhone, The retry queue is live for every merchant, with Impact High, an Evidence link, Kudos from Ines Costa and the tag #delivery, then the win itself and an Evidence field for files](iphone-brag-entry.webp)
 
 **Capture it in seconds.** On iPhone, touch and hold the New entry button and choose Brag document. On the Mac, press Option-Command-J (⌥⌘J) in any app to open quick entry from the menu bar, pick Brag document from its template menu and write the win; the Fill line under it takes the other fields, such as “impact high”.
 

@@ -247,8 +247,11 @@ DAYFOLIO_STALE_CLAIMS = [
 
 # What each page must still say. A rewrite that only deletes the old claim and
 # never states the new one is caught too. Plain substrings, case-sensitive.
+DAYFOLIO_PRODUCT_TITLE = "Dayfolio: Work Journal for iPhone, iPad and Mac — NinjaApps"  # the decision review, 2026-10-16
 DAYFOLIO_REQUIRED = {
     "index.html": [
+        f"<title>{DAYFOLIO_PRODUCT_TITLE}</title>",
+        f'<meta property="og:title" content="{DAYFOLIO_PRODUCT_TITLE}">',
         *DAYFOLIO_PRICES,
         DAYFOLIO_STORE_URL,
         f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STORE_ID}">',

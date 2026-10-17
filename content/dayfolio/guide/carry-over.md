@@ -25,12 +25,13 @@ Some of the library’s templates that carry over:
 | [Client meeting](../../templates/consulting-freelance/client-meeting/) | Client, Next steps |
 | [Project status update](../../templates/consulting-freelance/project-status-update/) | Client, Next steps |
 | [Customer call](../../templates/sales/customer-call/) | Account, Next steps, for the same contact |
+| [Site inspection log](../../templates/construction-field/site-inspection-log/) | Actions, for the same site |
 
 To change which fields carry, open the template in the template editor, select a field and switch **Carry over from previous entry** on or off. See [Templates and fields](../templates-and-fields/).
 
 ## It follows the person or the client
 
-On a template about people or clients, “the previous entry” means the previous one **with the same people, or the same client**. Maya’s action items never land on Sam’s page, and one client’s next steps never reach another’s.
+On a template about people, clients or sites, “the previous entry” means the previous one **with the same people, the same client or the same site**. Maya’s action items never land on Sam’s page, one client’s next steps never reach another’s, and a site’s open items stay with it.
 
 ### Templates that start with a person
 
@@ -43,6 +44,10 @@ Choose someone else and Dayfolio takes back what the first person’s page broug
 ### Templates that start with a client
 
 Client meeting and Project status update start with *Client*, and Deal update with *Deal*. A new page starts with the latest page’s client and what that page carried. Choose another client and you get that client’s open items instead.
+
+### Templates that start with a site
+
+Site inspection log starts with *Site*, and Accessibility audit with *Surface*. The site itself doesn’t carry over, but its open items do, and they stay with it: a new page waits for its site, as a 1:1 waits for its person, and choosing the site brings that site’s unticked *Actions* (*Fixes needed* in an audit) from its latest page, never another site’s.
 
 ## The carried mark
 

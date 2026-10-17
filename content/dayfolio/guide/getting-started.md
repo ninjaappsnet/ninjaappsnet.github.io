@@ -18,7 +18,7 @@ The first time you open Dayfolio, it doesn’t ask you to configure anything. It
 
 Nothing is created before you choose Keep this page. If you pick General, your words become a Note and the general templates are added for later.
 
-![The first page on iPhone with Sounds like offering Software Engineering, Design and General, the standup’s fields shown faintly, and the line saying it creates Engineering Log with Daily standup, Weekly review and 2 more templates.](getting-started-first-page-iphone.webp)
+![The first page on iPhone with “Reviewing the retry queue PR and fixing the flaky deploy test” typed above the keyboard, Sounds like offering Software Engineering, DevOps & On-call and General, the standup’s fields shown faintly, and Keep this page.](getting-started-first-page-iphone.webp)
 
 After Keep, a card under the entry asks “Write again tomorrow?” with the time the template suggests, for example weekdays at 09:00 for a standup or 17:30 for a billable day. **Remind me** adds that reminder to the journal; **Not now** adds nothing. If the journal is for notes about people, such as one made for management, Dayfolio also asks once whether to lock it. See [Locked journals and privacy](../locked-journals/).
 
