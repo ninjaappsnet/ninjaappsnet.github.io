@@ -93,11 +93,11 @@
     <h2 id="network">What goes over the network</h2>
     <p>FlectoBI makes a network connection only to a database server that you add as an Input: a PostgreSQL, MySQL or MariaDB server. It connects to the host and port you typed, and only:</p>
     <ul>
-      <li>when you click Test Connection or Refresh, or</li>
+      <li>when you click Test Connection, Add Input, Apply or Refresh, or</li>
       <li>when you open a Workbook whose database Input has a password saved in this Mac’s Keychain for that same server.</li>
     </ul>
     <p>A Workbook never connects to anything by itself otherwise. The connection is read only: FlectoBI reads a table or the result of a query, and never writes to the server. What the server sends back is kept in the Workbook’s engine on your Mac, and is not sent anywhere else.</p>
-    <p>Whether a database connection is encrypted depends on the SSL setting you choose: Off, Prefer, Require or Verify certificate. With Off, the password and the data can be read on the network, and FlectoBI warns you for a server on another machine. FlectoBI never sends a PostgreSQL password in clear text or as MD5.</p>
+    <p>Whether a database connection is encrypted depends on the SSL setting you choose: Off, Prefer, Require or Verify certificate. With Off, the password and the data can be read on the network, and FlectoBI warns you when a MySQL or MariaDB server is on another machine. FlectoBI never sends a PostgreSQL password in clear text or as MD5.</p>
     <p>The libraries FlectoBI uses to talk to those servers run only on this path. The data engine, DuckDB, is built so that it cannot download or load extensions, and FlectoBI makes no other network requests. Maps are drawn from shapes and place names that come with the app, with no map service, tiles or lookup.</p>
 
     <h2 id="apple">Apple’s services</h2>
@@ -117,7 +117,7 @@
       <li><strong>File and folder access:</strong> remove any grant in Settings, under Access. It takes effect at once.</li>
       <li><strong>Database passwords:</strong> delete them in the Keychain Access app on your Mac. They are saved under the service name com.ninjaapps.flectobi.db.</li>
       <li><strong>Workbooks and Output files:</strong> they are ordinary files that you can move, copy or delete.</li>
-      <li><strong>Everything else:</strong> deleting the app deletes its storage area, and the data in it, from your Mac.</li>
+      <li><strong>Everything else:</strong> it is kept in the app’s storage area, the folder Library/Containers/com.ninjaapps.flectobi in your home folder. Moving the app to the Trash may leave that folder behind, so delete it too if you want nothing left.</li>
     </ul>
 
     <h2>Your rights under the GDPR</h2>

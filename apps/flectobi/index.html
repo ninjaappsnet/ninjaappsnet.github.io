@@ -70,10 +70,10 @@
   </div>
   <div class="devices">
     <div class="devices-row">
-      <figure class="shot device-desktop"><img src="media/report-overview.webp" alt="FlectoBI on the Mac showing a Report: a row of Cards with total revenue, orders and units sold, a Slicer for Region, and a line chart, a column chart and a donut chart of the sample sales." width="1440" height="900"><figcaption>A Report, on the sample Workbook</figcaption></figure>
+      <figure class="shot device-desktop"><img src="media/report-overview.webp" alt="FlectoBI on the Mac showing a Report: a row of Cards with total revenue, orders and units sold, a Slicer for Region, and a line chart, a column chart and a donut chart of the sample sales." width="1920" height="1200"><figcaption>A Report, on the sample Workbook</figcaption></figure>
     </div>
     <div class="devices-row">
-      <figure class="shot device-desktop"><img src="media/flow-overview.webp" alt="FlectoBI on the Mac showing a Flow: Inputs for sales, products and stores joined and summarized in a chain of Steps, with the data of the selected Step in a table below and its options in the inspector on the right." width="1440" height="900" loading="lazy"><figcaption>A Flow, with the data of the selected Step below it</figcaption></figure>
+      <figure class="shot device-desktop"><img src="media/flow-overview.webp" alt="FlectoBI on the Mac showing a Flow: Inputs for sales, products and stores joined and summarized in a chain of Steps, with the data of the selected Step in a table below and its options in the inspector on the right." width="1920" height="1200" loading="lazy"><figcaption>A Flow, with the data of the selected Step below it</figcaption></figure>
     </div>
   </div>
   <p class="shot-note">The pictures show the sample Workbook that comes with FlectoBI. Its data is made up.</p>
@@ -135,13 +135,13 @@
     <p>A Report is made of Pages. Each Page is a grid where you place Visuals and give each one a Dataset from a Step. You fill a Visual by dropping Columns into its Field Wells, and choose how to add them up: Sum, Average, Median, Min, Max, Count or Distinct count.</p>
     <ul>
       <li><strong>Visual kinds:</strong> Column, Bar, Line, Area, Pie, Donut, Scatter, Heatmap, Funnel, Bubble Map, Filled Map, Table, Card, Slicer, 3D Scatter, Surface Plot and Spike Map.</li>
-      <li><strong>Cross-filtering.</strong> Click a bar, a slice or a place and every other Visual on the Page narrows to that Selection. Use a Slicer to choose values from a list. A badge on each Visual shows what filters it.</li>
+      <li><strong>Cross-filtering.</strong> Click a bar, a slice or a place and every other Visual on the Page that has the same Column narrows to that Selection. Use a Slicer to choose values from a list. A chip at the top of the Page says what filters it, and a dot marks each filtered Visual.</li>
       <li><strong>Refresh.</strong> A Report reads only the output of Steps, so when the Flow runs again the Report is current.</li>
     </ul>
   </div>
   <figure class="shot">
-    <video controls muted playsinline preload="none" poster="media/clip-cross-filter-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: a click on one region in a chart narrows the other Visuals on the Page to that region."><source src="media/clip-cross-filter.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-cross-filter.mp4">Download it</a> (MP4).</p></video>
-    <figcaption>Click a mark, and the Page follows</figcaption>
+    <video controls muted playsinline preload="none" poster="media/clip-cross-filter-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: North is ticked in the Region Slicer and the Page narrows to it, a click on the Electronics column narrows it further, and then the Selection is cleared."><source src="media/clip-cross-filter.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-cross-filter.mp4">Download it</a> (MP4).</p></video>
+    <figcaption>Tick a Slicer or click a mark, and the Page follows</figcaption>
   </figure>
 </section>
 
@@ -157,12 +157,12 @@
   </div>
   <div class="devices">
     <div class="devices-row">
-      <figure class="shot device-desktop"><img src="media/report-map.webp" alt="FlectoBI on the Mac showing a Report Page of maps: a Bubble Map of store revenue across the United States, Europe and Japan, and a Filled Map of revenue by state, with a Slicer for Country." width="1440" height="900" loading="lazy"><figcaption>Maps, drawn from data in the app</figcaption></figure>
+      <figure class="shot device-desktop"><img src="media/report-map.webp" alt="FlectoBI on the Mac showing a Report Page of maps: a Bubble Map of store revenue across the United States, Europe and Japan, and a Filled Map of revenue by state or region, with the top of a Slicer for Country below." width="1920" height="1200" loading="lazy"><figcaption>Maps, drawn from data in the app</figcaption></figure>
     </div>
   </div>
   <figure class="shot">
-    <video controls muted playsinline preload="none" poster="media/clip-3d-turn-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: a 3D Scatter chart is turned with the pointer to show its three axes from another side."><source src="media/clip-3d-turn.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-3d-turn.mp4">Download it</a> (MP4).</p></video>
-    <figcaption>Turn a 3D Visual with a drag</figcaption>
+    <video controls muted playsinline preload="none" poster="media/clip-3d-turn-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: a 3D Scatter chart is turned all the way round, 15 degrees at a time with Command and the arrow keys, then tilted up and back."><source src="media/clip-3d-turn.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-3d-turn.mp4">Download it</a> (MP4).</p></video>
+    <figcaption>Turn a 3D Visual from the keyboard, or with a drag</figcaption>
   </figure>
 </section>
 
@@ -184,7 +184,7 @@
         </tbody>
       </table>
     </div>
-    <p>Databases are read only. FlectoBI copies a table or the result of a query into the Workbook as a snapshot, and never writes to the server. Passwords go to your Mac’s Keychain, never into the Workbook.</p>
+    <p>Databases are read only. FlectoBI copies a table or the result of a query into its engine as a snapshot, and never writes to the server. The Workbook keeps only the connection details. Passwords go to your Mac’s Keychain, never into the Workbook.</p>
     <p>An Output writes only when you ask, with Write Now or Write All Outputs. You can turn on automatic writing after that. FlectoBI refuses an Output that would overwrite a file the Flow reads.</p>
   </div>
 </section>
@@ -225,7 +225,7 @@
   </div>
   <div class="devices">
     <div class="devices-row">
-      <figure class="shot device-desktop"><img src="media/report-overview-dark.webp" alt="The same Report in FlectoBI with the Mac in Dark appearance: the Cards, the Slicer and the charts on a dark background." width="1440" height="900" loading="lazy"><figcaption>The same Report in Dark appearance</figcaption></figure>
+      <figure class="shot device-desktop"><img src="media/report-overview-dark.webp" alt="The same Report in FlectoBI with the Mac in Dark appearance: the Cards, the Slicer and the charts on a dark background." width="1920" height="1200" loading="lazy"><figcaption>The same Report in Dark appearance</figcaption></figure>
     </div>
   </div>
 </section>

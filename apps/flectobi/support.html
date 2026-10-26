@@ -79,7 +79,7 @@
     <p>A Mac with Apple silicon, running macOS 26 or later. FlectoBI does not run on Intel Macs, and there is no version for iPhone or iPad yet. FlectoBI is coming to the Mac App Store.</p>
 
     <h2 id="sample">Where is the sample Workbook?</h2>
-    <p>Choose Help, then Open Sample Workbook. You can also click Open Sample Workbook on an empty Flow. FlectoBI copies the sample into a folder called FlectoBI Samples in its own Documents folder and opens Sales Sample. It has a Flow of twelve Steps and a Report with six Pages, and it needs no permission to read its files.</p>
+    <p>Choose Help, then Open Sample Workbook. You can also click Open Sample Workbook on an empty Flow. FlectoBI copies the sample into a folder called FlectoBI Samples in its own Documents folder and opens Sales Sample. It has a Flow of twelve Steps and a Report with five Pages, and it needs no permission to read its files.</p>
     <p>If you change the sample, FlectoBI keeps your Workbook and only refreshes its data files.</p>
 
     <h2 id="grant-access">FlectoBI says it needs permission to read a file. What do I do?</h2>
@@ -97,12 +97,12 @@
     <p>FlectoBI reads .xlsx, .xlsm, .xlsb, .xls and .ods files in a separate, sandboxed helper, so a damaged file cannot crash the app. The helper refuses a file it cannot read safely, and the message says what to do:</p>
     <ul>
       <li>“The workbook is password-protected or encrypted. Remove the password in Excel and try again.”</li>
-      <li>“The sheet is too large to import. Save it as CSV and import that instead.” A sheet may have at most 50,000,000 cells.</li>
+      <li>“The sheet is too large to import. Save it as CSV and import that instead.” A sheet may have at most 50,000,000 cells, and .xls and .ods sheets at most 20,000,000.</li>
       <li>FlectoBI says it stopped reading the file because the file made the spreadsheet reader fail. The file may be damaged. Try opening and saving it in Excel, or save it as CSV.</li>
       <li>“The file is damaged or not a valid spreadsheet.”</li>
       <li>“The sheet is empty.” or “The workbook has no sheets.”</li>
     </ul>
-    <p>Saving the sheet as CSV or Parquet from Excel works around all of these. If the file has more than one sheet, choose the one you want in the Input’s options. FlectoBI reads the first visible sheet by default, and the Range option reads only the cells you name, such as A1:F200. A file may be at most 1 GiB.</p>
+    <p>Saving the sheet as CSV or Parquet from Excel works around all of these. If the file has more than one sheet, choose the one you want in the Input’s options. FlectoBI reads the first visible sheet by default, and the Range option reads only the cells you name, such as A1:F200. A file may be at most 1 GiB, and an .xls or .ods file at most 200 MiB.</p>
 
     <h2 id="csv">My CSV file reads wrongly</h2>
     <ul>
@@ -140,7 +140,7 @@
     <h2 id="large-files">A Step stops because of memory or disk. What can I do?</h2>
     <p>FlectoBI keeps its data engine to about 30% of your Mac’s memory and writes the overflow to temporary disk space. A Step stops when the whole app passes 80% of the memory, and says that it needs more memory than is available, and that you should filter or summarize the data earlier in the Flow, or simplify the Formula.</p>
     <ul>
-      <li>Put a Filter or Remove Columns Step as early in the Flow as you can, so later Steps handle less.</li>
+      <li>Put a Filter or Keep/Remove Columns Step as early in the Flow as you can, so later Steps handle less.</li>
       <li>Summarize before you Join or Pivot.</li>
       <li>Close other Workbooks, which each have their own engine.</li>
       <li>Free some disk space. The space for overflow is limited to a quarter of what is free.</li>
