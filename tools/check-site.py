@@ -54,6 +54,18 @@ Checks:
      content/dayfolio/library/ and the examples beside it: a page for every
      pack and template, none for one the library dropped. With DAYFOLIO_REPO
      set to the Dayfolio repository, the copy must also be the app's own.
+ 22. Every FlectoBI page (everything under apps/flectobi/) is held to 16's
+     rules, and states no price and does not call FlectoBI free: it is a paid
+     app whose price is not set. Until it has an App Store id
+     (FLECTOBI_STORE_ID in tools/dayfolio-build.py) no page carries a Smart
+     App Banner or a store link, the product page says "Coming to the Mac App
+     Store" without a link, and the check WARNS that the id and the price are
+     due before launch. Once the id is set, every page needs the banner and
+     the product page the store link and a price.
+ 23. FlectoBI's product page tells a search engine it is a macOS business
+     app, with no offers until it has a price and no ratings or reviews.
+
+Warnings are printed and do not fail the check.
 """
 
 from __future__ import annotations
@@ -100,6 +112,11 @@ MANIFEST = [
     # Dayfolio's published version 1.0 of each (README: Legal page versioning).
     "apps/dayfolio/privacy-v1.0.html",
     "apps/dayfolio/terms-v1.0.html",
+    "apps/flectobi/index.html",
+    "apps/flectobi/support.html",
+    "apps/flectobi/privacy.html",
+    "apps/flectobi/guide/index.html",
+    "apps/flectobi/tutorials/index.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
         "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
     )),
@@ -329,6 +346,17 @@ DAYFOLIO_BANNER = f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STOR
 DAYFOLIO_CARD = ['property="og:title"', 'property="og:description"', 'property="og:url"', 'property="og:image"',
                  'name="twitter:card"']
 DAYFOLIO_OFFERS = ["0", *(price.lstrip("$") for price in DAYFOLIO_PRICES)]
+# Every app page's social card (check_app_pages), Dayfolio's and FlectoBI's.
+SOCIAL_CARD_TAGS = DAYFOLIO_CARD
+
+# FlectoBI (apps/flectobi/) is a Mac app on its way to the Mac App Store: paid, its price not set yet (the owner,
+# 2026-10-26). Its App Store id lives in one place, FLECTOBI_STORE_ID in tools/dayfolio-build.py, which writes the
+# banner and the store button on the pages it generates; this reads it from there. Until it is set, no FlectoBI page
+# may carry a banner or a store link, or state a price, and the product page says FLECTOBI_SOON, not as a link.
+FLECTOBI_DIR = "apps/flectobi"
+FLECTOBI_SOON = "Coming to the Mac App Store"
+FLECTOBI_PRICE = re.compile(r"\$\s?\d[\d,.]*")
+FLECTOBI_FREE = re.compile(r"(?i)\bfree (?:to )?download\b|\bit[’']s free\b")
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
 # The press kit. Same layout every time it is rebuilt, so a journalist's
@@ -389,10 +417,15 @@ SOCIAL = [
 EXEMPT_DIRS = {"games/_template", "apps/_template", "assets/brand"}
 
 errors: list[str] = []
+warnings: list[str] = []
 
 
 def fail(msg: str) -> None:
     errors.append(msg)
+
+
+def warn(msg: str) -> None:
+    warnings.append(msg)
 
 
 def is_exempt(path: Path) -> bool:
@@ -982,58 +1015,75 @@ class Outline(HTMLParser):
         return self.problems + [f"<{tag}> on line {line} is never closed" for tag, line in self.open]
 
 
+def app_pages(app_dir: str) -> list[Path]:
+    return [p for p in published_pages() if p.relative_to(ROOT).as_posix().startswith(app_dir + "/")]
+
+
 def dayfolio_pages() -> list[Path]:
-    return [p for p in published_pages() if p.relative_to(ROOT).as_posix().startswith(DAYFOLIO_DIR + "/")]
+    return app_pages(DAYFOLIO_DIR)
 
 
 def check_dayfolio_pages() -> None:
     """Every Dayfolio page: unique title and description, canonical, banner, social card, alt text, an
     outline of headings, ids used once, tags that close and JSON-LD that parses."""
+    check_app_pages(DAYFOLIO_DIR, "dayfolio page", DAYFOLIO_BANNER)
+
+
+def check_flectobi_pages() -> None:
+    """Every FlectoBI page, to the same rules; the banner only once FlectoBI has an App Store id."""
+    store_id = flectobi_store_id()
+    check_app_pages(FLECTOBI_DIR, "flectobi page",
+                    f'<meta name="apple-itunes-app" content="app-id={store_id}' if store_id else None)
+
+
+def check_app_pages(app_dir: str, label: str, banner: str | None) -> None:
+    """One app's pages: unique title and description, canonical, the banner (when `banner` is given), social card,
+    alt text, an outline of headings, ids used once, tags that close and JSON-LD that parses."""
     titles: dict[str, list[str]] = {}
     descriptions: dict[str, list[str]] = {}
-    for page in dayfolio_pages():
+    for page in app_pages(app_dir):
         rel = page.relative_to(ROOT).as_posix()
         text = page.read_text(encoding="utf-8")
         for kind, found, seen in (("title", re.findall(r"<title>(.*?)</title>", text, re.S), titles),
                                   ("description", re.findall(r'<meta name="description" content="([^"]*)">', text),
                                    descriptions)):
             if len(found) != 1 or not found[0].strip():
-                fail(f"dayfolio page: {rel} needs one {kind}, and it has {len(found)}")
+                fail(f"{label}: {rel} needs one {kind}, and it has {len(found)}")
             else:
                 seen.setdefault(found[0].strip(), []).append(rel)
         if not re.search(r'<link\s+rel="canonical"\s+href="[^"]+"', text):
-            fail(f"dayfolio page: {rel} has no canonical URL")
-        if DAYFOLIO_BANNER not in text:
-            fail(f"dayfolio page: {rel} has no Smart App Banner ({DAYFOLIO_BANNER}...>)")
+            fail(f"{label}: {rel} has no canonical URL")
+        if banner and banner not in text:
+            fail(f"{label}: {rel} has no Smart App Banner ({banner}...>)")
         if not is_noindex(page):
-            for tag in DAYFOLIO_CARD:
+            for tag in SOCIAL_CARD_TAGS:
                 if not re.search(rf'<meta\s+{tag}\s+content="[^"]+"', text):
-                    fail(f"dayfolio page: {rel} has no {tag.split('=')[1].strip(chr(34))} for its social card")
+                    fail(f"{label}: {rel} has no {tag.split('=')[1].strip(chr(34))} for its social card")
         outline = Outline()
         outline.feed(text)
         for problem in outline.finish():
-            fail(f"dayfolio page: {rel} does not parse: {problem}")
+            fail(f"{label}: {rel} does not parse: {problem}")
         for image in outline.images:
             if not (image.get("alt") or "").strip():
-                fail(f"dayfolio page: {rel} has a picture with no alt text: {image.get('src')}")
+                fail(f"{label}: {rel} has a picture with no alt text: {image.get('src')}")
         if outline.headings.count(1) != 1:
-            fail(f"dayfolio page: {rel} has {outline.headings.count(1)} h1 headings; a page has one")
+            fail(f"{label}: {rel} has {outline.headings.count(1)} h1 headings; a page has one")
         for before, after in zip(outline.headings, outline.headings[1:]):
             if after > before + 1:
-                fail(f"dayfolio page: {rel} goes from h{before} to h{after}; headings step down one level")
+                fail(f"{label}: {rel} goes from h{before} to h{after}; headings step down one level")
                 break
         for ident, count in sorted(outline.ids.items()):
             if count > 1:
-                fail(f"dayfolio page: {rel} uses the id {ident!r} {count} times")
+                fail(f"{label}: {rel} uses the id {ident!r} {count} times")
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
             try:
                 json.loads(block)
             except json.JSONDecodeError as exc:
-                fail(f"dayfolio page: {rel} has JSON-LD that does not parse ({exc})")
+                fail(f"{label}: {rel} has JSON-LD that does not parse ({exc})")
     for kind, seen in (("title", titles), ("description", descriptions)):
         for value, rels in sorted(seen.items()):
             if len(rels) > 1:
-                fail(f"dayfolio page: the {kind} {value[:60]!r} is on {', '.join(rels)}; each page needs its own")
+                fail(f"{label}: the {kind} {value[:60]!r} is on {', '.join(rels)}; each page needs its own")
 
 
 def check_anchors() -> None:
@@ -1102,16 +1152,101 @@ def check_robots() -> None:
         fail("robots: robots.txt shuts the whole site")
 
 
-def check_dayfolio_build() -> None:
-    """The committed pages are what tools/dayfolio-build.py makes from content/dayfolio/."""
+def build_module():
+    """tools/dayfolio-build.py, as a module (once: it loads this one by the same name)."""
     name = "dayfolio_build"
     if name not in sys.modules:
         spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("dayfolio-build.py"))
         module = importlib.util.module_from_spec(spec)
         sys.modules[name] = module
         spec.loader.exec_module(module)
-    for problem in sys.modules[name].check(ROOT):
+    return sys.modules[name]
+
+
+def flectobi_store_id() -> str | None:
+    """FlectoBI's App Store id, from the one place it is set (FLECTOBI_STORE_ID in tools/dayfolio-build.py)."""
+    return build_module().APPS["flectobi"].store_id
+
+
+def check_dayfolio_build() -> None:
+    """The committed pages are what tools/dayfolio-build.py makes from content/dayfolio/ and content/flectobi/."""
+    for problem in build_module().check(ROOT):
         fail(f"dayfolio build: {problem}")
+
+
+def visible(text: str) -> str:
+    """A page's markup without its scripts and styles: what it says, and its links."""
+    return re.sub(r"<(script|style)\b.*?</\1>", "", text, flags=re.S | re.I)
+
+
+def check_flectobi() -> None:
+    """FlectoBI is paid and has no price yet: no page states one or calls it free. Until it has an App Store id,
+    no page carries a banner or a store link and the product page says it is coming (a warning says the id and the
+    price are due); once it has one, the product page links the store and states the price."""
+    store_id = flectobi_store_id()
+    if store_id is None:
+        warn("flectobi: the store id (FLECTOBI_STORE_ID in tools/dayfolio-build.py) and the price are not set; "
+             "add both before launch, and state the price on the product page")
+    for page in app_pages(FLECTOBI_DIR):
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        said = visible(text)
+        for hit in sorted({m.group(0) for m in FLECTOBI_FREE.finditer(said)}):
+            fail(f"flectobi: {rel} says {hit!r}; FlectoBI is a paid app")
+        if store_id is None:
+            for hit in sorted({m.group(0) for m in FLECTOBI_PRICE.finditer(said)}):
+                fail(f"flectobi: {rel} states a price, {hit!r}; FlectoBI has none yet")
+            if 'name="apple-itunes-app"' in text:
+                fail(f"flectobi: {rel} has a Smart App Banner, but FlectoBI has no App Store id yet")
+            if "apps.apple.com" in text:
+                fail(f"flectobi: {rel} links the App Store, but FlectoBI has no App Store id yet")
+    product = ROOT / FLECTOBI_DIR / "index.html"
+    if not product.is_file():
+        return  # check_manifest reports a missing page
+    text = product.read_text(encoding="utf-8")
+    if store_id is None:
+        if FLECTOBI_SOON not in text or re.search(rf"<a\b[^>]*>[^<]*{FLECTOBI_SOON}", text):
+            fail(f"flectobi: {FLECTOBI_DIR}/index.html must say {FLECTOBI_SOON!r}, not as a link, "
+                 "in place of the store button")
+    else:
+        store_url = f"https://apps.apple.com/app/id{store_id}"
+        if store_url not in text:
+            fail(f"flectobi: {FLECTOBI_DIR}/index.html does not link {store_url}")
+        if not FLECTOBI_PRICE.search(visible(text)):
+            fail(f"flectobi: {FLECTOBI_DIR}/index.html states no price; FlectoBI has an App Store id, "
+                 "so say what it costs")
+        if FLECTOBI_SOON in text:
+            fail(f"flectobi: {FLECTOBI_DIR}/index.html still says {FLECTOBI_SOON!r}")
+
+
+def check_flectobi_app() -> None:
+    """The product page tells a search engine FlectoBI is a macOS business app, offers nothing while it has no
+    price, and claims no ratings or reviews."""
+    page = ROOT / FLECTOBI_DIR / "index.html"
+    if not page.is_file():
+        return  # check_manifest reports a missing page
+    blocks = []
+    for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page.read_text(encoding="utf-8"), re.S):
+        try:
+            blocks.append(json.loads(raw))
+        except json.JSONDecodeError:
+            continue  # check_flectobi_pages reports it
+    apps = [b for b in blocks if isinstance(b, dict) and b.get("@type") == "SoftwareApplication"]
+    if len(apps) != 1:
+        fail(f"flectobi app: index.html has {len(apps)} SoftwareApplication JSON-LD blocks, not one")
+        return
+    app = apps[0]
+    if app.get("name") != "FlectoBI":
+        fail(f"flectobi app: the name is {app.get('name')!r}, not 'FlectoBI'")
+    if "macOS" not in str(app.get("operatingSystem", "")):
+        fail("flectobi app: operatingSystem does not name macOS")
+    if app.get("applicationCategory") != "BusinessApplication":
+        fail(f"flectobi app: applicationCategory is {app.get('applicationCategory')!r}, not 'BusinessApplication'")
+    if "offers" in app and flectobi_store_id() is None:
+        fail("flectobi app: offers are set; FlectoBI has no price yet")
+    for key in ("aggregateRating", "review"):
+        if key in app:
+            fail(f"flectobi app: {key} is set; the page states no ratings or reviews")
 
 
 def check_dayfolio_templates() -> None:
@@ -1205,10 +1340,15 @@ def main() -> int:
         check_robots,
         check_dayfolio_build,
         check_dayfolio_templates,
+        check_flectobi,
+        check_flectobi_pages,
+        check_flectobi_app,
         check_press_kit,
     ):
         check()
 
+    for warning in warnings:
+        print(f"WARNING — {warning}")
     if errors:
         print(f"FAIL — {len(errors)} problem(s):\n")
         for err in errors:

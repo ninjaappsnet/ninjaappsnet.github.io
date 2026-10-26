@@ -150,6 +150,129 @@ class DayfolioRulesTests(unittest.TestCase):
         self.assertProblem("apps/dayfolio/guide/getting-started/index.html", "check_dayfolio_build")
 
 
+FLECTO_APP = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FlectoBI",
+    "operatingSystem": "macOS 26 or later",
+    "applicationCategory": "BusinessApplication",
+    "publisher": {"@type": "Organization", "name": "NinjaApps", "url": "https://ninjaapps.net/"},
+}
+SOON = '<span class="btn btn-quiet btn-soon">Coming to the Mac App Store</span>'
+
+
+def flecto_social(url: str) -> str:
+    return social(url).replace("apps/dayfolio/social-card.png", "apps/flectobi/social-card.png")
+
+
+def flecto_product(app: dict, extra: str = SOON) -> str:
+    return tb.FLECTO_PRODUCT.replace(
+        "</head>", flecto_social("https://ninjaapps.net/apps/flectobi/")
+        + f'<script type="application/ld+json">{json.dumps(app)}</script>\n</head>').replace(
+        "<h1>FlectoBI</h1>", f"<h1>FlectoBI</h1>\n{extra}")
+
+
+FLECTO_SUPPORT = tb.FLECTO_PRODUCT.replace(
+    "</head>", flecto_social("https://ninjaapps.net/apps/flectobi/support.html") + "</head>").replace(
+    "<title>FlectoBI — NinjaApps</title>", "<title>Support — FlectoBI — NinjaApps</title>").replace(
+    'href="https://ninjaapps.net/apps/flectobi/"', 'href="https://ninjaapps.net/apps/flectobi/support.html"').replace(
+    '<meta name="description" content="The product page.">', '<meta name="description" content="Help with FlectoBI.">'
+    ).replace("<h1>FlectoBI</h1>", "<h1>Support</h1>")
+
+FLECTO_ALL = ("check_flectobi_pages", "check_flectobi", "check_flectobi_app", "check_dayfolio_build")
+
+
+class FlectoBIRulesTests(unittest.TestCase):
+    def setUp(self):
+        self.site = tb.flecto_site(self)
+        self.site.put("apps/flectobi/index.html", flecto_product(FLECTO_APP))
+        self.site.put("apps/flectobi/support.html", FLECTO_SUPPORT)
+        self.site.put("content/flectobi/tutorials/a.md", tb.topic("first-flow", "Your first Flow", 1))
+        build.write(self.site.root)
+        check.ROOT = self.site.root
+        self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
+        self.addCleanup(build.set_store_id, "flectobi", build.FLECTOBI_STORE_ID)
+
+    def problems(self, *names: str) -> list:
+        check.errors, check.warnings = [], []
+        for name in names or FLECTO_ALL:
+            getattr(check, name)()
+        found, check.errors = list(check.errors), []
+        return found
+
+    def edit(self, rel: str, old: str, new: str) -> None:
+        text = self.site.read(rel)
+        self.assertIn(old, text)
+        self.site.put(rel, text.replace(old, new, 1))
+
+    def assertProblem(self, needle: str, *names: str) -> None:
+        found = self.problems(*names)
+        self.assertTrue(any(needle in p for p in found), f"no problem mentions {needle!r}: {found}")
+
+    def test_the_fixture_is_clean_and_warns_that_the_store_id_and_price_are_due(self):
+        self.assertEqual(self.problems(), [])
+        self.assertTrue(any("store id" in w and "price" in w for w in check.warnings), check.warnings)
+
+    def test_every_flectobi_page_is_in_the_manifest(self):
+        for rel in ("apps/flectobi/index.html", "apps/flectobi/support.html", "apps/flectobi/privacy.html",
+                    "apps/flectobi/guide/index.html", "apps/flectobi/tutorials/index.html"):
+            self.assertIn(rel, check.MANIFEST)
+
+    def test_no_page_states_a_price_or_calls_it_free(self):
+        for claim in ("It costs $29.99.", "A free download.", "Free to download.", "It’s free.", "It's free."):
+            with self.subTest(claim=claim):
+                self.site.put("apps/flectobi/support.html", FLECTO_SUPPORT)
+                self.edit("apps/flectobi/support.html", "<h1>Support</h1>", f"<h1>Support</h1><p>{claim}</p>")
+                self.assertProblem("apps/flectobi/support.html", "check_flectobi")
+        self.site.put("content/flectobi/guide/b.md", tb.topic("b", "B", 1, body="It costs $5 a month.\n"))
+        build.write(self.site.root)
+        self.assertProblem("apps/flectobi/guide/b/index.html", "check_flectobi")
+
+    def test_without_a_store_id_no_page_has_a_banner_or_a_store_link(self):
+        self.edit("apps/flectobi/support.html", "<title>",
+                  '<meta name="apple-itunes-app" content="app-id=1234567890">\n<title>')
+        self.assertProblem("Smart App Banner", "check_flectobi")
+        self.site.put("apps/flectobi/support.html", FLECTO_SUPPORT)
+        self.site.put("apps/flectobi/index.html",
+                      flecto_product(FLECTO_APP, '<a class="btn" href="https://apps.apple.com/app/id1">APP STORE</a>'))
+        build.write(self.site.root)
+        self.assertProblem("Coming to the Mac App Store", "check_flectobi")
+
+    def test_once_the_store_id_is_set_the_product_page_must_state_a_price_and_link_the_store(self):
+        build.set_store_id("flectobi", "1234567890")
+        build.write(self.site.root)
+        found = self.problems("check_flectobi", "check_flectobi_pages")
+        self.assertTrue(any("price" in p for p in found), found)
+        self.assertTrue(any("https://apps.apple.com/app/id1234567890" in p for p in found), found)
+        self.assertTrue(any("apps/flectobi/support.html" in p and "Smart App Banner" in p for p in found), found)
+        self.assertFalse(any("store id" in w for w in check.warnings), check.warnings)
+
+    def test_the_per_page_rules_hold_on_flectobi_pages(self):
+        cases = (("<h1>Support</h1>", "<h1>Support</h1><h1>Again</h1>", "h1"),
+                 ("<h1>Support</h1>", '<h1>Support</h1><img src="icon-320.webp">', "alt"),
+                 ("<title>Support — FlectoBI — NinjaApps</title>", "<title>FlectoBI — NinjaApps</title>", "title"),
+                 ('<link rel="canonical" href="https://ninjaapps.net/apps/flectobi/support.html">', "", "canonical"),
+                 ('<meta name="twitter:card" content="summary_large_image">', "", "twitter:card"),
+                 ("</head>", '<script type="application/ld+json">{"broken": </script></head>', "JSON-LD"))
+        for old, new, needle in cases:
+            with self.subTest(needle=needle):
+                self.site.put("apps/flectobi/support.html", FLECTO_SUPPORT)
+                build.write(self.site.root)
+                self.edit("apps/flectobi/support.html", old, new)
+                self.assertProblem(needle, "check_flectobi_pages")
+
+    def test_the_product_page_names_the_mac_app_and_offers_nothing_yet(self):
+        for broken, needle in (({**FLECTO_APP, "offers": [{"@type": "Offer", "price": "0"}]}, "offers"),
+                               ({**FLECTO_APP, "aggregateRating": {"ratingValue": 5}}, "aggregateRating"),
+                               ({**FLECTO_APP, "operatingSystem": "iOS 26"}, "macOS"),
+                               ({**FLECTO_APP, "applicationCategory": "Game"}, "BusinessApplication"),
+                               ({**FLECTO_APP, "name": "Flecto"}, "FlectoBI")):
+            with self.subTest(needle=needle):
+                self.site.put("apps/flectobi/index.html", flecto_product(broken))
+                build.write(self.site.root)
+                self.assertProblem(needle, "check_flectobi_app")
+
+
 class TemplateGalleryTests(unittest.TestCase):
     """The gallery's pages, as tools/dayfolio-templates.py writes them, pass every Dayfolio rule, and a page that
     drifted from the library is reported."""
