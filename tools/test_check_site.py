@@ -188,6 +188,8 @@ class FlectoBIRulesTests(unittest.TestCase):
         self.site.put("apps/flectobi/index.html", flecto_product(FLECTO_APP))
         self.site.put("apps/flectobi/support.html", FLECTO_SUPPORT)
         self.site.put("content/flectobi/tutorials/a.md", tb.topic("first-flow", "Your first Flow", 1))
+        self.site.put("index.html", '<a href="apps/flectobi/">FlectoBI</a>')
+        self.site.put("privacy/index.html", '<a href="../apps/flectobi/privacy.html">FlectoBI</a>')
         build.write(self.site.root)
         check.ROOT = self.site.root
         self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
@@ -260,6 +262,16 @@ class FlectoBIRulesTests(unittest.TestCase):
                 build.write(self.site.root)
                 self.edit("apps/flectobi/support.html", old, new)
                 self.assertProblem(needle, "check_flectobi_pages")
+
+    def test_the_landing_page_and_the_privacy_hub_list_flectobi(self):
+        self.site.put("index.html", '<a href="apps/dayfolio/">Dayfolio</a>')
+        self.site.put("privacy/index.html", '<a href="../apps/dayfolio/privacy.html">Dayfolio</a>')
+        found = self.problems("check_flectobi")
+        self.assertTrue(any("index.html" in p and "apps/flectobi/" in p for p in found), found)
+        self.assertTrue(any("privacy/index.html" in p for p in found), found)
+        self.site.put("index.html", '<a href="apps/flectobi/">FlectoBI</a>')
+        self.site.put("privacy/index.html", '<a href="../apps/flectobi/privacy.html">FlectoBI</a>')
+        self.assertEqual(self.problems("check_flectobi"), [])
 
     def test_the_product_page_names_the_mac_app_and_offers_nothing_yet(self):
         for broken, needle in (({**FLECTO_APP, "offers": [{"@type": "Offer", "price": "0"}]}, "offers"),

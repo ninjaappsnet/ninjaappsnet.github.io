@@ -356,6 +356,8 @@ SOCIAL_CARD_TAGS = DAYFOLIO_CARD
 FLECTOBI_DIR = "apps/flectobi"
 FLECTOBI_SOON = "Coming to the Mac App Store"
 FLECTOBI_PRICE = re.compile(r"\$\s?\d[\d,.]*")
+# The landing page's card and the privacy hub's row: the pages that list every app.
+FLECTOBI_LISTED = {"index.html": "apps/flectobi/", "privacy/index.html": "../apps/flectobi/privacy.html"}
 FLECTOBI_FREE = re.compile(r"(?i)\bfree (?:to )?download\b|\bit[’']s free\b")
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
@@ -1200,6 +1202,10 @@ def check_flectobi() -> None:
                 fail(f"flectobi: {rel} has a Smart App Banner, but FlectoBI has no App Store id yet")
             if "apps.apple.com" in text:
                 fail(f"flectobi: {rel} links the App Store, but FlectoBI has no App Store id yet")
+    for rel, link in FLECTOBI_LISTED.items():
+        page = ROOT / rel
+        if page.is_file() and f'href="{link}"' not in page.read_text(encoding="utf-8"):
+            fail(f"flectobi: {rel} does not link {link}; it lists every app")
     product = ROOT / FLECTOBI_DIR / "index.html"
     if not product.is_file():
         return  # check_manifest reports a missing page
