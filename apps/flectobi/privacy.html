@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
-<link rel="stylesheet" href="../../style.css?v=2026-10-26">
+<link rel="stylesheet" href="../../style.css?v=2026-10-26b">
 <script src="../../assets/theme.js" defer></script>
 </head>
 <body>
@@ -49,9 +49,92 @@
   <p class="effective">VERSION 1.0 — EFFECTIVE 2026-10-26</p>
   <div class="prose">
 
-    <p><strong>The short version: FlectoBI collects nothing.</strong> There is no account and no analytics, and your Workbooks and the data you open in them stay on your Mac.</p>
+    <p><strong>The short version: FlectoBI collects nothing.</strong> There is no account and no analytics, and your Workbooks and the data you open in them stay on your Mac. The only network connections FlectoBI makes are to the database servers you set up yourself.</p>
+
+    <p>This policy covers FlectoBI for Mac. FlectoBI is made by NinjaApps, a trading name of cetin.info, the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. FlectoBI gives us none.</p>
+
+    <nav class="toc" aria-label="On this page">
+      <p class="toc-title">ON THIS PAGE</p>
+      <ul>
+        <li><a href="#what-it-does-not-do">What the app does not do</a></li>
+        <li><a href="#where-it-lives">What stays on your Mac</a></li>
+        <li><a href="#network">What goes over the network</a></li>
+        <li><a href="#apple">Apple’s services</a></li>
+        <li><a href="#files-access">Files and folders</a></li>
+        <li><a href="#website">Our website</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#choices">Your choices, and deleting your data</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <h2 id="what-it-does-not-do">What the app does not do</h2>
+    <ul>
+      <li>No accounts and no sign-in. There is nothing to sign up for.</li>
+      <li>No advertising, no advertising identifiers and no tracking. The app’s privacy manifest declares no tracking, no tracking domains and no collected data types.</li>
+      <li>No analytics and no crash-reporting code of our own.</li>
+      <li>No update service and no web content inside the app.</li>
+      <li>No servers of ours. There is nowhere for your data to be sent, so we receive none of it: not your files, not your Workbooks, not what is in them.</li>
+    </ul>
+    <p>FlectoBI tells you the same in its Settings, under About: “All processing happens on this Mac. FlectoBI never uploads your data.”</p>
+
+    <h2 id="where-it-lives">What stays on your Mac</h2>
+    <ul>
+      <li><strong>Workbooks.</strong> A Workbook is one file that you save where you choose. It holds the recipe: the Steps, the Reports and their settings, the paths of your files, and, for a database Input, the host, port, database name, user name and SSL setting. It does not hold your data, and it never holds a password or a file-access bookmark. The data is read again from its source each time the Workbook opens.</li>
+      <li><strong>File access.</strong> When you choose or drop a file or folder, macOS lets FlectoBI keep a security-scoped bookmark so it can open it again. These bookmarks are kept in the app’s own storage area on your Mac, and you can see and remove each one in Settings, under Access.</li>
+      <li><strong>Database passwords.</strong> A password you enter for a database goes into your Mac’s Keychain, and nowhere else. It is given back only for the same host, port, database and user it was saved for.</li>
+      <li><strong>Working data.</strong> While a Workbook is open, its data is held in memory by the data engine. When there is too much, the engine writes temporary files to a folder inside the app’s storage area. FlectoBI deletes that folder when the Workbook closes, and removes any left by a crash the next time it starts.</li>
+      <li><strong>Settings.</strong> FlectoBI remembers little: the height of the data preview below the Flow, and what macOS itself keeps for windows.</li>
+      <li><strong>The sample.</strong> When you open the sample Workbook, FlectoBI copies it and its made-up data files into a folder in the app’s storage area.</li>
+    </ul>
+    <p>FlectoBI is sandboxed by macOS. It can open only the files and folders you choose. The helper that reads Excel files has no network access and no file access of its own, and receives a file only from the app.</p>
+
+    <h2 id="network">What goes over the network</h2>
+    <p>FlectoBI makes a network connection only to a database server that you add as an Input: a PostgreSQL, MySQL or MariaDB server. It connects to the host and port you typed, and only:</p>
+    <ul>
+      <li>when you click Test Connection or Refresh, or</li>
+      <li>when you open a Workbook whose database Input has a password saved in this Mac’s Keychain for that same server.</li>
+    </ul>
+    <p>A Workbook never connects to anything by itself otherwise. The connection is read only: FlectoBI reads a table or the result of a query, and never writes to the server. What the server sends back is kept in the Workbook’s engine on your Mac, and is not sent anywhere else.</p>
+    <p>Whether a database connection is encrypted depends on the SSL setting you choose: Off, Prefer, Require or Verify certificate. With Off, the password and the data can be read on the network, and FlectoBI warns you for a server on another machine. FlectoBI never sends a PostgreSQL password in clear text or as MD5.</p>
+    <p>The libraries FlectoBI uses to talk to those servers run only on this path. The data engine, DuckDB, is built so that it cannot download or load extensions, and FlectoBI makes no other network requests. Maps are drawn from shapes and place names that come with the app, with no map service, tiles or lookup.</p>
+
+    <h2 id="apple">Apple’s services</h2>
+    <p>FlectoBI is distributed through the Mac App Store, and Apple handles its download and updates. Apple may collect information about downloads, and, if you have chosen in your Mac’s settings to share analytics with app developers, about crashes and use. That is Apple’s collection, under <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>. FlectoBI contains no code that sends such reports, and we have no access to your files, Workbooks or data through Apple.</p>
+
+    <h2 id="files-access">Files and folders</h2>
+    <p>FlectoBI reads the files you choose and writes only the Output files you set up, when you ask it to write. It never writes over a file that a Flow reads, and it never writes to a database. A write goes to a temporary file first and replaces the destination only when it is complete.</p>
+
+    <h2 id="website">Our website</h2>
+    <p>The app does not connect to this website. The website itself is hosted on GitHub Pages; GitHub logs visitor IP addresses for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a>, and we have no access to those logs and keep none of our own.</p>
+
+    <h2 id="children">Children</h2>
+    <p>FlectoBI is a tool for working with data and is not directed at children. It collects no data from anyone, including children.</p>
+
+    <h2 id="choices">Your choices, and deleting your data</h2>
+    <ul>
+      <li><strong>File and folder access:</strong> remove any grant in Settings, under Access. It takes effect at once.</li>
+      <li><strong>Database passwords:</strong> delete them in the Keychain Access app on your Mac. They are saved under the service name com.ninjaapps.flectobi.db.</li>
+      <li><strong>Workbooks and Output files:</strong> they are ordinary files that you can move, copy or delete.</li>
+      <li><strong>Everything else:</strong> deleting the app deletes its storage area, and the data in it, from your Mac.</li>
+    </ul>
+
+    <h2>Your rights under the GDPR</h2>
+    <p>The GDPR gives you rights of access, rectification, erasure, restriction, portability and objection over personal data a controller holds about you. We hold none: there is no account to look up, no identifier we could search on, and no database. Your data is yours, on your Mac, and you can already read, change, export and delete it there.</p>
+    <p>You can raise a concern with us at <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a>, or lodge a complaint with the Polish supervisory authority, the Urząd Ochrony Danych Osobowych (UODO), at <a href="https://uodo.gov.pl">uodo.gov.pl</a>.</p>
+
+    <h2 id="changes">Changes to this policy</h2>
+    <p>Each version of this policy carries a version number and an effective date, and both change whenever the substance does. We do not edit a published version in place; a change means a new one, and the earlier versions stay readable.</p>
+    <ul>
+      <li><strong>Version 1.0, effective 2026-10-26</strong> — the first version, for FlectoBI for Mac.</li>
+    </ul>
+
+    <h2 id="contact">Contact</h2>
+    <p>Questions about this policy: <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a>. There is more on the <a href="support.html">support page</a>.</p>
 
   </div>
+  <a class="backlink" href="./">← BACK TO FLECTOBI</a>
 </section>
 
 </main>

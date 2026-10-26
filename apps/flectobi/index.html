@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
-<link rel="stylesheet" href="../../style.css?v=2026-10-26">
+<link rel="stylesheet" href="../../style.css?v=2026-10-26b">
 <script src="../../assets/theme.js" defer></script>
 <!-- What FlectoBI is, for a search engine. No offers until it has a price, and no ratings or reviews to claim:
      tools/check-site.py (check_flectobi_app) holds it to that. -->
@@ -50,13 +50,199 @@
   <div>
     <div class="kicker">道 MAC — 02</div>
     <h1>FlectoBI</h1>
-    <p class="lede">Transform. Analyze. Visualize. FlectoBI turns the files you clean every week into a Flow you can run again, and a Report that refreshes with it, on your Mac and with no code.</p>
+    <p class="lede">Transform. Analyze. Visualize. FlectoBI turns the files you clean every week into a Flow you can run again, and a Report that refreshes with it. It runs on your Mac, keeps your data there, and needs no code.</p>
     <div class="actions">
       <span class="btn btn-quiet btn-soon">Coming to the Mac App Store</span>
+      <a class="btn" href="guide/">READ THE GUIDE →</a>
     </div>
+    <p class="shot-note">Requires macOS 26 or later and a Mac with Apple silicon.</p>
   </div>
   <div class="hero-side">
     <img class="app-icon" src="icon-320.webp" alt="FlectoBI app icon" width="160" height="160">
+  </div>
+</section>
+
+<section class="group" id="overview">
+  <div class="group-head">
+    <span class="group-kanji">画 OVERVIEW</span>
+    <h2 class="group-title">Prepare the data. Show it.</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="devices">
+    <div class="devices-row">
+      <figure class="shot device-desktop"><img src="media/report-overview.webp" alt="FlectoBI on the Mac showing a Report: a row of Cards with total revenue, orders and units sold, a Slicer for Region, and a line chart, a column chart and a donut chart of the sample sales." width="1440" height="900"><figcaption>A Report, on the sample Workbook</figcaption></figure>
+    </div>
+    <div class="devices-row">
+      <figure class="shot device-desktop"><img src="media/flow-overview.webp" alt="FlectoBI on the Mac showing a Flow: Inputs for sales, products and stores joined and summarized in a chain of Steps, with the data of the selected Step in a table below and its options in the inspector on the right." width="1440" height="900" loading="lazy"><figcaption>A Flow, with the data of the selected Step below it</figcaption></figure>
+    </div>
+  </div>
+  <p class="shot-note">The pictures show the sample Workbook that comes with FlectoBI. Its data is made up.</p>
+</section>
+
+<section class="group" id="about">
+  <div class="group-head">
+    <span class="group-kanji">説 ABOUT</span>
+    <h2 class="group-title">One Workbook for both jobs</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="about">
+    <div class="prose">
+      <p>Most teams use one tool to clean a file and another to chart it. FlectoBI does both in a single Workbook. You build a Flow of Steps that shapes your data, and a Report of Pages that shows it. When the files change, you refresh, and everything follows.</p>
+      <p>A Workbook stores the recipe, not the data. The data is read again from your files and databases each time the Workbook opens, and FlectoBI never writes over a source file.</p>
+      <p>It is made for people who work with spreadsheets and exports every week, such as analysts in operations, sales and finance, and consultants who receive client files and hand back Reports. No programming is needed, and nothing is hidden: you can see the data at every Step.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>PLATFORM</dt><dd>Mac</dd></div>
+      <div><dt>REQUIRES</dt><dd>macOS 26 or later</dd></div>
+      <div><dt>MAC CHIPS</dt><dd>Apple silicon</dd></div>
+      <div><dt>AVAILABILITY</dt><dd>Coming to the Mac App Store</dd></div>
+      <div><dt>GUIDE</dt><dd><a href="guide/">READ →</a></dd></div>
+      <div><dt>TUTORIALS</dt><dd><a href="tutorials/">LEARN →</a></dd></div>
+      <div><dt>SUPPORT</dt><dd><a href="support.html">HELP →</a></dd></div>
+      <div><dt>PRIVACY</dt><dd><a href="privacy.html">POLICY →</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="group" id="flows">
+  <div class="group-head">
+    <span class="group-kanji">流 FLOWS</span>
+    <h2 class="group-title">Shape the data, one Step at a time</h2>
+    <span class="group-rule"></span>
+    <span class="group-count">26 TRANSFORMS</span>
+  </div>
+  <div class="prose">
+    <p>A Flow is a canvas of Steps: Inputs bring data in, Transforms change it, and Outputs write it out. Click any Step to see its data in a table below the canvas, as it is at that point. You never have to guess what a Step did.</p>
+    <ul>
+      <li><strong>26 Transforms</strong> in five groups: Rows, Columns, Text, Combine and Reshape. They include Filter, Sort, Join, Stack, Summary, Pivot and Unpivot.</li>
+      <li><strong>A live preview at every Step.</strong> Change an option and the table and every Step after it update. A Step that cannot run says why.</li>
+      <li><strong>Formulas</strong> that read like a spreadsheet: <code>round([Units] * [UnitPrice] * (1 - [Discount]), 2)</code>. When one is wrong, the message is in plain English and names the fix, for example a column you may have meant.</li>
+      <li><strong>Search for a Transform</strong> by typing. Names, common words and the first letters all find it.</li>
+      <li><strong>Column profile</strong> for any Column: counts, empty Values, the range and the most frequent Values.</li>
+      <li><strong>Undo</strong> for every edit, with the name of what it undoes.</li>
+    </ul>
+    <p>The data engine underneath is DuckDB, built into the app, so large files stay responsive on a laptop.</p>
+  </div>
+</section>
+
+<section class="group" id="reports">
+  <div class="group-head">
+    <span class="group-kanji">表 REPORTS</span>
+    <h2 class="group-title">Charts that follow the Flow</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <p>A Report is made of Pages. Each Page is a grid where you place Visuals and give each one a Dataset from a Step. You fill a Visual by dropping Columns into its Field Wells, and choose how to add them up: Sum, Average, Median, Min, Max, Count or Distinct count.</p>
+    <ul>
+      <li><strong>Visual kinds:</strong> Column, Bar, Line, Area, Pie, Donut, Scatter, Heatmap, Funnel, Bubble Map, Filled Map, Table, Card, Slicer, 3D Scatter, Surface Plot and Spike Map.</li>
+      <li><strong>Cross-filtering.</strong> Click a bar, a slice or a place and every other Visual on the Page narrows to that Selection. Use a Slicer to choose values from a list. A badge on each Visual shows what filters it.</li>
+      <li><strong>Refresh.</strong> A Report reads only the output of Steps, so when the Flow runs again the Report is current.</li>
+    </ul>
+  </div>
+  <figure class="shot">
+    <video controls muted playsinline preload="none" poster="media/clip-cross-filter-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: a click on one region in a chart narrows the other Visuals on the Page to that region."><source src="media/clip-cross-filter.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-cross-filter.mp4">Download it</a> (MP4).</p></video>
+    <figcaption>Click a mark, and the Page follows</figcaption>
+  </figure>
+</section>
+
+<section class="group" id="maps-3d">
+  <div class="group-head">
+    <span class="group-kanji">地 MAPS AND 3D</span>
+    <h2 class="group-title">Places and a third measure</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <p>A Filled Map colours countries, states and regions by a Value. A Bubble Map puts a bubble on each place, sized by area, from names or from latitude and longitude. Both work offline: the shapes and the place names come with the app, and no map service is called.</p>
+    <p>Where there is a real third measure, FlectoBI can show it in 3D: a 3D Scatter with an optional fitted surface, a Surface Plot, a Spike Map and a Globe view. They turn only when you turn them, with a drag or with Command and the arrow keys.</p>
+  </div>
+  <div class="devices">
+    <div class="devices-row">
+      <figure class="shot device-desktop"><img src="media/report-map.webp" alt="FlectoBI on the Mac showing a Report Page of maps: a Bubble Map of store revenue across the United States, Europe and Japan, and a Filled Map of revenue by state, with a Slicer for Country." width="1440" height="900" loading="lazy"><figcaption>Maps, drawn from data in the app</figcaption></figure>
+    </div>
+  </div>
+  <figure class="shot">
+    <video controls muted playsinline preload="none" poster="media/clip-3d-turn-poster.webp" width="1440" height="900" aria-label="A short clip with no sound: a 3D Scatter chart is turned with the pointer to show its three axes from another side."><source src="media/clip-3d-turn.mp4" type="video/mp4"><p>Your browser can’t play this clip here. <a href="media/clip-3d-turn.mp4">Download it</a> (MP4).</p></video>
+    <figcaption>Turn a 3D Visual with a drag</figcaption>
+  </figure>
+</section>
+
+<section class="group" id="inputs-outputs">
+  <div class="group-head">
+    <span class="group-kanji">入出 INPUTS AND OUTPUTS</span>
+    <h2 class="group-title">Bring data in, write it out</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <p>Drop files onto the Flow, or choose Add Input. Each Input keeps its own options, such as the delimiter, the encoding, the sheet or the range, and you can refresh it whenever the source changes.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kind</th><th>Input</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>Text and spreadsheets</td><td>CSV, TSV and text, Excel, ODS</td><td>CSV, TSV, Excel (.xlsx)</td></tr>
+          <tr><td>Structured files</td><td>JSON, JSON Lines, Parquet, SQLite</td><td>JSON, JSON Lines, Parquet</td></tr>
+          <tr><td>Databases</td><td>PostgreSQL, MySQL and MariaDB</td><td>Not applicable</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Databases are read only. FlectoBI copies a table or the result of a query into the Workbook as a snapshot, and never writes to the server. Passwords go to your Mac’s Keychain, never into the Workbook.</p>
+    <p>An Output writes only when you ask, with Write Now or Write All Outputs. You can turn on automatic writing after that. FlectoBI refuses an Output that would overwrite a file the Flow reads.</p>
+  </div>
+</section>
+
+<section class="group" id="private">
+  <div class="group-head">
+    <span class="group-kanji">秘 PRIVATE</span>
+    <h2 class="group-title">Private by design</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <ul>
+      <li><strong>Your data stays on your Mac.</strong> All processing happens locally. FlectoBI never uploads your data.</li>
+      <li><strong>Sandboxed.</strong> FlectoBI opens only the files and folders you choose, and you can see and remove each one in Settings. Excel files are read by a separate helper that has no network or file access of its own.</li>
+      <li><strong>No account, and no tracking.</strong> There is nothing to sign in to. The privacy manifest declares no tracking and no collected data.</li>
+      <li><strong>Maps work offline.</strong> No map tiles or lookup services are used.</li>
+      <li><strong>The only network use is a database you connect to.</strong> FlectoBI talks to the host and port you type, and to nothing else.</li>
+    </ul>
+    <p>The <a href="privacy.html">privacy policy</a> has the details.</p>
+  </div>
+</section>
+
+<section class="group" id="mac">
+  <div class="group-head">
+    <span class="group-kanji">匠 MAC</span>
+    <h2 class="group-title">Built for the Mac</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <p>FlectoBI is a native Mac app, not a web page in a window. It follows what you set in macOS.</p>
+    <ul>
+      <li><strong>Keyboard.</strong> You can build a Flow and arrange a Report without the mouse: Tab moves between Steps and Visuals, the arrow keys move and resize, and typing a letter on the canvas opens the Transform search.</li>
+      <li><strong>VoiceOver.</strong> Steps and Visuals expose actions, and charts have spoken summaries.</li>
+      <li><strong>Light, Dark and Increase Contrast.</strong> The chart colours are chosen to stay apart for people with colour blindness.</li>
+      <li><strong>Reduce Motion.</strong> When it is on, nothing in a chart moves or grows.</li>
+      <li><strong>Documents.</strong> A Workbook is one file, autosaved, with Undo and Redo, and a window of its own.</li>
+    </ul>
+  </div>
+  <div class="devices">
+    <div class="devices-row">
+      <figure class="shot device-desktop"><img src="media/report-overview-dark.webp" alt="The same Report in FlectoBI with the Mac in Dark appearance: the Cards, the Slicer and the charts on a dark background." width="1440" height="900" loading="lazy"><figcaption>The same Report in Dark appearance</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="group" id="learn">
+  <div class="group-head">
+    <span class="group-kanji">学 LEARN</span>
+    <h2 class="group-title">Start here</h2>
+    <span class="group-rule"></span>
+  </div>
+  <div class="prose">
+    <p>FlectoBI includes a sample Workbook that opens offline and shows every kind of Visual. Choose Help, then Open Sample Workbook.</p>
+    <ul>
+      <li><a href="guide/">The guide</a> explains each part of the app, from adding an Input to sharing a Workbook.</li>
+      <li><a href="tutorials/">The tutorials</a> take you through a task from start to finish.</li>
+      <li><a href="support.html">Support</a> answers common questions and tells you how to reach us.</li>
+    </ul>
   </div>
 </section>
 

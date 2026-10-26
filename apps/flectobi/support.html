@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
-<link rel="stylesheet" href="../../style.css?v=2026-10-26">
+<link rel="stylesheet" href="../../style.css?v=2026-10-26b">
 <script src="../../assets/theme.js" defer></script>
 </head>
 <body>
@@ -47,8 +47,137 @@
   <div class="kicker">助 SUPPORT — FLECTOBI</div>
   <h1 class="page-title">Something wrong?</h1>
   <div class="contact-box">
-    <p><strong>Write to <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a></strong>, and a real person will read it.</p>
+    <p><strong>Write to <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a></strong></p>
+    <p>A real person reads it, and you will hear back within 24–48 hours. Your Mac model, your macOS version and a screenshot will get you a better answer faster. If a message in FlectoBI is the problem, copy its words into your email.</p>
   </div>
+
+  <div class="callout callout-lead">
+    <p><strong>Learning FlectoBI?</strong> <a href="guide/">The FlectoBI guide</a> walks through each part of the app, and <a href="tutorials/">the tutorials</a> take you through a task from start to finish. This page answers questions about files, access, databases, limits and sharing.</p>
+  </div>
+
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">ON THIS PAGE</p>
+    <ul>
+      <li><a href="#requirements">What you need</a></li>
+      <li><a href="#sample">The sample Workbook</a></li>
+      <li><a href="#grant-access">Grant Access and file permission</a></li>
+      <li><a href="#excel">Excel files</a></li>
+      <li><a href="#csv">CSV files that read wrongly</a></li>
+      <li><a href="#databases">Databases and SSL errors</a></li>
+      <li><a href="#large-files">Large files and memory</a></li>
+      <li><a href="#outputs">Outputs</a></li>
+      <li><a href="#maps">Maps</a></li>
+      <li><a href="#sharing">Sharing a Workbook</a></li>
+      <li><a href="#limits">Limits</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ul>
+  </nav>
+
+  <div class="prose">
+
+    <h2 id="requirements">What do I need to run FlectoBI?</h2>
+    <p>A Mac with Apple silicon, running macOS 26 or later. FlectoBI does not run on Intel Macs, and there is no version for iPhone or iPad yet. FlectoBI is coming to the Mac App Store.</p>
+
+    <h2 id="sample">Where is the sample Workbook?</h2>
+    <p>Choose Help, then Open Sample Workbook. You can also click Open Sample Workbook on an empty Flow. FlectoBI copies the sample into a folder called FlectoBI Samples in its own Documents folder and opens Sales Sample. It has a Flow of twelve Steps and a Report with six Pages, and it needs no permission to read its files.</p>
+    <p>If you change the sample, FlectoBI keeps your Workbook and only refreshes its data files.</p>
+
+    <h2 id="grant-access">FlectoBI says it needs permission to read a file. What do I do?</h2>
+    <p>FlectoBI is a sandboxed Mac app, so it can open only the files you choose. When you pick or drop a file, FlectoBI keeps a bookmark so it can open that file again later without asking. A Workbook from another Mac, or a folder that has moved, has no such bookmark yet. An orange banner then appears at the top of the window, for example “FlectoBI needs permission to read 3 input files.”</p>
+    <ol>
+      <li>Click <strong>Grant Access…</strong> in the banner.</li>
+      <li>Choose the folder that holds the Workbook’s data, or the files themselves. The panel starts at the folder they have in common.</li>
+      <li>Click <strong>Grant Access</strong>. The Steps read their files again by themselves.</li>
+    </ol>
+    <p>One grant for a folder covers everything inside it, so choosing the common folder usually fixes every Step at once. You can see and remove each grant in Settings, under Access. Removing a grant takes effect at once, and data FlectoBI has already read stays in open Workbooks until you refresh them.</p>
+    <p>If a file is missing, FlectoBI says so instead: “It may have been moved, renamed or deleted, or be on a drive that isn’t connected.” Granting access cannot bring a missing file back. Use <strong>Change File…</strong> in the Input’s options to point to it.</p>
+    <p>For an SQLite database, FlectoBI may need the whole folder, because SQLite keeps working files next to the database. The banner then says “FlectoBI needs access to the folder of” the file.</p>
+
+    <h2 id="excel">FlectoBI refused my Excel file. Why?</h2>
+    <p>FlectoBI reads .xlsx, .xlsm, .xlsb, .xls and .ods files in a separate, sandboxed helper, so a damaged file cannot crash the app. The helper refuses a file it cannot read safely, and the message says what to do:</p>
+    <ul>
+      <li>“The workbook is password-protected or encrypted. Remove the password in Excel and try again.”</li>
+      <li>“The sheet is too large to import. Save it as CSV and import that instead.” A sheet may have at most 50,000,000 cells.</li>
+      <li>FlectoBI says it stopped reading the file because the file made the spreadsheet reader fail. The file may be damaged. Try opening and saving it in Excel, or save it as CSV.</li>
+      <li>“The file is damaged or not a valid spreadsheet.”</li>
+      <li>“The sheet is empty.” or “The workbook has no sheets.”</li>
+    </ul>
+    <p>Saving the sheet as CSV or Parquet from Excel works around all of these. If the file has more than one sheet, choose the one you want in the Input’s options. FlectoBI reads the first visible sheet by default, and the Range option reads only the cells you name, such as A1:F200. A file may be at most 1 GiB.</p>
+
+    <h2 id="csv">My CSV file reads wrongly</h2>
+    <ul>
+      <li><strong>Dates read the wrong way round.</strong> A date such as 03/04/2025 can mean two days. Set Date order in the Input’s options to Month first or Day first.</li>
+      <li><strong>Numbers such as 1.234,56.</strong> Set Decimals to Comma, or use a Change Type Step with Numbers use a decimal comma turned on.</li>
+      <li><strong>Leading zeros are gone.</strong> Turn on Read every column as text, then use Change Type where you want numbers.</li>
+      <li><strong>Strange characters.</strong> Choose the file’s Encoding instead of Automatic. When it cannot tell, FlectoBI says that the file is not UTF-8 text and asks you to choose its encoding in the Input’s options.</li>
+      <li><strong>A title above the header.</strong> Raise Skip rows until the header is the first row read.</li>
+    </ul>
+
+    <h2 id="databases">A database connection fails. What do the messages mean?</h2>
+    <p>FlectoBI connects to PostgreSQL, MySQL and MariaDB servers, and only reads from them. Use <strong>Test Connection</strong> in the sheet to see the result before you add the Input. The messages say what to change:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Message</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td>Authentication failed. Check the user name and password.</td><td>Re-enter the user and password. The password is stored in your Mac’s Keychain, not in the Workbook.</td></tr>
+          <tr><td>The server refused the connection. Check the host and port.</td><td>The defaults are 5432 for PostgreSQL and 3306 for MySQL. Check that the server accepts connections from your network.</td></tr>
+          <tr><td>The host name could not be found.</td><td>Check the spelling, and check that you are on the right network or VPN.</td></tr>
+          <tr><td>The server did not respond in time.</td><td>Check the host and port, and any firewall in between.</td></tr>
+          <tr><td>The server does not allow connections from this Mac.</td><td>Ask the administrator to allow your Mac’s address.</td></tr>
+          <tr><td>The server requires SSL. Choose Require or Verify certificate.</td><td>Change the SSL setting in the sheet.</td></tr>
+          <tr><td>The server does not support SSL. Try a different SSL mode.</td><td>Choose Prefer, or Off for a server on your own Mac.</td></tr>
+          <tr><td>The server’s certificate could not be verified. If the server uses its own certificate, choose Require.</td><td>Verify certificate checks the certificate against the ones your Mac trusts. If your server uses a certificate it made itself, choose Require.</td></tr>
+          <tr><td>The server offers only an outdated encryption version (TLS 1.0 or 1.1). Ask the administrator to turn on TLS 1.2 or later.</td><td>FlectoBI needs TLS 1.2 or later for MySQL.</td></tr>
+          <tr><td>The server asked for the password in a form that could be intercepted, so it was not sent. Choose Verify certificate, or set up the server for SCRAM passwords.</td><td>FlectoBI never sends a PostgreSQL password in clear text or as MD5. Ask for SCRAM passwords on the server.</td></tr>
+          <tr><td>This account signs in with a method FlectoBI does not support.</td><td>Ask for an account with a caching_sha2_password or mysql_native_password password.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The SSL setting has four choices: Off, Prefer, Require and Verify certificate. For a server on another machine, a new connection starts at Require for PostgreSQL and Verify certificate for MySQL. Choose Off only for a server on your own Mac, or one that offers no encryption, and know that the password and the data can then be read on the network.</p>
+    <p>A custom query for MySQL must read data. Start it with SELECT, WITH, TABLE or VALUES, and enter one query only. FlectoBI does not write to any database.</p>
+    <p>MySQL 8.4, 9.7 and 26.x and MariaDB 11.8 are tested. Accounts that sign in with ed25519, PARSEC or sha256_password are not supported.</p>
+
+    <h2 id="large-files">A Step stops because of memory or disk. What can I do?</h2>
+    <p>FlectoBI keeps its data engine to about 30% of your Mac’s memory and writes the overflow to temporary disk space. A Step stops when the whole app passes 80% of the memory, and says that it needs more memory than is available, and that you should filter or summarize the data earlier in the Flow, or simplify the Formula.</p>
+    <ul>
+      <li>Put a Filter or Remove Columns Step as early in the Flow as you can, so later Steps handle less.</li>
+      <li>Summarize before you Join or Pivot.</li>
+      <li>Close other Workbooks, which each have their own engine.</li>
+      <li>Free some disk space. The space for overflow is limited to a quarter of what is free.</li>
+      <li>Press Command-period to stop a Step that is running.</li>
+    </ul>
+
+    <h2 id="outputs">An Output will not write</h2>
+    <ul>
+      <li><strong>It would overwrite an Input.</strong> FlectoBI says that the Output would overwrite a file the Flow reads, and asks you to choose another file. FlectoBI never writes over a source file.</li>
+      <li><strong>It needs permission.</strong> Use Grant Access in the banner, or Change… to choose the file again.</li>
+      <li><strong>Excel is limited.</strong> Excel files are written as .xlsx, with at most 1,048,575 rows. For more, write CSV or Parquet.</li>
+      <li><strong>Nothing happens when the Workbook opens.</strong> This is on purpose. An Output writes when you click Write Now, or choose Write All Outputs, and automatic writing starts only after that.</li>
+    </ul>
+    <p>A write goes to a temporary file first, and replaces the destination only when it is complete. If it fails, “The file was left as it was.”</p>
+
+    <h2 id="maps">Do maps need the internet?</h2>
+    <p>No. The shapes of countries, states and regions, and the names of cities of 15,000 people or more, come with the app. FlectoBI does not call a map service.</p>
+    <p>If a place is not found, the Visual lists it, and suggests that you check the spelling or add a Country field, so FlectoBI can tell places with the same name apart. Where a name could be several places, FlectoBI uses the largest and says so. Postal codes are not supported.</p>
+
+    <h2 id="sharing">How do I share a Workbook?</h2>
+    <p>Send the .flectobi file together with its data files, and keep the folders as they were: the Workbook stores paths relative to itself. A Workbook holds the recipe, never the data and never a password.</p>
+    <p>On the other Mac, FlectoBI shows the Grant Access banner described above. One grant of the common folder fixes every Step. A database password does not travel: the person you share with is asked for it once, and it is saved in their own Keychain.</p>
+
+    <h2 id="limits">What are the limits in this version?</h2>
+    <ul>
+      <li>Inputs: files and PostgreSQL, MySQL and MariaDB databases. There is no Google Sheets, cloud storage or other database yet.</li>
+      <li>Transpose takes at most 1,000 rows, and Pivot at most 500 distinct values.</li>
+      <li>A Formula can be 4,000 characters long.</li>
+      <li>A chart shows up to 1,000 categories, a Table up to 1,000 rows, and a Scatter up to 20,000 points. A Visual says when it has cut the data.</li>
+      <li>Sharing is by file. There is no cloud and no shared editing.</li>
+    </ul>
+
+    <h2 id="acknowledgements">Where are the acknowledgements?</h2>
+    <p>Choose Help, then Acknowledgements, to see the notices for the open-source libraries inside FlectoBI. They include DuckDB for the data engine, and Natural Earth and GeoNames for the maps.</p>
+
+  </div>
+  <a class="backlink" href="./">← BACK TO FLECTOBI</a>
 </section>
 
 </main>

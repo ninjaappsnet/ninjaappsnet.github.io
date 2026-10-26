@@ -974,6 +974,9 @@ figure.shot { margin: 0; }
 figure.shot img { border: 0; filter: drop-shadow(0 6px 18px rgba(0,0,0,.18)); } /* window corners are transparent, so no square hairline */
 .shot-lead { grid-column: 1 / -1; }
 .shot figcaption { margin: 12px 0 0; font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+.shot video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; border: 1px solid var(--line); background: var(--line); }
+.shot video p { margin: 0; padding: 24px; font: 400 13px/1.6 'Zen Kaku Gothic New', sans-serif; }
+.group > .shot { margin-top: 28px; max-width: 1040px; }
 .shot-note { margin: 14px 0 0; font: 400 12px/1.6 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 
 /* Dayfolio's pictures (apps/dayfolio/): the App Store's captioned pictures, opaque and light, so a hairline frames
