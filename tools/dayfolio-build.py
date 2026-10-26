@@ -1,37 +1,43 @@
 #!/usr/bin/env python3
-"""Build Dayfolio's guide, template and article pages from Markdown.
+"""Build the app pages (Dayfolio's and FlectoBI's) from Markdown.
 
     python3 tools/dayfolio-build.py            # write every file the build owns
     python3 tools/dayfolio-build.py --check    # write nothing; fail if a committed file differs
 
-The sources are Markdown files with front matter in content/dayfolio/<section>/
-(guide, templates, articles). Each section's index.md is the section page at
-/apps/dayfolio/<section>/, and every other file is a page at
-/apps/dayfolio/<section>/<slug>/. GitHub Pages serves files, so the generated
-HTML is committed; tools/check-site.py runs --check, and fails when a committed
-page differs from what this makes. Standard library only, like the rest of the
-site.
+Each app in APPS has its pages under apps/<app>/ and their sources, Markdown
+files with front matter, in content/<app>/<section>/: Dayfolio's sections are
+guide, templates and articles, FlectoBI's guide and tutorials. Each section's
+index.md is the section page at /apps/<app>/<section>/, and every other file is
+a page at /apps/<app>/<section>/<slug>/. An app with no content folder has no
+generated pages. GitHub Pages serves files, so the generated HTML is committed;
+tools/check-site.py runs --check, and fails when a committed page differs from
+what this makes. Standard library only, like the rest of the site. (The name is
+the one it had when Dayfolio was the only app; the other tools load it by it.)
 
-Every Dayfolio page shares one shell (render_page): the head (title,
-description, canonical, Open Graph and Twitter card, JSON-LD, the Smart App
-Banner), the site header and footer (taken from apps/dayfolio/index.html, as
-tools/archive-page.py always did, and rebased to the page's depth), and the
-Dayfolio sub-navigation. The build also keeps that sub-navigation, and the
-stylesheet's version (STYLE_VERSION), current on the hand-written pages (the
-product, support, privacy and terms pages), on archive-format.html and on the
-template gallery's pages, replacing only the <nav class="subnav"> block and the
-style.css link, and writes sitemap.xml (every indexable page on the site) and
-robots.txt.
+Every app page shares one shell (render_page): the head (title, description,
+canonical, Open Graph and Twitter card, JSON-LD, and the Smart App Banner once
+the app has an App Store id), the site header and footer (taken from the app's
+product page, apps/<app>/index.html, as tools/archive-page.py always did, and
+rebased to the page's depth), and the app's sub-navigation. The build also keeps
+that sub-navigation, and the stylesheet's version (STYLE_VERSION), current on
+the hand-written pages (the product, support, privacy and terms pages), on
+archive-format.html and on the template gallery's pages, replacing only the
+<nav class="subnav"> block and the style.css link, and writes sitemap.xml
+(every indexable page on the site) and robots.txt.
 
 The Markdown is tools/archive-page.py's (headings, paragraphs, lists, tables,
-code, **bold**, *italic*, links), with three additions for these pages: a
+code, **bold**, *italic*, links), with these additions for these pages: a
 relative link stays a link, a line that is only a picture, ![alt](file.webp
-"caption"), becomes a figure (several such lines in a row sit side by side),
-and a > quote becomes a callout, for tips. The build stops, naming the file
-and line, at a missing field, a picture without alt text or not in WebP, a
-second h1, or copy that breaks the site's rules (straight quotes, exclamation
-marks, emoji). FOUNDATION.md in the orchestrator folder, and the README, say
-how to add a page.
+"caption"), becomes a figure (several such lines in a row sit side by side), the
+same line naming an .mp4, ![alt](clip.mp4 "caption"), becomes a short film over
+its poster frame (clip-poster.webp beside it), and a > quote becomes a callout,
+for tips. On FlectoBI's pages (window_figures) a landscape figure is drawn wider
+than the text, and a picture with transparent corners (a window capture) gets a
+shadow. The build stops, naming the file and line, at a missing field, a picture
+without alt text or not in WebP, a clip without its poster or that cannot play
+while it downloads, a second h1, or copy that breaks the site's rules (straight
+quotes, exclamation marks, emoji). FOUNDATION.md in the orchestrator folder, and
+the README, say how to add a page.
 """
 
 from __future__ import annotations
@@ -50,25 +56,16 @@ from typing import Dict, List, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent
 ORIGIN = "https://ninjaapps.net"
-APP_DIR = "apps/dayfolio"
-CONTENT_DIR = "content/dayfolio"
-STORE_ID = "6817388897"
-STORE_URL = f"https://apps.apple.com/app/id{STORE_ID}"
-BANNER = f'<meta name="apple-itunes-app" content="app-id={STORE_ID}">'
-SUFFIX = " — Dayfolio — NinjaApps"
-CARD = f"{APP_DIR}/social-card.png"
-CARD_ALT = ("The Dayfolio app icon beside the words: Dayfolio. A calm work journal. One page a day, "
-            "in the shape of your job.")
-ICON = f"{APP_DIR}/icon-320.webp"
 # Cloudflare keeps style.css in its edge cache, and tells browsers to keep it, for four hours (the README, Assets),
 # so a page whose markup needs a rule style.css didn't have asks for the stylesheet by a new query. Every Dayfolio
-# page asks by this one: the shell writes it, and the build refreshes it on the hand-written pages. When a Dayfolio
-# page needs a new rule, change it to the day of the change (a letter after it for a second change that day) and
-# run the build.
+# and FlectoBI page asks by this one: the shell writes it, and the build refreshes it on the hand-written pages. When
+# one of those pages needs a new rule, change it to the day of the change (a letter after it for a second change
+# that day) and run the build.
 STYLE_VERSION = "2026-10-16b"
 GENERATED = "Generated by tools/dayfolio-build.py"
 TITLE_MAX, DESCRIPTION_MIN, DESCRIPTION_MAX = 60, 50, 160
 PICTURE_MAX_BYTES = 500_000
+CLIP_MAX_BYTES = 8_000_000     # a short film that explains one thing, not a tour of the app
 ORG = {"@type": "Organization", "name": "NinjaApps", "url": f"{ORIGIN}/"}
 PUBLISHER = {**ORG, "logo": {"@type": "ImageObject", "url": f"{ORIGIN}/assets/brand/ninjaapps-seal-1024.png"}}
 
@@ -90,14 +87,106 @@ class Section:
     empty: str         # what the section page says while it lists nothing
 
 
-SECTIONS: Dict[str, Section] = {
-    "guide": Section("Guide", "導", "topic", True, "← THE GUIDE", "No guide pages yet."),
-    "templates": Section("Templates", "型", "topic", False, "← ALL TEMPLATES", "No template pages yet."),
-    "articles": Section("Articles", "記", "article", False, "← ALL ARTICLES", "No articles yet."),
-}
-# The Dayfolio sub-navigation, in order: label, then the target under apps/dayfolio/.
-SUBNAV = [("Overview", ""), ("Guide", "guide/"), ("Templates", "templates/"), ("Articles", "articles/"),
-          ("Support", "support.html")]
+@dataclass
+class App:
+    """One app's pages: apps/<key>/, built from content/<key>/<section>/, under the app's sub-navigation."""
+    key: str                         # the folder: apps/<key>/ and content/<key>/
+    name: str                        # as the sub-navigation, the kickers and the <title> say it
+    card_alt: str                    # what the default social card, apps/<key>/social-card.png, shows
+    sections: Dict[str, "Section"]   # the Markdown sections, in the order the build makes them
+    subnav: List[Tuple[str, str]]    # the sub-navigation, in order: label, then the target under apps/<key>/
+    store_id: Optional[str]          # the App Store id; None until the app has one (no banner, no store link)
+    box: str                         # the app box's sentence, under every guide page (HTML)
+    window_figures: bool = False     # landscape figures draw wide, and a transparent-cornered window gets a shadow
+
+    @property
+    def dir(self) -> str:
+        return f"apps/{self.key}"
+
+    @property
+    def content(self) -> str:
+        return f"content/{self.key}"
+
+    @property
+    def suffix(self) -> str:
+        return f" — {self.name} — NinjaApps"
+
+    @property
+    def card(self) -> str:
+        return f"{self.dir}/social-card.png"
+
+    @property
+    def icon(self) -> str:
+        return f"{self.dir}/icon-320.webp"
+
+    @property
+    def store_url(self) -> Optional[str]:
+        return f"https://apps.apple.com/app/id{self.store_id}" if self.store_id else None
+
+    @property
+    def banner(self) -> Optional[str]:
+        return f'<meta name="apple-itunes-app" content="app-id={self.store_id}">' if self.store_id else None
+
+
+# FlectoBI has no App Store record yet, and no price (the owner: paid, the price to follow). This is the one place
+# its id goes: with None, no FlectoBI page carries a Smart App Banner or a store link, the product page says
+# "Coming to the Mac App Store" without a link, and tools/check-site.py warns that the id and the price are due
+# before launch. Once the id is set there, it fails until the product page states the price.
+FLECTOBI_STORE_ID: Optional[str] = None
+
+DAYFOLIO = App(
+    key="dayfolio", name="Dayfolio",
+    card_alt=("The Dayfolio app icon beside the words: Dayfolio. A calm work journal. One page a day, "
+              "in the shape of your job."),
+    sections={
+        "guide": Section("Guide", "導", "topic", True, "← THE GUIDE", "No guide pages yet."),
+        "templates": Section("Templates", "型", "topic", False, "← ALL TEMPLATES", "No template pages yet."),
+        "articles": Section("Articles", "記", "article", False, "← ALL ARTICLES", "No articles yet."),
+    },
+    subnav=[("Overview", ""), ("Guide", "guide/"), ("Templates", "templates/"), ("Articles", "articles/"),
+            ("Support", "support.html")],
+    store_id="6817388897",
+    box=("<strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. It’s free to start, "
+         "with one journal and 100 entries, and there’s no subscription."),
+)
+FLECTOBI = App(
+    key="flectobi", name="FlectoBI",
+    card_alt=("The FlectoBI app icon beside the words: FlectoBI. Transform. Analyze. Visualize. "
+              "Data prep and dashboards for Mac."),
+    sections={
+        "guide": Section("Guide", "導", "topic", True, "← THE GUIDE", "No guide pages yet."),
+        "tutorials": Section("Tutorials", "習", "topic", True, "← ALL TUTORIALS", "No tutorials yet."),
+    },
+    subnav=[("Overview", ""), ("Guide", "guide/"), ("Tutorials", "tutorials/"), ("Support", "support.html")],
+    store_id=FLECTOBI_STORE_ID,
+    box=("<strong>FlectoBI</strong> turns the files you clean every week into a Flow you can run again, and a "
+         "Report that follows it, on your Mac and with no code."),
+    window_figures=True,
+)
+APPS: Dict[str, App] = {app.key: app for app in (DAYFOLIO, FLECTOBI)}
+
+
+def set_store_id(key: str, store_id: Optional[str]) -> None:
+    """Give an app its App Store id for this run (the tests use it; the real one is set above)."""
+    global FLECTOBI_STORE_ID
+    APPS[key].store_id = store_id
+    if key == "flectobi":
+        FLECTOBI_STORE_ID = store_id
+
+
+def app_for(page: str) -> App:
+    """The app a page (a file, from the site root) belongs to; Dayfolio's shell is the default."""
+    for app in APPS.values():
+        if page.startswith(app.dir + "/"):
+            return app
+    return DAYFOLIO
+
+
+# Dayfolio's, by the names the other tools and the tests have always used.
+APP_DIR, CONTENT_DIR = DAYFOLIO.dir, DAYFOLIO.content
+STORE_ID, STORE_URL, BANNER = DAYFOLIO.store_id, DAYFOLIO.store_url, DAYFOLIO.banner
+SUFFIX, CARD, CARD_ALT, ICON = DAYFOLIO.suffix, DAYFOLIO.card, DAYFOLIO.card_alt, DAYFOLIO.icon
+SECTIONS, SUBNAV = DAYFOLIO.sections, DAYFOLIO.subnav
 
 FIELDS = {  # kind: (required, optional)
     "section": ({"title", "description"}, {"heading", "image", "image_alt"}),
@@ -117,14 +206,14 @@ class BuildError(Exception):
 @dataclass
 class Page:
     path: str                      # the output file, from the site root: apps/dayfolio/guide/x/index.html
-    title: str                     # without the " — Dayfolio — NinjaApps" the <title> adds
+    title: str                     # without the " — Dayfolio — NinjaApps" the <title> adds (the page's app's)
     description: str
     kicker: str                    # HTML above the h1: a kicker, or the breadcrumbs
     body: str                      # HTML inside <div class="prose">
-    crumbs: List[Tuple[str, str]] = field(default_factory=list)  # (name, site path) from Dayfolio down
+    crumbs: List[Tuple[str, str]] = field(default_factory=list)  # (name, site path) from the app down
     og_type: str = "website"
-    image: str = CARD              # the social card, from the site root
-    image_alt: str = CARD_ALT
+    image: str = ""                # the social card, from the site root; "" is the app's own
+    image_alt: str = ""
     jsonld: List[dict] = field(default_factory=list)
     head_extra: List[str] = field(default_factory=list)
     meta_line: str = ""            # under the h1: an article's date
@@ -177,6 +266,18 @@ def ld(data: dict) -> str:
 
 
 # ----- pictures -----
+
+def has_alpha(path: Path) -> bool:
+    """Whether a WebP picture keeps an alpha channel: a window capture's transparent corners."""
+    data = path.read_bytes()
+    if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+        return False
+    if data[12:16] == b"VP8X":
+        return bool(data[20] & 0x10)
+    if data[12:16] == b"VP8L" and data[20] == 0x2F:
+        return bool(int.from_bytes(data[21:25], "little") >> 28 & 1)
+    return False
+
 
 def image_size(path: Path) -> Tuple[int, int]:
     """Width and height of a PNG, JPEG or WebP file, from its header."""
@@ -313,23 +414,69 @@ def markdown(root: Path, md: str, page: str, source: str) -> str:
             raise BuildError(f"{source}: a # heading is a second h1; the title comes from the front matter, "
                              "so start the body's headings at ##")
 
+    app = app_for(page)
+
     def link(label: str, url: str) -> str:
         return f'<a href="{url}">{label}</a>'
 
-    def figure(alt: str, src: str, caption: str, archive) -> str:
-        if not alt.strip():
-            raise BuildError(f"{source}: the picture {src} has no alt text; say what it shows")
+    def picture_file(src: str, what: str) -> Tuple[Path, Tuple[int, int]]:
+        """A WebP picture next to the page, small enough, and its size."""
         _, file = resolve(root, page, src, source)
         if file.suffix.lower() != ".webp":
-            raise BuildError(f"{source}: the picture {src} is not webp; pictures in pages are WebP")
+            raise BuildError(f"{source}: the {what} {src} is not webp; pictures in pages are WebP")
         if file.stat().st_size > PICTURE_MAX_BYTES:
-            raise BuildError(f"{source}: the picture {src} is {file.stat().st_size // 1000} KB; "
+            raise BuildError(f"{source}: the {what} {src} is {file.stat().st_size // 1000} KB; "
                              f"keep pictures under {PICTURE_MAX_BYTES // 1000} KB")
-        width, height = image_size(file)
+        return file, image_size(file)
+
+    def classes(kind: str, width: int, height: int, window: bool) -> str:
         shape = "portrait" if height > width else "landscape"
+        names = ["figure", *([kind] if kind else []), f"figure-{shape}"]
+        if app.window_figures and shape == "landscape":
+            names.append("figure-wide")      # a Mac window, drawn wider than the column of text
+            if window:
+                names.append("figure-window")  # transparent rounded corners: a shadow, not a frame
+        return " ".join(names)
+
+    def clip(alt: str, src: str, caption: str, archive) -> str:
+        """A short film: a <video> a visitor starts, muted and inline, over a poster frame beside it
+        (clip.mp4 and clip-poster.webp), playable while it downloads."""
+        if not alt.strip():
+            raise BuildError(f"{source}: the clip {src} has no alt text; say what it shows")
+        site_path = posixpath.normpath(posixpath.join(posixpath.dirname(page), src))
+        if re.match(r"[a-zA-Z][a-zA-Z0-9+.-]*:|/", src) or not (root / site_path).is_file():
+            raise BuildError(f"{source}: the clip {src} is not at {site_path}, next to the page")
+        file = root / site_path
+        if file.stat().st_size > CLIP_MAX_BYTES:
+            raise BuildError(f"{source}: the clip {src} is {file.stat().st_size // 1_000_000} MB; "
+                             f"keep clips under {CLIP_MAX_BYTES // 1_000_000} MB")
+        boxes = _check_site_module().mp4_boxes(file)
+        if not boxes or boxes[0] != b"ftyp":
+            raise BuildError(f"{source}: the clip {src} is not an MP4 file")
+        if b"moov" not in boxes or (b"mdat" in boxes and boxes.index(b"moov") > boxes.index(b"mdat")):
+            raise BuildError(f"{source}: the clip {src} keeps its moov box after the media, so it cannot play "
+                             "until it has all downloaded; remux it with ffmpeg -movflags +faststart")
+        poster = src[:-len(".mp4")] + "-poster.webp"
+        if not (root / posixpath.normpath(posixpath.join(posixpath.dirname(page), poster))).is_file():
+            raise BuildError(f"{source}: the clip {src} has no poster frame: put {poster} next to it")
+        _, (width, height) = picture_file(poster, "poster frame")
         caption_html = f"<figcaption>{archive.inline(caption)}</figcaption>" if caption else ""
-        return (f'<figure class="figure figure-{shape}"><img src="{esc(src)}" alt="{esc(alt.strip())}" '
-                f'width="{width}" height="{height}" loading="lazy">{caption_html}</figure>')
+        return (f'<figure class="{classes("figure-clip", width, height, False)}"><video controls muted playsinline '
+                f'preload="none" poster="{esc(poster)}" width="{width}" height="{height}" '
+                f'aria-label="{esc(alt.strip())}"><source src="{esc(src)}" type="video/mp4">'
+                f'<p>Your browser can’t play this clip here. <a href="{esc(src)}">Open it on its own</a> (MP4).</p>'
+                f'</video>{caption_html}</figure>')
+
+    def figure(alt: str, src: str, caption: str, archive) -> str:
+        if src.lower().endswith(".mp4"):
+            return clip(alt, src, caption, archive)
+        if not alt.strip():
+            raise BuildError(f"{source}: the picture {src} has no alt text; say what it shows")
+        file, (width, height) = picture_file(src, "picture")
+        window = app.window_figures and has_alpha(file)
+        caption_html = f"<figcaption>{archive.inline(caption)}</figcaption>" if caption else ""
+        return (f'<figure class="{classes("", width, height, window)}"><img src="{esc(src)}" '
+                f'alt="{esc(alt.strip())}" width="{width}" height="{height}" loading="lazy">{caption_html}</figure>')
 
     archive = _archive()
     return archive.convert(md, link=link, figure=lambda a, s, c: figure(a, s, c, archive))
@@ -346,12 +493,13 @@ class Source:
     out: str           # the page it makes, from the site root
 
 
-def read_sources(root: Path) -> Tuple[Dict[str, Source], Dict[str, List[Source]]]:
-    """Each section's own page (index.md) and its pages, checked and ordered as the section lists them."""
+def read_sources(root: Path, app: App = DAYFOLIO) -> Tuple[Dict[str, Source], Dict[str, List[Source]]]:
+    """Each of the app's sections' own page (index.md) and its pages, checked and ordered as the section lists
+    them."""
     indexes: Dict[str, Source] = {}
     pages: Dict[str, List[Source]] = {}
-    for key, section in SECTIONS.items():
-        folder = root / CONTENT_DIR / key
+    for key, section in app.sections.items():
+        folder = root / app.content / key
         pages[key] = []
         for file in sorted(folder.glob("*.md")) if folder.is_dir() else []:
             rel = file.relative_to(root).as_posix()
@@ -363,9 +511,9 @@ def read_sources(root: Path) -> Tuple[Dict[str, Source], Dict[str, List[Source]]
             if problems:
                 raise BuildError("\n".join(problems))
             if kind == "section":
-                indexes[key] = Source(key, kind, fields, body, body_line, rel, f"{APP_DIR}/{key}/index.html")
+                indexes[key] = Source(key, kind, fields, body, body_line, rel, f"{app.dir}/{key}/index.html")
             else:
-                out = f"{APP_DIR}/{key}/{fields['slug']}/index.html"
+                out = f"{app.dir}/{key}/{fields['slug']}/index.html"
                 pages[key].append(Source(key, kind, fields, body, body_line, rel, out))
         seen: Dict[str, str] = {}
         for item in pages[key]:
@@ -385,16 +533,17 @@ def read_sources(root: Path) -> Tuple[Dict[str, Source], Dict[str, List[Source]]
 # ----- the shell -----
 
 def render_subnav(page: str) -> str:
-    links = [f'  <a class="subnav-app" href="{href(page, APP_DIR + "/")}">Dayfolio</a>']
-    for label, target in SUBNAV:
-        site_target = f"{APP_DIR}/{target}"
+    app = app_for(page)
+    links = [f'  <a class="subnav-app" href="{href(page, app.dir + "/")}">{app.name}</a>']
+    for label, target in app.subnav:
+        site_target = f"{app.dir}/{target}"
         current = ""
         if page == site_target or (site_target.endswith("/") and page == site_target + "index.html"):
             current = ' aria-current="page"'
         elif target.endswith("/") and page.startswith(site_target):
             current = ' aria-current="true"'
         links.append(f'  <a href="{href(page, site_target)}"{current}>{label}</a>')
-    return '<nav class="subnav" aria-label="Dayfolio">\n' + "\n".join(links) + "\n</nav>"
+    return f'<nav class="subnav" aria-label="{app.name}">\n' + "\n".join(links) + "\n</nav>"
 
 
 def with_subnav(text: str, page: str) -> str:
@@ -416,15 +565,18 @@ def with_stylesheet(text: str, page: str) -> str:
 
 
 def chrome(root: Path, page: str) -> Tuple[str, str]:
-    """The site header and footer, as the product page has them, rebased to `page`."""
-    product = root / APP_DIR / "index.html"
+    """The site header and footer, as the page's app's product page has them, rebased to `page`."""
+    app_dir = app_for(page).dir
+    product = root / app_dir / "index.html"
+    if not product.is_file():
+        raise BuildError(f"{app_dir}/index.html is missing; the shell takes the site's header and footer from it")
     text = product.read_text(encoding="utf-8")
     parts = []
     for tag in ("header", "footer"):
         found = re.search(rf"<{tag}>.*?</{tag}>", text, re.S)
         if not found:
-            raise BuildError(f"{APP_DIR}/index.html has no <{tag}>; the shell takes the site's from it")
-        parts.append(rebase(found.group(0), APP_DIR, page))
+            raise BuildError(f"{app_dir}/index.html has no <{tag}>; the shell takes the site's from it")
+        parts.append(rebase(found.group(0), app_dir, page))
     return parts[0], parts[1]
 
 
@@ -435,17 +587,19 @@ def breadcrumbs(crumbs: List[Tuple[str, str]]) -> dict:
 
 
 def render_page(root: Path, page: Page) -> str:
-    url, full = url_for(page.path), page.title + SUFFIX
-    image_file = root / page.image
+    app = app_for(page.path)
+    url, full = url_for(page.path), page.title + app.suffix
+    image, image_alt = page.image or app.card, page.image_alt or app.card_alt
+    image_file = root / image
     if not image_file.is_file():
-        raise BuildError(f"{page.path}: its social card {page.image} is missing")
+        raise BuildError(f"{page.path}: its social card {image} is missing")
     width, height = image_size(image_file)
-    image_url = url_for(page.image)
+    image_url = url_for(image)
     blocks = ([breadcrumbs(page.crumbs)] if page.crumbs else []) + page.jsonld
     head = [
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        BANNER,
+        *([app.banner] if app.banner else []),
         f"<title>{esc(full)}</title>",
         f'<meta name="description" content="{esc(page.description)}">',
         f'<link rel="canonical" href="{url}">',
@@ -457,12 +611,12 @@ def render_page(root: Path, page: Page) -> str:
         f'<meta property="og:image" content="{image_url}">',
         f'<meta property="og:image:width" content="{width}">',
         f'<meta property="og:image:height" content="{height}">',
-        f'<meta property="og:image:alt" content="{esc(page.image_alt)}">',
+        f'<meta property="og:image:alt" content="{esc(image_alt)}">',
         '<meta name="twitter:card" content="summary_large_image">',
         f'<meta name="twitter:title" content="{esc(full)}">',
         f'<meta name="twitter:description" content="{esc(page.description)}">',
         f'<meta name="twitter:image" content="{image_url}">',
-        f'<meta name="twitter:image:alt" content="{esc(page.image_alt)}">',
+        f'<meta name="twitter:image:alt" content="{esc(image_alt)}">',
         *page.head_extra,
         ICON_LINK,
         THEME,
@@ -520,11 +674,14 @@ def _social(root: Path, item: Source) -> Dict[str, str]:
 
 
 def _app_box(page: str) -> str:
-    return f"""  <aside class="appbox" aria-label="Get Dayfolio">
-    <img class="app-icon-sm" src="{href(page, ICON)}" alt="Dayfolio app icon" width="64" height="64" loading="lazy">
+    app = app_for(page)
+    store = (f'<a class="btn" href="{app.store_url}">APP STORE →</a>' if app.store_url
+             else '<span class="btn btn-quiet btn-soon">Coming to the Mac App Store</span>')
+    return f"""  <aside class="appbox" aria-label="Get {app.name}">
+    <img class="app-icon-sm" src="{href(page, app.icon)}" alt="{app.name} app icon" width="64" height="64" loading="lazy">
     <div>
-      <p><strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. It’s free to start, with one journal and 100 entries, and there’s no subscription.</p>
-      <div class="actions"><a class="btn" href="{STORE_URL}">APP STORE →</a><a class="btn" href="{href(page, APP_DIR + '/')}">ABOUT DAYFOLIO</a></div>
+      <p>{app.box}</p>
+      <div class="actions">{store}<a class="btn" href="{href(page, app.dir + '/')}">ABOUT {app.name.upper()}</a></div>
     </div>
   </aside>"""
 
@@ -546,7 +703,7 @@ def _pager(item: Source, siblings: List[Source]) -> str:
 
 
 def _listing(key: str, index_out: str, items: List[Source]) -> str:
-    section = SECTIONS[key]
+    section = app_for(index_out).sections[key]
     if not items:
         return f'  <p class="listing-empty">{esc(section.empty)}</p>'
     cards = []
@@ -566,8 +723,9 @@ def _generator(item: Source) -> str:
 
 
 def section_page(root: Path, key: str, index: Source, items: List[Source]) -> str:
-    section = SECTIONS[key]
     out = index.out
+    app = app_for(out)
+    section = app.sections[key]
     blocks = []
     if items:
         blocks.append({"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [
@@ -576,28 +734,30 @@ def section_page(root: Path, key: str, index: Source, items: List[Source]) -> st
     page = Page(
         path=out, title=index.fields["title"], description=index.fields["description"],
         heading=index.fields.get("heading", ""),
-        kicker=f'<div class="kicker">{section.kanji} {section.name.upper()} — DAYFOLIO</div>',
+        kicker=f'<div class="kicker">{section.kanji} {section.name.upper()} — {app.name.upper()}</div>',
         body=markdown(root, index.body, out, index.path),
-        crumbs=[("Dayfolio", f"{APP_DIR}/"), (section.name, f"{APP_DIR}/{key}/")],
+        crumbs=[(app.name, f"{app.dir}/"), (section.name, f"{app.dir}/{key}/")],
         jsonld=blocks, after=_listing(key, out, items),
-        backlink=(href(out, APP_DIR + "/"), "← BACK TO DAYFOLIO"), generator=_generator(index),
+        backlink=(href(out, app.dir + "/"), f"← BACK TO {app.name.upper()}"), generator=_generator(index),
         **_social(root, index))
     return render_page(root, page)
 
 
 def content_page(root: Path, key: str, item: Source, siblings: List[Source]) -> str:
-    section, fields, out = SECTIONS[key], item.fields, item.out
+    fields, out = item.fields, item.out
+    app = app_for(out)
+    section = app.sections[key]
     url = url_for(out)
     social = _social(root, item)
     article = {
         "@context": "https://schema.org", "@type": "Article", "headline": fields["title"],
         "description": fields["description"], "datePublished": fields["date"],
         "dateModified": fields.get("updated", fields["date"]), "inLanguage": "en",
-        "image": [url_for(social.get("image", CARD))], "mainEntityOfPage": url,
+        "image": [url_for(social.get("image", app.card))], "mainEntityOfPage": url,
         "author": ORG, "publisher": PUBLISHER,
-        "about": {"@type": "SoftwareApplication", "name": "Dayfolio", "url": url_for(f"{APP_DIR}/")},
+        "about": {"@type": "SoftwareApplication", "name": app.name, "url": url_for(f"{app.dir}/")},
     }
-    crumbs = [("Dayfolio", f"{APP_DIR}/"), (section.name, f"{APP_DIR}/{key}/"), (fields["title"], out)]
+    crumbs = [(app.name, f"{app.dir}/"), (section.name, f"{app.dir}/{key}/"), (fields["title"], out)]
     trail = '<span class="crumbs-sep" aria-hidden="true">/</span>'.join(
         f'<a href="{href(out, path)}">{esc(name)}</a>' for name, path in crumbs[:-1])
     kicker = (f'<nav class="kicker crumbs" aria-label="Breadcrumb"><span class="crumbs-mark" aria-hidden="true">'
@@ -613,7 +773,7 @@ def content_page(root: Path, key: str, item: Source, siblings: List[Source]) -> 
         heading=fields.get("heading", ""),
         body=markdown(root, item.body, out, item.path), crumbs=crumbs, og_type="article",
         jsonld=[article], head_extra=head_extra, meta_line=meta_line, after="\n".join(after),
-        backlink=(href(out, f"{APP_DIR}/{key}/"), section.back), generator=_generator(item), **social)
+        backlink=(href(out, f"{app.dir}/{key}/"), section.back), generator=_generator(item), **social)
     return render_page(root, page)
 
 
@@ -651,23 +811,24 @@ ROBOTS = f"User-agent: *\nAllow: /\n\nSitemap: {ORIGIN}/sitemap.xml\n"
 
 def build_site(root: Path) -> Dict[str, str]:
     """Every file the build owns, from the site root, with the content it should have."""
-    indexes, pages = read_sources(root)
     out: Dict[str, str] = {}
     lastmod: Dict[str, str] = {}
-    for key in SECTIONS:
-        for item in pages[key]:
-            out[item.out] = content_page(root, key, item, pages[key])
-            lastmod[item.out] = item.fields.get("updated", item.fields["date"])
-        if key in indexes:
-            out[indexes[key].out] = section_page(root, key, indexes[key], pages[key])
+    for app in APPS.values():
+        indexes, pages = read_sources(root, app)
+        for key in app.sections:
+            for item in pages[key]:
+                out[item.out] = content_page(root, key, item, pages[key])
+                lastmod[item.out] = item.fields.get("updated", item.fields["date"])
+            if key in indexes:
+                out[indexes[key].out] = section_page(root, key, indexes[key], pages[key])
     everything: Dict[str, str] = {}
     for rel in html_pages(root):
         if rel in out:
             continue
         text = (root / rel).read_text(encoding="utf-8")
-        if rel.startswith(APP_DIR + "/") and is_generated(text):
+        if in_app(rel) and is_generated(text):
             continue  # a page whose source is gone: stale(), and write() removes it
-        if rel.startswith(APP_DIR + "/"):
+        if in_app(rel):
             refreshed = with_stylesheet(with_subnav(text, rel), rel)
             if refreshed != text:
                 out[rel] = refreshed
@@ -679,8 +840,13 @@ def build_site(root: Path) -> Dict[str, str]:
     return out
 
 
+def in_app(rel: str) -> bool:
+    """Whether a page is one of an app's (under apps/<key>/ for an app in APPS)."""
+    return any(rel.startswith(app.dir + "/") for app in APPS.values())
+
+
 def stale(root: Path, expected: Dict[str, str]) -> List[str]:
-    return [rel for rel in html_pages(root) if rel.startswith(APP_DIR + "/") and rel not in expected
+    return [rel for rel in html_pages(root) if in_app(rel) and rel not in expected
             and is_generated((root / rel).read_text(encoding="utf-8"))]
 
 

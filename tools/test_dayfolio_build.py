@@ -46,9 +46,10 @@ def png(width: int, height: int) -> bytes:
             + chunk(b"IEND", b""))
 
 
-def webp(width: int, height: int) -> bytes:
-    """A WebP header (VP8X) with the canvas size: all the build reads."""
-    body = (b"VP8X" + struct.pack("<I", 10) + bytes(4)
+def webp(width: int, height: int, alpha: bool = False) -> bytes:
+    """A WebP header (VP8X) with the canvas size, and the alpha flag a window capture's transparent corners set:
+    all the build reads."""
+    body = (b"VP8X" + struct.pack("<I", 10) + bytes([0x10 if alpha else 0]) + bytes(3)
             + (width - 1).to_bytes(3, "little") + (height - 1).to_bytes(3, "little"))
     return b"RIFF" + struct.pack("<I", 4 + len(body)) + b"WEBP" + body
 
@@ -456,6 +457,159 @@ class WriteAndCheckTests(unittest.TestCase):
         text = self.site.read("apps/dayfolio/support.html")
         self.site.put("apps/dayfolio/support.html", text.replace(f"?v={build.STYLE_VERSION}", "?v=2026-01-01"))
         self.assertTrue(any("apps/dayfolio/support.html" in p for p in build.check(self.site.root)))
+
+
+def mp4(*boxes: bytes) -> bytes:
+    """An MP4 file's top-level boxes, empty, in the order given: all the build reads."""
+    return b"".join(struct.pack(">I", 8) + kind for kind in boxes)
+
+
+FLECTO_PRODUCT = PRODUCT.replace('<meta name="apple-itunes-app" content="app-id=6817388897">\n', "").replace(
+    "<title>Dayfolio — NinjaApps</title>", "<title>FlectoBI — NinjaApps</title>").replace(
+    "apps/dayfolio/", "apps/flectobi/").replace("<h1>Dayfolio</h1>", "<h1>FlectoBI</h1>")
+
+
+def flecto_site(test: unittest.TestCase) -> "Site":
+    """The Dayfolio fixture, with FlectoBI's product page, card, icon and two section pages beside it."""
+    site = Site(test)
+    site.put("apps/flectobi/index.html", FLECTO_PRODUCT)
+    site.put("apps/flectobi/social-card.png", png(1200, 630))
+    site.put("apps/flectobi/icon-320.webp", webp(320, 320))
+    for key, title in (("guide", "Guide"), ("tutorials", "Tutorials")):
+        site.put(f"content/flectobi/{key}/index.md", section(title))
+    return site
+
+
+class ClipTests(unittest.TestCase):
+    """A picture line whose file is an .mp4 is a short film: a <video> a visitor starts, over its poster frame."""
+
+    def setUp(self):
+        self.site = Site(self)
+        self.site.put("apps/dayfolio/guide/a/clip.mp4", mp4(b"ftyp", b"moov", b"mdat"))
+        self.site.put("apps/dayfolio/guide/a/clip-poster.webp", webp(1600, 1000))
+
+    def page(self, body: str) -> str:
+        self.site.put("content/dayfolio/guide/a.md", topic("a", "A", 1, body=body))
+        return self.site.built()["apps/dayfolio/guide/a/index.html"]
+
+    def test_a_clip_is_a_figure_with_a_video_over_its_poster(self):
+        page = self.page('![Adding a Step to a Flow](clip.mp4 "Add a Step, and its preview follows")\n')
+        figure = re.search(r"<figure[^>]*>.*?</figure>", page, re.S).group(0)
+        self.assertIn('class="figure figure-clip figure-landscape"', figure)
+        video = re.search(r"<video([^>]*)>", figure).group(1)
+        self.assertEqual(video, ' controls muted playsinline preload="none" poster="clip-poster.webp" '
+                                'width="1600" height="1000" aria-label="Adding a Step to a Flow"')
+        self.assertIn('<source src="clip.mp4" type="video/mp4">', figure)
+        self.assertIn("<figcaption>Add a Step, and its preview follows</figcaption>", figure)
+        self.assertNotIn("autoplay", figure)
+
+    def test_a_clip_needs_its_poster_its_file_alt_text_and_moov_first(self):
+        for body, setup, why in (
+                ("![A film](clip.mp4)\n", lambda: (self.site.root / "apps/dayfolio/guide/a/clip-poster.webp").unlink(),
+                 "poster"),
+                ("![A film](gone.mp4)\n", lambda: None, "gone.mp4"),
+                ("![](clip.mp4)\n", lambda: None, "alt"),
+                ("![A film](clip.mp4)\n",
+                 lambda: self.site.put("apps/dayfolio/guide/a/clip.mp4", mp4(b"ftyp", b"mdat", b"moov")), "moov")):
+            with self.subTest(why=why):
+                self.setUp()
+                setup()
+                with self.assertRaisesRegex(build.BuildError, why):
+                    self.page(body)
+
+
+class FlectoBITests(unittest.TestCase):
+    """FlectoBI's pages come from the same shell as Dayfolio's: content/flectobi/<section>/ makes
+    apps/flectobi/<section>/, with FlectoBI's sub-navigation, title and card, and no App Store id yet."""
+
+    def setUp(self):
+        self.site = flecto_site(self)
+        self.site.put("content/flectobi/tutorials/first-flow.md", topic("first-flow", "Your first Flow", 1))
+        self.site.put("content/flectobi/guide/inputs.md", topic("inputs", "Inputs", 1))
+        self.built = self.site.built()
+        self.page = self.built["apps/flectobi/tutorials/first-flow/index.html"]
+
+    def test_the_sections_and_their_pages_are_built(self):
+        for rel in ("apps/flectobi/guide/index.html", "apps/flectobi/tutorials/index.html",
+                    "apps/flectobi/guide/inputs/index.html", "apps/flectobi/tutorials/first-flow/index.html"):
+            self.assertIn(rel, self.built)
+        self.assertIn("apps/dayfolio/guide/index.html", self.built)  # Dayfolio's are still built beside them
+
+    def test_the_head_names_flectobi_and_carries_no_banner_without_a_store_id(self):
+        page, url = self.page, "https://ninjaapps.net/apps/flectobi/tutorials/first-flow/"
+        self.assertIn("<title>Your first Flow — FlectoBI — NinjaApps</title>", page)
+        self.assertIn(f'<link rel="canonical" href="{url}">', page)
+        self.assertEqual(meta(page, "og:image"), "https://ninjaapps.net/apps/flectobi/social-card.png")
+        self.assertIn("FlectoBI", meta(page, "og:image:alt"))
+        self.assertNotIn("apple-itunes-app", page)
+        self.assertNotIn("apps.apple.com", page)
+        self.assertIsNone(build.FLECTOBI_STORE_ID)
+
+    def test_the_sub_navigation_is_flectobis(self):
+        nav = re.search(r'<nav class="subnav" aria-label="FlectoBI">.*?</nav>', self.page, re.S).group(0)
+        links = re.findall(r'<a (?:class="[^"]*" )?href="([^"]+)"(?: aria-current="(\w+)")?>([^<]+)</a>', nav)
+        self.assertEqual([(href, label) for href, _, label in links], [
+            ("../../", "FlectoBI"), ("../../", "Overview"), ("../../guide/", "Guide"), ("../", "Tutorials"),
+            ("../../support.html", "Support")])
+        self.assertEqual([label for _, current, label in links if current], ["Tutorials"])
+
+    def test_json_ld_and_breadcrumbs_name_flectobi(self):
+        blocks = {block["@type"]: block for block in jsonld(self.page)}
+        self.assertEqual(blocks["Article"]["about"]["name"], "FlectoBI")
+        self.assertEqual([item["name"] for item in blocks["BreadcrumbList"]["itemListElement"]],
+                         ["FlectoBI", "Tutorials", "Your first Flow"])
+        self.assertIn("TUTORIALS — FLECTOBI", self.built["apps/flectobi/tutorials/index.html"])
+        self.assertIn("content/flectobi/tutorials/first-flow.md", self.page)
+
+    def test_the_app_box_says_where_flectobi_is_coming_without_a_link_or_a_price(self):
+        box = re.search(r'<aside class="appbox".*?</aside>', self.page, re.S).group(0)
+        self.assertIn("Coming to the Mac App Store", box)
+        self.assertNotRegex(box, r"<a [^>]*>[^<]*Coming to the Mac App Store")
+        self.assertNotRegex(box, r"\$\d|(?i:\bfree\b)")
+        self.assertIn('src="../../icon-320.webp"', box)
+
+    def test_with_a_store_id_every_page_carries_the_banner_and_the_box_links_the_store(self):
+        original = build.FLECTOBI_STORE_ID
+        self.addCleanup(build.set_store_id, "flectobi", original)
+        build.set_store_id("flectobi", "1234567890")
+        page = self.site.built()["apps/flectobi/tutorials/first-flow/index.html"]
+        self.assertIn('<meta name="apple-itunes-app" content="app-id=1234567890">', page)
+        self.assertIn('href="https://apps.apple.com/app/id1234567890"', page)
+        self.assertNotIn("Coming to the Mac App Store", page)
+
+    def test_the_hand_written_pages_get_the_sub_navigation_and_the_stylesheet(self):
+        product = self.built["apps/flectobi/index.html"]
+        self.assertRegex(product, r'</header>\n\n<nav class="subnav" aria-label="FlectoBI">')
+        self.assertRegex(product, r'<a href="\./" aria-current="page">Overview</a>')
+        self.assertNotIn('aria-label="Dayfolio"', product)
+
+    def test_the_sitemap_lists_flectobis_pages(self):
+        urls = [loc.text for loc in ET.fromstring(self.built["sitemap.xml"]).iter(
+            "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+        for url in ("https://ninjaapps.net/apps/flectobi/", "https://ninjaapps.net/apps/flectobi/tutorials/",
+                    "https://ninjaapps.net/apps/flectobi/tutorials/first-flow/"):
+            self.assertIn(url, urls)
+
+    def test_a_window_capture_is_drawn_wide_with_a_shadow_on_flectobi_only(self):
+        self.site.put("apps/flectobi/guide/inputs/window.webp", webp(2400, 1500, alpha=True))
+        self.site.put("apps/flectobi/guide/inputs/opaque.webp", webp(2400, 1500))
+        self.site.put("content/flectobi/guide/inputs.md", topic("inputs", "Inputs", 1, body=(
+            "![A window](window.webp)\n\n![An opaque picture](opaque.webp)\n")))
+        self.site.put("apps/dayfolio/guide/a/window.webp", webp(2400, 1500, alpha=True))
+        self.site.put("content/dayfolio/guide/a.md", topic("a", "A", 1, body="![A window](window.webp)\n"))
+        built = self.site.built()
+        flecto = built["apps/flectobi/guide/inputs/index.html"]
+        self.assertIn('<figure class="figure figure-landscape figure-wide figure-window"><img src="window.webp"', flecto)
+        self.assertIn('<figure class="figure figure-landscape figure-wide"><img src="opaque.webp"', flecto)
+        self.assertIn('<figure class="figure figure-landscape"><img src="window.webp"',
+                      built["apps/dayfolio/guide/a/index.html"])
+
+    def test_after_a_build_the_check_is_clean_and_a_drifted_page_is_named(self):
+        build.write(self.site.root)
+        self.assertEqual(build.check(self.site.root), [])
+        rel = "apps/flectobi/guide/inputs/index.html"
+        self.site.put(rel, self.site.read(rel).replace("Some words.", "Hand edit."))
+        self.assertTrue(any(rel in p for p in build.check(self.site.root)))
 
 
 class ArchiveMarkdownTests(unittest.TestCase):
