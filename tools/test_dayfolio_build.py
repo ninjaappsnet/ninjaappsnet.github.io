@@ -612,6 +612,26 @@ class FlectoBITests(unittest.TestCase):
         self.assertTrue(any(rel in p for p in build.check(self.site.root)))
 
 
+class StylesheetTests(unittest.TestCase):
+    """Every class the shell writes on a figure, a clip or the app box has a rule in the site's style.css, in
+    both themes where it draws a colour."""
+
+    def setUp(self):
+        self.css = (TOOLS.parent / "style.css").read_text(encoding="utf-8")
+
+    def test_the_figure_clip_and_box_classes_have_rules(self):
+        for selector in (".figure-clip", ".figure-wide", ".figure-window", ".btn-soon",
+                         '.subnav[aria-label="FlectoBI"] .subnav-app::before'):
+            with self.subTest(selector=selector):
+                self.assertTrue(selector in self.css, f"style.css has no {selector}")
+        self.assertTrue("assets/icon-flectobi-144.webp" in self.css, "no FlectoBI icon in the sub-navigation")
+        self.assertTrue(re.search(r'\[data-theme="dark"\][^{]*\.figure-window', self.css),
+                        "no dark-theme shadow for a window capture")
+
+    def test_the_stylesheet_is_asked_for_by_the_day_its_figure_rules_came(self):
+        self.assertGreaterEqual(build.STYLE_VERSION, "2026-10-26")
+
+
 class ArchiveMarkdownTests(unittest.TestCase):
     """archive-page.py keeps its own rules: a relative link is a path in the Dayfolio repo, so plain text."""
 

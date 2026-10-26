@@ -1144,6 +1144,25 @@ body:has(> .subnav) > main { flex: 1; }
 .prose .figure-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 8px 0 28px; align-items: start; }
 .prose .figure-row figure { margin: 0; }
 .prose .figure-row .figure-portrait img { width: 100%; max-width: 300px; }
+/* Clips (a picture line naming an .mp4): a short film a visitor starts, over its poster frame, framed like a
+   picture; a portrait one is phone-sized. */
+.prose .figure-clip video { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--line); background: var(--card-hover); }
+.prose .figure-clip.figure-portrait video { width: 300px; }
+.prose .figure-clip video p { margin: 0; padding: 24px; }
+/* FlectoBI's pages (a Mac app, window_figures in the build): a landscape figure, picture or clip, is a Mac window
+   and is drawn wider than the column of text, up to 1040px and centred on it, keeping 24px from the window's
+   edges; in a row of figures it keeps its cell. A window capture has transparent rounded corners, so it gets the
+   soft shadow the product pages' window captures get (figure.shot img) instead of the hairline and the fill, a
+   deeper one on the dark paper. */
+.prose .figure-wide { width: min(1040px, calc(100vw - 48px)); max-width: none; margin-left: calc(50% - min(520px, 50vw - 24px)); }
+.prose .figure-row .figure-wide { width: auto; margin-left: 0; }
+.prose .figure-window img { border: 0; background: none; filter: drop-shadow(0 6px 18px rgba(0,0,0,.18)); }
+[data-theme="dark"] .prose .figure-window img { filter: drop-shadow(0 8px 24px rgba(0,0,0,.55)); }
+/* FlectoBI's mark in its sub-navigation, and the quiet stand-in for the store button until it has an App Store id
+   (typed in sentence case, set in capitals like the buttons beside it). */
+.subnav[aria-label="FlectoBI"] .subnav-app::before { background-image: url(assets/icon-flectobi-144.webp); }
+.btn-soon { text-transform: uppercase; }
+.btn-soon:hover { border-color: var(--ink-28); color: var(--ink-45); }
 .callout p + p { margin-top: 10px; }
 .callout-lead p { max-width: none; font: 400 14px/1.7 'Zen Kaku Gothic New', sans-serif; color: var(--ink-60); }
 .callout-lead strong { color: var(--ink); }
