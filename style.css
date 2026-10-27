@@ -353,6 +353,16 @@ header nav a, .subnav a:not(.subnav-app) {
   .onesheet-foot { grid-column: 1; padding-top: 28px; }
 }
 
+/* The mosaic opening (assets/mosaic.js): the title restored from tiles. */
+.mosaic-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+/* The canvas draws the title; the <h1> stays for every reader. The type is
+   hidden only when scripts run (html.js), and comes back by itself after three
+   seconds if the mosaic never takes over. */
+.js .onesheet[data-mosaic] .onesheet-title { color: transparent; animation: title-back 1ms 3s forwards; }
+.js .onesheet[data-mosaic] .onesheet-title.tiled { color: transparent; animation: none; }
+.js .onesheet[data-mosaic] .onesheet-title.untiled { color: inherit; animation: none; }
+@keyframes title-back { to { color: var(--app-on); } }
+
 /* ===== Sections on paper ===== */
 .group { padding: clamp(56px, 7vw, 96px) var(--pad-side) 0; }
 .group:last-of-type { padding-bottom: clamp(64px, 8vw, 112px); }

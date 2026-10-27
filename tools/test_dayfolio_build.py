@@ -393,20 +393,21 @@ class HandWrittenPagesTests(unittest.TestCase):
         self.assertRegex(support, r'<a href="support\.html" aria-current="page">Support</a>')
         self.assertEqual(support.count('class="subnav"'), 1)
 
-    def test_every_dayfolio_page_asks_for_the_stylesheet_by_one_version(self):
+    def test_every_page_asks_for_the_stylesheet_by_one_version(self):
         # Cloudflare keeps style.css at its edge, and browsers keep it, for four hours: a page whose markup needs
-        # a new rule asks for the stylesheet by a new query, and every Dayfolio page asks by the same one.
+        # a new rule asks for the stylesheet by a new query, and every page on the site asks by the same one.
         site = Site(self)
         link = '<link rel="stylesheet" href="../../style.css{}">\n</head>'
         site.put("apps/dayfolio/index.html", PRODUCT.replace("</head>", link.format("?v=2026-01-01")))
         site.put("apps/dayfolio/support.html", SUPPORT.replace("</head>", link.format("")))
         site.put("games/smalti/index.html", f"<html><head>{link.format('')}<body></body></html>")
+        site.put("privacy/index.html", "<html><head><link rel=\"stylesheet\" href=\"../style.css\">\n</head><body></body></html>")
         built = site.built()
         wanted = f'<link rel="stylesheet" href="../../style.css?v={build.STYLE_VERSION}">'
-        for rel in ("apps/dayfolio/index.html", "apps/dayfolio/support.html"):
+        for rel in ("apps/dayfolio/index.html", "apps/dayfolio/support.html", "games/smalti/index.html"):
             self.assertIn(wanted, built[rel])
             self.assertEqual(built[rel].count('rel="stylesheet"'), 1)
-        self.assertNotIn("games/smalti/index.html", built)  # the rest of the site links style.css as it chooses
+        self.assertIn(f'<link rel="stylesheet" href="../style.css?v={build.STYLE_VERSION}">', built["privacy/index.html"])
         self.assertRegex(build.STYLE_VERSION, r"^\d{4}-\d{2}-\d{2}[a-z]?$")  # the day of the change
 
 
