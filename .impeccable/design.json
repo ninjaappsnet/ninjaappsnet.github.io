@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T16:55:06+00:00",
+  "title": "Design System: NinjaApps",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#ffffff"
+        ]
+      },
+      "seal-red": {
+        "role": "primary",
+        "displayName": "Seal Red",
+        "canonical": "#d7301f",
+        "tonalRamp": [
+          "#430f0a",
+          "#761a11",
+          "#a92618",
+          "#dc3120",
+          "#e65e50",
+          "#ed8d83",
+          "#f4bcb6",
+          "#fceae9"
+        ]
+      },
+      "smalti-ground": {
+        "role": "secondary",
+        "displayName": "Smalti Glazed Navy",
+        "canonical": "#1c2337",
+        "tonalRamp": [
+          "#1a2033",
+          "#2d3959",
+          "#415180",
+          "#556aa7",
+          "#7a8bbb",
+          "#a1adcf",
+          "#c7cfe3",
+          "#eef0f6"
+        ]
+      },
+      "smalti-gold": {
+        "role": "secondary",
+        "displayName": "Mosaic Gold",
+        "canonical": "#d9ab55",
+        "tonalRamp": [
+          "#3f2e0e",
+          "#6e5019",
+          "#9e7323",
+          "#cd962e",
+          "#daae5b",
+          "#e5c68b",
+          "#f0ddbb",
+          "#faf5ea"
+        ]
+      },
+      "smalti-ink": {
+        "role": "secondary",
+        "displayName": "Smalti Garnet",
+        "canonical": "#7d2333",
+        "tonalRamp": [
+          "#3c1118",
+          "#691d2b",
+          "#972a3e",
+          "#c43750",
+          "#d36277",
+          "#e0909e",
+          "#edbec6",
+          "#f9ebee"
+        ]
+      },
+      "dayfolio-ground": {
+        "role": "secondary",
+        "displayName": "Dayfolio Orange Paper",
+        "canonical": "#b0441c",
+        "tonalRamp": [
+          "#42190b",
+          "#742d13",
+          "#a7401b",
+          "#d95423",
+          "#e37952",
+          "#eba084",
+          "#f3c7b7",
+          "#fbeee9"
+        ]
+      },
+      "dayfolio-paper": {
+        "role": "secondary",
+        "displayName": "Cream",
+        "canonical": "#fdf3e4",
+        "tonalRamp": [
+          "#472d05",
+          "#7d4f09",
+          "#b4710d",
+          "#ea9311",
+          "#f1ac44",
+          "#f5c47b",
+          "#f9dcb1",
+          "#fdf4e7"
+        ]
+      },
+      "dayfolio-ink": {
+        "role": "secondary",
+        "displayName": "Dayfolio Ink",
+        "canonical": "#9a3a16",
+        "tonalRamp": [
+          "#43190a",
+          "#762c11",
+          "#a94018",
+          "#dc531f",
+          "#e67950",
+          "#eda083",
+          "#f5c7b6",
+          "#fceee9"
+        ]
+      },
+      "flectobi-ground": {
+        "role": "secondary",
+        "displayName": "FlectoBI Deep Teal",
+        "canonical": "#06454c",
+        "tonalRamp": [
+          "#064047",
+          "#0a717d",
+          "#0ea2b3",
+          "#12d4e9",
+          "#45dff0",
+          "#7be8f5",
+          "#b1f2f9",
+          "#e7fbfd"
+        ]
+      },
+      "flectobi-mint": {
+        "role": "secondary",
+        "displayName": "Signal Mint",
+        "canonical": "#66d4c8",
+        "tonalRamp": [
+          "#113c37",
+          "#1e6961",
+          "#2a978b",
+          "#37c4b5",
+          "#63d3c7",
+          "#90e0d7",
+          "#beede7",
+          "#ebf9f8"
+        ]
+      },
+      "flectobi-ink": {
+        "role": "secondary",
+        "displayName": "FlectoBI Ink",
+        "canonical": "#0b5f66",
+        "tonalRamp": [
+          "#074045",
+          "#0d717a",
+          "#13a2ae",
+          "#18d3e3",
+          "#4adfeb",
+          "#7fe8f1",
+          "#b3f2f7",
+          "#e8fbfd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title-poster": {
+        "displayName": "Title poster",
+        "purpose": "One-sheet title on app pages; wdth 125, wght 900."
+      },
+      "title-sheet": {
+        "displayName": "Title sheet",
+        "purpose": "Home slate titles; wdth 118."
+      },
+      "page-title": {
+        "displayName": "Page title",
+        "purpose": "Read page h1; wdth 112."
+      },
+      "group-title": {
+        "displayName": "Group title",
+        "purpose": "Section heads on app pages."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Prose h2."
+      },
+      "billing": {
+        "displayName": "Billing",
+        "purpose": "Condensed uppercase facts, nav, crumbs, footer; wdth 68."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Ticket and text-action labels; wdth 75-80."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text in the Apple system stack."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline and block code."
+      }
+    },
+    "shadows": [
+      {
+        "name": "device-art",
+        "value": "0 24px 60px -18px rgb(0 0 0 / .55)",
+        "purpose": "Soft shadow under phone and window art on a one-sheet."
+      },
+      {
+        "name": "window-prose",
+        "value": "drop-shadow(0 10px 22px rgb(0 0 0 / .2))",
+        "purpose": "Window screenshots in prose (.7 alpha, 26px in dark)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Hover lift, ticket press, settle, view transition."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Ident clip-path cut-in."
+      },
+      {
+        "name": "ident-cut-in",
+        "value": "clip-path inset 100% to 0, 700ms, 70ms stagger",
+        "purpose": "Every home load; fade 300ms under reduced motion."
+      },
+      {
+        "name": "art-drift",
+        "value": "animation-timeline: view(); translate 4% to -4%",
+        "purpose": "Scroll-driven art plane drift; off under reduced motion."
+      },
+      {
+        "name": "art-lift",
+        "value": "translateY(-4px) 240ms ease-out",
+        "purpose": "Hover on sheet or onesheet art; pointer-fine only."
+      },
+      {
+        "name": "ticket-press",
+        "value": "scale(.97) 160ms ease-out",
+        "purpose": "Ticket :active."
+      },
+      {
+        "name": "colour-change",
+        "value": "150-200ms ease",
+        "purpose": "Underlines, theme, link states."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "1080px"
+      },
+      {
+        "name": "narrow",
+        "value": "860px"
+      },
+      {
+        "name": "phone",
+        "value": "600px"
+      },
+      {
+        "name": "small-phone",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ticket",
+      "kind": "button",
+      "refersTo": "ticket",
+      "description": "The only App Store action: punched sides, perforation, drawn arrow.",
+      "html": "<a class=\"ds-ticket\" href=\"#\"><span>Get it on the App Store</span></a>",
+      "css": ".ds-ticket{--t-bg:#000;--t-fg:#fff;position:relative;display:inline-flex;padding-right:58px;background:var(--t-bg);color:var(--t-fg);font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:800;font-size:16px;line-height:1;font-stretch:75%;text-transform:uppercase;letter-spacing:.03em;-webkit-mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) 0 0/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) 100% 0/51% 100% no-repeat;mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) 0 0/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) 100% 0/51% 100% no-repeat;text-decoration:none;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-ticket span{padding:17px 22px 16px 26px}.ds-ticket::before{content:'';position:absolute;right:58px;top:9px;bottom:9px;border-left:2px dashed currentColor;opacity:.55}.ds-ticket::after{content:'';position:absolute;right:0;top:0;bottom:0;width:58px;background:currentColor;-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h14M13 6l6 6-6 6' fill='none' stroke='%23000' stroke-width='2.4'/%3E%3C/svg%3E\") 50% 50%/22px no-repeat;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h14M13 6l6 6-6 6' fill='none' stroke='%23000' stroke-width='2.4'/%3E%3C/svg%3E\") 50% 50%/22px no-repeat}.ds-ticket:active{transform:scale(.97)}.ds-ticket:focus-visible{outline:2px solid #000;outline-offset:4px;-webkit-mask:none;mask:none}"
+    },
+    {
+      "name": "Ticket (soon)",
+      "kind": "button",
+      "refersTo": "ticket-soon",
+      "description": "Unpunched, dashed stub for a title not yet on the store.",
+      "html": "<span class=\"ds-ticket-soon\">Coming soon</span>",
+      "css": ".ds-ticket-soon{display:inline-flex;padding:15px 22px;border:2px dashed currentColor;font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:800;font-size:16px;line-height:1;font-stretch:75%;text-transform:uppercase;letter-spacing:.03em}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "description": "Always-underlined condensed text action with a drawn arrow.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Read the guide</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 0;color:inherit;font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:750;font-size:16px;line-height:1;font-stretch:80%;text-transform:uppercase;letter-spacing:.03em;text-decoration:underline 2px;text-underline-offset:6px}.ds-btn::after{content:'';width:1em;height:1em;background:currentColor;-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h14M13 6l6 6-6 6' fill='none' stroke='%23000' stroke-width='2.4'/%3E%3C/svg%3E\") center/contain no-repeat;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h14M13 6l6 6-6 6' fill='none' stroke='%23000' stroke-width='2.4'/%3E%3C/svg%3E\") center/contain no-repeat}.ds-btn:focus-visible{outline:2px solid currentColor;outline-offset:3px}"
+    },
+    {
+      "name": "One-sheet (home)",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "A title's poster: production number, art plane, poster title, logline, billing, ticket.",
+      "html": "<article class=\"ds-sheet\"><div class=\"ds-head\"><span class=\"ds-no\">NA-01</span><span>A game for iPhone</span></div><h2 class=\"ds-sheet-title\">Smalti</h2><p class=\"ds-log\">Restore the mosaic, one tessera at a time.</p><p class=\"ds-billing\">iPhone · iOS 17 · Free</p><a class=\"ds-ticket-s\" href=\"#\"><span>Get it on the App Store</span></a></article>",
+      "css": ".ds-sheet{--g:#1c2337;--hi:#d9ab55;padding:18px 20px 20px;background:var(--g);color:#fff;width:300px}.ds-head{display:flex;justify-content:space-between;font-size:13px;font-family:Archivo,-apple-system,system-ui,sans-serif;font-stretch:68%;font-weight:650;text-transform:uppercase;letter-spacing:.02em}.ds-no{color:var(--hi)}.ds-sheet-title{margin:80px 0 0;font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:900;font-size:64px;line-height:.9;font-stretch:118%;letter-spacing:-.045em}.ds-log{margin:12px 0 0;font:17px/1.4 -apple-system,system-ui,sans-serif;max-width:30ch}.ds-billing{margin:16px 0 18px;padding-top:10px;border-top:1px solid currentColor;font-size:12.5px;line-height:1.45;font-family:Archivo,-apple-system,system-ui,sans-serif;font-stretch:68%;font-weight:650;text-transform:uppercase;letter-spacing:.02em}.ds-ticket-s{display:inline-flex;padding:17px 58px 16px 26px;background:var(--hi);color:var(--g);font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:800;font-size:16px;line-height:1;font-stretch:75%;text-transform:uppercase;letter-spacing:.03em;text-decoration:none}"
+    },
+    {
+      "name": "Facts",
+      "kind": "custom",
+      "refersTo": "facts",
+      "description": "The billing block on paper: 3px top rule, condensed terms, tabular values.",
+      "html": "<dl class=\"ds-facts\"><div><dt>Platforms</dt><dd>iPhone, iPad</dd></div><div><dt>Price</dt><dd>Free</dd></div></dl>",
+      "css": ".ds-facts{margin:0;border-top:3px solid currentColor;max-width:420px}.ds-facts>div{display:grid;grid-template-columns:9.5em 1fr;gap:12px;padding:11px 0 10px;border-bottom:1px solid currentColor}.ds-facts dt{font-size:14px;font-family:Archivo,-apple-system,system-ui,sans-serif;font-stretch:68%;font-weight:650;text-transform:uppercase;letter-spacing:.02em}.ds-facts dd{margin:0;font:15px/1.45 -apple-system,system-ui,sans-serif;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Subnav band",
+      "kind": "nav",
+      "refersTo": "subnav",
+      "description": "The title's colour band above its guide pages.",
+      "html": "<nav class=\"ds-subnav\"><a class=\"ds-app\" href=\"#\">Dayfolio</a><a href=\"#\" aria-current=\"page\">Guide</a><a href=\"#\">Templates</a></nav>",
+      "css": ".ds-subnav{display:flex;align-items:center;gap:8px 28px;padding:12px 24px;background:#b0441c;color:#fff;font-size:15px;font-family:Archivo,-apple-system,system-ui,sans-serif;font-stretch:68%;font-weight:650;text-transform:uppercase;letter-spacing:.02em}.ds-subnav a{color:inherit;text-decoration:underline 2px transparent;text-underline-offset:6px;transition:text-decoration-color 150ms ease}.ds-subnav a:hover{text-decoration-color:currentColor}.ds-subnav a[aria-current]{color:#fdf3e4;text-decoration-color:#fdf3e4}.ds-subnav .ds-app{margin-right:auto;font-size:20px;font-weight:900;font-stretch:118%;letter-spacing:-.03em;text-transform:none}"
+    },
+    {
+      "name": "Listing row",
+      "kind": "custom",
+      "refersTo": "listing",
+      "description": "Index entries as ruled rows, not cards.",
+      "html": "<a class=\"ds-row\" href=\"#\"><h2>Getting started</h2><p>Make your first entry in a minute.</p></a>",
+      "css": ".ds-row{display:grid;gap:6px;padding:18px 0 22px;border-top:1px solid currentColor;color:inherit;text-decoration:none;max-width:420px}.ds-row h2{margin:0;font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:800;font-size:21px;line-height:1.15;letter-spacing:-.015em;text-decoration:underline 2px transparent;text-underline-offset:5px;transition:text-decoration-color 150ms ease}.ds-row:hover h2{text-decoration-color:#9a3a16}.ds-row p{margin:0;font:15px/1.5 -apple-system,system-ui,sans-serif}"
+    },
+    {
+      "name": "Appbox",
+      "kind": "card",
+      "refersTo": "appbox",
+      "description": "A mini one-sheet at the foot of guide pages.",
+      "html": "<div class=\"ds-appbox\"><div><strong>FlectoBI</strong><p>Prepare data and build dashboards on your Mac.</p><a class=\"ds-ticket-s\" href=\"#\"><span>Get it on the App Store</span></a></div></div>",
+      "css": ".ds-appbox{padding:24px;background:#06454c;color:#fff;max-width:460px}.ds-appbox strong{font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:900;font-size:22px;line-height:1;font-stretch:112%;letter-spacing:-.02em}.ds-appbox p{margin:8px 0 18px;font:16px/1.5 -apple-system,system-ui,sans-serif}.ds-ticket-s{display:inline-flex;padding:17px 22px 16px 26px;background:#66d4c8;color:#06454c;font-family:Archivo,-apple-system,system-ui,sans-serif;font-weight:800;font-size:16px;line-height:1;font-stretch:75%;text-transform:uppercase;letter-spacing:.03em;text-decoration:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A NinjaApps Production",
+    "overview": "**Creative North Star: \"A NinjaApps Production\"**\n\nThe studio is a production company and every app is a title it releases. One frame holds them all: pure black and pure white, a wide heavy grotesque at poster scale, and a condensed uppercase billing voice for facts. Inside that frame each title owns a one-sheet, a field of colour taken from its app icon. The studio frame never borrows those colours and the titles never borrow the studio's. The seal (忍) is the only studio colour and appears only as the ident mark.\n\nDensity is poster-like on the Persuade surfaces (home slate, app one-sheets) and plain on Read surfaces (guides, privacy, support, templates), which sit inside the same frame: black-and-white paper, hairline and heavy rules, system-face reading text, and the title's band and link ink as the one touch of its colour. Depth is conveyed by layered planes and rules, not by cards.\n\nThe system refuses the indie-studio hero over a row of equal icon cards, and the retired cream, serif, vermillion \"paper dojo\".",
+    "keyCharacteristics": [
+      "Two-tone frame, no greys; the dark theme inverts paper and ink.",
+      "The slate, end credits, footer and 404 are black in both themes.",
+      "Colour is per title, selected by the page's canonical URL, never by a class on hand-written or generated pages.",
+      "Archivo variable on two axes: wide and heavy for titles, condensed for facts.",
+      "Rows, rules and plates instead of cards and shadows; the ticket is the only App Store action.",
+      "Production numbers NA-01 Smalti, NA-02 Dayfolio, NA-03 FlectoBI; a future web app continues the sequence."
+    ],
+    "rules": [
+      {
+        "name": "The No-Grey Rule",
+        "body": "The frame has no intermediate tones. Hierarchy comes from weight, width, size and rule thickness (1px, 3px), never from a lighter ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seal-Only Red Rule",
+        "body": "Studio red marks the seal and nothing else.",
+        "section": "colors"
+      },
+      {
+        "name": "The Title Owns Its Colour Rule",
+        "body": "A title's colours appear on its one-sheet, its subnav band, its appbox, its link ink and its ticket. They never colour the studio frame or another title's pages.",
+        "section": "colors"
+      },
+      {
+        "name": "The Screen Rule",
+        "body": "The slate, credits, footer and 404 stay black under both themes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Axes Rule",
+        "body": "Wide-and-heavy means a title; condensed-and-uppercase means a fact. A fact is never set wide, a title never condensed.",
+        "section": "typography"
+      },
+      {
+        "name": "The Own-Face Rule",
+        "body": "Scripts Archivo does not draw (ru, ko, zh-Hans, ja) take the system face at normal width for headings, nav and crumbs, so no line mixes two typefaces.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tight Title Rule",
+        "body": "Titles carry negative tracking that deepens with size (-0.015em to -0.055em).",
+        "section": "typography"
+      },
+      {
+        "name": "The Planes Rule",
+        "body": "Separation is by plane and rule. A surface does not gain a shadow to look important.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep the frame to `ink` and `paper`; use rule weight and type width for hierarchy.",
+      "**Do** give each title its four app values and let every component read them through `--app-*`.",
+      "**Do** use the ticket for the App Store action and nothing else; use it once per one-sheet.",
+      "**Do** set facts (platforms, price, requirements) in the condensed uppercase billing voice, short runs.",
+      "**Do** continue the production sequence (NA-04 and on) for the next title, including a web app, with its own ground, highlight and link ink.",
+      "**Do** keep requests on the origin and storage limited to the theme preference.",
+      "**Do** list things as rows with rules; keep plates and appboxes as the only filled blocks on paper."
+    ],
+    "donts": [
+      "**Don't** use grey, tinted paper or a second neutral in the studio frame.",
+      "**Don't** use the seal red for anything but the seal.",
+      "**Don't** put title colours on the studio frame or another title's pages.",
+      "**Don't** build a row of equal app-icon cards, or a hero over one.",
+      "**Don't** return to the cream, serif, vermillion paper-dojo look (Shippori, Zen Kaku, Plex).",
+      "**Don't** shape any other control like the ticket.",
+      "**Don't** add hard offset shadows or glyph icons; arrows and the theme mark are drawn.",
+      "**Don't** let hover or colour changes exceed 200ms or use anything but ease on them."
+    ]
+  }
+}

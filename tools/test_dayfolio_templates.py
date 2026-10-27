@@ -369,6 +369,14 @@ class PageTests(unittest.TestCase):
         self.assertEqual(len(descriptions), len(self.pages))
         self.assertIn("<title>Daily standup template — Dayfolio — NinjaApps</title>", self.standup)
 
+    def test_no_page_carries_a_label_above_its_title_or_a_decorative_kanji(self):
+        for path, page in self.pages.items():
+            with self.subTest(page=path):
+                self.assertNotIn('class="kicker', page)
+                self.assertNotIn("crumbs-mark", page)
+                self.assertNotRegex(page, "[←→]")  # arrows are drawn by the stylesheet, not typed
+                self.assertNotRegex(page.split("<main>")[1], r"[\u3040-\u30ff\u4e00-\u9fff]")
+
     def test_each_page_says_it_is_generated_and_carries_the_sub_navigation(self):
         for path, page in self.pages.items():
             self.assertIn(f"<!-- {templates.GENERATED}", page, path)

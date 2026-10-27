@@ -279,6 +279,27 @@ class SectionTests(unittest.TestCase):
         self.assertIn("Everything in the guide.", guide)
         self.assertEqual(meta(guide, "og:type"), "website")
 
+    def test_no_page_carries_a_label_above_its_title_or_a_decorative_kanji(self):
+        self.site.put("content/dayfolio/guide/a.md", topic("getting-started", "Getting started", 1))
+        built = self.site.built()
+        for rel in ("apps/dayfolio/guide/index.html", "apps/dayfolio/guide/getting-started/index.html"):
+            with self.subTest(page=rel):
+                page = built[rel]
+                self.assertNotIn('class="kicker', page)
+                self.assertNotIn("crumbs-mark", page)
+                self.assertNotRegex(page, "[←→]")  # arrows are drawn by the stylesheet, not typed
+                self.assertNotRegex(page.split("<main>")[1], r"[\u3040-\u30ff\u4e00-\u9fff]")
+        crumbs = re.search(r'<nav class="crumbs" aria-label="Breadcrumb">.*?</nav>',
+                           built["apps/dayfolio/guide/getting-started/index.html"], re.S).group(0)
+        self.assertIn('<a href="../../">Dayfolio</a>', crumbs)
+
+    def test_the_app_box_sends_to_the_store_with_the_ticket(self):
+        self.site.put("content/dayfolio/guide/a.md", topic("getting-started", "Getting started", 1))
+        box = re.search(r'<aside class="appbox".*?</aside>', self.site.built()["apps/dayfolio/guide/getting-started/index.html"],
+                        re.S).group(0)
+        self.assertIn('<a class="ticket" href="https://apps.apple.com/app/id6817388897"><span>Get it on the App Store</span></a>',
+                      box)
+
     def test_an_empty_section_says_so(self):
         templates = self.site.built()["apps/dayfolio/templates/index.html"]
         self.assertIn('class="listing-empty"', templates)
@@ -558,12 +579,12 @@ class FlectoBITests(unittest.TestCase):
         self.assertEqual(blocks["Article"]["about"]["name"], "FlectoBI")
         self.assertEqual([item["name"] for item in blocks["BreadcrumbList"]["itemListElement"]],
                          ["FlectoBI", "Tutorials", "Your first Flow"])
-        self.assertIn("TUTORIALS — FLECTOBI", self.built["apps/flectobi/tutorials/index.html"])
+        self.assertIn('<h1 class="page-title">Tutorials</h1>', self.built["apps/flectobi/tutorials/index.html"])
         self.assertIn("content/flectobi/tutorials/first-flow.md", self.page)
 
     def test_the_app_box_says_where_flectobi_is_coming_without_a_link_or_a_price(self):
         box = re.search(r'<aside class="appbox".*?</aside>', self.page, re.S).group(0)
-        self.assertIn("Coming to the Mac App Store", box)
+        self.assertIn('<span class="ticket-soon">Coming to the Mac App Store</span>', box)
         self.assertNotRegex(box, r"<a [^>]*>[^<]*Coming to the Mac App Store")
         self.assertNotRegex(box, r"\$\d|(?i:\bfree\b)")
         self.assertIn('src="../../icon-320.webp"', box)
@@ -629,7 +650,12 @@ class StylesheetTests(unittest.TestCase):
                         "no dark-theme shadow for a window capture")
 
     def test_the_stylesheet_is_asked_for_by_the_day_its_figure_rules_came(self):
-        self.assertGreaterEqual(build.STYLE_VERSION, "2026-10-26")
+        self.assertGreaterEqual(build.STYLE_VERSION, "2026-10-27")
+
+    def test_the_ticket_and_the_crumbs_have_rules(self):
+        for selector in (".ticket", ".ticket-soon", ".crumbs", ".appbox"):
+            with self.subTest(selector=selector):
+                self.assertIn(selector + " ", self.css)
 
 
 class ArchiveMarkdownTests(unittest.TestCase):

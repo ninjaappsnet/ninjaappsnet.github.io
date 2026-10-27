@@ -1,7 +1,8 @@
 # ninjaapps.net
 
-Static site for **NinjaApps** — games and apps for iPhone, iPad and Mac. Design: "Paper Dojo"
-(warm paper, ink, vermillion accent, hairline grids). Hosted on GitHub Pages
+Static site for **NinjaApps** — games and apps for iPhone, iPad and Mac. Design: "A NinjaApps
+Production" (a two-tone studio frame, each app a one-sheet in its own colours; see
+DESIGN.md). Hosted on GitHub Pages
 at [ninjaapps.net](https://ninjaapps.net). Plain HTML + one shared stylesheet,
 with no build step for the hand-written pages. Dayfolio's guide, template and
 article pages, and FlectoBI's guide and tutorial pages, are generated from
@@ -148,7 +149,20 @@ a journalist looks for them.
 1. Copy `games/_template/` to `games/<slug>/` and replace every `{{TOKEN}}`
    in both files (`{{EFFECTIVE_DATE}}` is `YYYY-MM-DD`). Remove the
    `noindex` meta line at the top of each copied file.
-2. Add a card on `index.html` under `#games` and bump the `group-count`.
+2. Give the title its one-sheet:
+   - Take the next production number (NA‑01 Smalti, NA‑02 Dayfolio, NA‑03 FlectoBI,
+     so the next is NA‑04). Web apps continue the same sequence.
+   - In `style.css`, under "Titles", add the title's four colours (`--app-ground`,
+     `--app-on`, `--app-hi`, `--app-ink`, plus a dark-theme `--app-ink`), keyed on
+     its canonical URL and on `.title-<slug>`. Take them from the icon, and check
+     that `--app-on` on `--app-ground` and `--app-ink` on white/black pass AA.
+   - Add an `<article class="sheet title-<slug>">` to `.sheets` on `index.html`,
+     copied from a neighbour. Mark its screen `class="phone"` (iPhone) or
+     `class="window"` (Mac window). The home page takes any number of titles,
+     three to a row; nothing else needs changing. Keep the title name short
+     enough to fit (8 letters is the longest tested).
+   - The App Store action is always the `.ticket`; before the app has a store
+     id, use `<span class="ticket-soon">In production</span>`.
 3. Add a row on `privacy/index.html` and bump its count.
 4. Copy the footer's `<nav class="social">` block onto every new page —
    `check_social` will fail the build until you do (see **Social** above).

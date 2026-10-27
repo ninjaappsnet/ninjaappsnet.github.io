@@ -2,3 +2,8 @@
 .serena/
 .claude/settings.local.json
 __pycache__/
+
+# Impeccable working files: the design brief and review captures stay local
+# (GitHub Pages would serve them). The design tokens are kept.
+.impeccable/*
+!.impeccable/design.json

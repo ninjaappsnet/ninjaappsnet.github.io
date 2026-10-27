@@ -11,7 +11,7 @@
 <meta property="og:title" content="Privacy — {{APP_NAME}} — NinjaApps">
 <meta property="og:description" content="Privacy policy for {{APP_NAME}} by NinjaApps.">
 <meta property="og:url" content="https://ninjaapps.net/games/{{SLUG}}/privacy.html">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="../../assets/seal.svg" type="image/svg+xml">
 <!-- remove this noindex line when copying the template -->
 <meta name="robots" content="noindex">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
@@ -21,18 +21,18 @@
 <body>
 
 <header>
-  <a class="wordmark" href="../../">忍 NinjaApps</a>
+  <a class="wordmark" href="../../">NinjaApps</a>
   <nav>
     <a href="../../#games">Games</a>
     <a href="privacy.html">Privacy</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme"></button>
   </nav>
 </header>
 
 <main>
 
 <section class="page">
-  <div class="kicker">秘 PRIVACY — {{APP_NAME_UPPER}}</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="./">{{APP_NAME}}</a></nav>
   <h1 class="page-title">Privacy Policy</h1>
   <p class="effective">EFFECTIVE {{EFFECTIVE_DATE}}</p>
   <div class="prose">
@@ -56,7 +56,7 @@
     <!-- TODO: add a support email when available -->
     <p>Questions about this policy can be raised through the app's App Store page.</p>
   </div>
-  <a class="backlink" href="./">← BACK TO {{APP_NAME_UPPER}}</a>
+  <a class="backlink" href="./">BACK TO {{APP_NAME_UPPER}}</a>
 </section>
 
 </main>

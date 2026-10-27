@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NinjaApps — Quiet craft, swift play.</title>
+<title>NinjaApps — Games and apps for iPhone, iPad and Mac</title>
 <meta name="description" content="An independent studio making games and apps for iPhone, iPad and Mac. Each one honed to do a single thing beautifully.">
 <link rel="canonical" href="https://ninjaapps.net/">
 <meta property="og:site_name" content="NinjaApps">
-<meta property="og:title" content="NinjaApps — Quiet craft, swift play.">
+<meta property="og:title" content="NinjaApps — Games and apps for iPhone, iPad and Mac">
 <meta property="og:description" content="An independent studio making games and apps for iPhone, iPad and Mac.">
 <meta property="og:url" content="https://ninjaapps.net/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="assets/seal.svg" type="image/svg+xml">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="stylesheet" href="style.css">
 <script src="assets/theme.js" defer></script>
@@ -22,82 +22,56 @@
 <body>
 
 <header>
-  <a class="wordmark" href="./">忍 NinjaApps</a>
+  <a class="wordmark" href="./">NinjaApps</a>
   <nav>
-    <a href="#games">Games</a>
-    <a href="#apps">Apps</a>
+    <a href="#titles">Titles</a>
+    <a href="#studio">Studio</a>
     <a href="privacy/">Privacy</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme"></button>
   </nav>
 </header>
 
 <main>
 
-<section class="hero">
-  <div>
-    <div class="kicker">NINJAAPPS.NET — GAMES &amp; APPS</div>
-    <h1>Quiet craft,<br>swift play.</h1>
-    <p class="lede">An independent studio making games and apps for iPhone, iPad and Mac. Each one honed to do a single thing beautifully. Smalti is out on the App Store, and Dayfolio is a calm work journal for iPhone, iPad and Mac.</p>
+<section class="slate ident" id="titles" aria-labelledby="slate-title">
+  <div class="slate-head">
+    <h1 id="slate-title">NinjaApps presents games and apps for iPhone, iPad and Mac.</h1>
   </div>
-  <div class="hero-side">
-    <div class="tategaki" lang="ja" aria-hidden="true">忍者アプリ</div>
-    <svg class="studio-seal" viewBox="0 0 180 180" role="img" aria-label="NinjaApps studio seal">
-      <rect class="seal-bg" x="4" y="4" width="172" height="172" rx="26"/>
-      <rect class="seal-ring" x="14" y="14" width="152" height="152" rx="18"/>
-      <text class="seal-glyph" x="90" y="132" text-anchor="middle">忍</text>
-    </svg>
+  <div class="sheets">
+
+    <article class="sheet title-smalti" id="games">
+      <div class="sheet-head"><p class="sheet-no">NA&#8209;01</p><p class="sheet-kind">A game for iPhone</p></div>
+      <div class="sheet-art"><img class="phone" src="games/smalti/shot-gameplay.webp" alt="Smalti mid-restoration: glazed tiles set on the board, more waiting in the tray" width="750" height="1629"></div>
+      <h2 class="sheet-title"><a href="games/smalti/">Smalti</a></h2>
+      <p class="sheet-log">A calm restoration game. Fit glazed pieces into place and watch each mosaic come back to life.</p>
+      <p class="billing">411 levels in 10 Rooms · one daily mosaic · free, with one $5.99 unlock · no ads · iOS 17</p>
+      <a class="ticket" href="https://apps.apple.com/app/id6792641328"><span>Get it on the App Store</span></a>
+    </article>
+
+    <article class="sheet title-dayfolio" id="apps">
+      <div class="sheet-head"><p class="sheet-no">NA&#8209;02</p><p class="sheet-kind">iPhone · iPad · Mac</p></div>
+      <div class="sheet-art"><img class="phone" src="apps/dayfolio/media/iphone-first-page-screen.webp" alt="Dayfolio on iPhone: the first page of a new day, with its first line written" width="624" height="710"></div>
+      <h2 class="sheet-title"><a href="apps/dayfolio/">Dayfolio</a></h2>
+      <p class="sheet-log">A calm work journal for iPhone, iPad and Mac. One page a day, in the shape of your job.</p>
+      <p class="billing">A journal per role or client · templates made for your work · reports for any week · free to start · no account</p>
+      <a class="ticket" href="https://apps.apple.com/app/id6817388897"><span>Get it on the App Store</span></a>
+    </article>
+
+    <article class="sheet title-flectobi">
+      <div class="sheet-head"><p class="sheet-no">NA&#8209;03</p><p class="sheet-kind">A Mac app</p></div>
+      <div class="sheet-art"><img class="window" src="apps/flectobi/media/report-canvas.webp" alt="FlectoBI showing a Report: revenue Cards, a Region Slicer, a line chart and two category charts" width="1465" height="1200"></div>
+      <h2 class="sheet-title"><a href="apps/flectobi/">FlectoBI</a></h2>
+      <p class="sheet-log">Data prep and dashboards on your Mac. A Flow you can run again, and a Report that refreshes with it.</p>
+      <p class="billing">No code · your data stays on your Mac · macOS 26 · Apple silicon</p>
+      <span class="ticket-soon">In production</span>
+    </article>
+
   </div>
 </section>
 
-<!-- ============ GAMES ============ -->
-<section class="group" id="games">
-  <div class="group-head">
-    <span class="group-kanji">遊 GAMES</span>
-    <h2 class="group-title">For play</h2>
-    <span class="group-rule"></span>
-    <span class="group-count">01</span>
-  </div>
-  <div class="grid grid-1">
-    <a class="card card-h" href="games/smalti/">
-      <img class="app-icon-sm" src="assets/icon-smalti-144.webp" alt="Smalti app icon" width="64" height="64">
-      <div>
-        <h3>Smalti</h3>
-        <p>A calm restoration game. Fit glazed pieces into place and watch each mosaic come back to life. 411 levels, one daily mosaic, no ads.</p>
-      </div>
-      <span class="tag">GAME</span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
-</section>
-
-<!-- ============ APPS ============ -->
-<section class="group" id="apps">
-  <div class="group-head">
-    <span class="group-kanji">道 APPS</span>
-    <h2 class="group-title">For work</h2>
-    <span class="group-rule"></span>
-    <span class="group-count">02</span>
-  </div>
-  <div class="grid grid-1">
-    <a class="card card-h" href="apps/dayfolio/">
-      <img class="app-icon-sm" src="assets/icon-dayfolio-144.webp" alt="Dayfolio app icon" width="64" height="64">
-      <div>
-        <h3>Dayfolio</h3>
-        <p>A calm work journal for iPhone, iPad and Mac. One page a day, in the shape of your job: a journal per role or client, templates made for your work, and reports for any week. Free to start, no account, no tracking.</p>
-      </div>
-      <span class="tag">APP</span>
-      <span class="arrow">→</span>
-    </a>
-    <a class="card card-h" href="apps/flectobi/">
-      <img class="app-icon-sm" src="assets/icon-flectobi-144.webp" alt="FlectoBI app icon" width="64" height="64">
-      <div>
-        <h3>FlectoBI</h3>
-        <p>Data prep and dashboards on your Mac. Shape the files you clean every week in a Flow you can run again, and chart them in a Report that refreshes with it. No code, and your data stays on your Mac.</p>
-      </div>
-      <span class="tag">APP</span>
-      <span class="arrow">→</span>
-    </a>
-  </div>
+<section class="credits" id="studio" aria-labelledby="studio-title">
+  <h2 class="credits-line" id="studio-title">A small studio that finishes things, then keeps them working.</h2>
+  <p class="billing credits-run"><b>No accounts</b> · <b>nothing tracked</b>, each title has its own <a href="privacy/">privacy policy</a> · <b>written help</b> for every title, and a full guide for the bigger ones · <b>made for</b> iPhone, iPad and Mac · <b>web apps</b> next</p>
 </section>
 
 </main>

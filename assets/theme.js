@@ -1,6 +1,6 @@
 // Theme toggle: persists choice, respects OS preference on first visit.
 // The blocking init snippet in each page's <head> sets data-theme before paint;
-// this script only wires up the button.
+// this script only wires up the button. The button's mark is drawn by style.css.
 (function () {
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
@@ -8,7 +8,6 @@
 
   function setTheme(t) {
     root.dataset.theme = t;
-    btn.textContent = t === 'dark' ? '◐ 昼' : '◑ 夜'; // 昼 day / 夜 night
     btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
     try { localStorage.setItem('ninjaapps-theme', t); } catch (e) { /* private mode */ }
   }
