@@ -17,7 +17,7 @@ A Formula works out one Value for each row. If you have written `=A2*B2` in Exce
 4. Check the line under the field. It says whether the Formula is valid.
 5. Click **Apply**, or press Command-Return. The new Column appears in the preview.
 
-![A Calculate Step added after Month: a Formula that divides Revenue by a Column named Unit shows “Unknown column Unit. Did you mean Units?”, then the corrected Formula is valid and the Step runs on 3,000 rows](clip-formula.mp4 "Typing a Formula, fixing the Column name it suggests, and the Step running.")
+![A Calculate Step added after Month: a Formula that divides Revenue by a Column named Unit shows “Unknown column Unit. Did you mean Units?”, then the corrected Formula is valid and the Step runs on 3,000 rows and the new Column Revenue per unit appears in the preview](clip-formula.mp4 "Typing a Formula, fixing the Column name it suggests, and the new Column appearing.")
 
 A leading `=` is ignored. A Formula can be 4,000 characters long and nested 64 levels deep.
 
