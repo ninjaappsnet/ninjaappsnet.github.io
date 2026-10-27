@@ -353,15 +353,18 @@ header nav a, .subnav a:not(.subnav-app) {
   .onesheet-foot { grid-column: 1; padding-top: 28px; }
 }
 
-/* The mosaic opening (assets/mosaic.js): the title restored from tiles. */
-.mosaic-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
-/* The canvas draws the title; the <h1> stays for every reader. The type is
-   hidden only when scripts run (html.js), and comes back by itself after three
-   seconds if the mosaic never takes over. */
-.js .onesheet[data-mosaic] .onesheet-title { color: transparent; animation: title-back 1ms 3s forwards; }
-.js .onesheet[data-mosaic] .onesheet-title.tiled { color: transparent; animation: none; }
-.js .onesheet[data-mosaic] .onesheet-title.untiled { color: inherit; animation: none; }
-@keyframes title-back { to { color: var(--app-on); } }
+/* Title openings (assets/opening.js, then one script per title): a canvas
+   draws the title while the heading stays in the page for every reader. */
+.opening-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+/* The type and the plates stay in front of the canvas, which may pass over
+   the key art (FlectoBI's map covers it, so the art is painted at once and
+   counts as loaded, as search engines measure it). */
+.onesheet-foot, .onesheet .billing { position: relative; z-index: 3; }
+/* The heading is drawn transparent, never removed, only when scripts run
+   (html.js), until its opening takes over (.opened); if that never happens
+   it comes back by itself. */
+.js [data-opening]:not(.opened) :is(.onesheet-title, h1) { color: transparent; animation: title-back 1ms 3s forwards; }
+@keyframes title-back { to { color: inherit; } }
 
 /* ===== Sections on paper ===== */
 .group { padding: clamp(56px, 7vw, 96px) var(--pad-side) 0; }
@@ -722,7 +725,9 @@ body.share main { flex: 1; }
 }
 
 /* ===== 404 ===== */
-.notfound { padding: clamp(80px, 12vw, 160px) var(--pad-side); background: var(--screen); color: var(--on-screen); }
+.notfound { position: relative; isolation: isolate; overflow: hidden; padding: clamp(80px, 12vw, 160px) var(--pad-side); background: var(--screen); color: var(--on-screen); }
+/* The broken mosaic (assets/mosaic.js) falls behind the words. */
+.notfound > :not(.opening-canvas) { position: relative; z-index: 1; }
 .notfound h1 { margin: 0; font: 900 clamp(64px, 12vw, 180px)/.86 var(--face-title); font-stretch: 125%; letter-spacing: -.05em; }
 .notfound .lede { margin: 24px 0 0; }
 .notfound .btn { color: var(--on-screen); }

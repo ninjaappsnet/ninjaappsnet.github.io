@@ -75,6 +75,15 @@ request nothing off-origin, and carry a social card whose image exists.
 covered by a separate dependency-free test: `node tools/test-daily-page.mjs`.
 Run it after touching the script in `games/smalti/daily/index.html`.
 
+The title openings (`assets/opening.js` and one script per title: `mosaic.js`
+for Smalti and the 404, `folio.js` for Dayfolio, `flecto.js` for FlectoBI; each
+also plays as a short trailer on its home sheet) have the same kind of test, one
+per script: `node tools/test-mosaic.mjs`, `node tools/test-folio.mjs` and
+`node tools/test-flecto.mjs`. Every opening keeps the real heading in the page
+and gives it back visible at the end (Smalti's one-sheet keeps its mosaic), ends
+on any click, key or scroll, and does nothing under reduced motion. The map in
+FlectoBI's is `assets/land.js`, made by `tools/make-land-dots.py`.
+
 The Smalti marketing pages (`STALE_CLAIMS` in the script) are held to the game's
 code, not to last quarter's copy: the check fails on a claim the app has
 retired (395 levels, nine packs, Masterpiece Commission, "handcrafted", daily

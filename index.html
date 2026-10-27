@@ -10,10 +10,20 @@
 <meta property="og:title" content="NinjaApps — Games and apps for iPhone, iPad and Mac">
 <meta property="og:description" content="An independent studio making games and apps for iPhone, iPad and Mac.">
 <meta property="og:url" content="https://ninjaapps.net/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ninjaapps.net/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NinjaApps presents games and apps for iPhone, iPad and Mac: one-sheets for Smalti, Dayfolio and FlectoBI.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/seal.svg" type="image/svg+xml">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
-<link rel="stylesheet" href="style.css?v=2026-10-27b">
+<link rel="stylesheet" href="style.css?v=2026-10-27c">
 <script src="assets/theme.js" defer></script>
+<script src="assets/opening.js" defer></script>
+<script src="assets/mosaic.js" defer></script>
+<script src="assets/folio.js" defer></script>
+<script src="assets/flecto.js" defer></script>
 <!-- Ties the four profiles and this domain together as one studio, so a
      search engine can link them rather than guessing. Keep sameAs in the same
      order as the footer row; tools/check-site.py enforces that they agree. -->
@@ -39,7 +49,7 @@
   </div>
   <div class="sheets">
 
-    <article class="sheet title-smalti" id="games">
+    <article class="sheet title-smalti" id="games" data-opening="smalti-trailer" data-delay="700">
       <div class="sheet-head"><p class="sheet-no">NA&#8209;01</p><p class="sheet-kind">A game for iPhone</p></div>
       <div class="sheet-art"><img class="phone" src="games/smalti/shot-gameplay.webp" alt="Smalti mid-restoration: glazed tiles set on the board, more waiting in the tray" width="750" height="1629"></div>
       <h2 class="sheet-title"><a href="games/smalti/">Smalti</a></h2>
@@ -48,7 +58,7 @@
       <a class="ticket" href="https://apps.apple.com/app/id6792641328"><span>Get it on the App Store</span></a>
     </article>
 
-    <article class="sheet title-dayfolio" id="apps">
+    <article class="sheet title-dayfolio" id="apps" data-opening="dayfolio-trailer" data-delay="1000">
       <div class="sheet-head"><p class="sheet-no">NA&#8209;02</p><p class="sheet-kind">iPhone · iPad · Mac</p></div>
       <div class="sheet-art"><img class="phone" src="apps/dayfolio/media/iphone-first-page-screen.webp" alt="Dayfolio on iPhone: the first page of a new day, with its first line written" width="624" height="710"></div>
       <h2 class="sheet-title"><a href="apps/dayfolio/">Dayfolio</a></h2>
@@ -57,7 +67,7 @@
       <a class="ticket" href="https://apps.apple.com/app/id6817388897"><span>Get it on the App Store</span></a>
     </article>
 
-    <article class="sheet title-flectobi">
+    <article class="sheet title-flectobi" data-opening="flectobi-trailer" data-delay="1300">
       <div class="sheet-head"><p class="sheet-no">NA&#8209;03</p><p class="sheet-kind">A Mac app</p></div>
       <div class="sheet-art"><img class="window" src="apps/flectobi/media/report-canvas.webp" alt="FlectoBI showing a Report: revenue Cards, a Region Slicer, a line chart and two category charts" width="1465" height="1200"></div>
       <h2 class="sheet-title"><a href="apps/flectobi/">FlectoBI</a></h2>

@@ -1,73 +1,31 @@
-// The opening of Smalti's one-sheet: the title is restored as a mosaic. The
-// name starts as empty slots, like the empty cells of a board in the game, and
-// the game's pieces (tetrominoes and pentominoes, one glaze each) seat into
-// them from left to right, each lifted, turned and a little large until it
-// drops into place. One sweep of glaze light crosses the
-// finished name, then it holds still.
+// Smalti's opening: the title restored as a mosaic. The name starts as empty
+// slots, like the empty cells of a board in the game, and the game's pieces
+// (tetrominoes and pentominoes, one glaze each) seat into them from left to
+// right, each lifted, turned and a little large until it drops into place. One
+// sweep of glaze light crosses the finished name, then it holds still.
 //
-// The real <h1> stays in the page for every reader. With no script the title
-// is plain type (the page only hides it under html.js); if this script fails,
-// style.css brings the type back after three seconds. Under reduced motion the
-// finished mosaic is drawn at once. The cells, the plan and the timeline are
-// pure functions, tested by tools/test-mosaic.mjs.
+// Three ways in, by data-opening on the host:
+//   smalti   the one-sheet: the full opening; the mosaic stays as the title.
+//   smalti-trailer   a sheet on the home page: a short run when the sheet is
+//            first seen, then the type comes back.
+//   broken   the 404: the number set whole, then a few pieces fall out of it.
+//
+// The real title stays in the page for every reader. Under reduced motion the
+// finished mosaic is drawn at once. The plan and the timeline are pure
+// functions, tested by tools/test-mosaic.mjs. Needs assets/opening.js.
 (function (root) {
   'use strict';
+  var O = root.NinjaOpening;
 
   var TILE_MS = 420;    // one tile seating
   var SWEEP_MS = 900;   // left edge to right edge
   var GLAZE_MS = 650;   // the light crossing once
+  var FALL_MS = 1100;   // a loose piece dropping out of the 404
 
   // The game's glazes: ivory carries the name, gold and oxblood are the
   // accents of its boards, jade the odd piece.
   var GLAZE = { ivory: '#efe6d3', gold: '#d9a441', oxblood: '#a63a50', jade: '#4f9470' };
-
-  function rng(seed) {
-    var s = seed >>> 0 || 1;
-    return function () {
-      s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 5; s >>>= 0;
-      return s / 4294967296;
-    };
-  }
-
-  // cubic-bezier(x1, y1, x2, y2) as a function of progress, solved for x.
-  function bezier(x1, y1, x2, y2) {
-    function a(p1, p2) { return 1 - 3 * p2 + 3 * p1; }
-    function b(p1, p2) { return 3 * p2 - 6 * p1; }
-    function c(p1) { return 3 * p1; }
-    function at(t, p1, p2) { return ((a(p1, p2) * t + b(p1, p2)) * t + c(p1)) * t; }
-    function slope(t, p1, p2) { return 3 * a(p1, p2) * t * t + 2 * b(p1, p2) * t + c(p1); }
-    return function (x) {
-      if (x <= 0) return 0;
-      if (x >= 1) return 1;
-      var t = x;
-      for (var i = 0; i < 8; i++) {
-        var d = slope(t, x1, x2);
-        if (Math.abs(d) < 1e-6) break;
-        t -= (at(t, x1, x2) - x) / d;
-      }
-      return at(Math.min(1, Math.max(0, t)), y1, y2);
-    };
-  }
-  var easeOut = bezier(0.23, 1, 0.32, 1);      // --ease-out
-  var easeInOut = bezier(0.77, 0, 0.175, 1);   // --ease-in-out
-
-  // The cells of a square grid that the inked mask covers at least half of.
-  function cells(alpha, width, height, size) {
-    var out = [], step = size / 5;
-    for (var cy = size / 2; cy < height; cy += size) {
-      for (var cx = size / 2; cx < width; cx += size) {
-        var hit = 0;
-        for (var sy = 0; sy < 5; sy++) {
-          for (var sx = 0; sx < 5; sx++) {
-            var x = Math.floor(cx - size / 2 + step * (sx + 0.5)), y = Math.floor(cy - size / 2 + step * (sy + 0.5));
-            if (x >= 0 && y >= 0 && x < width && y < height && alpha[y * width + x] > 127) hit++;
-          }
-        }
-        if (hit >= 13) out.push({ x: cx, y: cy, i: Math.round((cx - size / 2) / size), j: Math.round((cy - size / 2) / size) });
-      }
-    }
-    return out;
-  }
+  var easeOut = O.easeOut, easeInOut = O.easeInOut;
 
   var SIDES = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
@@ -79,7 +37,7 @@
   // undone. A stray of one or two cells that no piece can hold is left out.
   // Each piece takes one glaze and seats as one.
   function plan(list, o) {
-    var rand = rng(o.seed || 1);
+    var rand = O.rng(o.seed || 1);
     var order = list.slice().sort(function (a, b) { return a.i - b.i || a.j - b.j; });
     var at = {}, rank = {}, owner = {};
     for (var n = 0; n < order.length; n++) {
@@ -207,7 +165,7 @@
       if (color !== GLAZE.ivory && touchesColour(pc, id2)) color = GLAZE.ivory;
       colour[id2] = color;
       meta[id2] = { px: px, py: py, spin: Math.round((j2 - 0.5) * 1.4 * 1000) / 1000,   // the turn it makes as it seats
-                    delay: Math.round(80 + (px / o.width) * SWEEP_MS + j3 * 160) };
+                    delay: Math.round(80 + (px / o.width) * (o.sweep || SWEEP_MS) + j3 * 160) };
     }
 
     // Every letter carries colour: each separate stroke (cells joined side to
@@ -257,23 +215,59 @@
     return tiles;
   }
 
+  // The 404: a few whole pieces work loose and fall out of the set number, one
+  // after another, leaving their slots empty. Not two from the same stroke in
+  // a row, and never so many that the number stops reading.
+  function loosen(tiles, o) {
+    var rand = O.rng(o.seed || 3), ids = [], seen = {};
+    for (var i = 0; i < tiles.length; i++) if (!seen[tiles[i].piece]) { seen[tiles[i].piece] = true; ids.push(tiles[i].piece); }
+    var count = Math.max(1, Math.round(ids.length * (o.share || 0.1))), chosen = {};
+    for (var n = 0; n < count; n++) {
+      var at = Math.floor(rand() * ids.length);
+      chosen[ids[at]] = Math.round(500 + n * 260 + rand() * 120);
+      ids.splice(at, 1);
+    }
+    return tiles.map(function (t) {
+      var c = {};
+      for (var k in t) c[k] = t[k];
+      c.delay = -TILE_MS;   // set before the page shows
+      if (chosen[t.piece] !== undefined) { c.fall = chosen[t.piece]; c.drift = Math.round((rand() - 0.5) * 60) / 100; }
+      return c;
+    });
+  }
+
   function tileState(t, time) {
-    if (time < t.delay) return { alpha: 0, slot: true, scale: 1.3, lift: 1, angle: t.rest + t.spin };
+    if (t.fall !== undefined && time >= t.fall) {
+      var f = (time - t.fall) / FALL_MS;
+      if (f >= 1) return { alpha: 0, slot: true, scale: 1, lift: 0, angle: t.rest, drop: 0 };
+      // Gravity: it lets go slowly, then drops; it turns as it goes and is gone
+      // before it leaves the stage.
+      return { alpha: 1 - Math.max(0, (f - 0.6) / 0.4), slot: true, scale: 1, lift: 0,
+               angle: t.rest + t.drift * f * 3, drop: f * f };
+    }
+    if (time < t.delay) return { alpha: 0, slot: true, scale: 1.3, lift: 1, angle: t.rest + t.spin, drop: 0 };
     var p = (time - t.delay) / TILE_MS;
-    if (p >= 1) return { alpha: 1, slot: false, scale: 1, lift: 0, angle: t.rest };
+    if (p >= 1) return { alpha: 1, slot: false, scale: 1, lift: 0, angle: t.rest, drop: 0 };
     var e = easeOut(p);
-    return { alpha: Math.min(1, p * 4), slot: true, scale: 1 + 0.3 * (1 - e), lift: 1 - e, angle: t.rest + t.spin * (1 - e) };
+    return { alpha: Math.min(1, p * 4), slot: true, scale: 1 + 0.3 * (1 - e), lift: 1 - e, angle: t.rest + t.spin * (1 - e), drop: 0 };
   }
 
   function duration(tiles) {
     var last = 0;
-    for (var i = 0; i < tiles.length; i++) last = Math.max(last, tiles[i].delay);
-    return last + TILE_MS;
+    for (var i = 0; i < tiles.length; i++) {
+      last = Math.max(last, tiles[i].delay + TILE_MS);
+      if (tiles[i].fall !== undefined) last = Math.max(last, tiles[i].fall + FALL_MS);
+    }
+    return last;
   }
 
+  // The grid for a title of `size` px: a tile must still read as a tile, so a
+  // small title (a phone, a sheet on the home page) takes fewer, larger cells.
+  function cellFor(size) { return size >= 90 ? Math.max(7, size / 17) : Math.max(5, size / 11); }
+
   root.NinjaMosaic = {
-    GLAZE: GLAZE, cells: cells, plan: plan, tileState: tileState, duration: duration,
-    TILE_MS: TILE_MS, GLAZE_MS: GLAZE_MS,
+    GLAZE: GLAZE, cells: O.cells, plan: plan, loosen: loosen, tileState: tileState, duration: duration, cellFor: cellFor,
+    TILE_MS: TILE_MS, GLAZE_MS: GLAZE_MS, FALL_MS: FALL_MS,
   };
 
   // ----- in the page -----
@@ -301,8 +295,10 @@
     body.addColorStop(1, 'rgba(0,0,0,.22)');
     g.fillStyle = body; rounded(g, pad, pad, s, s, r); g.fill();
     g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = Math.max(1, s * 0.04); rounded(g, pad, pad, s, s, r); g.stroke();
-    g.fillStyle = 'rgba(255,255,255,.5)';
-    g.beginPath(); g.ellipse(pad + s * 0.32, pad + s * 0.24, s * 0.2, s * 0.09, -0.5, 0, Math.PI * 2); g.fill();
+    if (s >= 8) {
+      g.fillStyle = 'rgba(255,255,255,.5)';
+      g.beginPath(); g.ellipse(pad + s * 0.32, pad + s * 0.24, s * 0.2, s * 0.09, -0.5, 0, Math.PI * 2); g.fill();
+    }
     return { canvas: c, pad: pad, side: s };
   }
 
@@ -316,71 +312,29 @@
     return c;
   }
 
-  function start(host) {
-    var h1 = host.querySelector('.onesheet-title');
-    var text = h1 && h1.firstChild;
-    if (!text || text.nodeType !== 3) return;
-    var canvas = document.createElement('canvas');
-    canvas.className = 'mosaic-canvas';
-    canvas.setAttribute('aria-hidden', 'true');
-    // Its placing is set here, not only in style.css: a visitor holding an
-    // older stylesheet must never get the canvas in the flow of the page.
-    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none';
-    var ctx = canvas.getContext('2d');
-    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var tiles = [], sprites = {}, slot = null, cell = 20, frame = 0, width = 0, dpr = 1;
+  function start(host, mode) {
+    var el = mode === 'trailer' ? host.querySelector('.sheet-title a') : host.querySelector('h1');
+    if (!el || !O.textOf(el)) return;
+    var st = O.stage(host), ctx = st.ctx, canvas = st.canvas;
+    var tiles = [], sprites = {}, slot = null, cell = 20, frame = 0;
 
-    // The name, set on an offscreen mask exactly where the page sets it, then
-    // read back as grid cells.
     function measure() {
-      var box = host.getBoundingClientRect();
-      var cs = getComputedStyle(h1), size = parseFloat(cs.fontSize);
-      var range = document.createRange(); range.selectNodeContents(text);
-      var ink = range.getBoundingClientRect();
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      width = box.width;
-      canvas.width = Math.round(box.width * dpr);
-      canvas.height = Math.round(box.height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // Below this size a tile is too small to read as a tile: phones keep the type.
-      if (size < 90) return false;
-      var mask = document.createElement('canvas');
-      mask.width = Math.ceil(box.width); mask.height = Math.ceil(box.height);
-      var m = mask.getContext('2d', { willReadFrequently: true });
-      m.font = '900 ' + size + 'px Archivo';
-      if ('fontStretch' in m) m.fontStretch = 'expanded';
-      // Check the face against the page first, at the page's own spacing.
-      if ('letterSpacing' in m) m.letterSpacing = cs.letterSpacing;
-      var check = ink.width / m.measureText(text.data).width;
-      if (!(check > 0.85 && check < 1.15)) return false;   // the face did not load as the page set it
-      // On a grid, letters set as tight as the type would fuse; the mosaic sets
-      // them a little apart and fits the same width, centred on the same line.
-      if ('letterSpacing' in m) m.letterSpacing = (size * 0.03) + 'px';
-      var metrics = m.measureText(text.data);
-      var fit = ink.width / metrics.width;
-      var inkH = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
-      var mid = ink.top - box.top + ink.height / 2;
-      m.save();
-      m.translate(ink.left - box.left, mid);
-      m.scale(fit, fit);
-      m.fillText(text.data, 0, inkH / 2 - metrics.actualBoundingBoxDescent);
-      m.restore();
-      var data = m.getImageData(0, 0, mask.width, mask.height).data;
-      var alpha = new Uint8ClampedArray(mask.width * mask.height);
-      for (var i = 0; i < alpha.length; i++) alpha[i] = data[i * 4 + 3];
-
-      cell = Math.max(7, size / 17);
-      tiles = plan(cells(alpha, mask.width, mask.height, cell), { seed: 7, width: box.width, cell: cell });
+      st.fit();
+      var mk = O.mask(host, el, 0.03);
+      if (!mk || mk.size < 44) return false;
+      cell = cellFor(mk.size);
+      var list = O.cells(mk.alpha, mk.w, mk.h, cell);
+      tiles = plan(list, { seed: 7, width: st.w, cell: cell, sweep: mode === 'trailer' ? 360 : SWEEP_MS });
+      if (mode === 'broken') tiles = loosen(tiles, { seed: 3, share: 0.1 });
       var side = cell * 0.9;
       sprites = {};
-      for (var k in GLAZE) sprites[GLAZE[k]] = sprite(GLAZE[k], side, dpr);
-      slot = slotSprite(side, dpr);
+      for (var k in GLAZE) sprites[GLAZE[k]] = sprite(GLAZE[k], side, st.dpr);
+      slot = slotSprite(side, st.dpr);
       return tiles.length > 0;
     }
 
     function draw(time, glaze) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      st.clear();
       var side = cell * 0.9;
       for (var i = 0; i < tiles.length; i++) {
         var t = tiles[i], s = tileState(t, time);
@@ -391,12 +345,13 @@
         var dx = t.x - t.px, dy = t.y - t.py, cos = Math.cos(s.angle), sin = Math.sin(s.angle);
         ctx.save();
         ctx.globalAlpha = s.alpha;
-        ctx.translate(t.px + (dx * cos - dy * sin) * s.scale, t.py + (dx * sin + dy * cos) * s.scale + s.lift * cell * 1.8);
+        ctx.translate(t.px + (dx * cos - dy * sin) * s.scale,
+                      t.py + (dx * sin + dy * cos) * s.scale + s.lift * cell * 1.8 + s.drop * (st.h - t.py + cell * 4));
         ctx.rotate(s.angle);
         ctx.scale(s.scale, s.scale);
         ctx.drawImage(sp.canvas, -full / 2, -full / 2, full, full);
         if (glaze !== null) {
-          var d = Math.abs(t.x / width - glaze);
+          var d = Math.abs(t.x / st.w - glaze);
           if (d < 0.07) {
             ctx.globalAlpha = 0.55 * (1 - d / 0.07);
             ctx.fillStyle = '#fff';
@@ -408,22 +363,52 @@
       }
     }
 
+    function finish() {
+      cancelAnimationFrame(frame);
+      if (mode === 'trailer') { canvas.remove(); O.showType(el, 0); }
+      else draw(Infinity, null);
+    }
+
     function play() {
-      var began = performance.now(), end = duration(tiles);
+      var began = performance.now(), end = duration(tiles), glazeMs = mode === 'broken' ? 0 : GLAZE_MS;
+      var stop = O.onSkip(finish);
       function tick(now) {
         var time = now - began;
-        var glaze = time > end ? easeInOut(Math.min(1, (time - end) / GLAZE_MS)) * 1.3 - 0.15 : null;
+        var glaze = glazeMs && time > end ? easeInOut(Math.min(1, (time - end) / glazeMs)) * 1.3 - 0.15 : null;
         draw(time, glaze);
-        if (time < end + GLAZE_MS) frame = requestAnimationFrame(tick);
-        else draw(Infinity, null);
+        if (time < end + glazeMs) frame = requestAnimationFrame(tick);
+        else if (mode === 'trailer') {
+          // The trailer hands the title back to the type, which takes the
+          // sheet's hover and focus as it always does.
+          stop();
+          O.showType(el, 240);
+          canvas.style.transition = 'opacity 240ms ease';
+          canvas.style.opacity = '0';
+          setTimeout(function () { canvas.remove(); }, 260);
+        } else { stop(); draw(Infinity, null); }
       }
       frame = requestAnimationFrame(tick);
     }
 
-    host.insertBefore(canvas, host.firstChild);
-    if (!measure()) { canvas.remove(); h1.classList.add('untiled'); return; }
-    h1.classList.add('tiled');
-    h1.style.color = 'transparent';
+    if (!measure()) { canvas.remove(); host.classList.add('opened'); return; }
+    var still = O.still();
+    if (mode === 'trailer') {
+      if (still) { canvas.remove(); return; }
+      // Plays once, when the sheet is first well in view.
+      O.hideType(el);
+      draw(0, null);
+      var seen = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        seen.disconnect();
+        // data-delay waits out the home page's cut-in, counted from the page's
+        // start: a sheet first seen later plays at once.
+        setTimeout(play, Math.max(0, (+host.dataset.delay || 0) - performance.now()));
+      }, { threshold: 0.6 });
+      seen.observe(host);
+      return;
+    }
+    O.hideType(el);
+    host.classList.add('opened');
     if (still) draw(Infinity, null);
     else { draw(0, null); play(); }
 
@@ -433,18 +418,12 @@
       pending = setTimeout(function () {
         cancelAnimationFrame(frame);
         if (measure()) draw(Infinity, null);
-        else { canvas.remove(); h1.classList.remove('tiled'); h1.classList.add('untiled'); h1.style.color = ''; }
+        else { canvas.remove(); O.showType(el, 0); }
       }, 150);
     });
   }
 
-  function boot() {
-    var hosts = document.querySelectorAll('[data-mosaic]');
-    var go = function () { for (var i = 0; i < hosts.length; i++) start(hosts[i]); };
-    if (!hosts.length) return;
-    if (document.fonts && document.fonts.load) document.fonts.load('900 100px Archivo').then(go, go);
-    else go();
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  O.register('smalti', function (host) { start(host, 'title'); });
+  O.register('smalti-trailer', function (host) { start(host, 'trailer'); });
+  O.register('broken', function (host) { start(host, 'broken'); });
 })(typeof globalThis !== 'undefined' ? globalThis : this);

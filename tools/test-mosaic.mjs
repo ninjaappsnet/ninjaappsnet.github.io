@@ -11,10 +11,10 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const SOURCE = fs.readFileSync(new URL('../assets/mosaic.js', import.meta.url), 'utf8');
 const sandbox = {};
 sandbox.globalThis = sandbox;
-vm.runInNewContext(SOURCE, sandbox);
+vm.createContext(sandbox);
+for (const f of ['opening.js', 'mosaic.js']) vm.runInContext(fs.readFileSync(new URL(`../assets/${f}`, import.meta.url), 'utf8'), sandbox);
 const M = sandbox.NinjaMosaic;
 
 let failed = 0;
@@ -143,6 +143,33 @@ check('at rest it is seated square', rest.alpha === 1 && rest.scale === 1 && res
 const end = M.duration(tiles);
 check('every tile is seated by the end', tiles.every((x) => M.tileState(x, end).scale === 1));
 check('the whole opening stays short', end + M.GLAZE_MS <= 2600, `${end + M.GLAZE_MS}ms`);
+
+// A phone or a home sheet sets the title small: it takes a coarser grid, so a
+// tile still reads as a tile (at least 5px), about eleven to a letter's height.
+check('a small title takes a coarser grid', M.cellFor(60) >= 5 && Math.abs(M.cellFor(60) - 60 / 11) < 0.01, String(M.cellFor(60)));
+check('a poster title keeps the fine grid', Math.abs(M.cellFor(204) - 12) < 0.01, String(M.cellFor(204)));
+
+// The home trailer runs the same plan faster: seated and glazed in 1.7s.
+const trailer = M.plan(row, { seed: 7, width: 1200, cell: 20, sweep: 360 });
+check('the trailer is short', M.duration(trailer) + M.GLAZE_MS <= 1700, `${M.duration(trailer) + M.GLAZE_MS}ms`);
+
+// The 404: the number is set whole at once, then a few whole pieces work loose
+// one after another and fall out, leaving their slots empty.
+const broken = M.loosen(tiles, { seed: 3, share: 0.1 });
+const loose = new Map();
+for (const x of broken) if (x.fall !== undefined) { if (!loose.has(x.piece)) loose.set(x.piece, new Set()); loose.get(x.piece).add(x.fall); }
+const pieceCount = new Set(tiles.map((x) => x.piece)).size;
+check('the 404 starts whole', broken.every((x) => M.tileState(x, 0).alpha === 1 && !M.tileState(x, 0).slot));
+check('about a tenth of its pieces fall', loose.size >= 1 && Math.abs(loose.size - pieceCount * 0.1) <= 1, `${loose.size} of ${pieceCount}`);
+check('a piece falls as one', [...loose.values()].every((s) => s.size === 1));
+const times = [...loose.values()].map((s) => [...s][0]).sort((a, b) => a - b);
+check('they fall one after another', times.every((v, n) => n === 0 || v - times[n - 1] >= 200), times.join(','));
+const after = M.duration(broken);
+check('a fallen piece leaves an empty slot', broken.filter((x) => x.fall !== undefined).every((x) => M.tileState(x, after).alpha === 0 && M.tileState(x, after).slot));
+check('the rest stays set', broken.filter((x) => x.fall === undefined).every((x) => M.tileState(x, after).alpha === 1));
+const midFall = broken.find((x) => x.fall !== undefined);
+const falling = M.tileState(midFall, midFall.fall + M.FALL_MS / 2);
+check('a falling piece drops and turns', falling.drop > 0 && falling.alpha > 0);
 
 if (failed) { console.error(`${failed} failed`); process.exit(1); }
 console.log('all passed');
