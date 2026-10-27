@@ -129,6 +129,8 @@ header nav a, .subnav a:not(.subnav-app) {
   text-decoration: underline 2px transparent; text-underline-offset: 6px;
   transition: text-decoration-color 150ms ease;
 }
+/* The studio page you are on (the privacy hub) keeps its underline. */
+header nav a[aria-current] { text-decoration-color: currentColor; }
 @media (hover: hover) and (pointer: fine) {
   header nav a:hover, .subnav a:not(.subnav-app):hover { text-decoration-color: currentColor; }
 }
@@ -556,6 +558,7 @@ body:has(> .subnav) > main { flex: 1; }
   background: url(assets/icon-dayfolio-144.webp) center / cover;
 }
 .subnav[aria-label="FlectoBI"] .subnav-app::before { background-image: url(assets/icon-flectobi-144.webp); }
+.subnav[aria-label="Smalti"] .subnav-app::before { background-image: url(assets/icon-smalti-144.webp); }
 .subnav a[aria-current] { text-decoration: underline 2px var(--app-hi); text-underline-offset: 7px; color: var(--app-hi); }
 
 /* Index listings: rows, not boxes. */

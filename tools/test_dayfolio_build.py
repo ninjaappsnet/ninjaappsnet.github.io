@@ -249,7 +249,7 @@ class ShellTests(unittest.TestCase):
     def test_the_chrome_is_the_product_pages_rebased_to_the_pages_depth(self):
         page = self.page
         self.assertIn('<a class="wordmark" href="../../../../">', page)
-        self.assertIn('<a href="../../../../#apps">Apps</a>', page)
+        self.assertIn('<a href="../../../../#titles">Titles</a>', page)
         self.assertIn('<a class="footer-privacy" href="../../privacy.html">', page)
         self.assertIn(f'<link rel="stylesheet" href="../../../../style.css?v={build.STYLE_VERSION}">', page)
         self.assertIn('<script src="../../../../assets/theme.js" defer></script>', page)
@@ -394,7 +394,7 @@ class HandWrittenPagesTests(unittest.TestCase):
         self.assertRegex(product, r'</header>\n\n<nav class="subnav" aria-label="Dayfolio">')
         self.assertRegex(product, r'<a href="\./" aria-current="page">Overview</a>')
         self.assertEqual(product.replace(build.render_subnav("apps/dayfolio/index.html") + "\n\n", ""),
-                         PRODUCT)
+                         build.with_header(PRODUCT, "apps/dayfolio/index.html"))
 
     def test_an_old_sub_navigation_is_replaced(self):
         support = self.built["apps/dayfolio/support.html"]
@@ -428,11 +428,74 @@ class HandWrittenPagesTests(unittest.TestCase):
         site.put("games/smalti/index.html", '<html><head><link rel="stylesheet" href="../../style.css">\n</head><body></body></html>')
         site.put("privacy/index.html", '<html><head><link rel="stylesheet" href="../style.css">\n</head><body></body></html>')
         built = site.built()
-        preload = '<link rel="preload" href="{}assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>'
+        # Low priority: the face comes early but never ahead of the page's main image (a phone's LCP).
+        preload = '<link rel="preload" href="{}assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">'
         self.assertEqual(built["games/smalti/index.html"].count(preload.format("../../")), 1)
         self.assertEqual(built["privacy/index.html"].count(preload.format("../")), 1)
         again = build.with_stylesheet(built["privacy/index.html"], "privacy/index.html")
         self.assertEqual(again.count('rel="preload"'), 1)
+
+
+def header(page: str) -> str:
+    return re.search(r"<header>.*?</header>", page, re.S).group(0)
+
+
+def menu(page: str) -> list:
+    """The studio menu's links: (label, href, aria-current or "")."""
+    return [(re.sub(r"<[^>]+>", "", text).strip(), target, current) for target, current, text in re.findall(
+        r'<a href="([^"]*)"(?: aria-current="([^"]*)")?>(.*?)</a>', header(page).split("<nav>", 1)[1])]
+
+
+OLD_HEADER = """<header>
+  <a class="wordmark" href="../../">忍 NinjaApps</a>
+  <nav>
+    <a href="../../#games">Games</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◑ 夜</button>
+  </nav>
+</header>"""
+
+
+class StudioMenuTests(unittest.TestCase):
+    # The menu at the top is the studio's, the same on every page: the titles, the studio, and the
+    # privacy hub. What belongs to one title (its guide, its support, its policy) is in its own band below.
+    def page(self, lang: str = "en") -> str:
+        return f'<html lang="{lang}"><head><link rel="stylesheet" href="../../style.css"></head><body>\n{OLD_HEADER}\n<main></main></body></html>'
+
+    def setUp(self):
+        self.site = Site(self)
+        self.site.put("games/smalti/index.html", self.page())
+        self.site.put("games/smalti/privacy-de.html", self.page("de"))
+        self.site.put("games/smalti/daily/index.html", self.page().replace("../../", "../../../"))
+        self.site.put("privacy/index.html", self.page().replace("../../", "../"))
+        self.built = self.site.built()
+
+    def test_every_page_has_the_same_studio_menu(self):
+        for rel, root in (("games/smalti/index.html", "../../"), ("apps/dayfolio/index.html", "../../"),
+                          ("apps/dayfolio/support.html", "../../"), ("games/smalti/daily/index.html", "../../../")):
+            with self.subTest(rel):
+                self.assertEqual(menu(self.built[rel]), [("Titles", root + "#titles", ""), ("Studio", root + "#studio", ""),
+                                                         ("Privacy", root + "privacy/", "")])
+                self.assertIn(f'<a class="wordmark" href="{root}">NinjaApps</a>', self.built[rel])
+
+    def test_the_privacy_hub_is_marked_as_the_page_you_are_on(self):
+        self.assertEqual(menu(self.built["privacy/index.html"])[2], ("Privacy", "./", "page"))
+
+    def test_a_translated_page_has_the_menu_in_its_language(self):
+        self.assertEqual([m[0] for m in menu(self.built["games/smalti/privacy-de.html"])], ["Titel", "Studio", "Datenschutz"])
+
+    def test_the_old_marks_and_the_old_theme_button_go(self):
+        page = self.built["games/smalti/index.html"]
+        self.assertNotIn("忍", header(page))
+        self.assertNotIn("夜", header(page))
+        self.assertIn('<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme"></button>', page)
+
+    def test_a_game_has_its_own_band_with_the_page_marked(self):
+        band = re.search(r'<nav class="subnav" aria-label="Smalti">.*?</nav>', self.built["games/smalti/daily/index.html"], re.S)
+        self.assertIsNotNone(band)
+        self.assertIn('<a href="./" aria-current="page">Daily</a>', band.group(0))
+        self.assertIn('<a href="../support.html">Support</a>', band.group(0))
 
 class SitemapTests(unittest.TestCase):
     def test_the_sitemap_lists_every_indexable_page_and_robots_points_to_it(self):

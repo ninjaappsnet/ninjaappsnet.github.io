@@ -1,6 +1,8 @@
 <!-- TEMPLATE: copy this folder to games/<slug>/, replace every {{TOKEN}},
      then add a card for the app on the landing page and a row on /privacy/,
-     and a 1200x630 social-card.png (a capture of the finished one-sheet). -->
+     and a 1200x630 social-card.png (a capture of the finished one-sheet), and the
+     game's band (its pages) to GAMES in tools/dayfolio-build.py; the build writes
+     the band and the studio menu. -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -31,8 +33,9 @@
 <header>
   <a class="wordmark" href="../../">NinjaApps</a>
   <nav>
-    <a href="../../#games">Games</a>
-    <a href="privacy.html">Privacy</a>
+    <a href="../../#titles">Titles</a>
+    <a href="../../#studio">Studio</a>
+    <a href="../../privacy/">Privacy</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme"></button>
   </nav>
 </header>

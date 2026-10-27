@@ -314,7 +314,7 @@ class TemplateGalleryTests(unittest.TestCase):
             page, target = problem[len("dead link: "):].split(" -> ")
             target = target.split("?", 1)[0]  # the stylesheet asks by its version (STYLE_VERSION)
             root = "../" * page.count("/")
-            return target.endswith(("style.css", "assets/theme.js", "archivo-var-latin.woff2", "privacy.html")) or target in (root, root + "#apps")
+            return target.endswith(("style.css", "assets/theme.js", "archivo-var-latin.woff2", "privacy.html")) or target in (root, root + "#titles", root + "#studio", root + "privacy/")
         dead = [p for p in self.problems("check_links")
                 if p.startswith("dead link: apps/dayfolio/templates/") and not chrome(p)]
         self.assertEqual(dead, [])
