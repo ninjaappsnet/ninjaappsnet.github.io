@@ -13,7 +13,7 @@ The Sales Sample is a Workbook that comes with FlectoBI. It holds a small shop c
 
 ## Open the sample
 
-1. Choose **Help**, then **Open Sample Workbook**. On a new, empty Flow you can also click **Open Sample Workbook**.
+1. Choose **Help**, then **Open Sample Workbook**. On a new, empty Flow you can also click **or open the Sample Workbook**.
 2. A window called Sales Sample opens. FlectoBI copies the sample files into its own Documents folder first, so you cannot damage anything.
 
 The window has three areas. The sidebar on the left lists the **Data Flow** and the Reports. The workspace is in the middle. The inspector on the right shows the options of whatever is selected. If the inspector is hidden, press **Option-Command-I**.

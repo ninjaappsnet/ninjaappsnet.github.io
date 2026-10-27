@@ -19,7 +19,7 @@ There is no account and no sign-in. Your data stays on your Mac.
 
 The quickest way to see what FlectoBI does is to open the sample.
 
-1. Choose **Help › Open Sample Workbook**. On an empty Flow you can also click **Open Sample Workbook**.
+1. Choose **Help › Open Sample Workbook**. On an empty Flow you can also click **or open the Sample Workbook**, under the two buttons.
 2. FlectoBI copies the sample files into its own folder and opens **Sales Sample.flectobi**.
 3. Click **Data Flow** in the sidebar to see the Flow. Click **Sales Dashboard** under Reports to see the Report.
 
@@ -35,7 +35,7 @@ Each Workbook opens in its own window with three areas.
 
 A new Workbook starts with an empty Flow and one empty Report named Report 1.
 
-![A new Workbook: an empty Flow with the message Start with Your Data and the Add Input button.](workbook-empty.webp "A new Workbook opens with an empty Flow.")
+![A new Workbook: an empty Flow with the message Start with Your Data, the Add Files and Connect to Database buttons, and a link to the Sample Workbook.](workbook-empty.webp "A new Workbook opens with an empty Flow.")
 
 ## Your first Flow from a CSV
 

@@ -9,7 +9,7 @@ FlectoBI can read from PostgreSQL, MySQL and MariaDB. It only reads. It never wr
 
 ## Add a database Input
 
-1. Click **Add Input** in the toolbar and choose **New PostgreSQL Input…** or **New MySQL Input…**. The same items are in the **Flow** menu. Use the MySQL one for MariaDB too.
+1. Click **Add Input** in the toolbar and choose **New PostgreSQL Input…** or **New MySQL Input…**. The same items are in the **Flow** menu. Use the MySQL one for MariaDB too. On an empty Flow, click **Connect to Database** and choose **PostgreSQL…** or **MySQL or MariaDB…**.
 2. Fill in **Host**, **Port**, **Database** and **User**. The port starts as 5432 for PostgreSQL and 3306 for MySQL.
 3. Choose the **SSL** mode. See below.
 4. Type the **Password**.
