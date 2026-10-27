@@ -208,6 +208,15 @@ class ShellTests(unittest.TestCase):
         self.site.put("content/dayfolio/guide/getting-started.md", topic("getting-started", "Getting started", 1))
         self.page = self.site.built()["apps/dayfolio/guide/getting-started/index.html"]
 
+    def test_a_long_title_drops_the_studio_name_and_keeps_the_app_name(self):
+        # A search result shows about 60 characters: past 65 the studio's name
+        # goes, so the words and the app's name stay in view.
+        long = "Siri, Shortcuts, widgets, Control Center and Focus"
+        self.site.put("content/dayfolio/guide/siri.md", topic("siri", long, 2))
+        page = self.site.built()["apps/dayfolio/guide/siri/index.html"]
+        self.assertIn(f"<title>{long} — Dayfolio</title>", page)
+        self.assertIn("<title>Getting started — Dayfolio — NinjaApps</title>", self.page)
+
     def test_the_head_carries_what_a_search_engine_and_a_share_sheet_read(self):
         page, url = self.page, "https://ninjaapps.net/apps/dayfolio/guide/getting-started/"
         self.assertIn("<title>Getting started — Dayfolio — NinjaApps</title>", page)
@@ -410,6 +419,20 @@ class HandWrittenPagesTests(unittest.TestCase):
         self.assertIn(f'<link rel="stylesheet" href="../style.css?v={build.STYLE_VERSION}">', built["privacy/index.html"])
         self.assertRegex(build.STYLE_VERSION, r"^\d{4}-\d{2}-\d{2}[a-z]?$")  # the day of the change
 
+
+    def test_every_page_preloads_the_title_face_once(self):
+        # The title face is found only once style.css is read; on a slow phone
+        # that wait holds back the first paint of every page, so each page asks
+        # for it next to the stylesheet. Building twice must not ask twice.
+        site = Site(self)
+        site.put("games/smalti/index.html", '<html><head><link rel="stylesheet" href="../../style.css">\n</head><body></body></html>')
+        site.put("privacy/index.html", '<html><head><link rel="stylesheet" href="../style.css">\n</head><body></body></html>')
+        built = site.built()
+        preload = '<link rel="preload" href="{}assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>'
+        self.assertEqual(built["games/smalti/index.html"].count(preload.format("../../")), 1)
+        self.assertEqual(built["privacy/index.html"].count(preload.format("../")), 1)
+        again = build.with_stylesheet(built["privacy/index.html"], "privacy/index.html")
+        self.assertEqual(again.count('rel="preload"'), 1)
 
 class SitemapTests(unittest.TestCase):
     def test_the_sitemap_lists_every_indexable_page_and_robots_points_to_it(self):

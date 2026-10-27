@@ -195,6 +195,7 @@ FIELDS = {  # kind: (required, optional)
 
 SUBNAV_BLOCK = re.compile(r'<nav class="subnav"[^>]*>.*?</nav>', re.S)
 STYLESHEET_LINK = re.compile(r'<link rel="stylesheet" href="(?:\.\./)*style\.css(?:\?[^"]*)?">')
+FONT_PRELOAD = re.compile(r'<link rel="preload" href="(?:\.\./)*assets/fonts/[^"]+\.woff2"[^>]*>\n?')
 PICTURE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)')
 
 
@@ -558,9 +559,15 @@ def stylesheet_link(page: str) -> str:
     return f'<link rel="stylesheet" href="{href(page, "style.css")}?v={STYLE_VERSION}">'
 
 
+def font_preload(page: str) -> str:
+    return f'<link rel="preload" href="{href(page, "assets/fonts/archivo-var-latin.woff2")}" as="font" type="font/woff2" crossorigin>'
+
+
 def with_stylesheet(text: str, page: str) -> str:
-    """The page's link to the site's stylesheet, asking for STYLE_VERSION; a page without one is left as it is."""
-    return STYLESHEET_LINK.sub(lambda _: stylesheet_link(page), text, count=1)
+    """The page's link to the site's stylesheet, asking for STYLE_VERSION, with the title face preloaded beside it
+    (otherwise it is found only once the stylesheet is read); a page without one is left as it is."""
+    text = FONT_PRELOAD.sub("", text)
+    return STYLESHEET_LINK.sub(lambda _: font_preload(page) + "\n" + stylesheet_link(page), text, count=1)
 
 
 def chrome(root: Path, page: str) -> Tuple[str, str]:
@@ -588,6 +595,10 @@ def breadcrumbs(crumbs: List[Tuple[str, str]]) -> dict:
 def render_page(root: Path, page: Page) -> str:
     app = app_for(page.path)
     url, full = url_for(page.path), page.title + app.suffix
+    # A search result shows about 60 characters: past 65 the studio's name
+    # goes, so the page's words and the app's name stay in view.
+    if len(full) > 65:
+        full = f"{page.title} — {app.name}"
     image, image_alt = page.image or app.card, page.image_alt or app.card_alt
     image_file = root / image
     if not image_file.is_file():
@@ -619,6 +630,7 @@ def render_page(root: Path, page: Page) -> str:
         *page.head_extra,
         ICON_LINK,
         THEME,
+        font_preload(page.path),
         stylesheet_link(page.path),
         f'<script src="{href(page.path, "assets/theme.js")}" defer></script>',
         *(ld(block) for block in blocks),

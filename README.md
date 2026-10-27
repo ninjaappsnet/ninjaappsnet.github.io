@@ -80,7 +80,7 @@ for Smalti and the 404, `folio.js` for Dayfolio, `flecto.js` for FlectoBI; each
 also plays as a short trailer on its home sheet) have the same kind of test, one
 per script: `node tools/test-mosaic.mjs`, `node tools/test-folio.mjs` and
 `node tools/test-flecto.mjs`. Every opening keeps the real heading in the page
-and gives it back visible at the end (Smalti's one-sheet keeps its mosaic), ends
+and gives it back visible at the end (only the noindexed 404 stays broken), ends
 on any click, key or scroll, and does nothing under reduced motion. The map in
 FlectoBI's is `assets/land.js`, made by `tools/make-land-dots.py`.
 

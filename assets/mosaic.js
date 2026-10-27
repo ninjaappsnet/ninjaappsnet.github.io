@@ -2,17 +2,18 @@
 // slots, like the empty cells of a board in the game, and the game's pieces
 // (tetrominoes and pentominoes, one glaze each) seat into them from left to
 // right, each lifted, turned and a little large until it drops into place. One
-// sweep of glaze light crosses the finished name, then it holds still.
+// sweep of glaze light crosses the finished name, and the type takes it back.
 //
 // Three ways in, by data-opening on the host:
-//   smalti   the one-sheet: the full opening; the mosaic stays as the title.
+//   smalti   the one-sheet: the full opening, then the type takes over.
 //   smalti-trailer   a sheet on the home page: a short run when the sheet is
 //            first seen, then the type comes back.
 //   broken   the 404: the number set whole, then a few pieces fall out of it.
 //
-// The real title stays in the page for every reader. Under reduced motion the
-// finished mosaic is drawn at once. The plan and the timeline are pure
-// functions, tested by tools/test-mosaic.mjs. Needs assets/opening.js.
+// The real title stays in the page for every reader and ends visible (the 404
+// alone stays broken). Under reduced motion there is no opening. The plan and
+// the timeline are pure functions, tested by tools/test-mosaic.mjs. Needs
+// assets/opening.js.
 (function (root) {
   'use strict';
   var O = root.NinjaOpening;
@@ -363,9 +364,21 @@
       }
     }
 
+    // The one-sheet and the trailer hand the title back to the type, which
+    // stays the heading for every reader and search engine; the 404 stays broken.
+    var hands = mode !== 'broken', done = false;
+    function handBack(ms) {
+      if (done) return;
+      done = true;
+      cancelAnimationFrame(frame);
+      O.showType(el, ms);
+      canvas.style.transition = 'opacity ' + ms + 'ms ease';
+      canvas.style.opacity = '0';
+      setTimeout(function () { canvas.remove(); }, ms + 20);
+    }
     function finish() {
       cancelAnimationFrame(frame);
-      if (mode === 'trailer') { canvas.remove(); O.showType(el, 0); }
+      if (hands) handBack(0);
       else draw(Infinity, null);
     }
 
@@ -377,15 +390,7 @@
         var glaze = glazeMs && time > end ? easeInOut(Math.min(1, (time - end) / glazeMs)) * 1.3 - 0.15 : null;
         draw(time, glaze);
         if (time < end + glazeMs) frame = requestAnimationFrame(tick);
-        else if (mode === 'trailer') {
-          // The trailer hands the title back to the type, which takes the
-          // sheet's hover and focus as it always does.
-          stop();
-          O.showType(el, 240);
-          canvas.style.transition = 'opacity 240ms ease';
-          canvas.style.opacity = '0';
-          setTimeout(function () { canvas.remove(); }, 260);
-        } else { stop(); draw(Infinity, null); }
+        else { stop(); if (hands) handBack(mode === 'trailer' ? 240 : 400); else draw(Infinity, null); }
       }
       frame = requestAnimationFrame(tick);
     }
@@ -407,8 +412,9 @@
       seen.observe(host);
       return;
     }
-    O.hideType(el);
     host.classList.add('opened');
+    if (still && hands) { canvas.remove(); return; }
+    O.hideType(el);
     if (still) draw(Infinity, null);
     else { draw(0, null); play(); }
 
@@ -416,7 +422,9 @@
     addEventListener('resize', function () {
       clearTimeout(pending);
       pending = setTimeout(function () {
+        if (done) return;
         cancelAnimationFrame(frame);
+        if (hands) { handBack(0); return; }
         if (measure()) draw(Infinity, null);
         else { canvas.remove(); O.showType(el, 0); }
       }, 150);
