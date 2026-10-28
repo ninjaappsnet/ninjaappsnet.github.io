@@ -312,7 +312,7 @@ class TemplateGalleryTests(unittest.TestCase):
         self.assertEqual(self.problems(*ALL, "check_dayfolio_templates", "check_sitemap", "check_canonicals"), [])
         def chrome(problem: str) -> bool:  # the fixture's header and footer: the stylesheet and its face, the site's root
             page, target = problem[len("dead link: "):].split(" -> ")
-            target = target.split("?", 1)[0]  # the stylesheet asks by its version (STYLE_VERSION)
+            target = target.split("?", 1)[0]  # the stylesheet asks by its version (a hash of the file)
             root = "../" * page.count("/")
             return target.endswith(("style.css", "assets/theme.js", "archivo-var-latin.woff2", "privacy.html")) or target in (root, root + "#titles", root + "#studio", root + "privacy/")
         dead = [p for p in self.problems("check_links")
@@ -324,6 +324,58 @@ class TemplateGalleryTests(unittest.TestCase):
         self.site.put(self.page, text.replace("Retry queue is in", "Hand edit", 1))
         found = self.problems("check_dayfolio_templates")
         self.assertTrue(any(self.page in p for p in found), found)
+
+
+
+def sheet(src: str, extra: str) -> str:
+    return f'<div class="sheet-art"><img class="phone" src="{src}" {extra} alt="A picture" width="750" height="1000"></div>'
+
+
+class PicturesTests(unittest.TestCase):
+    """The home page's pictures: each offers a smaller file, and only the first, the largest paint on a phone,
+    is fetched straight away."""
+
+    def setUp(self):
+        self.site = tb.Site(self)
+        for name, width in (("a", 750), ("a-400", 400), ("b", 624), ("b-400", 400)):
+            self.site.put(f"media/{name}.webp", tb.webp(width, 1000))
+        check.ROOT = self.site.root
+        self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
+        self.first = sheet("media/a.webp", 'srcset="media/a-400.webp 400w, media/a.webp 750w" sizes="74vw" fetchpriority="high"')
+        self.second = sheet("media/b.webp", 'srcset="media/b-400.webp 400w, media/b.webp 624w" sizes="74vw" loading="lazy"')
+
+    def home(self, *sheets: str) -> list:
+        self.site.put("index.html", "<html><body>" + "\n".join(sheets) + "</body></html>")
+        check.errors = []
+        check.check_pictures()
+        found, check.errors = list(check.errors), []
+        return found
+
+    def test_the_home_page_as_it_should_be_passes(self):
+        self.assertEqual(self.home(self.first, self.second), [])
+
+    def test_a_picture_without_a_smaller_file_is_reported(self):
+        found = self.home(self.first, sheet("media/b.webp", 'loading="lazy"'))
+        self.assertTrue(any("media/b.webp" in p and "srcset" in p for p in found), found)
+
+    def test_a_picture_below_the_first_that_is_not_lazy_is_reported(self):
+        found = self.home(self.first, self.second.replace(' loading="lazy"', ""))
+        self.assertTrue(any("media/b.webp" in p and "lazy" in p for p in found), found)
+
+    def test_a_lazy_first_picture_is_reported(self):
+        found = self.home(self.first.replace('fetchpriority="high"', 'loading="lazy"'), self.second)
+        self.assertTrue(any("media/a.webp" in p for p in found), found)
+
+    def test_a_candidate_whose_width_is_wrong_or_missing_is_reported(self):
+        found = self.home(self.first.replace("a-400.webp 400w", "a-400.webp 500w"), self.second)
+        self.assertTrue(any("media/a-400.webp" in p and "400" in p for p in found), found)
+        found = self.home(self.first.replace("a-400.webp", "gone.webp"), self.second)
+        self.assertTrue(any("media/gone.webp" in p for p in found), found)
+
+    def test_candidates_are_checked_on_every_page(self):
+        self.site.put("games/x/index.html", '<img src="../../media/a.webp" srcset="../../media/a-400.webp 300w" sizes="1px">')
+        found = self.home(self.first, self.second)
+        self.assertTrue(any("games/x/index.html" in p for p in found), found)
 
 
 if __name__ == "__main__":

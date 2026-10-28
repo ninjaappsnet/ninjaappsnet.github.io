@@ -124,6 +124,9 @@ class Site:
         self.put("apps/dayfolio/icon-320.webp", webp(320, 320))
         self.put("404.html", '<html><head><meta name="robots" content="noindex"><title>404</title></head></html>')
         self.put("robots.txt", "old\n")
+        self.put("style.css", "body { margin: 0; }\n")
+        for name in ("theme", "opening", "mosaic"):
+            self.put(f"assets/{name}.js", f"// {name}\n")
         for key, title in (("guide", "Guide"), ("templates", "Templates"), ("articles", "Articles")):
             self.put(f"content/dayfolio/{key}/index.md", section(title))
 
@@ -151,6 +154,11 @@ def jsonld(page: str) -> list:
 def meta(page: str, key: str) -> str:
     found = re.search(rf'<meta (?:name|property)="{re.escape(key)}" content="([^"]*)">', page)
     return found.group(1) if found else ""
+
+
+def version(test: unittest.TestCase, rel: str, site: "Site | None" = None) -> str:
+    """The version a page asks for `rel` by, in the test's site."""
+    return build.asset_version((site or test.site).root, rel)
 
 
 class FrontMatterTests(unittest.TestCase):
@@ -251,8 +259,9 @@ class ShellTests(unittest.TestCase):
         self.assertIn('<a class="wordmark" href="../../../../">', page)
         self.assertIn('<a href="../../../../#titles">Titles</a>', page)
         self.assertIn('<a class="footer-privacy" href="../../privacy.html">', page)
-        self.assertIn(f'<link rel="stylesheet" href="../../../../style.css?v={build.STYLE_VERSION}">', page)
-        self.assertIn('<script src="../../../../assets/theme.js" defer></script>', page)
+        css, theme = version(self, "style.css"), version(self, "assets/theme.js")
+        self.assertIn(f'<link rel="stylesheet" href="../../../../style.css?v={css}">', page)
+        self.assertIn(f'<script src="../../../../assets/theme.js?v={theme}" defer></script>', page)
 
     def test_the_sub_navigation_marks_the_section(self):
         nav = re.search(r'<nav class="subnav" aria-label="Dayfolio">.*?</nav>', self.page, re.S).group(0)
@@ -402,9 +411,9 @@ class HandWrittenPagesTests(unittest.TestCase):
         self.assertRegex(support, r'<a href="support\.html" aria-current="page">Support</a>')
         self.assertEqual(support.count('class="subnav"'), 1)
 
-    def test_every_page_asks_for_the_stylesheet_by_one_version(self):
-        # Cloudflare keeps style.css at its edge, and browsers keep it, for four hours: a page whose markup needs
-        # a new rule asks for the stylesheet by a new query, and every page on the site asks by the same one.
+    def test_every_page_asks_for_the_stylesheet_by_its_content(self):
+        # Browsers keep style.css for a year, so a page asks for it by a hash of what it holds: a changed stylesheet
+        # is a new URL, and no page can pair new markup with the old rules.
         site = Site(self)
         link = '<link rel="stylesheet" href="../../style.css{}">\n</head>'
         site.put("apps/dayfolio/index.html", PRODUCT.replace("</head>", link.format("?v=2026-01-01")))
@@ -412,13 +421,43 @@ class HandWrittenPagesTests(unittest.TestCase):
         site.put("games/smalti/index.html", f"<html><head>{link.format('')}<body></body></html>")
         site.put("privacy/index.html", "<html><head><link rel=\"stylesheet\" href=\"../style.css\">\n</head><body></body></html>")
         built = site.built()
-        wanted = f'<link rel="stylesheet" href="../../style.css?v={build.STYLE_VERSION}">'
+        css = build.asset_version(site.root, "style.css")
+        self.assertRegex(css, r"^[0-9a-f]{10}$")
+        wanted = f'<link rel="stylesheet" href="../../style.css?v={css}">'
         for rel in ("apps/dayfolio/index.html", "apps/dayfolio/support.html", "games/smalti/index.html"):
             self.assertIn(wanted, built[rel])
             self.assertEqual(built[rel].count('rel="stylesheet"'), 1)
-        self.assertIn(f'<link rel="stylesheet" href="../style.css?v={build.STYLE_VERSION}">', built["privacy/index.html"])
-        self.assertRegex(build.STYLE_VERSION, r"^\d{4}-\d{2}-\d{2}[a-z]?$")  # the day of the change
+        self.assertIn(f'<link rel="stylesheet" href="../style.css?v={css}">', built["privacy/index.html"])
+        site.put("style.css", "body { margin: 1px; }\n")
+        self.assertNotEqual(build.asset_version(site.root, "style.css"), css)
 
+    def test_every_page_asks_for_its_scripts_by_their_content(self):
+        site = Site(self)
+        scripts = ('<script src="{0}assets/theme.js" defer></script>\n<script src="{0}assets/opening.js?v=2026-01-01" defer></script>\n'
+                   '<script src="{0}assets/mosaic.js?v=0123456789" defer></script>\n<script>inline()</script>\n</head>')
+        site.put("games/smalti/index.html", f"<html><head>{scripts.format('../../')}<body></body></html>")
+        built = site.built()["games/smalti/index.html"]
+        for name in ("theme", "opening", "mosaic"):
+            self.assertIn(f'<script src="../../assets/{name}.js?v={build.asset_version(site.root, f"assets/{name}.js")}" defer>',
+                          built)
+        self.assertIn("<script>inline()</script>", built)
+
+    def test_the_404_asks_for_its_files_from_the_root_by_their_content(self):
+        # The 404 is served at any depth, so its links start at the site's root.
+        site = Site(self)
+        site.put("404.html", '<html><head><meta name="robots" content="noindex">\n'
+                 '<link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">\n'
+                 '<link rel="stylesheet" href="/style.css?v=2026-01-01">\n<script src="/assets/theme.js" defer></script>\n</head></html>')
+        built = site.built()["404.html"]
+        self.assertIn(f'<link rel="stylesheet" href="/style.css?v={version(self, "style.css", site)}">', built)
+        self.assertIn(f'<script src="/assets/theme.js?v={version(self, "assets/theme.js", site)}" defer>', built)
+        self.assertEqual(built.count('href="/assets/fonts/archivo-var-latin.woff2"'), 1)
+
+    def test_a_missing_asset_stops_the_build(self):
+        site = Site(self)
+        site.put("games/smalti/index.html", '<html><head><script src="../../assets/gone.js" defer></script></head></html>')
+        with self.assertRaises(build.BuildError):
+            site.built()
 
     def test_every_page_preloads_the_title_face_once(self):
         # The title face is found only once style.css is read; on a slow phone
@@ -432,7 +471,7 @@ class HandWrittenPagesTests(unittest.TestCase):
         preload = '<link rel="preload" href="{}assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">'
         self.assertEqual(built["games/smalti/index.html"].count(preload.format("../../")), 1)
         self.assertEqual(built["privacy/index.html"].count(preload.format("../")), 1)
-        again = build.with_stylesheet(built["privacy/index.html"], "privacy/index.html")
+        again = build.with_stylesheet(site.root, built["privacy/index.html"], "privacy/index.html")
         self.assertEqual(again.count('rel="preload"'), 1)
 
 
@@ -557,14 +596,21 @@ class WriteAndCheckTests(unittest.TestCase):
         self.site.put("apps/dayfolio/index.html", PRODUCT)
         self.assertTrue(any("apps/dayfolio/index.html" in p for p in build.check(self.site.root)))
 
-    def test_a_hand_written_page_on_another_stylesheet_version_is_reported(self):
+    def test_a_hand_written_page_on_an_old_stylesheet_is_reported(self):
         self.site.put("apps/dayfolio/support.html",
                       SUPPORT.replace("</head>", '<link rel="stylesheet" href="../../style.css">\n</head>'))
         build.write(self.site.root)
         self.assertEqual(build.check(self.site.root), [])
         text = self.site.read("apps/dayfolio/support.html")
-        self.site.put("apps/dayfolio/support.html", text.replace(f"?v={build.STYLE_VERSION}", "?v=2026-01-01"))
+        self.site.put("apps/dayfolio/support.html", text.replace(f"?v={version(self, 'style.css')}", "?v=2026-01-01"))
         self.assertTrue(any("apps/dayfolio/support.html" in p for p in build.check(self.site.root)))
+
+    def test_a_changed_stylesheet_is_reported_until_the_build_runs(self):
+        build.write(self.site.root)
+        self.site.put("style.css", "body { margin: 2px; }\n")
+        self.assertTrue(any("apps/dayfolio/guide/index.html" in p for p in build.check(self.site.root)))
+        build.write(self.site.root)
+        self.assertEqual(build.check(self.site.root), [])
 
 
 def mp4(*boxes: bytes) -> bytes:
@@ -735,9 +781,6 @@ class StylesheetTests(unittest.TestCase):
         self.assertTrue("assets/icon-flectobi-144.webp" in self.css, "no FlectoBI icon in the sub-navigation")
         self.assertTrue(re.search(r'\[data-theme="dark"\][^{]*\.figure-window', self.css),
                         "no dark-theme shadow for a window capture")
-
-    def test_the_stylesheet_is_asked_for_by_the_day_its_figure_rules_came(self):
-        self.assertGreaterEqual(build.STYLE_VERSION, "2026-10-27")
 
     def test_the_ticket_and_the_crumbs_have_rules(self):
         for selector in (".ticket", ".ticket-soon", ".crumbs", ".appbox"):

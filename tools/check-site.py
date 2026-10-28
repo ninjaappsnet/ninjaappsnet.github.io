@@ -827,6 +827,41 @@ def webp_size(data: bytes) -> tuple[int, int] | None:
     return None
 
 
+
+IMG_TAG = re.compile(r"<img\b[^>]*>")
+ATTR = re.compile(r'([\w-]+)="([^"]*)"')
+
+
+def check_pictures() -> None:
+    """Every srcset names files that exist at the width it gives. On the home page, each title's picture offers a
+    smaller file, and only the first (the largest paint on a phone) is fetched straight away; the rest wait until
+    the visitor scrolls near them."""
+    for page in published_pages():
+        rel = page.relative_to(ROOT).as_posix()
+        for tag in IMG_TAG.findall(page.read_text(encoding="utf-8")):
+            for candidate in filter(None, (c.strip() for c in dict(ATTR.findall(tag)).get("srcset", "").split(","))):
+                src, _, descriptor = candidate.partition(" ")
+                file = (page.parent / src).resolve()
+                if not file.is_file():
+                    fail(f"picture: {rel} offers {src}, which is missing")
+                    continue
+                size = webp_size(file.read_bytes())
+                if descriptor.strip().endswith("w") and (not size or f"{size[0]}w" != descriptor.strip()):
+                    fail(f"picture: {rel} offers {src} as {descriptor.strip()}, but it is {size[0] if size else '?'}px wide")
+    home = ROOT / "index.html"
+    if not home.is_file():
+        return
+    sheets = re.findall(r'<div class="sheet-art">\s*(<img\b[^>]*>)', home.read_text(encoding="utf-8"))
+    for n, tag in enumerate(sheets):
+        attrs = dict(ATTR.findall(tag))
+        src = attrs.get("src", "?")
+        if "srcset" not in attrs or "sizes" not in attrs:
+            fail(f"picture: index.html shows {src} without a srcset and sizes, so a phone fetches the full file")
+        if n == 0 and (attrs.get("loading") == "lazy" or attrs.get("fetchpriority") != "high"):
+            fail(f"picture: index.html's first picture, {src}, should be fetched first (fetchpriority=\"high\", not lazy)")
+        if n > 0 and attrs.get("loading") != "lazy":
+            fail(f"picture: index.html's {src} is below the first picture on a phone and should be loading=\"lazy\"")
+
 def mp4_boxes(path: Path) -> list[bytes]:
     """The types of an MP4 file's top-level boxes, in file order."""
     boxes = []
@@ -1338,6 +1373,7 @@ def main() -> int:
         check_no_trackers,
         check_daily_page,
         check_social_cards,
+        check_pictures,
         check_stale_claims,
         check_dayfolio,
         check_dayfolio_pages,

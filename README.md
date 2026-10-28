@@ -400,17 +400,11 @@ them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 24.37 s
 H.264 with a silent AAC track, copied byte for byte), plays in a `<video>` with
 controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
 its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
-history has them. To swap a picture, convert the new PNG to the same size and keep
-its name, or change the page and its `width` and `height` with it (the checker reads
-the WebP's own size). The page links `style.css?v=…`, not `style.css`, and so does
-every Dayfolio page: Cloudflare serves the stylesheet from its edge cache and tells
-browsers to keep it for four hours, so new markup would otherwise meet the old rules
-(on 2026-10-16 the film drew at its full 886×1920 until the query was added). The
-query is `STYLE_VERSION` in `tools/dayfolio-build.py`, which writes it on the pages it
-generates and keeps it current on the hand-written ones; whenever a Dayfolio page
-needs a rule `style.css` didn't have, change it to the day of the change (a letter
-after it for a second change that day) and run the build. The rest of the site links
-`style.css` as it always has. The product page's App Store button is a plain `.btn` to
+history has them. To swap a picture, convert the new PNG to the same size under a
+new name and change the page (and its `width` and `height`, if they change: the
+checker reads the WebP's own size); browsers keep pictures for 30 days (Caching,
+below), so a new file under an old name reaches returning visitors late. The product
+page's App Store button is a plain `.btn` to
 `https://apps.apple.com/app/id6817388897`, with the Smart App Banner in the page's
 head, as Smalti's.
 
@@ -450,6 +444,28 @@ pixel), with the icon swapped for the medallion. Re-render and re-zip whenever
 the sheet or the icon changes; the size quoted on the press page must follow.
 `check-site.py` refuses the retired icon, by hash, anywhere on the site and keeps
 the kit's layout and icon sizes.
+
+### Caching
+
+Cloudflare sits in front of GitHub Pages, and its Cache Rules (zone ninjaapps.net,
+Caching → Cache Rules) set how long browsers keep each file; GitHub Pages' own
+`max-age=600` is overridden:
+
+- `style.css` and `assets/*.js`: one year. Every page asks for them by a hash of
+  what they hold (`style.css?v=426f261aff`); `tools/dayfolio-build.py` writes the
+  hash on every page, and the checker fails until the build has run after a change
+  to either. Never link one without its `?v=`.
+- `assets/fonts/`: one year. The Shippori and Plex files carry a hash in their
+  names; to change `archivo-var-latin*.woff2`, give it a new name.
+- Pictures (`.webp`, `.png`, `.svg`, `.mp4`): 30 days. Change a picture under a new name.
+- Pages: as GitHub Pages sends them (ten minutes), so a deploy shows within minutes.
+
+The home page's pictures each offer smaller files (`-400`, `-600`, … beside the
+original, made with `cwebp -q 80 -resize <width> 0`) through `srcset` and `sizes`;
+the `sizes` follow the `.sheet-art` widths in `style.css`, so change them together.
+Only the first picture is fetched at once; the others are `loading="lazy"`. The
+checker holds the home page to this and checks every `srcset` on the site names
+files that exist at the widths it gives.
 
 ## Dayfolio pages
 
