@@ -148,6 +148,31 @@ anyway. Still run the build and the checker before committing, so the committed 
 match what's live and a broken link is caught before the push. The repo keeps readable
 sources; the minified files exist only in the deploy.
 
+### HTTPS at Cloudflare
+
+The domain is proxied by Cloudflare, and two of its zone settings shape every
+response without a commit here (set 2026-10-28):
+
+- **Always Use HTTPS** (SSL/TLS › Edge Certificates): `http://` answers `301` to the
+  same `https://` URL. Before it, `http://` answered `200`, and Search Console listed
+  every page's `http://` copy as "Alternate page with proper canonical tag"; those
+  now move to "Page with redirect". Both count as not indexed and are expected.
+  `www.ninjaapps.net` redirects to the apex.
+- **HSTS**: `max-age=2592000` (1 month), include subdomains off, preload off,
+  No-Sniff on. Cloudflare's default max age is 0, which sends the header but does
+  nothing. Once a browser has seen a real max age it refuses `http://` for that
+  long, whatever the zone says later, so raise it in steps: 6 months, then 12, once
+  a month has passed without trouble. Leave preload off; leaving the browsers'
+  preload list takes months.
+
+Neither touches the `/.well-known/` rule (Universal links): the association file
+still answers `200` with no `Location`. Checking it:
+
+```sh
+curl -sI http://ninjaapps.net/ | grep -iE '^(HTTP|location)'    # 301, https://ninjaapps.net/
+curl -sI https://ninjaapps.net/ | grep -i strict-transport       # the max-age now set
+```
+
 ## Social
 
 Every page footer carries the same four profiles, in the same order:
