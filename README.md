@@ -132,7 +132,9 @@ live (Pages' source is "GitHub Actions", not the branch). In order, it:
 4. runs `tools/dayfolio-build.py`, which writes every page's `?v=` hashes from the
    minified files (Caching, under Assets);
 5. runs `tools/check-site.py`;
-6. publishes the site, without `.git`, `.github` and `tools/`.
+6. publishes the site, without `.git`, `.github`, `tools/`, `README.md`, `.gitignore`
+   and `.impeccable/`;
+7. checks that the live `/.well-known/apple-app-site-association` answers.
 
 A failure at any step leaves the live site as it was; the run's log on GitHub says
 which step and why. So a forgotten build can't reach visitors: the deploy builds
@@ -352,8 +354,8 @@ account, no identifier.
   repeats it for iOS 12 and older. Smalti requires iOS 17, so it is dead weight
   kept because it is harmless.
 - **GitHub Pages.** `/.well-known` is published only because the deploy keeps
-  dot-directories: `actions/upload-pages-artifact@v3` packs them, but v4 drops
-  hidden files unless asked (`include-hidden-files`), so check before upgrading it.
+  dot-directories: `actions/upload-pages-artifact` (v4 and later) drops them unless
+  `include-hidden-files: true`, which the workflow sets; never remove it.
   (`.nojekyll` dates from the branch deploy, when Jekyll dropped them; keep it.) Pages
   serves an extensionless file as `application/octet-stream` and cannot set
   headers. Apple's CDN accepted it anyway on the first deploy (2026-10-13): it

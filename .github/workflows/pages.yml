@@ -22,11 +22,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -48,11 +48,18 @@ jobs:
       - name: Check the site
         run: python3 tools/check-site.py
 
+      # The repo's notes and tooling stay out: README.md, .gitignore, .impeccable/ and tools/.
       - name: Collect the site
-        run: rsync -a --exclude .git --exclude .github --exclude tools --exclude __pycache__ --exclude _site ./ _site/
+        run: |
+          rsync -a --exclude .git --exclude .github --exclude tools --exclude __pycache__ --exclude _site \
+            --exclude /README.md --exclude /.gitignore --exclude /.impeccable ./ _site/
+          test -f _site/.well-known/apple-app-site-association
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      # v4 and later leave out dot-directories unless asked, and /.well-known (the daily share link) is one.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          include-hidden-files: true
 
   deploy:
     needs: build
@@ -62,4 +69,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+      # The daily share link depends on this file; a red run says it went missing.
+      - name: Check the live association file
+        run: curl -fsS -o /dev/null https://ninjaapps.net/.well-known/apple-app-site-association
