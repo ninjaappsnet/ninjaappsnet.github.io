@@ -48,12 +48,12 @@ jobs:
       - name: Check the site
         run: python3 tools/check-site.py
 
-      # The repo's notes and tooling stay out: README.md, .gitignore, .impeccable/ and tools/.
+      # Only the pages and the files they use, plus the addresses fetched from outside (tools/publish.py).
       - name: Collect the site
         run: |
-          rsync -a --exclude .git --exclude .github --exclude tools --exclude __pycache__ --exclude _site \
-            --exclude /README.md --exclude /.gitignore --exclude /.impeccable ./ _site/
+          python3 tools/publish.py _site
           test -f _site/.well-known/apple-app-site-association
+          test -f _site/games/smalti/config/v1.json
 
       - uses: actions/configure-pages@v6
       # v4 and later leave out dot-directories unless asked, and /.well-known (the daily share link) is one.

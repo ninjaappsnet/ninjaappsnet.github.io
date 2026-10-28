@@ -55,6 +55,7 @@ CNAME                        custom domain for GitHub Pages
 ```sh
 python3 tools/check-site.py
 python3 -m unittest discover -s tools -p 'test_*.py'   # after touching a tool
+python3 tools/publish.py /tmp/site                       # what the deploy would publish
 ```
 
 `check-site.py` also runs `tools/dayfolio-build.py --check` and
@@ -132,8 +133,13 @@ live (Pages' source is "GitHub Actions", not the branch). In order, it:
 4. runs `tools/dayfolio-build.py`, which writes every page's `?v=` hashes from the
    minified files (Caching, under Assets);
 5. runs `tools/check-site.py`;
-6. publishes the site, without `.git`, `.github`, `tools/`, `README.md`, `.gitignore`
-   and `.impeccable/`;
+6. publishes what `tools/publish.py` picks: every page, every file a page or the
+   stylesheet uses, and the addresses fetched from outside the site (`robots.txt`,
+   `sitemap.xml`, `/.well-known/`, Smalti's `config/v1.json`, `games/smalti/social/`,
+   and the brand PNGs and SVGs). Nothing else is reachable by URL: the repo's notes,
+   the Markdown sources, the templates and any file no page uses any more. A new
+   file that something outside the site fetches belongs in `ALWAYS` or
+   `ALWAYS_UNDER` there, or in check-site's `BAKED_IN_URLS`;
 7. checks that the live `/.well-known/apple-app-site-association` answers.
 
 A failure at any step leaves the live site as it was; the run's log on GitHub says
