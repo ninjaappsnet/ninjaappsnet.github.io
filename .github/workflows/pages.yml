@@ -1,0 +1,65 @@
+# Deploys ninjaapps.net. Every push to main is tested, built, checked and
+# minified here, so what goes live is right even if the build wasn't run
+# locally. The README's "Deploy" section explains each step.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer push replaces a queued one, never a running one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Test the tools and the scripts
+        run: |
+          python3 -m unittest discover -s tools -p 'test_*.py'
+          for test in tools/test-*.mjs; do node "$test"; done
+
+      # Minify before the build, so each page asks for the minified file by its hash.
+      - name: Minify the stylesheet and scripts
+        run: npx --yes esbuild@0.24.2 style.css assets/*.js --minify --outdir=. --allow-overwrite --log-level=warning
+
+      - name: Test the minified scripts
+        run: for test in tools/test-*.mjs; do node "$test"; done
+
+      - name: Build the pages
+        run: python3 tools/dayfolio-build.py
+
+      - name: Check the site
+        run: python3 tools/check-site.py
+
+      - name: Collect the site
+        run: rsync -a --exclude .git --exclude .github --exclude tools --exclude __pycache__ --exclude _site ./ _site/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

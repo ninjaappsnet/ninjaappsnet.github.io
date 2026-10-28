@@ -3,8 +3,8 @@
 Static site for **NinjaApps** — games and apps for iPhone, iPad and Mac. Design: "A NinjaApps
 Production" (a two-tone studio frame, each app a one-sheet in its own colours; see
 DESIGN.md). Hosted on GitHub Pages
-at [ninjaapps.net](https://ninjaapps.net). Plain HTML + one shared stylesheet,
-with no build step for the hand-written pages. Dayfolio's guide, template and
+at [ninjaapps.net](https://ninjaapps.net), deployed by GitHub Actions (see **Deploy**).
+Plain HTML + one shared stylesheet, hand-written pages edited as they are served. Dayfolio's guide, template and
 article pages, and FlectoBI's guide and tutorial pages, are generated from
 Markdown by a standard-library script, and the output is committed (see
 **Dayfolio pages** and **FlectoBI pages**).
@@ -120,6 +120,25 @@ excused them; and one `<video>` of `media/app-preview-iphone.mp4` that has
 controls, is muted and plays inline over a poster frame, never by itself. The
 film must be an MP4 whose `moov` box comes before its media, so it plays while it
 downloads. The link check follows `poster` as well as `href` and `src`.
+
+## Deploy
+
+Every push to `main` runs `.github/workflows/pages.yml`, and only what it builds goes
+live (Pages' source is "GitHub Actions", not the branch). In order, it:
+
+1. runs the Python tests and the `tools/test-*.mjs` script tests;
+2. minifies `style.css` and `assets/*.js` in place with esbuild (pinned);
+3. runs the script tests again, on the minified scripts;
+4. runs `tools/dayfolio-build.py`, which writes every page's `?v=` hashes from the
+   minified files (Caching, under Assets);
+5. runs `tools/check-site.py`;
+6. publishes the site, without `.git`, `.github` and `tools/`.
+
+A failure at any step leaves the live site as it was; the run's log on GitHub says
+which step and why. So a forgotten build can't reach visitors: the deploy builds
+anyway. Still run the build and the checker before committing, so the committed pages
+match what's live and a broken link is caught before the push. The repo keeps readable
+sources; the minified files exist only in the deploy.
 
 ## Social
 
@@ -332,8 +351,10 @@ account, no identifier.
   support and press pages keep opening in the browser. A legacy `paths` entry
   repeats it for iOS 12 and older. Smalti requires iOS 17, so it is dead weight
   kept because it is harmless.
-- **GitHub Pages.** `/.well-known` is published only because `.nojekyll`
-  exists: Jekyll would silently drop dot-directories, so never delete it. Pages
+- **GitHub Pages.** `/.well-known` is published only because the deploy keeps
+  dot-directories: `actions/upload-pages-artifact@v3` packs them, but v4 drops
+  hidden files unless asked (`include-hidden-files`), so check before upgrading it.
+  (`.nojekyll` dates from the branch deploy, when Jekyll dropped them; keep it.) Pages
   serves an extensionless file as `application/octet-stream` and cannot set
   headers. Apple's CDN accepted it anyway on the first deploy (2026-10-13): it
   re-serves the file byte for byte as `application/json` with
