@@ -11,7 +11,7 @@ Diagrove and [Dayfolio](../../../dayfolio/) are made by the same small team, and
 
 | From | To | How |
 |---|---|---|
-| A diagram | A Dayfolio entry | **Send to Dayfolio** |
+| A diagram | A Dayfolio entry | **Send to Dayfolio** (from the iPad) |
 | A diagram | A Dayfolio entry | The **Export Canvas as Image** shortcut action |
 | A Dayfolio entry’s text | A new diagram | The **Create Diagram from Text** shortcut action |
 | A click in a diagram | Dayfolio | A **Run shortcut** action that runs one of Dayfolio’s shortcuts |
@@ -21,9 +21,9 @@ Diagrove and [Dayfolio](../../../dayfolio/) are made by the same small team, and
 
 On the Mac, click **Send to Dayfolio** in the toolbar or choose **File › Send to Dayfolio…**. On iPad it’s in the toolbar’s Export menu.
 
-Diagrove opens the share menu (the share sheet on iPad) with two files: a picture of the current canvas, as a PNG, and the whole document, zipped. Choose Dayfolio, and Dayfolio’s share extension takes them into an entry: the picture to look at, and the document kept with it. Any other app in the share menu can take the files too.
+Diagrove opens the share menu (the share sheet on iPad) with two files: a picture of the current canvas, as a PNG, and the whole document, zipped. On iPad, choose Dayfolio, and Dayfolio’s share extension takes them into an entry: the picture to look at, and the document kept with it. Dayfolio for Mac doesn’t take shared files yet, so on the Mac it isn’t in the share menu: send the diagram from your iPad, or save the picture and add it to an entry yourself. Any other app in the share menu can take the files too.
 
-[shot: send-to-dayfolio-mac] The Mac, light appearance, the Roadmap template: the share menu open from the toolbar’s Send to Dayfolio button, with Dayfolio among the apps.
+[shot: send-to-dayfolio-ipad] iPad, light appearance, the Roadmap template: the share sheet open from Send to Dayfolio, with Dayfolio among the apps.
 
 ### Shortcuts both ways
 
