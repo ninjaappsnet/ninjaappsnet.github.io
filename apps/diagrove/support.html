@@ -133,9 +133,10 @@
     <p>The <code>diagrove</code> tool is a separate, notarized download for the Mac, outside the App Store. Install it with Homebrew:</p>
     <pre><code>brew install ninjaappsnet/diagrove/diagrove
 diagrove --version</code></pre>
+    <p>It needs macOS 26 or later, on Apple silicon or Intel. Without Homebrew, download the zip from <a href="https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest">the latest release</a>, keep its files together, and link <code>diagrove</code> onto your <code>PATH</code>; the tool alone, copied without the folders beside it, doesn’t work. In the app, Help › Command-line tool… says the same.</p>
     <ul>
       <li><strong>“diagrove: command not found”.</strong> Open a new Terminal window after installing, or check that Homebrew’s folder is on your <code>PATH</code> (<code>brew doctor</code> says).</li>
-      <li><strong><code>--live</code> asks for permission.</strong> Editing a document open in the app goes through Apple Events, so macOS asks once whether your terminal may control Diagrove. Allow it, or change it later in System Settings › Privacy &amp; Security › Automation. Diagrove must be open, with the document in a window.</li>
+      <li><strong><code>--live</code> asks for permission.</strong> Editing a document open in the app goes through Apple Events, so macOS asks once whether your terminal, or the AI app that runs the tool, may control Diagrove. Allow it, or change it later in System Settings › Privacy &amp; Security › Automation. Diagrove must be open, with the document in a window.</li>
       <li><strong>An AI assistant can’t see the tools.</strong> The MCP server is the command <code>diagrove</code> with the argument <code>mcp</code>. If the assistant can’t find it, give the full path that <code>which diagrove</code> prints.</li>
     </ul>
     <p>More in <a href="guide/command-line-tool/">the guide’s page on the command-line tool</a>.</p>
@@ -146,13 +147,13 @@ diagrove --version</code></pre>
     <h2 id="diagnostics">How do I send a diagnostic report?</h2>
     <p>When Diagrove crashes, hangs or runs slowly, your Mac or iPad hands it a report about a day later. Diagrove keeps these reports on the device for 30 days and never sends them by itself. If we ask for one:</p>
     <ul>
-      <li><strong>On the Mac,</strong> choose Help › Show diagnostic reports. The Finder opens the folder; attach the newest files to your email.</li>
-      <li><strong>On the iPad,</strong> choose Help › Share diagnostic reports… in the menu bar (swipe down from the top of the screen to show it), then Mail.</li>
+      <li><strong>On the Mac,</strong> choose Help › Show diagnostic reports. The Finder opens with the report files selected; attach them to your email.</li>
+      <li><strong>On the iPad,</strong> choose Help › Share diagnostic reports… in the menu bar (swipe down from the top of the screen to show it). The share sheet opens with the files: choose Mail, or Save to Files and attach them from there.</li>
     </ul>
-    <p>The reports describe the app’s state, such as where in its code a crash happened and how much memory it used. They hold no documents and nothing you typed. You choose whether to send them, and to whom.</p>
+    <p>If there are none yet, Diagrove says “No diagnostic reports yet”. Each report is a small JSON file, named like <code>diagnostics-20261029T080000Z-1a2b3c4d.json</code> for a crash, a hang, heavy disk writes or a CPU exception, or <code>metrics-….json</code> for a day’s performance. They describe how the app ran, such as where in its code a crash happened and how much memory it used, never your diagrams or anything you typed. You choose whether to send them, and to whom.</p>
 
     <h2 id="acknowledgements">Acknowledgements</h2>
-    <p>Diagrove is built with open-source software, including icons from <a href="https://lucide.dev">Lucide</a>. The full notices and licences are in the app: on the Mac in Diagrove › About Diagrove, and on the iPad in Help › About Diagrove.</p>
+    <p>Diagrove is built with open-source software, including icons from <a href="https://lucide.dev">Lucide</a>. The full notices and licences are in the app: on the Mac in Diagrove › About Diagrove, and on the iPad in About Diagrove, in the app menu of the menu bar. The command-line tool prints its own with <code>diagrove --licenses</code>.</p>
 
   </div>
   <a class="backlink" href="./">BACK TO DIAGROVE</a>

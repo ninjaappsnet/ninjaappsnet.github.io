@@ -63,17 +63,20 @@
 
 <h2 id="install-it">Install it</h2>
 
-<p>The tool is free, notarized by Apple and separate from the app. Install it with Homebrew:</p>
+<p>The tool is free, notarized by Apple and separate from the app. In the app, <strong>Help › Command-line tool…</strong> says the same. Install it with Homebrew:</p>
 
 <pre><code>brew install ninjaappsnet/diagrove/diagrove</code></pre>
 
-<p>Or download the latest release from <a href="https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest">github.com/ninjaappsnet/homebrew-diagrove</a>, unzip it, and put <code>diagrove</code> in a folder on your <code>PATH</code>.</p>
+<p>Or download the latest release from <a href="https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest">github.com/ninjaappsnet/homebrew-diagrove</a> (for 1.0.0, <code>diagrove-1.0.0-macos.zip</code>). The zip holds <code>diagrove</code>, the <code>.bundle</code> folders it reads from beside itself, and <code>LICENSES.txt</code>. Keep them together in one folder and link <code>diagrove</code> onto your <code>PATH</code>, rather than copying the tool alone, which breaks it. For example, with the files unzipped into <code>~/.local/lib/diagrove</code>:</p>
+
+<pre><code>sudo ln -sf ~/.local/lib/diagrove/diagrove /usr/local/bin/diagrove</code></pre>
 
 <p>Check that it works:</p>
 
-<pre><code>diagrove --version</code></pre>
+<pre><code>diagrove --version
+diagrove --help</code></pre>
 
-<p>The tool runs on the Mac only. The app works fully without it.</p>
+<p><code>diagrove --version</code> answers <code>1.0.0</code>. The tool needs macOS 26 or later and runs on Apple silicon and Intel Macs; it doesn’t run on iPad. The app works fully without it. <code>diagrove --licenses</code> prints the notices of the open-source software in it.</p>
 
 <h2 id="how-it-answers">How it answers</h2>
 

@@ -9,21 +9,26 @@ order: 11
 
 ## Install it
 
-The tool is free, notarized by Apple and separate from the app. Install it with Homebrew:
+The tool is free, notarized by Apple and separate from the app. In the app, **Help › Command-line tool…** says the same. Install it with Homebrew:
 
 ```sh
 brew install ninjaappsnet/diagrove/diagrove
 ```
 
-Or download the latest release from [github.com/ninjaappsnet/homebrew-diagrove](https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest), unzip it, and put `diagrove` in a folder on your `PATH`.
+Or download the latest release from [github.com/ninjaappsnet/homebrew-diagrove](https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest) (for 1.0.0, `diagrove-1.0.0-macos.zip`). The zip holds `diagrove`, the `.bundle` folders it reads from beside itself, and `LICENSES.txt`. Keep them together in one folder and link `diagrove` onto your `PATH`, rather than copying the tool alone, which breaks it. For example, with the files unzipped into `~/.local/lib/diagrove`:
+
+```sh
+sudo ln -sf ~/.local/lib/diagrove/diagrove /usr/local/bin/diagrove
+```
 
 Check that it works:
 
 ```sh
 diagrove --version
+diagrove --help
 ```
 
-The tool runs on the Mac only. The app works fully without it.
+`diagrove --version` answers `1.0.0`. The tool needs macOS 26 or later and runs on Apple silicon and Intel Macs; it doesn’t run on iPad. The app works fully without it. `diagrove --licenses` prints the notices of the open-source software in it.
 
 ## How it answers
 

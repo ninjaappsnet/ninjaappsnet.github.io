@@ -15,7 +15,7 @@ The tool is a free, notarized download, outside the App Store. With Homebrew, ru
 brew install ninjaappsnet/diagrove/diagrove
 ```
 
-Without Homebrew, download it from [the latest release](https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest). Then check that it runs:
+Without Homebrew, download the zip from [the latest release](https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest), keep its files together in one folder, and link `diagrove` onto your `PATH`, as the [command-line tool’s page](../../guide/command-line-tool/) shows. It needs macOS 26 or later. Then check that it runs:
 
 ```sh
 diagrove templates list
