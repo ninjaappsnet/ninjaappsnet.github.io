@@ -338,6 +338,8 @@ header nav a[aria-current] { text-decoration-color: currentColor; }
 .onesheet-art .phone { width: clamp(220px, 20vw, 300px); border-radius: 30px; }
 .onesheet-art .phone[src*="games/"], .onesheet-art .phone[src^="shot-"] { width: clamp(200px, 17vw, 244px); }
 .onesheet-art .window { width: min(600px, 100%); border-radius: 12px; }
+/* A mark with its own transparent squircle: its shadow follows the shape. */
+.onesheet-art .mark { width: min(440px, 100%); box-shadow: none; filter: drop-shadow(0 24px 40px rgb(0 0 0 / .35)); }
 .onesheet-foot { grid-column: 2; align-self: center; padding-top: 32px; }
 .onesheet .lede { margin: 0; max-width: 40ch; font-size: clamp(18px, 1.4vw, 20px); line-height: 1.45; color: inherit; }
 .onesheet .actions { margin-top: 24px; }

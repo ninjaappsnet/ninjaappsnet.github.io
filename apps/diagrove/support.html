@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Held until launch (DIAGROVE_HELD in tools/dayfolio-build.py): noindex, and tools/publish.py leaves it out. -->
+<meta name="robots" content="noindex">
+<title>Support — Diagrove — NinjaApps</title>
+<meta name="description" content="Help for Diagrove on Mac and iPad: the prompt bar without Apple Intelligence, iCloud Drive, the command-line tool, and how to reach a real person.">
+<link rel="canonical" href="https://ninjaapps.net/apps/diagrove/support.html">
+<meta property="og:site_name" content="NinjaApps">
+<meta property="og:title" content="Support — Diagrove — NinjaApps">
+<meta property="og:description" content="Help with Diagrove, by NinjaApps.">
+<meta property="og:url" content="https://ninjaapps.net/apps/diagrove/support.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ninjaapps.net/apps/diagrove/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Diagrove app icon beside the words: Diagrove. Precise diagrams that do something. For Mac and iPad.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/seal.svg" type="image/svg+xml">
+<script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
+<link rel="preload" href="../../assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
+<link rel="stylesheet" href="../../style.css?v=5ac7ec2224">
+<script src="../../assets/theme.js?v=b7c0a7cebd" defer></script>
+<style data-app="diagrove">:root { --app-ground: #17636a; --app-on: #ffffff; --app-hi: #ffd8c2; --app-ink: #17636a; } [data-theme="dark"] { --app-ink: #6cc3c7; } .subnav[aria-label="Diagrove"] .subnav-app::before { background-image: url(icon-144.webp); }</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="../../">NinjaApps</a>
+  <nav>
+    <a href="../../#titles">Titles</a>
+    <a href="../../#studio">Studio</a>
+    <a href="../../privacy/">Privacy</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme"></button>
+  </nav>
+</header>
+
+<nav class="subnav" aria-label="Diagrove">
+  <a class="subnav-app" href="./">Diagrove</a>
+  <a href="./">Overview</a>
+  <a href="guide/">Guide</a>
+  <a href="tutorials/">Tutorials</a>
+  <a href="how-to/">How-to</a>
+  <a href="support.html" aria-current="page">Support</a>
+</nav>
+
+<main>
+
+<section class="page">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Diagrove</a></nav>
+  <h1 class="page-title">Something wrong?</h1>
+  <div class="contact-box">
+    <p><strong>Write to <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a></strong></p>
+    <p>A real person reads it, and you will hear back within 24–48 hours. Say whether you use Diagrove on a Mac or an iPad, which version of macOS or iPadOS it runs, and what you did just before the problem. A screenshot, or the document itself if you are happy to share it, gets you a better answer faster. If a message in Diagrove is the problem, copy its words into your email.</p>
+  </div>
+
+  <div class="callout callout-lead">
+    <p><strong>Learning Diagrove?</strong> <a href="guide/">The guide</a> explains each part of the app, <a href="tutorials/">the tutorials</a> build something from start to finish, and <a href="how-to/">the how-to pages</a> do one task at a time. This page answers questions about requirements, the prompt bar, files and iCloud, the command-line tool and diagnostic reports.</p>
+  </div>
+
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">ON THIS PAGE</p>
+    <ul>
+      <li><a href="#requirements">What you need</a></li>
+      <li><a href="#apple-intelligence">The prompt bar and Apple Intelligence</a></li>
+      <li><a href="#prompt-bar">When the prompt bar doesn’t understand</a></li>
+      <li><a href="#files">Documents, Files and iCloud Drive</a></li>
+      <li><a href="#mac-only">What is on the Mac only</a></li>
+      <li><a href="#stencils">Stencils, libraries and updates</a></li>
+      <li><a href="#bindings">Live data that doesn’t show</a></li>
+      <li><a href="#omnigraffle">OmniGraffle files</a></li>
+      <li><a href="#cli">The command-line tool</a></li>
+      <li><a href="#dayfolio">Diagrove and Dayfolio</a></li>
+      <li><a href="#diagnostics">Sending a diagnostic report</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ul>
+  </nav>
+
+  <div class="prose">
+
+    <h2 id="requirements">What do I need to run Diagrove?</h2>
+    <p>A Mac with macOS 26 or later, or an iPad with iPadOS 26 or later. Diagrove is one app for both: the same documents open on each. There is no version for iPhone. Diagrove is coming to the App Store.</p>
+    <p>There is no account and no sign-in. Everything works without a network connection, except a binding that reads JSON from a web address.</p>
+
+    <h2 id="apple-intelligence">Do I need Apple Intelligence?</h2>
+    <p>Only to describe a diagram in your own words, such as “a flowchart for returning an order”. Everything else in the prompt bar works without it:</p>
+    <ul>
+      <li>steps joined by arrows: <code>Idea -&gt; Plan -&gt; Build -&gt; Ship</code>;</li>
+      <li>steps written as a sentence: “Sign up, confirm your email, then log in”, or a list pasted in;</li>
+      <li>changes by name or by kind: “make all decisions orange”, “rename Cart to Basket”, “add a step after Pay called Fraud check”, “connect Try again to Cart”, “delete the notes”;</li>
+      <li>changes to what you selected: “make it bold”, “make them 50% wider”, “align them left”, “group them”;</li>
+      <li>“tidy up the whole diagram”.</li>
+    </ul>
+    <p>When Apple Intelligence is off, the prompt bar says so as you click or tap into it, and its guide leaves out the examples that need it. Turn Apple Intelligence on in System Settings on the Mac, or Settings on the iPad, under Apple Intelligence &amp; Siri, on a device and in a language that support it.</p>
+
+    <h2 id="prompt-bar">The prompt bar didn’t do what I asked</h2>
+    <ul>
+      <li><strong>Write the steps, not a picture.</strong> The prompt bar draws boxes and arrows. For a poster, an infographic or a chart, start from a template or add stencils, then ask for changes.</li>
+      <li><strong>Use the words on the canvas.</strong> A change finds graphics by the words in them (“Pay”), by a kind (“decisions”, “notes”, “lines”) or by what you selected.</li>
+      <li><strong>Check the change before you apply it.</strong> It shows on the canvas with Apply and Discard. If it isn’t right, Discard puts everything back.</li>
+      <li><strong>Open the guide.</strong> The sparkle at the start of the prompt bar shows what you can ask, with examples you can click or tap to try. On the Mac it is also Help › What you can ask the prompt bar.</li>
+    </ul>
+
+    <h2 id="files">Where are my documents? How does iCloud Drive work?</h2>
+    <p>A Diagrove document is a <code>.diagrove</code> file that you keep where you choose. On the Mac, save it anywhere, iCloud Drive included, and open it from the Finder or File › Open Recent. On the iPad, documents are in the Files app, on the iPad or in iCloud Drive, and the start screen shows them.</p>
+    <p>A document saved in iCloud Drive opens on your other Mac or iPad signed in to the same Apple Account, pictures included. iCloud Drive is Apple’s service; Diagrove doesn’t run a server of its own and never sees your documents.</p>
+    <p>A document keeps its own copy of every stencil and picture it uses, so it opens the same on another device or for someone you send it to.</p>
+
+    <h2 id="mac-only">Some things are on the Mac only</h2>
+    <p>In version 1.0 these are on the Mac and not yet on the iPad: exporting a web player, turning a photo or a scan into a diagram, importing OmniGraffle documents, New from Dayfolio, and the command-line tool. On the iPad you draw a sketch straight onto the canvas with Sketch mode instead.</p>
+
+    <h2 id="stencils">Stencils, libraries and updates</h2>
+    <ul>
+      <li><strong>Can’t find a stencil?</strong> Search the Stencils tab one word at a time, such as “router” or “desk”. The preview, when you rest the pointer on a tile or touch and hold it, shows its library and the words it is found by.</li>
+      <li><strong>A stencil looks different after an update.</strong> Diagrove never changes the stencils in a document by itself. When a built-in stencil changes, it offers the update, and you choose.</li>
+      <li><strong>Your own libraries</strong> are <code>.diagrovestencils</code> files. Export one from the Stencils tab to share it, and bring one in with Import a library.</li>
+    </ul>
+
+    <h2 id="bindings">Live data doesn’t show</h2>
+    <ul>
+      <li>Live values show in Play mode, and in edit mode while Show live data is on. Otherwise you see, and edit, the values set by hand.</li>
+      <li>A JSON file at a web address is read while live data shows, and again every 30 seconds. Check that the address opens in a browser and answers JSON.</li>
+      <li>When a value is missing, the graphic keeps the value set by hand, and the inspector’s Data section shows whether its source could be read.</li>
+      <li>Bindings to the Dayfolio feed show their hand-set values for now: Dayfolio doesn’t share its feed with Diagrove yet.</li>
+    </ul>
+
+    <h2 id="omnigraffle">Can I open OmniGraffle files?</h2>
+    <p>On the Mac, choose File › Import… and pick a <code>.graffle</code> file. Diagrove reads it into a new document and never changes the original. A card under the tool palette lists anything that came across differently or was left out, with a button that shows you each graphic it is about. OmniGraffle stencil files come in as one of your stencil libraries. OmniGraffle is a trademark of The Omni Group; Diagrove is not affiliated with it.</p>
+
+    <h2 id="cli">The command-line tool</h2>
+    <p>The <code>diagrove</code> tool is a separate, notarized download for the Mac, outside the App Store. Install it with Homebrew:</p>
+    <pre><code>brew install ninjaappsnet/diagrove/diagrove
+diagrove --version</code></pre>
+    <ul>
+      <li><strong>“diagrove: command not found”.</strong> Open a new Terminal window after installing, or check that Homebrew’s folder is on your <code>PATH</code> (<code>brew doctor</code> says).</li>
+      <li><strong><code>--live</code> asks for permission.</strong> Editing a document open in the app goes through Apple Events, so macOS asks once whether your terminal may control Diagrove. Allow it, or change it later in System Settings › Privacy &amp; Security › Automation. Diagrove must be open, with the document in a window.</li>
+      <li><strong>An AI assistant can’t see the tools.</strong> The MCP server is the command <code>diagrove</code> with the argument <code>mcp</code>. If the assistant can’t find it, give the full path that <code>which diagrove</code> prints.</li>
+    </ul>
+    <p>More in <a href="guide/command-line-tool/">the guide’s page on the command-line tool</a>.</p>
+
+    <h2 id="dayfolio">Diagrove and Dayfolio</h2>
+    <p>Diagrove is a sibling of <a href="../dayfolio/">Dayfolio</a>, the work journal. Today you can share a diagram into a Dayfolio entry from the iPad with Send to Dayfolio, which hands over a picture of the canvas and the document, and connect the two with Shortcuts. Dayfolio doesn’t yet draw a diagram inside an entry or share its numbers with Diagrove. <a href="guide/dayfolio/">Diagrove and Dayfolio, in the guide</a>.</p>
+
+    <h2 id="diagnostics">How do I send a diagnostic report?</h2>
+    <p>When Diagrove crashes, hangs or runs slowly, your Mac or iPad hands it a report about a day later. Diagrove keeps these reports on the device for 30 days and never sends them by itself. If we ask for one:</p>
+    <ul>
+      <li><strong>On the Mac,</strong> choose Help › Show diagnostic reports. The Finder opens the folder; attach the newest files to your email.</li>
+      <li><strong>On the iPad,</strong> choose Help › Share diagnostic reports… in the menu bar (swipe down from the top of the screen to show it), then Mail.</li>
+    </ul>
+    <p>The reports describe the app’s state, such as where in its code a crash happened and how much memory it used. They hold no documents and nothing you typed. You choose whether to send them, and to whom.</p>
+
+    <h2 id="acknowledgements">Acknowledgements</h2>
+    <p>Diagrove is built with open-source software, including icons from <a href="https://lucide.dev">Lucide</a>. The full notices and licences are in the app: on the Mac in Diagrove › About Diagrove, and on the iPad in Help › About Diagrove.</p>
+
+  </div>
+  <a class="backlink" href="./">BACK TO DIAGROVE</a>
+</section>
+
+</main>
+
+
+<footer>
+  <span>© 2026 NinjaApps</span>
+  <nav class="social" aria-label="Social media">
+    <a href="https://www.youtube.com/@NinjaAppsnet" rel="me" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+    <a href="https://www.instagram.com/ninjaappsnet/" rel="me" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.846-10.405a1.441 1.441 0 0 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg></a>
+    <a href="https://www.tiktok.com/@ninjaapps" rel="me" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+    <a href="https://x.com/NinjaAppsnet" rel="me" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+  </nav>
+  <a class="footer-privacy" href="privacy.html">PRIVACY POLICY</a>
+</footer>
+
+</body>
+</html>
