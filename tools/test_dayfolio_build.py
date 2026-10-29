@@ -766,6 +766,106 @@ class FlectoBITests(unittest.TestCase):
         self.assertTrue(any(rel in p for p in build.check(self.site.root)))
 
 
+DIAGROVE_PRODUCT = FLECTO_PRODUCT.replace("FlectoBI", "Diagrove").replace("apps/flectobi/", "apps/diagrove/").replace(
+    "<head>\n", '<head>\n<meta name="robots" content="noindex">\n', 1)
+
+
+def diagrove_site(test: unittest.TestCase) -> "Site":
+    """The Dayfolio fixture, with Diagrove's product page, card, icon and its three section pages beside it."""
+    site = Site(test)
+    site.put("apps/diagrove/index.html", DIAGROVE_PRODUCT)
+    site.put("apps/diagrove/social-card.png", png(1200, 630))
+    site.put("apps/diagrove/icon-320.webp", webp(320, 320))
+    for key, title in (("guide", "Guide"), ("tutorials", "Tutorials"), ("how-to", "How-to")):
+        site.put(f"content/diagrove/{key}/index.md", section(title))
+    return site
+
+
+class DiagroveTests(unittest.TestCase):
+    """Diagrove's pages come from the same shell, with a guide, tutorials and how-to pages. Until its name is
+    cleared and it launches, the app is held (DIAGROVE_HELD): every page it makes is noindex, so the sitemap leaves
+    it out, and the deploy publishes none of it."""
+
+    def setUp(self):
+        self.site = diagrove_site(self)
+        self.site.put("content/diagrove/tutorials/first-flowchart.md", topic("first-flowchart", "Your first flowchart", 1))
+        self.site.put("content/diagrove/how-to/recolour.md", topic("recolour", "Recolour a stencil", 1, body=(
+            "Pick a tint.\n\n[shot: tint-popover] Mac, light: the Tint popover open on Blue.\n\nThen close it.\n")))
+        self.built = self.site.built()
+        self.page = self.built["apps/diagrove/tutorials/first-flowchart/index.html"]
+
+    def test_the_three_sections_and_their_pages_are_built(self):
+        for rel in ("apps/diagrove/guide/index.html", "apps/diagrove/tutorials/index.html",
+                    "apps/diagrove/how-to/index.html", "apps/diagrove/tutorials/first-flowchart/index.html",
+                    "apps/diagrove/how-to/recolour/index.html"):
+            self.assertIn(rel, self.built)
+
+    def test_a_held_apps_pages_are_noindex_and_out_of_the_sitemap(self):
+        self.assertTrue(build.APPS["diagrove"].held)
+        for rel, text in self.built.items():
+            if rel.startswith("apps/diagrove/") and rel.endswith(".html"):
+                with self.subTest(rel=rel):
+                    self.assertIn('<meta name="robots" content="noindex">', text)
+        self.assertNotIn("apps/diagrove", self.built["sitemap.xml"])
+        self.assertNotIn('content="noindex"', self.built["apps/flectobi/index.html"] if "apps/flectobi/index.html"
+                         in self.built else "")
+
+    def test_once_released_its_pages_are_indexed(self):
+        self.addCleanup(build.set_held, "diagrove", True)
+        build.set_held("diagrove", False)
+        built = self.site.built()
+        self.assertNotIn('content="noindex"', built["apps/diagrove/tutorials/first-flowchart/index.html"])
+        self.assertIn("https://ninjaapps.net/apps/diagrove/tutorials/first-flowchart/", built["sitemap.xml"])
+
+    def test_the_head_and_the_sub_navigation_are_diagroves(self):
+        self.assertIn("<title>Your first flowchart — Diagrove — NinjaApps</title>", self.page)
+        self.assertEqual(meta(self.page, "og:image"), "https://ninjaapps.net/apps/diagrove/social-card.png")
+        self.assertNotIn("apple-itunes-app", self.page)
+        nav = re.search(r'<nav class="subnav" aria-label="Diagrove">.*?</nav>', self.page, re.S).group(0)
+        self.assertEqual(re.findall(r">([^<]+)</a>", nav),
+                         ["Diagrove", "Overview", "Guide", "Tutorials", "How-to", "Support"])
+
+    def test_the_app_box_says_it_is_coming_to_the_app_store_without_a_link(self):
+        box = re.search(r'<aside class="appbox".*?</aside>', self.page, re.S).group(0)
+        self.assertIn('<span class="ticket-soon">Coming to the App Store</span>', box)
+        self.assertNotIn("Mac App Store", box)
+        self.assertNotIn("apps.apple.com", box)
+
+    def test_a_shot_line_is_an_invisible_marker_and_goes_on_the_shot_list(self):
+        page = self.built["apps/diagrove/how-to/recolour/index.html"]
+        self.assertIn("<!-- shot tint-popover: Mac, light: the Tint popover open on Blue. -->", page)
+        self.assertNotIn("[shot:", page)
+        self.assertIn("<p>Then close it.</p>", page)
+        shots = self.built["content/diagrove/SHOTS.md"]
+        self.assertIn("apps/diagrove/how-to/recolour/", shots)
+        self.assertIn("`tint-popover`", shots)
+        self.assertIn("the Tint popover open on Blue", shots)
+        self.assertNotIn("content/dayfolio/SHOTS.md", self.built)
+
+    def test_a_shot_that_names_an_option_keeps_its_comment_whole(self):
+        self.site.put("content/diagrove/how-to/live.md", topic("live", "Edit live", 2, body=(
+            "[shot: live] Terminal after `diagrove apply --live edits.json`.\n")))
+        page = self.site.built()["apps/diagrove/how-to/live/index.html"]
+        self.assertIn("<!-- shot live: Terminal after `diagrove apply - -live edits.json`. -->", page)
+
+    def test_the_hand_written_pages_get_diagroves_sub_navigation(self):
+        product = self.built["apps/diagrove/index.html"]
+        self.assertRegex(product, r'</header>\n\n<nav class="subnav" aria-label="Diagrove">')
+
+    def test_every_page_carries_diagroves_colours_and_icon_in_its_own_style(self):
+        for rel, depth in (("apps/diagrove/index.html", ""), ("apps/diagrove/how-to/recolour/index.html", "../../")):
+            with self.subTest(rel=rel):
+                page = self.built[rel]
+                self.assertEqual(page.count('<style data-app="diagrove">'), 1)
+                style = re.search(r'<style data-app="diagrove">(.*?)</style>', page, re.S).group(1)
+                self.assertIn("--app-ground: #17636a", style)
+                self.assertIn(f"url({depth}icon-144.webp)", style)
+        self.assertNotIn('<style data-app=', self.built["apps/dayfolio/guide/index.html"])
+        build.write(self.site.root)  # a second build keeps one block, not two, and has nothing left to change
+        self.assertEqual(self.site.read("apps/diagrove/index.html").count('<style data-app="diagrove">'), 1)
+        self.assertEqual(build.check(self.site.root), [])
+
+
 class StylesheetTests(unittest.TestCase):
     """Every class the shell writes on a figure, a clip or the app box has a rule in the site's style.css, in
     both themes where it draws a colour."""
@@ -779,6 +879,8 @@ class StylesheetTests(unittest.TestCase):
             with self.subTest(selector=selector):
                 self.assertTrue(selector in self.css, f"style.css has no {selector}")
         self.assertTrue("assets/icon-flectobi-144.webp" in self.css, "no FlectoBI icon in the sub-navigation")
+        # A held app's colours and icon travel in its own pages, so the published stylesheet never names it.
+        self.assertNotIn("diagrove", self.css.lower())
         self.assertTrue(re.search(r'\[data-theme="dark"\][^{]*\.figure-window', self.css),
                         "no dark-theme shadow for a window capture")
 

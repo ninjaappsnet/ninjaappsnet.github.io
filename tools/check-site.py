@@ -64,6 +64,15 @@ Checks:
      the product page the store link and a price.
  23. FlectoBI's product page tells a search engine it is a macOS business
      app, with no offers until it has a price and no ratings or reviews.
+ 24. Diagrove's pages (apps/diagrove/) keep 16's rules and state no price.
+     While they are held (DIAGROVE_HELD in tools/dayfolio-build.py, until
+     the name is cleared and the app launches) every one is noindex, none
+     carries a Smart App Banner or a store link, no page outside them links
+     in (not the landing page, not the privacy hub), the product page says
+     "Coming to the App Store" without a link, and the check WARNS that they
+     are held; tools/publish.py publishes none of them. Once released, none
+     may be noindex. Its product page's JSON-LD names Diagrove for macOS and
+     iPadOS, with no offers while it has no price and no ratings or reviews.
 
 Warnings are printed and do not fail the check.
 """
@@ -117,6 +126,13 @@ MANIFEST = [
     "apps/flectobi/privacy.html",
     "apps/flectobi/guide/index.html",
     "apps/flectobi/tutorials/index.html",
+    # Diagrove's, held until launch (DIAGROVE_HELD in tools/dayfolio-build.py): on disk, never published.
+    "apps/diagrove/index.html",
+    "apps/diagrove/support.html",
+    "apps/diagrove/privacy.html",
+    "apps/diagrove/guide/index.html",
+    "apps/diagrove/tutorials/index.html",
+    "apps/diagrove/how-to/index.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
         "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
     )),
@@ -358,6 +374,8 @@ FLECTOBI_SOON = "Coming to the Mac App Store"
 FLECTOBI_PRICE = re.compile(r"\$\s?\d[\d,.]*")
 # The landing page's card and the privacy hub's row: the pages that list every app.
 FLECTOBI_LISTED = {"index.html": "apps/flectobi/", "privacy/index.html": "../apps/flectobi/privacy.html"}
+DIAGROVE_DIR = "apps/diagrove"
+DIAGROVE_SOON = "Coming to the App Store"
 FLECTOBI_FREE = re.compile(r"(?i)\bfree (?:to )?download\b|\bit[’']s free\b")
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
@@ -1205,6 +1223,84 @@ def flectobi_store_id() -> str | None:
     return build_module().APPS["flectobi"].store_id
 
 
+def diagrove_app():
+    """Diagrove's entry in tools/dayfolio-build.py: its App Store id and whether its pages are held."""
+    return build_module().APPS["diagrove"]
+
+
+def check_diagrove_pages() -> None:
+    """Every Diagrove page, to the rules every app page keeps; the banner only once it has an App Store id."""
+    store_id = diagrove_app().store_id
+    check_app_pages(DIAGROVE_DIR, "diagrove page",
+                    f'<meta name="apple-itunes-app" content="app-id={store_id}' if store_id else None)
+
+
+def check_diagrove() -> None:
+    """Diagrove's pages wait for launch: held, they are noindex, state no price, carry no banner or store link,
+    and nothing outside them links in; released, none is noindex."""
+    app = diagrove_app()
+    if app.held:
+        warn("diagrove: its pages are held (DIAGROVE_HELD in tools/dayfolio-build.py): noindex and not published. "
+             "At launch set the store id and the price, release them, and list Diagrove on the landing page and "
+             "the privacy hub")
+    for page in app_pages(DIAGROVE_DIR):
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        said = visible(text)
+        if app.held and not is_noindex(page):
+            fail(f"diagrove: {rel} is not noindex, but Diagrove's pages are held until launch")
+        if not app.held and is_noindex(page):
+            fail(f"diagrove: {rel} is still noindex, but Diagrove's pages are released (DIAGROVE_HELD is False)")
+        if app.store_id is None:
+            for hit in sorted({m.group(0) for m in FLECTOBI_PRICE.finditer(said)}):
+                fail(f"diagrove: {rel} states a price, {hit!r}; Diagrove has none yet (D1370)")
+            if 'name="apple-itunes-app"' in text:
+                fail(f"diagrove: {rel} has a Smart App Banner, but Diagrove has no App Store id yet")
+            if "apps.apple.com" in text:
+                fail(f"diagrove: {rel} links the App Store, but Diagrove has no App Store id yet")
+    if app.held:
+        inward = re.compile(r'(?:href|src)="[^"]*apps/diagrove/')
+        for page in published_pages():
+            rel = page.relative_to(ROOT).as_posix()
+            if not rel.startswith(DIAGROVE_DIR + "/") and inward.search(page.read_text(encoding="utf-8")):
+                fail(f"diagrove: {rel} links to Diagrove's pages, which are held until launch")
+    product = ROOT / DIAGROVE_DIR / "index.html"
+    if product.is_file() and app.store_id is None:
+        text = product.read_text(encoding="utf-8")
+        if DIAGROVE_SOON not in text or re.search(rf"<a\b[^>]*>[^<]*{DIAGROVE_SOON}", text):
+            fail(f"diagrove: {DIAGROVE_DIR}/index.html must say {DIAGROVE_SOON!r}, not as a link, "
+                 "in place of the store button")
+
+
+def check_diagrove_app() -> None:
+    """The product page tells a search engine Diagrove is a Mac and iPad app, offers nothing while it has no
+    price, and claims no ratings or reviews."""
+    page = ROOT / DIAGROVE_DIR / "index.html"
+    if not page.is_file():
+        return  # check_manifest reports a missing page
+    blocks = []
+    for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page.read_text(encoding="utf-8"), re.S):
+        try:
+            blocks.append(json.loads(raw))
+        except json.JSONDecodeError:
+            continue  # check_diagrove_pages reports it
+    apps = [b for b in blocks if isinstance(b, dict) and b.get("@type") == "SoftwareApplication"]
+    if len(apps) != 1:
+        fail(f"diagrove app: index.html has {len(apps)} SoftwareApplication JSON-LD blocks, not one")
+        return
+    app = apps[0]
+    if app.get("name") != "Diagrove":
+        fail(f"diagrove app: the name is {app.get('name')!r}, not 'Diagrove'")
+    for system in ("macOS", "iPadOS"):
+        if system not in str(app.get("operatingSystem", "")):
+            fail(f"diagrove app: operatingSystem does not name {system}")
+    if "offers" in app and diagrove_app().store_id is None:
+        fail("diagrove app: offers are set; Diagrove has no price yet (D1370)")
+    for key in ("aggregateRating", "review"):
+        if key in app:
+            fail(f"diagrove app: {key} is set; the page states no ratings or reviews")
+
+
 def check_dayfolio_build() -> None:
     """The committed pages are what tools/dayfolio-build.py makes from content/dayfolio/ and content/flectobi/."""
     for problem in build_module().check(ROOT):
@@ -1385,6 +1481,9 @@ def main() -> int:
         check_flectobi,
         check_flectobi_pages,
         check_flectobi_app,
+        check_diagrove,
+        check_diagrove_pages,
+        check_diagrove_app,
         check_press_kit,
     ):
         check()

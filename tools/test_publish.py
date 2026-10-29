@@ -97,6 +97,42 @@ class PublishTests(unittest.TestCase):
         self.assertEqual(written, self.published)
 
 
+class HeldAppTests(unittest.TestCase):
+    """An app whose pages are held back (DIAGROVE_HELD in tools/dayfolio-build.py) publishes nothing, even when a
+    page that is published links to it by mistake."""
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = Path(tmp.name)
+        files = {
+            "index.html": '<a href="apps/diagrove/">Diagrove</a> <a href="apps/flectobi/">FlectoBI</a>',
+            "apps/diagrove/index.html": '<img src="icon-320.webp" alt=""> <a href="guide/">Guide</a>',
+            "apps/diagrove/icon-320.webp": "", "apps/diagrove/guide/index.html": "<p>Guide</p>",
+            "apps/flectobi/index.html": "<p>FlectoBI</p>",
+            "assets/icon-diagrove-144.webp": "",
+        }
+        for rel, text in files.items():
+            path = self.root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+
+    def test_a_held_app_publishes_nothing(self):
+        self.addCleanup(tb.build.set_held, "diagrove", tb.build.APPS["diagrove"].held)
+        tb.build.set_held("diagrove", True)
+        published = publish.published_files(self.root)
+        self.assertIn("apps/flectobi/index.html", published)
+        for rel in ("apps/diagrove/index.html", "apps/diagrove/icon-320.webp", "apps/diagrove/guide/index.html"):
+            self.assertNotIn(rel, published)
+
+    def test_once_released_it_is_published(self):
+        self.addCleanup(tb.build.set_held, "diagrove", tb.build.APPS["diagrove"].held)
+        tb.build.set_held("diagrove", False)
+        published = publish.published_files(self.root)
+        for rel in ("apps/diagrove/index.html", "apps/diagrove/icon-320.webp", "apps/diagrove/guide/index.html"):
+            self.assertIn(rel, published)
+
+
 class RealSiteTests(unittest.TestCase):
     def test_the_real_site_keeps_its_fixed_addresses(self):
         published = publish.published_files(tb.TOOLS.parent)
@@ -106,6 +142,12 @@ class RealSiteTests(unittest.TestCase):
             self.assertIn(rel, published)
         for rel in ("README.md", "DESIGN.md", "PRODUCT.md", "tools/check-site.py"):
             self.assertNotIn(rel, published)
+        if tb.build.APPS["diagrove"].held:
+            # Not a page, a picture or a line of the stylesheet names it: its name isn't cleared yet.
+            self.assertFalse([rel for rel in published if "diagrove" in rel.lower()])
+            root = tb.TOOLS.parent
+            self.assertFalse([rel for rel in published if rel.endswith((".html", ".css", ".js", ".xml", ".txt"))
+                              and "diagrove" in (root / rel).read_text(encoding="utf-8", errors="replace").lower()])
 
 
 if __name__ == "__main__":

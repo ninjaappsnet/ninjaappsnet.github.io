@@ -285,6 +285,129 @@ class FlectoBIRulesTests(unittest.TestCase):
                 self.assertProblem(needle, "check_flectobi_app")
 
 
+DIAGROVE_APP = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Diagrove",
+    "operatingSystem": "macOS 26 or later, iPadOS 26 or later",
+    "applicationCategory": "DesignApplication",
+    "publisher": {"@type": "Organization", "name": "NinjaApps", "url": "https://ninjaapps.net/"},
+}
+DIAGROVE_SOON = '<span class="btn btn-quiet btn-soon">Coming to the App Store</span>'
+
+
+def diagrove_social(url: str) -> str:
+    return social(url).replace("apps/dayfolio/social-card.png", "apps/diagrove/social-card.png")
+
+
+def diagrove_product(app: dict, extra: str = DIAGROVE_SOON) -> str:
+    return tb.DIAGROVE_PRODUCT.replace(
+        "</head>", diagrove_social("https://ninjaapps.net/apps/diagrove/")
+        + f'<script type="application/ld+json">{json.dumps(app)}</script>\n</head>').replace(
+        "<h1>Diagrove</h1>", f"<h1>Diagrove</h1>\n{extra}")
+
+
+DIAGROVE_SUPPORT = tb.DIAGROVE_PRODUCT.replace(
+    "</head>", diagrove_social("https://ninjaapps.net/apps/diagrove/support.html") + "</head>").replace(
+    "<title>Diagrove — NinjaApps</title>", "<title>Support — Diagrove — NinjaApps</title>").replace(
+    'href="https://ninjaapps.net/apps/diagrove/"', 'href="https://ninjaapps.net/apps/diagrove/support.html"').replace(
+    '<meta name="description" content="The product page.">', '<meta name="description" content="Help with Diagrove.">'
+    ).replace("<h1>Diagrove</h1>", "<h1>Support</h1>")
+
+DIAGROVE_ALL = ("check_diagrove_pages", "check_diagrove", "check_diagrove_app", "check_dayfolio_build")
+
+
+class DiagroveRulesTests(unittest.TestCase):
+    """Diagrove's pages are held until launch: noindex, never published, linked from no page outside them, with no
+    price, banner or store link; and the per-page rules every app page keeps."""
+
+    def setUp(self):
+        self.site = tb.diagrove_site(self)
+        self.site.put("apps/diagrove/index.html", diagrove_product(DIAGROVE_APP))
+        self.site.put("apps/diagrove/support.html", DIAGROVE_SUPPORT)
+        self.site.put("content/diagrove/guide/a.md", tb.topic("drawing", "Drawing", 1))
+        self.site.put("index.html", '<a href="apps/dayfolio/">Dayfolio</a>')
+        self.site.put("privacy/index.html", '<a href="../apps/dayfolio/privacy.html">Dayfolio</a>')
+        build.write(self.site.root)
+        check.ROOT = self.site.root
+        self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
+        self.addCleanup(build.set_store_id, "diagrove", build.DIAGROVE_STORE_ID)
+        self.addCleanup(build.set_held, "diagrove", build.DIAGROVE_HELD)
+
+    def problems(self, *names: str) -> list:
+        check.errors, check.warnings = [], []
+        for name in names or DIAGROVE_ALL:
+            getattr(check, name)()
+        found, check.errors = list(check.errors), []
+        return found
+
+    def edit(self, rel: str, old: str, new: str) -> None:
+        text = self.site.read(rel)
+        self.assertIn(old, text)
+        self.site.put(rel, text.replace(old, new, 1))
+
+    def assertProblem(self, needle: str, *names: str) -> None:
+        found = self.problems(*names)
+        self.assertTrue(any(needle in p for p in found), f"no problem mentions {needle!r}: {found}")
+
+    def test_the_fixture_is_clean_and_warns_that_the_pages_are_held(self):
+        self.assertEqual(self.problems(), [])
+        self.assertTrue(any("held" in w and "DIAGROVE_HELD" in w for w in check.warnings), check.warnings)
+
+    def test_every_diagrove_page_is_in_the_manifest(self):
+        for rel in ("apps/diagrove/index.html", "apps/diagrove/support.html", "apps/diagrove/privacy.html",
+                    "apps/diagrove/guide/index.html", "apps/diagrove/tutorials/index.html",
+                    "apps/diagrove/how-to/index.html"):
+            self.assertIn(rel, check.MANIFEST)
+
+    def test_while_held_every_page_is_noindex(self):
+        self.edit("apps/diagrove/support.html", '<meta name="robots" content="noindex">\n', "")
+        self.assertProblem("apps/diagrove/support.html", "check_diagrove")
+
+    def test_while_held_no_page_outside_links_in(self):
+        for rel, link in (("index.html", '<a href="apps/diagrove/">Diagrove</a>'),
+                          ("privacy/index.html", '<a href="../apps/diagrove/privacy.html">Diagrove</a>'),
+                          ("apps/dayfolio/support.html", '<a href="https://ninjaapps.net/apps/diagrove/">D</a>')):
+            with self.subTest(rel=rel):
+                original = self.site.read(rel)
+                self.site.put(rel, original.replace("</body>", link + "</body>") if "</body>" in original
+                              else original + link)
+                self.assertProblem(rel, "check_diagrove")
+                self.site.put(rel, original)
+
+    def test_no_page_states_a_price_or_carries_a_banner_or_store_link(self):
+        for old, new, needle in (("<h1>Support</h1>", "<h1>Support</h1><p>It costs $9.99.</p>", "price"),
+                                 ("<title>", '<meta name="apple-itunes-app" content="app-id=1">\n<title>', "Banner"),
+                                 ("<h1>Support</h1>", '<h1>Support</h1><a href="https://apps.apple.com/app/id1">x</a>',
+                                  "App Store")):
+            with self.subTest(needle=needle):
+                self.site.put("apps/diagrove/support.html", DIAGROVE_SUPPORT)
+                self.edit("apps/diagrove/support.html", old, new)
+                self.assertProblem(needle, "check_diagrove")
+
+    def test_the_product_page_says_where_it_is_coming_without_a_link(self):
+        self.site.put("apps/diagrove/index.html", diagrove_product(DIAGROVE_APP, extra=""))
+        self.assertProblem("Coming to the App Store", "check_diagrove")
+
+    def test_once_released_the_pages_must_be_indexed_and_the_warning_goes(self):
+        build.set_held("diagrove", False)
+        found = self.problems("check_diagrove")
+        self.assertTrue(any("noindex" in p for p in found), found)
+        self.assertFalse(any("DIAGROVE_HELD" in w for w in check.warnings), check.warnings)
+
+    def test_the_product_page_names_the_mac_and_ipad_app_and_offers_nothing(self):
+        for key, value, needle in (("name", "Diagrams", "name"), ("operatingSystem", "macOS 26", "iPadOS"),
+                                   ("offers", {"@type": "Offer", "price": "0"}, "offers"),
+                                   ("aggregateRating", {"ratingValue": 5}, "aggregateRating")):
+            with self.subTest(key=key):
+                self.site.put("apps/diagrove/index.html", diagrove_product({**DIAGROVE_APP, key: value}))
+                self.assertProblem(needle, "check_diagrove_app")
+
+    def test_the_per_page_rules_hold_on_diagrove_pages(self):
+        self.edit("apps/diagrove/support.html", "<h1>Support</h1>", "<h1>Support</h1><h1>Again</h1>")
+        self.assertProblem("h1", "check_diagrove_pages")
+
+
 class TemplateGalleryTests(unittest.TestCase):
     """The gallery's pages, as tools/dayfolio-templates.py writes them, pass every Dayfolio rule, and a page that
     drifted from the library is reported."""

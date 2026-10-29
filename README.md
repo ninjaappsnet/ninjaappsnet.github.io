@@ -46,6 +46,8 @@ apps/flectobi/               FlectoBI (Mac): index, support and privacy pages, h
 content/flectobi/<section>/  Markdown sources of FlectoBI's guide and tutorials pages
 apps/flectobi/guide/ …       generated from content/flectobi/ (also tutorials/): never edit
 apps/flectobi/social-card.png  the FlectoBI pages' social card (source: assets/brand/flectobi-card.html)
+apps/diagrove/               Diagrove (Mac and iPad): held until launch, never published yet (see Diagrove pages)
+content/diagrove/<section>/  Markdown sources of Diagrove's guide, tutorials and how-to pages; SHOTS.md is generated
 404.html                     not-found page
 CNAME                        custom domain for GitHub Pages
 ```
@@ -717,6 +719,42 @@ to quote, so the pages quote none.
     --hide-scrollbars --window-size=1200,630 --virtual-time-budget=5000 \
     --screenshot=apps/flectobi/social-card.png "file://$PWD/assets/brand/flectobi-card.html"
   ```
+
+## Diagrove pages (held until launch)
+
+Diagrove (`apps/diagrove/`), NinjaApps' diagramming app for Mac and iPad, uses the same build and shell as
+Dayfolio and FlectoBI. Its sub-navigation is Overview, Guide, Tutorials, How-to, Support, and every `<title>` ends
+" — Diagrove — NinjaApps". The facts come from the app repo's `PRODUCT.md`, `CONTEXT.md` and
+`docs/release/listing.md` (its words: canvas, layer, shape, line, graphic, stencil, tint, binding).
+
+- **Held.** The name isn't cleared by an attorney yet, so nothing may make it public. `DIAGROVE_HELD = True` in
+  `tools/dayfolio-build.py` is the one switch. While it is on, every Diagrove page is `noindex` (so the build leaves
+  them out of `sitemap.xml`), `tools/publish.py` publishes nothing under `apps/diagrove/` even if a page links there,
+  and `tools/check-site.py` warns that the pages are held and fails if any page outside `apps/diagrove/` links in.
+  Diagrove's colours and its band icon (`apps/diagrove/icon-144.webp`) are in a `<style data-app="diagrove">` block
+  the build keeps in each of its own pages, not in `style.css`, so no published file names it
+  (`RealSiteTests` in `tools/test_publish.py` checks). It has no card on the landing page and no row on the privacy hub.
+- **Hand-written:** `index.html` (the product page; the one-sheet's art is the Standing diamond mark,
+  `media/standing-diamond.webp`, rendered from the app repo's `design/brand/standing-diamond.icon` with Icon Composer's
+  `ictool`), `support.html` and `privacy.html` (version 1.0, effective on the day it is published: set the date then).
+  No terms page: there is no in-app purchase (the app repo's D1370 decides the price model).
+- **Generated:** `content/diagrove/guide/`, `tutorials/` and `how-to/`, front matter and Markdown as Dayfolio's.
+- **Pictures to take.** The pages have no pictures yet. A line `[shot: name] What it shows.` in the Markdown marks
+  where one goes: the page keeps an invisible `<!-- shot name: … -->` there, and the build lists every one in
+  `content/diagrove/SHOTS.md` (generated; `--check` keeps it current). Take each picture as its row says, put the
+  WebP beside the page and replace the shot line with the picture line. The hand-written pages mark theirs with the
+  same comments.
+- **Icons:** `apps/diagrove/icon-320.webp` (app box) and `icon-144.webp` (band) are the app repo's
+  `design/brand/app-icon-default.png` (512 px), resized with Lanczos, WebP q95.
+- **Social card:** a screenshot of `assets/brand/diagrove-card.html`, as FlectoBI's
+  (`--screenshot=apps/diagrove/social-card.png`).
+
+**At launch (owner):** once the name is cleared and the App Store record exists: set `DIAGROVE_STORE_ID` and
+`DIAGROVE_HELD = False` in `tools/dayfolio-build.py`; take the `noindex` line off `apps/diagrove/index.html`,
+`support.html` and `privacy.html`; put the store button and the price on the product page (in place of "Coming to
+the App Store") and set the policy's effective date; move the colours into `style.css` if you like (and the
+production number NA-04 onto a landing-page sheet); add the sheet to `index.html` and a row to `privacy/index.html`;
+run the build and the checker; then merge into `main`, which deploys.
 
 ## Placeholder inventory (TODO)
 

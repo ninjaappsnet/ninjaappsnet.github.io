@@ -93,6 +93,11 @@ class App:
     store_id: Optional[str]          # the App Store id; None until the app has one (no banner, no store link)
     box: str                         # the app box's sentence, under every guide page (HTML)
     window_figures: bool = False     # landscape figures draw wide, and a transparent-cornered window gets a shadow
+    soon: str = "Coming to the Mac App Store"  # the app box's unlinked line while there is no store id
+    held: bool = False               # not public yet: every page it makes is noindex, and the deploy leaves it out
+    # The title's colours (ground, on, hi, ink, dark ink), carried in its own pages' <style data-app> rather than
+    # in style.css, so a held app's name and look are on no published file. None: style.css has them.
+    colours: Optional[Tuple[str, str, str, str, str]] = None
 
     @property
     def dir(self) -> str:
@@ -129,6 +134,15 @@ class App:
 # before launch. Once the id is set there, it fails until the product page states the price.
 FLECTOBI_STORE_ID: Optional[str] = None
 
+# Diagrove (Mac and iPad) has no App Store record and no price yet (D1370), and its name is not yet cleared by an
+# attorney, so its pages are held: DIAGROVE_HELD is the one switch. While it is True every page under apps/diagrove/
+# says noindex (so sitemap.xml leaves them out), tools/publish.py publishes none of them, and tools/check-site.py
+# fails if a page outside apps/diagrove/ links in (the landing page, the privacy hub) and warns that the pages wait.
+# At launch: set the id below, set DIAGROVE_HELD to False, take noindex off the hand-written pages, list Diagrove on
+# the landing page and the privacy hub, and run the build.
+DIAGROVE_STORE_ID: Optional[str] = None
+DIAGROVE_HELD = True
+
 DAYFOLIO = App(
     key="dayfolio", name="Dayfolio",
     card_alt=("The Dayfolio app icon beside the words: Dayfolio. A calm work journal. One page a day, "
@@ -158,15 +172,76 @@ FLECTOBI = App(
          "Report that follows it, on your Mac and with no code."),
     window_figures=True,
 )
-APPS: Dict[str, App] = {app.key: app for app in (DAYFOLIO, FLECTOBI)}
+DIAGROVE = App(
+    key="diagrove", name="Diagrove",
+    card_alt=("The Diagrove app icon beside the words: Diagrove. Precise diagrams that do something. "
+              "For Mac and iPad."),
+    sections={
+        "guide": Section("Guide", "topic", True, "The guide", "No guide pages yet."),
+        "tutorials": Section("Tutorials", "topic", True, "All tutorials", "No tutorials yet."),
+        "how-to": Section("How-to", "topic", False, "All how-to pages", "No how-to pages yet."),
+    },
+    subnav=[("Overview", ""), ("Guide", "guide/"), ("Tutorials", "tutorials/"), ("How-to", "how-to/"),
+            ("Support", "support.html")],
+    store_id=DIAGROVE_STORE_ID,
+    box=("<strong>Diagrove</strong> draws precise diagrams on your Mac and iPad, and makes them do something: "
+         "play them, bind them to data, export them for the web."),
+    window_figures=True,
+    soon="Coming to the App Store",
+    held=DIAGROVE_HELD,
+    # The icon's teal ground (its accent-hover) and the apricot of its one orange decision, apart from FlectoBI's
+    # deeper teal and mint. White on the ground 6.9:1, the apricot 5.2:1; the ink on white 6.9:1, the dark ink on
+    # black 10.3:1.
+    colours=("#17636a", "#ffffff", "#ffd8c2", "#17636a", "#6cc3c7"),
+)
+APPS: Dict[str, App] = {app.key: app for app in (DAYFOLIO, FLECTOBI, DIAGROVE)}
 
 
 def set_store_id(key: str, store_id: Optional[str]) -> None:
     """Give an app its App Store id for this run (the tests use it; the real one is set above)."""
-    global FLECTOBI_STORE_ID
+    global FLECTOBI_STORE_ID, DIAGROVE_STORE_ID
     APPS[key].store_id = store_id
     if key == "flectobi":
         FLECTOBI_STORE_ID = store_id
+    if key == "diagrove":
+        DIAGROVE_STORE_ID = store_id
+
+
+def set_held(key: str, held: bool) -> None:
+    """Hold an app's pages back, or release them, for this run (the tests use it; the real switch is above)."""
+    global DIAGROVE_HELD
+    APPS[key].held = held
+    if key == "diagrove":
+        DIAGROVE_HELD = held
+
+
+APP_STYLE_BLOCK = re.compile(r'\n?<style data-app="[^"]*">.*?</style>', re.S)
+
+
+def app_style(page: str) -> str:
+    """The <style data-app> block of an app whose colours live in its pages (App.colours), for this page; ""
+    for every other page. Its sub-navigation icon is apps/<key>/icon-144.webp, beside its pages."""
+    app = app_for(page)
+    if not page.startswith(app.dir + "/") or not app.colours:
+        return ""
+    ground, on, hi, ink, ink_dark = app.colours
+    return (f'<style data-app="{app.key}">'
+            f":root {{ --app-ground: {ground}; --app-on: {on}; --app-hi: {hi}; --app-ink: {ink}; }} "
+            f'[data-theme="dark"] {{ --app-ink: {ink_dark}; }} '
+            f'.subnav[aria-label="{app.name}"] .subnav-app::before '
+            f'{{ background-image: url({href(page, app.dir + "/icon-144.webp")}); }}</style>')
+
+
+def with_app_style(text: str, page: str) -> str:
+    """A page keeps its app's own style block, current, once, at the end of its head."""
+    block = app_style(page)
+    text = APP_STYLE_BLOCK.sub("", text)
+    return text.replace("</head>", block + "\n</head>", 1) if block and "</head>" in text else text
+
+
+def held_dirs() -> List[str]:
+    """The folders of the apps whose pages are held back: noindex, and never published."""
+    return [app.dir for app in APPS.values() if app.held]
 
 
 def app_for(page: str) -> App:
@@ -194,6 +269,10 @@ STYLESHEET_LINK = re.compile(r'<link rel="stylesheet" href="(?:/|(?:\.\./)*)styl
 FONT_PRELOAD = re.compile(r'<link rel="preload" href="(?:/|(?:\.\./)*)assets/fonts/[^"]+\.woff2"[^>]*>\n?')
 SCRIPT_SRC = re.compile(r'(<script src="(?:/|(?:\.\./)*))(assets/[\w.-]+\.js)(?:\?[^"]*)?"')
 PICTURE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)')
+# A picture still to be taken: "[shot: name] What it shows." on a line of its own. The page keeps it as an
+# invisible comment where the picture will go, and the build lists every one in content/<app>/SHOTS.md.
+SHOT = re.compile(r"^\[shot: ([a-z0-9]+(?:-[a-z0-9]+)*)\] (\S.*)$")
+NOINDEX = '<meta name="robots" content="noindex">'
 
 
 class BuildError(Exception):
@@ -476,7 +555,44 @@ def markdown(root: Path, md: str, page: str, source: str) -> str:
                 f'alt="{esc(alt.strip())}" width="{width}" height="{height}" loading="lazy">{caption_html}</figure>')
 
     archive = _archive()
-    return archive.convert(md, link=link, figure=lambda a, s, c: figure(a, s, c, archive))
+    shots: List[Tuple[str, str]] = []
+
+    def mark(line: str) -> str:
+        found = SHOT.match(line)
+        if not found:
+            return line
+        # A comment can't hold "--" (an option such as --live would end it early), so the marker spaces it out.
+        shots.append((found.group(1), found.group(2).replace("--", "- -")))
+        return f"SHOTMARK{len(shots) - 1}"
+
+    fenced, lines = False, []
+    for line in md.splitlines():
+        fenced = fenced != line.startswith("```")
+        lines.append(line if fenced else mark(line))
+    body = archive.convert("\n".join(lines) + ("\n" if md.endswith("\n") else ""), link=link,
+                           figure=lambda a, s, c: figure(a, s, c, archive))
+    return re.sub(r"<p>SHOTMARK(\d+)</p>",
+                  lambda m: "<!-- shot {}: {} -->".format(*shots[int(m.group(1))]), body)
+
+
+def shot_list(app: "App", items: List["Source"]) -> Optional[str]:
+    """content/<app>/SHOTS.md: every picture still to be taken on the app's pages, page by page; None when none."""
+    rows = []
+    for item in items:
+        fenced = False
+        for line in item.body.splitlines():
+            fenced = fenced != line.startswith("```")
+            found = None if fenced else SHOT.match(line)
+            if found:
+                page = posixpath.dirname(item.out) + "/"
+                rows.append(f"| `{page}` | `{found.group(1)}` | {found.group(2).replace('|', '/')} |")
+    if not rows:
+        return None
+    return (f"# {app.name}: pictures to take\n\n"
+            f"{GENERATED} from the `[shot: name]` lines in {app.content}/: edit those and run the build, not this "
+            "file. Each row is a picture a page still needs; take it as the row says, put the WebP next to the "
+            "page and replace the shot line with the picture line.\n\n"
+            "| Page | Shot | What it shows |\n|---|---|---|\n" + "\n".join(rows) + "\n")
 
 
 @dataclass
@@ -693,6 +809,7 @@ def render_page(root: Path, page: Page) -> str:
     head = [
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        *([NOINDEX] if app.held else []),
         *([app.banner] if app.banner else []),
         f"<title>{esc(full)}</title>",
         f'<meta name="description" content="{esc(page.description)}">',
@@ -771,7 +888,7 @@ def _social(root: Path, item: Source) -> Dict[str, str]:
 def _app_box(page: str) -> str:
     app = app_for(page)
     store = (f'<a class="ticket" href="{app.store_url}"><span>Get it on the App Store</span></a>' if app.store_url
-             else '<span class="ticket-soon">Coming to the Mac App Store</span>')
+             else f'<span class="ticket-soon">{app.soon}</span>')
     return f"""  <aside class="appbox" aria-label="Get {app.name}">
     <img class="app-icon-sm" src="{href(page, app.icon)}" alt="{app.name} app icon" width="64" height="64" loading="lazy">
     <div>
@@ -908,12 +1025,17 @@ def build_site(root: Path) -> Dict[str, str]:
     lastmod: Dict[str, str] = {}
     for app in APPS.values():
         indexes, pages = read_sources(root, app)
+        shots = shot_list(app, [item for key in app.sections
+                                for item in ([indexes[key]] if key in indexes else []) + pages[key]])
+        if shots:
+            out[f"{app.content}/SHOTS.md"] = shots
         for key in app.sections:
             for item in pages[key]:
-                out[item.out] = with_header(content_page(root, key, item, pages[key]), item.out)
+                out[item.out] = with_app_style(with_header(content_page(root, key, item, pages[key]), item.out), item.out)
                 lastmod[item.out] = item.fields.get("updated", item.fields["date"])
             if key in indexes:
-                out[indexes[key].out] = with_header(section_page(root, key, indexes[key], pages[key]), indexes[key].out)
+                out[indexes[key].out] = with_app_style(
+                    with_header(section_page(root, key, indexes[key], pages[key]), indexes[key].out), indexes[key].out)
     everything: Dict[str, str] = {}
     for rel in html_pages(root):
         if rel in out:
@@ -923,7 +1045,7 @@ def build_site(root: Path) -> Dict[str, str]:
             continue  # a page whose source is gone: stale(), and write() removes it
         # Every page asks for the stylesheet and its scripts by their content, so a visitor never pairs new markup
         # with a cached file, and carries the studio menu; a title's pages also get its band.
-        refreshed = with_scripts(root, with_stylesheet(root, with_header(with_band(text, rel), rel), rel))
+        refreshed = with_app_style(with_scripts(root, with_stylesheet(root, with_header(with_band(text, rel), rel), rel)), rel)
         if refreshed != text:
             out[rel] = refreshed
         text = refreshed

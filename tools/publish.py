@@ -8,7 +8,8 @@ so does every file a page uses: what its href, src, srcset, poster or meta conte
 names, what the stylesheet's url() names, and so on, followed through the
 stylesheet and the scripts. Some addresses are fetched from outside the site, so
 they go live though no page names them (ALWAYS, ALWAYS_UNDER, and the files among
-check-site.py's BAKED_IN_URLS). Anything else, the repo's notes, the Markdown
+check-site.py's BAKED_IN_URLS). An app whose pages are held back (DIAGROVE_HELD in
+tools/dayfolio-build.py, until it launches) publishes nothing, even if a page links to it. Anything else, the repo's notes, the Markdown
 sources, the templates and files nothing uses any more, stays off the site.
 
 The deploy (.github/workflows/pages.yml) runs this after the build and the
@@ -37,6 +38,7 @@ def load(name: str, file: str):
 
 
 check = load("check_site", "check-site.py")
+build = load("dayfolio_build", "dayfolio-build.py")
 
 # Never published, whatever names them.
 NEVER = {".git", ".github", "tools", "_site", "__pycache__"}
@@ -56,8 +58,10 @@ REFERENCE = re.compile(
 
 
 def site_files(root: Path) -> set:
-    return {path.relative_to(root).as_posix() for path in root.rglob("*")
-            if path.is_file() and not NEVER.intersection(path.relative_to(root).parts)}
+    held = tuple(folder + "/" for folder in build.held_dirs())
+    return {rel for rel in (path.relative_to(root).as_posix() for path in root.rglob("*")
+                            if path.is_file() and not NEVER.intersection(path.relative_to(root).parts))
+            if not (held and rel.startswith(held))}
 
 
 def is_page(rel: str) -> bool:
