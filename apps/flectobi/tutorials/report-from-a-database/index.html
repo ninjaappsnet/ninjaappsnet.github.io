@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Build a Report from a database — FlectoBI — NinjaApps</title>
-<meta name="description" content="Connect FlectoBI to PostgreSQL or MySQL read-only, choose a table or write one SELECT, shape the result, build a Report and refresh it later.">
+<meta name="description" content="Save a PostgreSQL or MySQL server as a data source, pick a table or write one SELECT, shape the result, build a Report and refresh it later.">
 <link rel="canonical" href="https://ninjaapps.net/apps/flectobi/tutorials/report-from-a-database/">
 <meta property="og:site_name" content="NinjaApps">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build a Report from a database — FlectoBI — NinjaApps">
-<meta property="og:description" content="Connect FlectoBI to PostgreSQL or MySQL read-only, choose a table or write one SELECT, shape the result, build a Report and refresh it later.">
+<meta property="og:description" content="Save a PostgreSQL or MySQL server as a data source, pick a table or write one SELECT, shape the result, build a Report and refresh it later.">
 <meta property="og:url" content="https://ninjaapps.net/apps/flectobi/tutorials/report-from-a-database/">
 <meta property="og:image" content="https://ninjaapps.net/apps/flectobi/social-card.png">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="The FlectoBI app icon beside the words: FlectoBI. Transform. Analyze. Visualize. Data prep and dashboards for Mac.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Build a Report from a database — FlectoBI — NinjaApps">
-<meta name="twitter:description" content="Connect FlectoBI to PostgreSQL or MySQL read-only, choose a table or write one SELECT, shape the result, build a Report and refresh it later.">
+<meta name="twitter:description" content="Save a PostgreSQL or MySQL server as a data source, pick a table or write one SELECT, shape the result, build a Report and refresh it later.">
 <meta name="twitter:image" content="https://ninjaapps.net/apps/flectobi/social-card.png">
 <meta name="twitter:image:alt" content="The FlectoBI app icon beside the words: FlectoBI. Transform. Analyze. Visualize. Data prep and dashboards for Mac.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="../../../../style.css?v=426f261aff">
 <script src="../../../../assets/theme.js?v=b7c0a7cebd" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FlectoBI","item":"https://ninjaapps.net/apps/flectobi/"},{"@type":"ListItem","position":2,"name":"Tutorials","item":"https://ninjaapps.net/apps/flectobi/tutorials/"},{"@type":"ListItem","position":3,"name":"Build a Report from a database","item":"https://ninjaapps.net/apps/flectobi/tutorials/report-from-a-database/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Report from a database","description":"Connect FlectoBI to PostgreSQL or MySQL read-only, choose a table or write one SELECT, shape the result, build a Report and refresh it later.","datePublished":"2026-10-26","dateModified":"2026-10-26","inLanguage":"en","image":["https://ninjaapps.net/apps/flectobi/social-card.png"],"mainEntityOfPage":"https://ninjaapps.net/apps/flectobi/tutorials/report-from-a-database/","author":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/"},"publisher":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/","logo":{"@type":"ImageObject","url":"https://ninjaapps.net/assets/brand/ninjaapps-seal-1024.png"}},"about":{"@type":"SoftwareApplication","name":"FlectoBI","url":"https://ninjaapps.net/apps/flectobi/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build a Report from a database","description":"Save a PostgreSQL or MySQL server as a data source, pick a table or write one SELECT, shape the result, build a Report and refresh it later.","datePublished":"2026-10-31","dateModified":"2026-10-31","inLanguage":"en","image":["https://ninjaapps.net/apps/flectobi/social-card.png"],"mainEntityOfPage":"https://ninjaapps.net/apps/flectobi/tutorials/report-from-a-database/","author":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/"},"publisher":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/","logo":{"@type":"ImageObject","url":"https://ninjaapps.net/assets/brand/ninjaapps-seal-1024.png"}},"about":{"@type":"SoftwareApplication","name":"FlectoBI","url":"https://ninjaapps.net/apps/flectobi/"}}</script>
 </head>
 <body>
 <!-- Generated by tools/dayfolio-build.py from content/flectobi/tutorials/report-from-a-database.md: edit that file and run the build, not this page. -->
@@ -56,21 +56,21 @@
   <h1 class="page-title">Build a Report from a database</h1>
   <div class="prose">
 
-<p>Business data often lives in a database. FlectoBI can read from PostgreSQL and from MySQL, including MariaDB. It only reads. It never writes to your database, and your password stays in your Mac’s Keychain.</p>
+<p>Business data often lives in a database. FlectoBI can read from PostgreSQL and from MySQL, including MariaDB. It only reads. It never writes to your database, and your login stays in your Mac’s Keychain.</p>
 
 <p><strong>Goal:</strong> a Report built on a table or a query from a database.</p>
 
-<p><strong>What you need:</strong> the host name, the port, the database name, a user name and a password. Ask your administrator for an account that can read the tables you need. An account with read rights only is the safest choice.</p>
+<p><strong>What you need:</strong> the host name, the port, the database name, a user name and a password. Ask your administrator for an account that can read the tables you need. An account with read rights only is the safest choice, and the sheet reminds you: “Use a read-only database user.”</p>
 
 <h2 id="connect">Connect</h2>
 
-<ol><li>Click <strong>Add Input</strong> in the toolbar, and choose <strong>New PostgreSQL Input…</strong> or <strong>New MySQL Input…</strong> from its menu. You can also use the <strong>Flow</strong> menu.</li><li>Fill in the sheet: <strong>Host</strong>, such as db.example.com. <strong>Port</strong>, which starts at 5432 for PostgreSQL and 3306 for MySQL. <strong>Database</strong>. <strong>User</strong>. <strong>SSL</strong>, explained below. <strong>Password</strong>.</li><li>Click <strong>Test Connection</strong>. On success the sheet says “Connected. N tables and views found.” You can click <strong>Cancel</strong> while it is connecting.</li></ol>
+<ol><li>Choose <strong>Flow › Connect to Database › New Data Source</strong>, then <strong>PostgreSQL…</strong> or <strong>MySQL or MariaDB…</strong>. On an empty Flow, click <strong>Connect to Database</strong> and choose from the same menu.</li><li>Fill in the sheet: <strong>Name</strong>, if you want one. <strong>Host</strong>, such as db.example.com. <strong>Port</strong>, which starts at 5432 for PostgreSQL and 3306 for MySQL. <strong>Database</strong>. <strong>User</strong>. <strong>SSL</strong>, explained below. <strong>Password</strong>.</li><li>Click <strong>Test Connection</strong>. On success the sheet says “Connected. N tables and views found.” You can click <strong>Cancel</strong> while it is connecting.</li><li>Click <strong>Continue</strong>. FlectoBI saves the data source on this Mac and shows its tables.</li></ol>
 
-<figure class="figure figure-landscape figure-wide"><img src="sheet-postgres.webp" alt="The connection sheet for a PostgreSQL Input, with the host, port, database, user, SSL and password." width="1920" height="1200" loading="lazy"><figcaption>The PostgreSQL sheet.</figcaption></figure>
+<figure class="figure figure-landscape figure-wide"><img src="sheet-postgres.webp" alt="The connection sheet for a PostgreSQL source, with the host, port, database, user, SSL and password." width="1920" height="1200" loading="lazy"><figcaption>The PostgreSQL sheet.</figcaption></figure>
 
-<figure class="figure figure-landscape figure-wide"><img src="sheet-mysql.webp" alt="The connection sheet for a MySQL Input." width="1920" height="1200" loading="lazy"><figcaption>The MySQL sheet.</figcaption></figure>
+<figure class="figure figure-landscape figure-wide"><img src="sheet-mysql.webp" alt="The connection sheet for a MySQL source." width="1920" height="1200" loading="lazy"><figcaption>The MySQL sheet.</figcaption></figure>
 
-<p>If something is wrong, the sheet says what, in a sentence. Examples are “Authentication failed. Check the user name and password.”, “The host name could not be found.” and “The server did not respond in time.”</p>
+<p>If something is wrong, the sheet says what, in a sentence. Examples are “Authentication failed. Check the user name and password.”, “The host name could not be found.” and “The server did not respond in time.” A server older than FlectoBI supports says so too. See <a href="../../guide/databases/">Databases</a> for the list.</p>
 
 <h2 id="choose-the-ssl-mode">Choose the SSL mode</h2>
 
@@ -80,21 +80,25 @@
 
 <aside class="callout"><p><strong>Tip:</strong> If the server offers only outdated encryption, FlectoBI says so and asks you to have TLS 1.2 or later turned on.</p></aside>
 
-<h2 id="where-the-password-goes">Where the password goes</h2>
+<h2 id="where-your-login-goes">Where your login goes</h2>
 
-<p>The password is saved in the macOS Keychain, for that exact server, port, database and user. It is never saved in the Workbook, so you can send the Workbook to a colleague without sharing it. They are asked for their own password once.</p>
+<p>Your user name and password are saved in the macOS Keychain, one item for each data source. Under <strong>Keep the User Name and Password</strong> you choose whether the item stays on this Mac or syncs with iCloud Keychain. They are never saved in the Workbook, so you can send the Workbook to a colleague without sharing them. A colleague connects the source once with their own login, using <strong>Connect…</strong> in the Input’s inspector.</p>
 
 <h2 id="read-a-table-or-write-one-select">Read a table, or write one SELECT</h2>
 
-<p>In the <strong>Data</strong> section, choose one of two options.</p>
+<p>The table picker lists the source’s tables and views, with a row estimate for each. Choose how to read.</p>
 
-<ul><li><strong>Table</strong>: pick from the list of tables and views. Views are marked.</li><li><strong>Custom Query</strong>: write a single query. It runs on the server in a read-only session.</li></ul>
+<ul><li><strong>Tables:</strong> tick one or several, then click <strong>Add Table</strong> (or <strong>Add 3 Tables</strong>, and so on). Each becomes an Input named after the table.</li><li><strong>Custom Query…:</strong> write a single query in the editor. It runs on the server in a read-only session. Click <strong>Add Input</strong> or press <strong>Command-Return</strong>.</li></ul>
 
-<p>A custom query for MySQL must start with SELECT, WITH, TABLE or VALUES. Use one query only. Remove INTO. One semicolon at the end is allowed. The sheet shows a problem before you add the Input, and a CALL is refused.</p>
+<p>A custom query must start with SELECT, WITH, TABLE or VALUES. Use one query only. Remove INTO. One semicolon at the end is allowed. The editor marks a problem before you add the Input. A CALL is refused. The editor colours the words and suggests table and column names as you type. See <a href="../../guide/sql-editor/">The SQL editor and relationships</a>.</p>
 
 <p>For example, to read only this year’s orders you might write a query that selects the order id, date, region and total from the orders table, with a condition on the date. A query that reads less comes back faster, and needs less memory, than a whole table that you then filter.</p>
 
-<p>Click <strong>Add Input</strong>. FlectoBI copies the result into the engine as a snapshot. The Step is named after the table, or after the database with the word query.</p>
+<p>FlectoBI copies the result into the engine as a snapshot.</p>
+
+<h2 id="watch-a-big-table-load">Watch a big table load</h2>
+
+<p>Click the new Input. Its first 1,000 rows appear at once, tagged <strong>Sample</strong>, and the Steps you add after it work on those rows straight away. The rest of the table loads in the background, and the Input’s card shows the progress. Click <strong>Stop</strong> if you have seen enough. When all rows are in, the tag goes and the Steps run again on everything. For the details, and for Steps that run on the server, see <a href="../../guide/large-tables/">Large tables</a>.</p>
 
 <h2 id="shape-the-data">Shape the data</h2>
 
@@ -118,11 +122,11 @@
 
 <p>A database Input is a snapshot. It does not stay connected.</p>
 
-<ol><li>Click <strong>Refresh</strong> in the toolbar, or press <strong>Command-R</strong>. FlectoBI connects, reads the table or query again and recomputes the Steps. The Report redraws.</li><li>Opening a Workbook does not connect on its own, unless a password for that exact server is already in your Keychain. Without one, the Step waits and asks.</li><li>To change the server or the user, select the Input and edit the form. The inspector shows <strong>Unsaved changes</strong> until you click <strong>Apply</strong>.</li></ol>
+<ol><li>Click <strong>Refresh</strong> in the toolbar, or press <strong>Command-R</strong>. FlectoBI connects, reads the table or query again and recomputes the Steps. The Report redraws.</li><li>A Workbook from someone else does not connect on its own. It asks once before it uses a login saved on this Mac, and otherwise waits for you to click <strong>Connect…</strong>.</li><li>To change the server or the user, select the Input and click <strong>Edit Source…</strong> in its inspector. Saving changes the source for every Input that reads it.</li></ol>
 
 <h2 id="what-you-learned">What you learned</h2>
 
-<ul><li>A database Input is read-only and a snapshot. See <a href="../../guide/databases/">Databases</a>.</li><li>The password lives in the Keychain, not the Workbook. See <a href="../../guide/databases/">Databases</a>.</li><li>You can shape the result and build a Report as with any Input. See <a href="../../guide/reports-and-pages/">Reports and Pages</a>.</li></ul>
+<ul><li>A database is saved once as a data source. An Input from it is read-only and a snapshot. See <a href="../../guide/databases/">Databases</a>.</li><li>The login lives in the Keychain, not the Workbook. See <a href="../../guide/databases/">Databases</a>.</li><li>A big table shows a sample first and loads the rest in the background. See <a href="../../guide/large-tables/">Large tables</a>.</li><li>You can shape the result and build a Report as with any Input. See <a href="../../guide/reports-and-pages/">Reports and Pages</a>.</li></ul>
 
   </div>
   <nav class="pager" aria-label="More of the guide">
