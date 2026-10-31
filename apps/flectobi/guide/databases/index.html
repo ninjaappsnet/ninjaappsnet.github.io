@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connecting to databases — FlectoBI — NinjaApps</title>
-<meta name="description" content="Read a table or one SELECT query from PostgreSQL, MySQL or MariaDB. SSL modes in plain words, how passwords are kept, snapshots and common errors.">
+<meta name="description" content="Save a PostgreSQL, MySQL or MariaDB server as a data source and pick its tables. SSL modes, where your login is kept, supported servers and common errors.">
 <link rel="canonical" href="https://ninjaapps.net/apps/flectobi/guide/databases/">
 <meta property="og:site_name" content="NinjaApps">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Connecting to databases — FlectoBI — NinjaApps">
-<meta property="og:description" content="Read a table or one SELECT query from PostgreSQL, MySQL or MariaDB. SSL modes in plain words, how passwords are kept, snapshots and common errors.">
+<meta property="og:description" content="Save a PostgreSQL, MySQL or MariaDB server as a data source and pick its tables. SSL modes, where your login is kept, supported servers and common errors.">
 <meta property="og:url" content="https://ninjaapps.net/apps/flectobi/guide/databases/">
 <meta property="og:image" content="https://ninjaapps.net/apps/flectobi/social-card.png">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="The FlectoBI app icon beside the words: FlectoBI. Transform. Analyze. Visualize. Data prep and dashboards for Mac.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Connecting to databases — FlectoBI — NinjaApps">
-<meta name="twitter:description" content="Read a table or one SELECT query from PostgreSQL, MySQL or MariaDB. SSL modes in plain words, how passwords are kept, snapshots and common errors.">
+<meta name="twitter:description" content="Save a PostgreSQL, MySQL or MariaDB server as a data source and pick its tables. SSL modes, where your login is kept, supported servers and common errors.">
 <meta name="twitter:image" content="https://ninjaapps.net/apps/flectobi/social-card.png">
 <meta name="twitter:image:alt" content="The FlectoBI app icon beside the words: FlectoBI. Transform. Analyze. Visualize. Data prep and dashboards for Mac.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="../../../../style.css?v=426f261aff">
 <script src="../../../../assets/theme.js?v=b7c0a7cebd" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FlectoBI","item":"https://ninjaapps.net/apps/flectobi/"},{"@type":"ListItem","position":2,"name":"Guide","item":"https://ninjaapps.net/apps/flectobi/guide/"},{"@type":"ListItem","position":3,"name":"Connecting to databases","item":"https://ninjaapps.net/apps/flectobi/guide/databases/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Connecting to databases","description":"Read a table or one SELECT query from PostgreSQL, MySQL or MariaDB. SSL modes in plain words, how passwords are kept, snapshots and common errors.","datePublished":"2026-10-26","dateModified":"2026-10-26","inLanguage":"en","image":["https://ninjaapps.net/apps/flectobi/social-card.png"],"mainEntityOfPage":"https://ninjaapps.net/apps/flectobi/guide/databases/","author":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/"},"publisher":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/","logo":{"@type":"ImageObject","url":"https://ninjaapps.net/assets/brand/ninjaapps-seal-1024.png"}},"about":{"@type":"SoftwareApplication","name":"FlectoBI","url":"https://ninjaapps.net/apps/flectobi/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Connecting to databases","description":"Save a PostgreSQL, MySQL or MariaDB server as a data source and pick its tables. SSL modes, where your login is kept, supported servers and common errors.","datePublished":"2026-10-31","dateModified":"2026-10-31","inLanguage":"en","image":["https://ninjaapps.net/apps/flectobi/social-card.png"],"mainEntityOfPage":"https://ninjaapps.net/apps/flectobi/guide/databases/","author":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/"},"publisher":{"@type":"Organization","name":"NinjaApps","url":"https://ninjaapps.net/","logo":{"@type":"ImageObject","url":"https://ninjaapps.net/assets/brand/ninjaapps-seal-1024.png"}},"about":{"@type":"SoftwareApplication","name":"FlectoBI","url":"https://ninjaapps.net/apps/flectobi/"}}</script>
 </head>
 <body>
 <!-- Generated by tools/dayfolio-build.py from content/flectobi/guide/databases.md: edit that file and run the build, not this page. -->
@@ -56,26 +56,42 @@
   <h1 class="page-title">Connecting to databases</h1>
   <div class="prose">
 
-<p>FlectoBI can read from PostgreSQL, MySQL and MariaDB. It only reads. It never writes to a database, and it never changes one. This page shows how to connect, what the SSL choices mean, and what to do when a connection fails.</p>
+<p>FlectoBI can read from PostgreSQL, MySQL and MariaDB. It only reads. It never writes to a database, and it never changes one. This page shows how to save a server as a data source, pick its tables, and what to do when a connection fails. For tables with millions of rows, see <a href="../large-tables/">Large tables</a>. To write your own query, see <a href="../sql-editor/">The SQL editor and relationships</a>.</p>
 
-<h2 id="add-a-database-input">Add a database Input</h2>
+<aside class="callout"><p><strong>Tip:</strong> Use a read-only database user. The sheet says “Use a read-only database user.” under the <strong>User</strong> field. Ask your administrator for an account that can read the tables you need and nothing else.</p></aside>
 
-<ol><li>Click <strong>Add Input</strong> in the toolbar and choose <strong>New PostgreSQL Input…</strong> or <strong>New MySQL Input…</strong>. The same items are in the <strong>Flow</strong> menu. Use the MySQL one for MariaDB too. On an empty Flow, click <strong>Connect to Database</strong> and choose <strong>PostgreSQL…</strong> or <strong>MySQL or MariaDB…</strong>.</li><li>Fill in <strong>Host</strong>, <strong>Port</strong>, <strong>Database</strong> and <strong>User</strong>. The port starts as 5432 for PostgreSQL and 3306 for MySQL.</li><li>Choose the <strong>SSL</strong> mode. See below.</li><li>Type the <strong>Password</strong>.</li><li>Click <strong>Test Connection</strong>. FlectoBI tells you how many tables and views it found.</li><li>Choose what to read, then click <strong>Add Input</strong>.</li></ol>
+<h2 id="save-a-data-source">Save a data source</h2>
+
+<p>A data source is a server you save once. Every Workbook on this Mac can then pick tables from it.</p>
+
+<ol><li>Choose <strong>Flow › Connect to Database › New Data Source</strong>, then <strong>PostgreSQL…</strong> or <strong>MySQL or MariaDB…</strong>. Use the MySQL one for MariaDB too. The same menu is under <strong>Add Input</strong> in the toolbar, in the right-click menu of the canvas, and on the <strong>Connect to Database</strong> button of an empty Flow.</li><li>Type a <strong>Name</strong> if you like. Without one, FlectoBI shows the database and host, such as “shop on db.example.com”.</li><li>Fill in <strong>Host</strong>, <strong>Port</strong>, <strong>Database</strong> and <strong>User</strong>. The port starts as 5432 for PostgreSQL and 3306 for MySQL.</li><li>Choose the <strong>SSL</strong> mode. See below.</li><li>Type the <strong>Password</strong>.</li><li>Click <strong>Test Connection</strong>. FlectoBI tells you how many tables and views it found.</li><li>Under <strong>Keep the User Name and Password</strong>, choose where your login is kept. See below.</li><li>Click <strong>Continue</strong>. FlectoBI saves the source and opens the table picker.</li></ol>
 
 <div class="figure-row">
-<figure class="figure figure-landscape figure-wide"><img src="sheet-postgres.webp" alt="The New PostgreSQL Input sheet with host, port, database, user, SSL and password fields and the Test Connection button." width="1920" height="1200" loading="lazy"></figure>
-<figure class="figure figure-landscape figure-wide"><img src="sheet-mysql.webp" alt="The New MySQL Input sheet with the same fields, the port set to 3306." width="1920" height="1200" loading="lazy"></figure>
+<figure class="figure figure-landscape figure-wide"><img src="sheet-postgres.webp" alt="The sheet for a new PostgreSQL data source with host, port, database, user, SSL and password fields and the Test Connection button." width="1920" height="1200" loading="lazy"></figure>
+<figure class="figure figure-landscape figure-wide"><img src="sheet-mysql.webp" alt="The sheet for a new MySQL data source with the same fields, the port set to 3306." width="1920" height="1200" loading="lazy"></figure>
 </div>
 
-<h2 id="a-table-or-one-query">A table or one query</h2>
+<p>If you already saved a source for the same server, database and user, the sheet says “You already have this source” and offers <strong>Use It</strong>.</p>
 
-<p>The <strong>Data</strong> section has two choices.</p>
+<h2 id="pick-tables">Pick tables</h2>
 
-<ul><li><strong>Table:</strong> after a successful test, pick a table or view from the list. Views are marked “(view)”. In PostgreSQL, names look like schema.table. The Step takes the table’s name.</li><li><strong>Custom Query:</strong> type one query. The server runs it in a read-only session. The Step is named after the database and the word query. <strong>Command-Return</strong> adds the Input from the query editor.</li></ul>
+<p>The table picker shows the source’s name and address above a list of its tables.</p>
 
-<p>For MySQL and MariaDB, a query must start with <strong>SELECT</strong>, <strong>WITH</strong>, <strong>TABLE</strong> or <strong>VALUES</strong>. Enter one query only, with at most one semicolon at the end. Remove <strong>INTO</strong>, because the rows come into FlectoBI, not into a file. FlectoBI shows the problem in the sheet before you add the Input.</p>
+<ul><li>Type in <strong>Search tables</strong> to narrow the list.</li><li>Each row shows the table’s name, its kind (Table, View or Materialized view) and a row estimate, such as “about 1.2M rows”. A table already in this Workbook says “Already added”. You can add it again.</li><li>Tick one table or several. The button reads <strong>Add Table</strong>, or <strong>Add 3 Tables</strong>, and so on.</li><li>Each table becomes its own Input, named after the table. The new Steps are stacked at the left of the canvas. One <strong>Undo</strong> takes them all away.</li></ul>
 
-<aside class="callout"><p><strong>Tip:</strong> A query that already filters and summarizes on the server keeps the Dataset small. Use it when a table is very large.</p></aside>
+<p>FlectoBI keeps a copy of the table and column names on this Mac, so the picker opens at once. The copy holds names and keys, never rows. FlectoBI reads it again when it is more than a day old. Click the <strong>Refresh Schema</strong> button beside the search box to read it now. On a big database a line under the list says “Reading columns…”. You can pick tables meanwhile.</p>
+
+<p>If this Mac has no password for the source, the picker asks for it first. If the connection fails, the picker says why, with <strong>Try Again</strong> and <strong>Edit Source…</strong>.</p>
+
+<p>The picker also has <strong>Custom Query…</strong> for your own query and <strong>Relationships…</strong>. See <a href="../sql-editor/">The SQL editor and relationships</a>.</p>
+
+<h2 id="change-a-table-or-a-source">Change a table or a source</h2>
+
+<p>Select a database Input. Its inspector has a <strong>Source</strong> section and a <strong>Data</strong> section.</p>
+
+<ul><li><strong>Source</strong> names the data source and its address. <strong>Edit Source…</strong> opens the sheet again. Saving it changes the source for every Input that reads it, in every Workbook. <strong>Change</strong> reads this Input’s table from another source of the same kind. A <strong>Password</strong> field shows when this Mac has none for the source. <strong>Test Connection</strong> is here too.</li><li><strong>Data</strong> has <strong>Table</strong> and <strong>Custom Query</strong>. Choose another table from the <strong>Table</strong> pop-up. Views are marked “(view)”. For the rest of the section, see <a href="../large-tables/">Large tables</a>.</li></ul>
+
+<p>To rename or delete saved sources, open <strong>Settings</strong> with <strong>Command-,</strong> and choose <strong>Data Sources</strong>. Each row shows a name you can change, the address, <strong>Relationships…</strong> and <strong>Delete…</strong>. Deleting a source removes its password from the Keychain. Workbooks that read it ask you to connect again.</p>
 
 <h2 id="what-the-ssl-modes-mean">What the SSL modes mean</h2>
 
@@ -87,34 +103,44 @@
 
 <p>If your MySQL server uses its own certificate, <strong>Verify certificate</strong> may fail. FlectoBI then suggests <strong>Require</strong>. For MySQL, the sheet shows a warning under the SSL choice when the mode is weaker than it should be for the server you named.</p>
 
-<h2 id="where-the-password-goes">Where the password goes</h2>
+<h2 id="where-your-login-goes">Where your login goes</h2>
 
-<p>The password is saved in your Mac’s Keychain. It is never stored in the Workbook, and it does not travel when you share one.</p>
+<p>Your user name and password are saved together in your Mac’s Keychain, one item for each data source. They are never saved in a Workbook or in FlectoBI’s own files. Under <strong>Keep the User Name and Password</strong> you choose where the item may go.</p>
 
-<ul><li>A password is used only for the exact server it was saved for: the same host, port, database and user. If you copy a Workbook and change the host, FlectoBI asks for the password again.</li><li>For MySQL, a password saved under one SSL mode is also used for stronger modes. If you lower the mode, FlectoBI asks again.</li><li>Other Inputs for the same server pick up a saved password and read without asking.</li></ul>
+<ul><li><strong>This Mac.</strong> The default. The item stays in this Mac’s Keychain.</li><li><strong>This Mac and iCloud Keychain.</strong> The item can sync to your other Macs with the same Apple Account, when Passwords sync is on in System Settings. The choice is greyed out when this Mac is not signed in to iCloud, with an <strong>Open System Settings…</strong> button under it. The first time you pick it, FlectoBI asks you to check that Passwords sync is on. Click <strong>Passwords Sync Is On</strong> to go on.</li><li><strong>This Mac only, never in backups.</strong> A new Mac asks again.</li></ul>
 
-<p>Typing a new password in the inspector and clicking <strong>Apply</strong> moves it into the Keychain and clears the field.</p>
+<p>A Workbook keeps only the source’s name, kind, host, port, database and SSL mode. It never holds a user name or a password. That makes it safe to send to a colleague.</p>
+
+<h3 id="a-workbook-from-someone-else">A Workbook from someone else</h3>
+
+<p>A Workbook you did not make never connects by itself.</p>
+
+<ul><li>If it reads from a server you have not saved, the source is listed under <strong>In This Workbook</strong> in the Connect to Database menu. Its Inputs and the Visuals they feed say “Connect to load the data.” Click <strong>Connect…</strong> in the Input’s inspector and type your own user name and password. <strong>Save to My Data Sources</strong> is ticked. FlectoBI saves the source only once the connection works. Untick it and FlectoBI forgets the login when you quit.</li><li>If it reads from a source you have saved, a bar asks once: “This workbook wants to read from “name” with your saved login.” Click <strong>Allow</strong> or <strong>Don’t Allow</strong>. Until you allow it, the Inputs say “Allow to load the data.”, FlectoBI makes no connection, and each waiting Input offers <strong>Allow</strong>. FlectoBI remembers your answer on this Mac for that file. If the file is changed somewhere else, it asks again. A Workbook you made on this Mac does not ask.</li></ul>
 
 <h2 id="snapshots-and-refresh">Snapshots and refresh</h2>
 
-<p>A database Input copies the table or the query result into FlectoBI. It does not stay connected. Your Flow and Reports work on that copy. Click <strong>Refresh</strong> to read a fresh copy. FlectoBI connects only to the host and port you typed, and only when you test, add or refresh an Input, or open a Workbook with a saved password.</p>
+<p>A database Input copies the table or the query result into FlectoBI. It does not stay connected. Your Flow and Reports work on that copy. Click <strong>Refresh</strong> to read a fresh copy. FlectoBI connects only to the hosts and ports of your data sources, and only when it needs to: when you test a connection, open the picker, refresh, or open a Workbook that reads from the source.</p>
 
-<p>Once an Input exists, its inspector shows the same fields. Changes to the connection wait for <strong>Apply</strong>. A change of table or query applies at once.</p>
+<h2 id="servers-flectobi-works-with">Servers FlectoBI works with</h2>
+
+<p>FlectoBI is tested with these servers:</p>
+
+<ul><li>PostgreSQL 14, 15, 16, 17 and 18.</li><li>MySQL 8.0, 8.4, 9.7 and 26.x.</li><li>MariaDB 10.11, 11.4 and 11.8.</li></ul>
+
+<p>A server older than that is refused at once, with a sentence such as “This server runs MySQL 5.7. FlectoBI needs MySQL 8.0 or later.”</p>
 
 <h2 id="common-errors">Common errors</h2>
 
-<div class="table-wrap"><table><thead><tr><th>What you see</th><th>What to do</th></tr></thead><tbody><tr><td>Authentication failed. Check the user name and password.</td><td>Retype them.</td></tr><tr><td>The server refused the connection. Check the host and port.</td><td>Check the address, the port and any firewall.</td></tr><tr><td>The host name could not be found.</td><td>Check the spelling, and your network.</td></tr><tr><td>The server did not respond in time.</td><td>Try again, or ask whether the server is up.</td></tr><tr><td>The server requires SSL. Choose Require or Verify certificate.</td><td>Change the <strong>SSL</strong> mode.</td></tr><tr><td>The server’s certificate could not be verified.</td><td>If the server uses its own certificate, choose <strong>Require</strong>.</td></tr><tr><td>This user may not read that database or table.</td><td>Ask for read permission.</td></tr><tr><td>That table does not exist.</td><td>Check the table name.</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>What you see</th><th>What to do</th></tr></thead><tbody><tr><td>Authentication failed. Check the user name and password.</td><td>Retype them.</td></tr><tr><td>The server refused the connection. Check the host and port.</td><td>Check the address, the port and any firewall.</td></tr><tr><td>The host name could not be found.</td><td>Check the spelling, and your network.</td></tr><tr><td>The server did not respond in time.</td><td>Try again, or ask whether the server is up.</td></tr><tr><td>The server requires SSL. Choose Require or Verify certificate.</td><td>Change the <strong>SSL</strong> mode.</td></tr><tr><td>The server’s certificate could not be verified.</td><td>If the server uses its own certificate, choose <strong>Require</strong>.</td></tr><tr><td>The server does not allow connections from this Mac.</td><td>Ask the administrator to allow your Mac’s address.</td></tr><tr><td>That database does not exist on this server.</td><td>Check the database name.</td></tr><tr><td>This user may not read that database or table.</td><td>Ask for read permission.</td></tr><tr><td>That table does not exist.</td><td>Check the table name.</td></tr><tr><td>The sign-in for this connection could not be prepared. Check the host, database, user name and password.</td><td>Check those four fields in <strong>Edit Source…</strong>.</td></tr><tr><td>This server runs MySQL 5.7. FlectoBI needs MySQL 8.0 or later.</td><td>The server is older than FlectoBI supports. The sentence names the server and the version it needs.</td></tr><tr><td>Connect to load the data.</td><td>This Mac has no login for the source. Click <strong>Connect…</strong>.</td></tr><tr><td>Allow to load the data.</td><td>Click <strong>Allow</strong> in the bar or in the Input’s inspector.</td></tr></tbody></table></div>
 
 <h2 id="what-is-not-supported">What is not supported</h2>
 
-<ul><li>Accounts on MySQL or MariaDB that sign in with ed25519, PARSEC or sha256_password. Ask for an account that uses caching_sha2_password or mysql_native_password.</li><li>Servers that offer only TLS 1.0 or 1.1. MySQL needs TLS 1.2 or later.</li><li>Stored procedures on MySQL and MariaDB (CALL). Only queries that read data are accepted.</li><li>Other databases. SQL Server, Oracle and cloud warehouses are not available.</li></ul>
-
-<p>FlectoBI is tested with MySQL 8.4, 9.7 and 26.x, and MariaDB 11.8.</p>
+<ul><li>Accounts on MySQL or MariaDB that sign in with ed25519, PARSEC or sha256_password. Ask for an account that uses caching_sha2_password or mysql_native_password.</li><li>Servers that offer only TLS 1.0 or 1.1. MySQL needs TLS 1.2 or later.</li><li>Stored procedures on MySQL and MariaDB (CALL). Only queries that read data are accepted.</li><li>Servers older than the list above.</li><li>Other databases. SQL Server, Oracle and cloud warehouses are not available.</li></ul>
 
   </div>
   <nav class="pager" aria-label="More of the guide">
     <a class="pager-prev" href="../inputs/"><span class="pager-label">PREVIOUS</span>Inputs and their options</a>
-    <a class="pager-next" href="../the-flow-canvas/"><span class="pager-label">NEXT</span>The Flow canvas</a>
+    <a class="pager-next" href="../large-tables/"><span class="pager-label">NEXT</span>Large database tables</a>
   </nav>
   <aside class="appbox" aria-label="Get FlectoBI">
     <img class="app-icon-sm" src="../../icon-320.webp" alt="FlectoBI app icon" width="64" height="64" loading="lazy">

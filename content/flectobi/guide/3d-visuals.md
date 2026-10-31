@@ -3,7 +3,7 @@ title: 3D Visuals
 description: Use 3D Scatter, Surface Plot, Spike Map and the globe where your data has a real third measure. Learn to turn them, reset the view and why there are no 3D bars.
 slug: 3d-visuals
 date: 2026-10-26
-order: 14
+order: 16
 ---
 Most charts should be flat, because flat charts are easy to read. FlectoBI offers 3D for the few cases where your data has a real third measure, such as height, or a place on a sphere. In those cases a flat chart has to hide something.
 

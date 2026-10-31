@@ -3,7 +3,7 @@ title: Selections and Slicers
 description: Click a chart or use a Slicer to filter every other Visual on the Page. Learn how cross-filtering works, when it applies, and how to clear it.
 slug: selections-and-slicers
 date: 2026-10-26
-order: 12
+order: 14
 ---
 A Report is more useful when you can ask it questions. Which region sold the most? What does this one product look like on its own? In FlectoBI you ask by choosing a Value. Everything else on the Page answers.
 

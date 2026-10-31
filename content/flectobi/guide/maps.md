@@ -3,7 +3,7 @@ title: Maps
 description: Draw filled and bubble maps from countries, states, cities or coordinates, offline. Learn how places match and how to fix the ones that do not.
 slug: maps
 date: 2026-10-26
-order: 13
+order: 15
 ---
 If your data has places in it, a map is often the quickest way to see where the numbers are. FlectoBI draws two kinds of map, and it does so without sending anything over the network. The shapes and the place names ship inside the app.
 
