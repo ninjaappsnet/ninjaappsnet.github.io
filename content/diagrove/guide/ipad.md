@@ -74,7 +74,6 @@ These are on the Mac only in Diagrove 1.0:
 - Exporting a **Web player**. The iPad exports PNG, PDF and SVG.
 - The sheet that turns a photo or picture into a diagram, with Continuity Camera. On iPad, use Sketch mode.
 - Importing OmniGraffle documents and stencils.
-- **File › New from Dayfolio…**.
 - The [command-line tool](../command-line-tool/).
 
 Sketch mode is the other way round: it’s on iPad only.

@@ -25,7 +25,7 @@ Choose **File › Send to Dayfolio…**, or click **Send to Dayfolio** in the to
 
 In the entry you see the picture of the canvas, and the zipped Document as a file attached to the entry. The picture is a still image: it doesn’t change when you change the diagram, and its Actions don’t run. The zipped file is the whole Document; unzip it to open it in Diagrove again.
 
-Showing a diagram inside an entry as a live, clickable embed needs Dayfolio’s side of the work, which isn’t released. Bindings to Dayfolio’s data, and **File › New from Dayfolio…** on the Mac, wait on Dayfolio too: until Dayfolio shares its data, they show sample or hand-set values.
+Showing a diagram inside an entry as a live, clickable embed needs Dayfolio’s side of the work, which isn’t released. More connections between the two come in later versions.
 
 ## Other ways between the two apps
 

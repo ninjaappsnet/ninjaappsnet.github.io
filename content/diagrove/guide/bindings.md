@@ -12,7 +12,7 @@ A binding lets a graphic show a value from outside the drawing: a number in its 
 A binding lives on one graphic and has three parts:
 
 - **What it drives**: Text, Fill, Stroke, Text colour, Visibility or Progress. The menu offers what fits the graphic you selected; a line has a label and a stroke but no fill, for example. On a group, colours and progress pass to everything inside it.
-- **Where the value comes from**: a variable, a JSON file, a web link, a shortcut, or Dayfolio.
+- **Where the value comes from**: a variable, a JSON file, a web link, or a shortcut.
 - **A rule** that turns the value into what the graphic shows.
 
 A graphic can have several bindings; when two drive the same thing, the later one wins. Bindings never change the document you edit, only what’s shown: while you play, while **Show live data** is on, and in the Web player.
@@ -23,8 +23,8 @@ A graphic can have several bindings; when two drive the same thing, the later on
 2. Click **+** (or **Add binding**) and choose what the binding drives. A card opens.
 3. Fill in the card’s rows:
    - **Drives**: what it changes.
-   - **From**: **Variable**, **Dayfolio**, **JSON** or **Shortcut**. The rows under it ask for that source’s details.
-   - **Path**: which value to read, for JSON, a shortcut and Dayfolio.
+   - **From**: **Variable**, **JSON** or **Shortcut**. The rows under it ask for that source’s details.
+   - **Path**: which value to read, for JSON and a shortcut.
    - **Rule**: **As it is**, **Format text**, **Steps** or **Match values**.
 
 The card says what the binding shows right now, such as “Shows “12 h””, or why it leaves the graphic as drawn. **Duplicate binding** and **Remove binding** are in the card’s context menu.
@@ -71,10 +71,6 @@ From **JSON**, the **Source** menu chooses where the JSON lives:
 ### A shortcut’s output
 
 From **Shortcut**, type the shortcut’s name and, if you like, a path into its output. Output that reads as JSON, such as `{"done": 0.4}`, is used as JSON; anything else as text. Shortcuts run when Play mode starts, when you refresh in Play mode, and when you click **Run now** on the card. A run that fails, is cancelled or gets no answer within two minutes keeps the last good output.
-
-### The Dayfolio feed
-
-From **Dayfolio** is meant to read a summary Dayfolio shares with Diagrove: your projects and their hours, the running timer, recent entry titles. Dayfolio doesn’t share that summary yet, so today these bindings say “Dayfolio isn’t sharing with Diagrove yet” and leave the graphic as drawn. See [Diagrove and Dayfolio](../dayfolio/).
 
 ## Show live data
 

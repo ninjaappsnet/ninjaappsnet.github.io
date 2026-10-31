@@ -65,13 +65,13 @@
 
 <p>A binding lives on one graphic and has three parts:</p>
 
-<ul><li><strong>What it drives</strong>: Text, Fill, Stroke, Text colour, Visibility or Progress. The menu offers what fits the graphic you selected; a line has a label and a stroke but no fill, for example. On a group, colours and progress pass to everything inside it.</li><li><strong>Where the value comes from</strong>: a variable, a JSON file, a web link, a shortcut, or Dayfolio.</li><li><strong>A rule</strong> that turns the value into what the graphic shows.</li></ul>
+<ul><li><strong>What it drives</strong>: Text, Fill, Stroke, Text colour, Visibility or Progress. The menu offers what fits the graphic you selected; a line has a label and a stroke but no fill, for example. On a group, colours and progress pass to everything inside it.</li><li><strong>Where the value comes from</strong>: a variable, a JSON file, a web link, or a shortcut.</li><li><strong>A rule</strong> that turns the value into what the graphic shows.</li></ul>
 
 <p>A graphic can have several bindings; when two drive the same thing, the later one wins. Bindings never change the document you edit, only what’s shown: while you play, while <strong>Show live data</strong> is on, and in the Web player.</p>
 
 <h2 id="add-a-binding">Add a binding</h2>
 
-<ol><li>Select one graphic and open the inspector’s <strong>Data</strong> section.</li><li>Click <strong>+</strong> (or <strong>Add binding</strong>) and choose what the binding drives. A card opens.</li><li>Fill in the card’s rows:<ul><li><strong>Drives</strong>: what it changes.</li><li><strong>From</strong>: <strong>Variable</strong>, <strong>Dayfolio</strong>, <strong>JSON</strong> or <strong>Shortcut</strong>. The rows under it ask for that source’s details.</li><li><strong>Path</strong>: which value to read, for JSON, a shortcut and Dayfolio.</li><li><strong>Rule</strong>: <strong>As it is</strong>, <strong>Format text</strong>, <strong>Steps</strong> or <strong>Match values</strong>.</li></ul></li></ol>
+<ol><li>Select one graphic and open the inspector’s <strong>Data</strong> section.</li><li>Click <strong>+</strong> (or <strong>Add binding</strong>) and choose what the binding drives. A card opens.</li><li>Fill in the card’s rows:<ul><li><strong>Drives</strong>: what it changes.</li><li><strong>From</strong>: <strong>Variable</strong>, <strong>JSON</strong> or <strong>Shortcut</strong>. The rows under it ask for that source’s details.</li><li><strong>Path</strong>: which value to read, for JSON and a shortcut.</li><li><strong>Rule</strong>: <strong>As it is</strong>, <strong>Format text</strong>, <strong>Steps</strong> or <strong>Match values</strong>.</li></ul></li></ol>
 
 <p>The card says what the binding shows right now, such as “Shows “12 h””, or why it leaves the graphic as drawn. <strong>Duplicate binding</strong> and <strong>Remove binding</strong> are in the card’s context menu.</p>
 
@@ -108,10 +108,6 @@
 <h3 id="a-shortcut-s-output">A shortcut’s output</h3>
 
 <p>From <strong>Shortcut</strong>, type the shortcut’s name and, if you like, a path into its output. Output that reads as JSON, such as <code>{"done": 0.4}</code>, is used as JSON; anything else as text. Shortcuts run when Play mode starts, when you refresh in Play mode, and when you click <strong>Run now</strong> on the card. A run that fails, is cancelled or gets no answer within two minutes keeps the last good output.</p>
-
-<h3 id="the-dayfolio-feed">The Dayfolio feed</h3>
-
-<p>From <strong>Dayfolio</strong> is meant to read a summary Dayfolio shares with Diagrove: your projects and their hours, the running timer, recent entry titles. Dayfolio doesn’t share that summary yet, so today these bindings say “Dayfolio isn’t sharing with Diagrove yet” and leave the graphic as drawn. See <a href="../dayfolio/">Diagrove and Dayfolio</a>.</p>
 
 <h2 id="show-live-data">Show live data</h2>
 

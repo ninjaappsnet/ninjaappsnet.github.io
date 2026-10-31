@@ -1,11 +1,11 @@
 ---
 title: Diagrove and Dayfolio
-description: What works between Diagrove and Dayfolio today, Send to Dayfolio, Shortcuts and links, and what waits for a Dayfolio update.
+description: What works between Diagrove and Dayfolio today: Send to Dayfolio, Shortcuts and links.
 slug: dayfolio
 date: 2026-10-29
 order: 12
 ---
-Diagrove and [Dayfolio](../../../dayfolio/) are made by the same small team, and they’re built to work together. Some of that works today; the rest needs a Dayfolio update that isn’t out yet. This page says plainly which is which, so you know what to expect.
+Diagrove and [Dayfolio](../../../dayfolio/) are made by the same small team, and they’re built to work together. This page says what works between them today.
 
 ## What works today
 
@@ -25,6 +25,8 @@ Diagrove opens the share menu (the share sheet on iPad) with two files: a pictur
 
 [shot: send-to-dayfolio-ipad] iPad, light appearance, the Roadmap template: the share sheet open from Send to Dayfolio, with Dayfolio among the apps.
 
+> **Tip:** What Dayfolio gets is a copy. Your document stays where you saved it, and later changes in Diagrove reach an entry only when you send the diagram again.
+
 ### Shortcuts both ways
 
 Diagrove’s two shortcut actions work with Dayfolio’s own:
@@ -37,26 +39,14 @@ Diagrove’s two shortcut actions work with Dayfolio’s own:
 
 `diagrove://new?text=…` opens a new diagram drawn from the text, from any app or note that can open a link. See [Import and export](../import-and-export/).
 
-## What isn’t there yet
+## What comes later
 
-Three things wait for a Dayfolio update that isn’t out yet. The first two need Dayfolio to share a summary of your work with Diagrove; the third needs Dayfolio to show diagrams inside entries. There’s no date for any of them, so plan on what works today.
-
-### Bindings to the Dayfolio feed
-
-A [binding](../bindings/) can read **From Dayfolio**: your projects and their hours this week, the running timer, the titles of recent entries. Until Dayfolio shares that summary, these bindings say “Dayfolio isn’t sharing with Diagrove yet” and leave the graphic as you drew it, and in Play mode the live data capsule says “No data from Dayfolio yet”. Your hand-set values stay on show.
-
-### New from Dayfolio (Mac)
-
-**File › New from Dayfolio…** draws a diagram from that same summary: a **Project map** of your projects and the people on them, a **Week flow** of your latest week’s entries, or a **Timeline**. Until Dayfolio shares its summary, the sheet says Dayfolio isn’t sharing with Diagrove yet, and **Try with sample data** shows each diagram with made-up projects and entries, so you can see what it would draw. It’s on the Mac only.
-
-The sheet also says what the summary holds: your projects, people, tags, places, the running timer and the titles of recent entries. Locked journals and what you write in entries are never part of it.
+More connections between Diagrove and Dayfolio come in later versions, once Dayfolio has its side of them. There’s no date for them, so plan on what works today.
 
 ### Diagrams inside entries
 
-A diagram shown live inside a Dayfolio entry, which you could tap through, isn’t in Dayfolio yet either. A picture of the canvas, through Send to Dayfolio, is what an entry shows today.
+A diagram shown live inside a Dayfolio entry, which you could tap through, is one of them. A picture of the canvas, through Send to Dayfolio, is what an entry shows today.
 
 You can already see how a diagram would look and behave there: **View › Preview as embed**, with **Width** set to **Dayfolio entry**. A graphic with an **Ask the host app** action is how a diagram would ask Dayfolio to do something, such as start a timer for a project. Today, in Diagrove’s Play mode, it shows a note with what Dayfolio would get.
 
 [shot: preview-embed-mac] The Mac, light appearance, the App screen template: the Preview as embed sheet with Width set to Dayfolio entry and Show set to Just the drawing, and one row under The app receives.
-
-> **Tip:** What Dayfolio gets is a copy. Your document stays where you saved it, and later changes in Diagrove reach an entry only when you send the diagram again.
