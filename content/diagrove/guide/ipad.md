@@ -11,7 +11,7 @@ Diagrove on iPad is the same app as on the Mac, on the same engine: the same doc
 
 The start screen offers **New diagram** and **Choose a template** above the Files browser, with your recent documents. See [Getting started](../getting-started/).
 
-In a document, the toolbar has **Undo** and **Redo**, **Sketch**, **Insert picture**, **Arrange**, **Export** (with Send to Dayfolio and Preview as embed in its menu), **Play** and the inspector. The sidebar sits beside the canvas in landscape and over it in portrait. The inspector is a column on a wide window and a sheet on a narrow one. Diagrove works in every orientation, in Split View, Slide Over and Stage Manager, and in more than one window at a time.
+In a document, the toolbar has **Undo** and **Redo**, **Sketch**, **Insert picture**, **Arrange**, **Export** (with Send to Dayfolio and Preview as embed in its menu), **Play** and the inspector. Where the sidebar and the inspector can’t both sit beside the canvas, in portrait or a half-screen Split View, opening one puts the other away, so the canvas keeps its room. The inspector is a column on a wide window and a sheet on a narrow one. Diagrove works in every orientation, in Split View, Slide Over and Stage Manager, and in more than one window at a time.
 
 ## Touch
 
@@ -19,16 +19,16 @@ In a document, the toolbar has **Undo** and **Redo**, **Sketch**, **Insert pictu
 - **Double tap** edits a shape’s text, or enters a group.
 - **Drag** moves, resizes, rotates or draws. From an empty spot, a drag selects what it surrounds.
 - **Two fingers** pan and pinch to zoom.
-- **Long press** opens the context menu: Cut, Copy, Paste, Duplicate, Bring to front, Send to back, Save as stencil… and Delete, with a table cell’s row and column commands first.
+- **Long press** opens the context menu, the same one a right-click opens on the Mac: Cut, Copy, Copy as Diagrove text, Paste and Duplicate, then Group or Ungroup, Lock, Bring to front and Send to back, Flip, Align for two or more, Save as stencil… and Delete, with a table cell’s row and column commands first.
 - **Drag and drop** brings in stencils from the sidebar and pictures or SVG drawings from other apps, where you drop them.
 
 Fingers get generous targets: a handle or a thin line can be grabbed a little outside it, so small shapes stay easy to move.
 
 ## Apple Pencil
 
-Outside Sketch mode, Apple Pencil works as a precise finger, and it presses at once. Hovering the Pencil over the canvas shows the magnets a line would attach to. Fingers resting on the screen while you draw are ignored.
+Outside Sketch mode, Apple Pencil works as a precise finger, and it presses at once. With the Line tool chosen, hovering the Pencil over the canvas shows the magnets a line would attach to. Fingers resting on the screen while you draw are ignored.
 
-Double tap or squeeze switches between the last drawing tool and **Select**, unless you set the gesture to do something else in Settings.
+Double tap or squeeze switches between the last drawing tool and **Select**, unless you turn the gesture off in Settings or set it to run a shortcut.
 
 [shot: pencil-ipad] iPad in landscape, light appearance, the Flowchart template: Apple Pencil hovering near a shape with the Line tool chosen, the shape’s magnets showing.
 
@@ -73,7 +73,7 @@ These are on the Mac only in Diagrove 1.0:
 
 - Exporting a **Web player**. The iPad exports PNG, PDF and SVG.
 - The sheet that turns a photo or picture into a diagram, with Continuity Camera. On iPad, use Sketch mode.
-- Importing OmniGraffle documents and stencils.
+- Opening OmniGraffle documents. OmniGraffle stencils (`.gstencil`) import on iPad too, from **Your libraries**.
 - The [command-line tool](../command-line-tool/).
 
 Sketch mode is the other way round: it’s on iPad only.

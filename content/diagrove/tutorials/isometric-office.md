@@ -9,7 +9,7 @@ Isometric canvases draw a scene as if you were looking down at a corner of it, w
 
 ## 1. Open the Office floor template
 
-On the Mac, choose **File › New from template…** (Shift-Command-N), choose **Spaces**, then **Office floor**, pick White or Ink paper and click **Create**. On iPad, tap **Choose a template** on the start screen.
+On the Mac, choose **File › New from template…** (Shift-Command-N), choose **Spaces**, then **Office floor**, pick White or Ink paper and click **Create**. On iPad, tap **Choose a template** on the start screen, then **Spaces** and **Office floor**.
 
 The canvas, “Second floor”, shows Orchard Row Architects’ floor: the Schools team’s desks on green and the Housing team’s on blue along the back wall, each desk with a name on a pin, a meeting room at the front left, a kitchen and a printer, and a desk at the right end marked “Free desk”. A grid step is 16 points, which this template takes as 25 cm.
 
@@ -19,13 +19,13 @@ The canvas, “Second floor”, shows Orchard Row Architects’ floor: the Schoo
 
 ## 2. Choose where new things go
 
-The floor, the coloured areas and the walls lie on locked layers, so they stay put while you work. In the sidebar’s **Layers** list, click **Desks and places**. Whatever you add now goes on that layer.
+The floor, the coloured areas and the walls lie on locked layers, so they stay put while you work. Open the sidebar’s **Canvases** tab and, in its **Layers** list, click **Desks and places**. Whatever you add now goes on that layer.
 
-[shot: layers-list] Mac, light. The sidebar’s Layers list for the Office floor template, with Desks and places chosen and the locked Floor, Areas and Walls layers below it. Point to Desks and places.
+[shot: layers-list] Mac, light. The sidebar’s Canvases tab with the Layers list for the Office floor template, with Desks and places chosen and the locked Floor, Areas and Walls layers below it. Point to Desks and places.
 
 ## 3. Build a planter from a block
 
-On an isometric canvas, the tool palette offers **Block**, **Cylinder**, **Slab** and **Sphere**; **More shapes** has the rest, such as pyramids, cones, domes and tiles.
+On an isometric canvas, the tool palette offers **Block**, **Iso cylinder**, **Slab** and **Sphere**; **More shapes** has the rest, such as pyramids, cones, domes and tiles.
 
 1. Choose **Block** in the palette.
 2. Drag on the open floor between the kitchen and the printer. You draw the block’s footprint on the floor grid.
@@ -36,9 +36,10 @@ On an isometric canvas, the tool palette offers **Block**, **Cylinder**, **Slab*
 
 ## 4. Stack a plant on it
 
-1. Open the **Stencils** tab in the sidebar, choose **Isometric**, and find **Plant** in **Office scenes** (or type “plant” in **Search stencils**).
-2. Drag it onto the block. A stencil dropped on an isometric canvas lands on the floor under the pointer.
-3. In the inspector, set **Elevation** to the block’s height, 32. The plant now stands on top of the block.
+1. Open the **Stencils** tab in the sidebar, choose **Places**, and find **Plant** in **Office scenes** (or type “plant” in **Search stencils**).
+2. Drag it onto the block. A stencil dropped on an isometric canvas lands on the floor under the pointer, so at first the plant stands on the floor, not on the block.
+3. In the inspector, set **Elevation** to the block’s height, 32.
+4. Drag the plant until it stands on the middle of the block’s top.
 
 You can also raise a graphic by Option-dragging it. Whatever you stack, Diagrove works out what is in front, so the plant draws over the block and behind anything nearer to you.
 
@@ -46,7 +47,7 @@ You can also raise a graphic by Option-dragging it. Whatever you stack, Diagrove
 
 ## 5. Seat someone at the free desk
 
-1. In **Isometric**, find **Laptop** in **Devices** and drag it onto the free desk.
+1. Go back to the Stencils tab’s first page (**‹ Stencils**), choose **Isometric**, find **Laptop** in **Devices** and drag it onto the free desk.
 2. Set its **Elevation** to 49 pt, about the height the other laptops in this template sit at, so it rests on the desk top. Drag it on the desk until it sits where you want it.
 3. Double-click the words “Free desk” on the tag above the desk and type the new person’s name.
 
@@ -56,7 +57,7 @@ The name tags in this template face you wherever they are. A flat graphic can do
 
 ## 6. Add people
 
-1. In **Isometric**, open **Isometric people** and drag **Walking person** into the aisle in front of the desks.
+1. Go back to the Stencils tab’s first page, choose **People**, open **Isometric people** and drag **Walking person** into the aisle in front of the desks.
 2. In the inspector’s **Stencil** section, change the person’s **Tint**, **Skin** and **Hair**.
 3. Use **Turn** to face the person another way, a quarter turn at a time.
 

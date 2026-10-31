@@ -100,7 +100,7 @@
       <li><strong>Write the steps, not a picture.</strong> The prompt bar draws boxes and arrows. For a poster, an infographic or a chart, start from a template or add stencils, then ask for changes.</li>
       <li><strong>Use the words on the canvas.</strong> A change finds graphics by the words in them (“Pay”), by a kind (“decisions”, “notes”, “lines”) or by what you selected.</li>
       <li><strong>Check the change before you apply it.</strong> It shows on the canvas with Apply and Discard. If it isn’t right, Discard puts everything back.</li>
-      <li><strong>Open the guide.</strong> The sparkle at the start of the prompt bar shows what you can ask, with examples you can click or tap to try. On the Mac it is also Help › What you can ask the prompt bar.</li>
+      <li><strong>Open the guide.</strong> The sparkle at the start of the prompt bar shows what you can ask, with examples you can click or tap to try. It is also Help › What you can ask the prompt bar, on the Mac and the iPad.</li>
     </ul>
 
     <h2 id="files">Where are my documents? How does iCloud Drive work?</h2>
@@ -115,7 +115,7 @@
     <ul>
       <li><strong>Can’t find a stencil?</strong> Search the Stencils tab one word at a time, such as “router” or “desk”. The preview, when you rest the pointer on a tile or touch and hold it, shows its library and the words it is found by.</li>
       <li><strong>A stencil looks different after an update.</strong> Diagrove never changes the stencils in a document by itself. When a built-in stencil changes, it offers the update, and you choose.</li>
-      <li><strong>Your own libraries</strong> are <code>.diagrovestencils</code> files. Export one from the Stencils tab to share it, and bring one in with Import a library.</li>
+      <li><strong>Your own libraries</strong> are <code>.diagrovestencils</code> files. Export one from the Stencils tab to share it, and bring one in with Import… at the top of Your libraries, which also reads OmniGraffle stencil files.</li>
     </ul>
 
     <h2 id="bindings">Live data doesn’t show</h2>
@@ -126,13 +126,13 @@
     </ul>
 
     <h2 id="omnigraffle">Can I open OmniGraffle files?</h2>
-    <p>On the Mac, choose File › Import… and pick a <code>.graffle</code> file. Diagrove reads it into a new document and never changes the original. A card under the tool palette lists anything that came across differently or was left out, with a button that shows you each graphic it is about. OmniGraffle stencil files come in as one of your stencil libraries. OmniGraffle is a trademark of The Omni Group; Diagrove is not affiliated with it.</p>
+    <p>On the Mac, choose File › Import… and pick a <code>.graffle</code> file. Diagrove reads it into a new document and never changes the original. A card under the tool palette lists anything that came across differently or was left out, with a button that shows you each graphic it is about. OmniGraffle stencil files (<code>.gstencil</code>) come in as one of your stencil libraries, on the Mac and the iPad, through Import… in Your libraries. OmniGraffle is a trademark of The Omni Group; Diagrove is not affiliated with it.</p>
 
     <h2 id="cli">The command-line tool</h2>
     <p>The <code>diagrove</code> tool is a separate, notarized download for the Mac, outside the App Store. Install it with Homebrew:</p>
     <pre><code>brew install ninjaappsnet/diagrove/diagrove
 diagrove --version</code></pre>
-    <p>It needs macOS 26 or later, on Apple silicon or Intel. Without Homebrew, download the zip from <a href="https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest">the latest release</a>, keep its files together, and link <code>diagrove</code> onto your <code>PATH</code>; the tool alone, copied without the folders beside it, doesn’t work. In the app, Help › Command-line tool… says the same.</p>
+    <p>It needs macOS 26 or later, on Apple silicon or Intel. Without Homebrew, download the zip from <a href="https://github.com/ninjaappsnet/homebrew-diagrove/releases/latest">the latest release</a>, keep its files together, and link <code>diagrove</code> onto your <code>PATH</code>; the tool alone, copied without the folders beside it, doesn’t work. In the app, Help › Command-line tool… shows the same steps, with a link to the download.</p>
     <ul>
       <li><strong>“diagrove: command not found”.</strong> Open a new Terminal window after installing, or check that Homebrew’s folder is on your <code>PATH</code> (<code>brew doctor</code> says).</li>
       <li><strong><code>--live</code> asks for permission.</strong> Editing a document open in the app goes through Apple Events, so macOS asks once whether your terminal, or the AI app that runs the tool, may control Diagrove. Allow it, or change it later in System Settings › Privacy &amp; Security › Automation. Diagrove must be open, with the document in a window.</li>
@@ -141,7 +141,7 @@ diagrove --version</code></pre>
     <p>More in <a href="guide/command-line-tool/">the guide’s page on the command-line tool</a>.</p>
 
     <h2 id="dayfolio">Diagrove and Dayfolio</h2>
-    <p>Diagrove is a sibling of <a href="../dayfolio/">Dayfolio</a>, the work journal. Today you can share a diagram into a Dayfolio entry from the iPad with Send to Dayfolio, which hands over a picture of the canvas and the document, and connect the two with Shortcuts. More connections between the two come in later versions. <a href="guide/dayfolio/">Diagrove and Dayfolio, in the guide</a>.</p>
+    <p>Diagrove is a sibling of <a href="../dayfolio/">Dayfolio</a>, the work journal. Today you can share a diagram into a Dayfolio entry from the iPad with Send to Dayfolio, which hands over a picture of the drawing and the document, and connect the two with Shortcuts. More connections between the two come in later versions. <a href="guide/dayfolio/">Diagrove and Dayfolio, in the guide</a>.</p>
 
     <h2 id="diagnostics">How do I send a diagnostic report?</h2>
     <p>When Diagrove crashes, hangs or runs slowly, your Mac or iPad hands it a report about a day later. Diagrove keeps these reports on the device for 30 days and never sends them by itself. If we ask for one:</p>

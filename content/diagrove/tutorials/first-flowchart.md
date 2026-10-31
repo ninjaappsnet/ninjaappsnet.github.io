@@ -11,7 +11,7 @@ In this tutorial you draw a small checkout flowchart: a cart, a payment, a check
 
 On the Mac, choose **File › New diagram** (Command-N). On iPad, tap **New diagram** on the start screen.
 
-A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar sits at the bottom of the window.
+A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar floats at the bottom of the canvas.
 
 [shot: blank-canvas] Mac, light. A new blank diagram: the empty canvas with the tool palette at the top and the prompt bar at the bottom. Point to the prompt bar.
 
@@ -59,13 +59,13 @@ Try a few more, applying each one:
 - “add a step after Pay called Fraud check”
 - select Send receipt, then “make it bold”
 
-The sparkle at the start of the prompt bar opens the guide to what you can ask, with examples you can click to put in the bar. On the Mac it’s also in **Help › What you can ask the prompt bar**.
+The sparkle at the start of the prompt bar opens the guide to what you can ask, with examples you can click to put in the bar. It’s also in **Help › What you can ask the prompt bar**, on the Mac and the iPad.
 
-[shot: change-on-show] Mac, light. “make all decisions orange” on show on the canvas, with Apply and Discard in the prompt bar. Point to Apply.
+[shot: change-on-show] Mac, light. “make all decisions orange” on show on the canvas, with Discard and Apply on the card above the prompt bar. Point to Apply.
 
 ## 5. Tidy the layout
 
-Adding Fraud check pushed the shapes about. Type “tidy up the whole diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
+Adding Fraud check laid the flow out again around the new step. Whenever shapes you’ve moved by hand need putting back in order, type “tidy up the whole diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
 
 [shot: tidied] Mac, light. The finished flow after tidying: Basket, Pay, Fraud check, an orange Paid? decision, Send receipt in bold, and the “No” line looping back to Pay.
 
@@ -77,7 +77,7 @@ Adding Fraud check pushed the shapes about. Type “tidy up the whole diagram”
 4. Choose a **Scale** of 1×, 2× or 3×, and turn on **Transparent background** if the picture will sit on a coloured page.
 5. Click **Export…** and choose where to save it. On iPad, tap **Save to Files…**, or **Share** to send it straight on.
 
-The sheet’s subtitle says what you’ll get, including the PNG’s width in pixels.
+The sheet’s subtitle says what you’ll get, including the PNG’s size in pixels.
 
 [shot: export-png] Mac, light. The export sheet set to PNG image, Just the drawing, 2×, with the preview of the checkout flow. Point to the subtitle.
 

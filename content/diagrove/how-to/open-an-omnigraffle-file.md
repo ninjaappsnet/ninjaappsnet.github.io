@@ -11,14 +11,14 @@ Diagrove on the Mac reads OmniGraffle documents (`.graffle`, flat files and pack
 
 1. Choose **File › Import…**. You can also open a `.graffle` file from the Finder with Diagrove.
 2. Choose the OmniGraffle document. Diagrove opens a copy as a new, untitled Document.
-3. A card below the tool palette shows the file’s name and what came across, such as “Imported a copy · 3 canvases, 142 graphics”. A green check means everything came across as it was. Otherwise, open the list of differences to see what was simplified or left out.
+3. A card below the tool palette shows the file’s name and what came across, such as “Imported a copy · 3 canvases, 142 graphics”. A green check means everything came across as it was, and the card goes away on its own. Otherwise, open the list of differences to see what was simplified or left out.
 4. Choose **File › Save** and give it a name. It’s saved as a `.diagrove` Document; the `.graffle` stays as it was.
 
 [shot: import-report] Mac, light. A newly imported OmniGraffle document with the import card below the tool palette, its list of differences open. Point to the differences.
 
 ## What comes across
 
-- Canvases, in order, with their names, sizes and layers. Master canvases from older OmniGraffle documents become shared layers.
+- Canvases, in order, with their names, sizes and layers. Master canvases from older OmniGraffle documents become shared layers when every canvas uses the same one, and ordinary layers otherwise.
 - Shapes, including custom outlines, with their fills and gradients, strokes, shadows, words and text styles.
 - Lines with their arrowheads and labels, connected to the shapes and magnets they were connected to.
 - Groups, tables and pictures.
@@ -28,8 +28,8 @@ Some things come across differently, and the card names each one: shapes Diagrov
 
 ## OmniGraffle stencils
 
-To bring in an OmniGraffle stencil file (`.gstencil`), open the sidebar’s **Stencils** tab and click **Import a library** beside **Your libraries**. Its stencils appear in a library of your own. See [Make a stencil library](../make-a-stencil-library/).
+To bring in an OmniGraffle stencil file (`.gstencil`), open **Your libraries** on the sidebar’s **Stencils** tab and choose **Import…** at the top of its page. Its stencils appear in a library of your own. See [Make a stencil library](../make-a-stencil-library/).
 
-OmniGraffle import is on the Mac only in Diagrove 1.0. Documents you save open on iPad as usual.
+Opening OmniGraffle documents is on the Mac only in Diagrove 1.0; **Import…** in **Your libraries** takes `.gstencil` files on iPad too. Documents you save open on iPad as usual.
 
 More in [Import and export](../../guide/import-and-export/).

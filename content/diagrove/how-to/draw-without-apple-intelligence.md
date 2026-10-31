@@ -13,7 +13,7 @@ The prompt bar works on every Mac and iPad that runs Diagrove. Without Apple Int
 2. Type the steps in one of these forms, then press Return (on iPad, tap the arrow):
    - Arrows: `Idea -> Plan -> Build -> Ship`. A step ending in a question mark, such as `Paid?`, becomes a decision. Label a line with `Paid? -[Yes]-> Send receipt` or `Paid? -> Send receipt: Yes`.
    - Several lines of arrows, pasted in, make one diagram: a step with the same name is the same shape.
-   - A sentence: “Sign up, confirm your email, then log in” becomes three steps in a row.
+   - A sentence: “Sign up, confirm your email, then log in” becomes three steps, one after another.
    - A list pasted in, one topic per line, indented under its parent, becomes a tree of topics.
 3. Diagrove draws boxes and arrows and lays them out. The notice’s **Undo** takes them away.
 
@@ -27,7 +27,7 @@ These changes are read without Apple Intelligence too. Each one shows on the can
 - On what you’ve selected: “make it orange”, “make them 50% wider”, “align them left”, “group them”.
 - The layout: “tidy up the whole diagram”.
 
-The sparkle at the start of the bar (on the Mac, also **Help › What you can ask the prompt bar**) lists what you can ask. Without Apple Intelligence it leaves out the examples that need it.
+The sparkle at the start of the bar (or **Help › What you can ask the prompt bar**) lists what you can ask. Without Apple Intelligence it leaves out the examples that need it.
 
 [shot: guide-without-ai] iPad, light. The prompt bar guide, “What you can ask”, opened from the sparkle with Apple Intelligence off. Point to the Draw a new diagram section.
 

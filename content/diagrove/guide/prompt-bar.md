@@ -57,9 +57,9 @@ When Diagrove can’t work out part of a request, it says what it read and which
 
 ## The guide
 
-The sparkle at the start of the prompt bar opens **What you can ask**, the prompt bar guide. On the Mac, **Help › What you can ask the prompt bar** opens it too. It lists what the bar understands in four groups: Change what’s selected, Change graphics by name, Tidy up and Draw a new diagram. Click an example (tap on iPad) and it goes into the bar with its name highlighted, so you can type your own over it, then press Return.
+The sparkle at the start of the prompt bar opens **What you can ask**, the prompt bar guide, in the column where the inspector goes. **Help › What you can ask the prompt bar** opens it too. It lists what the bar understands in four groups: Change what’s selected, Change graphics by name, Tidy up and Draw a new diagram. Click an example (tap on iPad) and it goes into the bar with its name highlighted, so you can type your own over it, then press Return (tap the arrow on iPad).
 
-The guide opens with the first document window each time Diagrove starts. Turn off its *Shows at startup* switch to stop that, and turn it on again in the guide whenever you like; on the Mac, **Settings › General** has the same choice.
+The guide opens with the first document window each time Diagrove starts. Choose **Don’t show again** at its foot to stop that; the notice that follows has **Undo**. On the Mac, **Diagrove › Settings…** has the switch *Show the prompt bar guide when Diagrove opens*, to turn it back on later.
 
 ## What needs Apple Intelligence
 
@@ -80,7 +80,7 @@ When Apple Intelligence is off, the bar says so as you click into it, and the gu
 
 ## Privacy
 
-The prompt bar runs on the device, with Apple’s on-device model when Apple Intelligence is on and Diagrove’s own reader of English requests either way. Nothing you type is sent anywhere, and there’s no account. For what Diagrove does and doesn’t do with your data, see [Support](../../support.html).
+The prompt bar runs on the device, with Apple’s on-device model when Apple Intelligence is on and Diagrove’s own reader of English requests either way. Nothing you type is sent anywhere, and there’s no account. For what Diagrove does and doesn’t do with your data, see the [privacy policy](../../privacy.html#ai).
 
 ## Related
 

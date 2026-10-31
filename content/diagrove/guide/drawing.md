@@ -35,7 +35,7 @@ Fill’s **Type** is Solid, Linear gradient or Radial gradient. A gradient has a
 
 ## Align, distribute and snapping
 
-Select two or more graphics, then choose **Arrange › Align** (left, centre or right edges, top, middle or bottom) or **Arrange › Distribute** (horizontally or vertically). The inspector’s **Arrange** section has the same buttons.
+Select two or more graphics, then choose **Arrange › Align** (Left edges, Horizontal centres, Right edges, Top edges, Vertical centres or Bottom edges). Select three or more and **Arrange › Distribute** spaces them evenly, horizontally or vertically. The inspector’s **Arrange** section has the same buttons.
 
 As you drag, guides show where a graphic lines up with the edges and centres of others, and it snaps to them, else to the grid. Hold Command to move freely. With nothing selected, the inspector’s **Grid** section turns *Show grid* and *Snap to grid* on or off and sets the spacing.
 
@@ -51,11 +51,11 @@ Choose Table in the palette and drag a rectangle for a three-by-three table with
 
 On the Mac, drop a picture or PDF on the canvas, paste one, or choose **Insert › Picture…** (Shift-Command-I). On iPad, use **Insert › Picture from Photos…**, **Picture from Files…** or Insert picture in the toolbar. A picture is a shape, so it can have a border, a shadow and connected lines.
 
-The inspector’s **Picture** section chooses Fill, Fit or Stretch, replaces the picture and opens **Crop…**, where you drag the crop or pick a proportion such as Square or 16:9. Cropping keeps the picture where it is on the canvas. **Reset crop** shows all of it again. To show a picture in another outline, such as a circle, change its shape under Fill’s **More options**.
+The inspector’s **Picture** section chooses Fill, Fit or Stretch, replaces the picture and opens **Crop…**, where you drag the crop or pick a proportion such as Square or 16:9. Cropping keeps the picture where it is on the canvas. **Reset crop** shows all of it again. To show a picture in another outline, such as a circle, choose a shape in the Picture section’s **Mask** menu.
 
 ## Masks
 
-Put a shape behind the graphics you want to clip, select them all and choose **Arrange › Mask with selected shape**. The backmost shape becomes the mask: its outline clips the rest and it isn’t drawn itself. **Arrange › Release mask** undoes it. **Flip horizontal** (Shift-H) and **Flip vertical** (Shift-V) are in the same menu.
+Put a shape behind the graphics you want to clip, select them all and choose **Arrange › Mask with selected shape**. The backmost shape becomes the mask: its outline clips the rest and it isn’t drawn itself. **Arrange › Release mask** undoes it. **Flip horizontal** and **Flip vertical** are in the same menu; on the canvas, Shift-H and Shift-V flip the selection.
 
 [shot: inspector-gradient] The Mac, dark appearance, a blank diagram on Ink paper with a rounded rectangle selected: point to the Fill section set to Linear gradient with three stops on its bar, and the angle field.
 

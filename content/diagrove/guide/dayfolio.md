@@ -33,7 +33,7 @@ Diagrove’s two shortcut actions work with Dayfolio’s own:
 
 - **Create Diagram from Text** turns words into a diagram: make a shortcut that takes an entry’s text and passes it on, and an arrow chain such as `Idea -> Plan -> Ship` or an indented list becomes a new diagram. With Apple Intelligence, a description works too.
 - **Export Canvas as Image** turns a Diagrove document’s first canvas into a PNG, PDF or SVG file, which the next step of a shortcut can give to Dayfolio.
-- In the other direction, a graphic’s **Run shortcut** action can run one of Dayfolio’s shortcuts, such as New entry or Start timer. Click it in Play mode, and the diagram becomes a panel of buttons for your day. See [Play mode and actions](../play-mode-and-actions/).
+- In the other direction, a graphic’s **Run shortcut** action can run one of Dayfolio’s shortcuts, such as New entry or Quick note. Click it in Play mode, and the diagram becomes a panel of buttons for your day. See [Play mode and actions](../play-mode-and-actions/).
 
 ### A link
 

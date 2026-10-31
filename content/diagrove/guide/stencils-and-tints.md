@@ -13,7 +13,7 @@ Open the sidebar’s **Stencils** tab. Its first page shows:
 
 - **Favourites**: the stencils you’ve starred, one row of them.
 - **Recents**: the last stencils you added, one row of them. **Show all** opens the rest.
-- **Categories**: Basics, Diagrams, Software, Isometric, Interface, Infographic and People, each saying how many libraries and stencils it holds, then **Your libraries**.
+- **Categories**: Basics, Diagrams, Software, Engineering, Isometric, Places, Floor plans, Interface, Infographic and People, each saying how many libraries and stencils it holds, then **Your libraries**.
 
 Choose a category to see its libraries, each with a heading you can fold, and large tiles under them. **‹ Stencils** takes you back, as does Command-[ on the Mac.
 
@@ -49,7 +49,7 @@ The tint suits the paper: a light version of the hue on White paper, a dark vers
 
 A stencil you place is an instance: it stays linked to the stencil, and the document keeps its own copy, so it opens the same anywhere, even where the library isn’t installed.
 
-Select an instance and the inspector’s header reads Instance. Its **Stencil** section shows the stencil’s name and library, and a **Tint** well to recolour it later. People stencils also have a choice of five skin tones.
+Select an instance and the inspector’s header gives its stencil’s name, with Instance and its size under it. Its **Stencil** section shows the stencil’s name and library, and a **Tint** well to recolour it later. People stencils also have a choice of five skin tones, and of hair colours where they have hair.
 
 You can change an instance without losing the link. These changes are overrides: its tint, its words, its size, its position, its turn and flips, and each part’s fill, stroke and visibility. Double-click an instance to work on its parts, as in a group, or double-click its words to type new ones. When parts have changed, the section says how many, with **Reset** to undo them all and **Show all** to bring hidden parts back.
 
@@ -67,17 +67,17 @@ Lines between the graphics stay connected in the stencil. Actions that go to one
 
 ## Your libraries
 
-Your stencils live under **Your libraries**, after the built-in ones, in the Stencils tab. Beside the heading, **+** makes a new library and **Import a library** brings one in. Each library has a menu: **Rename**, **Export…**, **Show in Finder** (on the Mac) and **Delete…**, which moves the file to the Trash. Drag your stencils within a library to reorder them, or drop a stencil from another library to copy it in.
+Your stencils live under **Your libraries**, the last of the categories on the Stencils tab’s first page. At the top of its page, **New library** makes a library and **Import…** brings one in. Each library has a menu, from the **…** button beside its name or its context menu: **Rename**, **Export…**, **Show in Finder** (on the Mac) and **Delete…**, which moves the file to the Trash. Drag your stencils within a library to reorder them, or drop a stencil from another of your libraries onto one to copy it in.
 
 A library is a `.diagrovestencils` file, small enough to send to someone. **Export…** saves one wherever you choose.
 
 - **On the Mac,** double-click a `.diagrovestencils` file to open it in a small window that adds it to your libraries, or import it from the pane.
 - **On iPad,** import it from the Stencils pane.
-- **OmniGraffle stencils** (`.gstencil` files) can be imported as libraries on the Mac, the same way: every graphic or group on their sheets becomes a stencil.
+- **OmniGraffle stencils** (`.gstencil` files) can be imported as libraries the same way, on the Mac and on iPad: every graphic or group on their sheets becomes a stencil.
 
 Importing the same file twice doesn’t make a second copy.
 
-[shot: instance-inspector] The Mac, dark appearance, the System architecture template on Ink paper: a server instance selected, the inspector’s Stencil section showing its Tint well, “2 parts changed” with Reset and Show all, and Detach from stencil at the foot.
+[shot: instance-inspector] The Mac, dark appearance, the System architecture template on Ink paper: a container service instance selected, the inspector’s Stencil section showing its Tint well, “2 parts changed · 1 hidden” with Show all and Reset, and Detach from stencil at the foot.
 
 ## Related
 

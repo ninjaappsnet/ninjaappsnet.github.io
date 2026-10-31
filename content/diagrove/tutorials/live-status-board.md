@@ -25,8 +25,8 @@ Save this as `status.json`, in TextEdit set to plain text or in any code editor:
 ## 2. Draw the board
 
 1. Choose **File › New diagram** (Command-N). On iPad, tap **New diagram**.
-2. Choose **Rounded rectangle** in the tool palette and drag out a box. Type “Website”.
-3. Draw a second, wider box below it and type “Support queue”.
+2. Choose **Rounded rectangle** in the tool palette and drag out a box. Double-click it (or press Return) and type “Website”.
+3. Draw a second, wider box below it, double-click it and type “Support queue”.
 
 Leave Shop and Email for later: you’ll copy the Website box once its Bindings are set.
 
@@ -38,7 +38,8 @@ Leave Shop and Email for later: you’ll copy the Website box once its Bindings 
 2. Set **From** to **JSON**.
 3. Open the **Source** menu and choose **Use a file…**, then choose `status.json`. Diagrove keeps a copy of it inside the Document.
 4. In **Path**, type `services[name=Website].status`. This finds the item in `services` whose `name` is Website, and reads its `status`.
-5. Set **Rule** to **Match values**. Add three matches with **Add match**: `up` gives light green, `slow` gives light amber, and `down` gives light red. **Otherwise** can leave the box as drawn.
+5. Set **Rule** to **Match values**. The rule starts with one match and **Otherwise**. Type `up` in the first match’s value and choose light green for it. Click **Add match** twice, and make `slow` give light amber and `down` give light red.
+6. **Otherwise** starts with a colour of its own. To leave the box as drawn when nothing matches, right-click the Otherwise row (touch and hold on iPad) and choose **Leave as drawn**.
 
 Text matches exactly, so “Up” and “up” are different values. Numbers and true or false match however they’re written.
 
@@ -59,17 +60,17 @@ Bindings don’t change the drawing you edit. To see what the data does, click *
 ## 6. Copy it for Shop and Email
 
 1. Select Website and press Command-D twice. Copies keep their Bindings.
-2. Move the copies beside it and type “Shop” and “Email” as their words.
+2. Move the copies beside it, double-click each one and type “Shop” and “Email” as their words.
 3. For each copy, change the **Path** of both Bindings to `services[name=Shop].status` or `services[name=Email].status`, and change the Format text to `Shop: {value}` or `Email: {value}`.
 
-With live data showing, Shop turns amber and Email red.
+With live data showing, Shop turns light amber and Email light red.
 
 ## 7. Colour the queue by steps
 
 Match values suits words. For a number, use **Steps**:
 
 1. Select Support queue and add a **Fill** binding from JSON, with the same file and the path `queue.waiting`.
-2. Set **Rule** to **Steps**. Set the steps to **at** 0, light green; **at** 10, light amber; **at** 25, light red. **Add step** adds another.
+2. Set **Rule** to **Steps**. The rule starts with two steps: **at** 0 gives light green and **at** 10 gives light orange. Change the second step’s colour to light amber. Click **Add step**, which adds a step after the last one, and make it **at** 25, light red.
 3. Add a **Text** binding with the same path, the rule **Format text** and `{value} waiting`.
 
 The last step the value reaches wins, so 14 waiting is amber. Below the first step, the graphic stays as drawn.
@@ -88,7 +89,7 @@ Diagrove reads a link only while you play or show live data, and again every 30 
 
 ## 9. Play it
 
-Click **Play** (Option-Command-P on the Mac). The canvas’s bottom-left corner shows how the live data stands, with **Refresh live data** to read it again now. Change `status.json` on the server, wait half a minute or refresh, and watch the board follow.
+Click **Play** (Option-Command-P on the Mac). The canvas’s bottom-left corner shows how the live data stands, with a refresh button to read it again now. Change `status.json` on the server, wait half a minute or refresh, and watch the board follow.
 
 [shot: playing-live] Mac, dark appearance, White paper. The finished board in Play mode: Website green, Shop amber, Email red, Support queue amber, with the live data status and Refresh in the corner. Point to Refresh.
 

@@ -20,7 +20,6 @@ The layer now shows a small badge in the list. Its tooltip says how many canvase
 
 - **Edit anywhere.** Move, restyle or retype anything on the shared layer, on any canvas: the change reaches every canvas, as one step you can undo. Hiding, locking or renaming the layer is shared too.
 - **Draw on it on purpose.** New graphics go on the canvas’s own top layer, even when the shared layer is above it, so drawing on one canvas never draws on all of them. To add to the shared layer, click it in the Layers list first.
-- **Order per canvas.** Moving the shared layer up or down changes only the canvas you’re on.
 - **Lines.** A line on an ordinary layer can connect to a graphic on a shared layer. A line on a shared layer connects only to graphics on shared layers, because the others aren’t on every canvas. If sharing a layer would disconnect some line ends, Diagrove asks first and says how many; the lines stay where they are drawn.
 
 [shot: shared-badge] Mac, light. The Layers list on the second canvas of a Document, the shared “Header” layer at the top with its badge and tooltip. Point to the badge.

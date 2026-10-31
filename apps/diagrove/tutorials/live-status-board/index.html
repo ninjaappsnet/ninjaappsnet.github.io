@@ -76,7 +76,7 @@
 
 <h2 id="2-draw-the-board">2. Draw the board</h2>
 
-<ol><li>Choose <strong>File › New diagram</strong> (Command-N). On iPad, tap <strong>New diagram</strong>.</li><li>Choose <strong>Rounded rectangle</strong> in the tool palette and drag out a box. Type “Website”.</li><li>Draw a second, wider box below it and type “Support queue”.</li></ol>
+<ol><li>Choose <strong>File › New diagram</strong> (Command-N). On iPad, tap <strong>New diagram</strong>.</li><li>Choose <strong>Rounded rectangle</strong> in the tool palette and drag out a box. Double-click it (or press Return) and type “Website”.</li><li>Draw a second, wider box below it, double-click it and type “Support queue”.</li></ol>
 
 <p>Leave Shop and Email for later: you’ll copy the Website box once its Bindings are set.</p>
 
@@ -84,7 +84,7 @@
 
 <h2 id="3-colour-website-from-the-file">3. Colour Website from the file</h2>
 
-<ol><li>Select the Website box. In the inspector, open <strong>Data</strong> and choose <strong>Add binding › Fill</strong>.</li><li>Set <strong>From</strong> to <strong>JSON</strong>.</li><li>Open the <strong>Source</strong> menu and choose <strong>Use a file…</strong>, then choose <code>status.json</code>. Diagrove keeps a copy of it inside the Document.</li><li>In <strong>Path</strong>, type <code>services[name=Website].status</code>. This finds the item in <code>services</code> whose <code>name</code> is Website, and reads its <code>status</code>.</li><li>Set <strong>Rule</strong> to <strong>Match values</strong>. Add three matches with <strong>Add match</strong>: <code>up</code> gives light green, <code>slow</code> gives light amber, and <code>down</code> gives light red. <strong>Otherwise</strong> can leave the box as drawn.</li></ol>
+<ol><li>Select the Website box. In the inspector, open <strong>Data</strong> and choose <strong>Add binding › Fill</strong>.</li><li>Set <strong>From</strong> to <strong>JSON</strong>.</li><li>Open the <strong>Source</strong> menu and choose <strong>Use a file…</strong>, then choose <code>status.json</code>. Diagrove keeps a copy of it inside the Document.</li><li>In <strong>Path</strong>, type <code>services[name=Website].status</code>. This finds the item in <code>services</code> whose <code>name</code> is Website, and reads its <code>status</code>.</li><li>Set <strong>Rule</strong> to <strong>Match values</strong>. The rule starts with one match and <strong>Otherwise</strong>. Type <code>up</code> in the first match’s value and choose light green for it. Click <strong>Add match</strong> twice, and make <code>slow</code> give light amber and <code>down</code> give light red.</li><li><strong>Otherwise</strong> starts with a colour of its own. To leave the box as drawn when nothing matches, right-click the Otherwise row (touch and hold on iPad) and choose <strong>Leave as drawn</strong>.</li></ol>
 
 <p>Text matches exactly, so “Up” and “up” are different values. Numbers and true or false match however they’re written.</p>
 
@@ -102,15 +102,15 @@
 
 <h2 id="6-copy-it-for-shop-and-email">6. Copy it for Shop and Email</h2>
 
-<ol><li>Select Website and press Command-D twice. Copies keep their Bindings.</li><li>Move the copies beside it and type “Shop” and “Email” as their words.</li><li>For each copy, change the <strong>Path</strong> of both Bindings to <code>services[name=Shop].status</code> or <code>services[name=Email].status</code>, and change the Format text to <code>Shop: {value}</code> or <code>Email: {value}</code>.</li></ol>
+<ol><li>Select Website and press Command-D twice. Copies keep their Bindings.</li><li>Move the copies beside it, double-click each one and type “Shop” and “Email” as their words.</li><li>For each copy, change the <strong>Path</strong> of both Bindings to <code>services[name=Shop].status</code> or <code>services[name=Email].status</code>, and change the Format text to <code>Shop: {value}</code> or <code>Email: {value}</code>.</li></ol>
 
-<p>With live data showing, Shop turns amber and Email red.</p>
+<p>With live data showing, Shop turns light amber and Email light red.</p>
 
 <h2 id="7-colour-the-queue-by-steps">7. Colour the queue by steps</h2>
 
 <p>Match values suits words. For a number, use <strong>Steps</strong>:</p>
 
-<ol><li>Select Support queue and add a <strong>Fill</strong> binding from JSON, with the same file and the path <code>queue.waiting</code>.</li><li>Set <strong>Rule</strong> to <strong>Steps</strong>. Set the steps to <strong>at</strong> 0, light green; <strong>at</strong> 10, light amber; <strong>at</strong> 25, light red. <strong>Add step</strong> adds another.</li><li>Add a <strong>Text</strong> binding with the same path, the rule <strong>Format text</strong> and <code>{value} waiting</code>.</li></ol>
+<ol><li>Select Support queue and add a <strong>Fill</strong> binding from JSON, with the same file and the path <code>queue.waiting</code>.</li><li>Set <strong>Rule</strong> to <strong>Steps</strong>. The rule starts with two steps: <strong>at</strong> 0 gives light green and <strong>at</strong> 10 gives light orange. Change the second step’s colour to light amber. Click <strong>Add step</strong>, which adds a step after the last one, and make it <strong>at</strong> 25, light red.</li><li>Add a <strong>Text</strong> binding with the same path, the rule <strong>Format text</strong> and <code>{value} waiting</code>.</li></ol>
 
 <p>The last step the value reaches wins, so 14 waiting is amber. Below the first step, the graphic stays as drawn.</p>
 
@@ -126,7 +126,7 @@
 
 <h2 id="9-play-it">9. Play it</h2>
 
-<p>Click <strong>Play</strong> (Option-Command-P on the Mac). The canvas’s bottom-left corner shows how the live data stands, with <strong>Refresh live data</strong> to read it again now. Change <code>status.json</code> on the server, wait half a minute or refresh, and watch the board follow.</p>
+<p>Click <strong>Play</strong> (Option-Command-P on the Mac). The canvas’s bottom-left corner shows how the live data stands, with a refresh button to read it again now. Change <code>status.json</code> on the server, wait half a minute or refresh, and watch the board follow.</p>
 
 <!-- shot playing-live: Mac, dark appearance, White paper. The finished board in Play mode: Website green, Shop amber, Email red, Support queue amber, with the live data status and Refresh in the corner. Point to Refresh. -->
 

@@ -12,8 +12,8 @@ Diagrove reads a hand-drawn diagram and draws it again as shapes, connected line
 1. Open a diagram and tap **Sketch** in the toolbar.
 2. Draw boxes, circles, diamonds and the arrows between them with Apple Pencil, or with your finger. Write the words inside the shapes and on the arrows.
 3. Use **Eraser** to rub out a stroke, or **Clear** to start again. Undo works on the ink while you sketch.
-4. Tap **Turn into diagram**. The shapes and lines appear where you drew them.
-5. Tap **Done** to leave Sketch mode.
+4. Tap **Turn into diagram**. The shapes and lines appear where you drew them, selected, as one step you can undo; the ink goes and Sketch mode ends. To have them arranged for you instead, tap **Tidy** in the notice that follows.
+5. To leave Sketch mode without reading the ink, tap **Done**. The ink waits for you while the window is open.
 
 Once you’ve used Apple Pencil, only the Pencil draws and a finger scrolls, as in Notes. The ink isn’t saved with the Document.
 
@@ -27,7 +27,7 @@ Once you’ve used Apple Pencil, only the Pencil draws and a finger scrolls, as 
 4. Choose **Keep my layout** for shapes where you drew them, lined up on the grid, or **Tidy** to have them arranged for you.
 5. Click **Insert**.
 
-A picture already on the canvas can be read too: select it and choose **Turn into diagram…** from its context menu.
+A picture already on the canvas can be read too: select it and choose **Turn into diagram…** from its context menu or the inspector’s Picture section.
 
 [shot: sketch-sheet] Mac, light. The “Turn your sketch into a diagram” sheet with a whiteboard photo on the left, the found shapes outlined over it, and the diagram on the right; Keep my layout chosen. Point to Insert.
 

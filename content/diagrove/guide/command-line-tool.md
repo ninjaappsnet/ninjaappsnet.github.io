@@ -9,7 +9,7 @@ order: 11
 
 ## Install it
 
-The tool is free, notarized by Apple and separate from the app. In the app, **Help › Command-line tool…** says the same. Install it with Homebrew:
+The tool is free, notarized by Apple and separate from the app. In the app, **Help › Command-line tool…** shows the same steps, with a link to the download. Install it with Homebrew:
 
 ```sh
 brew install ninjaappsnet/diagrove/diagrove
@@ -40,18 +40,18 @@ Every command writes one JSON object on standard output: `{"ok": true, …}`, or
 |---|---|
 | `diagrove new -o Plan.diagrove` | Makes a document: empty, from Diagrove text with `--text plan.gtext`, or from a template with `--template kanban` (add `--paper dark` for Ink paper). |
 | `diagrove text Plan.diagrove` | Writes a document as Diagrove text, and lists anything that couldn’t come across. |
-| `diagrove validate plan.gtext` | Checks a `.diagrove` or `.gtext` file and reports each problem with its line and column. |
+| `diagrove validate plan.gtext` | Checks a `.diagrove` or `.gtext` file and reports each problem and where it is: in Diagrove text, its line and column. |
 | `diagrove check Plan.diagrove` | Finds what makes a diagram hard to read: overlaps, words that don’t fit, weak contrast, lines through shapes. `--fix` applies the safe fixes. |
 | `diagrove render Plan.diagrove -o plan.png` | Draws a canvas as PNG, PDF or SVG, exactly as the app exports it. `--live-data` draws bindings with the document’s variables and JSON files. |
 | `diagrove apply Plan.diagrove edits.json` | Applies a list of changes (Ops), all at once or not at all. `--dry-run` shows what would change. |
 | `diagrove inspect Plan.diagrove` | Describes the structure: canvases, layers, and each graphic’s ID, kind, words and position. |
 | `diagrove layout Plan.diagrove` | Arranges connected graphics as the app’s Tidy does, with `--style layered` or `tree` and `--direction down` or `right`. |
-| `diagrove templates list` | Lists the app’s 63 templates. `diagrove templates show flowchart` answers one as Diagrove text to adapt. |
+| `diagrove templates list` | Lists the app’s 63 templates and its two blank documents. `diagrove templates show flowchart` answers one as Diagrove text to adapt. |
 | `diagrove stencils search database` | Finds built-in stencils by name or keyword, with the IDs Diagrove text uses. |
 | `diagrove import mermaid chart.mmd -o Chart.diagrove` | Makes a document from a Mermaid flowchart. |
 | `diagrove schema ops` | Describes the Ops, Diagrove text (`schema text`) or any command’s input and output. |
 
-`apply` and `layout` write back to the file you give them unless you add `-o` with another file.
+`apply`, `layout` and `check --fix` write back to the file you give them unless you add `-o` with another file.
 
 ## Diagrove text in brief
 

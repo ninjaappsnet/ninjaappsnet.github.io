@@ -10,12 +10,12 @@ Dayfolio is Diagrove’s sibling app from NinjaApps. Send to Dayfolio puts a dia
 ## On iPad
 
 1. Open the canvas you want to send.
-2. Tap **Export** in the toolbar, then **Send to Dayfolio…**.
-3. In the share sheet, choose **Dayfolio**, then the journal. Dayfolio takes both files into an entry there.
+2. Tap **Export** in the toolbar, then **Send to Dayfolio**.
+3. In the share sheet, choose **Dayfolio**. In Dayfolio’s sheet, pick the journal (it asks when you have more than one) and save. Dayfolio takes both files into an entry there.
 
-The share sheet holds a PNG of the canvas at 2× and the Document as a `.diagrove.zip` file.
+The share sheet holds a PNG of the canvas’s drawing at 2× (smaller for a very large drawing) and the Document as a `.diagrove.zip` file.
 
-[shot: send-ipad] iPad, light. The Export menu open in the toolbar with Send to Dayfolio… highlighted, over the Roadmap template. Point to Send to Dayfolio….
+[shot: send-ipad] iPad, light. The Export menu open in the toolbar with Send to Dayfolio highlighted, over the Roadmap template. Point to Send to Dayfolio.
 
 ## On the Mac
 
@@ -30,7 +30,7 @@ Showing a diagram inside an entry as a live, clickable embed needs Dayfolio’s 
 ## Other ways between the two apps
 
 - **Shortcuts.** Diagrove’s Create Diagram from Text and Export Canvas as Image actions work with Dayfolio’s own actions in the Shortcuts app.
-- **Actions.** A graphic’s Run shortcut Action can run a shortcut that uses Dayfolio’s actions, such as New entry or Start timer. See [Run a shortcut from a diagram](../run-a-shortcut-from-a-diagram/).
+- **Actions.** A graphic’s Run shortcut Action can run a shortcut that uses Dayfolio’s actions, such as New entry or Quick note. See [Run a shortcut from a diagram](../run-a-shortcut-from-a-diagram/).
 - **Links.** A `diagrove://new?text=…` link, with the steps after `text=`, opens Diagrove with that diagram drawn, from any app that opens links.
 
 More in [Diagrove and Dayfolio](../../guide/dayfolio/).

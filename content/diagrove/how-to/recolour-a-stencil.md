@@ -31,11 +31,12 @@ An isometric shape you drew with the tool palette, such as a block, takes its ti
 
 1. Double-click a part of the stencil away from its words. You’re now working inside it, with that part selected.
 2. Change the part’s fill or stroke in the inspector.
+3. Press Esc to leave the stencil, which stays selected.
 
-The Stencil section then counts what you changed, such as “2 parts changed · 1 hidden”. **Reset** gives every part the stencil’s look again and keeps the tint; **Show all** brings hidden parts back. Press Esc to leave the stencil.
+The Stencil section then counts what you changed, such as “2 parts changed · 1 hidden”. **Reset** gives every part the stencil’s look again and keeps the tint; **Show all** brings hidden parts back.
 
 To change a stencil beyond its parts’ colours, words and visibility, choose **Detach from stencil** at the bottom of the section. It becomes a plain group that looks the same and no longer follows its stencil.
 
-On iPad, double-tap instead of double-click, and the rows sit under their labels.
+On iPad, double-tap instead of double-click, and the Skin and Hair swatches sit under their labels.
 
 More in [Stencils and tints](../../guide/stencils-and-tints/).

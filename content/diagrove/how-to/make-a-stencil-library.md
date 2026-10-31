@@ -15,13 +15,13 @@ Anything you draw can become a stencil, kept in a library of your own and ready 
 4. Check **Roles**. Diagrove suggests a role for each part from its colours, such as body, glyph or label. Click **Edit** to change them. A part follows a tint by its role; fixed parts keep their own colours.
 5. Click **Save**.
 
-The stencil appears in the sidebar’s **Stencils** tab, under **Your libraries**. Drag it onto any canvas, and tint it as you would a built-in one.
+The stencil appears in the sidebar’s **Stencils** tab, under **Your libraries**, the last category on the tab’s first page. Drag it onto any canvas, and tint it as you would a built-in one.
 
 [shot: save-sheet] Mac, light. The Save as stencil sheet for a selected badge: Name, Library set to a new library, the Roles row with Edit, and the preview. Point to the Roles row.
 
 ## Organise your libraries
 
-In **Your libraries**, the button beside the heading starts a **New library**. Drag a stencil from any library, a built-in one included, into one of yours to keep a copy there, or drag it within a library to change the order. Each library’s menu has **Rename**, **Export…** and **Delete…**, and on the Mac **Show in Finder**.
+In **Your libraries**, **New library** at the top of the page makes one. Drag a stencil from one of your libraries onto another to keep a copy there, or drag it within a library to change the order. Each library’s menu, the **…** button beside its name, has **Rename**, **Export…** and **Delete…**, and on the Mac **Show in Finder**.
 
 ## Export and share a library
 
@@ -29,7 +29,7 @@ In **Your libraries**, the button beside the heading starts a **New library**. D
 2. Choose where to save it. It’s saved as one `.diagrovestencils` file.
 3. Send the file however you like: AirDrop, Mail, a shared folder or iCloud Drive.
 
-To add a library someone sent you, click **Import a library** beside the **Your libraries** heading and choose the file. It appears alongside your own. On the Mac, **Import a library** also reads OmniGraffle stencil files (`.gstencil`).
+To add a library someone sent you, click **Import…** at the top of **Your libraries** and choose the file. It appears alongside your own. On the Mac you can also double-click a `.diagrovestencils` file, and **Import…** also reads OmniGraffle stencil files (`.gstencil`).
 
 [shot: library-menu] Mac, light. The Stencils tab with Your libraries open, a library’s menu showing Rename, Export…, Show in Finder and Delete…. Point to Export….
 

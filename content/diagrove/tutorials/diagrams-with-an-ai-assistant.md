@@ -35,13 +35,13 @@ It answers in JSON, listing the same templates the app’s gallery has.
 
 Add it where your assistant keeps its MCP servers, then restart the assistant. Its tools include `read_me`, `create`, `check`, `render`, `inspect`, `apply`, `layout`, `templates` and `search_stencils`.
 
-If your assistant reads skills, also run:
+If your assistant is Claude Code, also run:
 
 ```sh
 diagrove skill install
 ```
 
-This puts Diagrove’s skill in `~/.claude/skills/diagrove` (use `--path` for another folder): how to write Diagrove text, the Ops that change a Document, and the habit of rendering and looking before calling a diagram done.
+This puts Diagrove’s skill in `~/.claude/skills/diagrove`, where Claude Code finds it (use `--path` for another folder): how to write Diagrove text, the Ops that change a Document, and the habit of rendering and looking before calling a diagram done.
 
 ## 3. Ask for a diagram
 

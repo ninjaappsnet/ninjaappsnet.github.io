@@ -12,7 +12,7 @@ A template is a finished example diagram you start from: a flowchart with its sw
 - **On the Mac,** choose **File › New from template…** (Shift-Command-N), or **All templates…** in the Welcome window. The Welcome window also shows six starters of its own: Flowchart, System architecture, App screen, Mind map, Roadmap and Org chart.
 - **On iPad,** choose **Choose a template** on the start screen.
 
-On the Mac, click a template to select it, then double-click it, press Return or choose **Create**. Press Space to see the selected template large; the Left and Right Arrow keys step to the one before or after. On iPad, tap a template to start from it, or touch and hold one to see it large, with **Create** in its menu.
+On the Mac, double-click a template, or select it and press Return or click **Create**. Press Space to see the selected template large; the Left and Right Arrow keys step to the one before or after. On iPad, tap a template to start from it, or touch and hold one to see it large, with **Create** in its menu.
 
 [shot: gallery-mac] The template gallery on the Mac, light appearance: the category sidebar with All templates chosen, the Process section’s cards with Flowchart selected, and Paper set to White in the footer.
 
@@ -48,7 +48,7 @@ Every template comes on White or Ink paper. Choose **Paper** in the gallery’s 
 
 ## What you get
 
-Creating from a template opens a new document, named after the template: “Flowchart”, then “Flowchart 2”. It has no history to undo, so you start clean. On iPad it’s saved as a file straight away, beside the last document you opened.
+Creating from a template opens a new document, named after the template: “Flowchart”, then “Flowchart 2”. It has no history to undo, so you start clean. On iPad it’s saved as a file straight away, beside the last document you opened, or else in Diagrove’s folder in iCloud Drive or on your iPad.
 
 What’s inside is ordinary Diagrove: shapes, lines, groups and stencil instances, in palette colours. Change the words, move things, retint a stencil, delete what you don’t need, or ask the prompt bar for changes such as “rename Cart to Basket”. Some templates have more than one canvas, such as App screen.
 

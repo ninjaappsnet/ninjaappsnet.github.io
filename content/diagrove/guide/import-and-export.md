@@ -14,7 +14,7 @@ Choose **File › Export…** (Shift-Command-E), or click **Export** in the tool
 - **Format**: **PNG image**, **PDF document**, **SVG drawing**, and on the Mac **Web player**.
 - **Area**: **Whole canvas**, paper and all, or **Just the drawing** with a small margin.
 - For PNG, **Scale** is 1×, 2× or 3×, and **Transparent background** leaves out the paper.
-- For PDF, **Every canvas, one page each** puts the whole document in one file.
+- For PDF in a document with two or more canvases, **Every canvas, one page each** puts the whole document in one file.
 
 On the Mac you choose where to save. On iPad, choose **Save to Files…** or **Share**.
 
@@ -45,7 +45,7 @@ A `diagrove://` link does the same from anywhere a link works:
 diagrove://new?text=Idea%20-%3E%20Plan%20-%3E%20Ship
 ```
 
-The text after `text=` is written as a web address writes it, with spaces and symbols encoded. `diagrove://new` alone opens an empty document. On iPad, the link draws the diagram and the start screen says it’s ready: tap **New diagram** to open it.
+The text after `text=` is written as a web address writes it, with spaces and symbols encoded. `diagrove://new` alone opens an empty document on the Mac, and the start screen on iPad. On iPad, the link draws the diagram and the start screen says it’s ready: tap **New diagram** to open it.
 
 ## Bring in SVG drawings
 
@@ -66,13 +66,13 @@ Choose **File › Import…** and pick a `.graffle` file, or open one from the F
 
 Canvases, layers, shapes, lines and their connections, groups, tables, pictures and link actions come across. A report card over the canvas lists what didn’t map exactly.
 
-OmniGraffle stencils (`.gstencil`) come in as a library of your own: in the sidebar’s Stencils tab, under **Your libraries**, click **Import a library**. See [Stencils and tints](../stencils-and-tints/).
+OmniGraffle stencils (`.gstencil`) come in as a library of your own, on iPad too: open **Your libraries** on the sidebar’s Stencils tab and choose **Import…** at the top of its page. See [Stencils and tints](../stencils-and-tints/).
 
 ## Turn a sketch or photo into a diagram (Mac)
 
 A photo of a whiteboard, a paper sketch or a screenshot of a drawn diagram can become shapes and connected lines.
 
-1. Choose **File › New diagram from sketch or photo…** for a new document, or **Insert › Diagram from sketch or photo…** to add to this one. A picture already on the canvas has **Turn into diagram…** in its context menu.
+1. Choose **File › New diagram from sketch or photo…** for a new document, or **Insert › Diagram from sketch or photo…** to add to this one. A picture already on the canvas has **Turn into diagram…** in its context menu and in the inspector’s Picture section.
 2. Choose the picture, or drop it on the sheet. To take one with your iPhone, choose **File › Import from iPhone or iPad** while the sheet is open.
 3. The sheet, **Turn your sketch into a diagram**, shows your picture beside the diagram Diagrove read from it. Under **Layout**, choose **Keep my layout** to keep things where you drew them, or **Tidy** to have them arranged for you.
 4. Click **Insert**.

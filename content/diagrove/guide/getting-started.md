@@ -22,11 +22,11 @@ When Diagrove opens with nothing to open, it shows the Welcome window. On the le
 - **Describe a diagram…** (Option-Shift-Command-N): a new document with the prompt bar ready for you to type.
 - **Open…** (Command-O): a document you already have.
 
-On the right, the first time, six templates wait under “Start with a template”: Flowchart, System architecture, App screen, Mind map, Roadmap and Org chart. Click one to select it, then double-click it, press Return or choose **Create**. Press Space for a large preview. **All templates…** (Shift-Command-N) opens the full gallery. See [Templates](../templates/).
+On the right, the first time, six templates wait under “Start with a template”: Flowchart, System architecture, App screen, Mind map, Roadmap and Org chart. Double-click one, or select it and press Return or click **Create**. Press Space for a large preview. **All templates…** (Shift-Command-N) opens the full gallery. See [Templates](../templates/).
 
-Once you have documents, the right side shows **Recent documents** and **Templates** (Command-1 and Command-2). Choose a recent document and press Return to open it.
+Once you have documents, the right side has two tabs, **Recent** and **Templates** (Command-1 and Command-2). Choose a recent document and press Return to open it.
 
-**Paper** chooses what new diagrams start on: White or Ink. A document keeps its paper in light and dark appearance alike, so you choose it once. On the Mac you can also change it in **Settings › General**.
+**Paper** chooses what new diagrams start on: White or Ink. A document keeps its paper in light and dark appearance alike, so you choose it once. On the Mac you can also change it in **Diagrove › Settings…**, under *New diagrams start on*.
 
 To see the Welcome window again, choose **Window › Welcome to Diagrove** (Shift-Command-1). Turn off *Show this window when Diagrove opens* if you’d rather start with a new blank diagram.
 
@@ -36,7 +36,7 @@ To see the Welcome window again, choose **Window › Welcome to Diagrove** (Shif
 
 The start screen shows **New diagram** and **Choose a template** above the Files browser, where your documents are. Choose a template opens the gallery as a sheet: tap a template to start from it, or choose **Describe a diagram…** in the sheet’s bar.
 
-A new document goes where you work: beside the last document you opened, or else in Diagrove’s folder in iCloud Drive when iCloud is on, or else in On My iPad › Diagrove. A document made from a template is named after it, such as “Flowchart”.
+A document you start from a template or with Describe a diagram… goes where you work: beside the last document you opened, or else in Diagrove’s folder in iCloud Drive when iCloud is on, or else in On My iPad › Diagrove. A document made from a template is named after it, such as “Flowchart”.
 
 [shot: start-ipad] The iPad start screen in landscape, light appearance: the hero picture, New diagram and Choose a template, and the Files browser below with a few recent documents.
 

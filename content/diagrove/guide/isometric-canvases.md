@@ -23,7 +23,7 @@ The grid runs along three axes 120° apart, so its floor lines lie at 30° to th
 
 ## Planes: the floor and two walls
 
-Every graphic on an isometric canvas lies in a plane: the floor, the left wall or the right wall. What you draw lies on the floor until you move it. To move a selection onto a wall, choose **Arrange › Plane › Left wall** or **Right wall**, use the same items in the canvas’s context menu, or set **Plane** in the inspector’s **Isometric** section. Words on a wall read along that wall.
+Every graphic on an isometric canvas lies in a plane: the floor, the left wall or the right wall. What you draw lies on the floor until you move it. To move a selection onto a wall, choose **Arrange › Plane › Left wall** or **Right wall**, use the same items in the canvas’s context menu, or set **Plane** in the inspector’s **Isometric** section. Words on a wall read along that wall. Iso shapes always stand on the floor.
 
 ## Elevation and depth order
 
@@ -55,13 +55,13 @@ Some graphics should stand upright and face you wherever they are: a person’s 
 
 ## Lines on an isometric canvas
 
-Lines run along the axes of the floor at the elevation of their start, in Elbow, Straight or Curved style. An iso shape’s magnets sit at the middle of each edge of its base and on each face, so lines meet it where you’d expect.
+Lines lie on the floor at the elevation of their start, and Elbow lines run along the floor’s axes. A line whose ends stand at different heights runs at its start’s height, then rises straight up to its end. An iso shape’s magnets sit at the middle of each edge of its base and on each face, so lines meet it where you’d expect.
 
-[shot: iso-office] The Mac, light appearance, the Office floor template on White paper: desks, people with name badges facing the viewer, the meeting room on its rug, and contact shadows under the furniture.
+[shot: iso-office] The Mac, light appearance, the Office floor template on White paper: desks with name tags on pins facing the viewer, the meeting room behind its low partitions, and contact shadows under the furniture.
 
 ## Isometric stencils
 
-The Stencils pane’s **Isometric** category holds servers, clouds, offices, homes, shops, warehouses, cities, vehicles and people. They stand up on an isometric canvas and take the tint like iso shapes. On a flat canvas they are drawn as pictures, just as they look. See [Stencils and tints](../stencils-and-tints/).
+The Stencils pane’s **Isometric** category holds servers and racks, cloud, containers, network, security, databases, devices, AI, and shapes and floor tiles; **Places** holds offices, homes, shops, venues, warehouses, cities, nature and vehicles; and **People** has a library of isometric people. They stand up on an isometric canvas and take the tint like iso shapes. On a flat canvas they are drawn as pictures, just as they look. See [Stencils and tints](../stencils-and-tints/).
 
 ## Flat diagrams on the floor
 
