@@ -183,7 +183,7 @@
         </tbody>
       </table>
     </div>
-    <p>Databases are read only. FlectoBI copies a table or the result of a query into its engine as a snapshot, and never writes to the server. The Workbook keeps only the connection details. Passwords go to your Mac’s Keychain, never into the Workbook.</p>
+    <p>Databases are read only. Save a server once as a data source, pick its tables, and FlectoBI copies each table or query result into its engine as a snapshot. A big table shows its first 1,000 rows at once and loads the rest in the background, and Filters, Joins and Summaries can run on the server so fewer rows travel. FlectoBI never writes to the server. The Workbook keeps the source’s name, host, port, database and SSL setting. Your user name and password go to your Mac’s Keychain, never into the Workbook.</p>
     <p>An Output writes only when you ask, with Write Now or Write All Outputs. You can turn on automatic writing after that. FlectoBI refuses an Output that would overwrite a file the Flow reads.</p>
   </div>
 </section>
