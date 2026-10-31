@@ -2,7 +2,7 @@
 title: Getting started with FlectoBI
 description: What you need to run FlectoBI, how to open the Sales Sample, the parts of the window, and how to build your first Flow and Report.
 slug: getting-started
-date: 2026-10-26
+date: 2026-10-31
 order: 1
 ---
 FlectoBI is a Mac app for shaping data and showing it. You build a recipe once, as a Flow of Steps, and then draw Reports from the result. When your files change, you refresh and everything follows. This page takes you from a first launch to a first Flow and a first Report.
@@ -33,7 +33,7 @@ Each Workbook opens in its own window with three areas.
 - **Workspace, in the middle.** With the Flow selected, the Flow canvas sits above a preview grid. With a Report selected, you see its Pages as tabs, and the Page below.
 - **Inspector, on the right.** It shows the options of the Step or Visual you have selected. Show or hide it with **Option-Command-I**, or the **Inspector** button in the toolbar.
 
-A new Workbook starts with an empty Flow and one empty Report named Report 1.
+A new Workbook starts with an empty Flow and one empty Report named Report 1. The empty Flow offers **Add Files…** and a **Connect to Database** menu, with a link under them to open the Sample Workbook.
 
 ![A new Workbook: an empty Flow with the message Start with Your Data, the Add Files and Connect to Database buttons, and a link to the Sample Workbook.](workbook-empty.webp "A new Workbook opens with an empty Flow.")
 

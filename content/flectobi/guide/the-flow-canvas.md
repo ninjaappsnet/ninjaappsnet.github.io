@@ -2,8 +2,8 @@
 title: The Flow canvas
 description: Add Steps, connect them, move and rename them, zoom and select several at once. The palette, the context menus and the keyboard shortcuts.
 slug: the-flow-canvas
-date: 2026-10-26
-order: 5
+date: 2026-10-31
+order: 7
 ---
 The Flow canvas is where you build your recipe. Each box is a Step. Lines between them are Connections that carry a Dataset from one Step to the next. This page covers everything you can do on the canvas, with the mouse and the keyboard.
 
@@ -13,7 +13,7 @@ The Flow canvas is where you build your recipe. Each box is a Step. Lines betwee
 - A **Transform** changes data. There are 26, in five groups: Rows, Columns, Text, Combine and Reshape.
 - An **Output** writes a file. It takes one Connection.
 
-A Step shows its state: Ready, Failed, Waiting, Queued or Running. A Step with a problem tells you what to fix in the preview and inspector.
+A Step shows its state: Ready, Failed, Waiting, Not Connected, Queued or Running. A Step with a problem tells you what to fix in the preview and inspector.
 
 ## Add a Step
 
@@ -26,6 +26,12 @@ There are several ways. Use the one that suits you.
 - Right-click a wire and choose **Insert Transform on Connection**.
 
 ![The Transform palette open on the Flow canvas with a search typed and matching Transforms listed.](flow-palette.webp "The palette finds a Transform by name, by its first letters or by a common word.")
+
+## Where new Steps go
+
+A new Input goes to the left edge of the canvas, in the middle of what you can see. Several added together form a group, one row apart. A Transform added after a Step goes to its right. The canvas scrolls just enough to show what you added.
+
+Steps you moved yourself stay where you put them. Only new Steps are placed this way. **Auto Layout** keeps the same left margin and centres the whole Flow.
 
 ## Use the palette
 
@@ -75,9 +81,9 @@ Click a Step to see its result in the preview below and its options in the inspe
 
 ## Context menus
 
-Right-click a Step for **Add Transform After**, **Find Transform…**, **Insert Transform Between**, **Add Output…**, **Connect Output To**, **Refresh**, **Write Now**, **Show in Inspector**, **Rename**, **Duplicate** and **Delete**. Refresh applies to Inputs and Write Now to Outputs.
+Right-click a Step for **Add Transform After**, **Find Transform…**, **Insert Transform Between**, **Add Output…**, **Connect Output To**, **Refresh**, **Write Now**, **Show in Inspector**, **Rename**, **Duplicate** and **Delete**. Refresh applies to Inputs and Write Now to Outputs. A Step inside an “On the server” region also has **Convert to Custom Query**, and so does the shaded region itself when you right-click it. See [Large tables](../large-tables/).
 
-Right-click empty canvas for **Add Input Files…**, **New PostgreSQL Input…**, **New MySQL Input…**, **Add Transform**, **Find Transform…**, **Auto Layout**, **Zoom to Fit** and **Select All**.
+Right-click empty canvas for **Add Input Files…**, **Connect to Database**, **Add Transform**, **Find Transform…**, **Auto Layout**, **Zoom to Fit** and **Select All**.
 
 ## Stop and refresh
 
