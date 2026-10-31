@@ -47,10 +47,10 @@
 <section class="page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="./">FlectoBI</a></nav>
   <h1 class="page-title">Privacy Policy</h1>
-  <p class="effective">VERSION 1.0 — EFFECTIVE 2026-10-26</p>
+  <p class="effective">VERSION 1.1 — EFFECTIVE 2026-10-31</p>
   <div class="prose">
 
-    <p><strong>The short version: FlectoBI collects nothing.</strong> There is no account and no analytics, and your Workbooks and the data you open in them stay on your Mac. The only network connections FlectoBI makes are to the database servers you set up yourself.</p>
+    <p><strong>The short version: FlectoBI collects nothing.</strong> There is no account and no analytics, and your Workbooks and the data you open in them stay on your Mac. The only network connections FlectoBI makes are to the database servers you set up yourself. If you choose to keep a database login in iCloud Keychain, Apple syncs it between your Macs; FlectoBI sends nothing to Apple or to us.</p>
 
     <p>This policy covers FlectoBI for Mac. FlectoBI is made by NinjaApps, a trading name of cetin.info, the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. FlectoBI gives us none.</p>
 
@@ -82,9 +82,10 @@
 
     <h2 id="where-it-lives">What stays on your Mac</h2>
     <ul>
-      <li><strong>Workbooks.</strong> A Workbook is one file that you save where you choose. It holds the recipe: the Steps, the Reports and their settings, the paths of your files, and, for a database Input, the host, port, database name, user name and SSL setting. It does not hold your data, and it never holds a password or a file-access bookmark. The data is read again from its source each time the Workbook opens.</li>
+      <li><strong>Workbooks.</strong> A Workbook is one file that you save where you choose. It holds the recipe: the Steps, the Reports and their settings, the paths of your files, and, for a database Input, the data source’s name, host, port, database name and SSL setting, and any relationships you defined between its tables. It does not hold your data, and it never holds a user name, a password or a file-access bookmark. The data is read again from its source each time the Workbook opens.</li>
       <li><strong>File access.</strong> When you choose or drop a file or folder, macOS lets FlectoBI keep a security-scoped bookmark so it can open it again. These bookmarks are kept in the app’s own storage area on your Mac, and you can see and remove each one in Settings, under Access.</li>
-      <li><strong>Database passwords.</strong> A password you enter for a database goes into your Mac’s Keychain, and nowhere else. It is given back only for the same host, port, database and user it was saved for.</li>
+      <li><strong>Data sources.</strong> A database you save is kept on your Mac, in the app’s storage area, as its name, kind, host, port, database name and SSL setting. The same folder holds a copy of the source’s table and column names, which FlectoBI reads from the server so that it can list them, a list of the Workbooks you allowed to use a source, and your relationships. It holds no rows and no login. None of it is synced by FlectoBI.</li>
+      <li><strong>Database logins.</strong> The user name and password you enter for a database go into your Mac’s Keychain, one item for each saved data source, and nowhere else. You choose where the item may go: This Mac, This Mac and iCloud Keychain, or This Mac only, never in backups. With the iCloud choice, macOS syncs the item between your Macs through iCloud Keychain, under Apple’s terms. FlectoBI gives the item only to a connection of that data source. A Workbook from someone else never connects on its own; FlectoBI asks you once before it uses a saved login for it.</li>
       <li><strong>Working data.</strong> While a Workbook is open, its data is held in memory by the data engine. When there is too much, the engine writes temporary files to a folder inside the app’s storage area. FlectoBI deletes that folder when the Workbook closes, and removes any left by a crash the next time it starts.</li>
       <li><strong>Settings.</strong> FlectoBI remembers little: the height of the data preview below the Flow, and what macOS itself keeps for windows.</li>
       <li><strong>The sample.</strong> When you open the sample Workbook, FlectoBI copies it and its made-up data files into a folder in the app’s storage area.</li>
@@ -92,14 +93,14 @@
     <p>FlectoBI is sandboxed by macOS. It can open only the files and folders you choose. The helper that reads Excel files has no network access and no file access of its own, and receives a file only from the app.</p>
 
     <h2 id="network">What goes over the network</h2>
-    <p>FlectoBI makes a network connection only to a database server that you add as an Input: a PostgreSQL, MySQL or MariaDB server. It connects to the host and port you typed, and only:</p>
+    <p>FlectoBI makes a network connection only to a database server that you save as a data source: a PostgreSQL, MySQL or MariaDB server. It connects to the host and port you typed, and only:</p>
     <ul>
-      <li>when you click Test Connection, Add Input, Apply or Refresh, or</li>
-      <li>when you open a Workbook whose database Input has a password saved in this Mac’s Keychain for that same server.</li>
+      <li>when you click Test Connection, open the table list of a data source, add tables, apply a change or refresh, or when FlectoBI refreshes the saved table and column names of a source it has a login for, or</li>
+      <li>when you open a Workbook whose database Input reads a data source you saved on this Mac, once you have allowed that Workbook to use it.</li>
     </ul>
-    <p>A Workbook never connects to anything by itself otherwise. The connection is read only: FlectoBI reads a table or the result of a query, and never writes to the server. What the server sends back is kept in the Workbook’s engine on your Mac, and is not sent anywhere else.</p>
+    <p>A Workbook from someone else never connects by itself. A Workbook never connects to anything otherwise. The connection is read only: FlectoBI reads a table or the result of a query, and never writes to the server. What the server sends back is kept in the Workbook’s engine on your Mac, and is not sent anywhere else.</p>
     <p>Whether a database connection is encrypted depends on the SSL setting you choose: Off, Prefer, Require or Verify certificate. With Off, the password and the data can be read on the network, and FlectoBI warns you when a MySQL or MariaDB server is on another machine. FlectoBI never sends a PostgreSQL password in clear text or as MD5.</p>
-    <p>The libraries FlectoBI uses to talk to those servers run only on this path. The data engine, DuckDB, is built so that it cannot download or load extensions, and FlectoBI makes no other network requests. Maps are drawn from shapes and place names that come with the app, with no map service, tiles or lookup.</p>
+    <p>The libraries FlectoBI uses to talk to those servers run only on this path. FlectoBI also asks macOS whether this Mac is signed in to iCloud, only to switch the iCloud Keychain choice on or off; it stores and sends no data to iCloud. The data engine, DuckDB, is built so that it cannot download or load extensions, and FlectoBI makes no other network requests. Maps are drawn from shapes and place names that come with the app, with no map service, tiles or lookup.</p>
 
     <h2 id="apple">Apple’s services</h2>
     <p>FlectoBI is distributed through the Mac App Store, and Apple handles its download and updates. Apple may collect information about downloads, and, if you have chosen in your Mac’s settings to share analytics with app developers, about crashes and use. That is Apple’s collection, under <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>. FlectoBI contains no code that sends such reports, and we have no access to your files, Workbooks or data through Apple.</p>
@@ -116,7 +117,7 @@
     <h2 id="choices">Your choices, and deleting your data</h2>
     <ul>
       <li><strong>File and folder access:</strong> remove any grant in Settings, under Access. It takes effect at once.</li>
-      <li><strong>Database passwords:</strong> delete them in the Keychain Access app on your Mac. They are saved under the service name com.ninjaapps.flectobi.db.</li>
+      <li><strong>Data sources and logins:</strong> in Settings, under Data Sources, Delete a source. It removes the source and its login from the Keychain. You can also delete logins in the Keychain Access app, under the service name com.ninjaapps.flectobi.db.</li>
       <li><strong>Workbooks and Output files:</strong> they are ordinary files that you can move, copy or delete.</li>
       <li><strong>Everything else:</strong> it is kept in the app’s storage area, the folder Library/Containers/com.ninjaapps.flectobi in your home folder. Moving the app to the Trash may leave that folder behind, so delete it too if you want nothing left.</li>
     </ul>
@@ -128,7 +129,8 @@
     <h2 id="changes">Changes to this policy</h2>
     <p>Each version of this policy carries a version number and an effective date, and both change whenever the substance does. We do not edit a published version in place; a change means a new one, and the earlier versions stay readable.</p>
     <ul>
-      <li><strong>Version 1.0, effective 2026-10-26</strong> — the first version, for FlectoBI for Mac.</li>
+      <li><strong>Version 1.1, effective 2026-10-31</strong> — the current version. It covers data sources, where database logins are kept, the iCloud Keychain choice and the iCloud account check.</li>
+      <li><strong>Version 1.0, effective 2026-10-26</strong> — the first version, for FlectoBI for Mac. <a href="privacy-v1.0.html">Read version 1.0</a>.</li>
     </ul>
 
     <h2 id="contact">Contact</h2>

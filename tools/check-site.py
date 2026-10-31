@@ -115,6 +115,7 @@ MANIFEST = [
     "apps/flectobi/index.html",
     "apps/flectobi/support.html",
     "apps/flectobi/privacy.html",
+    "apps/flectobi/privacy-v1.0.html",
     "apps/flectobi/guide/index.html",
     "apps/flectobi/tutorials/index.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
