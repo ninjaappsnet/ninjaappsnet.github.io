@@ -30,8 +30,9 @@ Checks:
  14. No page loads anything from another origin, posts a form, or runs an
      inline script that talks to the network or stores anything: the site has
      no analytics, trackers or cookies, and must not get any.
- 15. Dayfolio's pages say what the app does: the five prices, the App Store
-     link and Smart App Banner, the refund sentence, the free tier and the
+ 15. Dayfolio's pages say what the apps do: the two app names, no price, no
+     free tier or in-app purchase, the App Store
+     link and Smart App Banner, the refund sentence and the
      anchors the app opens, and none of the claims the first copy made
      ($9.99, "coming soon", the "Mac App Store"). The privacy policy and terms
      name their version and link the archived one. The URLs the app opens
@@ -43,8 +44,7 @@ Checks:
      time, ids used once, tags that close, and JSON-LD that parses.
  17. No internal link points at an #anchor its page does not have.
  18. The product page's SoftwareApplication JSON-LD names the app, its three
-     systems and a category, offers what the page states (free, and the five
-     prices) and claims no ratings or reviews.
+     systems and a category, offers nothing while no price is set, and claims no ratings or reviews.
  19. robots.txt names the sitemap and does not shut the site.
  20. Every page tools/dayfolio-build.py makes (the guide, templates and
      articles pages, the sub-navigation on the other Dayfolio pages,
@@ -72,6 +72,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import itertools
 import json
 import os
 import re
@@ -112,6 +113,8 @@ MANIFEST = [
     # Dayfolio's published version 1.0 of each (README: Legal page versioning).
     "apps/dayfolio/privacy-v1.0.html",
     "apps/dayfolio/terms-v1.0.html",
+    "apps/dayfolio/privacy-v1.1.html",
+    "apps/dayfolio/terms-v1.1.html",
     "apps/flectobi/index.html",
     "apps/flectobi/support.html",
     "apps/flectobi/privacy.html",
@@ -240,17 +243,15 @@ REQUIRED_FACTS = {
     ],
 }
 
-# Dayfolio (apps/dayfolio/) is one App Store record for iPhone, iPad and Mac. Its
-# pages are held to the app's own decisions, not to the first copy: the five
-# purchases and their US prices are D223-D225 (docs/product-spec.md §3.7b in the
-# app repo), the free tier is D224 as changed by D1623 and D1624, and the website
-# brief is D1625. The privacy policy and terms are versioned like Smalti's: the
+# Dayfolio (apps/dayfolio/) is two paid apps since 2026-11-01: Dayfolio: Work Journal for
+# the Mac and Dayfolio: Daily Work Log for iPhone and iPad, each bought once, with no free
+# tier, no in-app purchase and no subscription, and no price stated until one is set. Its
+# pages are held to that decision, not to the first copy; the website brief is D1625. The privacy policy and terms are versioned like Smalti's: the
 # canonical page serves the latest, the archived ones are only held to exist,
 # stay out of the index and link back.
 DAYFOLIO_DIR = "apps/dayfolio"
 DAYFOLIO_STORE_ID = "6817388897"
 DAYFOLIO_STORE_URL = f"https://apps.apple.com/app/id{DAYFOLIO_STORE_ID}"
-DAYFOLIO_PRICES = ["$7.99", "$19.99", "$24.99", "$4.99", "$16.99"]
 DAYFOLIO_MARKETING = ["index.html", "support.html", "privacy.html", "terms.html"]
 
 DAYFOLIO_STALE_CLAIMS = [
@@ -260,41 +261,50 @@ DAYFOLIO_STALE_CLAIMS = [
     (r"(?i)\b(?:premium|pro version|dayfolio pro)\b",
      "the glossary's word is the purchase, or the full version (CONTEXT.md, Purchase)"),
     (r"(?i)\b(?:free trial|trial period|lite version|demo version)\b",
-     "the free version is the Free tier, not a trial (CONTEXT.md, Free tier)"),
+     "Dayfolio has no free version and no trial (the two apps are paid, 2026-11-01)"),
+]
+
+# What the first copy sold and the paid apps no longer do. Held against the product and support pages; the legal
+# pages' version histories describe the earlier versions, and the legal text is reviewed by hand.
+DAYFOLIO_PAID_STALE = [
+    (r"\$\s?\d", "no price is set for the paid apps, so no page states one"),
+    (r"(?i)(?<!no )\bfree (?:to (?:start|download|use)|version|tier)\b|\bfree\b(?= download)", "Dayfolio has no free version"),
+    (r"(?i)(?<!no )in-app purchase|restore purchases?|\bpaywall\b|\bupgrades?\b|full version|100 entries",
+     "Dayfolio has no in-app purchase, upgrade or limit"),
 ]
 
 # What each page must still say. A rewrite that only deletes the old claim and
 # never states the new one is caught too. Plain substrings, case-sensitive.
-DAYFOLIO_PRODUCT_TITLE = "Dayfolio: Work Journal for iPhone, iPad and Mac — NinjaApps"  # the decision review, 2026-10-16
+DAYFOLIO_PRODUCT_TITLE = "Dayfolio: Work Journal for Mac, Daily Work Log for iPhone and iPad — NinjaApps"  # two apps, 2026-11-01
 DAYFOLIO_REQUIRED = {
     "index.html": [
         f"<title>{DAYFOLIO_PRODUCT_TITLE}</title>",
         f'<meta property="og:title" content="{DAYFOLIO_PRODUCT_TITLE}">',
-        *DAYFOLIO_PRICES,
         DAYFOLIO_STORE_URL,
         f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STORE_ID}">',
         "https://reportaproblem.apple.com",
-        "one journal and 100 entries",
-        "Buy Dayfolio for iPhone and iPad, for Mac, or for all three; "
-        "if you own one, the other is an upgrade at the difference",
+        "Dayfolio: Work Journal",
+        "Dayfolio: Daily Work Log",
+        "One price, everything included, no subscription",
         'id="price"',
         'href="archive-format.html"',
     ],
     "support.html": [
-        *DAYFOLIO_PRICES,
-        "Restore purchases",
+        "Dayfolio: Work Journal",
+        "Dayfolio: Daily Work Log",
         "Not what you need? Apple handles refunds at",
         "https://reportaproblem.apple.com",
         'href="archive-format.html"',
         *(f'id="{anchor}"' for anchor in (
-            "free-version", "prices", "upgrades", "restore-purchases", "refunds", "archive",
+            "prices", "refunds", "archive",
             "mirror-folder", "quick-note-link", "shortcuts", "widgets", "share", "spotlight",
             "handoff", "reminders", "reports")),
     ],
     "privacy.html": [
-        "VERSION 1.1",
+        "VERSION 1.2",
         "Dayfolio collects nothing",
         'href="privacy-v1.0.html"',
+        'href="privacy-v1.1.html"',
         'id="version-history"',
         # A paragraph per permission and system feature (D1625), plus iCloud and the two Mac features.
         *(f'id="{anchor}"' for anchor in (
@@ -303,7 +313,7 @@ DAYFOLIO_REQUIRED = {
             "quick-note-link")),
         "Advanced Data Protection",
     ],
-    "terms.html": ['href="terms-v1.0.html"'],
+    "terms.html": ['href="terms-v1.0.html"', 'href="terms-v1.1.html"'],
 }
 
 # The landing page and the privacy hub carry a line about Dayfolio too. They are not Dayfolio's pages, so only what
@@ -342,11 +352,10 @@ DAYFOLIO_APP_URLS = [
 
 # Every Dayfolio page is held to the website brief's baseline (WEB-6: the head a search engine and a share sheet
 # read, pictures that say what they show, headings that outline the page). The product page's JSON-LD offers are
-# the page's own: free to download, and the five purchases at DAYFOLIO_PRICES.
+# the page's own: none while no price is set.
 DAYFOLIO_BANNER = f'<meta name="apple-itunes-app" content="app-id={DAYFOLIO_STORE_ID}'
 DAYFOLIO_CARD = ['property="og:title"', 'property="og:description"', 'property="og:url"', 'property="og:image"',
                  'name="twitter:card"']
-DAYFOLIO_OFFERS = ["0", *(price.lstrip("$") for price in DAYFOLIO_PRICES)]
 # Every app page's social card (check_app_pages), Dayfolio's and FlectoBI's.
 SOCIAL_CARD_TAGS = DAYFOLIO_CARD
 
@@ -960,7 +969,8 @@ def check_dayfolio() -> None:
         if not page.is_file():
             continue  # check_manifest reports a missing page
         text = page.read_text(encoding="utf-8")
-        for pattern, why in DAYFOLIO_STALE_CLAIMS:
+        paid = DAYFOLIO_PAID_STALE if name in ("index.html", "support.html") else []
+        for pattern, why in DAYFOLIO_STALE_CLAIMS + paid:
             hits: dict[str, int] = {}
             for hit in re.finditer(pattern, text):
                 hits[hit.group(0)] = hits.get(hit.group(0), 0) + 1
@@ -984,15 +994,15 @@ def check_dayfolio() -> None:
                 fail(f"dayfolio: {rel} no longer says {need!r}")
 
     # The archived versions: published as they were, kept out of the index, and a way back to the current one.
-    for name in ("privacy", "terms"):
-        archived = ROOT / DAYFOLIO_DIR / f"{name}-v1.0.html"
+    for name, version in itertools.product(("privacy", "terms"), ("1.0", "1.1")):
+        archived = ROOT / DAYFOLIO_DIR / f"{name}-v{version}.html"
         if not archived.is_file():
             continue
         text = archived.read_text(encoding="utf-8")
         if not is_noindex(archived):
-            fail(f"dayfolio: {name}-v1.0.html must be noindex (an archived version)")
+            fail(f"dayfolio: {name}-v{version}.html must be noindex (an archived version)")
         if f'href="{name}.html"' not in text:
-            fail(f"dayfolio: {name}-v1.0.html does not link the current version")
+            fail(f"dayfolio: {name}-v{version}.html does not link the current version")
 
     # The addresses the app opens: the page, and the anchor on it.
     for url, target, anchor in DAYFOLIO_APP_URLS:
@@ -1169,10 +1179,8 @@ def check_dayfolio_app() -> None:
             fail(f"dayfolio app: operatingSystem does not name {system}")
     if not app.get("applicationCategory"):
         fail("dayfolio app: no applicationCategory")
-    offers = app.get("offers") if isinstance(app.get("offers"), list) else []
-    prices = sorted(str(offer.get("price")) for offer in offers if isinstance(offer, dict))
-    if prices != sorted(DAYFOLIO_OFFERS) or any(o.get("priceCurrency") != "USD" for o in offers if isinstance(o, dict)):
-        fail(f"dayfolio app: the offers are {prices} (USD expected); the page states {sorted(DAYFOLIO_OFFERS)}")
+    if "offers" in app:
+        fail("dayfolio app: offers are set; the paid apps have no price set yet")
     for key in ("aggregateRating", "review"):
         if key in app:
             fail(f"dayfolio app: {key} is set; the page states no ratings or reviews")

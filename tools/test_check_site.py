@@ -19,16 +19,12 @@ check = tb.load("check_site", "check-site.py")
 build = tb.build
 REAL_ROOT = check.ROOT
 
-NAMES = ["iPhone & iPad", "Mac", "All", "Upgrade from Mac", "Upgrade from iPhone & iPad"]
 APP = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Dayfolio",
     "operatingSystem": "iOS 26 or later, iPadOS 26 or later, macOS 26 or later",
     "applicationCategory": "BusinessApplication",
-    "offers": [{"@type": "Offer", "name": "Free download", "price": "0", "priceCurrency": "USD"}]
-    + [{"@type": "Offer", "name": name, "price": price.lstrip("$"), "priceCurrency": "USD"}
-       for name, price in zip(NAMES, check.DAYFOLIO_PRICES)],
 }
 
 
@@ -131,8 +127,8 @@ class DayfolioRulesTests(unittest.TestCase):
         build.write(self.site.root)
         self.assertProblem("support.html#gone", "check_anchors")
 
-    def test_the_product_page_names_the_app_and_its_prices(self):
-        for broken, needle in (({**APP, "offers": APP["offers"][:-1]}, "offers"),
+    def test_the_product_page_names_the_app_and_states_no_price(self):
+        for broken, needle in (({**APP, "offers": [{"@type": "Offer", "price": "9.99", "priceCurrency": "USD"}]}, "offers"),
                                ({**APP, "aggregateRating": {"ratingValue": 5}}, "aggregateRating"),
                                ({**APP, "@type": "WebPage"}, "SoftwareApplication"),
                                ({**APP, "operatingSystem": "iOS 26"}, "macOS")):

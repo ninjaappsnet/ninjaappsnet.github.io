@@ -24,8 +24,10 @@ games/smalti/daily/          landing page for the daily share link (see Universa
 .well-known/apple-app-site-association   which URLs iOS hands to the Smalti app
 apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
 apps/dayfolio/archive-format.html   the .dayfolio file format, generated (see Dayfolio)
-apps/dayfolio/privacy-v1.0.html     version 1.0 of the policy, archived (noindex);
+apps/dayfolio/privacy-v1.0.html     versions 1.0 and 1.1 of the policy, archived (noindex);
+apps/dayfolio/privacy-v1.1.html
 apps/dayfolio/terms-v1.0.html       the same for the terms
+apps/dayfolio/terms-v1.1.html
 apps/dayfolio/media/                the product page's pictures and the iPhone app preview (see Assets)
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
@@ -256,15 +258,17 @@ The same rule (and the ASC privacy-label same-release requirement) lives in
 the game repo's PUBLISHING_TODO.
 
 Dayfolio's pages follow it. `apps/dayfolio/privacy.html` and `terms.html` are
-version 1.1, effective 2026-10-15, the first to cover iPhone and iPad. Version 1.0
-(effective 2026-09-29, the Mac app) stays readable as `privacy-v1.0.html` and
-`terms-v1.0.html`: `noindex`, self-canonical, a line at the top saying which
-dates it was in force and linking the current version, and each is in `MANIFEST`
-but not in `sitemap.xml`. The canonical page's version history says what 1.1
-changed, including what goes past the permissions the app asks for (what a file
-keeps inside it, the mirror folder and the Spotlight index as second copies of
-your text, where the quick-note key is kept). The next substantive change
-snapshots 1.1 as `privacy-v1.1.html` first.
+version 1.2, effective 2026-11-01: Dayfolio became two paid apps (Dayfolio: Work
+Journal for Mac, Dayfolio: Daily Work Log for iPhone and iPad), with no free version,
+no in-app purchase and no subscription, so the purchase section of the terms and the
+App Store statements of the policy changed. Version 1.1 (effective 2026-10-15, the
+first to cover iPhone and iPad) stays readable as `privacy-v1.1.html` and
+`terms-v1.1.html`, and version 1.0 (effective 2026-09-29, the Mac app) as
+`privacy-v1.0.html` and `terms-v1.0.html`: `noindex`, self-canonical, a line at the
+top saying which dates it was in force and linking the current version, and each is
+in `MANIFEST` but not in `sitemap.xml`. The canonical page's version history says
+what each version changed. The next substantive change snapshots 1.2 as
+`privacy-v1.2.html` first.
 
 ## Localized legal pages
 
