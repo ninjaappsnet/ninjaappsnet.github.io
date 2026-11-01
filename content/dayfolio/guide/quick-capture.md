@@ -70,9 +70,6 @@ On iPhone and iPad, an entry’s *Add attachment* menu can take a photo or a vid
 
 You can also capture by voice with **Log in Dayfolio**, from a Home Screen widget or from Control Center. See [Siri, Shortcuts, widgets, Control Center and Focus](../siri-shortcuts-and-widgets/).
 
-## What’s free
-
-Every quick capture is a new entry, so it counts toward the free version’s 100 entries. At the limit, nothing you typed is lost: quick entry keeps your draft, and the Share sheet keeps your text until you cancel. Adding pictures and files to entries comes with the full version; the Share sheet then offers to save the text alone.
 
 ## Related
 

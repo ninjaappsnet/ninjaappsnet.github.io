@@ -62,9 +62,6 @@ In Settings › People & projects, each name shows how many entries mention it, 
 
 A name that only a locked journal mentions isn’t listed anywhere while the journal is locked, and can’t be renamed or deleted until you unlock it. Counts and dates on a name’s page cover only journals you can see, with a line saying that journals you lock are left out. See [Locked journals and privacy](../locked-journals/).
 
-## What’s free
-
-Adding, renaming, merging and deleting people and projects, and setting hourly rates, are all free.
 
 ## Related
 

@@ -74,7 +74,7 @@ Dayfolio is a work journal for iPhone, iPad and Mac. You write a short entry eac
 - Fields labelled Next or Plan go under **Next week**.
 - Everything else goes under **This week**.
 
-You choose the journals and fields it includes. A section with nothing in it is left out, and the titles of your starred entries come first in Highlights, each linking back to its entry. If your template has no field for next week, add a checklist labelled “Next week”: changing a template you added from the library is free.
+You choose the journals and fields it includes. A section with nothing in it is left out, and the titles of your starred entries come first in Highlights, each linking back to its entry. If your template has no field for next week, add a checklist labelled “Next week”.
 
 ![A director update on iPhone for Ines Costa, covering 19 to 25 October over the Management journal: Highlights summarized on the device, then This week](iphone-director-update.webp "A director update with its For line filled in.")
 
@@ -82,7 +82,7 @@ You choose the journals and fields it includes. A section with nothing in it is 
 
 **Address it and narrow it.** A report’s For line says who it’s for, and Prepared by, set once in Settings › General, adds your name. You can also keep only the entries for one project, with one person or with one tag.
 
-**Send it.** Copy it as Markdown and paste it into an email or a chat message, or export it as PDF, Word or Markdown, or share it. Save the report’s setup as a preset, and next week it’s ready to generate again. Making a report and reading it on screen is free; saving presets, keeping reports and sending them come with the purchase.
+**Send it.** Copy it as Markdown and paste it into an email or a chat message, or export it as PDF, Word or Markdown, or share it. Save the report’s setup as a preset, and next week it’s ready to generate again.
 
 **Ask Siri.** “Make this week’s report” works from Siri, Shortcuts, Spotlight and the Action Button: Dayfolio opens on the Weekly report for the last full week (from Friday on, this one), generated and ready to read.
 
@@ -92,4 +92,4 @@ Next week, write three lines a day. On Friday, the update will be mostly there, 
 
 - See the [Daily standup template](../../templates/software-engineering/daily-standup/) and the [Weekly review template](../../templates/general/weekly-review/), with every field and a filled-in example.
 - Read about [Reports](../../guide/reports/) in the Dayfolio guide: weekly reports, director updates, filters, the For line and sending.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

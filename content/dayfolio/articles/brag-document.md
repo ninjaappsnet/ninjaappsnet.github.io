@@ -69,7 +69,7 @@ Each brag document entry has:
 
 - **Win,** for what happened, with the question “What did you do, and what changed because of it?”
 - **Impact:** High, Medium or Low.
-- **Evidence,** a link, and a second **Evidence** field for files, such as a screenshot or a PDF. Adding files comes with the purchase.
+- **Evidence,** a link, and a second **Evidence** field for files, such as a screenshot or a PDF.
 - **Kudos from,** the person who noticed.
 - **Tags,** for your themes.
 
@@ -83,7 +83,7 @@ Each brag document entry has:
 
 **Find them again.** Search can narrow to the Brag document template, to a tag or to a date range. Kudos from is a person, and a person’s name in an entry has “Entries with …” in its menu, which lists every entry that names them, brag document entries included.
 
-**Turn it into a review.** In Reports, a **Performance review** (the last six months, unless you choose other dates) and the **Year-end self-review** (this year so far) both read your brag document entries the way a review wants them: the Win field first, then the Evidence links, with the titles of your starred entries first in Highlights. Making a report and reading it on screen is free; keeping and sending reports come with the purchase.
+**Turn it into a review.** In Reports, a **Performance review** (the last six months, unless you choose other dates) and the **Year-end self-review** (this year so far) both read your brag document entries the way a review wants them: the Win field first, then the Evidence links, with the titles of your starred entries first in Highlights.
 
 ## Start with today’s win
 
@@ -91,4 +91,4 @@ You don’t need to reconstruct the year to begin. Write down one thing from thi
 
 - See the [Brag document template](../../templates/general/brag-document/), with every field and a filled-in example.
 - Read about [templates and fields](../../guide/templates-and-fields/), [quick capture](../../guide/quick-capture/) and [Reports](../../guide/reports/) in the Dayfolio guide.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

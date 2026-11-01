@@ -77,9 +77,6 @@ On iPhone and iPad, Settings › Privacy › **Show entries in Spotlight** lets 
 
 Start an entry on one device and pick it up on another: the entry you have open shows in the other device’s app switcher or Dock, and opens there with its latest text. Handoff is never offered for a journal you lock. See [Sync and iCloud](../sync-and-icloud/).
 
-## What’s free
-
-These features are free. An entry they create counts toward the free version’s 100 entries, as any entry does. *Make this week’s report* opens a report you can read for free.
 
 ## Related
 

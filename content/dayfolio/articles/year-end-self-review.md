@@ -85,7 +85,7 @@ You choose which journals and fields it reads, and you can narrow it to the entr
 
 **Write the review itself in an entry.** Add the **Year-end self-review** template to a journal from the library: open Templates, find it in the General pack and add it to your journal. Its fields are the four parts above, Biggest wins, Growth, Feedback received and Next year, each with a question to answer, plus an Evidence link and Tags. Write it from what the report gathered.
 
-**Send it.** Export the report as Word, PDF or Markdown, or copy it as Markdown and paste it into your company’s review tool. Making a report and reading it on screen is free; keeping reports and sending them come with the purchase.
+**Send it.** Export the report as Word, PDF or Markdown, or copy it as Markdown and paste it into your company’s review tool.
 
 ![The same year-end self-review exported as a Word document and opened in Pages, its highlights a bulleted list under the dates](mac-word-export.webp)
 
@@ -96,4 +96,4 @@ The best time to start a self-review is the week after the last one. One short e
 - See the [Year-end self-review template](../../templates/general/year-end-self-review/) and the [Brag document template](../../templates/general/brag-document/), with every field and a filled-in example.
 - Read about [Reports](../../guide/reports/) in the Dayfolio guide: every kind of report, filters and exports.
 - Read [what goes in a brag document, and how to keep one](../brag-document/), so next year’s review starts itself.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

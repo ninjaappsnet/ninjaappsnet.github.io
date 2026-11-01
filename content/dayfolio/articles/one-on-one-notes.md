@@ -81,4 +81,4 @@ You don’t need to backfill old meetings. Write your next 1:1 with its action i
 
 - See the [1:1 notes template](../../templates/general/1-1-notes/), with every field and a filled-in example.
 - Read about [carry-over](../../guide/carry-over/) and [locked journals](../../guide/locked-journals/) in the Dayfolio guide.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

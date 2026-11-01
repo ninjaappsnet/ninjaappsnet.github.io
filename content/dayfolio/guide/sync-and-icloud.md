@@ -58,13 +58,9 @@ On iPhone and iPad, **Upload files over Wi-Fi only** in Settings › Sync keeps 
 
 Deleting an entry, a journal or anything else moves it to Recently deleted on every device, where it waits 30 days and can be restored. When many items arrive deleted from another device at once, Dayfolio tells you, with *Review* and *Restore all*.
 
-## Purchases on every device
+## Two apps, one iCloud
 
-A purchase covers every device of its platform signed in to your Apple Account: the Mac purchase all your Macs, the iPhone & iPad purchase all your iPhones and iPads, or one purchase for all of them. If a purchase doesn’t show on a device, choose **Restore purchases** in Settings › General. Prices are on the [Dayfolio page](../../).
-
-## What’s free
-
-Sync is free, with no limit of its own. It uses your iCloud storage.
+Dayfolio is two apps: **Dayfolio: Work Journal** for Mac, and **Dayfolio: Daily Work Log** for iPhone and iPad. Each is bought once, with no subscription, and someone who uses both buys both. They sync through your own iCloud, so a journal you write on one appears in the other. Each app covers every device of its platform signed in to your Apple Account.
 
 ## Related
 

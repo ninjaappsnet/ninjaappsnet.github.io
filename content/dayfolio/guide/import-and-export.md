@@ -5,7 +5,7 @@ slug: import-and-export
 date: 2026-10-16
 order: 10
 ---
-What you write in Dayfolio stays yours, in formats you can read anywhere. You can export a journal or everything as Markdown files, keep a complete backup you can restore on any device, bring in Markdown notes from elsewhere, and, on a Mac, keep a live Markdown copy of chosen journals in a folder of your own. Exporting and importing are free.
+What you write in Dayfolio stays yours, in formats you can read anywhere. You can export a journal or everything as Markdown files, keep a complete backup you can restore on any device, bring in Markdown notes from elsewhere, and, on a Mac, keep a live Markdown copy of chosen journals in a folder of your own.
 
 ## Export
 
@@ -74,9 +74,6 @@ The mirrored files aren’t encrypted, like any export.
 
 ![Settings › Export on a Mac, mirroring Engineering Log and Northwind Client to a folder named Vault, up to date, with Career & Growth dimmed because it’s locked.](export-mirror-folder-mac.webp)
 
-## What’s free
-
-Exporting entries and journals, restoring an archive, importing Markdown and mirroring to a folder are all free, including for anything over the free version’s limits.
 
 ## Related
 

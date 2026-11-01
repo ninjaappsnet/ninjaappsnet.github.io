@@ -97,9 +97,6 @@ In an entry made today, an empty select, person, project, tags or link field sho
 
 On a Mac, *Add field* on an entry adds a field to that entry alone, without changing the template. On any device, the Fill line offers the same for a label the entry doesn’t have. A one-off field is searchable like any other.
 
-## What’s free
-
-Templates from the library are free to add, customize and edit. Making a template from scratch with *New template*, copying one with *Duplicate template*, and editing a template of your own come with the full version.
 
 ## Related
 

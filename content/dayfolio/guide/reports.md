@@ -5,7 +5,7 @@ slug: reports
 date: 2026-10-16
 order: 4
 ---
-A report turns a week, a month or a review period of entries into a summary you can read, edit and send. Because entries are structured, Dayfolio doesn’t just paste your notes together: it lists what shipped, adds up hours in a time table, counts statuses and puts your starred entries first. Making and reading reports is free.
+A report turns a week, a month or a review period of entries into a summary you can read, edit and send. Because entries are structured, Dayfolio doesn’t just paste your notes together: it lists what shipped, adds up hours in a time table, counts statuses and puts your starred entries first.
 
 ## Open Reports
 
@@ -98,9 +98,6 @@ If a journal has a weekly review template with a reminder, Today shows a card on
 
 A report that includes a locked journal asks you to unlock first, and a report made from one opens only while it’s unlocked. When you’d rather leave it out, choose *Generate without* that journal. See [Locked journals and privacy](../locked-journals/).
 
-## What’s free
-
-Making a draft, generating it and reading it in the app are free, over all your entries. Saving a report preset, keeping its reports, and sending them by copy, export, share or print come with the full version.
 
 ## Related
 

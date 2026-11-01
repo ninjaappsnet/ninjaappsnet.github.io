@@ -61,9 +61,6 @@ Give it a name, an icon and a colour, and choose a **Template pack** to start fr
 
 Dayfolio can record where you wrote an entry and the weather there at the time. A new journal starts with this off. To turn it on, open the journal’s settings and switch on **Capture location & weather with new entries** under Privacy. Weather is fetched once, when the entry is made, and never changed afterwards.
 
-## What’s free
-
-Dayfolio is free to start, with no account and no subscription. The free version has one journal and 100 entries, and you can make and read reports in the app. A one-time purchase for your platform adds more journals and entries, attachments, templates of your own, and keeping and sending reports. Anything you’ve written stays yours to read, edit and export, whatever you decide. Prices are on the [Dayfolio page](../../).
 
 ## Tips
 

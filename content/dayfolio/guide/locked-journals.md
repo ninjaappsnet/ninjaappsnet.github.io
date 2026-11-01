@@ -68,9 +68,6 @@ Settings › **Privacy** holds the permissions Dayfolio uses, each with what it�
 
 The on-device summary in reports and *Log in Dayfolio* use Apple Intelligence on your device. Nothing you write is sent to Dayfolio, because there’s no Dayfolio server. The details are in the [privacy policy](../../privacy.html).
 
-## What’s free
-
-Locking journals and every privacy setting are free.
 
 ## Related
 

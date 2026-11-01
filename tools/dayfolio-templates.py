@@ -741,7 +741,7 @@ def template_page(root: Path, library: Library, template: Template, example: Exa
         f"<li>Choose the {_esc(pack.name)} pack, then {_esc(template.name)}.</li>"
         "<li>Choose <strong>Add to</strong> and the journal, or <strong>Customize…</strong> to change its "
         "fields first.</li></ol>",
-        f"<p>Templates from the library are free to add and to change. To start a whole journal with this "
+        f"<p>To start a whole journal with this "
         f'template and its neighbours, see the <a href="{href(_dir(pack_path(pack)))}">{_esc(pack.name)} pack</a>. '
         f"More about templates and fields in {guide}.</p>",
     ]
@@ -815,7 +815,7 @@ def gallery_page(root: Path, library: Library) -> str:
         "A template is the shape of an entry: values such as a status or a duration at the top, and the writing "
         "below them.</p>",
         "<p>In the app, you add a template to a journal from the template library, or start a journal with a whole "
-        "pack. Templates from the library are free to add and to change. Each page here shows a template’s "
+        "pack. Each page here shows a template’s "
         "fields, with their options and prompts, and an example entry filled in the way the app draws it. "
         f'<a href="{href(guide)}">The guide</a> explains templates and fields in the app.</p>',
     ]
