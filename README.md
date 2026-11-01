@@ -102,18 +102,17 @@ version.
 
 Dayfolio's pages are held to the app the same way (`check_dayfolio`, `DAYFOLIO_*`
 in the script). The product, support, privacy and terms pages fail on a claim the
-first copy made and the app has outgrown (`$9.99`, "coming soon", the "Mac App
+first copy made and the app has outgrown (a price, a free version, an in-app purchase,
+"coming soon", the "Mac App
 Store", "premium", "free trial"), and on losing a fact: the product page's title
-("Dayfolio: Work Journal for iPhone, iPad and Mac — NinjaApps", and its `og:title`), the five prices, the App
-Store link and Smart App Banner id, the refund sentence, the free tier's "one
-journal and 100 entries", the anchors the app opens (`#quick-note-link`) and one
+("Dayfolio: Work Journal for Mac, Daily Work Log for iPhone and iPad — NinjaApps", and its `og:title`), the
+two app names, the App Store link and Smart App Banner id, the refund sentence, the anchors the app opens (`#quick-note-link`) and one
 anchor per permission on the privacy policy. The policy must name its version
 and link the archived one; the archived versions must stay `noindex` and link
 back. The landing page and the privacy hub are held to the same retired claims
-and must say Dayfolio is for iPhone, iPad and Mac. The prices and ids are the
-app repo's (`docs/product-spec.md` §3.7b, D223–D225); when they change, change
-`DAYFOLIO_PRICES`, the copy and the App Store Connect products in the same
-commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
+and must say Dayfolio is for iPhone, iPad and Mac. The apps are paid and no price
+is set (2026-11-01): when one is, add it to the copy, the JSON-LD `offers` and this
+check in the same commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
 also introduces Dayfolio.
 
 `check_dayfolio_media` holds the product page's pictures and film: at least one
@@ -580,8 +579,8 @@ top; a page whose source is gone is removed by the next build.
 description, a canonical URL, the banner, a social card (unless noindex), alt text,
 one h1 and headings that step down one level at a time, ids used once, tags that
 close, JSON-LD that parses, and anchors that exist. The product page's
-`SoftwareApplication` JSON-LD must offer what the page states (free, and
-`DAYFOLIO_PRICES`), with no ratings or reviews. The social card is a screenshot of
+`SoftwareApplication` JSON-LD must offer nothing while no
+price is set, with no ratings or reviews. The social card is a screenshot of
 `assets/brand/dayfolio-card.html`:
 
 ```sh
