@@ -70,7 +70,7 @@ pay -> retry: "No" { dash: dashed }
 - `key: "Label" { … }` is a shape. The key is its ID.
 - `a -> b` is a line with an arrow at `b`, and `: "Yes"` labels it.
 - Shapes without a position are laid out for you, top to bottom, or left to right with `direction: right` at the top.
-- `canvas "Home" { … }` blocks make more canvases, and `on-click: go "Home"` gives a shape an action.
+- For more than one canvas, put each canvas’s lines in a `canvas "Home" { … }` block; then every shape goes in one. `on-click: go "Home"` gives a shape an action.
 
 Build it with `diagrove new --text checkout.gtext -o Checkout.diagrove`, then `check` it and `render` it to look at the result. `diagrove schema text` lists every attribute.
 

@@ -100,7 +100,7 @@ cart -&gt; pay
 pay -&gt; receipt: "Yes"
 pay -&gt; retry: "No" { dash: dashed }</code></pre>
 
-<ul><li><code>key: "Label" { … }</code> is a shape. The key is its ID.</li><li><code>a -&gt; b</code> is a line with an arrow at <code>b</code>, and <code>: "Yes"</code> labels it.</li><li>Shapes without a position are laid out for you, top to bottom, or left to right with <code>direction: right</code> at the top.</li><li><code>canvas "Home" { … }</code> blocks make more canvases, and <code>on-click: go "Home"</code> gives a shape an action.</li></ul>
+<ul><li><code>key: "Label" { … }</code> is a shape. The key is its ID.</li><li><code>a -&gt; b</code> is a line with an arrow at <code>b</code>, and <code>: "Yes"</code> labels it.</li><li>Shapes without a position are laid out for you, top to bottom, or left to right with <code>direction: right</code> at the top.</li><li>For more than one canvas, put each canvas’s lines in a <code>canvas "Home" { … }</code> block; then every shape goes in one. <code>on-click: go "Home"</code> gives a shape an action.</li></ul>
 
 <p>Build it with <code>diagrove new --text checkout.gtext -o Checkout.diagrove</code>, then <code>check</code> it and <code>render</code> it to look at the result. <code>diagrove schema text</code> lists every attribute.</p>
 
