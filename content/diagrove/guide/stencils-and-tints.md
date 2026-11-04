@@ -77,7 +77,7 @@ A library is a `.diagrovestencils` file, small enough to send to someone. **Expo
 
 Importing the same file twice doesn’t make a second copy.
 
-![The System architecture template on Ink paper in the dark appearance, with the Orders container service selected and the inspector’s Stencil section showing its Tint well set to Purple, 2 parts changed · 1 hidden with Show all and Reset, and Detach from stencil.](instance-inspector.webp "An instance with changed and hidden parts.")
+![The System architecture template on Ink paper in the dark appearance, with two of the Orders container service’s parts changed and one hidden: Orders selected, and the inspector’s Stencil section showing its Tint well set to Purple, 2 parts changed · 1 hidden with Show all and Reset, and Detach from stencil.](instance-inspector.webp "An instance with changed and hidden parts.")
 
 ## Related
 
