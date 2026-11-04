@@ -30,7 +30,7 @@ Save this as `status.json`, in TextEdit set to plain text or in any code editor:
 
 Leave Shop and Email for later: you’ll copy the Website box once its Bindings are set.
 
-[shot: board-drawn] Mac, light. A new diagram with two rounded rectangles, Website and Support queue, on White paper. Point to the Website box.
+![A new diagram on White paper with two rounded rectangles, Website and a wider Support queue below it.](board-drawn.webp "The board drawn: Website and Support queue.")
 
 ## 3. Colour Website from the file
 
@@ -43,7 +43,7 @@ Leave Shop and Email for later: you’ll copy the Website box once its Bindings 
 
 Text matches exactly, so “Up” and “up” are different values. Numbers and true or false match however they’re written.
 
-[shot: match-values] Mac, light. The Website box selected, with the inspector’s Data section showing a Fill binding: From JSON, Source In this document, the path, and Match values with up, slow and down. Point to the Rule menu.
+![The Website box selected, with the inspector’s Data section showing a Fill binding: Drives Fill, From JSON, Source In this document, the path to Website’s status, Rule Match values, and up, slow and down matched to light green, light amber and light red, Otherwise As drawn.](match-values.webp "A Fill binding that matches up, slow and down.")
 
 ## 4. Put the status in its words
 
@@ -55,7 +55,7 @@ Text matches exactly, so “Up” and “up” are different values. Numbers and
 
 Bindings don’t change the drawing you edit. To see what the data does, click **Show live data** in the canvas’s bottom-left corner, above the zoom control. The Website box turns light green and reads “Website: up”. Click it again to see the canvas as drawn. Edits you make while it’s on still change the drawing.
 
-[shot: show-live-data] Mac, light. Show live data turned on: the Website box light green reading “Website: up”. Point to the Show live data button.
+![Show live data on: the Website box light green and reading Website: up, the Live data on button in the canvas’s bottom-left corner, and Live data in the canvas inspector.](show-live-data.webp "With live data showing, Website reads “Website: up”.")
 
 ## 6. Copy it for Shop and Email
 
@@ -75,7 +75,7 @@ Match values suits words. For a number, use **Steps**:
 
 The last step the value reaches wins, so 14 waiting is amber. Below the first step, the graphic stays as drawn.
 
-[shot: steps] Mac, light. Support queue selected, light amber and reading “14 waiting”, with the Data section showing Steps at 0, 10 and 25. Point to the steps.
+![Support queue selected, light amber and reading 14 waiting, above Website, Shop and Email in light green, light amber and light red, with the inspector’s Data section showing a Fill binding on queue.waiting with Steps at 0, 10 and 25.](steps.webp "Steps at 0, 10 and 25: 14 waiting is amber.")
 
 ## 8. Read it from a web address
 
