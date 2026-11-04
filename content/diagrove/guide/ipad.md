@@ -57,7 +57,7 @@ The result is one undo step, and a notice says what came in, with **Tidy** to ar
 
 Once you’ve used Apple Pencil, only the Pencil draws in Sketch mode and one finger scrolls, as in Notes.
 
-[shot: sketch-mode-ipad] iPad in landscape, light appearance, a blank diagram in Sketch mode: four hand-drawn boxes joined by arrows in the accent-coloured ink, the sketch bar with Pen, Eraser, Clear, Turn into diagram and Done.
+![Sketch mode on iPad over a blank diagram: four hand-drawn boxes joined by arrows in the accent-coloured ink, and the sketch bar with Pen, Eraser, Clear, Turn into diagram and Done.](sketch-mode-ipad.webp "Sketch mode, with the sketch bar at the top.")
 
 ## Files and iCloud Drive
 
