@@ -27,7 +27,7 @@ A graphic can have several bindings; when two drive the same thing, the later on
    - **Path**: which value to read, for JSON and a shortcut.
    - **Rule**: **As it is**, **Format text**, **Steps** or **Match values**.
 
-The card says what the binding shows right now, such as “Shows “12 h””, or why it leaves the graphic as drawn. **Duplicate binding** and **Remove binding** are in the card’s context menu.
+The card says what the binding shows right now, such as “Shows “12 h””, or why it leaves the graphic as drawn. **Duplicate binding** and **Remove binding** are in the card’s context menu, and an open card ends with a **Remove binding** row.
 
 ![The KPI board template with its first number, £412k, selected and a Text binding open in the inspector’s Data section: Drives Text, From JSON, Source Link with a web address, Path revenue, Rule Format text with £{value}k, and Shows “£412k”.](data-card-mac.webp "A Text binding from a JSON link.")
 
