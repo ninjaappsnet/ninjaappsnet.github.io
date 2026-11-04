@@ -81,7 +81,7 @@ The inspector’s **Picture** section chooses Fill, Fit or Stretch, replaces the
 
 Put a shape behind the graphics you want to clip, select them all and choose **Arrange › Mask with selected shape**. The backmost shape becomes the mask: its outline clips the rest and it isn’t drawn itself. **Arrange › Release mask** undoes it. **Flip horizontal** and **Flip vertical** are in the same menu; on the canvas, Shift-H and Shift-V flip the selection.
 
-[shot: inspector-gradient] The Mac, dark appearance, a blank diagram on Ink paper with a rounded rectangle selected: point to the Fill section set to Linear gradient with three stops on its bar, and the angle field.
+![A rounded rectangle called Launch selected on Ink paper, with the inspector’s Fill section set to a linear gradient: three stops on the gradient bar, the first chosen as Dark teal, and the angle at 135 degrees.](inspector-gradient.webp "Fill set to a linear gradient with three stops.")
 
 ## Layers and shared layers
 
@@ -93,7 +93,7 @@ A layer’s context menu also has **Share with all canvases**. A shared layer sh
 
 A document can hold many canvases, such as the screens of an app or the floors of a building. **Canvas › New canvas** (Option-Command-N) adds one, and **Duplicate canvas** and **Delete canvas** are beside it. Click a canvas in the sidebar to show it; its context menu renames it or exports it. Each canvas has its own size, paper and grid in the inspector when nothing is selected.
 
-[shot: layers-shared] The Mac, light appearance, the App screen template: the sidebar’s Canvases tab with both canvases, the Layers list below, and a layer’s context menu open on Share with all canvases.
+![The App screen template with the sidebar’s Canvases tab showing the Projects and Website canvases, and a layer’s context menu open in the Layers list with Share with all canvases highlighted.](layers-shared.webp "A layer’s context menu, with Share with all canvases.")
 
 ## Related
 
