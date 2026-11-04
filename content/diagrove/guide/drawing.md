@@ -47,7 +47,7 @@ When you resize one graphic that isn’t rotated, without Shift, its width or he
 
 Hold Command while you drag to turn snapping off: for moving, resizing, drawing a shape and placing a line’s end.
 
-[shot: spacing-markers] The Mac, light appearance, a blank diagram on White paper with three rounded rectangles in a row: the third being dragged into place, its gap to the second matching the gap between the first two, and spacing markers with the distance on both gaps.
+![Three rounded rectangles in a row, Draft, Review and Publish, with Publish being dragged into place: a guide along their top edges, and spacing markers reading 40 on both gaps.](spacing-markers.webp "Spacing markers show the equal gaps while you drag.")
 
 ## Rulers and guides
 
@@ -61,7 +61,7 @@ On iPad, touch and hold the zoom percentage for the zoom commands, **Show rulers
 
 Isometric canvases have no rulers or guides in 1.0: their floor grid measures them.
 
-[shot: rulers-guide] The Mac, light appearance, a blank diagram on White paper with the rulers showing: a vertical guide dragged out of the side ruler, three shapes of different widths snapped to it by their left edges, one of them selected and marked on both rulers.
+![A diagram with the rulers showing along the top and the side, a vertical guide at 288 points, and three shapes of different widths lined up on it by their left edges; Owner: Amara is selected and its extent is marked on both rulers.](rulers-guide.webp "Rulers, and a guide three shapes sit on.")
 
 ## Groups
 
