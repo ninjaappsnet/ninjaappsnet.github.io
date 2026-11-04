@@ -20,7 +20,7 @@ On the Mac you choose where to save. On iPad, choose **Save to Files…** or **S
 
 Copy works too: a selection you copy carries a PDF and a PNG of itself, so you can paste it straight into a document, a slide or a message.
 
-[shot: export-sheet-mac] The Mac, light appearance, the Flowchart template: the export sheet with Format set to PNG image, Area set to Just the drawing, Scale 2×, and the preview.
+![The export sheet over the Flowchart template: a preview of the bike repair flowchart, Format set to PNG image, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels.](export-sheet-mac.webp "File › Export… set to a PNG image.")
 
 ## The Web player (Mac)
 
