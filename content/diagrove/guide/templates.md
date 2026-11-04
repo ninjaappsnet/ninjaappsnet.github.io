@@ -14,7 +14,7 @@ A template is a finished example diagram you start from: a flowchart with its sw
 
 On the Mac, double-click a template, or select it and press Return or click **Create**. Press Space to see the selected template large; the Left and Right Arrow keys step to the one before or after. On iPad, tap a template to start from it, or touch and hold one to see it large, with **Create** in its menu.
 
-[shot: gallery-mac] The template gallery on the Mac, light appearance: the category sidebar with All templates chosen, the Process section’s cards with Flowchart selected, and Paper set to White in the footer.
+![The template gallery on the Mac: the category list with All templates chosen and 63 templates, the Blank cards and the Process cards with Flowchart chosen, and Paper set to White beside Create.](gallery-mac.webp "File › New from template… on All templates.")
 
 ## Categories
 
@@ -67,7 +67,7 @@ The Spaces templates are isometric scenes, built from the isometric stencils at 
 
 System architecture and Order fulfilment are isometric too, as is the blank isometric diagram. See [Isometric canvases](../isometric-canvases/).
 
-[shot: spaces-ink] The template gallery on the Mac, dark appearance, the Spaces category chosen with Paper set to Ink: the six isometric scenes as cards, Warehouse selected.
+![The template gallery in the dark appearance with Spaces chosen: Home network, Warehouse, Data centre, Office floor, Shop and Event venue on Ink paper, Warehouse chosen.](spaces-ink.webp "The Spaces templates on Ink paper.")
 
 ## Related
 
