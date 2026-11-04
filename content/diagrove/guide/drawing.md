@@ -33,6 +33,8 @@ The **Fill** and **Stroke** sections set a shape’s colour, outline width and d
 
 Fill’s **Type** is Solid, Linear gradient or Radial gradient. A gradient has a bar of stops: click the bar to add one, and drag one off or press Delete to remove it. A linear gradient has an angle; a radial gradient has centre and radius handles on the canvas while you edit it. Fill also holds the drop and inner shadows, and **Opacity** has a blend mode under **Blend**.
 
+![A rounded rectangle called Launch selected on Ink paper, with the inspector’s Fill section set to a linear gradient: three stops on the gradient bar, the first chosen as Dark teal, and the angle at 135 degrees.](inspector-gradient.webp "Fill set to a linear gradient with three stops.")
+
 ## Align and distribute
 
 Select two or more graphics, then choose **Arrange › Align** (Left edges, Horizontal centres, Right edges, Top edges, Vertical centres or Bottom edges). Select three or more and **Arrange › Distribute** spaces them evenly, horizontally or vertically. The inspector’s **Arrange** section has the same buttons.
@@ -81,19 +83,17 @@ The inspector’s **Picture** section chooses Fill, Fit or Stretch, replaces the
 
 Put a shape behind the graphics you want to clip, select them all and choose **Arrange › Mask with selected shape**. The backmost shape becomes the mask: its outline clips the rest and it isn’t drawn itself. **Arrange › Release mask** undoes it. **Flip horizontal** and **Flip vertical** are in the same menu; on the canvas, Shift-H and Shift-V flip the selection.
 
-![A rounded rectangle called Launch selected on Ink paper, with the inspector’s Fill section set to a linear gradient: three stops on the gradient bar, the first chosen as Dark teal, and the angle at 135 degrees.](inspector-gradient.webp "Fill set to a linear gradient with three stops.")
-
 ## Layers and shared layers
 
 Each canvas has layers, listed under its canvases on the sidebar’s **Canvases** tab. Choose **+** beside Layers, or **Canvas › New layer** (Option-Command-L). Each row can hide or lock its layer; its context menu renames it, moves the selection to it and chooses whether it prints.
 
 A layer’s context menu also has **Share with all canvases**. A shared layer shows on every canvas, which suits a header, a navigation bar or a page frame: change it on one canvas and every canvas changes. New graphics still go on the canvas’s own top layer; click the shared layer in the list to add to it. **Stop sharing** makes each copy an ordinary layer again.
 
+![The App screen template with the sidebar’s Canvases tab showing the Projects and Website canvases, and a layer’s context menu open in the Layers list with Share with all canvases highlighted.](layers-shared.webp "A layer’s context menu, with Share with all canvases.")
+
 ## Canvases
 
 A document can hold many canvases, such as the screens of an app or the floors of a building. **Canvas › New canvas** (Option-Command-N) adds one, and **Duplicate canvas** and **Delete canvas** are beside it. Click a canvas in the sidebar to show it; its context menu renames it or exports it. Each canvas has its own size, paper and grid in the inspector when nothing is selected.
-
-![The App screen template with the sidebar’s Canvases tab showing the Projects and Website canvases, and a layer’s context menu open in the Layers list with Share with all canvases highlighted.](layers-shared.webp "A layer’s context menu, with Share with all canvases.")
 
 ## Related
 
