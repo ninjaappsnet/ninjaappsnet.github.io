@@ -15,7 +15,7 @@ A stencil you place stays linked to its library, and one colour, its tint, recol
 
 On light paper a hue goes on as its light version, on dark paper as its dark version, and on an isometric canvas as the full hue.
 
-[shot: tint-row] Mac, light. The Stencils tab with teal chosen in the Tint row and the Servers and racks tiles drawn in teal. Point to the Tint row.
+![The Stencils tab on the Isometric category with Teal chosen in the Tint row, and the Servers and racks tiles drawn in teal.](tint-row.webp "Teal chosen in the Tint row.")
 
 ## After you place it
 
@@ -25,7 +25,7 @@ On light paper a hue goes on as its light version, on dark paper as its dark ver
 
 An isometric shape you drew with the tool palette, such as a block, takes its tint in the **Isometric** section instead.
 
-[shot: stencil-section] Mac, dark appearance. An isometric person selected, with the inspector’s Stencil section showing Tint, Skin, Hair and Turn. Point to Tint.
+![An isometric walking person selected on the Office floor in the dark appearance, with the inspector’s Stencil section showing Tint set to Orange, Skin, Hair and Turn.](stencil-section.webp "A person’s Stencil section: Tint, Skin, Hair and Turn.")
 
 ## Change one part
 
