@@ -57,7 +57,7 @@ Some graphics should stand upright and face you wherever they are: a person’s 
 
 Lines lie on the floor at the elevation of their start, and Elbow lines run along the floor’s axes. A line whose ends stand at different heights runs at its start’s height, then rises straight up to its end. An iso shape’s magnets sit at the middle of each edge of its base and on each face, so lines meet it where you’d expect.
 
-[shot: iso-office] The Mac, light appearance, the Office floor template on White paper: desks with name tags on pins facing the viewer, the meeting room behind its low partitions, and contact shadows under the furniture.
+![The Office floor template on White paper: desks along the back wall with name tags on pins facing the viewer, the meeting room behind low partitions, the kitchen, the printer and the entrance.](iso-office.webp "The Office floor template.")
 
 ## Isometric stencils
 
