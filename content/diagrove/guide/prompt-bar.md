@@ -19,11 +19,11 @@ Press Return on the Mac, or tap the arrow on iPad. Diagrove draws a box for each
 
 This works with or without Apple Intelligence.
 
+![A blank diagram with Cart -> Pay -> Paid? -> Send receipt in the prompt bar and, above it, the flowchart it drew: Cart, Pay, a Paid? decision and Send receipt, with the notice Drawn from your text.](draw-from-steps.webp "Steps typed with arrows become a flowchart.")
+
 ## Draw from a description
 
 With Apple Intelligence on, you can describe a diagram in your own words: “Draw a flowchart for returning an order” or “Draw a mind map about planning a trip”. Diagrove works out the steps on the device, then draws and lays them out the same way. On the Mac, **File › Describe a diagram…** (Option-Shift-Command-N) opens a new document with the bar ready and an example to follow; on iPad, **Describe a diagram…** is in the template sheet.
-
-![A blank diagram with Cart -> Pay -> Paid? -> Send receipt in the prompt bar and, above it, the flowchart it drew: Cart, Pay, a Paid? decision and Send receipt, with the notice Drawn from your text.](draw-from-steps.webp "Steps typed with arrows become a flowchart.")
 
 ## Change a diagram in words
 
