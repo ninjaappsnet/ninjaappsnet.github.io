@@ -91,7 +91,7 @@ Diagrove reads a link only while you play or show live data, and again every 30 
 
 Click **Play** (Option-Command-P on the Mac). The canvas’s bottom-left corner shows how the live data stands, with a refresh button to read it again now. Change `status.json` on the server, wait half a minute or refresh, and watch the board follow.
 
-[shot: playing-live] Mac, dark appearance, White paper. The finished board in Play mode: Website green, Shop amber, Email red, Support queue amber, with the live data status and Refresh in the corner. Point to Refresh.
+![The finished board in Play mode in the dark appearance on White paper: Website light green reading Website: up, Shop light amber, Email light red and Support queue light amber with 14 waiting; in the corner, Live data with its status dot and Refresh.](playing-live.webp "Playing, with live data’s status and Refresh in the corner.")
 
 > **Tip:** A colour can come straight from the data, too. With the rule **As it is**, a Fill binding uses the value as a colour: a swatch name such as `teal` or `light amber`, or a hex code.
 
