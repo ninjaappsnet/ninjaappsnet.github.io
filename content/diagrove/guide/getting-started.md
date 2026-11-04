@@ -30,7 +30,7 @@ Once you have documents, the right side has two tabs, **Recent** and **Templates
 
 To see the Welcome window again, choose **Window › Welcome to Diagrove** (Shift-Command-1). Turn off *Show this window when Diagrove opens* if you’d rather start with a new blank diagram.
 
-[shot: welcome-mac] The Welcome window on the Mac, light appearance, first run: the hero picture, the four ways to start, the six starter templates with Flowchart selected, Paper set to White, and Create.
+![The Welcome window on the Mac: the Diagrove picture and version, New diagram, New isometric diagram, Describe a diagram and Open, six starter templates with Flowchart chosen, Paper set to White and the Create button.](welcome-mac.webp "The Welcome window on first run, with Flowchart chosen.")
 
 ## Start on the iPad
 
@@ -48,7 +48,7 @@ A document you start from a template or with Describe a diagram… goes where yo
 - **The prompt bar**, at the bottom of the canvas, draws a diagram from steps or a description, and changes the one in front of you. See [The prompt bar](../prompt-bar/).
 - **The toolbar.** On the Mac: the sidebar toggle, Arrange, Export, Send to Dayfolio, Play, and the inspector toggle on its own at the end. **View › Customize Toolbar…** adds more, such as Zoom, Insert picture, Tidy, Group, Lock and New canvas. On iPad: Undo, Redo, Sketch, Insert picture, Arrange, Export, Play and Inspector.
 
-[shot: window-parts-mac] A document window on the Mac, light appearance, the Flowchart template on White paper: point to the tool palette above the canvas, the sidebar on its Canvases tab with Layers below, the inspector with a shape selected, the prompt bar and the toolbar.
+![A Diagrove window on the Mac with the Flowchart template: the sidebar on its Canvases tab with the Layers list, the tool palette over the canvas, the step Repair the bike selected, the inspector on the right, the prompt bar and zoom at the foot, and the toolbar at the top.](window-parts-mac.webp "The sidebar, tool palette, canvas, inspector, prompt bar and toolbar.")
 
 ## Saving and iCloud Drive
 
