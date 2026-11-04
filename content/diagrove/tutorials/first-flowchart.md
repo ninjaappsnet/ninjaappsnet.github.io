@@ -68,7 +68,7 @@ The sparkle at the start of the prompt bar opens the guide to what you can ask, 
 
 Adding Fraud check laid the flow out again around the new step. Whenever shapes you’ve moved by hand need putting back in order, type “tidy up the whole diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
 
-![The finished checkout flow: Basket, Pay, Fraud check, an orange Paid? decision and Send receipt in bold, with the No line looping back to Pay and Yes on the line to Send receipt.](tidied.webp "The finished flow, laid out again.")
+![The finished checkout flow in one straight column: Basket, Pay in bold, Fraud check, an orange Paid? decision and Send receipt, with the No line looping back to Pay and Yes on the line to Send receipt, under the notice Made the text of “Pay” bold.](tidied.webp "The finished flow, laid out again.")
 
 ## 6. Export a PNG
 
@@ -80,7 +80,7 @@ Adding Fraud check laid the flow out again around the new step. Whenever shapes 
 
 The sheet’s subtitle says what you’ll get, including the PNG’s size in pixels.
 
-![The export sheet for Checkout: a preview of the checkout flow, Format set to PNG image, Area set to Just the drawing and Scale 2×, under the subtitle Saves “Diagram” as a PNG picture, 510 × 1,160 px.](export-png.webp "The subtitle gives the PNG’s size in pixels.")
+![The export sheet for Checkout: a preview of the checkout flow, Format set to PNG image, Area set to Just the drawing and Scale 2×, under the subtitle Saves “Diagram” as a PNG picture, 460 × 1,160 px.](export-png.webp "The subtitle gives the PNG’s size in pixels.")
 
 ## Where to go next
 
