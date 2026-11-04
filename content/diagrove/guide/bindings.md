@@ -29,7 +29,7 @@ A graphic can have several bindings; when two drive the same thing, the later on
 
 The card says what the binding shows right now, such as “Shows “12 h””, or why it leaves the graphic as drawn. **Duplicate binding** and **Remove binding** are in the card’s context menu.
 
-[shot: data-card-mac] The Mac, light appearance, the KPI board template with a Text binding added to its first number, which is selected: the inspector’s Data section with one open card, Drives set to Text, From set to JSON with a link, a Path, Rule set to Format text, and the line saying what it shows.
+![The KPI board template with its first number, £412k, selected and a Text binding open in the inspector’s Data section: Drives Text, From JSON, Source Link with a web address, Path revenue, Rule Format text with £{value}k, and Shows “£412k”.](data-card-mac.webp "A Text binding from a JSON link.")
 
 ## Paths
 
