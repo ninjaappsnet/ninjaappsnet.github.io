@@ -17,7 +17,7 @@ The prompt bar works on every Mac and iPad that runs Diagrove. Without Apple Int
    - A list pasted in, one topic per line, indented under its parent, becomes a tree of topics.
 3. Diagrove draws boxes and arrows and lays them out. The notice’s **Undo** takes them away.
 
-[shot: no-ai-tip] Mac, light. An empty canvas with the prompt bar focused and its tip saying Apple Intelligence is off and arrows and lists still work. Point to the tip.
+![An empty canvas with the prompt bar focused and its tip above it: Apple Intelligence is off. Arrows such as “Idea -> Plan -> Ship” and lists still work, with Open Settings.](no-ai-tip.webp "The prompt bar’s tip when Apple Intelligence is off.")
 
 ## Change a diagram
 
