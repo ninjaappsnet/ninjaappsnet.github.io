@@ -1,11 +1,11 @@
 ---
 title: Drawing
-description: Shapes, lines that stay connected through magnets, text, colours and gradients, groups, tables, pictures, masks, layers and canvases.
+description: Shapes, lines that stay connected, text, colours, snapping and smart guides, rulers, groups, tables, pictures, masks, layers and canvases.
 slug: drawing
 date: 2026-10-29
 order: 2
 ---
-Everything you place on a canvas is a graphic: a shape, a line, a group or a table. This page covers how to draw, style and line them up, and how to organise them in layers and canvases.
+Everything you place on a canvas is a graphic: a shape, a line, a group or a table. This page covers how to draw, style and line them up, with smart guides and rulers, and how to organise them in layers and canvases.
 
 ## Shapes
 
@@ -33,11 +33,35 @@ The **Fill** and **Stroke** sections set a shape’s colour, outline width and d
 
 Fill’s **Type** is Solid, Linear gradient or Radial gradient. A gradient has a bar of stops: click the bar to add one, and drag one off or press Delete to remove it. A linear gradient has an angle; a radial gradient has centre and radius handles on the canvas while you edit it. Fill also holds the drop and inner shadows, and **Opacity** has a blend mode under **Blend**.
 
-## Align, distribute and snapping
+## Align and distribute
 
 Select two or more graphics, then choose **Arrange › Align** (Left edges, Horizontal centres, Right edges, Top edges, Vertical centres or Bottom edges). Select three or more and **Arrange › Distribute** spaces them evenly, horizontally or vertically. The inspector’s **Arrange** section has the same buttons.
 
-As you drag, guides show where a graphic lines up with the edges and centres of others, and it snaps to them, else to the grid. Hold Command to move freely. With nothing selected, the inspector’s **Grid** section turns *Show grid* and *Snap to grid* on or off and sets the spacing.
+## Snapping and smart guides
+
+As you drag a graphic, it snaps to the edges and centres of the graphics around it, and a guide shows each line it meets. Resize handles, the corner of a shape you’re drawing and the free end of a line snap the same way. Where nothing lines up, a graphic snaps to the grid. With nothing selected, the inspector’s **Grid** section turns *Show grid* and *Snap to grid* on or off and sets the spacing.
+
+Smart guides also measure the space between graphics. As you move one, it snaps to a gap that matches the gaps between the graphics in its row or column, and to the point halfway between the graphics either side of it. Spacing markers show each equal gap with its distance. An edge or centre that lines up wins over a spacing.
+
+When you resize one graphic that isn’t rotated, without Shift, its width or height snaps to match a neighbour’s, and a marker under each of them (beside each, for a height) shows the size they share.
+
+Hold Command while you drag to turn snapping off: for moving, resizing, drawing a shape and placing a line’s end.
+
+[shot: spacing-markers] The Mac, light appearance, a blank diagram on White paper with three rounded rectangles in a row: the third being dragged into place, its gap to the second matching the gap between the first two, and spacing markers with the distance on both gaps.
+
+## Rulers and guides
+
+Choose **View › Show rulers** (Command-R) to show a ruler along the top of the canvas and one down its side. They measure the canvas in points from the top-left corner of the paper, and mark where the selection starts and ends.
+
+To add a guide, drag from a ruler onto the canvas: from the top ruler for a horizontal guide, from the side ruler for a vertical one. While you drag, the guide shows its position and snaps to the edges of graphics, then to the grid. Drag a guide to move it. To remove one, drag it back onto its ruler or off the canvas, or right-click it and choose **Remove guide**. Graphics snap to guides as they do to each other’s edges.
+
+**View › Guides** holds **Show guides** (or **Hide guides**), **Lock guides**, which stops them being dragged, and **Clear guides on this canvas**. Each canvas keeps its own guides, saved with the document, but they never appear in a print, an export, Play mode, an embed or the web player. Whether the rulers and guides show, and whether guides are locked, is one setting for every document.
+
+On iPad, touch and hold the zoom percentage for the zoom commands, **Show rulers** and **Guides**; with a keyboard, Command-R works too. Drag a guide out of a ruler with your finger, and touch and hold a guide for **Remove guide**.
+
+Isometric canvases have no rulers or guides in 1.0: their floor grid measures them.
+
+[shot: rulers-guide] The Mac, light appearance, a blank diagram on White paper with the rulers showing: a vertical guide dragged out of the side ruler, three shapes of different widths snapped to it by their left edges, one of them selected and marked on both rulers.
 
 ## Groups
 
