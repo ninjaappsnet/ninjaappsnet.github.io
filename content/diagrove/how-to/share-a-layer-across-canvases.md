@@ -14,7 +14,7 @@ A shared layer appears on every canvas of the Document. Use it for what repeats:
 
 The layer now shows a small badge in the list. Its tooltip says how many canvases show it, such as “Shared layer, shown on all 3 canvases”. Canvases you add later get it too.
 
-[shot: share-menu] Mac, light. The Layers list with a layer’s context menu open and Share with all canvases highlighted. Point to the menu item.
+![The Layers list of the App screen template with the Taps layer’s context menu open: Rename, Move selection here, Move layer up, Move layer down, Printable, Share with all canvases highlighted, and Delete.](share-menu.webp "Share with all canvases, in a layer’s context menu.")
 
 ## Work with it
 
@@ -22,7 +22,7 @@ The layer now shows a small badge in the list. Its tooltip says how many canvase
 - **Draw on it on purpose.** New graphics go on the canvas’s own top layer, even when the shared layer is above it, so drawing on one canvas never draws on all of them. To add to the shared layer, click it in the Layers list first.
 - **Lines.** A line on an ordinary layer can connect to a graphic on a shared layer. A line on a shared layer connects only to graphics on shared layers, because the others aren’t on every canvas. If sharing a layer would disconnect some line ends, Diagrove asks first and says how many; the lines stay where they are drawn.
 
-[shot: shared-badge] Mac, light. The Layers list on the second canvas of a Document, the shared “Header” layer at the top with its badge and tooltip. Point to the badge.
+![The Layers list on the Website canvas, the second canvas of the document, with the shared Header layer at the top, its badge, and the tooltip Shared layer, shown on both canvases.](shared-badge.webp "A shared layer’s badge and its tooltip.")
 
 ## Stop sharing or delete it
 
