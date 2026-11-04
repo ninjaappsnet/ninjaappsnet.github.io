@@ -78,7 +78,7 @@ While you edit, the canvas shows your drawing as drawn. To preview bindings, cli
 
 In Play mode the same corner says how the data stands, such as **Live data** or **Some data couldn’t load**, with a button to read it all again.
 
-[shot: live-data-ipad] iPad in landscape, light appearance, a document whose cards are bound to variables and to a JSON file in the document: Show live data switched on over the canvas, the bound values showing, and the Variables section in the inspector.
+![The Live data sample on iPad with Show live data switched on: a light switch and steps bound to variables, Atrium busy and Library free from a JSON file in the document, and the inspector’s Variables section with isOn and step.](live-data-ipad.webp "Live data on iPad, with the Variables section in the inspector.")
 
 ## When data is missing
 
