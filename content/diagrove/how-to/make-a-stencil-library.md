@@ -17,7 +17,7 @@ Anything you draw can become a stencil, kept in a library of your own and ready 
 
 The stencil appears in the sidebar’s **Stencils** tab, under **Your libraries**, the last category on the tab’s first page. Drag it onto any canvas, and tint it as you would a built-in one.
 
-[shot: save-sheet] Mac, light. The Save as stencil sheet for a selected badge: Name, Library set to a new library, the Roles row with Edit, and the preview. Point to the Roles row.
+![The Save as stencil sheet for a selected Beta badge: a preview of the badge, Name Beta, Library set to New library, Library name My stencils, the Roles row reading Body and fixed with Edit, and Save.](save-sheet.webp "Save as stencil, into a new library.")
 
 ## Organise your libraries
 
@@ -31,6 +31,6 @@ In **Your libraries**, **New library** at the top of the page makes one. Drag a 
 
 To add a library someone sent you, click **Import…** at the top of **Your libraries** and choose the file. It appears alongside your own. On the Mac you can also double-click a `.diagrovestencils` file, and **Import…** also reads OmniGraffle stencil files (`.gstencil`).
 
-[shot: library-menu] Mac, light. The Stencils tab with Your libraries open, a library’s menu showing Rename, Export…, Show in Finder and Delete…. Point to Export….
+![The Stencils tab on Your libraries, with New library and Import…, the My stencils library holding the Beta stencil, and the library’s menu open: Rename, Export… highlighted, Show in Finder and Delete….](library-menu.webp "A library’s menu.")
 
 More in [Stencils and tints](../../guide/stencils-and-tints/).
