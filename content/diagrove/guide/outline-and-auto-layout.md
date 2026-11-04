@@ -60,6 +60,8 @@ The toolbar’s **Arrange** button offers the same list, on the Mac and the iPad
 
 The rest of the Arrange menu works on the selection: Group and Ungroup, Save as stencil…, the stacking order (Bring to front, Bring forward, Send backward, Send to back), the flips and masks, Align and Distribute, and on an isometric canvas, Plane.
 
+![A hand-drawn flowchart of five steps out of line, Order placed, Pick items, Pack box, Print label and Ship, with the toolbar’s Arrange menu open under Auto-arrange and Flow, top to bottom highlighted.](arrange-menu.webp "The toolbar’s Arrange menu.")
+
 ## Tidy
 
 Tidy is auto-layout put to a quick job: putting a messy diagram back in order.
@@ -69,8 +71,6 @@ Tidy is auto-layout put to a quick job: putting a messy diagram back in order.
 - On the Mac, **View › Customize Toolbar…** can add a **Tidy** button, which tidies the diagram in the direction it flows. The iPad toolbar can add it too.
 
 Tidy and auto-layout move a locked shape that is part of the diagram, as they lay out every connected shape. Undo puts everything back as one step.
-
-![A hand-drawn flowchart of five steps out of line, Order placed, Pick items, Pack box, Print label and Ship, with the toolbar’s Arrange menu open under Auto-arrange and Flow, top to bottom highlighted.](arrange-menu.webp "The toolbar’s Arrange menu.")
 
 ## On an isometric canvas
 
