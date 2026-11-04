@@ -14,7 +14,7 @@ A web player is a folder that plays your Document in a browser, just as Play mod
 3. Click **Export…**, give the folder a name and choose where to put it.
 4. Open the folder’s `index.html` in a browser to try it.
 
-[shot: web-player-format] Mac, light. The export sheet with Format set to Web player for the App screen template, the subtitle saying it plays both canvases. Point to the Format menu.
+![The export sheet for the App screen template with Format set to Web player and the subtitle Saves a folder that plays both canvases in any browser, above a preview and More options.](web-player-format.webp "Format set to Web player.")
 
 ## What’s in the folder
 
@@ -32,7 +32,7 @@ The player starts on the first canvas and fits it to the window. After a jump it
 - `?chrome=0` hides the player’s controls, for showing the diagram inside another page.
 - `?zoom=1` keeps it at its own size instead of fitting the window.
 
-[shot: player-in-browser] Mac, light. The exported App screen web player in Safari on the Website canvas after a click, with the player’s Back button and canvas menu. Point to the Back button.
+![The exported App screen web player in Safari on the Website canvas after a click on the Website row, with the player’s Back button and its canvas menu showing Website.](player-in-browser.webp "The web player in Safari, with Back and the canvas menu.")
 
 ## A desktop app too
 
