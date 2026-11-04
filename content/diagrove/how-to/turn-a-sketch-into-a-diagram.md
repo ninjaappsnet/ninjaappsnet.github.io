@@ -17,7 +17,7 @@ Diagrove reads a hand-drawn diagram and draws it again as shapes, connected line
 
 Once you’ve used Apple Pencil, only the Pencil draws and a finger scrolls, as in Notes. The ink isn’t saved with the Document.
 
-[shot: sketch-mode] iPad, light. Sketch mode on a blank diagram: three hand-drawn boxes and arrows with words, and the sketch bar with Pen, Eraser, Clear, Turn into diagram and Done. Point to Turn into diagram.
+![Sketch mode on iPad: three hand-drawn boxes with Order, Pay and Ship written in them, joined by arrows, and the sketch bar with Pen, Eraser, Clear, Turn into diagram and Done.](sketch-mode.webp "A sketch ready to turn into a diagram.")
 
 ## On the Mac: a sketch or photo
 
