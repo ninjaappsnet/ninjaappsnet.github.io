@@ -53,7 +53,7 @@ Any other edit, a click on the canvas, switching canvas or starting Play drops a
 
 When Diagrove can’t work out part of a request, it says what it read and which words it couldn’t, so you can say it another way. A request that asks for no change it knows, such as “make it sparkle”, changes nothing.
 
-![The Flowchart template with make all decisions orange in the prompt bar, the Go ahead? decision shown orange on the canvas, and the card above the bar with its summary, Discard and Apply.](change-on-show.webp "A change on show before you apply it.")
+![The Flowchart template with make all decisions orange in the prompt bar, the Go ahead? decision and the key’s Decision shown orange on the canvas, and the card above the bar: Change the fills of 2 decisions, Read from your text, Discard and Apply.](change-on-show.webp "A change on show before you apply it.")
 
 ## The guide
 
