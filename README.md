@@ -739,7 +739,8 @@ Dayfolio and FlectoBI. Its sub-navigation is Overview, Guide, Tutorials, How-to,
   `ictool`), `support.html` and `privacy.html` (version 1.0, effective on the day it is published: set the date then).
   No terms page: there is no in-app purchase (the app repo's D1370 decides the price model).
 - **Generated:** `content/diagrove/guide/`, `tutorials/` and `how-to/`, front matter and Markdown as Dayfolio's.
-- **Pictures to take.** The pages have no pictures yet. A line `[shot: name] What it shows.` in the Markdown marks
+- **Pictures.** Taken from the 1.0 app with the app repo's `tools/site-shots/` (Mac) and `UITests/iOS/SiteShotsUITests.swift`
+  (iPad), and placed beside each page as WebP. A line `[shot: name] What it shows.` in the Markdown marks
   where one goes: the page keeps an invisible `<!-- shot name: … -->` there, and the build lists every one in
   `content/diagrove/SHOTS.md` (generated; `--check` keeps it current). Take each picture as its row says, put the
   WebP beside the page and replace the shot line with the picture line. The hand-written pages mark theirs with the
