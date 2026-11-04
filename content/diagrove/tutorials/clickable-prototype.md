@@ -18,7 +18,7 @@ The Document has two canvases, listed in the sidebar’s **Canvases** list:
 
 The phone frames lie on locked layers under the screens, so a click selects what’s on a screen rather than the phone around it.
 
-[shot: app-screen-template] Mac, light. The App screen template on White paper, Projects canvas, with the Canvases list in the sidebar showing Projects and Website. Point to the Website row on the left phone.
+![The App screen template on White paper: the Projects canvas with the projects list on the left phone and the Website screen on the right, joined by an arrow marked Tap, and the Canvases list showing Projects and Website.](app-screen-template.webp "The App screen template’s Projects canvas.")
 
 ## 2. See how its Actions work
 
@@ -28,7 +28,7 @@ Now open the Website canvas from the Canvases list and select the large “Websi
 
 An Action does nothing while you edit. It runs in Play mode, or in the web player you export.
 
-[shot: action-section] Mac, light. The Website row selected on the Projects canvas, with the inspector’s Action section open: On click, Go to canvas, Canvas Website, and its caption. Point to the On click menu.
+![The Website row selected on the Projects canvas, with the inspector’s Action section open: On click set to Go to canvas, Canvas set to Website, and the caption In Play mode, a click on this instance goes to Website.](action-section.webp "The Website row goes to the Website canvas.")
 
 ## 3. Give the Logo row a screen of its own
 
@@ -39,7 +39,7 @@ An Action does nothing while you edit. It runs in Play mode, or in the web playe
 5. In the inspector’s **Action** section, set **On click** to **Go to canvas**, then set **Canvas** to **Logo**.
 6. Click the sparkles symbol on the Logo row and give it the same Action, as the template does for Website’s globe.
 
-[shot: logo-action] Mac, light. The Projects canvas with the Logo row selected and its Action set to Go to canvas, Canvas Logo; the Canvases list shows Projects, Website and Logo. Point to the Canvas menu.
+![The Projects canvas with the Logo row selected and the inspector’s Action section set to Go to canvas, Canvas Logo; the Canvases list shows Projects, Website and the new Logo canvas.](logo-action.webp "The Logo row now goes to the Logo canvas.")
 
 ## 4. Add a back button
 
@@ -50,7 +50,7 @@ The Logo screen’s title came with the copy, so it already goes back. Any graph
 
 Go back returns to wherever you came from. If a graphic should always lead to one place, use **Go to canvas** instead. The same menu has **Open link**, **Run shortcut**, **Set variable**, **Toggle variable** and **Ask the host app**.
 
-[shot: back-button] Mac, light. The Logo canvas with the tab bar selected and its Action set to Go back, with the caption “Goes back to the canvas you came from.” Point to the tab bar.
+![The Logo canvas with its tab bar selected and the inspector’s Action section set to Go back, with the caption Goes back to the canvas you came from.](back-button.webp "The tab bar as a back button.")
 
 ## 5. Play it
 
@@ -60,7 +60,7 @@ Click the Logo row: the Logo screen opens. Click its title or its tab bar to com
 
 On iPad, tap **Play**, tap through the screens, and tap **Stop** when you’re done.
 
-[shot: playing] Mac, light. Play mode on the Logo canvas after clicking the Logo row, with the Stop button in the toolbar. Point to the tab bar.
+![Play mode on the Logo canvas after a click on the Logo row: the Logo screen, due 28 Oct, and the play bar with Back, Playing, Logo and Stop.](playing.webp "Playing: the Logo row opened the Logo screen.")
 
 ## 6. Export a web player (Mac)
 
