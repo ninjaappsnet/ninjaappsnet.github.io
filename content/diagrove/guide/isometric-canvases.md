@@ -19,7 +19,7 @@ Any canvas can switch. With nothing selected, set **Projection** to Isometric in
 
 The grid runs along three axes 120° apart, so its floor lines lie at 30° to the horizontal, and every fifth line is stronger. Moving, resizing and drawing snap to it, as on a flat canvas. Hold Command to move freely.
 
-[shot: iso-grid] The Mac, light appearance, a blank isometric diagram on White paper with the grid showing, one teal block on the floor and its footprint and height handles visible.
+![A blank isometric diagram on White paper with its grid showing and one teal block on the floor, selected, with its footprint handles and its height handle; the inspector’s Isometric section shows Tint, Shading, Footprint, Height and Elevation.](iso-grid.webp "A block on the isometric grid.")
 
 ## Planes: the floor and two walls
 
