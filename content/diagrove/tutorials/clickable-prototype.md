@@ -60,7 +60,7 @@ Click the Logo row: the Logo screen opens. Click its title or its tab bar to com
 
 On iPad, tap **Play**, tap through the screens, and tap **Stop** when you’re done.
 
-![Play mode on the Logo canvas after a click on the Logo row: the Logo screen, due 28 Oct, and the play bar with Back, Playing, Logo and Stop.](playing.webp "Playing: the Logo row opened the Logo screen.")
+![Play mode on the Logo canvas after a click on the Logo row: the Logo screen, due 28 Oct, and the play bar with the back arrow, Playing, Logo and Stop.](playing.webp "Playing: the Logo row opened the Logo screen.")
 
 ## 6. Export a web player (Mac)
 
