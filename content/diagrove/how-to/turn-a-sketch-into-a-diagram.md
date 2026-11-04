@@ -29,7 +29,7 @@ Once you’ve used Apple Pencil, only the Pencil draws and a finger scrolls, as 
 
 A picture already on the canvas can be read too: select it and choose **Turn into diagram…** from its context menu or the inspector’s Picture section.
 
-[shot: sketch-sheet] Mac, light. The “Turn your sketch into a diagram” sheet with a whiteboard photo on the left, the found shapes outlined over it, and the diagram on the right; Keep my layout chosen. Point to Insert.
+![The Turn your sketch into a diagram sheet: the whiteboard photo on the left with the shapes it found outlined, the diagram on the right with 4 shapes, 3 lines and 5 labels, Keep my layout chosen, and Insert.](sketch-sheet.webp "The found shapes outlined over the photo, and the diagram beside it.")
 
 ## For the best reading
 
