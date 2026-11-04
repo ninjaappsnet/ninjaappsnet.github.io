@@ -70,7 +70,7 @@ Tidy is auto-layout put to a quick job: putting a messy diagram back in order.
 
 Tidy and auto-layout move a locked shape that is part of the diagram, as they lay out every connected shape. Undo puts everything back as one step.
 
-[shot: arrange-menu] The Mac, light appearance, a hand-drawn flowchart of five steps out of line: the toolbar’s Arrange menu open, with Flow, top to bottom highlighted.
+![A hand-drawn flowchart of five steps out of line, Order placed, Pick items, Pack box, Print label and Ship, with the toolbar’s Arrange menu open under Auto-arrange and Flow, top to bottom highlighted.](arrange-menu.webp "The toolbar’s Arrange menu.")
 
 ## On an isometric canvas
 
