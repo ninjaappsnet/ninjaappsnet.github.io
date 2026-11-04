@@ -32,7 +32,7 @@ The player starts on the first canvas and fits it to the window. After a jump it
 - `?chrome=0` hides the player’s controls, for showing the diagram inside another page.
 - `?zoom=1` keeps it at its own size instead of fitting the window.
 
-![The exported App screen web player in Safari on the Website canvas after a click on the Website row, with the player’s Back button and its canvas menu showing Website.](player-in-browser.webp "The web player in Safari, with Back and the canvas menu.")
+![The exported App screen web player in Safari on the Website canvas after a click on the Website row, with the player’s Back button, its canvas menu showing Website, and the address ending in #Website.](player-in-browser.webp "The web player in Safari, with Back and the canvas menu.")
 
 ## A desktop app too
 
