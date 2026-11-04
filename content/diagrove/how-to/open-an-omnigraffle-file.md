@@ -14,7 +14,7 @@ Diagrove on the Mac reads OmniGraffle documents (`.graffle`, flat files and pack
 3. A card below the tool palette shows the file’s name and what came across, such as “Imported a copy · 3 canvases, 142 graphics”. A green check means everything came across as it was, and the card goes away on its own. Otherwise, open the list of differences to see what was simplified or left out.
 4. Choose **File › Save** and give it a name. It’s saved as a `.diagrove` Document; the `.graffle` stays as it was.
 
-[shot: import-report] Mac, light. A newly imported OmniGraffle document with the import card below the tool palette, its list of differences open. Point to the differences.
+![An OmniGraffle document, Support process, just imported: the import card under the tool palette says Imported a copy, 1 canvas, 7 graphics, with its list of differences open, and the support flow on the canvas.](import-report.webp "The import card lists what came across differently.")
 
 ## What comes across
 
