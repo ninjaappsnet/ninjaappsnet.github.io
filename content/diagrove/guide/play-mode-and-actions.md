@@ -15,7 +15,7 @@ A diagram in Diagrove can do something when you click it. Give a shape a button�
 
 A graphic has one action. When a shape with an action sits inside a group with one too, the shape’s own action wins. Once a graphic has an action, the section’s header offers **Try it in Play mode**.
 
-[shot: action-section-mac] The Mac, light appearance, the App screen template: the Website row selected, the inspector’s Action section open with On click set to Go to canvas, the Canvas row and the caption under it.
+![The App screen template with the Website row selected on the Projects canvas and the inspector’s Action section open: On click set to Go to canvas, Canvas set to Website, and the caption In Play mode, a click on this instance goes to Website.](action-section-mac.webp "The Action section of the Website row.")
 
 ## The kinds of action
 
@@ -65,7 +65,7 @@ To stop, press Esc, click **Stop**, or choose **View › Stop playing**. On iPad
 
 When you open a template that plays, such as App screen, a notice says “This diagram plays. Press Play to try it.”
 
-[shot: playing-mac] The Mac, light appearance, the App screen template in Play mode after clicking the Website row: the play bar with Back, Playing and the canvas name, and Stop; the inspector showing the play tip.
+![The App screen template in Play mode on the Website canvas, after a click on the Website row: the play bar with Back, Playing and Website, and Stop; the inspector says to click a shape that has an action, and Esc to go back to editing.](playing-mac.webp "Play mode after a click on the Website row.")
 
 > **Tip:** To prototype an app, give each screen its own canvas. Buttons get **Go to canvas**, a back arrow gets **Go back**, and a switch gets **Toggle variable** with a binding that shows its state.
 
