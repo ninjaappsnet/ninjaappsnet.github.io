@@ -43,7 +43,7 @@ Leave Shop and Email for later: you’ll copy the Website box once its Bindings 
 
 Text matches exactly, so “Up” and “up” are different values. Numbers and true or false match however they’re written.
 
-![The Website box selected, with the inspector’s Data section showing a Fill binding: Drives Fill, From JSON, Source In this document, Path services[name=Website].status wrapped onto two lines, Rule Match values, and up, slow and down matched to light green, light amber and light red, Otherwise As drawn.](match-values.webp "A Fill binding that matches up, slow and down.")
+![The Website box selected, with the inspector’s Data section showing a Fill binding: Drives Fill, From JSON, Source In this document, the path to Website’s status in full on two lines, Rule Match values, and up, slow and down matched to light green, light amber and light red, Otherwise As drawn.](match-values.webp "A Fill binding that matches up, slow and down.")
 
 ## 4. Put the status in its words
 
