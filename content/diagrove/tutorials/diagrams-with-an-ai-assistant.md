@@ -75,7 +75,7 @@ open Checkout.diagrove
 
 Everything in it can be edited by hand, played and exported like any Diagrove Document.
 
-[shot: open-in-app] Mac, light. Checkout.diagrove open in Diagrove, the flowchart the assistant drew on the canvas, with the inspector showing. Point to the Paid? decision.
+![Checkout open in Diagrove: the flowchart the assistant drew, Cart, Pay, a Paid? decision with Yes to Send receipt and No back to Pay, with Paid? selected and the inspector showing its fill.](open-in-app.webp "The assistant’s Checkout, open in Diagrove.")
 
 ## 6. Edit it live
 
@@ -104,7 +104,7 @@ The first time, macOS asks whether Terminal may control Diagrove; you can change
 
 The MCP tools work on files. An assistant that can run commands in Terminal, with the skill installed, can use `--live` the same way to change what you have open.
 
-[shot: live-edit] Mac, light. Diagrove’s window beside Terminal, just after `diagrove apply --live edits.json`, with the Pay box now light amber. Point to the Pay box.
+![Checkout open in Diagrove just after diagrove apply --live edits.json, with the Pay box now light amber and the title bar saying Edited.](live-edit.webp "After diagrove apply --live, Pay is light amber in the open window.")
 
 ## Where to go next
 
