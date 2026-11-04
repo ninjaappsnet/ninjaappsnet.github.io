@@ -11,7 +11,7 @@ In this tutorial you draw a small checkout flowchart: a cart, a payment, a check
 
 On the Mac, choose **File › New diagram** (Command-N). On iPad, tap **New diagram** on the start screen.
 
-A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar floats at the bottom of the canvas.
+A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar floats at the bottom of the canvas. Save it now (Command-S) and call it Checkout.
 
 ![A new blank diagram on White paper with its grid, the tool palette at the top of the canvas and the prompt bar at the bottom.](blank-canvas.webp "A new diagram, with the prompt bar at the bottom of the canvas.")
 
@@ -34,12 +34,13 @@ Press Return. On iPad, tap the arrow at the end of the bar. Diagrove draws four 
 A payment that fails should go back to Pay. Draw that line yourself:
 
 1. Choose **Line** in the tool palette, or press L.
-2. Drag from the Paid? decision to the Pay box, and let go over Pay. Diagrove goes back to the Select tool with the new line selected.
-3. Press Return (or double-click the line) and type “No”. Click an empty part of the canvas to finish.
+2. Control-click the Line button and choose **Elbow** from its menu, so the line bends at right angles instead of running straight.
+3. Point at Paid? and its magnets show as dots. Drag from the dot on Paid?’s right point to the dot on the right side of Pay, and let go there. Diagrove goes back to the Select tool with the new line selected.
+4. Press Return (or double-click the line) and type “No”. Click an empty part of the canvas to finish.
 
 Both ends of the line are connected, so if you move Paid? or Pay, the line follows. Label the other way out of the decision too: double-click the line from Paid? to Send receipt and type “Yes”.
 
-On iPad, tap **Line** in the palette, drag with your finger or Apple Pencil, then double-tap the new line to type its label.
+On iPad, touch and hold **Line** in the palette and choose **Elbow**, drag from dot to dot with your finger or Apple Pencil, then double-tap the new line to type its label.
 
 ![The checkout flow with a line from the Paid? decision back to Pay labelled No, and Yes on the line from Paid? down to Send receipt.](no-path.webp "The No line loops back to Pay.")
 
@@ -57,7 +58,7 @@ Try a few more, applying each one:
 
 - “rename Cart to Basket”
 - “add a step after Pay called Fraud check”
-- select Send receipt, then “make it bold”
+- select Pay, then “make it bold”
 
 The sparkle at the start of the prompt bar opens the guide to what you can ask, with examples you can click to put in the bar. It’s also in **Help › What you can ask the prompt bar**, on the Mac and the iPad.
 
