@@ -53,6 +53,8 @@ Every command writes one JSON object on standard output: `{"ok": true, …}`, or
 
 `apply`, `layout` and `check --fix` write back to the file you give them unless you add `-o` with another file.
 
+![Preview in the dark appearance showing look.png, the PNG diagrove render made of the checkout flow on White paper: Cart, Pay, Paid?, Send receipt and the No line back to Pay.](render-result-mac.webp "The PNG from diagrove render Checkout.diagrove -o look.png, open in Preview.")
+
 ## Diagrove text in brief
 
 Diagrove text writes a whole document in a few lines. Files end in `.gtext`.
@@ -125,5 +127,3 @@ diagrove skill install
 ```
 
 It goes in `~/.claude/skills/diagrove`, or in the folder you give with `--path`.
-
-![Preview in the dark appearance showing look.png, the PNG diagrove render made of the checkout flow on White paper: Cart, Pay, Paid?, Send receipt and the No line back to Pay.](render-result-mac.webp "The PNG diagrove render wrote, open in Preview.")
