@@ -13,7 +13,7 @@ On the Mac, choose **File › New diagram** (Command-N). On iPad, tap **New diag
 
 A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar floats at the bottom of the canvas. Save it now (Command-S) and call it Checkout.
 
-![A new blank diagram on White paper with its grid, the tool palette at the top of the canvas and the prompt bar at the bottom.](blank-canvas.webp "A new diagram, with the prompt bar at the bottom of the canvas.")
+![A new blank diagram called Checkout on White paper with its grid: the Start your diagram card in the middle of the canvas, the tool palette at the top of the canvas and the prompt bar at the bottom.](blank-canvas.webp "A new diagram, with the prompt bar at the bottom of the canvas.")
 
 ## 2. Type the steps
 
