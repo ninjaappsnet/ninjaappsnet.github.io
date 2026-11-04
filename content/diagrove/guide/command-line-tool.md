@@ -100,7 +100,7 @@ Changes made with `apply --live` land in the window as one undo step, so **Edit 
 
 The first time, macOS asks whether your terminal app may control Diagrove. If you said no, turn it on in **System Settings › Privacy & Security › Automation**. Diagrove has to be running; the tool says so when it isn’t.
 
-[shot: live-apply-mac] The Mac, light appearance: Terminal beside a Diagrove window with the Flowchart template, after `diagrove apply --live` added a shape; the new shape selected on the canvas and the JSON answer in Terminal.
+![The Flowchart template in Diagrove just after diagrove apply --live added a shape: the new Send a reminder step selected on the canvas, with its Fill and Stroke in the inspector.](live-apply-mac.webp "A shape added from Terminal with diagrove apply --live, selected in the open window.")
 
 ## Connect an AI assistant
 
@@ -126,4 +126,4 @@ diagrove skill install
 
 It goes in `~/.claude/skills/diagrove`, or in the folder you give with `--path`.
 
-[shot: render-result-mac] The Mac, dark appearance: Terminal after `diagrove render Checkout.diagrove -o look.png`, with the JSON answer, beside the PNG open in Preview showing the checkout flow on White paper.
+![Preview in the dark appearance showing look.png, the PNG diagrove render made of the checkout flow on White paper: Cart, Pay, Paid?, Send receipt and the No line back to Pay.](render-result-mac.webp "The PNG diagrove render wrote, open in Preview.")
