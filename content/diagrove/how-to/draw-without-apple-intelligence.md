@@ -29,7 +29,7 @@ These changes are read without Apple Intelligence too. Each one shows on the can
 
 The sparkle at the start of the bar (or **Help › What you can ask the prompt bar**) lists what you can ask. Without Apple Intelligence it leaves out the examples that need it.
 
-[shot: guide-without-ai] iPad, light. The prompt bar guide, “What you can ask”, opened from the sparkle with Apple Intelligence off. Point to the Draw a new diagram section.
+![The prompt bar guide, What you can ask, on iPad beside the Flowchart template with Apple Intelligence off: Tidy up, and Draw a new diagram with its examples and the note that Apple Intelligence is off, above What it can’t do yet.](guide-without-ai.webp "The guide with Apple Intelligence off.")
 
 ## What needs Apple Intelligence
 
