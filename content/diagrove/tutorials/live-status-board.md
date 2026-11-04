@@ -24,7 +24,7 @@ Save this as `status.json`, in TextEdit set to plain text or in any code editor:
 
 ## 2. Draw the board
 
-1. Choose **File › New diagram** (Command-N). On iPad, tap **New diagram**.
+1. Choose **File › New diagram** (Command-N), then save it as Status board (Command-S). On iPad, tap **New diagram**.
 2. Choose **Rounded rectangle** in the tool palette and drag out a box. Double-click it (or press Return) and type “Website”.
 3. Draw a second, wider box below it, double-click it and type “Support queue”.
 
@@ -75,7 +75,7 @@ Match values suits words. For a number, use **Steps**:
 
 The last step the value reaches wins, so 14 waiting is amber. Below the first step, the graphic stays as drawn.
 
-![Support queue selected, light amber and reading 14 waiting, above Website, Shop and Email in light green, light amber and light red, with the inspector’s Data section showing a Fill binding on queue.waiting with Steps at 0, 10 and 25.](steps.webp "Steps at 0, 10 and 25: 14 waiting is amber.")
+![Support queue selected, light amber and reading 14 waiting, below Website, Shop and Email in light green, light amber and light red, with the inspector’s Data section showing a Fill binding on queue.waiting with Steps at 0, 10 and 25.](steps.webp "Steps at 0, 10 and 25: 14 waiting is amber.")
 
 ## 8. Read it from a web address
 
