@@ -29,7 +29,7 @@ To star a stencil on the Mac, click the star that shows on a tile under the poin
 
 On the Mac, rest the pointer on a tile and a preview opens beside it: the stencil larger, its name, its library and category, a line on what it’s for, and its keywords. On iPad, touch and hold a tile to see the same preview above its menu, which offers **Add to canvas** and your favourites.
 
-![The Stencils tab on the Software category with the light blue tint chosen, its UML structure tiles in blue, and the preview open beside the Interface tile with its name, library, a line on what it’s for and its keywords.](stencils-pane.webp "The Software category, the tint on blue and a stencil’s preview.")
+![The Stencils tab on the Software category with the light blue tint chosen, its UML structure tiles in light blue, and the preview open beside the Interface tile with its name, library, a line on what it’s for and its keywords.](stencils-pane.webp "The Software category, the tint on light blue and a stencil’s preview.")
 
 ## Placing a stencil
 
