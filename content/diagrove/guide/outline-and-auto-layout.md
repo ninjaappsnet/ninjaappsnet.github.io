@@ -19,7 +19,7 @@ The Outline is the diagram seen another way, not a copy of it. Select a topic an
 
 On the Mac, the arrow keys move through the topics and the disclosure triangles show or hide the topics under one. On iPad each topic is a full-height row, with its disclosure at the trailing edge.
 
-[shot: outline-mac] The Mac, light appearance, the Mind map template on White paper: the sidebar’s Outline tab showing the launch plan two levels deep, one topic selected and its shape selected on the canvas.
+![The Mind map template with the sidebar’s Outline tab: iPad launch with Channels, Audience, Timeline and Risks and their topics, Channels chosen in the outline and selected on the canvas.](outline-mac.webp "The outline and the diagram stay in step.")
 
 ## Adding topics
 
