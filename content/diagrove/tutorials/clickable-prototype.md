@@ -73,7 +73,7 @@ A web player is a folder that plays your Document in any browser, Actions and al
 
 The player shows a **Back** button after a jump and a menu of canvases. Under **More options**, **Include a desktop app project** adds a Tauri project next to the player; building it needs Tauri and Rust. The web player is on the Mac only in Diagrove 1.0.
 
-[shot: web-player] Mac, light. The exported web player open in Safari, showing the Logo screen after a click, with the player’s Back button. Point to the Back button.
+![The exported web player open in Safari, showing the Logo screen after a click on the Logo row, with the player’s Back button and canvas menu at the top.](web-player.webp "The web player in Safari, after a click on Logo.")
 
 ## Where to go next
 
