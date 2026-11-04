@@ -49,4 +49,4 @@ A diagram shown live inside a Dayfolio entry, which you could tap through, is on
 
 You can already see how a diagram would look and behave there: **View › Preview as embed**, with **Width** set to **Dayfolio entry**. A graphic with an **Ask the host app** action is how a diagram would ask Dayfolio to do something, such as start a timer for a project. Today, in Diagrove’s Play mode, it shows a note with what Dayfolio would get.
 
-[shot: preview-embed-mac] The Mac, light appearance, the App screen template: the Preview as embed sheet with Width set to Dayfolio entry and Show set to Just the drawing, and one row under The app receives.
+![The Preview as embed sheet over the App screen template: Show set to Just the drawing, Width set to Dayfolio entry, the two phone screens in the preview, and under The app receives one row: a click on the background, where the app could open the diagram in Diagrove.](preview-embed-mac.webp "Preview as embed at the width of a Dayfolio entry.")
