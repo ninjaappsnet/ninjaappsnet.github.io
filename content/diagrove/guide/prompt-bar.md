@@ -23,7 +23,7 @@ This works with or without Apple Intelligence.
 
 With Apple Intelligence on, you can describe a diagram in your own words: “Draw a flowchart for returning an order” or “Draw a mind map about planning a trip”. Diagrove works out the steps on the device, then draws and lays them out the same way. On the Mac, **File › Describe a diagram…** (Option-Shift-Command-N) opens a new document with the bar ready and an example to follow; on iPad, **Describe a diagram…** is in the template sheet.
 
-[shot: draw-from-steps] The Mac, light appearance, a new blank diagram: the prompt bar holding “Cart -> Pay -> Paid? -> Send receipt” and, above it, the drawn flowchart with Paid? as a decision.
+![A blank diagram with Cart -> Pay -> Paid? -> Send receipt in the prompt bar and, above it, the flowchart it drew: Cart, Pay, a Paid? decision and Send receipt, with the notice Drawn from your text.](draw-from-steps.webp "Steps typed with arrows become a flowchart.")
 
 ## Change a diagram in words
 
@@ -53,7 +53,7 @@ Any other edit, a click on the canvas, switching canvas or starting Play drops a
 
 When Diagrove can’t work out part of a request, it says what it read and which words it couldn’t, so you can say it another way. A request that asks for no change it knows, such as “make it sparkle”, changes nothing.
 
-[shot: change-on-show] The Mac, light appearance, the Flowchart template: “make all decisions orange” in the prompt bar, the decisions shown orange on the canvas, and the card above the bar with its summary, Discard and Apply.
+![The Flowchart template with make all decisions orange in the prompt bar, the Go ahead? decision shown orange on the canvas, and the card above the bar with its summary, Discard and Apply.](change-on-show.webp "A change on show before you apply it.")
 
 ## The guide
 
