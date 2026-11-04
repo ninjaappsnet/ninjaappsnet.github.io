@@ -13,7 +13,7 @@ On the Mac, choose **File › New diagram** (Command-N). On iPad, tap **New diag
 
 A blank canvas opens. The tool palette floats at the top of the canvas, and the prompt bar floats at the bottom of the canvas.
 
-[shot: blank-canvas] Mac, light. A new blank diagram: the empty canvas with the tool palette at the top and the prompt bar at the bottom. Point to the prompt bar.
+![A new blank diagram on White paper with its grid, the tool palette at the top of the canvas and the prompt bar at the bottom.](blank-canvas.webp "A new diagram, with the prompt bar at the bottom of the canvas.")
 
 ## 2. Type the steps
 
@@ -27,7 +27,7 @@ Press Return. On iPad, tap the arrow at the end of the bar. Diagrove draws four 
 
 > **Tip:** You can label an arrow as you type it. `Paid? -[Yes]-> Send receipt` puts “Yes” on that line, and so does `Paid? -> Send receipt: Yes`.
 
-[shot: drawn-from-text] Mac, light. The four-step checkout flow just drawn from the prompt bar, with the “Drawn from your text” notice showing. Point to the Paid? decision.
+![The checkout flow just drawn from the prompt bar, from top to bottom: Cart, Pay, the Paid? decision and Send receipt, joined by arrows, with the notice Drawn from your text and Undo.](drawn-from-text.webp "Four steps drawn from one line, with Paid? as a decision.")
 
 ## 3. Add the “No” path by hand
 
@@ -41,7 +41,7 @@ Both ends of the line are connected, so if you move Paid? or Pay, the line follo
 
 On iPad, tap **Line** in the palette, drag with your finger or Apple Pencil, then double-tap the new line to type its label.
 
-[shot: no-path] Mac, light. The checkout flow with a hand-drawn line from Paid? back to Pay labelled “No”, and “Yes” on the line to Send receipt. Point to the “No” line.
+![The checkout flow with a line from the Paid? decision back to Pay labelled No, and Yes on the line from Paid? down to Send receipt.](no-path.webp "The No line loops back to Pay.")
 
 ## 4. Change it in words
 
@@ -61,13 +61,13 @@ Try a few more, applying each one:
 
 The sparkle at the start of the prompt bar opens the guide to what you can ask, with examples you can click to put in the bar. It’s also in **Help › What you can ask the prompt bar**, on the Mac and the iPad.
 
-[shot: change-on-show] Mac, light. “make all decisions orange” on show on the canvas, with Discard and Apply on the card above the prompt bar. Point to Apply.
+![The checkout flow with make all decisions orange in the prompt bar, the Paid? decision shown orange, and the card above the bar with Change the fill of “Paid?”, Read from your text, Discard and Apply.](change-on-show.webp "The change on show, with Discard and Apply.")
 
 ## 5. Tidy the layout
 
 Adding Fraud check laid the flow out again around the new step. Whenever shapes you’ve moved by hand need putting back in order, type “tidy up the whole diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
 
-[shot: tidied] Mac, light. The finished flow after tidying: Basket, Pay, Fraud check, an orange Paid? decision, Send receipt in bold, and the “No” line looping back to Pay.
+![The finished checkout flow: Basket, Pay, Fraud check, an orange Paid? decision and Send receipt in bold, with the No line looping back to Pay and Yes on the line to Send receipt.](tidied.webp "The finished flow, laid out again.")
 
 ## 6. Export a PNG
 
@@ -79,7 +79,7 @@ Adding Fraud check laid the flow out again around the new step. Whenever shapes 
 
 The sheet’s subtitle says what you’ll get, including the PNG’s size in pixels.
 
-[shot: export-png] Mac, light. The export sheet set to PNG image, Just the drawing, 2×, with the preview of the checkout flow. Point to the subtitle.
+![The export sheet for Checkout: a preview of the checkout flow, Format set to PNG image, Area set to Just the drawing and Scale 2×, under the subtitle Saves “Diagram” as a PNG picture, 510 × 1,160 px.](export-png.webp "The subtitle gives the PNG’s size in pixels.")
 
 ## Where to go next
 
