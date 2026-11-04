@@ -81,7 +81,7 @@ Diagrove reads the picture on your Mac; nothing is sent anywhere. It looks for c
 
 On iPad you draw the sketch over the canvas instead, in Sketch mode. See [Diagrove on iPad](../ipad/).
 
-[shot: sketch-sheet-mac] The Mac, light appearance, a new document: the Turn your sketch into a diagram sheet with a whiteboard photo of four boxes and arrows on the left, the diagram it made on the right, Layout set to Keep my layout, and Insert.
+![The Turn your sketch into a diagram sheet over a new document: a whiteboard photo of four shapes and arrows on the left with the shapes it found outlined, the diagram it made on the right, Layout set to Keep my layout, and Insert.](sketch-sheet-mac.webp "Turn your sketch into a diagram, with Keep my layout.")
 
 ## Diagrove text
 
