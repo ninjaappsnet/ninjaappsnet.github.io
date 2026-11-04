@@ -38,7 +38,7 @@ The start screen shows **New diagram** and **Choose a template** above the Files
 
 A document you start from a template or with Describe a diagram… goes where you work: beside the last document you opened, or else in Diagrove’s folder in iCloud Drive when iCloud is on, or else in On My iPad › Diagrove. A document made from a template is named after it, such as “Flowchart”.
 
-[shot: start-ipad] The iPad start screen in landscape, light appearance: the hero picture, New diagram and Choose a template, and the Files browser below with a few recent documents.
+![The iPad start screen in landscape: the Diagrove name and picture, New diagram and Choose a template, and the Files browser below on the Diagrove folder with Flowchart, Mind map, Office floor and Roadmap.](start-ipad.webp "The start screen on iPad.")
 
 ## The parts of a window
 
