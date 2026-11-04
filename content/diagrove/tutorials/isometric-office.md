@@ -15,13 +15,13 @@ The canvas, “Second floor”, shows Orchard Row Architects’ floor: the Schoo
 
 > **Tip:** To start a scene from nothing instead, choose **File › New isometric diagram** (Control-Command-N). Everything below works the same there.
 
-[shot: office-floor] Mac, light. The Office floor template on White paper, the whole “Second floor” canvas in view. Point to the Free desk at the right end of the back row.
+![The Office floor template on White paper, the whole Second floor canvas: Orchard Row Architects’ desks along the back wall, the meeting room at the front left, the kitchen, the printer and, at the right end of the back row, the Free desk.](office-floor.webp "The Second floor canvas, with the Free desk at the right end of the back row.")
 
 ## 2. Choose where new things go
 
 The floor, the coloured areas and the walls lie on locked layers, so they stay put while you work. Open the sidebar’s **Canvases** tab and, in its **Layers** list, click **Desks and places**. Whatever you add now goes on that layer.
 
-[shot: layers-list] Mac, light. The sidebar’s Canvases tab with the Layers list for the Office floor template, with Desks and places chosen and the locked Floor, Areas and Walls layers below it. Point to Desks and places.
+![The sidebar’s Canvases tab for the Office floor template, its Layers list with Desks and places chosen, and the locked Walls, Areas and Floor layers below it.](layers-list.webp "Desks and places chosen in the Layers list.")
 
 ## 3. Build a planter from a block
 
@@ -32,7 +32,7 @@ On an isometric canvas, the tool palette offers **Block**, **Iso cylinder**, **S
 3. Drag the handle on top of the block to make it taller, or type a **Height** in the inspector’s **Isometric** section. Try 32.
 4. In the same section, pick a **Tint**. Every face follows the one colour, lit from the top left. **Shading** switches between **Soft** and **Flat**.
 
-[shot: block] Mac, light. A tinted block drawn on the open floor between the kitchen and the printer, selected, with its height handle on top and the inspector’s Isometric section showing Tint, Footprint, Height and Elevation. Point to the height handle.
+![A teal block drawn on the open floor between the kitchen and the printer, selected, with its height handle on top, and the inspector’s Isometric section showing Tint, Shading, Footprint 40 by 40, Height 32 and Elevation 0.](block.webp "A block, 32 points high, with its height handle on top.")
 
 ## 4. Stack a plant on it
 
@@ -43,7 +43,7 @@ On an isometric canvas, the tool palette offers **Block**, **Iso cylinder**, **S
 
 You can also raise a graphic by Option-dragging it. Whatever you stack, Diagrove works out what is in front, so the plant draws over the block and behind anything nearer to you.
 
-[shot: plant-on-block] Mac, light. The plant stencil standing on top of the tinted block, with Elevation 32 in the inspector. Point to Elevation.
+![The plant stencil standing on top of the teal block, selected, with Elevation 32 pt in the inspector’s Isometric section.](plant-on-block.webp "The plant raised to the block’s height, 32.")
 
 ## 5. Seat someone at the free desk
 
@@ -53,7 +53,7 @@ You can also raise a graphic by Option-dragging it. Whatever you stack, Diagrove
 
 The name tags in this template face you wherever they are. A flat graphic can do the same with **Face the viewer** in the inspector, or lie on a wall with **Arrange › Plane › Left wall** or **Right wall**.
 
-[shot: free-desk] Mac, light. The free desk with a laptop on it and its tag renamed to a person’s name. Point to the laptop.
+![The desk at the right end of the back row with a laptop on it, selected, and its tag renamed Priya; the inspector shows the laptop’s Elevation, 49 pt.](free-desk.webp "A laptop on the free desk, and a name on its tag.")
 
 ## 6. Add people
 
@@ -63,13 +63,13 @@ The name tags in this template face you wherever they are. A flat graphic can do
 
 The library has 30 stencils of people, from a person at a laptop and two people talking to a delivery courier and a crowd.
 
-[shot: people] Mac, light. A walking person in the aisle of the Office floor, selected, with the Stencil section showing Tint, Skin, Hair and Turn. Point to the Skin row.
+![A walking person in the aisle of the Office floor, selected, with the inspector’s Stencil section showing Tint set to Orange, the five Skin tones, the Hair colours and Turn.](people.webp "A walking person, with Tint, Skin, Hair and Turn.")
 
 ## 7. Look at the whole floor
 
 Choose **View › Zoom to fit** (Option-Command-0) to see everything. The Document is yours to change: move teams, rename them on their tags, or recolour an area’s floor after unlocking the **Areas** layer. When you’re done, export it as a PNG, PDF or SVG with **File › Export…**.
 
-[shot: finished-floor] Mac, dark appearance, Ink paper. The finished Office floor with the planter and plant, the laptop and name at the former free desk, and the walking person. Point to the planter.
+![The finished Office floor on Ink paper in the dark appearance: the teal planter with a plant between the kitchen and the printer, a laptop at Priya’s desk, and a person walking in the aisle.](finished-floor.webp "The finished floor, on Ink paper.")
 
 ## Where to go next
 
