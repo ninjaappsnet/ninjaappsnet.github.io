@@ -102,7 +102,7 @@ Changes made with `apply --live` land in the window as one undo step, so **Edit 
 
 The first time, macOS asks whether your terminal app may control Diagrove. If you said no, turn it on in **System Settings › Privacy & Security › Automation**. Diagrove has to be running; the tool says so when it isn’t.
 
-![The Flowchart template in Diagrove just after diagrove apply --live added a shape: the new Send a reminder step selected on the canvas, with its Fill and Stroke in the inspector.](live-apply-mac.webp "A shape added from Terminal with diagrove apply --live, selected in the open window.")
+![The Flowchart template in Diagrove just after diagrove apply --live added a step: Clean the bike, joined between Test ride and Text that it’s ready and selected on the canvas, with the Edit menu open on Undo Apply 5 changes.](live-apply-mac.webp "A step added with diagrove apply --live is one undo step in the open window.")
 
 ## Connect an AI assistant
 
