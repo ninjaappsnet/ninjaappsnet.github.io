@@ -1,6 +1,6 @@
 ---
 title: Your first flowchart
-description: Draw a checkout flowchart from one line of text, add the “No” path by hand, change it in plain words, tidy it and export it as a PNG.
+description: Draw a checkout flowchart from one line of text, add the “No” path by hand, change it in plain words, arrange it and export it as a PNG.
 slug: first-flowchart
 date: 2026-10-29
 order: 1
@@ -64,9 +64,9 @@ The sparkle at the start of the prompt bar opens the guide to what you can ask, 
 
 ![The checkout flow with make all decisions orange in the prompt bar, the Paid? decision shown orange, and the card above the bar with Change the fill of “Paid?”, Read from your text, Discard and Apply.](change-on-show.webp "The change on show, with Discard and Apply.")
 
-## 5. Tidy the layout
+## 5. Arrange the layout
 
-Adding Fraud check laid the flow out again around the new step. Whenever shapes you’ve moved by hand need putting back in order, type “tidy up the whole diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
+Adding Fraud check laid the flow out again around the new step. Whenever shapes you’ve moved by hand need putting back in order, type “auto-arrange the diagram” in the prompt bar, or choose **Arrange › Auto-arrange › Flow, top to bottom** (Shift-Command-L). The connected shapes are laid out again, neatly spaced, with your hand-drawn “No” line still joining Paid? to Pay.
 
 ![The finished checkout flow in one straight column: Basket, Pay in bold, Fraud check, an orange Paid? decision and Send receipt, with the No line looping back to Pay and Yes on the line to Send receipt, under the notice Made the text of “Pay” bold.](tidied.webp "The finished flow, laid out again.")
 

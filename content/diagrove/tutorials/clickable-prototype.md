@@ -48,7 +48,7 @@ The Logo screen’s title came with the copy, so it already goes back. Any graph
 1. On the Logo canvas, click the tab bar.
 2. In **Action**, set **On click** to **Go back**.
 
-Go back returns to wherever you came from. If a graphic should always lead to one place, use **Go to canvas** instead. The same menu has **Open link**, **Run shortcut**, **Set variable**, **Toggle variable** and **Ask the host app**.
+Go back returns to wherever you came from. If a graphic should always lead to one place, use **Go to canvas** instead. The same menu has **Open link**, **Run shortcut**, **Set variable**, **Toggle variable** and **Send to the app it’s embedded in**.
 
 ![The Logo canvas with its tab bar selected and the inspector’s Action section set to Go back, with the caption Goes back to the canvas you came from.](back-button.webp "The tab bar as a back button.")
 
