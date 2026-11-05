@@ -10,7 +10,7 @@ Dayfolio is Diagrove’s sibling app from NinjaApps. Send to Dayfolio puts a dia
 ## On iPad
 
 1. Open the canvas you want to send.
-2. Tap **Export** in the toolbar, then **Send to Dayfolio**.
+2. Tap **Export** in the toolbar, then **Send to Dayfolio**. It’s in the menu when Dayfolio is installed.
 3. In the share sheet, choose **Dayfolio**. In Dayfolio’s sheet, pick the journal (it asks when you have more than one) and save. Dayfolio takes both files into an entry there.
 
 The share sheet holds a PNG of the canvas’s drawing at 2× (smaller for a very large drawing) and the Document as a `.diagrove.zip` file.
@@ -19,7 +19,7 @@ The share sheet holds a PNG of the canvas’s drawing at 2× (smaller for a very
 
 ## On the Mac
 
-Choose **File › Send to Dayfolio…**, or click **Send to Dayfolio** in the toolbar. The share menu offers the same two files. Dayfolio for Mac doesn’t take shared files yet, so it isn’t listed there. Send from your iPad instead: a Document saved in iCloud Drive opens there too.
+Choose **File › Send to Dayfolio…**, shown when Dayfolio is installed, or add **Send to Dayfolio** to the toolbar with **View › Customize Toolbar…**. The share menu offers the same two files. Dayfolio for Mac doesn’t take shared files yet, so it isn’t listed there. Send from your iPad instead: a Document saved in iCloud Drive opens there too.
 
 ## What Dayfolio shows today
 

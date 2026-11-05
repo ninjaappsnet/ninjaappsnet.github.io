@@ -25,7 +25,7 @@ These changes are read without Apple Intelligence too. Each one shows on the can
 
 - By name: “make all decisions orange”, “rename Cart to Basket”, “add a step after Pay called Fraud check”, “connect Try again to Cart”, “move Try again below Send receipt”, “change 2% to 3%”, “delete the notes”.
 - On what you’ve selected: “make it orange”, “make them 50% wider”, “align them left”, “group them”.
-- The layout: “tidy up the whole diagram”.
+- The layout: “auto-arrange the diagram”.
 
 The sparkle at the start of the bar (or **Help › What you can ask the prompt bar**) lists what you can ask. Without Apple Intelligence it leaves out the examples that need it.
 

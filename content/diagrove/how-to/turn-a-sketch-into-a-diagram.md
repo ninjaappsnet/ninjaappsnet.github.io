@@ -24,7 +24,7 @@ Once you’ve used Apple Pencil, only the Pencil draws and a finger scrolls, as 
 1. Choose **File › New diagram from sketch or photo…** for a new Document, or **Insert › Diagram from sketch or photo…** to add to the canvas you’re on.
 2. Choose a photo of a whiteboard or a paper sketch, or a screenshot. You can also take one with your iPhone through Continuity Camera, or drop a picture on the sheet. The example below starts from a picture of a drawn flowchart.
 3. The sheet shows your picture with what it found drawn over it, and the diagram it will insert beside it. Anything it’s unsure of is dashed and named in a note.
-4. Choose **Keep my layout** for shapes where you drew them, lined up on the grid, or **Tidy** to have them arranged for you.
+4. Choose **Keep my layout** for shapes where you drew them, lined up on the grid, or **Auto-arrange** to have them arranged for you.
 5. Click **Insert**.
 
 A picture already on the canvas can be read too: select it and choose **Turn into diagram…** from its context menu or the inspector’s Picture section.

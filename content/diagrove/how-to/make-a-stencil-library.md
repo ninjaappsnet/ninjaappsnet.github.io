@@ -21,7 +21,7 @@ The stencil appears in the sidebar’s **Stencils** tab, under **Your libraries*
 
 ## Organise your libraries
 
-In **Your libraries**, **New library** at the top of the page makes one. Drag a stencil from one of your libraries onto another to keep a copy there, or drag it within a library to change the order. Each library’s menu, the **…** button beside its name, has **Rename**, **Export…** and **Delete…**, and on the Mac **Show in Finder**.
+In **Your libraries**, **New library** at the top of the page makes one. Drag a stencil from one of your libraries onto another to keep a copy there, or drag it within a library to change the order. Each library’s menu, the **…** button beside its name, has **Rename** and **Export…**, then **Show in Finder** and **Move to Trash** on the Mac, or **Delete** on iPad. A library you remove goes at once, with **Undo** in the notice.
 
 ## Export and share a library
 
