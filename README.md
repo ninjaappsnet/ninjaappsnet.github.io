@@ -458,10 +458,10 @@ the drop shadow a window capture gets. The Mac's four, `media/mac-folders.webp`,
 and 7, two to a row; `check_dayfolio_media` requires one for each platform (`DAYFOLIO_PLATFORMS_REQUIRED`).
 The guide's and the articles' Mac pictures are the app's own windows from the same capture, 1504×940
 (the popover alone 600 wide), on white. Above them, the iPhone app preview,
-`media/app-preview-iphone.mp4` (886×1920, 29.73 s, H.264 with a silent AAC track, copied
+`media/app-preview-iphone.mp4` (886×1920, 28.53 s, H.264 with a silent AAC track, copied
 byte for byte from `build/asc-upload/tpj/web/`), plays in a `<video>` with controls, muted
 and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
-its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
+its frame at 3 s. The iPhone and iPad pictures, the guide's and the articles' captioned ones and the film were remade on 2026-11-05 after the demo seed fix (no journal is called "Weekly Review 2"); the first-page crop is now 624×690. The dark Mac captures (`shot-*.webp`) are gone from the site; git
 history has them. To swap a picture, convert the new PNG to the same size under a
 new name and change the page (and its `width` and `height`, if they change: the
 checker reads the WebP's own size); browsers keep pictures for 30 days (Caching,
