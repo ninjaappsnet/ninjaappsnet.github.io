@@ -45,7 +45,7 @@ Every command writes one JSON object on standard output: `{"ok": true, …}`, or
 | `diagrove render Plan.diagrove -o plan.png` | Draws a canvas as PNG, PDF or SVG, exactly as the app exports it. `--live-data` draws bindings with the document’s variables and JSON files. |
 | `diagrove apply Plan.diagrove edits.json` | Applies a list of changes (Ops), all at once or not at all. `--dry-run` shows what would change. |
 | `diagrove inspect Plan.diagrove` | Describes the structure: canvases, layers, and each graphic’s ID, kind, words and position. |
-| `diagrove layout Plan.diagrove` | Arranges connected graphics as the app’s Tidy does, with `--style layered` or `tree` and `--direction down` or `right`. |
+| `diagrove layout Plan.diagrove` | Arranges connected graphics as **Arrange › Auto-arrange** does in the app, with `--style layered` or `tree` and `--direction down` or `right`. |
 | `diagrove templates list` | Lists the app’s 63 templates and its two blank documents. `diagrove templates show flowchart` answers one as Diagrove text to adapt. |
 | `diagrove stencils search database` | Finds built-in stencils by name or keyword, with the IDs Diagrove text uses. |
 | `diagrove import mermaid chart.mmd -o Chart.diagrove` | Makes a document from a Mermaid flowchart. |

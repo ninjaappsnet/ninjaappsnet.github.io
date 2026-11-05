@@ -64,13 +64,13 @@ The rest of the Arrange menu works on the selection: Group and Ungroup, Save as 
 
 ## Tidy
 
-Tidy is auto-layout put to a quick job: putting a messy diagram back in order.
+Auto-arrange and the Outline’s Tidy are auto-layout put to a quick job: putting a messy diagram back in order.
 
 - In the Outline, the **Tidy** menu at the foot of the tab lays the canvas out as trees, top to bottom or left to right.
-- In the prompt bar, type “tidy up the whole diagram”, or select some shapes and type “tidy up what’s selected”. Without a direction, it keeps the way the diagram’s lines mostly run.
-- On the Mac, **View › Customize Toolbar…** can add a **Tidy** button, which tidies the diagram in the direction it flows. The iPad toolbar can add it too.
+- In the prompt bar, type “auto-arrange the diagram”, or select some shapes and type “auto-arrange what’s selected”. Without a direction, it keeps the way the diagram’s lines mostly run.
+- On the Mac, **View › Customize Toolbar…** can add an **Auto-arrange** button, which arranges the diagram in the direction it flows. The iPad toolbar can add it too.
 
-Tidy and auto-layout move a locked shape that is part of the diagram, as they lay out every connected shape. Undo puts everything back as one step.
+Auto-arrange and Tidy leave locked graphics, and graphics on locked layers, where they are. Undo puts everything back as one step.
 
 ## On an isometric canvas
 

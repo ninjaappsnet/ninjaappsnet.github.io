@@ -76,7 +76,7 @@ From **Shortcut**, type the shortcut’s name and, if you like, a path into its 
 
 While you edit, the canvas shows your drawing as drawn. To preview bindings, click **Show live data** in the canvas’s leading corner, above zoom. The canvas inspector’s **Live data** section has the same switch, **Show on the canvas**. The canvas then shows each bound graphic with its current value, using the variables’ starting values. Your edits still change the drawing underneath.
 
-In Play mode the same corner says how the data stands, such as **Live data** or **Some data couldn’t load**, with a button to read it all again.
+In Play mode the same corner says how the data stands, such as **Live data**, with a button to read it all again. When something couldn’t update it says what, such as “Couldn’t reach rooms.example.com”, and **Retry** reads again only what failed, in Play mode and beside **Show live data** while you edit.
 
 ![The Live data sample on iPad with Show live data switched on: a light switch and steps bound to variables, Atrium busy and Library free from a JSON file in the document, and the inspector’s Variables section with isOn and step.](live-data-ipad.webp "Live data on iPad, with the Variables section in the inspector.")
 

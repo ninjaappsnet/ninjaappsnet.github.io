@@ -28,7 +28,7 @@ A graphic has one action. When a shape with an action sits inside a group with o
 | **Run shortcut** | **Shortcut** | Runs that shortcut in the Shortcuts app. |
 | **Set variable** | **Variable**, **Value** | Gives the variable a value: `true`, a number such as `3`, or text. |
 | **Toggle variable** | **Variable** | Switches an on-or-off variable between on and off. |
-| **Ask the host app** | **Name**, **Details** | Nothing in Diagrove itself. The app showing the diagram decides (see below). |
+| **Send to the app it’s embedded in** | **Name**, **Details** | Nothing in Diagrove itself. The app showing the diagram decides (see below). |
 
 **Run shortcut** is the way out to everything else on your Mac or iPad. One click in a diagram can log an entry, start a timer or send a message, through any shortcut you have.
 
@@ -58,7 +58,7 @@ While you play:
 - Nothing can be selected or moved. Your diagram is safe from stray clicks.
 - On the Mac the pointer becomes a hand over a graphic with an action. A click or tap on a spot that does nothing outlines, for a moment, every graphic that has an action, so you can see what to try.
 - The inspector shows what to do, how to stop, and each variable’s value as it changes.
-- The toolbar’s editing buttons are dimmed on the Mac and hidden on iPad. Export, Send to Dayfolio, zoom, the inspector and Preview as embed keep working.
+- The toolbar’s editing buttons are hidden, as are the sidebar’s **+** buttons and each layer’s eye and lock. Export, Send to Dayfolio, zoom, the inspector and Preview as embed keep working.
 - If the document has bindings, a capsule over the canvas shows how its live data stands, with a button to refresh it.
 
 To stop, press Esc, click **Stop**, or choose **View › Stop playing**. On iPad, tap **Stop** in the play bar or the toolbar, or press Esc on a hardware keyboard.
@@ -71,7 +71,7 @@ When you open a template that plays, such as App screen, a notice says “This d
 
 ## What a host action does
 
-An **Ask the host app** action is for a diagram shown inside another app, or on a web page through the [Web player](../import-and-export/). You give it a **Name**, such as `startTimer`, and **Details**, such as `project=Larkspur`. The app around the diagram decides what they mean.
+A **Send to the app it’s embedded in** action (the field shows **Send to the app**) is for a diagram shown inside another app, or on a web page through the [Web player](../import-and-export/). You give it a **Name**, such as `startTimer`, and **Details**, such as `project=Larkspur`. The app around the diagram decides what they mean.
 
 In Diagrove’s own Play mode a host action does nothing to your document. Instead a note under the play bar says what the app would get, for example “An app showing this diagram would get “startTimer””, with the details listed below it as “project: Larkspur”. In the Web player, a host action goes to the page or app around the player; played on its own, the player shows a similar note.
 
@@ -82,7 +82,7 @@ Dayfolio doesn’t show diagrams inside its entries yet, so today a host action 
 **View › Preview as embed** shows the diagram as an app that embeds it would show it. On iPad it’s also in the toolbar’s Export menu; on the Mac you can add it to the toolbar with **Customize Toolbar…**.
 
 - **Show** chooses **Whole canvas** or **Just the drawing**.
-- **Width** chooses **Phone** or **Dayfolio entry**, the width the diagram is drawn at.
+- **Width** chooses **Phone** or **In Dayfolio**, the width the diagram is drawn at.
 - Click or tap a graphic with an action, and **The app receives** lists what the app would be handed, the last three at a time. A click on the background is listed too, as the place where an app could open the diagram in Diagrove.
 
 Choose **Done**, or press Esc, to close it. Nothing in the preview changes your document.

@@ -20,7 +20,7 @@ Choose Line (L) and drag from one shape to another. As you hover, Diagrove shows
 The Line tool also sets how new lines are routed: Control-click it on the Mac, or touch and hold it on iPad, and choose Straight, Elbow or Curved. To change a line you’ve drawn, select it and use the inspector’s **Line** section:
 
 - **Route**: Straight, Elbow or Curved.
-- **Ends**: the head and tail. The list groups them under Arrows, UML, ER and Other, from a plain arrow to a hollow triangle, a crow’s foot or an open circle.
+- **Ends**: the head and tail. The list groups them under Arrows, UML, Entity relationship and Other, from a plain arrow to a hollow triangle, a crow’s foot or an open circle.
 - **Label**: words on the line. Its position along the line can be changed too.
 
 ## Text
@@ -29,7 +29,7 @@ Double-click a shape or a line to type its words (double-tap on iPad). The Text 
 
 ## Colours, gradients and shadows
 
-The **Fill** and **Stroke** sections set a shape’s colour, outline width and dash. A colour well opens the palette: a row of neutrals, then light, full and dark versions of ten hues (red, orange, amber, yellow, green, teal, blue, purple, pink and slate). A well names a palette colour, such as “Light teal”, and shows any other colour by its hex value.
+The **Fill** and **Stroke** sections set a shape’s colour, outline width and dash. A colour well opens the palette: a row of neutrals, then light, full and dark versions of ten hues (red, orange, amber, yellow, green, teal, blue, purple, pink and slate). A well names a palette colour, such as “Light teal”, and a tone a tint or a paper made by the palette colour nearest it, such as “Dark slate”; any other colour shows its hex value.
 
 Fill’s **Type** is Solid, Linear gradient or Radial gradient. A gradient has a bar of stops: click the bar to add one, and drag one off or press Delete to remove it. A linear gradient has an angle; a radial gradient has centre and radius handles on the canvas while you edit it. Fill also holds the drop and inner shadows, and **Opacity** has a blend mode under **Blend**.
 

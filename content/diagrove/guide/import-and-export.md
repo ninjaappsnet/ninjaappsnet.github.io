@@ -11,16 +11,23 @@ Diagrove documents are `.diagrove` files you keep wherever you like. This page c
 
 Choose **File › Export…** (Shift-Command-E), or click **Export** in the toolbar. The sheet shows a preview and says what it will save.
 
-- **Format**: **PNG image**, **PDF document**, **SVG drawing**, and on the Mac **Web player**.
+- **Purpose**, under the preview, sets the rows below for a common job: **Slide or document** (a PNG at 2×), **Print** (a PDF, a page per canvas) or **Web** (an SVG drawing). You can still change any row.
+- **Format**: **PNG image**, **PDF document**, **SVG drawing**, and on the Mac **Web player**. Each says what it’s for.
 - **Area**: **Whole canvas**, paper and all, or **Just the drawing** with a small margin.
 - For PNG, **Scale** is 1×, 2× or 3×, and **Transparent background** leaves out the paper.
 - For PDF in a document with two or more canvases, **Every canvas, one page each** puts the whole document in one file.
 
-On the Mac you choose where to save. On iPad, choose **Save to Files…** or **Share**.
+The sheet remembers your last choices for each document.
+
+On the Mac you choose where to save, and a notice names the file, such as Exported “Bike repair.png”, with **Show in Finder** and **Open**. On iPad, choose **Save to Files…** or **Share**.
 
 Copy works too: a selection you copy carries a PDF and a PNG of itself, so you can paste it straight into a document, a slide or a message.
 
 ![The export sheet over the Flowchart template: a preview of the bike repair flowchart, Format set to PNG image, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels.](export-sheet-mac.webp "File › Export… set to a PNG image.")
+
+## Print
+
+On the Mac, choose **File › Print…** (Command-P), and **File › Page Setup…** for the paper. On iPad, choose **Print…** in the toolbar’s Export menu. Each canvas prints on a page of its own, scaled to fit, and layers whose **Printable** is off are left out. A wide first canvas prints in landscape.
 
 ## The Web player (Mac)
 
@@ -28,7 +35,7 @@ Choose **Web player** as the format and Diagrove saves a folder that plays the d
 
 - Under **More options**, **Include a desktop app project** adds a Tauri project beside the player, to build into a desktop app. Building it needs Tauri and Rust.
 - To put the player on a web page of your own, show `index.html` in an `iframe`. Adding `?chrome=0` to its address leaves out the player’s own controls.
-- A graphic with an **Ask the host app** action hands it to the page around the player. See [Play mode and actions](../play-mode-and-actions/).
+- A graphic with a **Send to the app it’s embedded in** action hands it to the page around the player. See [Play mode and actions](../play-mode-and-actions/).
 
 The Web player is on the Mac only in Diagrove 1.0. The iPad exports PNG, PDF and SVG.
 
@@ -74,7 +81,7 @@ A photo of a whiteboard, a paper sketch or a screenshot of a drawn diagram can b
 
 1. Choose **File › New diagram from sketch or photo…** for a new document, or **Insert › Diagram from sketch or photo…** to add to this one. A picture already on the canvas has **Turn into diagram…** in its context menu and in the inspector’s Picture section.
 2. Choose the picture, or drop it on the sheet. To take one with your iPhone, choose **File › Import from iPhone or iPad** while the sheet is open.
-3. The sheet, **Turn your sketch into a diagram**, shows your picture beside the diagram Diagrove read from it. Under **Layout**, choose **Keep my layout** to keep things where you drew them, or **Tidy** to have them arranged for you.
+3. The sheet, **Turn your sketch into a diagram**, shows your picture beside the diagram Diagrove read from it. Under **Layout**, choose **Keep my layout** to keep things where you drew them, or **Auto-arrange** to have them arranged for you.
 4. Click **Insert**.
 
 Diagrove reads the picture on your Mac; nothing is sent anywhere. It looks for closed outlines and lines between them, so a photo taken straight on, with dark lines on a light background, reads best. Shapes it was unsure of are dashed on your picture.

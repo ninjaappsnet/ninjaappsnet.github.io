@@ -11,7 +11,7 @@ Diagrove on iPad is the same app as on the Mac, on the same engine: the same doc
 
 The start screen offers **New diagram** and **Choose a template** above the Files browser, with your recent documents. See [Getting started](../getting-started/).
 
-In a document, the toolbar has **Undo** and **Redo**, **Sketch**, **Insert picture**, **Arrange**, **Export** (with Send to Dayfolio and Preview as embed in its menu), **Play** and the inspector. Where the sidebar and the inspector can’t both sit beside the canvas, in portrait or a half-screen Split View, opening one puts the other away, so the canvas keeps its room. The inspector is a column on a wide window and a sheet on a narrow one. Diagrove works in every orientation, in Split View, Slide Over and Stage Manager, and in more than one window at a time.
+In a document, the toolbar has **Undo** and **Redo**, **Sketch**, **Insert picture**, **Arrange**, **Export** (its menu has Share…, Export…, Print…, Preview as embed and Save as template…, and Send to Dayfolio when Dayfolio is installed), **Play** and the inspector. Where the sidebar and the inspector can’t both sit beside the canvas, in portrait or a half-screen Split View, opening one puts the other away, so the canvas keeps its room. The inspector is a column on a wide window and a sheet on a narrow one. Diagrove works in every orientation, in Split View, Slide Over and Stage Manager, and in more than one window at a time.
 
 ## Touch
 
@@ -40,7 +40,7 @@ A hardware keyboard follows the Mac’s rules: Delete removes the selection, the
 
 ## The menu bar
 
-Diagrove’s commands are in the iPadOS menu bar, as on the Mac: Export, Send to Dayfolio, Insert, Arrange, zoom, **View › Play** (Option-Command-P), **View › Preview as embed** and the Canvas menu. Hold Command on a hardware keyboard to see the shortcuts.
+Diagrove’s commands are in the iPadOS menu bar, as on the Mac: Export, Save as template, Send to Dayfolio when Dayfolio is installed, Insert, Arrange, zoom, **View › Play** (Option-Command-P), **View › Preview as embed** and the Canvas menu. Hold Command on a hardware keyboard to see the shortcuts.
 
 The **Insert** menu has **Picture from Photos…** (Shift-Command-I), **Picture from Files…** and **Drawing from Files…** (Option-Shift-Command-I) for SVG drawings. See [Import and export](../import-and-export/).
 

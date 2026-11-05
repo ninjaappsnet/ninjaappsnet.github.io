@@ -22,7 +22,9 @@ When Diagrove opens with nothing to open, it shows the Welcome window. On the le
 - **Describe a diagram…** (Option-Shift-Command-N): a new document with the prompt bar ready for you to type.
 - **Open…** (Command-O): a document you already have.
 
-On the right, the first time, six templates wait under “Start with a template”: Flowchart, System architecture, App screen, Mind map, Roadmap and Org chart. Double-click one, or select it and press Return or click **Create**. Press Space for a large preview. **All templates…** (Shift-Command-N) opens the full gallery. See [Templates](../templates/).
+On the right, the first time, six templates wait under “Start with a template”: Flowchart, System architecture, App screen, Mind map, Roadmap and Org chart. Double-click one, or select it and press Return or click **Create**. Press Space for a large preview. **All templates…** opens the full gallery, as **File › New from template…** (Shift-Command-N) does. See [Templates](../templates/).
+
+**Getting started**, a small card on the left, counts four first steps: make a diagram, connect two shapes, add a colour or tint, and export, print or play it. Each counts once, when you really do it, and the card’s button leads to the next, such as **Choose a template…**. Choose **Hide** to put it away; **Help › Getting started** shows the steps again, with *Show in the Welcome window* to bring the card back. On iPad, Help › Getting started shows them in a sheet. When all four are done, the card says “You’re set”.
 
 Once you have documents, the right side has two tabs, **Recent** and **Templates** (Command-1 and Command-2). Choose a recent document and press Return to open it.
 
@@ -46,7 +48,7 @@ A document you start from a template or with Describe a diagram… goes where yo
 - **The sidebar** has three tabs. **Canvases** lists the document’s canvases, with the current canvas’s layers below them. **Outline** shows the canvas as a tree of topics (see [Outline and auto-layout](../outline-and-auto-layout/)). **Stencils** holds the built-in stencils and your own libraries (see [Stencils and tints](../stencils-and-tints/)). On the Mac, **View › Hide Sidebar** is Control-Command-S. On iPad the sidebar sits beside the canvas in landscape and over it in portrait.
 - **The inspector**, on the right, changes what’s selected: Fill, Stroke, Line, Text and Arrange, and for one graphic its Action and Data. With nothing selected it shows the canvas: its name, size, paper and projection, and the grid. Control-Command-I shows or hides it. In a narrow iPad window it opens as a sheet.
 - **The prompt bar**, at the bottom of the canvas, draws a diagram from steps or a description, and changes the one in front of you. See [The prompt bar](../prompt-bar/).
-- **The toolbar.** On the Mac: the sidebar toggle, Arrange, Export, Send to Dayfolio, Play, and the inspector toggle on its own at the end. **View › Customize Toolbar…** adds more, such as Zoom, Insert picture, Tidy, Group, Lock and New canvas. On iPad: Undo, Redo, Sketch, Insert picture, Arrange, Export, Play and Inspector.
+- **The toolbar.** On the Mac: the sidebar toggle, Arrange, Export, Play, and the inspector toggle on its own at the end. **View › Customize Toolbar…** adds more, such as Zoom, Insert picture, Auto-arrange, Group, Lock and New canvas, and Send to Dayfolio when Dayfolio is installed. On iPad: Undo, Redo, Sketch, Insert picture, Arrange, Export, Play and Inspector.
 
 ![A Diagrove window on the Mac with the Flowchart template: the sidebar on its Canvases tab with the Layers list, the tool palette over the canvas, the step Repair the bike selected, the inspector on the right, the prompt bar and zoom at the foot, and the toolbar at the top.](window-parts-mac.webp "The sidebar, tool palette, canvas, inspector, prompt bar and toolbar.")
 

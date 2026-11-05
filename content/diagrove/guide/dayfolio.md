@@ -19,7 +19,7 @@ Diagrove and [Dayfolio](../../../dayfolio/) are made by the same small team, and
 
 ### Send to Dayfolio
 
-On the Mac, click **Send to Dayfolio** in the toolbar or choose **File › Send to Dayfolio…**. On iPad it’s in the toolbar’s Export menu.
+On the Mac, choose **File › Send to Dayfolio…**, which shows when Dayfolio is installed; **View › Customize Toolbar…** can add it to the toolbar too. On iPad it’s in the toolbar’s Export menu.
 
 Diagrove opens the share menu (the share sheet on iPad) with two files: a picture of the current canvas, as a PNG, and the whole document, zipped. On iPad, choose Dayfolio, and Dayfolio’s share extension takes them into an entry: the picture to look at, and the document kept with it. Dayfolio for Mac doesn’t take shared files yet, so on the Mac it isn’t in the share menu: send the diagram from your iPad, or save the picture and add it to an entry yourself. Any other app in the share menu can take the files too.
 
@@ -47,6 +47,6 @@ More connections between Diagrove and Dayfolio come in later versions, once Dayf
 
 A diagram shown live inside a Dayfolio entry, which you could tap through, is one of them. A picture of the canvas, through Send to Dayfolio, is what an entry shows today.
 
-You can already see how a diagram would look and behave there: **View › Preview as embed**, with **Width** set to **Dayfolio entry**. A graphic with an **Ask the host app** action is how a diagram would ask Dayfolio to do something, such as start a timer for a project. Today, in Diagrove’s Play mode, it shows a note with what Dayfolio would get.
+You can already see how a diagram would look and behave there: **View › Preview as embed**, with **Width** set to **In Dayfolio**. A graphic with a **Send to the app it’s embedded in** action is how a diagram would ask Dayfolio to do something, such as start a timer for a project. Today, in Diagrove’s Play mode, it shows a note with what Dayfolio would get.
 
 ![The Preview as embed sheet over the App screen template: Show set to Just the drawing, Width set to Dayfolio entry, the top of the two phone screens in the preview, whose stage scrolls to show the rest, and under The app receives one row: a click on the background, where the app could open the diagram in Diagrove.](preview-embed-mac.webp "Preview as embed at the width of a Dayfolio entry.")

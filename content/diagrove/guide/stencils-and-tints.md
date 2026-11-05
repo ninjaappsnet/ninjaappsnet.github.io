@@ -13,7 +13,7 @@ Open the sidebar’s **Stencils** tab. Its first page shows:
 
 - **Favourites**: the stencils you’ve starred, one row of them.
 - **Recents**: the last stencils you added, one row of them. **Show all** opens the rest.
-- **Categories**: Basics, Diagrams, Software, Engineering, Isometric, Places, Floor plans, Interface, Infographic and People, each saying how many libraries and stencils it holds, then **Your libraries**.
+- **Categories**: Basics, Diagrams, Software, Engineering, Isometric, Places, Floor plans, Interface, Infographics and People, each saying how many libraries and stencils it holds, then **Your libraries**.
 
 Choose a category to see its libraries, each with a heading you can fold, and large tiles under them. **‹ Stencils** takes you back, as does Command-[ on the Mac.
 
@@ -67,7 +67,7 @@ Lines between the graphics stay connected in the stencil. Actions that go to one
 
 ## Your libraries
 
-Your stencils live under **Your libraries**, the last of the categories on the Stencils tab’s first page. At the top of its page, **New library** makes a library and **Import…** brings one in. Each library has a menu, from the **…** button beside its name or its context menu: **Rename**, **Export…**, **Show in Finder** (on the Mac) and **Delete…**, which moves the file to the Trash. Drag your stencils within a library to reorder them, or drop a stencil from another of your libraries onto one to copy it in.
+Your stencils live under **Your libraries**, the last of the categories on the Stencils tab’s first page. At the top of its page, **New library** makes a library and **Import…** brings one in. Each library has a menu, from the **…** button beside its name or its context menu: **Rename** and **Export…**, then **Show in Finder** and **Move to Trash** on the Mac, or **Delete** on iPad. The library goes at once, and the notice that follows has **Undo**. Drag your stencils within a library to reorder them, or drop a stencil from another of your libraries onto one to copy it in.
 
 A library is a `.diagrovestencils` file, small enough to send to someone. **Export…** saves one wherever you choose.
 

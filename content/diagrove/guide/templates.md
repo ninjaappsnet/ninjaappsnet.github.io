@@ -18,7 +18,7 @@ On the Mac, double-click a template, or select it and press Return or click **Cr
 
 ## Categories
 
-The gallery’s sidebar lists **All templates**, then each category with how many templates it holds. Choose one to see it alone. On iPad the sidebar shows in a wide sheet; in a narrow window it becomes a menu above the cards.
+The gallery’s sidebar lists **All templates**, then each category with how many templates it holds, and last **Your templates**. Choose one to see it alone. On iPad the sidebar shows in a wide sheet; in a narrow window it becomes a menu above the cards.
 
 | Category | Templates |
 |---|---|
@@ -53,6 +53,10 @@ Creating from a template opens a new document, named after the template: “Flow
 What’s inside is ordinary Diagrove: shapes, lines, groups and stencil instances, in palette colours. Change the words, move things, retint a stencil, delete what you don’t need, or ask the prompt bar for changes such as “rename Cart to Basket”. Some templates have more than one canvas, such as App screen.
 
 App screen is a template that plays: it opens with a notice, “This diagram plays. Press Play to try it.” Choose **Play** in the toolbar (Option-Command-P on the Mac) and click through its screens; press Esc, or tap Stop on iPad, to go back to editing.
+
+## Your templates
+
+To start new diagrams from one of your own, open it and choose **File › Save as template…** (on iPad, **Save as template…** in the toolbar’s Export menu). Give it a name and, if you like, a short line on what it’s for, then click **Save**. It appears in the gallery under **Your templates**, the last category, on its own paper; it isn’t in All templates or search. A card’s menu has **Create**, **Rename…**, **Show in Finder** on the Mac, and **Delete**, with **Undo** in the notice. Your templates stay on the Mac or iPad you saved them on.
 
 ## The Spaces templates
 

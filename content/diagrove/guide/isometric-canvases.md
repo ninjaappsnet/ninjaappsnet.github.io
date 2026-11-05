@@ -13,7 +13,7 @@ An isometric canvas draws your diagram as if you were looking down at it from a 
 - **On iPad,** choose **Choose a template**, then **Blank isometric diagram**.
 - **From a template,** start from System architecture, Order fulfilment or one of the Spaces templates. See [Templates](../templates/).
 
-Any canvas can switch. With nothing selected, set **Projection** to Isometric in the inspector’s Canvas section. Diagrove asks first when the canvas has graphics on it, and moves them onto the floor, where you can give them height. You can undo this. Switching back to Flat keeps each graphic’s plane and elevation for the next time you switch.
+Any canvas can switch. With nothing selected, set **Projection** to Isometric in the inspector’s Canvas section. The canvas switches at once and moves its graphics onto the floor, where you can give them height; a notice says so, with **Undo**. Switching back to Flat keeps each graphic’s plane and elevation for the next time you switch.
 
 ## The isometric grid
 

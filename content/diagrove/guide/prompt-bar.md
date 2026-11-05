@@ -36,7 +36,7 @@ Once there’s something on the canvas, the bar says “Ask for a change, or typ
 - “Move Try again below Send receipt”
 - “Change 2% to 3%”
 - “Delete the notes”
-- “Tidy up the whole diagram”
+- “Auto-arrange the diagram”
 
 Or select graphics first and say what to do with them: “Make it orange”, “Make them 50% wider”, “Align them left”, “Make it bold”, “Rename it to Payment”, “Space them out evenly” or “Group them”.
 
@@ -57,7 +57,7 @@ When Diagrove can’t work out part of a request, it says what it read and which
 
 ## The guide
 
-The sparkle at the start of the prompt bar opens **What you can ask**, the prompt bar guide, in the column where the inspector goes. **Help › What you can ask the prompt bar** opens it too. It lists what the bar understands in four groups: Change what’s selected, Change graphics by name, Tidy up and Draw a new diagram. Click an example (tap on iPad) and it goes into the bar with its name highlighted, so you can type your own over it, then press Return (tap the arrow on iPad).
+The sparkle at the start of the prompt bar opens **What you can ask**, the prompt bar guide, in the column where the inspector goes. **Help › What you can ask the prompt bar** opens it too. It lists what the bar understands in four groups: Change what’s selected, Change graphics by name, Auto-arrange and Draw a new diagram. Click an example (tap on iPad) and it goes into the bar with its name highlighted, so you can type your own over it, then press Return (tap the arrow on iPad).
 
 The guide opens with the first document window each time Diagrove starts. Choose **Don’t show again** at its foot to stop that; the notice that follows has **Undo**. On the Mac, **Diagrove › Settings…** has the switch *Show the prompt bar guide when Diagrove opens*, to turn it back on later.
 
@@ -84,5 +84,5 @@ The prompt bar runs on the device, with Apple’s on-device model when Apple Int
 
 ## Related
 
-- [Outline and auto-layout](../outline-and-auto-layout/): Tidy and the layouts the prompt bar uses.
+- [Outline and auto-layout](../outline-and-auto-layout/): Auto-arrange, Tidy and the layouts the prompt bar uses.
 - [Getting started](../getting-started/): the parts of a window.
