@@ -4,7 +4,6 @@
     "id": "management-leadership",
     "industry": "Management",
     "name": "Management & Leadership",
-    "journalName": "Management",
     "summary": "Feedback, team check-ins and delegation for people who manage other people.",
     "icon": "person.2",
     "color": "purple",
@@ -21,7 +20,6 @@
         "color": "pink",
         "cadence": "onEvent",
         "summary": "What you told them, and what you’ll check on next time.",
-        "includedByDefault": true,
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           {
@@ -55,7 +53,6 @@
         "color": "green",
         "cadence": "review",
         "summary": "A quick read on team mood, workload and what needs attention.",
-        "includedByDefault": true,
         "fields": [
           { "key": "team-mood", "label": "Team mood", "type": "mood", "includeInInsights": true },
           { "key": "workload", "label": "Workload", "type": "rating", "includeInInsights": true },
@@ -79,8 +76,8 @@
         "color": "blue",
         "cadence": "review",
         "summary": "The team’s wins, who needs support and what’s next.",
-        "includedByDefault": false,
         "reminder": { "weekdays": [6], "hour": 16, "minute": 30 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "energy", "label": "Energy", "type": "rating" },
           { "key": "meeting-time", "label": "Meeting time", "type": "duration" },
@@ -107,7 +104,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "What you hear when you talk to people who don’t report to you directly.",
-        "includedByDefault": false,
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
@@ -124,7 +120,6 @@
         "color": "teal",
         "cadence": "onEvent",
         "summary": "What you handed off, to whom, and whether it needs a check-in.",
-        "includedByDefault": false,
         "fields": [
           { "key": "assigned-to", "label": "Assigned to", "type": "person" },
           { "key": "check-in-by", "label": "Check-in by", "type": "date" },

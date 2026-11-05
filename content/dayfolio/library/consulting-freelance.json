@@ -4,7 +4,6 @@
     "id": "consulting-freelance",
     "industry": "Consulting",
     "name": "Consulting & Freelance",
-    "journalName": "Clients",
     "summary": "Meetings, billable time, invoices and status updates for people who work for clients.",
     "icon": "briefcase",
     "color": "blue",
@@ -21,7 +20,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Who was there, what you decided and what happens next.",
-        "includedByDefault": true,
         "fields": [
           { "key": "client", "label": "Client", "type": "project", "carryOver": true },
           { "key": "attendees", "label": "Attendees", "type": "person", "showInListPreview": true },
@@ -63,8 +61,8 @@
         "color": "teal",
         "cadence": "daily",
         "summary": "Hours logged against a client, ready for the invoice.",
-        "includedByDefault": true,
         "reminder": { "weekdays": [2, 3, 4, 5, 6], "hour": 17, "minute": 30 },
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "client", "label": "Client", "type": "project", "carryOver": true },
           { "key": "hours", "label": "Hours", "type": "duration", "includeInInsights": true },
@@ -92,7 +90,6 @@
         "color": "green",
         "cadence": "onEvent",
         "summary": "What you billed, to whom, and whether it’s been paid.",
-        "includedByDefault": true,
         "fields": [
           { "key": "client", "label": "Client", "type": "project", "carryOver": true },
           { "key": "amount", "label": "Amount", "type": "number", "includeInInsights": true },
@@ -119,8 +116,8 @@
         "color": "purple",
         "cadence": "weekly",
         "summary": "Progress, risks and what’s next, ready to send to the client.",
-        "includedByDefault": false,
         "reminder": { "weekdays": [6], "hour": 15, "minute": 0 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "client", "label": "Client", "type": "project", "carryOver": true },
           {
@@ -156,7 +153,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "What you proposed, what it’s worth, and whether it landed.",
-        "includedByDefault": false,
         "fields": [
           { "key": "client", "label": "Client", "type": "project" },
           { "key": "estimated-value", "label": "Estimated value", "type": "number", "includeInInsights": true },

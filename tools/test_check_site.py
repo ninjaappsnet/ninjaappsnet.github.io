@@ -77,6 +77,16 @@ class DayfolioRulesTests(unittest.TestCase):
     def test_the_fixture_is_clean(self):
         self.assertEqual(self.problems(), [])
 
+    def test_no_sample_company_from_another_vendor_appears_on_a_dayfolio_page_or_source(self):
+        for rel, text in (("apps/dayfolio/support.html", "Hours for Northwind Traders."),
+                          ("content/dayfolio/guide/a.md", "Ask contoso for the files.")):
+            with self.subTest(rel=rel):
+                original = self.site.read(rel)
+                self.site.put(rel, original + "\n" + text)
+                self.assertProblem("sample company", "check_dayfolio_samples")
+                self.site.put(rel, original)
+        self.assertEqual(self.problems("check_dayfolio_samples"), [])
+
     def test_titles_and_descriptions_are_unique(self):
         self.edit("apps/dayfolio/support.html", "<title>Support — Dayfolio — NinjaApps</title>",
                   "<title>Dayfolio — NinjaApps</title>")

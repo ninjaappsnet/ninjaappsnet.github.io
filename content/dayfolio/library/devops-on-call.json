@@ -4,7 +4,6 @@
     "id": "devops-on-call",
     "industry": "Engineering",
     "name": "DevOps & On-call",
-    "journalName": "On-call Log",
     "summary": "Handovers, incidents, alerts and deploys for people who keep production running.",
     "icon": "server.rack",
     "color": "slate",
@@ -20,7 +19,7 @@
         "color": "slate",
         "cadence": "weekly",
         "summary": "What the next on-call person needs on day one of the rotation.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "pages", "label": "Pages", "type": "number" },
           { "key": "tags", "label": "Tags", "type": "tags" },
@@ -40,7 +39,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "Severity, timeline, root cause and follow-ups for a blameless incident record.",
-        "includedByDefault": true,
         "fields": [
           {
             "key": "severity", "label": "Severity", "type": "singleSelect", "includeInInsights": true,
@@ -83,7 +81,7 @@
         "color": "slate",
         "cadence": "daily",
         "summary": "A running tally of pager noise, so alert fatigue shows up as a chart.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "alerts-received", "label": "Alerts received", "type": "number", "includeInInsights": true },
           { "key": "actionable", "label": "Actionable", "type": "number", "includeInInsights": true },
@@ -102,7 +100,6 @@
         "color": "teal",
         "cadence": "onEvent",
         "summary": "What went out, whether it stuck, and how long it took.",
-        "includedByDefault": false,
         "fields": [
           { "key": "service", "label": "Service", "type": "project" },
           {
@@ -126,7 +123,6 @@
         "color": "purple",
         "cadence": "review",
         "summary": "A periodic check that runbooks stay trustworthy for whoever’s paged next.",
-        "includedByDefault": false,
         "fields": [
           { "key": "runbook", "label": "Runbook", "type": "link" },
           { "key": "last-tested", "label": "Last tested", "type": "date" },

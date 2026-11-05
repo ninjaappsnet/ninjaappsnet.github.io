@@ -444,18 +444,24 @@ commit to this repo, so the live check is
 ## Assets
 
 Dayfolio's product page (`apps/dayfolio/`) shows the App Store's captioned, light
-pictures across iPhone, iPad and Mac, from the app repo's `build/asc-upload/buy/web/`
-(D2091, D2095): `media/iphone-first-page.webp` and `iphone-client-report.webp`
-(880×1912, two thirds of 1320×2868), `media/ipad-person.webp` (1032×1376, half of
-2064×2752), and `media/mac-performance-review.webp` and `mac-quick-entry.webp`
-(1440×900, half of 2880×1800): lossy WebP at quality 90, sRGB. `.devices` lays them
-out. On a desktop the two iPhones and the iPad share a row at one height, and the
-two Macs the next; narrower, the iPhones pair up and the rest take a row each; on a
-phone every picture takes a row, an iPhone's no wider than 300px. They are opaque,
-so a hairline frames each instead of the drop shadow a window capture gets. Above
-them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 24.37 s,
-H.264 with a silent AAC track, copied byte for byte), plays in a `<video>` with
-controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
+pictures from the app repo's `build/asc-upload/tpj/web/` (the set made after TPJ and
+FEEL: a journal is one template, with folders; D2500–D2510 there): the iPhone's
+`media/iphone-first-page-template.webp`, `iphone-new-journal.webp`, `iphone-folders.webp`,
+`iphone-checklist.webp`, `iphone-weekly-goal.webp` and `iphone-client-report.webp`
+(880×1912, two thirds of 1320×2868), and the iPad's `media/ipad-folders.webp` and
+`ipad-checklist.webp` (1032×1376, half of 2064×2752): lossy WebP at quality 90, sRGB.
+`.devices` lays them out, three iPhones to a row and the two iPads the next; narrower,
+the iPhones pair up and the rest take a row each; on a phone every picture takes a row,
+an iPhone's no wider than 300px. They are opaque, so a hairline frames each instead of
+the drop shadow a window capture gets. **There is no Mac picture yet.** The Mac set could
+not be captured when the page was updated (the capture tool needs Accessibility and Screen
+Recording), and the old Mac pictures showed a sidebar and a sample company's name the app no
+longer has, so they were taken down; `check_dayfolio_media` requires an iPhone and an iPad
+picture (`DAYFOLIO_PLATFORMS_REQUIRED`) and allows a `media/mac-….webp` (put `mac` back in
+that tuple when the set lands). Above them, the iPhone app preview,
+`media/app-preview-iphone.mp4` (886×1920, 29.73 s, H.264 with a silent AAC track, copied
+byte for byte from `build/asc-upload/tpj/web/`), plays in a `<video>` with controls, muted
+and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
 its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
 history has them. To swap a picture, convert the new PNG to the same size under a
 new name and change the page (and its `width` and `height`, if they change: the
@@ -617,14 +623,18 @@ repo's `Packages/DayfolioKit/Sources/DayfolioDomain/Resources/Library/` (format:
 `Library/PackFormat.md` there), copied into `content/dayfolio/library/` so this
 site can be checked and rebuilt on its own, and the sample values in
 `content/dayfolio/examples/<pack-id>.json`: one made-up entry per template, every
-field filled, names and numbers plainly examples (and no famous person's name), links
+field filled, names and numbers plainly examples (no famous person's name, and no sample-company name from another vendor's product, such as Northwind or Contoso), links
 only on example.com, .net or .org. An entry's optional `page_title` titles its template's
 page with the words people search for when they differ from the template's name
 ("1:1 meeting notes template" for 1:1 notes); without it the page is "<name> template".
 The generator stops at a page title over 60 characters, against the copy rules, or
 another page's. A carried field's note says which earlier entry it comes from, by the
 lead the app's `EntryFactory.leadField(in:)` picks: the last entry with the same
-person, for the same client or site, or of the template. **After the app's library changes:**
+person, for the same client or site, or of the template. A template page tells how to make a journal from it (New journal; the app has no Templates
+screen since TPJ, ADR 0015) and shows the weekly goal the pack's `suggestedGoal` names, with
+the reminder, where there is one. A pack page names the template the first page makes a journal
+from (`defaultTemplate`, required). The generator refuses a `suggestedGoal` the app would refuse.
+**After the app's library changes:**
 
 ```sh
 python3 tools/dayfolio-templates.py --library /path/to/dayfolio   # copy the packs in, write the pages

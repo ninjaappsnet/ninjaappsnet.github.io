@@ -4,7 +4,6 @@
     "id": "customer-support",
     "industry": "Support",
     "name": "Customer Support",
-    "journalName": "Support Log",
     "summary": "Tickets, escalations and shift summaries for people who help customers directly.",
     "icon": "headphones",
     "color": "teal",
@@ -20,7 +19,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "A record of the issue and how it got fixed — searchable next time it comes up.",
-        "includedByDefault": true,
         "fields": [
           { "key": "customer", "label": "Customer", "type": "person" },
           {
@@ -54,7 +52,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "Why something needed to go up a level, and what would stop it happening again.",
-        "includedByDefault": true,
         "fields": [
           { "key": "ticket", "label": "Ticket", "type": "link" },
           { "key": "escalated-to", "label": "Escalated to", "type": "person" },
@@ -84,7 +81,7 @@
         "color": "teal",
         "cadence": "daily",
         "summary": "Volume, speed and satisfaction for your shift, plus the one interaction worth remembering.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 5 },
         "fields": [
           { "key": "tickets-handled", "label": "Tickets handled", "type": "number", "includeInInsights": true },
           { "key": "avg-handle-time", "label": "Avg handle time", "type": "duration", "includeInInsights": true },
@@ -104,7 +101,7 @@
         "color": "purple",
         "cadence": "weekly",
         "summary": "The trend, not the tally — Shift Summary already charts daily volume and CSAT.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "tags", "label": "Tags", "type": "tags" },
           {

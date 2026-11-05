@@ -4,7 +4,6 @@
     "id": "sales",
     "industry": "Sales",
     "name": "Sales",
-    "journalName": "Sales Log",
     "summary": "Calls, deals and pipeline numbers for people who carry a quota.",
     "icon": "chart.line.uptrend.xyaxis",
     "color": "green",
@@ -20,7 +19,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Who you spoke with, what they said and what happens next.",
-        "includedByDefault": true,
         "fields": [
           { "key": "contact", "label": "Contact", "type": "person" },
           { "key": "account", "label": "Account", "type": "project", "carryOver": true },
@@ -58,7 +56,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "What moved this week, and what could stall it.",
-        "includedByDefault": false,
         "fields": [
           { "key": "deal", "label": "Deal", "type": "project", "carryOver": true },
           {
@@ -92,7 +89,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "The moment a proposal goes out, and what happens to it.",
-        "includedByDefault": false,
         "fields": [
           { "key": "deal", "label": "Deal", "type": "project", "carryOver": true },
           { "key": "amount", "label": "Amount", "type": "number", "includeInInsights": true },
@@ -116,8 +112,8 @@
         "color": "purple",
         "cadence": "weekly",
         "summary": "Where the pipeline stands, and which deals need attention.",
-        "includedByDefault": true,
         "reminder": { "weekdays": [2], "hour": 9, "minute": 30 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "week-of", "label": "Week of", "type": "date" },
           { "key": "open-deals", "label": "Open deals", "type": "number", "includeInInsights": true },
@@ -142,8 +138,8 @@
         "color": "green",
         "cadence": "weekly",
         "summary": "Calls, meetings and deals closed, with the story behind them.",
-        "includedByDefault": true,
         "reminder": { "weekdays": [6], "hour": 16, "minute": 0 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "calls-made", "label": "Calls made", "type": "number", "includeInInsights": true },
           { "key": "meetings-booked", "label": "Meetings booked", "type": "number", "includeInInsights": true },

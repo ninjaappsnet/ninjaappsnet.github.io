@@ -4,7 +4,6 @@
     "id": "construction-field",
     "industry": "Construction",
     "name": "Construction & Field",
-    "journalName": "Field Log",
     "summary": "Site logs, safety talks and inspections for people who work on site rather than at a desk.",
     "icon": "hammer",
     "color": "amber",
@@ -20,7 +19,7 @@
         "color": "amber",
         "cadence": "daily",
         "summary": "The site diary, minus weather and location — Dayfolio adds those once you turn them on in Journal settings.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "site", "label": "Site", "type": "project" },
           { "key": "crew-size", "label": "Crew size", "type": "number", "includeInInsights": true },
@@ -42,7 +41,7 @@
         "color": "blue",
         "cadence": "weekly",
         "summary": "What was covered in the safety briefing, and who was there.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "attendees", "label": "Attendees", "type": "person" },
           { "key": "tags", "label": "Tags", "type": "tags" },
@@ -58,7 +57,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "An incident or near-miss record, logged while it’s fresh.",
-        "includedByDefault": true,
         "fields": [
           {
             "key": "severity", "label": "Severity", "type": "singleSelect", "includeInInsights": true,
@@ -86,7 +84,6 @@
         "color": "slate",
         "cadence": "onEvent",
         "summary": "What’s on site, what’s working, and what’s out of action.",
-        "includedByDefault": false,
         "fields": [
           {
             "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
@@ -109,7 +106,7 @@
         "color": "green",
         "cadence": "weekly",
         "summary": "A periodic walk-round, logged before the inspector’s report is the first you hear of a problem.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "site", "label": "Site", "type": "project" },
           {

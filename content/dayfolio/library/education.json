@@ -4,7 +4,6 @@
     "id": "education",
     "industry": "Education",
     "name": "Education",
-    "journalName": "Teaching Log",
     "summary": "Lesson reflection and professional development for teachers — never student records.",
     "icon": "graduationcap",
     "color": "blue",
@@ -21,7 +20,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Gibbs-style reflection on a single lesson, about your teaching — not a gradebook.",
-        "includedByDefault": true,
         "fields": [
           { "key": "class", "label": "Class", "type": "project" },
           { "key": "energy", "label": "Energy", "type": "rating", "includeInInsights": true },
@@ -39,7 +37,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "Feedback from being observed teaching, or from observing a colleague.",
-        "includedByDefault": false,
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           {

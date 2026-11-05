@@ -3,7 +3,8 @@ title: People and projects
 description: Keep track of the people and projects in your notes: see everything with one name, what’s still open, and rename or merge names in Dayfolio.
 slug: people-and-projects
 date: 2026-10-16
-order: 5
+updated: 2026-11-05
+order: 6
 ---
 The people you work with and the projects or clients you work on run through every journal. Dayfolio keeps one list of each, shared by all your journals, so you can see everything about one name in one place: every entry, the action items still open, and a report about them.
 
@@ -29,11 +30,9 @@ On a Mac, right-click the name. In an entry you can only read, and in Search’s
 
 The page shows the name with how many entries mention it, since when and when last, and which journals they’re in, such as “18 entries since 3 June · last on Friday 9 October”. Under it:
 
-- **Still open** lists the unticked items of checklists that carry over, from the latest entry of each template that mentions the name, with how long each has been open. A tap opens its entry. See [Carry-over between entries](../carry-over/).
+- **Still open** lists the unticked items of checklists that carry over, from the latest entry of each journal that mentions the name, with how long each has been open. A tap opens its entry. See [Carry-over between entries](../carry-over/).
 - **Make a report** starts a report about that name: for a person, a performance review of the last six months; for a project, last week’s weekly report; for a tag, last month’s. See [Reports](../reports/).
 - The entries themselves, newest first, with where each mentions the name.
-
-![Entries with Maya on a Mac, with the header counting her entries since May, two items still open, the Make a report button and her 1:1 notes listed below.](people-entries-with-mac.webp)
 
 ## Rename a person or project
 

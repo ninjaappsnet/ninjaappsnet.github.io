@@ -4,7 +4,6 @@
     "id": "software-engineering",
     "industry": "Engineering",
     "name": "Software Engineering",
-    "journalName": "Engineering Log",
     "summary": "Standups, incidents, plans and reviews for people who ship software.",
     "icon": "chevron.left.forwardslash.chevron.right",
     "color": "orange",
@@ -21,8 +20,8 @@
         "color": "orange",
         "cadence": "daily",
         "summary": "What you shipped, what you’re on and what’s in the way.",
-        "includedByDefault": true,
         "reminder": { "weekdays": [2, 3, 4, 5, 6], "hour": 9, "minute": 0 },
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "energy", "label": "Energy", "type": "rating", "showInListPreview": true, "includeInInsights": true },
           { "key": "focus-time", "label": "Focus time", "type": "duration", "showInListPreview": true, "includeInInsights": true },
@@ -59,7 +58,6 @@
         "color": "teal",
         "cadence": "onEvent",
         "summary": "PRs you reviewed, the verdict and patterns worth sharing with the team.",
-        "includedByDefault": false,
         "fields": [
           { "key": "pull-request", "label": "Pull request", "type": "link" },
           { "key": "author", "label": "Author", "type": "person" },
@@ -91,8 +89,8 @@
         "color": "blue",
         "cadence": "weekly",
         "summary": "Your top priorities for the week, and what could get in the way.",
-        "includedByDefault": false,
         "reminder": { "weekdays": [2], "hour": 9, "minute": 0 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "week-of", "label": "Week of", "type": "date" },
           { "key": "project", "label": "Project", "type": "project", "carryOver": true },
@@ -115,7 +113,6 @@
         "color": "purple",
         "cadence": "review",
         "summary": "What worked, what didn’t and one experiment for next sprint.",
-        "includedByDefault": false,
         "fields": [
           { "key": "team-mood", "label": "Team mood", "type": "mood", "includeInInsights": true },
           { "key": "tags", "label": "Tags", "type": "tags" },
@@ -136,7 +133,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Technical design docs and RFCs: options weighed, the call made, who signed off.",
-        "includedByDefault": false,
         "fields": [
           { "key": "doc", "label": "Doc", "type": "link" },
           {
@@ -165,7 +161,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "Shortcuts taken, what they cost you, and when they should be paid down.",
-        "includedByDefault": false,
         "fields": [
           { "key": "area", "label": "Area", "type": "project" },
           { "key": "interest", "label": "Interest", "type": "rating", "includeInInsights": true },

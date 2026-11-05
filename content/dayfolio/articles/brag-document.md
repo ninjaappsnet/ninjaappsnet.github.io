@@ -3,6 +3,7 @@ title: What goes in a brag document, and how to keep one
 description: A brag document is a running record of your wins, with evidence. What to put in it, how to write each entry and how to keep it going all year.
 slug: brag-document
 date: 2026-10-16
+updated: 2026-11-05
 image: card.png
 image_alt: The title What goes in a brag document, and how to keep one, beside an iPhone showing a brag document entry in Dayfolio with its impact, evidence, kudos and the win
 ---
@@ -63,7 +64,7 @@ When the review comes, your brag document is the pile of evidence: pick the thre
 
 ## How Dayfolio helps
 
-Dayfolio is a work journal for iPhone, iPad and Mac, with a template for each kind of entry you write. Its **Brag document** template is in the General pack, described as “Capture a win when it happens, so review season isn’t a memory test.” It’s ticked by default when you make a journal from the General, Software Engineering or Management & Leadership pack, and you can add it to any journal from the library.
+Dayfolio is a work journal for iPhone, iPad and Mac, with a journal for each kind of page you write. Its **Brag document** template is in the General pack, described as “Capture a win when it happens, so review season isn’t a memory test.” In New journal, choose it and it becomes a journal of its own, “Brag document”, with its own form, so your wins stay in one place.
 
 Each brag document entry has:
 
@@ -75,13 +76,12 @@ Each brag document entry has:
 
 ![A brag document entry on iPhone, The retry queue is live for every merchant, with Impact High, an Evidence link, Kudos from Ines Costa and the tag #delivery, then the win itself and an Evidence field for files](iphone-brag-entry.webp)
 
-**Capture it in seconds.** On iPhone, touch and hold the New entry button and choose Brag document. On the Mac, press Option-Command-J (⌥⌘J) in any app to open quick entry from the menu bar, pick Brag document from its template menu and write the win; the Fill line under it takes the other fields, such as “impact high”.
+**Capture it in seconds.** On iPhone, touch and hold the New entry button and choose New entry in Brag document, from its list of your recent journals. On the Mac, press Option-Command-J (⌥⌘J) in any app to open quick entry from the menu bar, choose the Brag document journal at the top and write the win; the Fill line under it takes the other fields, such as “impact high”.
 
-![Quick entry on a Mac, opened from the menu bar over the Engineering Log: the Daily Standup template picked, a one-line note, and “energy 4, focus time 1h30” on the Fill line, previewed as Energy High and Focus time 1h 30m](mac-quick-entry.webp "Quick entry with a template picked, here a standup. Brag document is in the same menu.")
 
 **Star the wins that matter most.** Starred entries show a filled star everywhere, and Search finds them all with its Starred filter.
 
-**Find them again.** Search can narrow to the Brag document template, to a tag or to a date range. Kudos from is a person, and a person’s name in an entry has “Entries with …” in its menu, which lists every entry that names them, brag document entries included.
+**Find them again.** Search can narrow to the Brag document journal, to a folder, a tag or a date range. Kudos from is a person, and a person’s name in an entry has “Entries with …” in its menu, which lists every entry that names them, brag document entries included.
 
 **Turn it into a review.** In Reports, a **Performance review** (the last six months, unless you choose other dates) and the **Year-end self-review** (this year so far) both read your brag document entries the way a review wants them: the Win field first, then the Evidence links, with the titles of your starred entries first in Highlights.
 
@@ -90,5 +90,5 @@ Each brag document entry has:
 You don’t need to reconstruct the year to begin. Write down one thing from this week that went well, with its link, and add the next one when it happens.
 
 - See the [Brag document template](../../templates/general/brag-document/), with every field and a filled-in example.
-- Read about [templates and fields](../../guide/templates-and-fields/), [quick capture](../../guide/quick-capture/) and [Reports](../../guide/reports/) in the Dayfolio guide.
+- Read about [journals, forms and fields](../../guide/templates-and-fields/), [quick capture](../../guide/quick-capture/) and [Reports](../../guide/reports/) in the Dayfolio guide.
 - [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

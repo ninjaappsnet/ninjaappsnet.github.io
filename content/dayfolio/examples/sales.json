@@ -42,8 +42,8 @@
       "pipeline-value": 186000,
       "forecast-confidence": 3,
       "tags": ["pipeline", "forecast"],
-      "at-risk": "Northwind Studio has gone quiet since the pricing call. Two other deals are waiting on budgets set in January.",
-      "priorities": ["[ ] Call Northwind Studio before Thursday", "[ ] Move two early deals to qualified or close them", "[ ] Update the forecast for the quarterly review"]
+      "at-risk": "Fernhill Studio has gone quiet since the pricing call. Two other deals are waiting on budgets set in January.",
+      "priorities": ["[ ] Call Fernhill Studio before Thursday", "[ ] Move two early deals to qualified or close them", "[ ] Update the forecast for the quarterly review"]
     }
   },
   "sales.weekly-numbers": {

@@ -26,13 +26,14 @@ STATUS = [{"key": "on-track", "label": "On track", "color": "success"},
           {"key": "blocked", "label": "Blocked", "color": "danger"}]
 
 GENERAL = {"formatVersion": 1, "pack": {
-    "id": "general", "industry": "General", "name": "General", "journalName": "Work Log",
+    "id": "general", "industry": "General", "name": "General",
     "summary": "Weekly reviews, 1:1s and decisions that fit any kind of work.", "icon": "tray", "color": "slate",
     "order": 0, "defaultTemplate": "general.weekly-review",
     "templates": [
         {"id": "general.weekly-review", "version": 2, "name": "Weekly review", "icon": "calendar", "color": "orange",
          "cadence": "review", "summary": "Energy, mood, wins and lessons — a personal check-in for any job.",
-         "includedByDefault": True, "reminder": {"weekdays": [6], "hour": 17, "minute": 0},
+         "reminder": {"weekdays": [6], "hour": 17, "minute": 0},
+         "suggestedGoal": {"kind": "timesPerWeek", "count": 1},
          "fields": [
              {"key": "energy", "label": "Energy", "type": "rating"},
              {"key": "mood", "label": "Mood", "type": "mood"},
@@ -43,7 +44,6 @@ GENERAL = {"formatVersion": 1, "pack": {
               "prompt": "Anything else worth remembering about this week?"}]},
         {"id": "general.1-1-notes", "version": 1, "name": "1:1 notes", "icon": "person.2", "color": "blue",
          "cadence": "onEvent", "summary": "Any recurring one-on-one — with a manager, a mentor, a peer or a report.",
-         "includedByDefault": True,
          "fields": [
              {"key": "person", "label": "With", "type": "person"},
              {"key": "meeting-time", "label": "Meeting time", "type": "timeRange"},
@@ -52,14 +52,15 @@ GENERAL = {"formatVersion": 1, "pack": {
 
 ENGINEERING = {"formatVersion": 1, "pack": {
     "id": "software-engineering", "industry": "Engineering", "name": "Software Engineering",
-    "journalName": "Engineering Log", "summary": "Standups, incidents, plans and reviews for people who ship software.",
+    "summary": "Standups, incidents, plans and reviews for people who ship software.",
     "icon": "chevron.left.forwardslash.chevron.right", "color": "orange", "order": 1,
     "defaultTemplate": "software-engineering.daily-standup", "keywords": ["deploy"],
     "includes": ["general.weekly-review"],
     "templates": [
         {"id": "software-engineering.daily-standup", "version": 3, "name": "Daily standup", "icon": "checklist",
          "color": "orange", "cadence": "daily", "summary": "What you shipped, what you’re on and what’s in the way.",
-         "includedByDefault": True, "reminder": {"weekdays": [2, 3, 4, 5, 6], "hour": 9, "minute": 0},
+         "reminder": {"weekdays": [2, 3, 4, 5, 6], "hour": 9, "minute": 0},
+         "suggestedGoal": {"kind": "weekdays", "weekdays": [2, 3, 4, 5, 6]},
          "fields": [
              {"key": "focus-time", "label": "Focus time", "type": "duration"},
              {"key": "project", "label": "Project", "type": "project", "carryOver": True},
@@ -247,7 +248,7 @@ class CarryOverTests(unittest.TestCase):
         project, working = field("project", "project", True), field("working-on", "richText", True)
         standup = [field("energy", "rating"), project, working]
         self.assertEqual(note(standup, project),
-                         "Carries over: a new entry starts with the value from your last entry with this template.")
+                         "Carries over: a new entry starts with the value from your last entry in this journal.")
         with_, items = field("with", "person", label="With"), field("action-items", "checklist", True)
         self.assertEqual(note([with_, items], items),
                          "Carries over: once you choose who it’s with, it fills with the items you haven’t ticked "
@@ -256,7 +257,7 @@ class CarryOverTests(unittest.TestCase):
         self.assertIn("your last entry with the same people.", note([attendees, items], items))
         client, steps = field("client", "project", True, "Client"), field("next-steps", "checklist", True)
         self.assertEqual(note([client, steps], client),
-                         "Carries over: a new entry starts with the value from your last entry with this template.")
+                         "Carries over: a new entry starts with the value from your last entry in this journal.")
         self.assertEqual(note([client, steps], steps),
                          "Carries over: a new entry starts with the items you haven’t ticked in your last entry for "
                          "the same client; choose another client and you get that client’s instead.")
@@ -350,11 +351,64 @@ class PageTests(unittest.TestCase):
                      'href="general/1-1-notes/"', 'href="software-engineering/daily-standup/"'):
             self.assertIn(href, gallery)
 
-    def test_a_pack_page_says_how_a_journal_made_from_it_starts(self):
+    def test_a_pack_page_says_a_template_becomes_a_journal_and_which_one_the_first_page_makes(self):
         pack = self.pages["apps/dayfolio/templates/software-engineering/index.html"]
-        self.assertIn("Engineering Log", pack)
-        self.assertIn("Daily standup", pack)
         self.assertIn("From General", pack)
+        self.assertIn("<dt>THE FIRST PAGE MAKES</dt><dd>Daily standup</dd>", pack)
+        self.assertIn('id="new-journal"', pack)
+        self.assertIn("Pick one template and it becomes a journal of its own", pack)
+        for old in ("SUGGESTED JOURNAL NAME", "Start a journal with this pack", "template pack", "checked by default",
+                    "default template", "Engineering Log"):
+            self.assertNotIn(old, pack)
+
+    def test_a_template_page_says_how_to_make_a_journal_from_it_and_names_no_templates_screen(self):
+        page = self.standup
+        add = page.split('id="new-journal"')[1].split("<h2", 1)[0]
+        for words in ("New journal", "Software Engineering", "Daily standup", "Daily standup 2", "Journal settings",
+                      "its own form", "Suggested for you", "Blank journal"):
+            self.assertIn(words, add)
+        for old in ("Add to", "Customize", "Template Library", "⇧⌘L", "More › Templates", 'id="add"',
+                    "Add it to a journal"):
+            self.assertNotIn(old, page)
+
+    def test_a_template_page_shows_the_goal_the_app_suggests_where_it_has_one(self):
+        self.assertIn("<dt>SUGGESTED GOAL</dt><dd>Weekdays</dd>", self.standup)
+        self.assertIn("<dt>SUGGESTED GOAL</dt><dd>Once a week</dd>", self.pages[TEMPLATE_PAGES[0]])
+        self.assertNotIn("SUGGESTED GOAL", self.pages[TEMPLATE_PAGES[1]])    # 1:1 notes here suggests none
+        self.assertIn("A missed week just starts a new one", self.standup)
+        self.assertNotIn("streak", self.pages[TEMPLATE_PAGES[1]].lower())    # nothing to say where there is no goal
+
+    def test_a_goal_reads_as_the_app_writes_it(self):
+        goal = templates.goal_text
+        self.assertEqual(goal({"kind": "weekdays", "weekdays": [2, 3, 4, 5, 6]}), "Weekdays")
+        self.assertEqual(goal({"kind": "weekdays", "weekdays": [2, 4, 6]}), "Mon, Wed, Fri")
+        self.assertEqual(goal({"kind": "timesPerWeek", "count": 1}), "Once a week")
+        self.assertEqual(goal({"kind": "timesPerWeek", "count": 2}), "Twice a week")
+        self.assertEqual(goal({"kind": "timesPerWeek", "count": 5}), "5 times a week")
+        self.assertIsNone(goal(None))
+
+    def test_a_goal_the_app_would_refuse_is_named(self):
+        for bad in ({"kind": "daily"}, {"kind": "timesPerWeek", "count": 9}, {"kind": "weekdays", "weekdays": []},
+                    {"kind": "weekdays", "weekdays": [0, 8]}, "weekdays"):
+            pack = copy.deepcopy(ENGINEERING)
+            pack["pack"]["templates"][0]["suggestedGoal"] = bad
+            with self.subTest(goal=bad), self.assertRaises(templates.LibraryError) as caught:
+                Site(self, packs=(GENERAL, pack)).library()
+            self.assertIn("software-engineering.json", str(caught.exception))
+            self.assertIn("suggestedGoal", str(caught.exception))
+
+    def test_a_pack_must_name_its_default_template(self):
+        pack = copy.deepcopy(ENGINEERING)
+        pack["pack"].pop("defaultTemplate")
+        with self.assertRaises(templates.LibraryError) as caught:
+            Site(self, packs=(GENERAL, pack)).library()
+        self.assertIn("defaultTemplate", str(caught.exception))
+
+    def test_the_gallery_says_a_template_becomes_a_journal(self):
+        gallery = self.pages[GALLERY]
+        self.assertIn("Pick a template in New journal and it becomes a journal of its own", gallery)
+        for old in ("add a template to a journal", "start a journal with a whole", "template library"):
+            self.assertNotIn(old, gallery)
 
     def test_titles_and_descriptions_fit_search_results_and_differ(self):
         titles, descriptions = set(), set()

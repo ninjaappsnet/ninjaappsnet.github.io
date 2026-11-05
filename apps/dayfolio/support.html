@@ -20,7 +20,7 @@
 <link rel="icon" href="../../assets/seal.svg" type="image/svg+xml">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preload" href="../../assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-<link rel="stylesheet" href="../../style.css?v=426f261aff">
+<link rel="stylesheet" href="../../style.css?v=d17d0255ed">
 <script src="../../assets/theme.js?v=b7c0a7cebd" defer></script>
 </head>
 <body>
@@ -63,8 +63,10 @@
     <ul>
       <li><a href="#prices">What it costs</a></li>
       <li><a href="#refunds">Refunds</a></li>
+      <li><a href="#journals">Journals, templates and folders</a></li>
       <li><a href="#sync">Sync between devices</a></li>
       <li><a href="#lock">Lock a journal</a></li>
+      <li><a href="#undo">Undo and Recently deleted</a></li>
       <li><a href="#archive">Back up and restore</a></li>
       <li><a href="#import-markdown">Import Markdown</a></li>
       <li><a href="#mirror-folder">Mirror to a folder (Mac)</a></li>
@@ -94,16 +96,25 @@
     <h2 id="refunds">How do refunds work?</h2>
     <p>Not what you need? Apple handles refunds at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>. Apple processes every purchase and decides every refund, so we cannot issue one ourselves, but do tell us what went wrong.</p>
 
+    <h2 id="journals">How do journals, templates and folders work?</h2>
+    <p>A journal is one kind of page you write, such as a daily standup, a weekly 1:1 or a client’s meetings, and it has one form: the fields every entry in it starts with. You make a journal from <strong>New journal</strong> (<strong>+</strong> beside Journals in the Mac’s sidebar, or More › Journals › <strong>+</strong> on iPhone and iPad). Choose one template from the library, grouped by pack, or <strong>Blank journal</strong>. The ones that fit your work come first, under <em>Suggested for you</em>.</p>
+    <p>A template becomes a journal of its own, named for it, with a form that is yours to change in Journal settings. Make the same template again, for a second client, and the new journal is numbered, such as “Client meeting 2”. Changing one journal’s form never touches another’s, and entries you have already written keep the shape they had. There is no separate Templates screen.</p>
+    <p><strong>Folders</strong> group journals one level deep, and they are optional. A new journal starts outside any folder. Open a folder to read all its journals together, newest first, and filter Search and Reports to it. A folder has no lock of its own and never opens a locked journal. <strong>Notes</strong> is a journal that is always there, for everything that has no form of its own, and it cannot be deleted.</p>
+    <p>Today shows your current journal. To see several at once, choose them in Settings › General › Today; the choice stays on that device. Lock, reminders, location and weather, and an optional weekly goal are set for each journal. A weekly goal counts the days you write in it, such as three times a week; it keeps no streak, and a week you miss simply starts a new one.</p>
+
     <h2 id="sync">How do I sync between my devices?</h2>
     <p>Sync uses your own iCloud, and it is on by default when your device is signed in to iCloud. Sign in to the same Apple Account on your other iPhone, iPad or Mac and open Dayfolio: on first launch it looks for your journals in iCloud and brings them over. Settings › Sync shows the status, and turns sync on or off.</p>
-    <p>Everything you write or choose syncs, including templates, reminders and reports. A few settings stay on each device, such as Open at login, the menu bar icon and the quick-entry shortcut on the Mac. Reminders fire on every device. If you edit the same text on two devices, Dayfolio keeps both: the other version appears as a "conflicted copy" entry in the same journal, named after the device that wrote it. Turning sync off does not remove what is already in iCloud; <strong>Delete from iCloud…</strong> in Settings › Sync does.</p>
+    <p>Everything you write or choose syncs, including journals, folders, forms, reminders and reports. A few settings stay on each device, such as Open at login, the menu bar icon and the quick-entry shortcut on the Mac. Reminders fire on every device. If you edit the same text on two devices, Dayfolio keeps both: the other version appears as a "conflicted copy" entry in the same journal, named after the device that wrote it. Turning sync off does not remove what is already in iCloud; <strong>Delete from iCloud…</strong> in Settings › Sync does.</p>
     <p>On iPhone and iPad, what a widget, the Share sheet, Siri or a reminder reply wrote is sent by the app: at once while it is open, and otherwise in the background, within hours. Opening Dayfolio sends it straight away.</p>
 
     <h2 id="lock">How do I lock a journal?</h2>
     <p>Open Journal settings › Privacy and turn on <strong>Lock with Face ID</strong> (Touch ID on a device that has it). A Mac without Touch ID unlocks with your login password, and iPhone and iPad fall back to your passcode. The journal's entries are hidden until you unlock it, and they stay out of the timeline, search, widgets, notifications and Spotlight while it is locked. You choose how soon journals lock again in Settings › Locked journals. The lock hides a journal inside Dayfolio; files you export are not encrypted.</p>
 
+    <h2 id="undo">Can I undo a delete?</h2>
+    <p>Yes. Deleting an entry says “Moved to Recently deleted” with <strong>Undo</strong>, and so does deleting a folder: the folder comes back, with the journals that have not moved since. After a few seconds the message goes, and an entry stays in Recently deleted for 30 days (More › Recently deleted on iPhone, and in the sidebar once it holds something on iPad and Mac), where <strong>Restore</strong> brings it back. A folder holds no entries, so deleting one never deletes a journal.</p>
+
     <h2 id="archive">How do I back up my journal, and restore it?</h2>
-    <p>On the Mac choose File › Export…; on iPhone and iPad choose More › Export…. Pick <strong>this journal</strong> or <strong>Everything</strong>, and choose <strong>Dayfolio archive</strong>. The archive is a single file that holds your journals, entries, templates, attachments, Recently deleted and the settings that sync, and you can keep it wherever you like. On iPhone and iPad Dayfolio writes it straight into a folder you pick in Files. It is not encrypted, so store it somewhere you trust.</p>
+    <p>On the Mac choose File › Export…; on iPhone and iPad choose More › Export…. Start from what you want to do: <strong>Back up everything</strong> (a Dayfolio archive), <strong>Read or edit elsewhere</strong> (a folder of Markdown files) or <strong>Share or print one entry</strong> (a PDF). <strong>More options</strong> holds the scope, this journal or everything, and the format. The archive is a single file that holds your journals, folders, forms, entries, attachments, Recently deleted and the settings that sync, and you can keep it wherever you like. On iPhone and iPad Dayfolio writes it straight into a folder you pick in Files. It is not encrypted, so store it somewhere you trust. When it finishes, the sheet says what it made and where, such as “Exported 58 entries to Downloads”, with <strong>Show in Finder</strong> on the Mac and <strong>Share…</strong> on iPhone and iPad. If it fails, nothing is left half-written and <strong>Try again</strong> asks where to save again.</p>
     <p>To restore, choose File › Import… (More › Import… on iPhone and iPad), or open a <code>.dayfolio</code> file from Files, Mail or AirDrop, and pick the archive. Restoring adds only what is missing and never changes or removes anything already on the device. The settings in the archive apply only when the device has no journals yet.</p>
     <p>If you would rather have plain files, choose <strong>Markdown folder</strong> when you export. Each entry becomes one Markdown file, with its attachments alongside. A Markdown export is readable anywhere, but it cannot be restored into Dayfolio as it is; a Dayfolio archive can.</p>
     <p>The archive's format is public. <a href="archive-format.html">The Dayfolio archive format</a> describes every file and key precisely enough to write your own reader.</p>
@@ -127,7 +138,7 @@
     <pre><code>#!/bin/zsh
 note() { open -g "dayfolio://note?key=KEY&amp;text=$(osascript -l JavaScript -e 'function run(a){return encodeURIComponent(a.join(" "))}' -- "$@")"; }
 note "Committed: $(git log -1 --pretty=%s)"</code></pre>
-    <p><strong>Where the note goes.</strong> Into quick entry's journal: the one quick entry last wrote to, or your first journal. A link never writes into a journal you lock with Touch ID; while quick entry's journal is locked, links are refused rather than sent to another journal.</p>
+    <p><strong>Where the note goes.</strong> Into Notes, the journal that is always there. A link never writes into a journal you lock with Touch ID; if you lock Notes, links are refused rather than sent to another journal.</p>
     <p><strong>What you will see.</strong> Nothing, when the note is written: it is in <em>Today so far</em> the next time you open quick entry (Option-Command-J). When a link cannot write, because of a wrong or old key, the switch turned off, or a locked journal, nothing is written and one notification says why. It never names a journal or repeats what the link carried.</p>
     <p><strong>Limits.</strong> A note can be up to 10,000 characters; a longer one is cut there, saved, and a notification says so.</p>
     <p><strong>If someone else gets your key</strong>, choose <em>Make a new key…</em> in the same place. Every line and hook with the old key stops working, so copy the new line into them. Turning <em>Write notes from links</em> off keeps your key, so your lines work again when you turn it back on.</p>
@@ -148,7 +159,7 @@ note "Committed: $(git log -1 --pretty=%s)"</code></pre>
     <p>Add them from the Home Screen's edit mode, or in Control Center. <strong>New entry</strong> starts an entry and shows today's count, on the Home Screen and the Lock Screen, and <strong>Journals</strong> puts a button for up to three of your journals on the Home Screen. Three Home Screen widgets act on today's entry: <strong>Rate today</strong>, <strong>Today's timer</strong> and <strong>Today's checklist</strong>, each set to a journal that cannot be locked. Control Center has <strong>New entry</strong> and <strong>Dayfolio timer</strong>. A running timer also shows as a Live Activity on the Lock Screen and in the Dynamic Island. Nothing from a journal you lock appears in any of them.</p>
 
     <h2 id="share">How do I save something from another app? (iPhone and iPad)</h2>
-    <p>Choose <strong>Dayfolio</strong> in any app's share sheet, which opens a sheet called <strong>Save to Dayfolio</strong>. Pick the journal and a template, add to the text if you like, and Save writes one entry with the text, the page's link and any files. A journal you lock is listed with a lock and takes the entry without opening.</p>
+    <p>Choose <strong>Dayfolio</strong> in any app's share sheet, which opens a sheet called <strong>Save to Dayfolio</strong>. The sheet opens on Notes; pick another journal if you like, add to the text, and Save writes one entry with the text, the page's link and any files. A journal whose form has nowhere for the text or files saves it in Notes and says so. A journal you lock is listed with a lock and takes the entry without opening.</p>
 
     <h2 id="spotlight">Can I find entries in Spotlight? (iPhone and iPad)</h2>
     <p>Yes, once you turn it on. <strong>Show entries in Spotlight</strong> in Settings › Privacy is off until you do. It adds each entry's title and the text of its text, rich-text and checklist fields to Spotlight on that device only, for journals you don't lock. Locking a journal takes its entries out, and turning the switch off removes everything.</p>
@@ -157,12 +168,12 @@ note "Committed: $(git log -1 --pretty=%s)"</code></pre>
     <p>Yes, between your iPhone, iPad and Mac signed in to the same Apple Account, with Handoff turned on in the system settings. Dayfolio hands over only which entry is open, and the other device opens it from your own iCloud, showing "Waiting for iCloud…" until it arrives. An entry of a journal you lock is never handed off.</p>
 
     <h2 id="reminders">My reminders do not appear</h2>
-    <p>Reminders are notifications from your device, so the system has to allow them. Open Settings in Dayfolio to see whether permission is on, and check your device's Notifications settings. A reminder is skipped on a day when the journal already has an entry from that template, archived journals send none, and a Focus can hold them back: a Focus can carry the <strong>Dayfolio reminders</strong> filter, which chooses the journals whose reminders come through, and whether those of journals you lock do too.</p>
+    <p>Reminders are notifications from your device, so the system has to allow them. Open Settings in Dayfolio to see whether permission is on, and check your device's Notifications settings. A reminder is skipped on a day when the journal already has an entry, archived journals send none, and a Focus can hold them back: a Focus can carry the <strong>Dayfolio reminders</strong> filter, which chooses the journals whose reminders come through, and whether those of journals you lock do too.</p>
     <p>You can answer a reminder without opening Dayfolio. For a journal you don't lock, touch and hold the notification (expand it on the Mac) to set up to three quick fields, a rating, a choice and a duration, and choose <strong>Save</strong>, or type a reply. A journal you lock gets <strong>Write now</strong> only.</p>
 
     <h2 id="reports">How do reports work?</h2>
     <p>Open Reports (More › Reports on iPhone, the sidebar on iPad and Mac), choose <strong>+</strong> and a kind: Weekly, Monthly, Performance review, Director update, Year-end self-review or Custom. Pick journals and fields, choose <strong>Generate</strong> and read the report on screen. Keep a report with <strong>Save preset</strong>, and send one as PDF, Word, Markdown, Share, Print, Copy or CSV.</p>
-    <p>You can narrow a report to one project, person or tag, group it by person, and add a For line and a Prepared by line. To add up hours for a client, give the project an hourly rate (<strong>Hourly rate…</strong> in the project's menu, or in Settings › People &amp; projects), tick a duration or time range field, and choose <strong>Split time by</strong> in the report's settings. The report's time table then shows an amount per project, with totals per currency and never converted, and exports as CSV with one row per entry and project.</p>
+    <p>You can narrow a report to a folder, one project, person or tag, group it by person, and add a For line and a Prepared by line. To add up hours for a client, give the project an hourly rate (<strong>Hourly rate…</strong> in the project's menu, or in Settings › People &amp; projects), tick a duration or time range field, and choose <strong>Split time by</strong> in the report's settings. The report's time table then shows an amount per project, with totals per currency and never converted, and exports as CSV with one row per entry and project.</p>
 
     <h2 id="highlights">Why don't I see the AI highlights in reports?</h2>
     <p>Highlights are written on your device by Apple Intelligence, so they appear only on an iPhone, iPad or Mac that supports it, with Apple Intelligence turned on in Settings. Elsewhere the option is hidden and reports work as usual. Nothing is sent to us either way.</p>

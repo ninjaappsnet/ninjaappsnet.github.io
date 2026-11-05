@@ -4,7 +4,6 @@
     "id": "data-analytics",
     "industry": "Data",
     "name": "Data & Analytics",
-    "journalName": "Analytics Log",
     "summary": "Experiments, pipeline incidents and analysis notes for people who work with data day to day.",
     "icon": "chart.bar.xaxis",
     "color": "teal",
@@ -20,7 +19,6 @@
         "color": "teal",
         "cadence": "onEvent",
         "summary": "What you tested, what happened, and whether it’s worth shipping.",
-        "includedByDefault": true,
         "fields": [
           { "key": "project", "label": "Project", "type": "project" },
           {
@@ -50,7 +48,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "Schema drift, broken joins, stale data — the postmortem for pipelines, not services.",
-        "includedByDefault": true,
         "fields": [
           { "key": "pipeline", "label": "Pipeline", "type": "project" },
           {
@@ -89,7 +86,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "An ad hoc analysis worth remembering: the question, the method, and how sure you are.",
-        "includedByDefault": false,
         "fields": [
           { "key": "project", "label": "Project", "type": "project" },
           { "key": "confidence", "label": "Confidence", "type": "rating", "includeInInsights": true },
@@ -110,7 +106,7 @@
         "color": "purple",
         "cadence": "weekly",
         "summary": "Is the model — or the dashboard — still telling the truth?",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "model", "label": "Model", "type": "project" },
           { "key": "metric-drift", "label": "Metric drift", "type": "number", "includeInInsights": true },
@@ -134,7 +130,7 @@
         "color": "green",
         "cadence": "daily",
         "summary": "A quick daily tally of automated checks, so quality drift shows up early.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "checks-run", "label": "Checks run", "type": "number", "includeInInsights": true },
           { "key": "checks-failed", "label": "Checks failed", "type": "number", "includeInInsights": true },

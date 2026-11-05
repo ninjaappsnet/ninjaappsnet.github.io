@@ -121,8 +121,8 @@ class Template:
     name: str
     cadence: str
     summary: str
-    included_by_default: bool
     reminder: Optional[dict]
+    goal: Optional[dict]           # the weekly goal the app suggests (FEEL, D2626), offered once; None for most
     fields: List[Field]
     source: str                    # the pack file, by name
 
@@ -131,10 +131,9 @@ class Template:
 class Pack:
     id: str
     name: str
-    journal_name: str
     summary: str
     order: Optional[int]
-    default_template: str
+    default_template: str          # required since TPJ (X29): the template the first page makes a journal from
     own: List[Template]
     includes: List[str]
     source: str
@@ -192,6 +191,20 @@ def _field(data: dict, where: str) -> Field:
                  data.get("presentation") == "warning", bool(data.get("carryOver")), parsed)
 
 
+def _goal_ok(goal) -> bool:
+    """A suggested goal as the app's pack format allows it (PackFormat.md, D2626)."""
+    if not isinstance(goal, dict):
+        return False
+    if goal.get("kind") == "weekdays":
+        days = goal.get("weekdays")
+        return (isinstance(days, list) and bool(days) and len(set(days)) == len(days)
+                and all(isinstance(d, int) and not isinstance(d, bool) and d in DAYS for d in days))
+    if goal.get("kind") == "timesPerWeek":
+        count = goal.get("count")
+        return isinstance(count, int) and not isinstance(count, bool) and 1 <= count <= 7
+    return False
+
+
 def _template(data: dict, pack_id: str, where: str) -> Template:
     tid = _need(data, "id", str, where)
     where = f"{where}: {tid}"
@@ -206,12 +219,14 @@ def _template(data: dict, pack_id: str, where: str) -> Template:
         if (not isinstance(days, list) or not days or any(d not in DAYS for d in days)
                 or not 0 <= reminder.get("hour", -1) <= 23 or not 0 <= reminder.get("minute", -1) <= 59):
             raise LibraryError(f"{where}: the reminder is not days 1–7, an hour and a minute")
+    goal = data.get("suggestedGoal")
+    if goal is not None and not _goal_ok(goal):
+        raise LibraryError(f"{where}: suggestedGoal is not weekdays 1–7 or a count of 1–7 times a week")
     fields = [_field(f, where) for f in _need(data, "fields", list, where)]
     if len({f.key for f in fields}) != len(fields):
         raise LibraryError(f"{where}: two fields share a key")
     return Template(tid, pack_id, tid[len(pack_id) + 1:], _need(data, "name", str, where), cadence,
-                    _need(data, "summary", str, where), bool(data.get("includedByDefault")), reminder, fields,
-                    where.split(":")[0])
+                    _need(data, "summary", str, where), reminder, goal, fields, where.split(":")[0])
 
 
 def load_library(folder: Path) -> Library:
@@ -230,9 +245,8 @@ def load_library(folder: Path) -> Library:
         raw, where = data["pack"], file.name
         pid = _need(raw, "id", str, where)
         own = [_template(t, pid, where) for t in _need(raw, "templates", list, where)]
-        packs.append(Pack(pid, _need(raw, "name", str, where), raw.get("journalName") or raw["name"],
-                          _need(raw, "summary", str, where), raw.get("order"), raw.get("defaultTemplate", ""),
-                          own, list(raw.get("includes", [])), file.name))
+        packs.append(Pack(pid, _need(raw, "name", str, where), _need(raw, "summary", str, where), raw.get("order"),
+                          _need(raw, "defaultTemplate", str, where), own, list(raw.get("includes", [])), file.name))
     seen: Dict[str, str] = {}
     for pack in packs:
         for template in pack.own:
@@ -245,7 +259,7 @@ def load_library(folder: Path) -> Library:
                 raise LibraryError(f"{pack.source}: includes {tid}, which is not another pack’s template, "
                                    "or is listed twice")
         listed = [t.id for t in pack.own] + pack.includes
-        if pack.default_template and pack.default_template not in listed:
+        if pack.default_template not in listed:
             raise LibraryError(f"{pack.source}: the default template {pack.default_template} is not in the pack")
     packs.sort(key=lambda p: (p.order is None, p.order or 0, p.name, p.source))
     return Library(packs)
@@ -292,6 +306,19 @@ def reminder_text(reminder: Optional[dict]) -> str:
         names = [_plural(d) for d in days]
         when = names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
     return f"{when} at {time}"
+
+
+def goal_text(goal: Optional[dict]) -> Optional[str]:
+    """A suggested goal as the app words it (JournalGoal): "Weekdays", "Mon, Wed, Fri", "Once a week", "3 times a week"."""
+    if not goal:
+        return None
+    if goal["kind"] == "timesPerWeek":
+        count = goal["count"]
+        return {1: "Once a week", 2: "Twice a week"}.get(count, f"{count} times a week")
+    days = sorted(set(goal["weekdays"]), key=lambda d: (d - 2) % 7)   # the week from Monday
+    if days == [2, 3, 4, 5, 6]:
+        return "Weekdays"
+    return ", ".join(DAYS[d][:3] for d in days)
 
 
 def indefinite(name: str) -> str:
@@ -343,7 +370,7 @@ def carry_note(fields: List[Field], f: Field) -> Optional[str]:
     what = "the items you haven’t ticked in" if f.type == "checklist" else "the value from"
     lead = lead_field(fields)
     if lead is None or lead is f:
-        return f"Carries over: a new entry starts with {what} your last entry with this template."
+        return f"Carries over: a new entry starts with {what} your last entry in this journal."
     if lead.type == "person":
         plural = lead.label.endswith("s") and not lead.label.endswith("ss")
         same, choose, other = f"with the same {'people' if plural else 'person'}", "who it’s with", "someone else"
@@ -705,6 +732,37 @@ def _field_item(template: Template, f: Field) -> str:
     return "<li>" + "".join(parts) + "</li>"
 
 
+def _new_journal_steps(template: Template, pack: Pack) -> str:
+    """How a template becomes a journal (TPJ, ADR 0015: one template to a journal; New journal is the only way in)."""
+    name = _esc(template.name)
+    return ("<ol>"
+            "<li>Open <strong>New journal</strong>: on a Mac, choose <strong>+</strong> beside Journals in the "
+            "sidebar, or File › New journal…; on iPhone and iPad, go to More › Journals and tap "
+            "<strong>+</strong>.</li>"
+            f"<li>Choose {name}, under {_esc(pack.name)}, or search for it. It may also be under "
+            "<em>Suggested for you</em>, at the top.</li>"
+            f"<li>Choose <strong>Create</strong>. Dayfolio makes a journal named {name}, with its own form: this "
+            "template’s fields, which you can change in Journal settings, and no other journal’s.</li></ol>"
+            f"<p>Make it again for a second client or project and the new journal is called {name} 2, then {name} 3, "
+            "ready to rename. <strong>Blank journal</strong>, at the top of the list, starts from one writing field "
+            "instead.</p>")
+
+
+def _offers(template: Template) -> str:
+    """What New journal offers once for this template: its reminder and its weekly goal, both off until chosen."""
+    parts = []
+    if template.reminder:
+        parts.append(f"a reminder ({reminder_text(template.reminder).lower()})")
+    if template.goal:
+        parts.append(f"a weekly goal ({goal_text(template.goal).lower()})")
+    if not parts:
+        return ("<p>The journal starts with no reminder and no goal. You can add either in Journal settings.</p>")
+    text = (f"<p>New journal offers {listing(parts)} once, as switches that start off. A weekly goal counts the days "
+            "you write. A missed week just starts a new one: there are no streaks.</p>" if template.goal
+            else f"<p>New journal offers {listing(parts)} once, as a switch that starts off.</p>")
+    return text
+
+
 def template_page(root: Path, library: Library, template: Template, example: Example, title: str) -> str:
     build = _build()
     out = page_path(template)
@@ -715,12 +773,14 @@ def template_page(root: Path, library: Library, template: Template, example: Exa
              ("CADENCE", CADENCES[template.cadence])]
     if template.reminder:
         facts.append(("SUGGESTED REMINDER", reminder_text(template.reminder)))
+    if template.goal:
+        facts.append(("SUGGESTED GOAL", _esc(goal_text(template.goal))))
     facts.append(("FIELDS", str(len(template.fields))))
     others = [p for p in library.packs_listing(template.id) if p.id != pack.id]
     if others:
         facts.append(("ALSO IN", ", ".join(f'<a href="{href(_dir(pack_path(p)))}">{_esc(p.name)}</a>' for p in others)))
     guide_exists = (root / GUIDE_TOPIC / "index.html").is_file()
-    guide = (f'<a href="{href(GUIDE_TOPIC)}">Templates and fields</a>' if guide_exists
+    guide = (f'<a href="{href(GUIDE_TOPIC)}">Journals, forms and fields</a>' if guide_exists
              else f'<a href="{href(GUIDE)}">the Dayfolio guide</a>')
     related = [t for t in library.listed(pack.id) if t.id != template.id]
     body = [
@@ -734,16 +794,11 @@ def template_page(root: Path, library: Library, template: Template, example: Exa
         "<p>Values sit at the top of an entry and the writing fields below them, full width. A field’s prompt is "
         "the hint you see while it’s empty.</p>",
         '<ol class="tpl-fields">' + "".join(_field_item(template, f) for f in template.fields) + "</ol>",
-        '<h2 id="add">Add it to a journal</h2>',
-        "<ol>"
-        "<li>Open the template library: on a Mac, choose View › Template Library (⇧⌘L); on iPhone and iPad, "
-        "go to More › Templates.</li>"
-        f"<li>Choose the {_esc(pack.name)} pack, then {_esc(template.name)}.</li>"
-        "<li>Choose <strong>Add to</strong> and the journal, or <strong>Customize…</strong> to change its "
-        "fields first.</li></ol>",
-        f"<p>To start a whole journal with this "
-        f'template and its neighbours, see the <a href="{href(_dir(pack_path(pack)))}">{_esc(pack.name)} pack</a>. '
-        f"More about templates and fields in {guide}.</p>",
+        '<h2 id="new-journal">Start a journal from it</h2>',
+        _new_journal_steps(template, pack),
+        _offers(template),
+        f"<p>See the other templates of the <a href=\"{href(_dir(pack_path(pack)))}\">{_esc(pack.name)} pack</a>. "
+        f"More about journals, forms and fields in {guide}.</p>",
     ]
     if related:
         body.append('<h2 id="related">Related templates</h2>')
@@ -767,11 +822,8 @@ def pack_page(root: Path, library: Library, pack: Pack) -> str:
     out = pack_path(pack)
     listed = library.listed(pack.id)
     href = lambda target: build.href(out, target)  # noqa: E731
-    starting = [t for t in listed if t.included_by_default]
-    default = library.templates.get(pack.default_template)
-    facts = [("TEMPLATES", str(len(listed))), ("SUGGESTED JOURNAL NAME", _esc(pack.journal_name))]
-    if default:
-        facts.insert(1, ("A NEW JOURNAL OPENS WITH", _esc(default.name)))
+    default = library.templates[pack.default_template]
+    facts = [("TEMPLATES", str(len(listed))), ("THE FIRST PAGE MAKES", _esc(default.name))]
     cards = []
     for t in listed:
         source = "" if t.pack == pack.id else f'\n      <p class="card-from">From {_esc(library.owner(t).name)}</p>'
@@ -780,14 +832,11 @@ def pack_page(root: Path, library: Library, pack: Pack) -> str:
       <h3>{_esc(t.name)}</h3>
       <p>{_esc(smart(t.summary))}</p>{source}
     </a>""")
-    start = ""
-    if starting:
-        names = listing([t.name for t in starting])
-        lead = f" {_esc(default.name)} becomes its default template." if default in starting else ""
-        start = (f'\n  <div class="prose">\n<h2 id="new-journal">Start a journal with this pack</h2>\n'
-                 f"<p>In New journal, choose {_esc(pack.name)} as the template pack. The journal starts with the "
-                 f"templates checked by default, {_esc(names)}, and you can check or uncheck any of them first."
-                 f"{lead} The name it suggests is {_esc(pack.journal_name)}.</p>\n  </div>")
+    start = (f'\n  <div class="prose">\n<h2 id="new-journal">Start a journal from a template</h2>\n'
+             f"<p>Pick one template and it becomes a journal of its own, named for it, with its own form. "
+             f"Open New journal, choose {_esc(pack.name)} and one of its {len(listed)} templates. "
+             f"When you write a first line on Dayfolio’s first page and it sounds like this kind of work, the journal "
+             f"it makes is {_esc(default.name)}.</p>\n  </div>")
     body = [f"<p>{_esc(smart(pack.summary))}</p>",
             '<dl class="facts">' + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in facts) + "</dl>",
             f'<h2 id="templates">The {len(listed)} templates</h2>']
@@ -812,12 +861,12 @@ def gallery_page(root: Path, library: Library) -> str:
     guide = GUIDE_TOPIC if (root / GUIDE_TOPIC / "index.html").is_file() else GUIDE
     body = [
         f"<p>Dayfolio comes with a library of {count} templates in {packs} packs, one pack for each kind of work. "
-        "A template is the shape of an entry: values such as a status or a duration at the top, and the writing "
-        "below them.</p>",
-        "<p>In the app, you add a template to a journal from the template library, or start a journal with a whole "
-        "pack. Each page here shows a template’s "
+        "A template is the shape of a journal’s entries: values such as a status or a duration at the top, and the "
+        "writing below them.</p>",
+        "<p>Pick a template in New journal and it becomes a journal of its own, with its own form that you can "
+        "change. Each page here shows a template’s "
         "fields, with their options and prompts, and an example entry filled in the way the app draws it. "
-        f'<a href="{href(guide)}">The guide</a> explains templates and fields in the app.</p>',
+        f'<a href="{href(guide)}">The guide</a> explains journals, templates and fields in the app.</p>',
     ]
     blocks = []
     for pack in library.packs:

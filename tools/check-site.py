@@ -336,6 +336,10 @@ DAYFOLIO_MEDIA = f"{DAYFOLIO_DIR}/media"
 DAYFOLIO_PREVIEW = f"{DAYFOLIO_MEDIA}/app-preview-iphone.mp4"
 DAYFOLIO_PREVIEW_URL = f"{ORIGIN}/{DAYFOLIO_PREVIEW}"
 DAYFOLIO_PLATFORMS = ("iphone", "ipad", "mac")
+# The Mac set after TPJ and FEEL (a journal is one template, with folders) is not captured yet: the old Mac pictures
+# showed the sidebar with a Templates row and a sample company's name the app no longer uses, so they were taken
+# down. A Mac picture is allowed and not yet required; put the rule back when the new set lands.
+DAYFOLIO_PLATFORMS_REQUIRED = ("iphone", "ipad")
 DAYFOLIO_RETIRED_PICTURES = [
     "shot-today.webp", "shot-timeline.webp", "shot-calendar.webp", "shot-insights.webp", "shot-library.webp",
     "dark mode on a Mac",
@@ -927,7 +931,7 @@ def check_dayfolio_media() -> None:
             fail(f"dayfolio: {DAYFOLIO_DIR}/{name} is not a WebP picture")
         elif size and width and height and size != (int(width.group(1)), int(height.group(1))):
             fail(f"dayfolio: {rel} gives {name} as {width.group(1)}x{height.group(1)}, but it is {size[0]}x{size[1]}")
-    for platform in DAYFOLIO_PLATFORMS:
+    for platform in DAYFOLIO_PLATFORMS_REQUIRED:
         if platform not in shown:
             fail(f"dayfolio: {rel} shows no {platform} picture (media/{platform}-….webp)")
 
@@ -959,10 +963,29 @@ def check_dayfolio_media() -> None:
             fail(f"dayfolio: {DAYFOLIO_PREVIEW} keeps its moov box after the media, so it cannot play until it has all downloaded")
 
 
+DAYFOLIO_SAMPLE_COMPANIES = re.compile(r"(?i)\b(?:northwind|contoso)\b")
+
+
+def check_dayfolio_samples() -> None:
+    """No page or source under apps/dayfolio/ or content/dayfolio/ uses another vendor's sample-company name
+    (Microsoft's Northwind and Contoso); the app's demo says Fernhill, and the examples and pictures follow it."""
+    for base in (f"{DAYFOLIO_DIR}", "content/dayfolio"):
+        folder = ROOT / base
+        if not folder.is_dir():
+            continue
+        for path in sorted(folder.rglob("*")):
+            if path.suffix not in (".html", ".md", ".json", ".txt") or not path.is_file():
+                continue
+            if DAYFOLIO_SAMPLE_COMPANIES.search(path.read_text(encoding="utf-8", errors="replace")):
+                fail(f"dayfolio: {path.relative_to(ROOT).as_posix()} names a sample company (Northwind or Contoso); "
+                     "the demo's is Fernhill")
+
+
 def check_dayfolio() -> None:
     """Dayfolio's pages say what the app does (see DAYFOLIO_* above), the archived
     legal versions stay archived, and the addresses the app opens still resolve."""
     check_dayfolio_media()
+    check_dayfolio_samples()
     for name in DAYFOLIO_MARKETING:
         rel = f"{DAYFOLIO_DIR}/{name}"
         page = ROOT / rel
