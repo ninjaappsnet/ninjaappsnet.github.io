@@ -36,6 +36,8 @@ A continuous checklist moves what’s open forward. A **Completed list** field s
 
 ![A 1:1 entry on iPhone: Action items at 1 of 2 done with the ticked item struck through, over Done since the last 1:1, which lists the two items ticked last time.](carry-over-completed-list-iphone.webp)
 
+![A 1:1 entry on a Mac: Action items at 1 of 2 done with the ticked item struck through, over Done since the last 1:1, which lists the two items ticked last time.](carry-over-completed-list-mac.webp)
+
 ## It follows the person or the client
 
 In a journal about people, clients or sites, “the previous entry” means the previous one **with the same people, the same client or the same site**. Maya’s action items never land on Sam’s page, one client’s next steps never reach another’s, and a site’s open items stay with it.

@@ -336,10 +336,9 @@ DAYFOLIO_MEDIA = f"{DAYFOLIO_DIR}/media"
 DAYFOLIO_PREVIEW = f"{DAYFOLIO_MEDIA}/app-preview-iphone.mp4"
 DAYFOLIO_PREVIEW_URL = f"{ORIGIN}/{DAYFOLIO_PREVIEW}"
 DAYFOLIO_PLATFORMS = ("iphone", "ipad", "mac")
-# The Mac set after TPJ and FEEL (a journal is one template, with folders) is not captured yet: the old Mac pictures
-# showed the sidebar with a Templates row and a sample company's name the app no longer uses, so they were taken
-# down. A Mac picture is allowed and not yet required; put the rule back when the new set lands.
-DAYFOLIO_PLATFORMS_REQUIRED = ("iphone", "ipad")
+# The Mac set after TPJ and FEEL (a journal is one template, with folders) was captured on 2026-11-05, so each platform
+# shows a picture on the product page again.
+DAYFOLIO_PLATFORMS_REQUIRED = ("iphone", "ipad", "mac")
 DAYFOLIO_RETIRED_PICTURES = [
     "shot-today.webp", "shot-timeline.webp", "shot-calendar.webp", "shot-insights.webp", "shot-library.webp",
     "dark mode on a Mac",

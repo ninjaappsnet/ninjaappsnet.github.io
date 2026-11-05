@@ -19,6 +19,8 @@ A Dayfolio journal is one kind of page you write: a daily standup, a weekly 1:1,
 
 ![New journal on iPhone, with Suggested for you listing four templates, then Blank journal and the General pack’s templates.](journals-new-journal-iphone.webp)
 
+![New journal on a Mac, with Suggested for you listing Sprint retro, Design doc log, Tech debt journal and Weekly review, then Blank journal and the General pack’s templates.](journals-new-journal-mac.webp)
+
 Make the same template again, for a second client or project, and the new journal is numbered: “Client meeting 2”, then “Client meeting 3”. Each is a separate journal with its own form. **Blank journal** starts from one writing field and opens the form editor, so you can build the form straight away. To start from a journal you already have, choose **Duplicate journal** in its settings or, on a Mac, in its menu in the sidebar. The copy has the same form, colour, icon, lock and goal, none of the entries, and sits right after the original.
 
 ### Notes
@@ -44,6 +46,8 @@ Choose a folder to read **all its journals together**, newest first, each row na
 
 ![An iPad with the sidebar showing Journals, then folders each with All entries and its journals, beside today’s entry.](journals-folders-ipad.webp)
 
+![The Mac’s sidebar, with Notes and Career & Growth under Journals, then the Engineering Log, Fernhill Client and Team 1:1s folders, each holding its journals.](journals-folders-mac.webp)
+
 ### Delete a folder
 
 Deleting a folder asks nothing, because it can be undone. Its journals, archived ones too, become loose, after the others, and a message says “Deleted folder “Work”. Its 3 journals are loose now.” with **Undo**. Undo brings the folder back where it was, with each journal that has not moved since. A folder holds no entries, so deleting one never deletes a journal or an entry.
@@ -67,6 +71,8 @@ A weekly goal is optional, and it is off until you set one. Open a journal’s s
 Some templates suggest a goal, offered once as a switch in New journal and then in Journal settings until you set it or dismiss it: daily work such as a standup suggests weekdays, a weekly review or 1:1 notes suggests once a week, and a template for things that happen on an event, such as incident notes, suggests none. The [template gallery](../../templates/) shows each template’s suggestion.
 
 ![The Client Meeting journal on iPhone, with “2 of 3 this week” under its title.](journals-weekly-goal-iphone.webp)
+
+![The Client Meeting journal on a Mac, with “2 of 3 this week” under its title, beside today’s entry.](journals-weekly-goal-mac.webp)
 
 ## Make it yours
 

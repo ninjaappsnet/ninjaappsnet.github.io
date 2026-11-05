@@ -25,6 +25,8 @@ While a journal is locked, its entries are left out of the journal list, the edi
 
 ![A locked journal on iPhone, with the journal’s lock, “Career & Growth is locked”, the Unlock with Face ID button and placeholders where entries would be.](locked-journal-iphone.webp)
 
+![A locked journal on a Mac: “1:1 notes is locked” with Unlock with Touch ID and Use password where the entry would be, placeholders in the list, and a lock beside each locked journal in the sidebar.](locked-journal-mac.webp)
+
 The lock is set for each journal, and a folder adds none. A folder’s combined list never opens a locked journal: until you unlock it, its entries are left out of the list, whatever the folder holds. Notes can be locked like any other journal.
 
 Names that only a locked journal mentions, such as a person or a tag, are hidden too, from tag counts, people lists and Search, until you unlock.

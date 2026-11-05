@@ -453,12 +453,11 @@ FEEL: a journal is one template, with folders; D2500–D2510 there): the iPhone'
 `.devices` lays them out, three iPhones to a row and the two iPads the next; narrower,
 the iPhones pair up and the rest take a row each; on a phone every picture takes a row,
 an iPhone's no wider than 300px. They are opaque, so a hairline frames each instead of
-the drop shadow a window capture gets. **There is no Mac picture yet.** The Mac set could
-not be captured when the page was updated (the capture tool needs Accessibility and Screen
-Recording), and the old Mac pictures showed a sidebar and a sample company's name the app no
-longer has, so they were taken down; `check_dayfolio_media` requires an iPhone and an iPad
-picture (`DAYFOLIO_PLATFORMS_REQUIRED`) and allows a `media/mac-….webp` (put `mac` back in
-that tuple when the set lands). Above them, the iPhone app preview,
+the drop shadow a window capture gets. The Mac's four, `media/mac-folders.webp`, `mac-new-journal.webp`, `mac-performance-review.webp` and
+`mac-quick-entry.webp` (1440×900, half of 2880×1800, quality 90), are the captioned Mac set's slots 1, 2, 5
+and 7, two to a row; `check_dayfolio_media` requires one for each platform (`DAYFOLIO_PLATFORMS_REQUIRED`).
+The guide's and the articles' Mac pictures are the app's own windows from the same capture, 1504×940
+(the popover alone 600 wide), on white. Above them, the iPhone app preview,
 `media/app-preview-iphone.mp4` (886×1920, 29.73 s, H.264 with a silent AAC track, copied
 byte for byte from `build/asc-upload/tpj/web/`), plays in a `<video>` with controls, muted
 and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,

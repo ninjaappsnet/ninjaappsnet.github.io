@@ -62,6 +62,8 @@ Dayfolio is a work journal for iPhone, iPad and Mac. You write a short entry eac
 
 **Write the week as it happens.** The **Daily standup** template, the one Dayfolio’s first page makes a journal from for software work, has Shipped, Working on and Blockers, with Energy, Focus time, Project and Status above them. The project and what you’re working on carry over from your last standup, so each day starts with them filled in. Star the entries you’d lead an update with.
 
+![Today on a Mac: a Daily Standup in the Engineering Log, with Energy, Focus time, Project and Status filled in, two items ticked under Shipped, a paragraph under Working on and a blocker, beside the journal’s list of the week’s entries](mac-daily-standup.webp)
+
 
 **Review the week on Friday.** If you keep a journal made from a weekly review template, with a reminder (the library’s **Weekly review** suggests Friday at 5 pm), Today shows a card once the reminder has gone off: “Your week, ready to review”, with the week’s counts and “Start this week’s review”. Its menu also has “Make this week’s report”. While you write the review, a This week panel lists what you ticked done, what you starred and what’s still open, and a tap adds a row to the field you’re in.
 

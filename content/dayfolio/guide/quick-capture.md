@@ -20,6 +20,8 @@ When you choose a journal other than Notes, the note is written with that journa
 
 Under the note, **Today so far** lists what you’ve written today, and a *What’s next* row suggests the entry you’re most likely to want, such as the journal a reminder just asked for. **Open Dayfolio** brings the main window forward.
 
+![Quick entry on a Mac, opened from the menu bar with Daily Standup picked, a note typed and the Fill line reading “energy 4, focus time 1h30”, above Today so far.](capture-quick-entry-mac.webp)
+
 A draft you close without saving is kept until you come back. You can change the shortcut, hide the menu-bar icon or open Dayfolio at login in Settings › General › Quick entry.
 
 

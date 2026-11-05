@@ -62,6 +62,8 @@ Dayfolio is a work journal for iPhone, iPad and Mac. Its **1:1 notes** template 
 
 ![A 1:1 notes entry on iPhone, with Maya’s notes, Action items at 1 of 2 done with the ticked item struck through, and Done since the last 1:1 listing the two items ticked last time.](iphone-one-on-one-checklist.webp)
 
+![A 1:1 notes entry on a Mac, with Maya’s notes, Action items at 1 of 2 done and Done since the last 1:1 listing the two items ticked last time.](mac-one-on-one-checklist.webp)
+
 
 **Start from your calendar.** Beside Meeting time, “Fill from calendar…” lets you pick one of today’s meetings and fills in its time and the attendees you already know. Dayfolio reads your calendar on your device, and asks for access the first time. After a meeting ends, Today can offer a card with “Start meeting notes”. A meeting whose title says 1:1, 1-1, one-on-one or 1on1 starts from your 1:1 notes template with the other person in With, so the open items carry over straight away. Someone Dayfolio doesn’t know yet is one tap to add.
 

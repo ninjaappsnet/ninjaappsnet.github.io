@@ -14,6 +14,8 @@ A report turns a week, a month or a review period of entries into a summary you 
 - **On iPhone:** More › Reports. **On iPad:** Reports in the sidebar, or More › Reports in a narrow window.
 - From elsewhere: *Create report* in Insights, *Make a report* on a person’s, project’s or tag’s page, and *Make this week’s report* from Siri or Shortcuts.
 
+![The Year-end self-review on a Mac: its settings, with the report type, the journals and the dates, beside the report, which opens with Highlights and then what shipped, by project.](reports-performance-review-mac.webp)
+
 ## Kinds of report
 
 | Kind | What it covers |
@@ -87,6 +89,8 @@ To send a report:
 When a file is made, a message names it and where it went, such as “Saved “Weekly report.pdf” in Downloads”, with *Show in Finder* on a Mac and *Share…* on iPhone and iPad. If saving fails, the message stays until you dismiss it and has *Try again*. While a report is made, Dayfolio says what it’s doing, such as “Reading 27 entries” or “Saving the report”, and shows nothing at all when it’s quick. A range with no entries says so, and offers the previous period.
 
 The PDF and Word files are named after the report, so a review season’s files are easy to tell apart.
+
+![The same Year-end self-review exported as a PDF and opened in Preview on a Mac, its highlights a bulleted list under the dates.](reports-pdf-export-mac.webp)
 
 ![A Director update for Ines Costa on iPhone, read as text that fits the screen, with its highlights and This week.](reports-director-update-iphone.webp)
 

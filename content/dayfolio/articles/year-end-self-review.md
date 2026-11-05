@@ -78,6 +78,8 @@ Dayfolio is a work journal for iPhone, iPad and Mac. A self-review is much easie
 - Where Apple Intelligence is available, a short summary is written on your device and added to Highlights. You can edit every highlight.
 - Notes about people, such as your 1:1 notes, stay out unless you tick them.
 
+![The Year-end self-review on a Mac: its settings, with the report type, the journals, the entry filters and the dates, beside the report, which opens with Highlights and then what shipped, by project](mac-year-end-review.webp "On a Mac, the report’s settings sit beside it.")
+
 
 You choose which journals and fields it reads, and you can narrow it to the entries for a project, with a person or tagged with a tag.
 
@@ -85,6 +87,8 @@ You choose which journals and fields it reads, and you can narrow it to the entr
 **Write the review itself in an entry.** Make a journal from the **Year-end self-review** template: choose New journal, find it in the General pack and create it. Its fields are the four parts above, Biggest wins, Growth, Feedback received and Next year, each with a question to answer, plus an Evidence link and Tags. Write it from what the report gathered.
 
 **Send it.** Export the report as Word, PDF or Markdown, or copy it as Markdown and paste it into your company’s review tool.
+
+![The same year-end self-review exported as a PDF and opened in Preview on a Mac, its highlights a bulleted list under the dates](mac-pdf-export.webp)
 
 
 ## Start before review season
