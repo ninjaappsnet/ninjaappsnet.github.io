@@ -15,7 +15,7 @@ Dayfolio is Diagrove’s sibling app from NinjaApps. Send to Dayfolio puts a dia
 
 The share sheet holds a PNG of the canvas’s drawing at 2× (smaller for a very large drawing) and the Document as a `.diagrove.zip` file.
 
-![The Roadmap template on iPad with the toolbar’s Export menu open: Export…, Send to Dayfolio and Preview as embed.](send-ipad.webp "Send to Dayfolio in the Export menu.")
+![The Roadmap template on iPad with the toolbar’s Export menu open: Share…, Export…, Print…, Send to Dayfolio…, Preview as embed and Save as template….](send-ipad.webp "Send to Dayfolio in the Export menu.")
 
 ## On the Mac
 

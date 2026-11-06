@@ -17,7 +17,7 @@ The prompt bar works on every Mac and iPad that runs Diagrove. Without Apple Int
    - A list pasted in, one topic per line, indented under its parent, becomes a tree of topics.
 3. Diagrove draws boxes and arrows and lays them out. The notice’s **Undo** takes them away.
 
-![A new Untitled diagram with the prompt bar focused, its placeholder Type steps, such as A -> B -> C, and its tip above it: Apple Intelligence is off. Arrows such as “Idea -> Plan -> Ship” and lists still work, with Open Settings.](no-ai-tip.webp "The prompt bar’s tip when Apple Intelligence is off.")
+![A new Untitled diagram with the prompt bar focused, its placeholder Type steps, such as A -> B -> C, and its tip above it: Apple Intelligence is off. Steps joined with -> or listed with “then” still draw, with Open System Settings.](no-ai-tip.webp "The prompt bar’s tip when Apple Intelligence is off.")
 
 ## Change a diagram
 
@@ -29,7 +29,7 @@ These changes are read without Apple Intelligence too. Each one shows on the can
 
 The sparkle at the start of the bar (or **Help › What you can ask the prompt bar**) lists what you can ask. Without Apple Intelligence it leaves out the examples that need it.
 
-![The prompt bar guide, What you can ask, on iPad beside the Flowchart template with Apple Intelligence off: Tidy up, and Draw a new diagram with its examples and the note that Apple Intelligence is off, above What it can’t do yet.](guide-without-ai.webp "The guide with Apple Intelligence off.")
+![The prompt bar guide, What you can ask, on iPad beside the Flowchart template with Apple Intelligence off: Auto-arrange, and Draw a new diagram with its examples and the note that Apple Intelligence is off, above What it can’t do yet.](guide-without-ai.webp "The guide with Apple Intelligence off.")
 
 ## What needs Apple Intelligence
 

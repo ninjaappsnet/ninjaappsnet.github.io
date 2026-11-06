@@ -31,6 +31,6 @@ In **Your libraries**, **New library** at the top of the page makes one. Drag a 
 
 To add a library someone sent you, click **Import…** at the top of **Your libraries** and choose the file. It appears alongside your own. On the Mac you can also double-click a `.diagrovestencils` file, and **Import…** also reads OmniGraffle stencil files (`.gstencil`).
 
-![The Stencils tab on Your libraries, with New library and Import…, the My stencils library holding the Beta stencil in its saved teal and white, and the library’s menu open: Rename, Export… highlighted, Show in Finder and Delete….](library-menu.webp "A library’s menu.")
+![The Stencils tab on Your libraries, with New library and Import…, the My stencils library holding the Beta stencil in its saved teal and white, and the library’s menu open: Rename, Export… highlighted, Show in Finder and Move to Trash.](library-menu.webp "A library’s menu.")
 
 More in [Stencils and tints](../../guide/stencils-and-tints/).

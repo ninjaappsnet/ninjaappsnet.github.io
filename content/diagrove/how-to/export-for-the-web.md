@@ -14,7 +14,7 @@ A web player is a folder that plays your Document in a browser, just as Play mod
 3. Click **Export…**, give the folder a name and choose where to put it.
 4. While it writes, the sheet says how far it’s got, such as “Preparing canvas 2 of 3…”, and **Cancel** stops it. When it’s done, a notice names the folder: click **Open in browser** to try it, or open the folder’s `index.html` in any browser.
 
-![The export sheet for the App screen template with Format set to Web player and the subtitle Saves a folder that plays both canvases in any browser, above a preview and More options.](web-player-format.webp "Format set to Web player.")
+![The export sheet for the App screen template with the subtitle Saves a folder that plays both canvases in any browser, a preview, the Purpose row, and Format set to Web player, to click through in a browser, above More options.](web-player-format.webp "Format set to Web player.")
 
 ## What’s in the folder
 
