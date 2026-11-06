@@ -134,6 +134,7 @@ MANIFEST = [
     "apps/diagrove/index.html",
     "apps/diagrove/support.html",
     "apps/diagrove/privacy.html",
+    "apps/diagrove/terms.html",
     "apps/diagrove/guide/index.html",
     "apps/diagrove/tutorials/index.html",
     "apps/diagrove/how-to/index.html",
