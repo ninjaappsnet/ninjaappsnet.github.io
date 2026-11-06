@@ -141,7 +141,7 @@ FLECTOBI_STORE_ID: Optional[str] = None
 # At launch: set the id below, set DIAGROVE_HELD to False, take noindex off the hand-written pages, list Diagrove on
 # the landing page and the privacy hub, and run the build.
 DIAGROVE_STORE_ID: Optional[str] = None
-DIAGROVE_HELD = True
+DIAGROVE_HELD = False
 
 DAYFOLIO = App(
     key="dayfolio", name="Dayfolio",

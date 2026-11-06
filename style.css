@@ -71,9 +71,13 @@
 :root:has(link[rel="canonical"][href*="/apps/flectobi/"]), .title-flectobi {
   --app-ground: #06454c; --app-on: #ffffff; --app-hi: #66d4c8; --app-ink: #0b5f66;
 }
+:root:has(link[rel="canonical"][href*="/apps/diagrove/"]), .title-diagrove {
+  --app-ground: #17636a; --app-on: #ffffff; --app-hi: #ffd8c2; --app-ink: #17636a;
+}
 [data-theme="dark"]:has(link[rel="canonical"][href*="/games/smalti/"]), [data-theme="dark"] .title-smalti { --app-ink: #e2b866; }
 [data-theme="dark"]:has(link[rel="canonical"][href*="/apps/dayfolio/"]), [data-theme="dark"] .title-dayfolio { --app-ink: #f4a27c; }
 [data-theme="dark"]:has(link[rel="canonical"][href*="/apps/flectobi/"]), [data-theme="dark"] .title-flectobi { --app-ink: #66d4c8; }
+[data-theme="dark"]:has(link[rel="canonical"][href*="/apps/diagrove/"]), [data-theme="dark"] .title-diagrove { --app-ink: #6cc3c7; }
 [data-theme="dark"]:not(:has(link[rel="canonical"][href*="/games/"], link[rel="canonical"][href*="/apps/"])) { --app-ink: #ffffff; }
 
 /* Cross-document page transitions: a short crossfade between internal pages. */

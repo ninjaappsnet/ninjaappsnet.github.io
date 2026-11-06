@@ -328,6 +328,7 @@ class DiagroveRulesTests(unittest.TestCase):
     price, banner or store link; and the per-page rules every app page keeps."""
 
     def setUp(self):
+        tb.hold_diagrove(self)
         self.site = tb.diagrove_site(self)
         self.site.put("apps/diagrove/index.html", diagrove_product(DIAGROVE_APP))
         self.site.put("apps/diagrove/support.html", DIAGROVE_SUPPORT)
@@ -460,6 +461,7 @@ class DiagroveTemplateGalleryTests(unittest.TestCase):
     noindex), its links land, and a page that drifted from the catalogue is reported."""
 
     def setUp(self):
+        tb.hold_diagrove(self)
         import test_diagrove_templates as dt
         self.templates = dt.templates
         self.site = dt.Site(self)

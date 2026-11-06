@@ -770,6 +770,13 @@ DIAGROVE_PRODUCT = FLECTO_PRODUCT.replace("FlectoBI", "Diagrove").replace("apps/
     "<head>\n", '<head>\n<meta name="robots" content="noindex">\n', 1)
 
 
+def hold_diagrove(test: unittest.TestCase) -> None:
+    """Pins Diagrove's pages as held for one test, whatever DIAGROVE_HELD says on the live site, so the rules a held
+    app keeps are tested before and after its launch."""
+    test.addCleanup(build.set_held, "diagrove", build.APPS["diagrove"].held)
+    build.set_held("diagrove", True)
+
+
 def diagrove_site(test: unittest.TestCase) -> "Site":
     """The Dayfolio fixture, with Diagrove's product page, card, icon and its four section pages beside it (its
     template gallery is tools/diagrove-templates.py's, as Dayfolio's is)."""
@@ -788,6 +795,7 @@ class DiagroveTests(unittest.TestCase):
     it out, and the deploy publishes none of it."""
 
     def setUp(self):
+        hold_diagrove(self)
         self.site = diagrove_site(self)
         self.site.put("content/diagrove/tutorials/first-flowchart.md", topic("first-flowchart", "Your first flowchart", 1))
         self.site.put("content/diagrove/articles/clear-flowchart.md", article(
@@ -893,8 +901,12 @@ class StylesheetTests(unittest.TestCase):
             with self.subTest(selector=selector):
                 self.assertTrue(selector in self.css, f"style.css has no {selector}")
         self.assertTrue("assets/icon-flectobi-144.webp" in self.css, "no FlectoBI icon in the sub-navigation")
-        # A held app's colours and icon travel in its own pages, so the published stylesheet never names it.
-        self.assertNotIn("diagrove", self.css.lower())
+        # A held app's colours and icon travel in its own pages, so the published stylesheet never names it; once
+        # it launches, its one-sheet colours join the others'.
+        if build.APPS["diagrove"].held:
+            self.assertNotIn("diagrove", self.css.lower())
+        else:
+            self.assertIn(".title-diagrove", self.css)
         self.assertTrue(re.search(r'\[data-theme="dark"\][^{]*\.figure-window', self.css),
                         "no dark-theme shadow for a window capture")
 

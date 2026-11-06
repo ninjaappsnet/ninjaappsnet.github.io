@@ -273,6 +273,7 @@ class TemplatePageTests(unittest.TestCase):
 
 class ListingPageTests(unittest.TestCase):
     def setUp(self):
+        tb.hold_diagrove(self)
         self.pages = Site(self).pages()
 
     def test_a_category_page_shows_a_card_for_each_template_with_its_picture(self):
@@ -331,6 +332,9 @@ class ListingPageTests(unittest.TestCase):
 
 
 class WriteAndCheckTests(unittest.TestCase):
+    def setUp(self):
+        tb.hold_diagrove(self)
+
     def test_after_a_write_the_check_is_clean_and_the_build_leaves_the_pages_alone(self):
         site = Site(self)
         templates.write(site.root)
