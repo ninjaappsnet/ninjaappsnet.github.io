@@ -1,0 +1,20 @@
+# A refund request, in Diagrove text. Lines starting with # are comments.
+canvas "Refund" {
+  direction: right
+  style lines { route: orthogonal }
+  asked: "Customer asks for a refund" { stencil: flow.terminal }
+  in_time: "Within 30 days?" { stencil: flow.decision }
+  receipt: "Has a receipt?" { stencil: flow.decision }
+  refund: "Refund to the card" { stencil: flow.process }
+  credit: "Offer store credit" { stencil: flow.process }
+  decline: "Explain the policy" { stencil: flow.process }
+  done: "Close the request" { stencil: flow.terminal }
+  asked -> in_time
+  in_time.top -> receipt.left: "Yes"
+  in_time.bottom -> decline.left: "No"
+  receipt.top -> refund.left: "Yes"
+  receipt.bottom -> credit.left: "No"
+  refund -> done
+  credit -> done
+  decline.right -> done.bottom
+}

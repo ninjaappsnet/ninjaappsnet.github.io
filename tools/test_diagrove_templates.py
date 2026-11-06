@@ -223,7 +223,7 @@ class TemplatePageTests(unittest.TestCase):
         self.assertIn("Decision", words)               # a stencil, with its library
         self.assertIn("Flowchart library", words)
         self.assertIn("12 connected lines", words)
-        self.assertIn("flow chart, swimlane and decision", words)
+        self.assertIn("“flow chart”, “swimlane” and “decision”", words)
 
     def test_an_isometric_template_says_so_and_links_the_guide(self):
         words = visible(self.pages[ISO])

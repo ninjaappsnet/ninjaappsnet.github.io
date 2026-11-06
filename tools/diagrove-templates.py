@@ -434,7 +434,7 @@ def _start(page: str, catalog: Catalog, t: Template) -> List[str]:
     ]
     if t.search_words:
         steps.append(f"<p>The gallery’s search finds it by its name and its line, and also by "
-                     f"{listing([_esc(w) for w in t.search_words])}.</p>")
+                     f"{listing([f'“{_esc(w)}”' for w in t.search_words])}.</p>")
     if t.blank:
         steps.append("<p>On the Mac, <strong>File › New diagram</strong> (Command-N) and <strong>New isometric "
                      "diagram</strong> make the blank ones straight away.</p>")

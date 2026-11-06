@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Diagrove article cards (1200×630 sources)</title>
+<!-- The Open Graph and Twitter image of each Diagrove article: apps/diagrove/articles/<slug>/card.png.
+     Each card is the section whose id is the article's slug, shown alone when this page is opened with #<slug>.
+     The picture is the app's own drawing of a template, from the template gallery. Re-render them with headless
+     Chrome (README, Diagrove pages). Uses the site's own tokens and fonts. -->
+<link rel="stylesheet" href="../../style.css">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+  .card { display: none; box-sizing: border-box; width: 1200px; height: 630px; padding: 0 64px 0 72px; overflow: hidden;
+          grid-template-columns: 1fr 470px; gap: 56px; align-items: center; border-bottom: 14px solid #17636a; }
+  .card:target { display: grid; }
+  .card .kicker { font-size: 18px; margin-bottom: 26px; }
+  .card h1 { font-size: 58px; line-height: 1.1; }
+  .card .lede { max-width: 600px; margin-top: 26px; font-size: 26px; line-height: 1.5; }
+  .card .where { margin-top: 34px; font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .16em; color: var(--ink-60); }
+  .card .art { width: 470px; height: 440px; object-fit: contain; background: #fff; border: 1px solid #1d1b18;
+               box-shadow: 0 18px 48px rgba(0,0,0,.16); }
+</style>
+</head>
+<body>
+
+<section class="card" id="clear-flowchart">
+  <div>
+    <div class="kicker">図 ARTICLE — DIAGROVE</div>
+    <h1>How to draw a clear flowchart</h1>
+    <p class="lede">One question, four shapes, every exit labelled, no line through a box.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="art" src="../../apps/diagrove/templates/process/flowchart/flowchart-card.webp" alt="">
+</section>
+
+<section class="card" id="system-architecture-diagram">
+  <div>
+    <div class="kicker">図 ARTICLE — DIAGROVE</div>
+    <h1>A system architecture diagram people can read</h1>
+    <p class="lede">One reader, one level, every arrow labelled, the boundaries drawn.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="art" src="../../apps/diagrove/templates/software/cloud-architecture/cloud-architecture-card.webp" alt="">
+</section>
+
+<section class="card" id="isometric-office-floor-plan">
+  <div>
+    <div class="kicker">図 ARTICLE — DIAGROVE</div>
+    <h1>How to draw an isometric office floor plan</h1>
+    <p class="lede">To scale, two back walls, teams in colour on the floor, labels that face you.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="art" src="../../apps/diagrove/templates/spaces/office-floor/office-floor-card.webp" alt="">
+</section>
+
+<section class="card" id="org-chart">
+  <div>
+    <div class="kicker">図 ARTICLE — DIAGROVE</div>
+    <h1>An org chart that stays tidy as the team changes</h1>
+    <p class="lede">Reports stacked under their lead, so a new hire is one more row.</p>
+    <div class="where">NINJAAPPS.NET</div>
+  </div>
+  <img class="art" src="../../apps/diagrove/templates/ideas-and-teams/org-chart/org-chart-card.webp" alt="">
+</section>
+
+</body>
+</html>
