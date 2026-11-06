@@ -2,7 +2,7 @@
 title: Workbooks and file access
 description: What a FlectoBI Workbook stores, how to save and share it, and how Grant Access and the Access settings work with the Mac sandbox.
 slug: workbooks-and-file-access
-date: 2026-10-26
+date: 2026-10-31
 order: 2
 ---
 A FlectoBI Workbook is one file with the ending **.flectobi**. It holds your Flow and your Reports. It does not hold your data. This page explains what that means, how to share a Workbook, and why FlectoBI sometimes asks for permission to read a file.
@@ -14,13 +14,13 @@ A Workbook is a single text file. Inside it are:
 - Your Steps, where you placed them, their options and their Connections.
 - Your Reports, Pages and Visuals, with their Field Wells and options.
 - The choices you made in a Slicer.
-- The paths of your files, and the host, port, database, user and SSL setting of any database Connection.
+- The paths of your files, and the name, host, port, database and SSL setting of any database source. Relationships you defined between its tables are kept too, if the Workbook uses them.
 
-It never contains your rows. It never contains a database password. It never contains a file permission.
+It never contains your rows. It never contains a database user name or password. It never contains a file permission.
 
 Because the data is not inside, the file stays small. When you open a Workbook, FlectoBI reads each Input again from the file or database it points to. Your numbers are always as new as your files.
 
-Opening a Workbook never writes a file. It never connects to a database unless a password is already saved in your Keychain for that exact server.
+Opening a Workbook never writes a file. A Workbook from someone else never connects to a database on its own. If it reads from a data source you saved on this Mac, FlectoBI asks once before it uses your saved login. See [Databases](../databases/).
 
 > **Tip:** FlectoBI never changes the files it reads. An Output cannot write to a file that your Flow reads. FlectoBI refuses it and tells you why.
 
@@ -49,7 +49,7 @@ On the other Mac, FlectoBI does not yet have permission to read those files. Thi
 
 One grant of the parent folder usually fixes every Step. If the Workbook has Outputs, the banner says “read and write”, because they need to write.
 
-Database passwords do not travel. The person who opens the Workbook is asked for the password once, and it is saved in their own Keychain. See [Databases](../databases/).
+Logins do not travel. The person who opens the Workbook gives their own user name and password for each database source, and they are saved in their own Keychain. See [Databases](../databases/).
 
 ![The Settings window on its Access pane, Files and folders FlectoBI can open, still empty with the words None yet.](settings.webp "Settings › Access lists every file and folder FlectoBI can open.")
 

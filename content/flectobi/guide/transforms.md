@@ -3,7 +3,7 @@ title: Transforms: every Step you can add
 description: A reference of all 26 FlectoBI Transforms, grouped as the palette groups them: what each does, when to use it and its main options.
 slug: transforms
 date: 2026-10-26
-order: 7
+order: 9
 ---
 A Transform is a Step that takes a Dataset, changes it and passes the result on. You add one after the selected Step, and the preview shows the result at once. This page lists all 26, in the groups the palette uses: Rows, Columns, Text, Combine and Reshape.
 

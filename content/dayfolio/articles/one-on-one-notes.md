@@ -3,6 +3,7 @@ title: 1:1 notes that carry over from one meeting to the next
 description: Keep topics, notes and action items for each 1:1, carry what’s still open into the next one, and keep the notes private. A practical method.
 slug: one-on-one-notes
 date: 2026-10-16
+updated: 2026-11-05
 image: card.png
 image_alt: The title 1:1 notes that carry over from one meeting to the next, beside an iPhone showing a 1:1 notes entry in Dayfolio with its topics and action items
 ---
@@ -48,7 +49,7 @@ Notes for different people shouldn’t mix. Maya’s open items belong in your n
 
 ## How Dayfolio helps
 
-Dayfolio is a work journal for iPhone, iPad and Mac. Its **1:1 notes** template is in the General pack for any recurring one-on-one, “with a manager, a mentor, a peer or a report”, and it’s the template a journal made from the Management & Leadership pack opens with. Each entry has:
+Dayfolio is a work journal for iPhone, iPad and Mac. Its **1:1 notes** template is in the General pack for any recurring one-on-one, “with a manager, a mentor, a peer or a report”, and it’s the one Dayfolio’s first page makes a journal from for management work. In New journal, choose it and it becomes a journal of its own, “1:1 notes”; make it again for each person or team and the next is “1:1 notes 2”. Each entry has:
 
 - **With,** the person you met.
 - **Meeting time.**
@@ -57,17 +58,19 @@ Dayfolio is a work journal for iPhone, iPad and Mac. Its **1:1 notes** template 
 - **Notes:** “What did you talk about, and what stood out?”
 - **Action items,** a checklist: “What’s still open from last time, and what’s new?”
 
-**Open items follow the person.** A new 1:1 entry starts with Action items empty. As soon as you set With to Maya, the items still unticked on your last 1:1 with Maya fill in. Never Sam’s: each person keeps their own thread. Ticked items stay behind, and the items are copies, so ticking one today doesn’t change last week’s entry. One undo takes the carried items back out. Topics never carries over, because it’s an agenda, not a list of tasks. Tags you used last time with Maya show faintly as Last time, and a tap keeps them.
+**Open items follow the person.** A new 1:1 entry starts with Action items empty. As soon as you set With to Maya, the items still unticked on your last 1:1 with Maya fill in. Never Sam’s: each person keeps their own thread. Ticked items stay behind, struck through, and the items are copies, so ticking one today doesn’t change last week’s entry. One undo takes the carried items back out. Topics never carries over, because it’s an agenda, not a list of tasks. Tags you used last time with Maya show faintly as Last time, and a tap keeps them.
 
-![A 1:1 notes entry on iPhone in the Team 1:1s journal, 1:1 with Maya: promo case, with one of two topics ticked, a short note and two open action items](iphone-one-on-one.webp)
+![A 1:1 notes entry on iPhone, with Maya’s notes, Action items at 1 of 2 done with the ticked item struck through, and Done since the last 1:1 listing the two items ticked last time.](iphone-one-on-one-checklist.webp)
+
+![A 1:1 notes entry on a Mac, with Maya’s notes, Action items at 1 of 2 done and Done since the last 1:1 listing the two items ticked last time.](mac-one-on-one-checklist.webp)
+
 
 **Start from your calendar.** Beside Meeting time, “Fill from calendar…” lets you pick one of today’s meetings and fills in its time and the attendees you already know. Dayfolio reads your calendar on your device, and asks for access the first time. After a meeting ends, Today can offer a card with “Start meeting notes”. A meeting whose title says 1:1, 1-1, one-on-one or 1on1 starts from your 1:1 notes template with the other person in With, so the open items carry over straight away. Someone Dayfolio doesn’t know yet is one tap to add.
 
 **See everything about one person.** Choose “Entries with Maya” from her name’s menu in an entry to see every entry that names her, across your journals. Above them, Still open lists the action items still open with her. Reading it takes a minute and is good preparation for your next 1:1.
 
-![Entries with Maya on a Mac: 43 entries across Team 1:1s and Management, her two open action items under Still open, and her latest 1:1 read beside the list](mac-entries-with-maya.webp)
 
-**Lock the journal.** When you make a journal for people, from the Management & Leadership pack or with 1:1 notes or Skip-level notes as its default template, Dayfolio asks once: “This journal holds notes about people. Lock it?” A locked journal opens with Face ID or Touch ID, or your passcode. Until you unlock it, its entries are hidden everywhere in the app, from the Timeline and Calendar to Search and Reports, and it stays out of widgets, notifications, Spotlight and the app switcher. On iPhone and iPad it locks again as soon as you leave Dayfolio; on every device it locks after five minutes without use (you can change the time) and whenever the device locks.
+**Lock the journal.** When you make a journal for people, from a Management & Leadership template such as 1:1 notes or Skip-level notes, Dayfolio asks once: “This journal holds notes about people. Lock it?” A locked journal opens with Face ID or Touch ID, or your passcode. Until you unlock it, its entries are hidden everywhere in the app, from the Timeline and Calendar to Search and Reports, and it stays out of widgets, notifications, Spotlight and the app switcher. On iPhone and iPad it locks again as soon as you leave Dayfolio; on every device it locks after five minutes without use (you can change the time) and whenever the device locks.
 
 ![The Team 1:1s journal locked on iPhone: its entries are hidden until you unlock, with a button to unlock with Face ID and a note that it locks again when you leave or after 5 minutes](iphone-locked-journal.webp)
 
@@ -81,4 +84,4 @@ You don’t need to backfill old meetings. Write your next 1:1 with its action i
 
 - See the [1:1 notes template](../../templates/general/1-1-notes/), with every field and a filled-in example.
 - Read about [carry-over](../../guide/carry-over/) and [locked journals](../../guide/locked-journals/) in the Dayfolio guide.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

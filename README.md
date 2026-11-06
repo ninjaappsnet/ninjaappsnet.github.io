@@ -24,8 +24,10 @@ games/smalti/daily/          landing page for the daily share link (see Universa
 .well-known/apple-app-site-association   which URLs iOS hands to the Smalti app
 apps/<slug>/                 same four pages for a non-game app (apps/dayfolio/)
 apps/dayfolio/archive-format.html   the .dayfolio file format, generated (see Dayfolio)
-apps/dayfolio/privacy-v1.0.html     version 1.0 of the policy, archived (noindex);
+apps/dayfolio/privacy-v1.0.html     versions 1.0 and 1.1 of the policy, archived (noindex);
+apps/dayfolio/privacy-v1.1.html
 apps/dayfolio/terms-v1.0.html       the same for the terms
+apps/dayfolio/terms-v1.1.html
 apps/dayfolio/media/                the product page's pictures and the iPhone app preview (see Assets)
 games/_template/             copy this to add a new app
 assets/brand/                brand exports + the two banner .html sources
@@ -102,18 +104,17 @@ version.
 
 Dayfolio's pages are held to the app the same way (`check_dayfolio`, `DAYFOLIO_*`
 in the script). The product, support, privacy and terms pages fail on a claim the
-first copy made and the app has outgrown (`$9.99`, "coming soon", the "Mac App
+first copy made and the app has outgrown (a price, a free version, an in-app purchase,
+"coming soon", the "Mac App
 Store", "premium", "free trial"), and on losing a fact: the product page's title
-("Dayfolio: Work Journal for iPhone, iPad and Mac — NinjaApps", and its `og:title`), the five prices, the App
-Store link and Smart App Banner id, the refund sentence, the free tier's "one
-journal and 100 entries", the anchors the app opens (`#quick-note-link`) and one
+("Dayfolio: Work Journal for Mac, Daily Work Log for iPhone and iPad — NinjaApps", and its `og:title`), the
+two app names, the App Store link and Smart App Banner id, the refund sentence, the anchors the app opens (`#quick-note-link`) and one
 anchor per permission on the privacy policy. The policy must name its version
 and link the archived one; the archived versions must stay `noindex` and link
 back. The landing page and the privacy hub are held to the same retired claims
-and must say Dayfolio is for iPhone, iPad and Mac. The prices and ids are the
-app repo's (`docs/product-spec.md` §3.7b, D223–D225); when they change, change
-`DAYFOLIO_PRICES`, the copy and the App Store Connect products in the same
-commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
+and must say Dayfolio is for iPhone, iPad and Mac. The apps are paid and no price
+is set (2026-11-01): when one is, add it to the copy, the JSON-LD `offers` and this
+check in the same commit. `STALE_CLAIMS`' iPad rule (a Smalti claim) skips the landing page, which
 also introduces Dayfolio.
 
 `check_dayfolio_media` holds the product page's pictures and film: at least one
@@ -258,15 +259,17 @@ The same rule (and the ASC privacy-label same-release requirement) lives in
 the game repo's PUBLISHING_TODO.
 
 Dayfolio's pages follow it. `apps/dayfolio/privacy.html` and `terms.html` are
-version 1.1, effective 2026-10-15, the first to cover iPhone and iPad. Version 1.0
-(effective 2026-09-29, the Mac app) stays readable as `privacy-v1.0.html` and
-`terms-v1.0.html`: `noindex`, self-canonical, a line at the top saying which
-dates it was in force and linking the current version, and each is in `MANIFEST`
-but not in `sitemap.xml`. The canonical page's version history says what 1.1
-changed, including what goes past the permissions the app asks for (what a file
-keeps inside it, the mirror folder and the Spotlight index as second copies of
-your text, where the quick-note key is kept). The next substantive change
-snapshots 1.1 as `privacy-v1.1.html` first.
+version 1.2, effective 2026-11-01: Dayfolio became two paid apps (Dayfolio: Work
+Journal for Mac, Dayfolio: Daily Work Log for iPhone and iPad), with no free version,
+no in-app purchase and no subscription, so the purchase section of the terms and the
+App Store statements of the policy changed. Version 1.1 (effective 2026-10-15, the
+first to cover iPhone and iPad) stays readable as `privacy-v1.1.html` and
+`terms-v1.1.html`, and version 1.0 (effective 2026-09-29, the Mac app) as
+`privacy-v1.0.html` and `terms-v1.0.html`: `noindex`, self-canonical, a line at the
+top saying which dates it was in force and linking the current version, and each is
+in `MANIFEST` but not in `sitemap.xml`. The canonical page's version history says
+what each version changed. The next substantive change snapshots 1.2 as
+`privacy-v1.2.html` first.
 
 ## Localized legal pages
 
@@ -443,19 +446,24 @@ commit to this repo, so the live check is
 ## Assets
 
 Dayfolio's product page (`apps/dayfolio/`) shows the App Store's captioned, light
-pictures across iPhone, iPad and Mac, from the app repo's `build/asc-upload/buy/web/`
-(D2091, D2095): `media/iphone-first-page.webp` and `iphone-client-report.webp`
-(880×1912, two thirds of 1320×2868), `media/ipad-person.webp` (1032×1376, half of
-2064×2752), and `media/mac-performance-review.webp` and `mac-quick-entry.webp`
-(1440×900, half of 2880×1800): lossy WebP at quality 90, sRGB. `.devices` lays them
-out. On a desktop the two iPhones and the iPad share a row at one height, and the
-two Macs the next; narrower, the iPhones pair up and the rest take a row each; on a
-phone every picture takes a row, an iPhone's no wider than 300px. They are opaque,
-so a hairline frames each instead of the drop shadow a window capture gets. Above
-them, the iPhone app preview, `media/app-preview-iphone.mp4` (886×1920, 24.37 s,
-H.264 with a silent AAC track, copied byte for byte), plays in a `<video>` with
-controls, muted and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
-its frame at 3 s. The dark Mac captures (`shot-*.webp`) are gone from the site; git
+pictures from the app repo's `build/asc-upload/tpj/web/` (the set made after TPJ and
+FEEL: a journal is one template, with folders; D2500–D2510 there): the iPhone's
+`media/iphone-first-page-template.webp`, `iphone-new-journal.webp`, `iphone-folders.webp`,
+`iphone-checklist.webp`, `iphone-weekly-goal.webp` and `iphone-client-report.webp`
+(880×1912, two thirds of 1320×2868), and the iPad's `media/ipad-folders.webp` and
+`ipad-checklist.webp` (1032×1376, half of 2064×2752): lossy WebP at quality 90, sRGB.
+`.devices` lays them out, three iPhones to a row and the two iPads the next; narrower,
+the iPhones pair up and the rest take a row each; on a phone every picture takes a row,
+an iPhone's no wider than 300px. They are opaque, so a hairline frames each instead of
+the drop shadow a window capture gets. The Mac's four, `media/mac-folders.webp`, `mac-new-journal.webp`, `mac-performance-review.webp` and
+`mac-quick-entry.webp` (1440×900, half of 2880×1800, quality 90), are the captioned Mac set's slots 1, 2, 5
+and 7, two to a row; `check_dayfolio_media` requires one for each platform (`DAYFOLIO_PLATFORMS_REQUIRED`).
+The guide's and the articles' Mac pictures are the app's own windows from the same capture, 1504×940
+(the popover alone 600 wide), on white. Above them, the iPhone app preview,
+`media/app-preview-iphone.mp4` (886×1920, 28.53 s, H.264 with a silent AAC track, copied
+byte for byte from `build/asc-upload/tpj/web/`), plays in a `<video>` with controls, muted
+and inline, `preload="none"`, over `media/app-preview-iphone-poster.webp`,
+its frame at 3 s. The iPhone and iPad pictures, the guide's and the articles' captioned ones and the film were remade on 2026-11-05 after the demo seed fix (no journal is called "Weekly Review 2"); the first-page crop is now 624×690. The dark Mac captures (`shot-*.webp`) are gone from the site; git
 history has them. To swap a picture, convert the new PNG to the same size under a
 new name and change the page (and its `width` and `height`, if they change: the
 checker reads the WebP's own size); browsers keep pictures for 30 days (Caching,
@@ -578,8 +586,8 @@ top; a page whose source is gone is removed by the next build.
 description, a canonical URL, the banner, a social card (unless noindex), alt text,
 one h1 and headings that step down one level at a time, ids used once, tags that
 close, JSON-LD that parses, and anchors that exist. The product page's
-`SoftwareApplication` JSON-LD must offer what the page states (free, and
-`DAYFOLIO_PRICES`), with no ratings or reviews. The social card is a screenshot of
+`SoftwareApplication` JSON-LD must offer nothing while no
+price is set, with no ratings or reviews. The social card is a screenshot of
 `assets/brand/dayfolio-card.html`:
 
 ```sh
@@ -616,14 +624,18 @@ repo's `Packages/DayfolioKit/Sources/DayfolioDomain/Resources/Library/` (format:
 `Library/PackFormat.md` there), copied into `content/dayfolio/library/` so this
 site can be checked and rebuilt on its own, and the sample values in
 `content/dayfolio/examples/<pack-id>.json`: one made-up entry per template, every
-field filled, names and numbers plainly examples (and no famous person's name), links
+field filled, names and numbers plainly examples (no famous person's name, and no sample-company name from another vendor's product, such as Northwind or Contoso), links
 only on example.com, .net or .org. An entry's optional `page_title` titles its template's
 page with the words people search for when they differ from the template's name
 ("1:1 meeting notes template" for 1:1 notes); without it the page is "<name> template".
 The generator stops at a page title over 60 characters, against the copy rules, or
 another page's. A carried field's note says which earlier entry it comes from, by the
 lead the app's `EntryFactory.leadField(in:)` picks: the last entry with the same
-person, for the same client or site, or of the template. **After the app's library changes:**
+person, for the same client or site, or of the template. A template page tells how to make a journal from it (New journal; the app has no Templates
+screen since TPJ, ADR 0015) and shows the weekly goal the pack's `suggestedGoal` names, with
+the reminder, where there is one. A pack page names the template the first page makes a journal
+from (`defaultTemplate`, required). The generator refuses a `suggestedGoal` the app would refuse.
+**After the app's library changes:**
 
 ```sh
 python3 tools/dayfolio-templates.py --library /path/to/dayfolio   # copy the packs in, write the pages

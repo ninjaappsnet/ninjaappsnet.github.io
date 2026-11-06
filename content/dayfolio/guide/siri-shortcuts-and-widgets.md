@@ -3,7 +3,8 @@ title: Siri, Shortcuts, widgets, Control Center and Focus
 description: Log entries with Siri, rate your day from a widget, time work from Control Center and quiet reminders with Focus. Dayfolio’s system features.
 slug: siri-shortcuts-and-widgets
 date: 2026-10-16
-order: 8
+updated: 2026-11-05
+order: 9
 ---
 Dayfolio works from outside the app too: you can log a line by voice, start today’s entry from your Home Screen, stop a timer from the Lock Screen and keep reminders quiet while you focus. None of these ever show or offer a journal you lock.
 
@@ -27,12 +28,10 @@ Say it once, and Dayfolio fills in the fields.
 
 1. Say “Log in Dayfolio”. Siri asks “What happened?”
 2. Say what you did, such as “Standup, energy 4, two hours of focus on the payments API, status on track”.
-3. Dayfolio picks the journal’s template and fills its fields from your words. Where Apple Intelligence is available, it does this on your device; otherwise it reads your words as the [Fill line](../templates-and-fields/) does.
+3. Dayfolio writes into the journal you named, or Notes when you named none, and fills its form’s fields from your words. Where Apple Intelligence is available, it does this on your device; otherwise it reads your words as the [Fill line](../templates-and-fields/) does.
 4. A confirmation shows the entry and what was filled, before anything is written. Choose **Log** to write it, or *Edit in Dayfolio* to finish it in the app.
 
 A client or person you name, as in “client Brightline” or “with Maya”, is filled in when you already have one by that name, and their open items carry over. Nothing is written before you choose Log.
-
-![The Log in Dayfolio confirmation on iPhone, run from Spotlight: Daily Standup in Engineering Log with energy, focus time and status filled in, Edit in Dayfolio, and Cancel and Log.](siri-log-in-dayfolio-iphone.webp)
 
 ## Widgets on iPhone and iPad
 
@@ -57,7 +56,7 @@ On iPhone and iPad, Dayfolio adds two controls you can put in Control Center, on
 - **New entry** opens the New entry sheet, in a journal you choose. Switch on **What’s next** and it opens with the entry Dayfolio thinks you want now, with the reason: “Because of your 09:00 reminder”, “Your 14:00 meeting ended” or “Nothing written today”.
 - **Dayfolio timer** shows a running timer and stops it. With none running, it opens today’s entry, ready to start one.
 
-While a timer runs, it also shows as a Live Activity on iPhone’s Lock Screen and in the Dynamic Island, and at the bottom of the app, with **Stop**. Stopping from the Lock Screen asks for Face ID, Touch ID or your passcode first. See [Templates and fields](../templates-and-fields/).
+While a timer runs, it also shows as a Live Activity on iPhone’s Lock Screen and in the Dynamic Island, and at the bottom of the app, with **Stop**. Stopping from the Lock Screen asks for Face ID, Touch ID or your passcode first. See [Journals, forms and fields](../templates-and-fields/).
 
 ## Focus
 
@@ -77,13 +76,10 @@ On iPhone and iPad, Settings › Privacy › **Show entries in Spotlight** lets 
 
 Start an entry on one device and pick it up on another: the entry you have open shows in the other device’s app switcher or Dock, and opens there with its latest text. Handoff is never offered for a journal you lock. See [Sync and iCloud](../sync-and-icloud/).
 
-## What’s free
-
-These features are free. An entry they create counts toward the free version’s 100 entries, as any entry does. *Make this week’s report* opens a report you can read for free.
 
 ## Related
 
 - [Quick capture](../quick-capture/)
-- [Templates and fields](../templates-and-fields/)
+- [Journals, forms and fields](../templates-and-fields/)
 - [Reports](../reports/)
 - Templates the widgets suit: [Daily standup](../../templates/software-engineering/daily-standup/), [Weekly review](../../templates/general/weekly-review/), [Shift summary](../../templates/customer-support/shift-summary/)

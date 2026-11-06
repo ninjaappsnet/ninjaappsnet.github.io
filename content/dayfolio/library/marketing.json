@@ -4,7 +4,6 @@
     "id": "marketing",
     "industry": "Marketing",
     "name": "Marketing",
-    "journalName": "Marketing Log",
     "summary": "Campaigns, content and performance reviews for people who run marketing.",
     "icon": "megaphone",
     "color": "orange",
@@ -20,7 +19,6 @@
         "color": "orange",
         "cadence": "onEvent",
         "summary": "The goal, channels and budget, written down before the campaign starts.",
-        "includedByDefault": true,
         "fields": [
           { "key": "campaign", "label": "Campaign", "type": "project", "carryOver": true },
           {
@@ -55,7 +53,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Every piece of content, from planned to published to reviewed.",
-        "includedByDefault": true,
         "fields": [
           {
             "key": "type", "label": "Type", "type": "singleSelect",
@@ -89,7 +86,7 @@
         "color": "teal",
         "cadence": "weekly",
         "summary": "Impressions, clicks and conversions, with the story behind the numbers.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "impressions", "label": "Impressions", "type": "number", "includeInInsights": true },
           { "key": "clicks", "label": "Clicks", "type": "number", "includeInInsights": true },
@@ -113,7 +110,6 @@
         "color": "purple",
         "cadence": "review",
         "summary": "Did the campaign hit its goal, and what would you change next time?",
-        "includedByDefault": false,
         "fields": [
           { "key": "campaign", "label": "Campaign", "type": "project" },
           {

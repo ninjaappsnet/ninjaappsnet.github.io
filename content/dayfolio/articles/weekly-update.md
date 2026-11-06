@@ -3,6 +3,7 @@ title: How to write a weekly update people read
 description: Lead with what changed, name risks early and keep the same shape every week: how to write a weekly update or a director update people read.
 slug: weekly-update
 date: 2026-10-16
+updated: 2026-11-05
 image: card.png
 image_alt: The title How to write a weekly update people read, beside an iPhone showing a director update in Dayfolio, with Highlights and This week
 ---
@@ -57,13 +58,14 @@ On Friday afternoon, Monday is a long time ago. The easiest updates come from a 
 
 ## How Dayfolio helps
 
-Dayfolio is a work journal for iPhone, iPad and Mac. You write a short entry each day from a template, and it turns the week into a report.
+Dayfolio is a work journal for iPhone, iPad and Mac. You write a short entry each day in a journal made from a template, and it turns the week into a report.
 
-**Write the week as it happens.** The **Daily standup** template, the one a journal made from the Software Engineering pack opens with, has Shipped, Working on and Blockers, with Energy, Focus time, Project and Status above them. The project and what you’re working on carry over from your last standup, so each day starts with them filled in. Star the entries you’d lead an update with.
+**Write the week as it happens.** The **Daily standup** template, the one Dayfolio’s first page makes a journal from for software work, has Shipped, Working on and Blockers, with Energy, Focus time, Project and Status above them. The project and what you’re working on carry over from your last standup, so each day starts with them filled in. Star the entries you’d lead an update with.
 
 ![Today on a Mac: a Daily Standup in the Engineering Log, with Energy, Focus time, Project and Status filled in, two items ticked under Shipped, a paragraph under Working on and a blocker, beside the journal’s list of the week’s entries](mac-daily-standup.webp)
 
-**Review the week on Friday.** If a journal has a weekly review with a reminder (the library’s **Weekly review** suggests Friday at 5 pm), Today shows a card once the reminder has gone off: “Your week, ready to review”, with the week’s counts and “Start this week’s review”. Its menu also has “Make this week’s report”. While you write the review, a This week panel lists what you ticked done, what you starred and what’s still open, and a tap adds a row to the field you’re in.
+
+**Review the week on Friday.** If you keep a journal made from a weekly review template, with a reminder (the library’s **Weekly review** suggests Friday at 5 pm), Today shows a card once the reminder has gone off: “Your week, ready to review”, with the week’s counts and “Start this week’s review”. Its menu also has “Make this week’s report”. While you write the review, a This week panel lists what you ticked done, what you starred and what’s still open, and a tap adds a row to the field you’re in.
 
 ![Today on iPhone, the Engineering Log with a card at the top that reads “Your week, ready to review”, the week’s 8 entries, 4 done and 2 starred, and a button to start this week’s review](iphone-friday-review.webp)
 
@@ -74,7 +76,7 @@ Dayfolio is a work journal for iPhone, iPad and Mac. You write a short entry eac
 - Fields labelled Next or Plan go under **Next week**.
 - Everything else goes under **This week**.
 
-You choose the journals and fields it includes. A section with nothing in it is left out, and the titles of your starred entries come first in Highlights, each linking back to its entry. If your template has no field for next week, add a checklist labelled “Next week”: changing a template you added from the library is free.
+You choose the journals and fields it includes. A section with nothing in it is left out, and the titles of your starred entries come first in Highlights, each linking back to its entry. If your journal’s form has no field for next week, add a checklist labelled “Next week” in Journal settings › Form.
 
 ![A director update on iPhone for Ines Costa, covering 19 to 25 October over the Management journal: Highlights summarized on the device, then This week](iphone-director-update.webp "A director update with its For line filled in.")
 
@@ -82,7 +84,7 @@ You choose the journals and fields it includes. A section with nothing in it is 
 
 **Address it and narrow it.** A report’s For line says who it’s for, and Prepared by, set once in Settings › General, adds your name. You can also keep only the entries for one project, with one person or with one tag.
 
-**Send it.** Copy it as Markdown and paste it into an email or a chat message, or export it as PDF, Word or Markdown, or share it. Save the report’s setup as a preset, and next week it’s ready to generate again. Making a report and reading it on screen is free; saving presets, keeping reports and sending them come with the purchase.
+**Send it.** Copy it as Markdown and paste it into an email or a chat message, or export it as PDF, Word or Markdown, or share it. Save the report’s setup as a preset, and next week it’s ready to generate again.
 
 **Ask Siri.** “Make this week’s report” works from Siri, Shortcuts, Spotlight and the Action Button: Dayfolio opens on the Weekly report for the last full week (from Friday on, this one), generated and ready to read.
 
@@ -92,4 +94,4 @@ Next week, write three lines a day. On Friday, the update will be mostly there, 
 
 - See the [Daily standup template](../../templates/software-engineering/daily-standup/) and the [Weekly review template](../../templates/general/weekly-review/), with every field and a filled-in example.
 - Read about [Reports](../../guide/reports/) in the Dayfolio guide: weekly reports, director updates, filters, the For line and sending.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

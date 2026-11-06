@@ -3,6 +3,7 @@ title: How to write your year-end self-review
 description: Gather a year of evidence, lead with outcomes and say what’s next: a practical way to write your year-end self-review, with a template to start from.
 slug: year-end-self-review
 date: 2026-10-16
+updated: 2026-11-05
 image: card.png
 image_alt: The title How to write your year-end self-review, beside an iPhone showing Dayfolio’s Year-end self-review with its highlights listed first
 ---
@@ -68,7 +69,7 @@ A review where nothing went wrong reads as unexamined. Pick one or two things th
 
 Dayfolio is a work journal for iPhone, iPad and Mac. A self-review is much easier when the year is already written down, and that’s what it’s for.
 
-**Through the year, capture wins as they happen.** The library’s **Brag document** template has a Win field that asks “What did you do, and what changed because of it?”, an Impact of High, Medium or Low, an Evidence link, and Kudos from for the person who noticed. Star an entry when it’s worth remembering: at review time, the titles of your starred entries come first.
+**Through the year, capture wins as they happen.** The library’s **Brag document** template, which you make into a journal of its own in New journal, has a Win field that asks “What did you do, and what changed because of it?”, an Impact of High, Medium or Low, an Evidence link, and Kudos from for the person who noticed. Star an entry when it’s worth remembering: at review time, the titles of your starred entries come first.
 
 **At review time, start the report.** In Reports, choose **+ › Year-end self-review**. Reports is in the sidebar on the Mac and iPad, and in More on iPhone. It sets up a Performance review of this year so far, from 1 January to today (in January, the whole year just ended), with your wins first:
 
@@ -77,17 +78,18 @@ Dayfolio is a work journal for iPhone, iPad and Mac. A self-review is much easie
 - Where Apple Intelligence is available, a short summary is written on your device and added to Highlights. You can edit every highlight.
 - Notes about people, such as your 1:1 notes, stay out unless you tick them.
 
-![The Year-end self-review on iPhone: a report from 1 January to 29 October 2026 over three journals, grouped by project and summarized on the device, with the titles of the starred entries first in Highlights](iphone-year-end-review.webp)
+![The Year-end self-review on a Mac: its settings, with the report type, the journals, the entry filters and the dates, beside the report, which opens with Highlights and then what shipped, by project](mac-year-end-review.webp "On a Mac, the report’s settings sit beside it.")
+
 
 You choose which journals and fields it reads, and you can narrow it to the entries for a project, with a person or tagged with a tag.
 
-![The Year-end self-review on a Mac: its settings, with the report type, the journals, the entry filters, the dates and the fields, beside the report, which opens with Highlights and then what shipped, by project](mac-year-end-review.webp "On a Mac, the report’s settings sit beside it.")
 
-**Write the review itself in an entry.** Add the **Year-end self-review** template to a journal from the library: open Templates, find it in the General pack and add it to your journal. Its fields are the four parts above, Biggest wins, Growth, Feedback received and Next year, each with a question to answer, plus an Evidence link and Tags. Write it from what the report gathered.
+**Write the review itself in an entry.** Make a journal from the **Year-end self-review** template: choose New journal, find it in the General pack and create it. Its fields are the four parts above, Biggest wins, Growth, Feedback received and Next year, each with a question to answer, plus an Evidence link and Tags. Write it from what the report gathered.
 
-**Send it.** Export the report as Word, PDF or Markdown, or copy it as Markdown and paste it into your company’s review tool. Making a report and reading it on screen is free; keeping reports and sending them come with the purchase.
+**Send it.** Export the report as Word, PDF or Markdown, or copy it as Markdown and paste it into your company’s review tool.
 
-![The same year-end self-review exported as a Word document and opened in Pages, its highlights a bulleted list under the dates](mac-word-export.webp)
+![The same year-end self-review exported as a PDF and opened in Preview on a Mac, its highlights a bulleted list under the dates](mac-pdf-export.webp)
+
 
 ## Start before review season
 
@@ -96,4 +98,4 @@ The best time to start a self-review is the week after the last one. One short e
 - See the [Year-end self-review template](../../templates/general/year-end-self-review/) and the [Brag document template](../../templates/general/brag-document/), with every field and a filled-in example.
 - Read about [Reports](../../guide/reports/) in the Dayfolio guide: every kind of report, filters and exports.
 - Read [what goes in a brag document, and how to keep one](../brag-document/), so next year’s review starts itself.
-- [Get Dayfolio on the App Store](https://apps.apple.com/app/id6817388897) for iPhone, iPad and Mac.
+- [Dayfolio: Work Journal on the Mac App Store](https://apps.apple.com/app/id6817388897). The iPhone and iPad app is Dayfolio: Daily Work Log.

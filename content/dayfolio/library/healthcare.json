@@ -4,7 +4,6 @@
     "id": "healthcare",
     "industry": "Healthcare",
     "name": "Healthcare",
-    "journalName": "Clinical Practice",
     "summary": "Shift debriefs, reflective practice and CPD for patient-facing roles — never patient records.",
     "icon": "cross.case",
     "color": "teal",
@@ -21,7 +20,6 @@
         "color": "teal",
         "cadence": "daily",
         "summary": "How the shift went, in your own terms — never a patient record.",
-        "includedByDefault": true,
         "fields": [
           { "key": "setting", "label": "Setting", "type": "project" },
           { "key": "workload", "label": "Workload", "type": "rating", "includeInInsights": true },
@@ -42,7 +40,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Gibbs’ Reflective Cycle, the format the NMC and HCPC both ask for.",
-        "includedByDefault": true,
         "fields": [
           { "key": "tags", "label": "Tags", "type": "tags" },
           {
@@ -65,7 +62,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "What you want to raise in your next reflective discussion or clinical supervision.",
-        "includedByDefault": false,
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           { "key": "tags", "label": "Tags", "type": "tags" },

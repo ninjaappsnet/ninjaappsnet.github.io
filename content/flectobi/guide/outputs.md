@@ -2,8 +2,8 @@
 title: Outputs: write your data to a file
 description: How FlectoBI Outputs work: the file types, their options, when a file is written, auto-write, and why a source file is never overwritten.
 slug: outputs
-date: 2026-10-26
-order: 9
+date: 2026-10-31
+order: 11
 ---
 An Output is the Step that writes a Dataset to a file. Use it to hand shaped data to a colleague, to feed another tool or to keep a snapshot. Reports do not need Outputs. They read the Steps directly.
 
@@ -54,7 +54,7 @@ The file is always **.xlsx**, never the older .xls. It has one sheet, named afte
 
 Nothing is written by surprise. Opening a Workbook never writes a file.
 
-- **Write Now** writes this Output. The result line says how many rows were written and when.
+- **Write Now** writes this Output. The result line says how many rows were written and when. An Output never writes a sample. While a database table is still loading, the Output says “Waits for all rows to load.”, and Write Now writes nothing until all the rows are in.
 - **Write All Outputs** (Shift-Command-R in the **Flow** menu) writes every Output.
 - **Write automatically when the data changes** rewrites the file whenever the data changes. It starts only after you have used **Write Now** or **Write All Outputs** once in this session.
 

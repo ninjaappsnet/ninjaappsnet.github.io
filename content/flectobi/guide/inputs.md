@@ -2,17 +2,17 @@
 title: Inputs and their options
 description: Every file type FlectoBI reads as an Input, the options for CSV, JSON, Excel and SQLite files, and how and when your data is read again.
 slug: inputs
-date: 2026-10-26
+date: 2026-10-31
 order: 3
 ---
-An Input is a Step that reads data. It is where every Flow starts. This page lists the file types FlectoBI reads and what you can set for each. For databases, see [Databases](../databases/).
+An Input is a Step that reads data. It is where every Flow starts. This page lists the file types FlectoBI reads and what you can set for each. For databases, see [Connecting to databases](../databases/).
 
 ## Adding an Input
 
 Choose one of these:
 
 - Drag files from Finder onto the Flow canvas.
-- Click **Add Input** in the toolbar. It opens a file panel.
+- Click **Add Input** in the toolbar. It opens a file panel. Its menu also offers **Files…** and **Connect to Database**.
 - Choose **Flow › Add Input Files…**, or press **Shift-Command-I**.
 
 You can choose several files at once. Each one becomes its own Step. If FlectoBI cannot read a file, it names it in a message and adds the others.
@@ -29,7 +29,7 @@ You can choose several files at once. Each one becomes its own Step. If FlectoBI
 | Excel and similar | .xlsx, .xlsm, .xlsb, .xls, .ods |
 | SQLite | .sqlite, .sqlite3, .db |
 
-FlectoBI also reads from PostgreSQL, MySQL and MariaDB servers.
+FlectoBI also reads from PostgreSQL, MySQL and MariaDB servers. A database Input shows its first 1,000 rows at once and loads the rest in the background. See [Large tables](../large-tables/).
 
 Select an Input and the inspector shows a **Source** section with the file name, where it is, **Change File…**, **Show in Finder**, and the size of the Dataset. The **Format** picker offers **CSV / TSV**, **JSON**, **Parquet**, **Excel** and **SQLite**. FlectoBI guesses from the ending, and you can change it.
 

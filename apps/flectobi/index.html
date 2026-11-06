@@ -19,7 +19,7 @@
 <link rel="icon" href="../../assets/seal.svg" type="image/svg+xml">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preload" href="../../assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-<link rel="stylesheet" href="../../style.css?v=5ac7ec2224">
+<link rel="stylesheet" href="../../style.css?v=a9a7424c37">
 <script src="../../assets/theme.js?v=b7c0a7cebd" defer></script>
 <script>document.documentElement.classList.add('js')</script>
 <script src="../../assets/opening.js?v=54d7275432" defer></script>
@@ -183,7 +183,7 @@
         </tbody>
       </table>
     </div>
-    <p>Databases are read only. FlectoBI copies a table or the result of a query into its engine as a snapshot, and never writes to the server. The Workbook keeps only the connection details. Passwords go to your Mac’s Keychain, never into the Workbook.</p>
+    <p>Databases are read only. Save a server once as a data source, pick its tables, and FlectoBI copies each table or query result into its engine as a snapshot. A big table shows its first 1,000 rows at once and loads the rest in the background, and Filters, Joins and Summaries can run on the server so fewer rows travel. FlectoBI never writes to the server. The Workbook keeps the source’s name, host, port, database and SSL setting. Your user name and password go to your Mac’s Keychain, never into the Workbook.</p>
     <p>An Output writes only when you ask, with Write Now or Write All Outputs. You can turn on automatic writing after that. FlectoBI refuses an Output that would overwrite a file the Flow reads.</p>
   </div>
 </section>
@@ -199,7 +199,7 @@
       <li><strong>Sandboxed.</strong> FlectoBI opens only the files and folders you choose, and you can see and remove each one in Settings. Excel files are read by a separate helper that has no network or file access of its own.</li>
       <li><strong>No account, and no tracking.</strong> There is nothing to sign in to. The privacy manifest declares no tracking and no collected data.</li>
       <li><strong>Maps work offline.</strong> No map tiles or lookup services are used.</li>
-      <li><strong>The only network use is a database you connect to.</strong> FlectoBI talks to the host and port you type, and to nothing else.</li>
+      <li><strong>The only network use is a database you connect to.</strong> FlectoBI talks to the hosts and ports of the data sources you save, and to nothing else. If you keep a database login in iCloud Keychain, macOS syncs it; FlectoBI sends nothing to iCloud.</li>
     </ul>
     <p>The <a href="privacy.html">privacy policy</a> has the details.</p>
   </div>

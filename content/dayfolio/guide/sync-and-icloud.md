@@ -3,7 +3,8 @@ title: Sync and iCloud
 description: Dayfolio syncs your journals between iPhone, iPad and Mac through your own iCloud, encrypted, and end to end with Advanced Data Protection.
 slug: sync-and-icloud
 date: 2026-10-16
-order: 9
+updated: 2026-11-05
+order: 10
 ---
 Dayfolio keeps your journals the same on your iPhone, iPad and Mac through your own iCloud account. There’s no Dayfolio account to create and no Dayfolio server: your entries go from your devices to your private iCloud storage and back.
 
@@ -15,7 +16,7 @@ On a new device signed in to the same iCloud account, Dayfolio looks for your jo
 
 ## What syncs
 
-Everything you write and set up: journals, templates, entries and their attachments, people, projects, places, reminders, saved searches, report presets and reports, and Recently deleted. Some settings sync too, such as the temperature unit, the Editor settings and *Prepared by*.
+Everything you write and set up: journals, folders, their forms, entries and their attachments, people, projects, places, reminders, saved searches, report presets and reports, and Recently deleted. Some settings sync too, such as the temperature unit, the Editor settings and *Prepared by*.
 
 Settings about one device stay on that device: how soon locked journals lock again, the quick entry shortcut, the menu-bar icon, the quick-note link and its key, the mirror folder, Spotlight and tips. Reminders arrive on each device that has them switched on.
 
@@ -58,13 +59,9 @@ On iPhone and iPad, **Upload files over Wi-Fi only** in Settings › Sync keeps 
 
 Deleting an entry, a journal or anything else moves it to Recently deleted on every device, where it waits 30 days and can be restored. When many items arrive deleted from another device at once, Dayfolio tells you, with *Review* and *Restore all*.
 
-## Purchases on every device
+## Two apps, one iCloud
 
-A purchase covers every device of its platform signed in to your Apple Account: the Mac purchase all your Macs, the iPhone & iPad purchase all your iPhones and iPads, or one purchase for all of them. If a purchase doesn’t show on a device, choose **Restore purchases** in Settings › General. Prices are on the [Dayfolio page](../../).
-
-## What’s free
-
-Sync is free, with no limit of its own. It uses your iCloud storage.
+Dayfolio is two apps: **Dayfolio: Work Journal** for Mac, and **Dayfolio: Daily Work Log** for iPhone and iPad. Each is bought once, with no subscription, and someone who uses both buys both. They sync through your own iCloud, so a journal you write on one appears in the other. Each app covers every device of its platform signed in to your Apple Account.
 
 ## Related
 

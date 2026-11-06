@@ -4,7 +4,6 @@
     "id": "general",
     "industry": "General",
     "name": "General",
-    "journalName": "Work Log",
     "summary": "Weekly reviews, 1:1s and decisions that fit any kind of work.",
     "icon": "square.grid.2x2",
     "color": "slate",
@@ -19,8 +18,8 @@
         "color": "slate",
         "cadence": "review",
         "summary": "Energy, mood, wins and lessons — a personal check-in for any job.",
-        "includedByDefault": true,
         "reminder": { "weekdays": [6], "hour": 17, "minute": 0 },
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "energy", "label": "Energy", "type": "rating" },
           { "key": "mood", "label": "Mood", "type": "mood" },
@@ -48,7 +47,7 @@
         "color": "slate",
         "cadence": "onEvent",
         "summary": "Any recurring one-on-one — with a manager, a mentor, a peer or a report.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
@@ -69,7 +68,6 @@
         "color": "amber",
         "cadence": "onEvent",
         "summary": "Capture a win when it happens, so review season isn’t a memory test.",
-        "includedByDefault": true,
         "fields": [
           {
             "key": "impact", "label": "Impact", "type": "singleSelect", "includeInInsights": true,
@@ -97,7 +95,6 @@
         "color": "slate",
         "cadence": "onEvent",
         "summary": "The context, the decision and who signed off — for any decision worth remembering.",
-        "includedByDefault": false,
         "fields": [
           { "key": "project", "label": "Project", "type": "project", "carryOver": true },
           { "key": "decided-by", "label": "Decided by", "type": "person" },
@@ -114,7 +111,6 @@
         "color": "slate",
         "cadence": "onEvent",
         "summary": "The generic meeting record: attendees, agenda and what’s next.",
-        "includedByDefault": false,
         "fields": [
           { "key": "attendees", "label": "Attendees", "type": "person" },
           { "key": "meeting-time", "label": "Meeting time", "type": "timeRange" },
@@ -138,7 +134,7 @@
         "color": "slate",
         "cadence": "daily",
         "summary": "A short, frequent “today I learned” log, useful in any discipline.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 3 },
         "fields": [
           { "key": "topic", "label": "Topic", "type": "tags" },
           { "key": "source", "label": "Source", "type": "link" },
@@ -155,7 +151,6 @@
         "color": "slate",
         "cadence": "onEvent",
         "summary": "Continuing professional development: hours logged, plus a reflection.",
-        "includedByDefault": false,
         "fields": [
           {
             "key": "type", "label": "Type", "type": "singleSelect",
@@ -184,7 +179,6 @@
         "color": "amber",
         "cadence": "review",
         "summary": "Your year in your own words, wins first, for review season.",
-        "includedByDefault": false,
         "fields": [
           { "key": "evidence", "label": "Evidence", "type": "link" },
           { "key": "tags", "label": "Tags", "type": "tags" },

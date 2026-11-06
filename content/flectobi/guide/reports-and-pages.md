@@ -2,8 +2,8 @@
 title: Reports and Pages
 description: A Report is a set of Pages, and a Page is a grid of Visuals. Learn to add, move, resize and undo Visuals, and how a Visual gets its data.
 slug: reports-and-pages
-date: 2026-10-26
-order: 10
+date: 2026-10-31
+order: 12
 ---
 A Flow shapes your data. A Report shows it. Reports are where you turn the Datasets you have prepared into charts, tables and numbers that other people can read at a glance.
 
@@ -66,7 +66,7 @@ Every Visual reads from exactly one Dataset: the output of one Step. Select the 
 2. Under **Fields**, fill the Field Wells. Each kind has its own wells, such as **X-axis** and **Values**. The [Visuals guide](../visuals/) lists them all.
 3. For each Value, choose a Column and an Aggregation such as **Sum** or **Count**.
 
-The Visual draws as soon as it has what it needs. If a Step has not run yet, the Visual says the Step “is not ready yet.” If a Step has a problem, it says so and names the Step. If you delete a Step that a Visual used, the Visual says “The dataset of this visual was deleted.” Pick another Dataset to bring it back.
+The Visual draws as soon as it has what it needs. If a Step has not run yet, the Visual says the Step “is not ready yet.” If a Step has a problem, it says so and names the Step. If you delete a Step that a Visual used, the Visual says “The dataset of this visual was deleted.” Pick another Dataset to bring it back. If the Step comes from a database table that is still loading, the Visual draws the first 1,000 rows and wears a grey **Sample** tag. It redraws when all rows are in. If the Workbook’s database source is not connected on this Mac, the Visual says “Connect to load the data.”
 
 > **Tip:** A Report only reads Step outputs. To show a different shape of data, add a Transform to your Flow, then pick that Step as the Dataset.
 

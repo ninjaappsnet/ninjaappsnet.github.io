@@ -19,7 +19,7 @@
 <link rel="icon" href="../../assets/seal.svg" type="image/svg+xml">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preload" href="../../assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-<link rel="stylesheet" href="../../style.css?v=5ac7ec2224">
+<link rel="stylesheet" href="../../style.css?v=a9a7424c37">
 <script src="../../assets/theme.js?v=b7c0a7cebd" defer></script>
 </head>
 <body>
@@ -65,6 +65,8 @@
       <li><a href="#excel">Excel files</a></li>
       <li><a href="#csv">CSV files that read wrongly</a></li>
       <li><a href="#databases">Databases and SSL errors</a></li>
+      <li><a href="#database-logins">Database logins and shared Workbooks</a></li>
+      <li><a href="#large-tables">Large database tables</a></li>
       <li><a href="#large-files">Large files and memory</a></li>
       <li><a href="#outputs">Outputs</a></li>
       <li><a href="#maps">Maps</a></li>
@@ -115,7 +117,7 @@
     </ul>
 
     <h2 id="databases">A database connection fails. What do the messages mean?</h2>
-    <p>FlectoBI connects to PostgreSQL, MySQL and MariaDB servers, and only reads from them. Use <strong>Test Connection</strong> in the sheet to see the result before you add the Input. The messages say what to change:</p>
+    <p>FlectoBI connects to PostgreSQL, MySQL and MariaDB servers, and only reads from them. Use <strong>Test Connection</strong> in the New Data Source sheet to see the result before you click Continue. FlectoBI asks you to use a read-only database user, which is the safest choice. The messages say what to change:</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Message</th><th>What to do</th></tr></thead>
@@ -131,12 +133,32 @@
           <tr><td>The server offers only an outdated encryption version (TLS 1.0 or 1.1). Ask the administrator to turn on TLS 1.2 or later.</td><td>FlectoBI needs TLS 1.2 or later for MySQL.</td></tr>
           <tr><td>The server asked for the password in a form that could be intercepted, so it was not sent. Choose Verify certificate, or set up the server for SCRAM passwords.</td><td>FlectoBI never sends a PostgreSQL password in clear text or as MD5. Ask for SCRAM passwords on the server.</td></tr>
           <tr><td>This account signs in with a method FlectoBI does not support.</td><td>Ask for an account with a caching_sha2_password or mysql_native_password password.</td></tr>
+          <tr><td>That database does not exist on this server.</td><td>Check the database name in Edit Source…</td></tr>
+          <tr><td>The sign-in for this connection could not be prepared. Check the host, database, user name and password.</td><td>Check those four fields in Edit Source…</td></tr>
+          <tr><td>This server runs MySQL 5.7. FlectoBI needs MySQL 8.0 or later.</td><td>The server is older than FlectoBI supports. The sentence names the server and the version it needs. The same sentence appears for MariaDB and PostgreSQL.</td></tr>
         </tbody>
       </table>
     </div>
     <p>The SSL setting has four choices: Off, Prefer, Require and Verify certificate. For a server on another machine, a new connection starts at Require for PostgreSQL and Verify certificate for MySQL. Choose Off only for a server on your own Mac, or one that offers no encryption, and know that the password and the data can then be read on the network.</p>
-    <p>A custom query for MySQL must read data. Start it with SELECT, WITH, TABLE or VALUES, and enter one query only. FlectoBI does not write to any database.</p>
-    <p>MySQL 8.4, 9.7 and 26.x and MariaDB 11.8 are tested. Accounts that sign in with ed25519, PARSEC or sha256_password are not supported.</p>
+    <p>A custom query must read data. Start it with SELECT, WITH, TABLE or VALUES, and enter one query only, without INTO. For PostgreSQL, leave out FOR UPDATE and FOR SHARE too. FlectoBI does not write to any database.</p>
+    <p>FlectoBI is tested with PostgreSQL 14 to 18, MySQL 8.0, 8.4, 9.7 and 26.x, and MariaDB 10.11, 11.4 and 11.8. Older servers are refused with a sentence that names the version needed. Accounts that sign in with ed25519, PARSEC or sha256_password are not supported.</p>
+
+    <h2 id="database-logins">Where is my database login kept? What if a Workbook asks to connect?</h2>
+    <p>Your user name and password are saved in your Mac’s Keychain, one item for each data source, and never in a Workbook. Under “Keep the User Name and Password” in the data source sheet you choose This Mac, This Mac and iCloud Keychain, or This Mac only, never in backups. The iCloud choice is greyed out when this Mac is not signed in to iCloud.</p>
+    <ul>
+      <li><strong>“Connect to load the data.”</strong> The Workbook reads from a database that is not set up on this Mac. Click Connect… in the Input’s inspector and type your own user name and password.</li>
+      <li><strong>“This workbook wants to read from … with your saved login.”</strong> The Workbook names a data source you saved on this Mac. Click Allow to let it use your saved login, or Don’t Allow. FlectoBI asks once for each file and source. Until you allow it, the Inputs say “Allow to load the data.”</li>
+      <li><strong>Remove a saved source.</strong> Open Settings, choose Data Sources, then Delete… Its password is removed from the Keychain.</li>
+    </ul>
+
+    <h2 id="large-tables">A database table shows “Sample”. Is something wrong?</h2>
+    <p>No. A database Input shows its first 1,000 rows at once and loads the rest in the background. Until it finishes, the Input and the Steps after it carry a grey Sample tag, and their results are based on those rows. When all rows are in, the tag goes and the Steps run again.</p>
+    <ul>
+      <li><strong>Stop.</strong> The Stop button beside the progress, or Command-period, stops the load and keeps the sample. Click Load All Rows to start again.</li>
+      <li><strong>Fewer rows.</strong> In the Input’s inspector, change Import from All rows to First… and type a number. Order decides which rows come first.</li>
+      <li><strong>On the server.</strong> A shaded “On the server” region on the canvas shows Steps that run on the database server, so fewer rows are downloaded. Select the Input and click Show Query to see the SQL.</li>
+      <li><strong>An Output waits.</strong> An Output never writes a sample. It says “Waits for all rows to load.”</li>
+    </ul>
 
     <h2 id="large-files">A Step stops because of memory or disk. What can I do?</h2>
     <p>FlectoBI keeps its data engine to about 30% of your Mac’s memory and writes the overflow to temporary disk space. A Step stops when the whole app passes 80% of the memory, and says that it needs more memory than is available, and that you should filter or summarize the data earlier in the Flow, or simplify the Formula.</p>
@@ -162,8 +184,8 @@
     <p>If a place is not found, the Visual lists it, and suggests that you check the spelling or add a Country field, so FlectoBI can tell places with the same name apart. Where a name could be several places, FlectoBI uses the largest and says so. Postal codes are not supported.</p>
 
     <h2 id="sharing">How do I share a Workbook?</h2>
-    <p>Send the .flectobi file together with its data files, and keep the folders as they were: the Workbook stores paths relative to itself. A Workbook holds the recipe, never the data and never a password.</p>
-    <p>On the other Mac, FlectoBI shows the Grant Access banner described above. One grant of the common folder fixes every Step. A database password does not travel: the person you share with is asked for it once, and it is saved in their own Keychain.</p>
+    <p>Send the .flectobi file together with its data files, and keep the folders as they were: the Workbook stores paths relative to itself. A Workbook holds the recipe, never the data and never a database login.</p>
+    <p>On the other Mac, FlectoBI shows the Grant Access banner described above. One grant of the common folder fixes every Step. A database login does not travel: the person you share with connects each source once with their own user name and password, and FlectoBI saves them in their own Keychain.</p>
 
     <h2 id="limits">What are the limits in this version?</h2>
     <ul>

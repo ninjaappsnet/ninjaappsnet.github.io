@@ -4,7 +4,6 @@
     "id": "design",
     "industry": "Design",
     "name": "Design",
-    "journalName": "Design Log",
     "summary": "Critique, research and system changes for people who design the product.",
     "icon": "paintbrush",
     "color": "pink",
@@ -21,7 +20,6 @@
         "color": "pink",
         "cadence": "onEvent",
         "summary": "What came up in critique, and what you’re actually going to change.",
-        "includedByDefault": true,
         "fields": [
           { "key": "artifact", "label": "Artifact", "type": "link" },
           { "key": "reviewers", "label": "Reviewers", "type": "person" },
@@ -51,7 +49,6 @@
         "color": "teal",
         "cadence": "onEvent",
         "summary": "Generative research: what you’re learning about people, before you test a design on them.",
-        "includedByDefault": true,
         "fields": [
           { "key": "participant", "label": "Participant", "type": "person" },
           {
@@ -76,7 +73,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "Evaluative research: did they succeed at the task, and where did they get stuck?",
-        "includedByDefault": false,
         "fields": [
           { "key": "participant", "label": "Participant", "type": "person" },
           {
@@ -101,7 +97,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "What changed in the system, so consuming teams don’t find out by breaking.",
-        "includedByDefault": false,
         "fields": [
           { "key": "component", "label": "Component", "type": "project" },
           {
@@ -126,7 +121,6 @@
         "color": "green",
         "cadence": "review",
         "summary": "A periodic pass to catch accessibility regressions before someone else does.",
-        "includedByDefault": false,
         "fields": [
           { "key": "surface", "label": "Surface", "type": "project" },
           { "key": "issues-found", "label": "Issues found", "type": "number", "includeInInsights": true },

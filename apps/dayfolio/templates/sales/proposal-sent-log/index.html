@@ -24,7 +24,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c73e26'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' text-anchor='middle' fill='%23f6f2e9'%3E忍%3C/text%3E%3C/svg%3E">
 <script>(function(){var t;try{t=localStorage.getItem('ninjaapps-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
 <link rel="preload" href="../../../../../assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
-<link rel="stylesheet" href="../../../../../style.css?v=5ac7ec2224">
+<link rel="stylesheet" href="../../../../../style.css?v=a9a7424c37">
 <script src="../../../../../assets/theme.js?v=b7c0a7cebd" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Dayfolio","item":"https://ninjaapps.net/apps/dayfolio/"},{"@type":"ListItem","position":2,"name":"Templates","item":"https://ninjaapps.net/apps/dayfolio/templates/"},{"@type":"ListItem","position":3,"name":"Sales","item":"https://ninjaapps.net/apps/dayfolio/templates/sales/"},{"@type":"ListItem","position":4,"name":"Proposal sent log","item":"https://ninjaapps.net/apps/dayfolio/templates/sales/proposal-sent-log/"}]}</script>
 </head>
@@ -77,10 +77,11 @@
 </article>
 <h2 id="fields">Its fields</h2>
 <p>Values sit at the top of an entry and the writing fields below them, full width. A field’s prompt is the hint you see while it’s empty.</p>
-<ol class="tpl-fields"><li><p class="tpl-field-head"><span class="tpl-field-name">Deal</span><span class="tpl-type">Project</span></p><p class="tpl-note">Carries over: a new entry starts with the value from your last entry with this template.</p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Amount</span><span class="tpl-type">Number</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Outcome</span><span class="tpl-type">Single select</span></p><p class="tpl-options"><span class="entry-pill entry-tone-success">Won</span><span class="entry-pill entry-tone-danger">Lost</span><span class="entry-pill entry-tone-neutral">Pending</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Tags</span><span class="tpl-type">Tags</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Close reason</span><span class="tpl-type">Text</span></p><p class="tpl-prompt">Why did they say yes or no?</p></li></ol>
-<h2 id="add">Add it to a journal</h2>
-<ol><li>Open the template library: on a Mac, choose View › Template Library (⇧⌘L); on iPhone and iPad, go to More › Templates.</li><li>Choose the Sales pack, then Proposal sent log.</li><li>Choose <strong>Add to</strong> and the journal, or <strong>Customize…</strong> to change its fields first.</li></ol>
-<p>Templates from the library are free to add and to change. To start a whole journal with this template and its neighbours, see the <a href="../">Sales pack</a>. More about templates and fields in <a href="../../../guide/templates-and-fields/">Templates and fields</a>.</p>
+<ol class="tpl-fields"><li><p class="tpl-field-head"><span class="tpl-field-name">Deal</span><span class="tpl-type">Project</span></p><p class="tpl-note">Carries over: a new entry starts with the value from your last entry in this journal.</p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Amount</span><span class="tpl-type">Number</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Outcome</span><span class="tpl-type">Single select</span></p><p class="tpl-options"><span class="entry-pill entry-tone-success">Won</span><span class="entry-pill entry-tone-danger">Lost</span><span class="entry-pill entry-tone-neutral">Pending</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Tags</span><span class="tpl-type">Tags</span></p></li><li><p class="tpl-field-head"><span class="tpl-field-name">Close reason</span><span class="tpl-type">Text</span></p><p class="tpl-prompt">Why did they say yes or no?</p></li></ol>
+<h2 id="new-journal">Start a journal from it</h2>
+<ol><li>Open <strong>New journal</strong>: on a Mac, choose <strong>+</strong> beside Journals in the sidebar, or File › New journal…; on iPhone and iPad, go to More › Journals and tap <strong>+</strong>.</li><li>Choose Proposal sent log, under Sales, or search for it. It may also be under <em>Suggested for you</em>, at the top.</li><li>Choose <strong>Create</strong>. Dayfolio makes a journal named Proposal sent log, with its own form: this template’s fields, which you can change in Journal settings, and no other journal’s.</li></ol><p>Make it again for a second client or project and the new journal is called Proposal sent log 2, then Proposal sent log 3, ready to rename. <strong>Blank journal</strong>, at the top of the list, starts from one writing field instead.</p>
+<p>The journal starts with no reminder and no goal. You can add either in Journal settings.</p>
+<p>See the other templates of the <a href="../">Sales pack</a>. More about journals, forms and fields in <a href="../../../guide/templates-and-fields/">Journals, forms and fields</a>.</p>
 <h2 id="related">Related templates</h2>
 <ul class="tpl-related"><li><a href="../customer-call/">Customer call</a>: Who you spoke with, what they said and what happens next.</li><li><a href="../deal-update/">Deal update</a>: What moved this week, and what could stall it.</li><li><a href="../pipeline-review/">Pipeline review</a>: Where the pipeline stands, and which deals need attention.</li><li><a href="../weekly-numbers/">Weekly numbers</a>: Calls, meetings and deals closed, with the story behind them.</li></ul>
 
@@ -88,7 +89,7 @@
   <aside class="appbox" aria-label="Get Dayfolio">
     <img class="app-icon-sm" src="../../../icon-320.webp" alt="Dayfolio app icon" width="64" height="64" loading="lazy">
     <div>
-      <p><strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. It’s free to start, with one journal and 100 entries, and there’s no subscription.</p>
+      <p><strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. Two apps, one for the Mac and one for iPhone and iPad, each bought once, with no subscription.</p>
       <div class="actions"><a class="ticket" href="https://apps.apple.com/app/id6817388897"><span>Get it on the App Store</span></a><a class="btn" href="../../../">About Dayfolio</a></div>
     </div>
   </aside>

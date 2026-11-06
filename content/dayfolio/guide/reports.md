@@ -3,15 +3,18 @@ title: Reports: weekly, director update and self-review
 description: Turn your entries into a weekly report, a director update, a performance review or a year-end self-review, with filters, billable time and CSV.
 slug: reports
 date: 2026-10-16
-order: 4
+updated: 2026-11-05
+order: 5
 ---
-A report turns a week, a month or a review period of entries into a summary you can read, edit and send. Because entries are structured, Dayfolio doesn’t just paste your notes together: it lists what shipped, adds up hours in a time table, counts statuses and puts your starred entries first. Making and reading reports is free.
+A report turns a week, a month or a review period of entries into a summary you can read, edit and send. Because entries are structured, Dayfolio doesn’t just paste your notes together: it lists what shipped, adds up hours in a time table, counts statuses and puts your starred entries first.
 
 ## Open Reports
 
 - **On a Mac:** Reports are in the sidebar under Journals. Choose **+** beside Reports for the *New report* menu.
 - **On iPhone:** More › Reports. **On iPad:** Reports in the sidebar, or More › Reports in a narrow window.
 - From elsewhere: *Create report* in Insights, *Make a report* on a person’s, project’s or tag’s page, and *Make this week’s report* from Siri or Shortcuts.
+
+![The Year-end self-review on a Mac: its settings, with the report type, the journals and the dates, beside the report, which opens with Highlights and then what shipped, by project.](reports-performance-review-mac.webp)
 
 ## Kinds of report
 
@@ -27,7 +30,7 @@ A report turns a week, a month or a review period of entries into a summary you 
 ## Make a report
 
 1. Choose **+** and a kind. A draft opens.
-2. Tick the **journals** to include.
+2. Tick the **journals** to include, or choose a **folder** to include all the journals in it. A folder is read when you generate, so a journal you add to it later is in the next report.
 3. Under **Include fields**, tick the fields to report on. Each says what it adds: a total time, an average, a sum, a count per option, or a list.
 4. Optionally narrow the **entries** and choose how to **group** them (below).
 5. Choose **Generate**.
@@ -36,7 +39,6 @@ The report appears as a page you can read: one section per field, with text as b
 
 Notes about people, the fields of 1:1 notes, Skip-level notes and Feedback given, start unticked in every kind but Custom, so they stay out of a report unless you tick them. A report filtered to one person ticks them for you.
 
-![The Reports screen on a Mac, with a Weekly report’s settings on the left and the generated report on the right, showing Highlights, a Shipped section and a time table.](reports-weekly-mac.webp)
 
 ### Keep it with Save preset
 
@@ -76,8 +78,6 @@ Amounts are totalled per currency, such as “$450.00 · €180.00”, and never
 
 A report with a time table can also be exported as a **CSV** file for your invoicing or a spreadsheet: one row per entry and project, with the date, journal, project, hours, rate, currency and amount.
 
-![A Weekly report on a Mac for the Clients journal, with an Hours table that prices each day’s time and totals it in euros and dollars.](reports-billable-mac.webp)
-
 ## Send it
 
 To send a report:
@@ -86,21 +86,22 @@ To send a report:
 - **Export** as PDF, Word or Markdown, or as CSV when it has a time table,
 - **Share…** sends the PDF, and **Print…** prints it.
 
+When a file is made, a message names it and where it went, such as “Saved “Weekly report.pdf” in Downloads”, with *Show in Finder* on a Mac and *Share…* on iPhone and iPad. If saving fails, the message stays until you dismiss it and has *Try again*. While a report is made, Dayfolio says what it’s doing, such as “Reading 27 entries” or “Saving the report”, and shows nothing at all when it’s quick. A range with no entries says so, and offers the previous period.
+
 The PDF and Word files are named after the report, so a review season’s files are easy to tell apart.
+
+![The same Year-end self-review exported as a PDF and opened in Preview on a Mac, its highlights a bulleted list under the dates.](reports-pdf-export-mac.webp)
 
 ![A Director update for Ines Costa on iPhone, read as text that fits the screen, with its highlights and This week.](reports-director-update-iphone.webp)
 
 ## Your week, ready to review
 
-If a journal has a weekly review template with a reminder, Today shows a card once that reminder has gone off and the week’s review isn’t written yet: “Your week, ready to review”, with how many entries you wrote, items done and entries starred. **Start this week’s review** opens the review entry, and ⋯ › *Make this week’s report* makes the report. In a weekly review entry, the **This week** tray lists what you ticked off, what you starred and what’s still open, ready to add with a tap.
+If a journal made from a weekly review template has a reminder, Today shows a card once that reminder has gone off and the week’s review isn’t written yet: “Your week, ready to review”, with how many entries you wrote, items done and entries starred. **Start this week’s review** opens the review entry, and ⋯ › *Make this week’s report* makes the report. In a weekly review entry, the **This week** tray lists what you ticked off, what you starred and what’s still open, ready to add with a tap.
 
 ## Locked journals in reports
 
 A report that includes a locked journal asks you to unlock first, and a report made from one opens only while it’s unlocked. When you’d rather leave it out, choose *Generate without* that journal. See [Locked journals and privacy](../locked-journals/).
 
-## What’s free
-
-Making a draft, generating it and reading it in the app are free, over all your entries. Saving a report preset, keeping its reports, and sending them by copy, export, share or print come with the full version.
 
 ## Related
 

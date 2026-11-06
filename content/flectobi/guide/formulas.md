@@ -3,7 +3,7 @@ title: Formulas: write, read and fix
 description: How FlectoBI Formulas work: syntax, Column references, text and dates, the functions you can use, plain-English errors and the minus sign rule.
 slug: formulas
 date: 2026-10-26
-order: 8
+order: 10
 ---
 A Formula works out one Value for each row. If you have written `=A2*B2` in Excel, you already know most of it. You use Formulas in a **Calculate** Step to add a Column, and in a **Filter** Step set to **Formula** to keep the rows where the Formula is true.
 

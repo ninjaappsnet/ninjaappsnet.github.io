@@ -4,7 +4,6 @@
     "id": "product-management",
     "industry": "Product",
     "name": "Product Management",
-    "journalName": "Product Log",
     "summary": "Customer conversations, specs, roadmap and launch reviews for people who decide what gets built.",
     "icon": "scope",
     "color": "blue",
@@ -20,7 +19,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "What a customer actually said, before it’s rounded off into a feature request.",
-        "includedByDefault": true,
         "fields": [
           { "key": "contact", "label": "Contact", "type": "person" },
           { "key": "account", "label": "Account", "type": "project", "carryOver": true },
@@ -41,7 +39,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "The spec’s open questions, and the calls made to close them.",
-        "includedByDefault": true,
         "fields": [
           { "key": "doc", "label": "Doc", "type": "link" },
           { "key": "reviewers", "label": "Reviewers", "type": "person" },
@@ -69,7 +66,6 @@
         "color": "purple",
         "cadence": "review",
         "summary": "Where the roadmap stands, and what’s putting it at risk.",
-        "includedByDefault": true,
         "fields": [
           {
             "key": "status", "label": "Status", "type": "singleSelect", "includeInInsights": true,
@@ -96,7 +92,7 @@
         "color": "teal",
         "cadence": "weekly",
         "summary": "A weekly pulse on each objective, so quarter-end isn’t the first check on progress.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "objective", "label": "Objective", "type": "project" },
           { "key": "progress", "label": "Progress", "type": "number", "includeInInsights": true },
@@ -117,7 +113,6 @@
         "color": "green",
         "cadence": "review",
         "summary": "Did it land? A short retro right after a feature ships, while it’s fresh.",
-        "includedByDefault": false,
         "fields": [
           { "key": "feature", "label": "Feature", "type": "project" },
           {
@@ -145,7 +140,7 @@
         "color": "pink",
         "cadence": "weekly",
         "summary": "Rolling up scattered feedback into the one theme worth acting on this week.",
-        "includedByDefault": false,
+        "suggestedGoal": { "kind": "timesPerWeek", "count": 1 },
         "fields": [
           { "key": "volume", "label": "Volume", "type": "number", "includeInInsights": true },
           {

@@ -2,8 +2,8 @@
 title: Preview and Column profile
 description: Check your data at every Step. The preview grid, paging, finding a Column, copying Values and the Column profile with its counts and common Values.
 slug: preview-and-column-profile
-date: 2026-10-26
-order: 6
+date: 2026-10-31
+order: 8
 ---
 Below the Flow canvas sits the preview grid. It shows the Dataset that comes out of the Step you selected. Because every Step has a preview, you can check your work as you build it, instead of finding a mistake in the final result.
 
@@ -17,6 +17,7 @@ The bar above the grid shows:
 - its size, as rows by columns,
 - its state, such as Ready, Running or Failed, with how long it took,
 - a refresh button on Inputs,
+- a grey **Sample** tag when the rows are only the first part of a database table, with the load’s progress and a **Stop** button while the rest loads (see [Large tables](../large-tables/)),
 - the **Find Column** box.
 
 A Step that has not finished says “Waiting to run…” or “Running”, followed by its name. A Step with a problem says “This Step Has a Problem” and gives the cause. On an Input, **Try Again** reads it again.

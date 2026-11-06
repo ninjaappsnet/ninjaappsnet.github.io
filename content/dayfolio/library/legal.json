@@ -4,7 +4,6 @@
     "id": "legal",
     "industry": "Legal",
     "name": "Legal",
-    "journalName": "Legal Practice",
     "summary": "Time recording, supervision and reflective practice for lawyers — never case files.",
     "icon": "scalemass",
     "color": "slate",
@@ -21,7 +20,7 @@
         "color": "slate",
         "cadence": "daily",
         "summary": "Time against a matter, the way the SRA and most bars expect it recorded.",
-        "includedByDefault": true,
+        "suggestedGoal": { "kind": "weekdays", "weekdays": [2, 3, 4, 5, 6] },
         "fields": [
           { "key": "matter", "label": "Matter", "type": "project" },
           { "key": "duration", "label": "Duration", "type": "duration", "includeInInsights": true },
@@ -48,7 +47,6 @@
         "color": "purple",
         "cadence": "onEvent",
         "summary": "What came up in supervision or mentoring, about your practice — not a client’s matter.",
-        "includedByDefault": false,
         "fields": [
           { "key": "person", "label": "With", "type": "person" },
           { "key": "tags", "label": "Tags", "type": "tags" },
@@ -63,7 +61,6 @@
         "color": "blue",
         "cadence": "onEvent",
         "summary": "A lesson worth keeping from how a matter went, stripped of anything privileged.",
-        "includedByDefault": false,
         "fields": [
           {
             "key": "area-of-law", "label": "Area of law", "type": "singleSelect",

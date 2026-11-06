@@ -2,8 +2,8 @@
 title: Keyboard and accessibility
 description: Every FlectoBI keyboard shortcut in tables, plus how the app works with VoiceOver, Increase Contrast and Reduce Motion.
 slug: keyboard-and-accessibility
-date: 2026-10-26
-order: 15
+date: 2026-10-31
+order: 17
 ---
 FlectoBI can be used from the keyboard alone. This page lists every shortcut, then explains how the app works with VoiceOver, Increase Contrast and Reduce Motion.
 
@@ -18,7 +18,7 @@ These work in any Workbook window.
 | Shift-Command-I | Add Input Files… |
 | Command-R | Refresh Inputs |
 | Shift-Command-R | Write All Outputs |
-| Command-. | Stop the running Step |
+| Command-. | Stop the running Step, or the load of a database table |
 | Command-D | Duplicate Selected Steps |
 
 Stop works only while FlectoBI is busy. Delete Selected Steps has no shortcut, but the Delete key does it on the canvas.
@@ -71,9 +71,13 @@ Zoom runs from 25% to 200%. **Zoom to Fit** is a button. Pinching with a trackpa
 |---|---|
 | Up, Down | Choose a Transform in the palette |
 | Return | Add the chosen Transform |
-| Esc | Close the palette, or cancel a database sheet |
+| Esc | Close the palette, or cancel a database sheet. In the SQL editor, close the list of suggestions, or open it when it is closed |
 | Command-Return | Apply a Formula in the Formula editor |
-| Command-Return | Add the Input, in a database sheet’s Custom Query mode |
+| Command-Return | Add the Input, on the Custom Query page of Connect to Database |
+| Command-Return | Apply the query, in the SQL editor of an Input or the larger editor |
+| Control-Space | Open the list of suggestions in the SQL editor |
+| Up, Down | Move through the SQL editor’s suggestions |
+| Tab, Return | Take the highlighted suggestion. Tab also moves between placeholders |
 
 ![The add-Step palette with col typed in the box, matching Transforms listed and the keys for adding and choosing in its footer.](flow-palette.webp "The palette’s footer shows its keys: Return adds, Up and Down choose.")
 

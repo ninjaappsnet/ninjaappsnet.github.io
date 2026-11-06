@@ -3,7 +3,8 @@ title: Locked journals and privacy
 description: Lock a journal with Face ID or Touch ID and its entries stay hidden everywhere until you unlock. What the lock hides, and Dayfolio’s privacy settings.
 slug: locked-journals
 date: 2026-10-16
-order: 6
+updated: 2026-11-05
+order: 7
 ---
 Some of what you write at work is sensitive: notes from 1:1s, feedback, career plans. You can lock any journal with Face ID or Touch ID, and while it’s locked, its entries don’t show anywhere in Dayfolio. Everything else about Dayfolio is private by default: there’s no account, your journals are stored on your devices and in your own iCloud, and Dayfolio collects nothing.
 
@@ -24,6 +25,10 @@ While a journal is locked, its entries are left out of the journal list, the edi
 
 ![A locked journal on iPhone, with the journal’s lock, “Career & Growth is locked”, the Unlock with Face ID button and placeholders where entries would be.](locked-journal-iphone.webp)
 
+![A locked journal on a Mac: “1:1 notes is locked” with Unlock with Touch ID and Use password where the entry would be, placeholders in the list, and a lock beside each locked journal in the sidebar.](locked-journal-mac.webp)
+
+The lock is set for each journal, and a folder adds none. A folder’s combined list never opens a locked journal: until you unlock it, its entries are left out of the list, whatever the folder holds. Notes can be locked like any other journal.
+
 Names that only a locked journal mentions, such as a person or a tag, are hidden too, from tag counts, people lists and Search, until you unlock.
 
 ## Unlock and lock again
@@ -35,7 +40,6 @@ Choose **Unlock with Face ID** (or Touch ID). Your device’s passcode or your M
 - on iPhone and iPad, every time Dayfolio goes to the background;
 - at once with **Lock now**, in the Dayfolio menu or the journal’s menu on a Mac.
 
-![A Mac with Career & Growth locked: “Career & Growth is locked” with Unlock with Touch ID and Use password where the entry would be, placeholders in the list, and a lock beside the journal in the sidebar.](locked-journal-mac.webp)
 
 ## Writing into a locked journal
 
@@ -68,9 +72,6 @@ Settings › **Privacy** holds the permissions Dayfolio uses, each with what it�
 
 The on-device summary in reports and *Log in Dayfolio* use Apple Intelligence on your device. Nothing you write is sent to Dayfolio, because there’s no Dayfolio server. The details are in the [privacy policy](../../privacy.html).
 
-## What’s free
-
-Locking journals and every privacy setting are free.
 
 ## Related
 

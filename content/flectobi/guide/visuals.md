@@ -3,7 +3,7 @@ title: The Visuals
 description: Every Visual in FlectoBI, from column charts to funnels, with what each is for, its Field Wells and its options, including category labels and Top N.
 slug: visuals
 date: 2026-10-26
-order: 11
+order: 13
 ---
 A Visual is one chart, table, card or Slicer on a Page. FlectoBI has the common kinds, plus a few for maps and 3D. This page tells you when to use each one, what goes in its Field Wells, and which options change how it looks.
 

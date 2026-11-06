@@ -155,8 +155,8 @@ DAYFOLIO = App(
     subnav=[("Overview", ""), ("Guide", "guide/"), ("Templates", "templates/"), ("Articles", "articles/"),
             ("Support", "support.html")],
     store_id="6817388897",
-    box=("<strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. It’s free to start, "
-         "with one journal and 100 entries, and there’s no subscription."),
+    box=("<strong>Dayfolio</strong> is a calm work journal for iPhone, iPad and Mac. Two apps, one for the Mac "
+         "and one for iPhone and iPad, each bought once, with no subscription."),
 )
 FLECTOBI = App(
     key="flectobi", name="FlectoBI",
