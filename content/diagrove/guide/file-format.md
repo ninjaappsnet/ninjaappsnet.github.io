@@ -3,7 +3,7 @@ title: The Diagrove file format
 description: What is inside a .diagrove document and a .gtext file: the package, its versioned JSON, pictures and stencils, and the plain-text form of a diagram.
 slug: file-format
 date: 2026-11-06
-order: 14
+order: 15
 ---
 Your diagrams are files, and both of their formats are open. A Diagrove document is a `.diagrove` package of JSON, a preview and pictures, readable without Diagrove. Diagrove text, a `.gtext` file, writes the same diagram as a few lines of plain text that a person, a script or an AI assistant can write. This page describes both, for anyone who wants to read, write, keep or check them outside the app.
 

@@ -100,3 +100,4 @@ A document can hold many canvases, such as the screens of an app or the floors o
 - [Stencils and tints](../stencils-and-tints/): ready-made graphics to drag in.
 - [Outline and auto-layout](../outline-and-auto-layout/): lay a diagram out for you.
 - [Isometric canvases](../isometric-canvases/): drawing in three dimensions.
+- [Keyboard shortcuts and accessibility](../keyboard-and-accessibility/): every shortcut, and the keys to hold while you drag.
