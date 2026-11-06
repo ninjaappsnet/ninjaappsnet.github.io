@@ -82,4 +82,10 @@ Sketch mode is the other way round: it’s on iPad only.
 
 On iPad, Diagrove’s own text follows the text size you choose in **Settings › Display & Brightness › Text Size**, and in Accessibility for the larger sizes. At the largest sizes, inspector labels move above their controls so nothing is cut off. The words in your diagrams stay the size you drew them. On the Mac, Diagrove keeps its own sizes.
 
-VoiceOver reads the canvas graphic by graphic, and in Play mode a graphic with an action is a button that a double tap runs.
+VoiceOver reads the canvas graphic by graphic, and in Play mode a graphic with an action is a button that a double tap runs. See [Keyboard shortcuts and accessibility](../keyboard-and-accessibility/) for what else VoiceOver reads, and every shortcut.
+
+## Related
+
+- [Getting started](../getting-started/): the start screen and the parts of a window.
+- [Drawing](../drawing/): shapes, lines, text and colours, on the Mac and the iPad.
+- [Keyboard shortcuts and accessibility](../keyboard-and-accessibility/): the shortcuts with a hardware keyboard, VoiceOver and text size.
