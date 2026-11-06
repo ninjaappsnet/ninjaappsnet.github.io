@@ -711,6 +711,17 @@ body.share main { flex: 1; }
 .prose .tpl-fields .tpl-prompt { font-style: italic; }
 .prose .tpl-fields .tpl-options { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .prose .tpl-related li + li { margin-top: 6px; }
+/* A diagram template's pictures (a template gallery made by a tool): the app's own drawing of it on its paper, framed by a
+   hairline so White paper doesn't run into the page, and never taller than the screen. */
+.prose .tpl-shot { text-align: center; }
+.prose .tpl-shot img { width: auto; max-width: 100%; max-height: min(92vh, 1100px); margin: 0 auto; border: 1px solid var(--ink); }
+.prose .tpl-shot figcaption { text-align: center; }
+/* The cards and the gallery's category pictures share one shape: the whole template, on its White paper (#fff in
+   both themes, as the app draws it), centred in the frame. */
+.tpl-cards .tpl-card img, .pack .pack-art img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3;
+  object-fit: contain; background: #fff; border: 1px solid var(--ink); }
+.tpl-cards .tpl-card img { margin: 0 0 8px; }
+.pack .pack-art { display: block; margin: 0 0 6px; }
 .listing .card .card-from { font: 500 10px var(--face-title); letter-spacing: .14em; text-transform: uppercase; color: inherit; }
 .listing + .prose { margin-top: 44px; }
 .pack-count { margin: 4px 0 14px; font: 500 11px var(--face-title); letter-spacing: .16em; text-transform: uppercase; color: inherit; }

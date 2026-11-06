@@ -1,0 +1,275 @@
+{
+  "categories": {
+    "blank": "An empty canvas, flat or isometric, for when you know what you want to draw.",
+    "process": "Steps, decisions and handoffs: flowcharts with swimlanes, customer journeys, process maps, decision trees, approvals and an isometric packing line.",
+    "software": "Systems and how their parts talk: architecture in isometric and in C4, networks, sequence diagrams, database schemas, state machines and release pipelines.",
+    "product": "Screens, flows and pages for the apps and sites you design, from wireframes and sitemaps to story maps and a prototype that plays.",
+    "planning": "Plans with dates: roadmaps, kanban boards, Gantt charts, release trains, a weekly planner and a launch checklist.",
+    "ideas": "Ideas and the people who hold them: mind maps and concept maps, org charts, RACI and skills matrices, and how teams work together.",
+    "business": "Strategy on one page: SWOT, a priority matrix, the business model and lean canvases, stakeholders, Porter’s five forces and OKRs.",
+    "data": "Numbers that make a point: a KPI board, a data story, a funnel, survey results, a monthly report and market share, each chart with what it shows.",
+    "meetings": "For the room: a retrospective, a timed agenda, a brainstorm with dot votes, an empathy map and an affinity map.",
+    "spaces": "Isometric scenes built from stencils at true scale: a home network, a warehouse, a data centre, an office floor, a shop and an event venue.",
+    "infographics": "Posters that explain one thing: a fishbone, a comparison, a timeline, a cutaway explainer, a before and after, a cycle, a pyramid and a Venn diagram."
+  },
+  "templates": {
+    "blank": {
+      "for": "Start from an empty canvas when you know what you want to draw, or when nothing in the gallery is close. Add shapes from the toolbar, stencils from the sidebar, or type a few steps joined by arrows in the prompt bar and let Diagrove lay them out."
+    },
+    "blankIsometric": {
+      "page_title": "Blank isometric diagram",
+      "for": "Start from an empty isometric canvas to draw something that stands up: a room, a building, a network or a production line. Draw on the floor or either wall, and stack things by their elevation; the isometric stencils are drawn to true scale."
+    },
+    "flowchart": {
+      "page_title": "Swimlane flowchart template",
+      "for": "A flowchart shows how a piece of work moves from step to step, who does each step, and where it waits on a decision. This one follows a bike workshop’s repair from drop-off to collection across three swimlanes, Customer, Front desk and Mechanic, with one decision, “Go ahead?”, and a key to its shapes. Replace the steps with your own process and keep the lanes for the people or teams who do them."
+    },
+    "customerJourney": {
+      "page_title": "Customer journey map template",
+      "for": "A customer journey map follows one person through the stages of buying or using something, and puts what they think, do and feel beside each stage, so you can see where the experience breaks. This one follows Maya buying a standing desk online, with a line for how she feels, her thoughts and actions, the touchpoints, the pains and a fix for each. Use it to agree on what to improve first."
+    },
+    "process": {
+      "page_title": "Process map template",
+      "for": "A process map shows who does each step of a process and how long each step takes, so the waits and handoffs stand out. This one maps a desk return across the customer, the courier, the warehouse, finance and the bank, with a bar for the days at each step and the one wait the shop can cut. Use it when a process is slow and you need to show where the time goes."
+    },
+    "decisionTree": {
+      "page_title": "Decision tree template",
+      "for": "A decision tree lays out a choice, the chance events that follow it and what each outcome is worth, so you can compare options by their expected value. This one decides where to hold a night market, with the weather as the chance and the takings after costs at each end. Use it for a decision with a few options and outcomes you can put numbers on."
+    },
+    "approvalFlow": {
+      "page_title": "Approval workflow template",
+      "for": "An approval flow shows who signs something off, in what order, and what happens when a step waits too long. This one is an expense claim at a school, from the teacher to the head of department and the bursar, in BPMN-style shapes with a timer that escalates a claim after five school days. Use it to agree on an approval process, or to explain one."
+    },
+    "orderFulfilment": {
+      "for": "An isometric scene shows a process where it happens. This one follows an order through a nursery’s packing shed, picked, packed, labelled and loaded onto a van, with four numbered stations along a belt and a step-by-step key beside them. Use it to explain a physical process, or as a starting point for a warehouse or a production line of your own."
+    },
+    "architecture": {
+      "page_title": "System architecture diagram template",
+      "for": "A system architecture diagram shows the parts of a system and how requests travel between them. This one is a shop’s backend in isometric, in three tiers, edge, app and data, with the services, their databases and a payment provider, and one checkout’s calls traced in orange. Use it to explain a system to people who don’t build it."
+    },
+    "network": {
+      "page_title": "Network diagram template",
+      "for": "A network diagram shows where servers sit and how traffic reaches them. This one is a VPC with public and private subnets in two availability zones, load balancers in front, app servers behind them and a database primary with its standby, with a key for what’s open to the internet. Use it to document a cloud network or to review one."
+    },
+    "sequence": {
+      "page_title": "Sequence diagram template",
+      "for": "A sequence diagram shows the messages that pass between people and systems, in the order they happen. This one is a checkout: the customer, the shop app, the orders service and payments, with stock reserved and the card authorised, and an alt frame for the approved and the declined card. Use it to design or explain an API conversation."
+    },
+    "database": {
+      "page_title": "Database schema template",
+      "for": "A database schema, or entity–relationship diagram, shows the tables of a database, their columns and keys, and how the tables relate. This one has a shop’s customers, orders, products and order lines, with crow’s-foot ends and a key to them. Use it to design a schema or to explain one."
+    },
+    "cloudArchitecture": {
+      "page_title": "C4 container diagram template",
+      "for": "A container diagram, in the C4 model, shows the people who use a software system, the applications and data stores inside it, and the calls between them, with the technology of each. This one is a ferry ticketing system, with a proposed scan queue picked out for review. Use it to show a system one level down from its context."
+    },
+    "stateMachine": {
+      "page_title": "State machine diagram template",
+      "for": "A state machine diagram shows the states something can be in, the events that move it from one to the next, and the guards and actions on the way, in UML notation. This one is a parcel locker’s compartment, from free to reserved, holding a parcel and out of service. Use it to specify behaviour before it’s built."
+    },
+    "ciPipeline": {
+      "page_title": "CI/CD pipeline diagram template",
+      "for": "A pipeline diagram shows what happens to a change between a merge and a release: the builds, the checks, the gates and who approves. This one is a recipe app’s releases, built once for iOS and Android, tested, tried by testers and released by a person, with the failed path in red. Use it to explain a release process or to plan one."
+    },
+    "appScreen": {
+      "page_title": "App wireframe and prototype template",
+      "for": "Two phone screens that play: tap the Website row on the Projects screen and the Website screen opens, as it would in the app. Use it to sketch an app’s screens and try the flow between them in Play mode before anyone writes code, or to show a client how an app will work."
+    },
+    "userFlow": {
+      "page_title": "User flow diagram template",
+      "for": "A user flow shows the screens someone goes through to finish a task and the paths between them, including the ones that go wrong. This one is a shop app’s log in and sign up, from the welcome screen to home, with a wrong password and an email to verify. Use it to design a flow before you design its screens."
+    },
+    "sitemap": {
+      "page_title": "Website sitemap template",
+      "for": "A sitemap shows a website’s pages as a tree, from the home page down, so you can agree on what goes where. This one is a museum’s relaunched site, with each page’s kind, the new pages marked, and the pages in every header and footer. Use it to plan a site or a redesign with the people who write for it."
+    },
+    "wireframe": {
+      "page_title": "Website wireframe template",
+      "for": "A wireframe shows what goes on a page and where, without the colours and pictures, so a review can be about the content and the layout. This one is a museum’s exhibition page for desktop, with numbered notes from the design review pinned to the parts they’re about. Use it to plan a page and to collect feedback on it."
+    },
+    "storyMap": {
+      "page_title": "User story map template",
+      "for": "A user story map lays out what someone does with a product, step by step, and slices the stories under each step into releases, so the first release covers the whole journey thinly. This one is a recipe app, from finding a recipe to cooking it. Use it to plan a first version and what comes after."
+    },
+    "deviceShowcase": {
+      "page_title": "Device mockup template",
+      "for": "A device showcase shows one product on several screens, for a launch page, a pitch or a case study. This one follows a recipe app from a laptop to a phone and a tablet, with a line under each on what it’s for. Use it to show how a product works across devices."
+    },
+    "roadmap": {
+      "page_title": "Product roadmap template",
+      "for": "A roadmap shows what each team plans to do and when, in quarters, with the milestones and today marked. This one is a studio’s iPad app from prototype to launch, by design, engineering and marketing, with a column for what comes after launch. Use it to share a plan without promising dates for everything."
+    },
+    "kanban": {
+      "page_title": "Kanban board template",
+      "for": "A kanban board shows work as cards moving from To do to Done, with limits on how much can be in progress at once. This one is a two-week sprint, with features, bugs and design tasks, points, owners and a blocked card. Use it to plan a sprint or to show where work is stuck."
+    },
+    "projectPlan": {
+      "page_title": "Gantt chart project plan template",
+      "for": "A project plan, or Gantt chart, shows tasks as bars against the weeks, with their owners, due dates and the tasks each one waits on. This one opens a second warehouse, with the critical path in orange, today marked and two tasks running late. Use it to plan a project and to see what a delay puts at risk."
+    },
+    "releaseTimeline": {
+      "page_title": "Release timeline template",
+      "for": "A release timeline shows versions on a regular train, with their feature and code freezes and what each release carries. This one is an app released every eight weeks, with a feature that missed its freeze moving to the next train. Use it to plan releases and to tell people when a feature will ship."
+    },
+    "weeklyPlanner": {
+      "page_title": "Weekly planner template",
+      "for": "A weekly planner shows a team’s week by day and hour, with today and the time now marked. This one is a museum learning team’s week when an exhibition opens, with class visits, public events and team time in their own colours. Use it to plan a busy week and share it."
+    },
+    "launchChecklist": {
+      "page_title": "Launch checklist template",
+      "for": "A launch checklist groups the tasks of a launch by when they’re due, with an owner and a date for each, and marks what’s done and what’s late. This one is a lantern walk, from a month out to the night itself, with one overdue task holding up another. Use it to run any event or launch."
+    },
+    "mindMap": {
+      "page_title": "Mind map template",
+      "for": "A mind map puts one topic in the middle and branches out to its parts, two levels deep, so you can see a whole plan at once. This one is an iPad app’s launch, with its channels, timeline, audience and risks. Use it to brainstorm, to plan, or to take notes in a meeting; its topics are an outline you can edit."
+    },
+    "orgChart": {
+      "page_title": "Org chart template",
+      "for": "An org chart shows who reports to whom. This one is a design studio, with the chief executive, an advisor on a dotted line, three department leads with their teams under them, and an open role, each person with initials and a role. Use it to show a team’s structure, and change it as the team changes."
+    },
+    "conceptMap": {
+      "page_title": "Concept map template",
+      "for": "A concept map links ideas with labelled arrows, so each link reads as a sentence: members own the co-op, the co-op runs solar panels. This one answers how a community energy co-op works, with cross-links between its branches. Use it to explain a system of ideas, to teach one, or to check that you understand it."
+    },
+    "raciMatrix": {
+      "page_title": "RACI matrix template",
+      "for": "A RACI matrix lists the tasks down the side and the people across the top, and marks who is responsible, accountable, consulted and informed for each. This one is a newsroom’s election night, with the riskiest task picked out. Use it when work crosses teams and it isn’t clear who decides."
+    },
+    "teamMap": {
+      "page_title": "Team topologies map template",
+      "for": "A team map shows the teams of an organisation and how they work together: which teams are stream-aligned, which support others, and whether they collaborate, offer a service or help for a while. This one is a university lab’s teams for a term. Use it to plan how teams should interact."
+    },
+    "skillsMatrix": {
+      "page_title": "Skills matrix template",
+      "for": "A skills matrix shows who can do what, and how well, so you can spot the gaps and plan who learns from whom. This one is a restaurant kitchen’s stations, with each cook’s level, the thinnest station first, an open role and who is teaching whom. Use it for any team that has to cover for each other."
+    },
+    "swot": {
+      "page_title": "SWOT analysis template",
+      "for": "A SWOT analysis lists strengths and weaknesses inside a business and the opportunities and threats outside it, then pairs them into moves. This one is a desk shop’s plan for a year, with numbered points and TOWS moves that use a strength or fix a weakness. Use it to start a strategy discussion with facts on the page."
+    },
+    "priorityMatrix": {
+      "page_title": "Impact effort priority matrix template",
+      "for": "A priority matrix places ideas by how much they would help and how much work they are, so the quick wins, the big bets, the fill-ins and the money pits sort themselves. This one places eight ideas for a desk shop, with the scores beside them and a plan for each quadrant. Use it to decide what to build or do next."
+    },
+    "businessModelCanvas": {
+      "page_title": "Business model canvas template",
+      "for": "The business model canvas describes a business on one page in nine blocks: who it serves, what it offers them, how it reaches them, what it needs and what it earns and costs. This one is a coffee roaster with two kinds of customer, colour-coded by who each block serves. Use it to describe a business, or to compare two ways to run one."
+    },
+    "leanCanvas": {
+      "page_title": "Lean canvas template",
+      "for": "The lean canvas is a one-page plan for a new product, filled in the order you should test it, from the problem and the customers to the unfair advantage, with the riskiest assumption marked. This one is an app idea after interviews with its first customers. Use it to write down a startup idea and decide what to test first."
+    },
+    "stakeholderMap": {
+      "page_title": "Stakeholder map template",
+      "for": "A stakeholder map shows who a change affects, how much say each group has, and whether they are for it, undecided or against it. This one places the groups around a town’s new cycle lanes, nearer the centre the more say they have, with a plan to brief each before the vote. Use it to plan who to talk to before a decision."
+    },
+    "fiveForces": {
+      "page_title": "Porter’s five forces template",
+      "for": "Porter’s five forces rates the pressures on a business’s prices: rivals, new entrants, substitutes, and the power of suppliers and buyers. This one rates them for a coworking space, with the reasons for each rating and what the owners will do about the high ones. Use it to understand a market before you set a price or a strategy."
+    },
+    "okrTree": {
+      "page_title": "OKR template",
+      "for": "An OKR tree hangs a quarter’s objectives under a mission, and the key results under each objective, with progress, a target and an owner for each. This one is a food bank’s quarter, checked on a given day, with the results on track, at risk and off track marked against steady progress. Use it to set goals and to review them."
+    },
+    "kpiBoard": {
+      "page_title": "KPI dashboard template",
+      "for": "A KPI board shows a month’s key numbers against their targets, with the trend for each and a short note on what moved them. This one is an online shop’s month, with revenue broken down into the figures that multiply to make it, and the one below target picked out. Use it for a monthly review, or redraw it with your own numbers."
+    },
+    "dataStory": {
+      "page_title": "Data story chart template",
+      "for": "A data story is one chart with its point made plain: a title that says what changed, the moment it changed marked on the line, and three takeaways beside it. This one shows wrong-size returns halving after a size guide went live. Use it when a chart has to convince, not just show."
+    },
+    "funnel": {
+      "page_title": "Conversion funnel template",
+      "for": "A funnel chart shows how many people reach each step of a process and how many leave between steps. This one follows a month’s shopping baskets to orders, with the biggest drop picked out and a chart of how that step has changed since a price went up. Use it to find where people give up."
+    },
+    "surveyResults": {
+      "page_title": "Survey results chart template",
+      "for": "A diverging bar chart shows how people answered agree-or-disagree questions, with the neutral answers in the middle and the statements sorted so the weakest stands out. This one is a shop’s after-order survey, with what it tells you and what to ask next. Use it to report a survey."
+    },
+    "monthlyReport": {
+      "page_title": "Monthly report template",
+      "for": "A monthly report compares a few sites or teams side by side, with a chart each on one shared scale, the totals for all of them and what happens next month. This one is three cafés’ October against September. Use it for a regular report that people read in a minute."
+    },
+    "marketShare": {
+      "page_title": "Market share chart template",
+      "for": "A stacked column chart shows how a market splits between brands, year on year, with the change in points and the reasons beside it. This one is a country’s e-bike sales by brand over four years. Use it to show who is gaining and losing share, and why."
+    },
+    "retrospective": {
+      "page_title": "Sprint retrospective template",
+      "for": "A retrospective looks back at a sprint: what went well, what to improve, and the actions that come out of it, each with an owner and a date. This one has dot votes on the problems, the last sprint’s actions checked off at the top, and a parked item. Use it to run your team’s next retro."
+    },
+    "meetingAgenda": {
+      "page_title": "Meeting agenda template",
+      "for": "A meeting agenda sets out an hour on a timeline: each item with its kind (inform, decide or discuss), its owner and its time, with the purpose, the outcome and what to read before. This one is a theatre group’s planning meeting, with spare time left for a decision that runs over. Use it to run a meeting that ends on time."
+    },
+    "brainstorm": {
+      "page_title": "Brainstorm template",
+      "for": "A brainstorm puts one question in the middle, as “How might we…”, groups the ideas around it and dot-votes them. This one is a library’s workshop with teenagers, with the favourites outlined and the next step written down. Use it to run a workshop, or to record one."
+    },
+    "empathyMap": {
+      "page_title": "Empathy map template",
+      "for": "An empathy map puts one person in the middle and what they say, think, do and feel around them, with their pains and gains, and turns it into a question to design for. This one is someone renting their first apartment before a new job. Use it after interviews, to agree on who you are designing for."
+    },
+    "affinityMap": {
+      "page_title": "Affinity diagram template",
+      "for": "An affinity map groups research notes into themes, so a pile of quotes becomes a few findings. This one groups eight patients’ words about booking an appointment under four statements in their own voice, with the two findings to fix first. Use it to make sense of interviews or feedback."
+    },
+    "homeNetwork": {
+      "page_title": "Home network diagram template",
+      "for": "An isometric scene shows a home network where it is: the line in, the router, a cabled mesh point on each floor and the devices in each room, with cable and Wi-Fi drawn differently. Use it to plan Wi-Fi for a house or a small office, or to explain to someone why one room has no signal."
+    },
+    "warehouse": {
+      "page_title": "Warehouse layout template",
+      "for": "An isometric warehouse shows the route a part takes through a hall, from receiving to dispatch, with five numbered stops and a key. Use it to explain a flow of goods, to plan a layout, or to train new staff."
+    },
+    "dataCentre": {
+      "page_title": "Data centre layout template",
+      "for": "An isometric data hall shows a contained pod of racks with hot and cold aisles, two power feeds and two network carriers, with a key to every part. Use it to document a server room or a data centre, or to show a customer how their hosting is protected."
+    },
+    "officeFloor": {
+      "page_title": "Office floor plan template",
+      "for": "An isometric office floor plan shows who sits where, by team, and the rooms everyone shares: the meeting room, the kitchen, the printer and a free desk. Use it for a move, for new starters, or to plan seating as a team grows."
+    },
+    "shop": {
+      "page_title": "Shop floor plan template",
+      "for": "An isometric shop floor shows a bookshop and café: the shelves by section, the till, the new books table, the café and the fire exit, with the route a visitor is meant to take. Use it to plan a shop layout or to show staff a new one."
+    },
+    "eventVenue": {
+      "page_title": "Event site plan template",
+      "for": "An isometric site plan shows a one-day fair on a green: the gates, the stage, the tents, first aid and the food truck, with a one-way route, a north arrow and a scale. Use it for any outdoor event, for the people who set it up and the people who visit."
+    },
+    "causeAndEffect": {
+      "page_title": "Fishbone diagram template",
+      "for": "A fishbone, or Ishikawa, diagram groups the causes behind one effect along its bones, so you can see where the trouble starts. This one groups the causes of a shop’s one-star reviews by stock, delivery, product and website, with the two causes to fix first and a chart of reviews by quarter. Use it to find a root cause before you fix the wrong thing."
+    },
+    "comparison": {
+      "page_title": "Comparison chart template",
+      "for": "A comparison sets two options side by side, row by row, with the better one in each row marked, a recommendation and a chart behind it. This one compares a courier and the post for a shop’s parcels. Use it to explain a choice between two options."
+    },
+    "timeline": {
+      "page_title": "Timeline template",
+      "for": "A timeline puts the milestones of a story on one axis, with bars beneath for what changed and when. This one is seven years of a shop, from a market stall to its own warehouse, with its range and team. Use it for a company history, a project’s story or a CV."
+    },
+    "explainerPoster": {
+      "page_title": "Infographic poster template",
+      "for": "An explainer poster answers one question with a cutaway drawing, numbered parts, a key that says what each does, and three numbers at the foot. This one explains how a heat pump heats a home. Use it to explain how something works."
+    },
+    "beforeAndAfter": {
+      "page_title": "Before and after template",
+      "for": "A before and after shows what a change did, with the steps before and after, the numbers that moved and a chart by device. This one is a checkout redesign that went from five steps to three. Use it to report the result of a redesign or an improvement."
+    },
+    "cycle": {
+      "page_title": "Cycle diagram template",
+      "for": "A cycle diagram shows stages that loop back to the first, with the headline number in the middle and a chart beside it. This one is a shop’s take-back scheme: take back, refurbish, sell and use. Use it for a lifecycle, a feedback loop or any process that repeats."
+    },
+    "pyramid": {
+      "page_title": "Pyramid diagram template",
+      "for": "A pyramid shows levels from the foundation to the top, each as wide as the share of people who reach it, with the numbers on both sides. This one shows what brings a customer back. Use it for a hierarchy of needs, a funnel of loyalty or levels that build on each other."
+    },
+    "overlap": {
+      "page_title": "Venn diagram template",
+      "for": "A Venn diagram shows three things people want, how they overlap, and what meets each pair, with the share of people in the middle marked and a chart of what they bought. This one finds the desk a shop doesn’t make yet. Use it to show where needs meet, or where an opportunity is."
+    }
+  }
+}

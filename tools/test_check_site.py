@@ -455,6 +455,53 @@ class TemplateGalleryTests(unittest.TestCase):
         self.assertTrue(any(self.page in p for p in found), found)
 
 
+class DiagroveTemplateGalleryTests(unittest.TestCase):
+    """Diagrove's gallery, as tools/diagrove-templates.py writes it, passes every rule a Diagrove page keeps (held:
+    noindex), its links land, and a page that drifted from the catalogue is reported."""
+
+    def setUp(self):
+        import test_diagrove_templates as dt
+        self.templates = dt.templates
+        self.site = dt.Site(self)
+        self.site.put("apps/diagrove/index.html", diagrove_product(DIAGROVE_APP))
+        self.site.put("apps/diagrove/support.html", DIAGROVE_SUPPORT)
+        for key, title in (("guide", "Guide"), ("tutorials", "Tutorials"), ("how-to", "How-to"), ("articles", "Articles")):
+            self.site.put(f"content/diagrove/{key}/index.md", tb.section(title))
+        for name, title in (("templates", "Templates"), ("isometric-canvases", "Isometric canvases"),
+                            ("play-mode-and-actions", "Play mode and actions"), ("bindings", "Bindings"),
+                            ("command-line-tool", "The command-line tool")):
+            self.site.put(f"content/diagrove/guide/{name}.md", tb.topic(name, title, len(name)))
+        self.templates.write(self.site.root)
+        build.write(self.site.root)
+        check.ROOT = self.site.root
+        self.addCleanup(setattr, check, "ROOT", REAL_ROOT)
+        self.page = dt.FLOWCHART
+
+    def problems(self, *names: str) -> list:
+        check.errors, check.warnings = [], []
+        for name in names:
+            getattr(check, name)()
+        found, check.errors = list(check.errors), []
+        return found
+
+    def test_the_gallery_passes_every_diagrove_rule_and_its_links_land(self):
+        self.assertEqual(self.problems(*DIAGROVE_ALL, "check_diagrove_templates", "check_canonicals"), [])
+        def chrome(problem: str) -> bool:
+            target = problem.split(" -> ")[1].split("?", 1)[0]
+            return target.endswith(("style.css", "assets/theme.js", "archivo-var-latin.woff2", "privacy.html")) \
+                or "#" in target \
+                or target.rstrip("/").endswith((".", "..")) or target.endswith("privacy/")
+        dead = [p for p in self.problems("check_links")
+                if p.startswith("dead link: apps/diagrove/templates/") and not chrome(p)]
+        self.assertEqual(dead, [])
+
+    def test_a_page_that_drifted_from_the_catalogue_is_reported(self):
+        text = self.site.read(self.page)
+        self.site.put(self.page, text.replace("Bike repair", "Hand edit", 1))
+        found = self.problems("check_diagrove_templates")
+        self.assertTrue(any(self.page in p for p in found), found)
+
+
 
 def sheet(src: str, extra: str) -> str:
     return f'<div class="sheet-art"><img class="phone" src="{src}" {extra} alt="A picture" width="750" height="1000"></div>'

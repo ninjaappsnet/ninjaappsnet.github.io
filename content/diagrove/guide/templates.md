@@ -3,6 +3,7 @@ title: Templates
 description: Start from one of 63 templates in ten categories, from flowcharts and roadmaps to isometric offices, on White or Ink paper, then make it yours.
 slug: templates
 date: 2026-10-29
+updated: 2026-11-06
 order: 6
 ---
 A template is a finished example diagram you start from: a flowchart with its swimlanes, a roadmap with its quarters, an office floor with its desks. Diagrove has 63 of them in ten categories, plus a blank diagram and a blank isometric diagram. Everything in a template is yours to change.
@@ -22,19 +23,19 @@ The gallery’s sidebar lists **All templates**, then each category with how man
 
 | Category | Templates |
 |---|---|
-| Blank | Blank diagram, Blank isometric diagram |
-| Process | Flowchart, Customer journey, Process, Decision tree, Approval flow, Order fulfilment |
-| Software | System architecture, Network, Sequence diagram, Database schema, Cloud architecture, State machine, CI/CD pipeline |
-| Product | App screen, User flow, Sitemap, Web page wireframe, User story map, Device showcase |
-| Planning | Roadmap, Kanban board, Project plan, Release timeline, Weekly planner, Launch checklist |
-| Ideas and teams | Mind map, Org chart, Concept map, RACI matrix, Team map, Skills matrix |
-| Business and strategy | SWOT, Priority matrix, Business model canvas, Lean canvas, Stakeholder map, Five forces, OKR tree |
-| Data and reports | KPI board, Data story, Funnel, Survey results, Monthly report, Market share |
-| Meetings and workshops | Retrospective, Meeting agenda, Brainstorm, Empathy map, Affinity map |
-| Spaces | Home network, Warehouse, Data centre, Office floor, Shop, Event venue |
-| Infographics | Cause and effect, Comparison, Timeline, Explainer poster, Before and after, Cycle, Pyramid, Overlap |
+| [Blank](../../templates/blank/) | [Blank diagram](../../templates/blank/blank-diagram/), [Blank isometric diagram](../../templates/blank/blank-isometric-diagram/) |
+| [Process](../../templates/process/) | [Flowchart](../../templates/process/flowchart/), [Customer journey](../../templates/process/customer-journey/), [Process](../../templates/process/process/), [Decision tree](../../templates/process/decision-tree/), [Approval flow](../../templates/process/approval-flow/), [Order fulfilment](../../templates/process/order-fulfilment/) |
+| [Software](../../templates/software/) | [System architecture](../../templates/software/system-architecture/), [Network](../../templates/software/network/), [Sequence diagram](../../templates/software/sequence-diagram/), [Database schema](../../templates/software/database-schema/), [Cloud architecture](../../templates/software/cloud-architecture/), [State machine](../../templates/software/state-machine/), [CI/CD pipeline](../../templates/software/ci-cd-pipeline/) |
+| [Product](../../templates/product/) | [App screen](../../templates/product/app-screen/), [User flow](../../templates/product/user-flow/), [Sitemap](../../templates/product/sitemap/), [Web page wireframe](../../templates/product/web-page-wireframe/), [User story map](../../templates/product/user-story-map/), [Device showcase](../../templates/product/device-showcase/) |
+| [Planning](../../templates/planning/) | [Roadmap](../../templates/planning/roadmap/), [Kanban board](../../templates/planning/kanban-board/), [Project plan](../../templates/planning/project-plan/), [Release timeline](../../templates/planning/release-timeline/), [Weekly planner](../../templates/planning/weekly-planner/), [Launch checklist](../../templates/planning/launch-checklist/) |
+| [Ideas and teams](../../templates/ideas-and-teams/) | [Mind map](../../templates/ideas-and-teams/mind-map/), [Org chart](../../templates/ideas-and-teams/org-chart/), [Concept map](../../templates/ideas-and-teams/concept-map/), [RACI matrix](../../templates/ideas-and-teams/raci-matrix/), [Team map](../../templates/ideas-and-teams/team-map/), [Skills matrix](../../templates/ideas-and-teams/skills-matrix/) |
+| [Business and strategy](../../templates/business-and-strategy/) | [SWOT](../../templates/business-and-strategy/swot/), [Priority matrix](../../templates/business-and-strategy/priority-matrix/), [Business model canvas](../../templates/business-and-strategy/business-model-canvas/), [Lean canvas](../../templates/business-and-strategy/lean-canvas/), [Stakeholder map](../../templates/business-and-strategy/stakeholder-map/), [Five forces](../../templates/business-and-strategy/five-forces/), [OKR tree](../../templates/business-and-strategy/okr-tree/) |
+| [Data and reports](../../templates/data-and-reports/) | [KPI board](../../templates/data-and-reports/kpi-board/), [Data story](../../templates/data-and-reports/data-story/), [Funnel](../../templates/data-and-reports/funnel/), [Survey results](../../templates/data-and-reports/survey-results/), [Monthly report](../../templates/data-and-reports/monthly-report/), [Market share](../../templates/data-and-reports/market-share/) |
+| [Meetings and workshops](../../templates/meetings-and-workshops/) | [Retrospective](../../templates/meetings-and-workshops/retrospective/), [Meeting agenda](../../templates/meetings-and-workshops/meeting-agenda/), [Brainstorm](../../templates/meetings-and-workshops/brainstorm/), [Empathy map](../../templates/meetings-and-workshops/empathy-map/), [Affinity map](../../templates/meetings-and-workshops/affinity-map/) |
+| [Spaces](../../templates/spaces/) | [Home network](../../templates/spaces/home-network/), [Warehouse](../../templates/spaces/warehouse/), [Data centre](../../templates/spaces/data-centre/), [Office floor](../../templates/spaces/office-floor/), [Shop](../../templates/spaces/shop/), [Event venue](../../templates/spaces/event-venue/) |
+| [Infographics](../../templates/infographics/) | [Cause and effect](../../templates/infographics/cause-and-effect/), [Comparison](../../templates/infographics/comparison/), [Timeline](../../templates/infographics/timeline/), [Explainer poster](../../templates/infographics/explainer-poster/), [Before and after](../../templates/infographics/before-and-after/), [Cycle](../../templates/infographics/cycle/), [Pyramid](../../templates/infographics/pyramid/), [Overlap](../../templates/infographics/overlap/) |
 
-Each card has the template’s name and a line on what it shows, such as “A bike repair across three swimlanes” for Flowchart.
+Each card has the template’s name and a line on what it shows, such as “A bike repair across three swimlanes” for Flowchart. Every template has a page in the [template gallery](../../templates/), with pictures of it on both papers and what’s in it.
 
 ## Search
 

@@ -771,34 +771,48 @@ DIAGROVE_PRODUCT = FLECTO_PRODUCT.replace("FlectoBI", "Diagrove").replace("apps/
 
 
 def diagrove_site(test: unittest.TestCase) -> "Site":
-    """The Dayfolio fixture, with Diagrove's product page, card, icon and its three section pages beside it."""
+    """The Dayfolio fixture, with Diagrove's product page, card, icon and its four section pages beside it (its
+    template gallery is tools/diagrove-templates.py's, as Dayfolio's is)."""
     site = Site(test)
     site.put("apps/diagrove/index.html", DIAGROVE_PRODUCT)
     site.put("apps/diagrove/social-card.png", png(1200, 630))
     site.put("apps/diagrove/icon-320.webp", webp(320, 320))
-    for key, title in (("guide", "Guide"), ("tutorials", "Tutorials"), ("how-to", "How-to")):
+    for key, title in (("guide", "Guide"), ("tutorials", "Tutorials"), ("how-to", "How-to"), ("articles", "Articles")):
         site.put(f"content/diagrove/{key}/index.md", section(title))
     return site
 
 
 class DiagroveTests(unittest.TestCase):
-    """Diagrove's pages come from the same shell, with a guide, tutorials and how-to pages. Until its name is
+    """Diagrove's pages come from the same shell, with a guide, tutorials, how-to pages and articles. Until its name is
     cleared and it launches, the app is held (DIAGROVE_HELD): every page it makes is noindex, so the sitemap leaves
     it out, and the deploy publishes none of it."""
 
     def setUp(self):
         self.site = diagrove_site(self)
         self.site.put("content/diagrove/tutorials/first-flowchart.md", topic("first-flowchart", "Your first flowchart", 1))
+        self.site.put("content/diagrove/articles/clear-flowchart.md", article(
+            "clear-flowchart", "How to draw a clear flowchart", "2026-11-06"))
         self.site.put("content/diagrove/how-to/recolour.md", topic("recolour", "Recolour a stencil", 1, body=(
             "Pick a tint.\n\n[shot: tint-popover] Mac, light: the Tint popover open on Blue.\n\nThen close it.\n")))
         self.built = self.site.built()
         self.page = self.built["apps/diagrove/tutorials/first-flowchart/index.html"]
 
-    def test_the_three_sections_and_their_pages_are_built(self):
+    def test_the_four_sections_and_their_pages_are_built(self):
         for rel in ("apps/diagrove/guide/index.html", "apps/diagrove/tutorials/index.html",
                     "apps/diagrove/how-to/index.html", "apps/diagrove/tutorials/first-flowchart/index.html",
-                    "apps/diagrove/how-to/recolour/index.html"):
+                    "apps/diagrove/how-to/recolour/index.html", "apps/diagrove/articles/index.html",
+                    "apps/diagrove/articles/clear-flowchart/index.html"):
             self.assertIn(rel, self.built)
+
+    def test_an_article_is_dated_and_lists_newest_first_as_dayfolios_do(self):
+        self.site.put("content/diagrove/articles/org-chart.md", article(
+            "org-chart", "An org chart that stays tidy", "2026-11-07"))
+        built = self.site.built()
+        page = built["apps/diagrove/articles/clear-flowchart/index.html"]
+        self.assertIn('<p class="effective">PUBLISHED 2026-11-06</p>', page)
+        self.assertIn('<a class="backlink" href="../">All articles</a>', page)
+        listing = built["apps/diagrove/articles/index.html"]
+        self.assertLess(listing.index("An org chart that stays tidy"), listing.index("How to draw a clear flowchart"))
 
     def test_a_held_apps_pages_are_noindex_and_out_of_the_sitemap(self):
         self.assertTrue(build.APPS["diagrove"].held)
@@ -823,7 +837,7 @@ class DiagroveTests(unittest.TestCase):
         self.assertNotIn("apple-itunes-app", self.page)
         nav = re.search(r'<nav class="subnav" aria-label="Diagrove">.*?</nav>', self.page, re.S).group(0)
         self.assertEqual(re.findall(r">([^<]+)</a>", nav),
-                         ["Diagrove", "Overview", "Guide", "Tutorials", "How-to", "Support"])
+                         ["Diagrove", "Overview", "Guide", "Templates", "Tutorials", "How-to", "Articles", "Support"])
 
     def test_the_app_box_says_it_is_coming_to_the_app_store_without_a_link(self):
         box = re.search(r'<aside class="appbox".*?</aside>', self.page, re.S).group(0)

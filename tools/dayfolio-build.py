@@ -180,9 +180,12 @@ DIAGROVE = App(
         "guide": Section("Guide", "topic", True, "The guide", "No guide pages yet."),
         "tutorials": Section("Tutorials", "topic", True, "All tutorials", "No tutorials yet."),
         "how-to": Section("How-to", "topic", False, "All how-to pages", "No how-to pages yet."),
+        "templates": Section("Templates", "topic", False, "All templates", "No template pages yet."),
+        "articles": Section("Articles", "article", False, "All articles", "No articles yet."),
     },
-    subnav=[("Overview", ""), ("Guide", "guide/"), ("Tutorials", "tutorials/"), ("How-to", "how-to/"),
-            ("Support", "support.html")],
+    # Templates is tools/diagrove-templates.py's gallery, as Dayfolio's is tools/dayfolio-templates.py's.
+    subnav=[("Overview", ""), ("Guide", "guide/"), ("Templates", "templates/"), ("Tutorials", "tutorials/"),
+            ("How-to", "how-to/"), ("Articles", "articles/"), ("Support", "support.html")],
     store_id=DIAGROVE_STORE_ID,
     box=("<strong>Diagrove</strong> draws precise diagrams on your Mac and iPad, and makes them do something: "
          "play them, bind them to data, export them for the web."),

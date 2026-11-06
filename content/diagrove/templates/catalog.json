@@ -1,0 +1,3955 @@
+{
+  "formatVersion": 1,
+  "source": "diagrove 1.0.0: the app’s own templates, read with --app (British English)",
+  "categories": [
+    {
+      "id": "blank",
+      "name": "Blank"
+    },
+    {
+      "id": "process",
+      "name": "Process"
+    },
+    {
+      "id": "software",
+      "name": "Software"
+    },
+    {
+      "id": "product",
+      "name": "Product"
+    },
+    {
+      "id": "planning",
+      "name": "Planning"
+    },
+    {
+      "id": "ideas",
+      "name": "Ideas and teams"
+    },
+    {
+      "id": "business",
+      "name": "Business and strategy"
+    },
+    {
+      "id": "data",
+      "name": "Data and reports"
+    },
+    {
+      "id": "meetings",
+      "name": "Meetings and workshops"
+    },
+    {
+      "id": "spaces",
+      "name": "Spaces"
+    },
+    {
+      "id": "infographics",
+      "name": "Infographics"
+    }
+  ],
+  "templates": [
+    {
+      "id": "blank",
+      "name": "Blank diagram",
+      "summary": "An empty canvas to draw on",
+      "category": "blank",
+      "blank": true,
+      "isometric": false,
+      "searchWords": [
+        "empty",
+        "new",
+        "canvas",
+        "freeform",
+        "whiteboard",
+        "sketch"
+      ],
+      "canvases": [
+        {
+          "name": "Diagram",
+          "size": [
+            1024,
+            768
+          ],
+          "projection": "flat",
+          "layers": [
+            "Layer 1"
+          ]
+        }
+      ],
+      "stencils": [],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "blankIsometric",
+      "name": "Blank isometric diagram",
+      "summary": "An empty canvas in isometric projection",
+      "category": "blank",
+      "blank": true,
+      "isometric": true,
+      "searchWords": [
+        "3d",
+        "isometric",
+        "empty",
+        "canvas",
+        "perspective"
+      ],
+      "canvases": [
+        {
+          "name": "Diagram",
+          "size": [
+            1024,
+            768
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Layer 1"
+          ]
+        }
+      ],
+      "stencils": [],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "flowchart",
+      "name": "Flowchart",
+      "summary": "A bike repair across three swimlanes",
+      "category": "process",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "flow chart",
+        "process flow",
+        "swimlane",
+        "swim lane",
+        "decision",
+        "workflow",
+        "algorithm"
+      ],
+      "canvases": [
+        {
+          "name": "Bike repair",
+          "size": [
+            816,
+            584
+          ],
+          "projection": "flat",
+          "layers": [
+            "Lanes",
+            "Steps",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "frames.lanes",
+          "name": "Three swimlanes",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "flow.terminal",
+          "name": "Start or end",
+          "library": "Flowchart"
+        },
+        {
+          "id": "flow.decision",
+          "name": "Decision",
+          "library": "Flowchart"
+        },
+        {
+          "id": "flow.process",
+          "name": "Process",
+          "library": "Flowchart"
+        },
+        {
+          "id": "flow.document",
+          "name": "Document",
+          "library": "Flowchart"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 9,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "customerJourney",
+      "name": "Customer journey",
+      "summary": "What a customer does and feels, stage by stage",
+      "category": "process",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "journey map",
+        "customer experience",
+        "cx",
+        "user journey",
+        "touchpoints",
+        "experience map"
+      ],
+      "canvases": [
+        {
+          "name": "Customer journey",
+          "size": [
+            808,
+            720
+          ],
+          "projection": "flat",
+          "layers": [
+            "Rows",
+            "Journey"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 9,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "process",
+      "name": "Process",
+      "summary": "Who does each step, the handoffs and the waits",
+      "category": "process",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "bpmn",
+        "process map",
+        "handoff",
+        "cross-functional",
+        "value stream",
+        "workflow"
+      ],
+      "canvases": [
+        {
+          "name": "Process",
+          "size": [
+            820,
+            614
+          ],
+          "projection": "flat",
+          "layers": [
+            "Chain",
+            "Days",
+            "Change"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "decisionTree",
+      "name": "Decision tree",
+      "summary": "A choice weighed by its chances and payoffs",
+      "category": "process",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "decision analysis",
+        "expected value",
+        "probability tree",
+        "payoff",
+        "choices",
+        "risk",
+        "options"
+      ],
+      "canvases": [
+        {
+          "name": "Decision tree",
+          "size": [
+            768,
+            596
+          ],
+          "projection": "flat",
+          "layers": [
+            "Tree",
+            "Branches"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 7,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "approvalFlow",
+      "name": "Approval flow",
+      "summary": "Who signs off a claim, and when it escalates",
+      "category": "process",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "approval process",
+        "sign-off",
+        "escalation",
+        "approval workflow",
+        "business process",
+        "swim lanes",
+        "expenses"
+      ],
+      "canvases": [
+        {
+          "name": "Approval flow",
+          "size": [
+            820,
+            794
+          ],
+          "projection": "flat",
+          "layers": [
+            "Pool",
+            "Flow",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "frames.columns",
+          "name": "Column lanes",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "basic.rectangle",
+          "name": "Rectangle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "bpmn.start",
+          "name": "Start event",
+          "library": "BPMN"
+        },
+        {
+          "id": "bpmn.user-task",
+          "name": "User task",
+          "library": "BPMN"
+        },
+        {
+          "id": "bpmn.timer",
+          "name": "Timer event",
+          "library": "BPMN"
+        },
+        {
+          "id": "bpmn.exclusive",
+          "name": "Exclusive gateway",
+          "library": "BPMN"
+        },
+        {
+          "id": "bpmn.end",
+          "name": "End event",
+          "library": "BPMN"
+        },
+        {
+          "id": "bpmn.send-task",
+          "name": "Send task",
+          "library": "BPMN"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 13,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "orderFulfilment",
+      "name": "Order fulfilment",
+      "summary": "Stations along a belt, from picking to the van",
+      "category": "process",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "order fulfilment",
+        "order fulfillment",
+        "fulfilment",
+        "fulfillment",
+        "pick and pack",
+        "warehouse",
+        "dispatch",
+        "shipping",
+        "conveyor",
+        "isometric",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Order fulfilment",
+          "size": [
+            816,
+            520
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Floor",
+            "Line",
+            "Route",
+            "Steps",
+            "Title"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.basics.floor",
+          "name": "Floor area",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.basics.wall",
+          "name": "Wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.nature.flower-bed",
+          "name": "Flower bed",
+          "library": "Nature"
+        },
+        {
+          "id": "iso.home.houseplant",
+          "name": "Houseplant",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.warehouse.conveyor",
+          "name": "Conveyor",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.warehouse.packing-station",
+          "name": "Packing station",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.basics.block",
+          "name": "Block",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.devices.printer",
+          "name": "Printer",
+          "library": "Devices"
+        },
+        {
+          "id": "iso.vehicles.delivery-van",
+          "name": "Delivery van",
+          "library": "Vehicles"
+        },
+        {
+          "id": "iso.people.standing",
+          "name": "Person",
+          "library": "Isometric people"
+        },
+        {
+          "id": "iso.people.long-hair",
+          "name": "Person with long hair",
+          "library": "Isometric people"
+        },
+        {
+          "id": "iso.people.person-with-a-tablet",
+          "name": "Person with a tablet",
+          "library": "Isometric people"
+        },
+        {
+          "id": "iso.people.delivery-courier",
+          "name": "Delivery courier",
+          "library": "Isometric people"
+        },
+        {
+          "id": "basic.circle",
+          "name": "Circle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "architecture",
+      "name": "System architecture",
+      "summary": "A three-tier cloud service, in isometric",
+      "category": "software",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "aws",
+        "cloud",
+        "infrastructure",
+        "servers",
+        "backend",
+        "microservices",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Shop backend",
+          "size": [
+            1096,
+            881
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Region",
+            "Tiers",
+            "Services"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "iso.cloud.saas",
+          "name": "Third-party service",
+          "library": "Cloud"
+        },
+        {
+          "id": "iso.cloud.cdn",
+          "name": "CDN",
+          "library": "Cloud"
+        },
+        {
+          "id": "iso.cloud.load-balancer",
+          "name": "Load balancer",
+          "library": "Cloud"
+        },
+        {
+          "id": "iso.cloud.container-service",
+          "name": "Container service",
+          "library": "Cloud"
+        },
+        {
+          "id": "iso.cloud.managed-db",
+          "name": "Managed database",
+          "library": "Cloud"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 8,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "summary": "Public and private subnets across two zones",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "network diagram",
+        "topology",
+        "vpc",
+        "subnet",
+        "firewall",
+        "infrastructure",
+        "aws"
+      ],
+      "canvases": [
+        {
+          "name": "Shop network",
+          "size": [
+            816,
+            764
+          ],
+          "projection": "flat",
+          "layers": [
+            "Subnets",
+            "Network",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "frames.container",
+          "name": "Container",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.group-frame",
+          "name": "Dashed group",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.region",
+          "name": "Highlight region",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "basic.cloud",
+          "name": "Cloud",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "arch.gateway",
+          "name": "API gateway",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.load-balancer",
+          "name": "Load balancer",
+          "library": "Architecture"
+        },
+        {
+          "id": "parts.server",
+          "name": "Server",
+          "library": "Architecture"
+        },
+        {
+          "id": "basic.cylinder",
+          "name": "Cylinder",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 8,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "sequence",
+      "name": "Sequence diagram",
+      "summary": "The messages behind a checkout, in order",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "uml",
+        "sequence chart",
+        "interaction",
+        "messages",
+        "lifelines",
+        "api calls"
+      ],
+      "canvases": [
+        {
+          "name": "Checkout",
+          "size": [
+            648,
+            780
+          ],
+          "projection": "flat",
+          "layers": [
+            "Fragments",
+            "Lifelines",
+            "Messages"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "uml.behaviour.fragment",
+          "name": "Combined fragment",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "uml.behaviour.actor-lifeline",
+          "name": "Actor lifeline",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "uml.behaviour.lifeline",
+          "name": "Lifeline",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "uml.behaviour.activation",
+          "name": "Activation",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.rectangle",
+          "name": "Rectangle",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 9,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "database",
+      "name": "Database schema",
+      "summary": "A shop’s tables, keys and relationships",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "erd",
+        "er diagram",
+        "entity relationship",
+        "schema",
+        "sql",
+        "tables",
+        "data model"
+      ],
+      "canvases": [
+        {
+          "name": "Shop database",
+          "size": [
+            816,
+            488
+          ],
+          "projection": "flat",
+          "layers": [
+            "Tables",
+            "Key",
+            "Keys"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "er.table",
+          "name": "Table",
+          "library": "Entity–relationship"
+        },
+        {
+          "id": "er.associative-table",
+          "name": "Join table with columns",
+          "library": "Entity–relationship"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 3,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "cloudArchitecture",
+      "name": "Cloud architecture",
+      "summary": "People, containers and the calls between them, in C4",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "c4",
+        "c4 model",
+        "container diagram",
+        "software architecture",
+        "system context",
+        "cloud",
+        "services",
+        "backend"
+      ],
+      "canvases": [
+        {
+          "name": "Ferry tickets",
+          "size": [
+            816,
+            776
+          ],
+          "projection": "flat",
+          "layers": [
+            "Boundary",
+            "Containers",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "frames.group-frame",
+          "name": "Dashed group",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "arch.user",
+          "name": "User",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.gateway",
+          "name": "API gateway",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.queue",
+          "name": "Queue",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.function",
+          "name": "Function",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.mobile",
+          "name": "Mobile app",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.service",
+          "name": "Service",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.database",
+          "name": "Database",
+          "library": "Architecture"
+        },
+        {
+          "id": "arch.external",
+          "name": "External system",
+          "library": "Architecture"
+        }
+      ],
+      "connections": 9,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "stateMachine",
+      "name": "State machine",
+      "summary": "States, events and guards, in UML",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "uml",
+        "state diagram",
+        "statechart",
+        "state chart",
+        "finite state machine",
+        "fsm",
+        "lifecycle",
+        "states",
+        "transitions"
+      ],
+      "canvases": [
+        {
+          "name": "Parcel locker",
+          "size": [
+            816,
+            760
+          ],
+          "projection": "flat",
+          "layers": [
+            "Composite",
+            "States",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "uml.behaviour.composite-state",
+          "name": "Composite state",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "uml.behaviour.initial",
+          "name": "Initial node",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "uml.behaviour.state",
+          "name": "State",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "basic.circle",
+          "name": "Circle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "uml.behaviour.final",
+          "name": "Final node",
+          "library": "UML behaviour"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 12,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "ciPipeline",
+      "name": "CI/CD pipeline",
+      "summary": "Builds, checks and gates from a merge to release",
+      "category": "software",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "ci",
+        "cd",
+        "ci/cd",
+        "continuous integration",
+        "continuous delivery",
+        "continuous deployment",
+        "deployment pipeline",
+        "build pipeline",
+        "release pipeline",
+        "devops",
+        "mobile release"
+      ],
+      "canvases": [
+        {
+          "name": "Recipe app releases",
+          "size": [
+            816,
+            788
+          ],
+          "projection": "flat",
+          "layers": [
+            "Pipeline",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.circle",
+          "name": "Circle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "flow.data",
+          "name": "Data",
+          "library": "Flowchart"
+        },
+        {
+          "id": "flow.decision",
+          "name": "Decision",
+          "library": "Flowchart"
+        },
+        {
+          "id": "basic.octagon",
+          "name": "Octagon",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 16,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "appScreen",
+      "name": "App screen",
+      "summary": "Two phone screens you can tap through in Play",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "wireframe",
+        "mockup",
+        "prototype",
+        "ios",
+        "iphone",
+        "app design",
+        "ui"
+      ],
+      "canvases": [
+        {
+          "name": "Projects",
+          "size": [
+            720,
+            786
+          ],
+          "projection": "flat",
+          "layers": [
+            "Devices",
+            "Phones",
+            "Screens",
+            "Taps"
+          ]
+        },
+        {
+          "name": "Website",
+          "size": [
+            376,
+            690
+          ],
+          "projection": "flat",
+          "layers": [
+            "Device",
+            "Phone",
+            "Screen"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "ios.phone-screen",
+          "name": "Phone screen",
+          "library": "iOS and iPadOS"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "ios.large-title",
+          "name": "Large title bar",
+          "library": "iOS and iPadOS"
+        },
+        {
+          "id": "ios.section-header",
+          "name": "Section header",
+          "library": "iOS and iPadOS"
+        },
+        {
+          "id": "ios.row-value",
+          "name": "Row with value",
+          "library": "iOS and iPadOS"
+        },
+        {
+          "id": "icons.globe",
+          "name": "Globe",
+          "library": "Icons"
+        },
+        {
+          "id": "icons.sparkles",
+          "name": "Sparkles",
+          "library": "Icons"
+        },
+        {
+          "id": "icons.mic",
+          "name": "Microphone",
+          "library": "Icons"
+        },
+        {
+          "id": "icons.chart",
+          "name": "Chart",
+          "library": "Icons"
+        },
+        {
+          "id": "icons.calendar",
+          "name": "Calendar",
+          "library": "Icons"
+        },
+        {
+          "id": "ios.tab-bar",
+          "name": "Tab bar",
+          "library": "iOS and iPadOS"
+        },
+        {
+          "id": "charts.progress-bar",
+          "name": "Progress bar",
+          "library": "Charts"
+        },
+        {
+          "id": "ios.row-check",
+          "name": "Row with check",
+          "library": "iOS and iPadOS"
+        }
+      ],
+      "connections": 1,
+      "plays": true,
+      "binds": false
+    },
+    {
+      "id": "userFlow",
+      "name": "User flow",
+      "summary": "Sign-up screens and the paths between them",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "wireframe",
+        "screen flow",
+        "ux flow",
+        "sign up",
+        "onboarding",
+        "task flow"
+      ],
+      "canvases": [
+        {
+          "name": "User flow",
+          "size": [
+            792,
+            768
+          ],
+          "projection": "flat",
+          "layers": [
+            "Screens",
+            "Content",
+            "Paths"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "ui.card",
+          "name": "Card",
+          "library": "Wireframe"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "ui.heading",
+          "name": "Heading",
+          "library": "Wireframe"
+        },
+        {
+          "id": "ui.button",
+          "name": "Button",
+          "library": "Wireframe"
+        },
+        {
+          "id": "ui.field",
+          "name": "Text field",
+          "library": "Wireframe"
+        },
+        {
+          "id": "flow.decision",
+          "name": "Decision",
+          "library": "Flowchart"
+        },
+        {
+          "id": "icons.mail",
+          "name": "Mail",
+          "library": "Icons"
+        }
+      ],
+      "connections": 7,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "sitemap",
+      "name": "Sitemap",
+      "summary": "A museum website’s pages, from home down",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "site map",
+        "information architecture",
+        "ia",
+        "site structure",
+        "navigation",
+        "page tree",
+        "website",
+        "content inventory"
+      ],
+      "canvases": [
+        {
+          "name": "Sitemap",
+          "size": [
+            816,
+            718
+          ],
+          "projection": "flat",
+          "layers": [
+            "Pages",
+            "Links"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 20,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "wireframe",
+      "name": "Web page wireframe",
+      "summary": "A museum’s exhibition page, with review notes",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "wireframe",
+        "web page",
+        "website",
+        "landing page",
+        "page layout",
+        "mockup",
+        "annotated",
+        "lo-fi",
+        "desktop"
+      ],
+      "canvases": [
+        {
+          "name": "Wireframe",
+          "size": [
+            816,
+            792
+          ],
+          "projection": "flat",
+          "layers": [
+            "Browser",
+            "Page",
+            "Notes"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "storyMap",
+      "name": "User story map",
+      "summary": "A recipe app’s stories, sliced into releases",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "story map",
+        "user story map",
+        "story mapping",
+        "release slices",
+        "walking skeleton",
+        "mvp",
+        "user stories",
+        "backbone",
+        "agile"
+      ],
+      "canvases": [
+        {
+          "name": "Story map",
+          "size": [
+            816,
+            680
+          ],
+          "projection": "flat",
+          "layers": [
+            "Backbone",
+            "Releases",
+            "Stories"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "deviceShowcase",
+      "name": "Device showcase",
+      "summary": "A recipe app on a laptop, a phone and a tablet",
+      "category": "product",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "device mockup",
+        "device showcase",
+        "devices",
+        "showcase",
+        "mockup",
+        "hero image",
+        "multi-device",
+        "cross-device",
+        "responsive",
+        "launch",
+        "device frame",
+        "app on devices"
+      ],
+      "canvases": [
+        {
+          "name": "Device showcase",
+          "size": [
+            768,
+            480
+          ],
+          "projection": "flat",
+          "layers": [
+            "Devices",
+            "Screens",
+            "Journey",
+            "Title"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 2,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "roadmap",
+      "name": "Roadmap",
+      "summary": "A year in quarters, with milestones and today",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "product roadmap",
+        "timeline",
+        "quarters",
+        "release plan",
+        "milestones"
+      ],
+      "canvases": [
+        {
+          "name": "Roadmap",
+          "size": [
+            768,
+            462
+          ],
+          "projection": "flat",
+          "layers": [
+            "Lanes",
+            "Today",
+            "Plan"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "kanban",
+      "name": "Kanban board",
+      "summary": "A sprint’s cards, from To do to Done",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "sprint",
+        "scrum",
+        "agile",
+        "task board",
+        "backlog",
+        "to do"
+      ],
+      "canvases": [
+        {
+          "name": "Sprint board",
+          "size": [
+            812,
+            624
+          ],
+          "projection": "flat",
+          "layers": [
+            "Columns",
+            "Tickets"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "steps.board-card",
+          "name": "Board card",
+          "library": "Timelines and steps"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "icons.check",
+          "name": "Done",
+          "library": "Icons"
+        }
+      ],
+      "connections": 1,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "projectPlan",
+      "name": "Project plan",
+      "summary": "Tasks by week, with the critical path and today",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "gantt",
+        "gantt chart",
+        "schedule",
+        "project timeline",
+        "work plan",
+        "milestones",
+        "critical path",
+        "dependencies"
+      ],
+      "canvases": [
+        {
+          "name": "Project plan",
+          "size": [
+            816,
+            582
+          ],
+          "projection": "flat",
+          "layers": [
+            "Weeks",
+            "Today",
+            "Plan"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 8,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "releaseTimeline",
+      "name": "Release timeline",
+      "summary": "Versions on a release train, with their freezes",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "release train",
+        "release plan",
+        "release schedule",
+        "versions",
+        "code freeze",
+        "feature freeze",
+        "release calendar",
+        "cadence"
+      ],
+      "canvases": [
+        {
+          "name": "Release timeline",
+          "size": [
+            816,
+            462
+          ],
+          "projection": "flat",
+          "layers": [
+            "Axis",
+            "Train",
+            "Today"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "weeklyPlanner",
+      "name": "Weekly planner",
+      "summary": "A team’s week by day and hour, with today marked",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "weekly planner",
+        "week view",
+        "weekly schedule",
+        "schedule",
+        "timetable",
+        "calendar",
+        "week plan",
+        "team calendar",
+        "roster",
+        "rota"
+      ],
+      "canvases": [
+        {
+          "name": "Weekly planner",
+          "size": [
+            816,
+            646
+          ],
+          "projection": "flat",
+          "layers": [
+            "Grid",
+            "Now",
+            "Week"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "launchChecklist",
+      "name": "Launch checklist",
+      "summary": "Tasks by phase, with owners and due dates",
+      "category": "planning",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "launch checklist",
+        "checklist",
+        "to-do list",
+        "todo",
+        "launch plan",
+        "go-live",
+        "event checklist",
+        "readiness",
+        "countdown",
+        "tasks"
+      ],
+      "canvases": [
+        {
+          "name": "Launch checklist",
+          "size": [
+            816,
+            580
+          ],
+          "projection": "flat",
+          "layers": [
+            "Checklist",
+            "Today"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 1,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "mindMap",
+      "name": "Mind map",
+      "summary": "A launch plan, two levels deep",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "brainstorm",
+        "ideas",
+        "concept map",
+        "mindmap",
+        "spider diagram"
+      ],
+      "canvases": [
+        {
+          "name": "Product launch",
+          "size": [
+            602,
+            536
+          ],
+          "projection": "flat",
+          "layers": [
+            "Areas",
+            "Topics"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "mind.boundary",
+          "name": "Branch boundary",
+          "library": "Mind map"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "mind.main",
+          "name": "Main topic",
+          "library": "Mind map"
+        },
+        {
+          "id": "mind.subtopic",
+          "name": "Subtopic",
+          "library": "Mind map"
+        }
+      ],
+      "connections": 17,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "orgChart",
+      "name": "Org chart",
+      "summary": "Departments, leads and an open role",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "organisation chart",
+        "organization chart",
+        "hierarchy",
+        "team structure",
+        "people",
+        "reporting lines"
+      ],
+      "canvases": [
+        {
+          "name": "Fernhill Studio",
+          "size": [
+            712,
+            792
+          ],
+          "projection": "flat",
+          "layers": [
+            "People",
+            "Reporting lines",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "org.photo-card",
+          "name": "Card with photo",
+          "library": "Org chart"
+        },
+        {
+          "id": "org.card",
+          "name": "Person card",
+          "library": "Org chart"
+        },
+        {
+          "id": "org.vacancy",
+          "name": "Open role",
+          "library": "Org chart"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        }
+      ],
+      "connections": 13,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "conceptMap",
+      "name": "Concept map",
+      "summary": "How an energy co-op works, as linked ideas",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "concept map",
+        "novak",
+        "knowledge map",
+        "propositions",
+        "cross-links",
+        "linking words",
+        "concept diagram",
+        "cmap"
+      ],
+      "canvases": [
+        {
+          "name": "Concept map",
+          "size": [
+            816,
+            673
+          ],
+          "projection": "flat",
+          "layers": [
+            "Concepts",
+            "Links",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 12,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "raciMatrix",
+      "name": "RACI matrix",
+      "summary": "Who does each task, and who signs it off",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "raci",
+        "raci matrix",
+        "raci chart",
+        "responsibility assignment matrix",
+        "responsible",
+        "accountable",
+        "consulted",
+        "informed",
+        "roles and responsibilities",
+        "rasci"
+      ],
+      "canvases": [
+        {
+          "name": "RACI matrix",
+          "size": [
+            816,
+            608
+          ],
+          "projection": "flat",
+          "layers": [
+            "Matrix",
+            "Marks",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "teamMap",
+      "name": "Team map",
+      "summary": "Teams and how they work together",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "team map",
+        "team topologies",
+        "stream-aligned",
+        "platform team",
+        "enabling team",
+        "complicated subsystem",
+        "interaction modes",
+        "collaboration",
+        "x-as-a-service",
+        "facilitating",
+        "team structure"
+      ],
+      "canvases": [
+        {
+          "name": "Team map",
+          "size": [
+            816,
+            620
+          ],
+          "projection": "flat",
+          "layers": [
+            "Teams",
+            "Interactions",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 6,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "skillsMatrix",
+      "name": "Skills matrix",
+      "summary": "Who can do what, and the gaps to fill",
+      "category": "ideas",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "skills matrix",
+        "skill matrix",
+        "competency matrix",
+        "training matrix",
+        "cross-training",
+        "skills inventory",
+        "harvey balls",
+        "skills gap",
+        "capability matrix",
+        "team skills"
+      ],
+      "canvases": [
+        {
+          "name": "Skills matrix",
+          "size": [
+            816,
+            624
+          ],
+          "projection": "flat",
+          "layers": [
+            "Matrix",
+            "Plan",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 1,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "swot",
+      "name": "SWOT",
+      "summary": "Strengths, weaknesses, opportunities and threats",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "swot analysis",
+        "strategy",
+        "strengths",
+        "weaknesses",
+        "opportunities",
+        "threats"
+      ],
+      "canvases": [
+        {
+          "name": "SWOT",
+          "size": [
+            648,
+            780
+          ],
+          "projection": "flat",
+          "layers": [
+            "SWOT",
+            "Moves"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "priorityMatrix",
+      "name": "Priority matrix",
+      "summary": "Ideas placed by their impact and effort",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "2x2",
+        "eisenhower",
+        "impact effort",
+        "prioritisation",
+        "prioritization",
+        "quadrant"
+      ],
+      "canvases": [
+        {
+          "name": "Priority matrix",
+          "size": [
+            816,
+            598
+          ],
+          "projection": "flat",
+          "layers": [
+            "Quadrants",
+            "Ideas",
+            "Plan"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "businessModelCanvas",
+      "name": "Business model canvas",
+      "summary": "A coffee roaster’s business, in nine blocks",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "bmc",
+        "business model",
+        "canvas",
+        "value proposition",
+        "customer segments",
+        "revenue streams",
+        "startup"
+      ],
+      "canvases": [
+        {
+          "name": "Business model canvas",
+          "size": [
+            816,
+            785
+          ],
+          "projection": "flat",
+          "layers": [
+            "Canvas",
+            "Notes"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "leanCanvas",
+      "name": "Lean canvas",
+      "summary": "An app idea’s riskiest bets, on one page",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "lean startup",
+        "startup",
+        "mvp",
+        "problem solution fit",
+        "one-page business plan",
+        "canvas"
+      ],
+      "canvases": [
+        {
+          "name": "Lean canvas",
+          "size": [
+            816,
+            786
+          ],
+          "projection": "flat",
+          "layers": [
+            "Canvas",
+            "Canvas words"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 3,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "stakeholderMap",
+      "name": "Stakeholder map",
+      "summary": "Who a change touches, and where they stand",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "stakeholder onion",
+        "stakeholder analysis",
+        "stakeholders",
+        "influence",
+        "engagement plan",
+        "power and interest"
+      ],
+      "canvases": [
+        {
+          "name": "Stakeholder map",
+          "size": [
+            816,
+            496
+          ],
+          "projection": "flat",
+          "layers": [
+            "Onion",
+            "Stakeholders",
+            "Plan"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 2,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "fiveForces",
+      "name": "Five forces",
+      "summary": "Five pressures on a business’s profits, rated",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "porter",
+        "five forces",
+        "competition",
+        "industry analysis",
+        "competitive forces",
+        "market"
+      ],
+      "canvases": [
+        {
+          "name": "Five forces",
+          "size": [
+            816,
+            704
+          ],
+          "projection": "flat",
+          "layers": [
+            "Title and source",
+            "Forces",
+            "Key and moves",
+            "Reasons"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 4,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "okrTree",
+      "name": "OKR tree",
+      "summary": "A quarter’s objectives and their key results",
+      "category": "business",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "okr",
+        "okrs",
+        "objectives",
+        "key results",
+        "goals",
+        "targets",
+        "quarterly goals"
+      ],
+      "canvases": [
+        {
+          "name": "OKR tree",
+          "size": [
+            772,
+            790
+          ],
+          "projection": "flat",
+          "layers": [
+            "Title",
+            "Tree",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 12,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "kpiBoard",
+      "name": "KPI board",
+      "summary": "A month’s numbers and what drives them",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "dashboard",
+        "metrics",
+        "kpis",
+        "scorecard",
+        "report"
+      ],
+      "canvases": [
+        {
+          "name": "KPI board",
+          "size": [
+            816,
+            608
+          ],
+          "projection": "flat",
+          "layers": [
+            "Tree",
+            "Notes"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 6,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "dataStory",
+      "name": "Data story",
+      "summary": "A chart with its turning point and three takeaways",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "line chart",
+        "chart",
+        "insight",
+        "analysis",
+        "report",
+        "trend"
+      ],
+      "canvases": [
+        {
+          "name": "Data story",
+          "size": [
+            816,
+            626
+          ],
+          "projection": "flat",
+          "layers": [
+            "Chart",
+            "Story"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "funnel",
+      "name": "Funnel",
+      "summary": "Baskets narrowing to orders, step by step",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "conversion funnel",
+        "sales funnel",
+        "pipeline",
+        "drop-off"
+      ],
+      "canvases": [
+        {
+          "name": "Funnel",
+          "size": [
+            816,
+            784
+          ],
+          "projection": "flat",
+          "layers": [
+            "Funnel",
+            "Next"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "surveyResults",
+      "name": "Survey results",
+      "summary": "A question’s answers and what they tell you",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "bar chart",
+        "poll",
+        "questionnaire",
+        "feedback",
+        "responses"
+      ],
+      "canvases": [
+        {
+          "name": "Survey results",
+          "size": [
+            816,
+            594
+          ],
+          "projection": "flat",
+          "layers": [
+            "Answers",
+            "Findings"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "monthlyReport",
+      "name": "Monthly report",
+      "summary": "Three cafés’ month: a chart each, one scale",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "monthly report",
+        "management report",
+        "small multiples",
+        "monthly review",
+        "business report",
+        "site report"
+      ],
+      "canvases": [
+        {
+          "name": "Monthly report",
+          "size": [
+            816,
+            688
+          ],
+          "projection": "flat",
+          "layers": [
+            "Title",
+            "Cafés",
+            "Totals",
+            "Next"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "marketShare",
+      "name": "Market share",
+      "summary": "A market split by brand, year on year",
+      "category": "data",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "market share",
+        "share of market",
+        "brand share",
+        "competitor share",
+        "100% stacked column",
+        "part to whole",
+        "market size"
+      ],
+      "canvases": [
+        {
+          "name": "Market share",
+          "size": [
+            816,
+            616
+          ],
+          "projection": "flat",
+          "layers": [
+            "Shares",
+            "Notes"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "retrospective",
+      "name": "Retrospective",
+      "summary": "What went well, what to fix, who acts by when",
+      "category": "meetings",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "retro",
+        "sprint retrospective",
+        "start stop continue",
+        "lessons learned",
+        "agile",
+        "team review"
+      ],
+      "canvases": [
+        {
+          "name": "Retrospective",
+          "size": [
+            744,
+            762
+          ],
+          "projection": "flat",
+          "layers": [
+            "Board",
+            "Actions"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 4,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "meetingAgenda",
+      "name": "Meeting agenda",
+      "summary": "An hour’s items, timed, with owners and decisions",
+      "category": "meetings",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "agenda",
+        "minutes",
+        "meeting plan",
+        "run of show",
+        "schedule",
+        "decisions"
+      ],
+      "canvases": [
+        {
+          "name": "Meeting agenda",
+          "size": [
+            806,
+            774
+          ],
+          "projection": "flat",
+          "layers": [
+            "Meeting",
+            "Clock",
+            "Items"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "brainstorm",
+      "name": "Brainstorm",
+      "summary": "Ideas grouped around one question, then dot-voted",
+      "category": "meetings",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "ideation",
+        "ideas",
+        "sticky notes",
+        "workshop",
+        "dot voting",
+        "how might we"
+      ],
+      "canvases": [
+        {
+          "name": "Brainstorm",
+          "size": [
+            812,
+            596
+          ],
+          "projection": "flat",
+          "layers": [
+            "Question",
+            "Ideas",
+            "Foot"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "empathyMap",
+      "name": "Empathy map",
+      "summary": "What someone says, thinks, does and feels",
+      "category": "meetings",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "persona",
+        "user research",
+        "ux",
+        "says thinks does feels",
+        "pains and gains"
+      ],
+      "canvases": [
+        {
+          "name": "Empathy map",
+          "size": [
+            816,
+            660
+          ],
+          "projection": "flat",
+          "layers": [
+            "Map",
+            "Pains and gains"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 2,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "affinityMap",
+      "name": "Affinity map",
+      "summary": "Research notes grouped into themes",
+      "category": "meetings",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "affinity diagram",
+        "kj method",
+        "user research",
+        "synthesis",
+        "themes",
+        "sticky notes",
+        "clustering"
+      ],
+      "canvases": [
+        {
+          "name": "Affinity map",
+          "size": [
+            816,
+            686
+          ],
+          "projection": "flat",
+          "layers": [
+            "Findings",
+            "Themes",
+            "Links"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 4,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "homeNetwork",
+      "name": "Home network",
+      "summary": "A router and mesh points over two floors",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "wifi",
+        "wi-fi",
+        "mesh",
+        "router",
+        "lan",
+        "smart home",
+        "floor plan",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Home network",
+          "size": [
+            664,
+            822
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Floors",
+            "Rooms",
+            "Furniture",
+            "Network",
+            "Title and key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.basics.slab",
+          "name": "Slab",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "iso.home.kitchen-counter",
+          "name": "Kitchen counter",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.home.three-seat-sofa",
+          "name": "Three-seat sofa",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.home.double-bed",
+          "name": "Double bed",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.home.bedside-table",
+          "name": "Bedside table",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.home.writing-desk",
+          "name": "Writing desk",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.network.internet",
+          "name": "Internet",
+          "library": "Network"
+        },
+        {
+          "id": "iso.network.router",
+          "name": "Router",
+          "library": "Network"
+        },
+        {
+          "id": "iso.network.mesh-node",
+          "name": "Mesh Wi-Fi node",
+          "library": "Network"
+        },
+        {
+          "id": "iso.home.tv-unit",
+          "name": "TV unit",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.devices.speaker",
+          "name": "Smart speaker",
+          "library": "Devices"
+        },
+        {
+          "id": "iso.devices.laptop",
+          "name": "Laptop",
+          "library": "Devices"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 7,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "warehouse",
+      "name": "Warehouse",
+      "summary": "A part’s route from goods in to dispatch",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "warehouse",
+        "logistics",
+        "distribution centre",
+        "distribution center",
+        "racking",
+        "picking",
+        "packing",
+        "dispatch",
+        "floor plan",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Warehouse",
+          "size": [
+            712,
+            456
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Hall",
+            "Stations",
+            "Route",
+            "Signs",
+            "Stops",
+            "Title"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.basics.wall",
+          "name": "Wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.warehouse.loading-dock",
+          "name": "Loading dock",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.warehouse.loaded-pallet",
+          "name": "Loaded pallet",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.warehouse.pallet-rack",
+          "name": "Pallet rack",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.warehouse.boltless-shelving",
+          "name": "Boltless shelving",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "iso.warehouse.packing-station",
+          "name": "Packing station",
+          "library": "Warehouse and logistics"
+        },
+        {
+          "id": "basic.circle",
+          "name": "Circle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "basic.text",
+          "name": "Text",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "dataCentre",
+      "name": "Data centre",
+      "summary": "Racks in hot and cold aisles, power and network",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "data centre",
+        "data center",
+        "server room",
+        "data hall",
+        "racks",
+        "hot aisle",
+        "cold aisle",
+        "colocation",
+        "hosting",
+        "floor plan",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Data centre",
+          "size": [
+            880,
+            680
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Rooms",
+            "Pod",
+            "Network",
+            "Names",
+            "Title and key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "basic.rectangle",
+          "name": "Rectangle",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "iso.basics.wall",
+          "name": "Wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.shop.staff-door",
+          "name": "Staff door",
+          "library": "Shop and retail"
+        },
+        {
+          "id": "iso.servers.rack",
+          "name": "Server rack",
+          "library": "Servers and racks"
+        },
+        {
+          "id": "iso.servers.cooling",
+          "name": "Cooling unit",
+          "library": "Servers and racks"
+        },
+        {
+          "id": "iso.basics.slab",
+          "name": "Slab",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.basics.tall-block",
+          "name": "Tall block",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.servers.ups",
+          "name": "UPS",
+          "library": "Servers and racks"
+        },
+        {
+          "id": "iso.network.internet",
+          "name": "Internet",
+          "library": "Network"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 4,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "officeFloor",
+      "name": "Office floor",
+      "summary": "Who sits where, by team, and the rooms they share",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "office",
+        "floor plan",
+        "seating plan",
+        "open plan",
+        "desks",
+        "workplace",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Second floor",
+          "size": [
+            1060,
+            918
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Floor",
+            "Areas",
+            "Walls",
+            "Desks and places",
+            "Title"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.basics.corner-wall",
+          "name": "Corner wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "iso.office.desk",
+          "name": "Desk",
+          "library": "Office scenes"
+        },
+        {
+          "id": "iso.office.chair",
+          "name": "Office chair",
+          "library": "Office scenes"
+        },
+        {
+          "id": "iso.devices.laptop",
+          "name": "Laptop",
+          "library": "Devices"
+        },
+        {
+          "id": "iso.basics.column",
+          "name": "Column",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.basics.wall",
+          "name": "Wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.office.whiteboard",
+          "name": "Whiteboard",
+          "library": "Office scenes"
+        },
+        {
+          "id": "iso.office.meeting-table",
+          "name": "Meeting table",
+          "library": "Office scenes"
+        },
+        {
+          "id": "iso.home.kitchen-island",
+          "name": "Kitchen island",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.office.filing-cabinet",
+          "name": "Filing cabinet",
+          "library": "Office scenes"
+        },
+        {
+          "id": "iso.devices.printer",
+          "name": "Printer",
+          "library": "Devices"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "shop",
+      "name": "Shop",
+      "summary": "A bookshop and café, and a visitor’s way round",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "retail",
+        "store",
+        "shop floor",
+        "bookshop",
+        "bookstore",
+        "café",
+        "customer flow",
+        "floor plan",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Shop floor",
+          "size": [
+            1096,
+            959
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Floor",
+            "Walls",
+            "Shop",
+            "Title",
+            "Key"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.basics.corner-wall",
+          "name": "Corner wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.shop.shopfront",
+          "name": "Shopfront",
+          "library": "Shop and retail"
+        },
+        {
+          "id": "iso.basics.wall",
+          "name": "Wall",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.home.front-door",
+          "name": "Front door",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.home.bookcase",
+          "name": "Bookcase",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.basics.column",
+          "name": "Column",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "iso.home.woven-rug",
+          "name": "Woven rug",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.venues.cafe-counter",
+          "name": "Café counter",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.cafe-table-and-chairs",
+          "name": "Café set",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.shop.display-table",
+          "name": "Display table",
+          "library": "Shop and retail"
+        },
+        {
+          "id": "iso.shop.cash-desk",
+          "name": "Cash desk",
+          "library": "Shop and retail"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "eventVenue",
+      "name": "Event venue",
+      "summary": "A one-day fair on a green and its one-way route",
+      "category": "spaces",
+      "blank": false,
+      "isometric": true,
+      "searchWords": [
+        "event",
+        "site plan",
+        "festival",
+        "fair",
+        "venue layout",
+        "crowd flow",
+        "conference",
+        "stage",
+        "3d"
+      ],
+      "canvases": [
+        {
+          "name": "Site plan",
+          "size": [
+            1107,
+            902
+          ],
+          "projection": "isometric",
+          "layers": [
+            "Ground",
+            "Walkway",
+            "Fence",
+            "Fair",
+            "Title",
+            "Key",
+            "Scale"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "iso.nature.wooden-fence",
+          "name": "Wooden fence",
+          "library": "Nature"
+        },
+        {
+          "id": "iso.basics.tall-block",
+          "name": "Tall block",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "iso.home.interior-door",
+          "name": "Interior door",
+          "library": "Home and furniture"
+        },
+        {
+          "id": "iso.basics.column",
+          "name": "Column",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "basic.capsule",
+          "name": "Capsule",
+          "library": "Basic shapes"
+        },
+        {
+          "id": "iso.venues.lighting-truss",
+          "name": "Lighting truss",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.stage",
+          "name": "Stage",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.pa-speaker",
+          "name": "PA speaker",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.marquee",
+          "name": "Marquee",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.food-truck",
+          "name": "Food truck",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.venues.cafe-table-and-chairs",
+          "name": "Café set",
+          "library": "Venues and hospitality"
+        },
+        {
+          "id": "iso.basics.block",
+          "name": "Block",
+          "library": "Isometric shapes and floor tiles"
+        },
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "causeAndEffect",
+      "name": "Cause and effect",
+      "summary": "A fishbone of what lies behind one effect",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "fishbone",
+        "ishikawa",
+        "root cause",
+        "causes"
+      ],
+      "canvases": [
+        {
+          "name": "Cause and effect",
+          "size": [
+            816,
+            560
+          ],
+          "projection": "flat",
+          "layers": [
+            "Fixes",
+            "Fishbone"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "comparison",
+      "name": "Comparison",
+      "summary": "Two options side by side, row by row",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "versus",
+        "vs",
+        "pros and cons",
+        "compare",
+        "table"
+      ],
+      "canvases": [
+        {
+          "name": "Comparison",
+          "size": [
+            816,
+            792
+          ],
+          "projection": "flat",
+          "layers": [
+            "Face-off",
+            "Verdict",
+            "Evidence"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "summary": "Seven years of a shop, on one axis",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "history",
+        "chronology",
+        "milestones",
+        "years"
+      ],
+      "canvases": [
+        {
+          "name": "Timeline",
+          "size": [
+            816,
+            670
+          ],
+          "projection": "flat",
+          "layers": [
+            "Page",
+            "Timeline"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "explainerPoster",
+      "name": "Explainer poster",
+      "summary": "A question answered with a numbered cutaway",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "infographic",
+        "cutaway",
+        "poster",
+        "how it works",
+        "explainer"
+      ],
+      "canvases": [
+        {
+          "name": "Explainer poster",
+          "size": [
+            816,
+            668
+          ],
+          "projection": "flat",
+          "layers": [
+            "Scene",
+            "Parts",
+            "Facts"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "beforeAndAfter",
+      "name": "Before and after",
+      "summary": "What a redesign changed, in numbers",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "before after",
+        "redesign",
+        "change",
+        "results"
+      ],
+      "canvases": [
+        {
+          "name": "Before and after",
+          "size": [
+            816,
+            780
+          ],
+          "projection": "flat",
+          "layers": [
+            "Title",
+            "Flows",
+            "Results"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 4,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "cycle",
+      "name": "Cycle",
+      "summary": "Four stages that loop back to the first",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "loop",
+        "lifecycle",
+        "circular",
+        "cycle diagram",
+        "stages"
+      ],
+      "canvases": [
+        {
+          "name": "Cycle",
+          "size": [
+            816,
+            524
+          ],
+          "projection": "flat",
+          "layers": [
+            "Title",
+            "Cycle",
+            "Evidence"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "pyramid",
+      "name": "Pyramid",
+      "summary": "Levels from the foundation to the top, each explained",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "hierarchy",
+        "levels",
+        "maslow",
+        "layers",
+        "triangle"
+      ],
+      "canvases": [
+        {
+          "name": "Pyramid",
+          "size": [
+            816,
+            572
+          ],
+          "projection": "flat",
+          "layers": [
+            "Pyramid",
+            "Figures"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    },
+    {
+      "id": "overlap",
+      "name": "Overlap",
+      "summary": "Three wants that overlap, and what meets each pair",
+      "category": "infographics",
+      "blank": false,
+      "isometric": false,
+      "searchWords": [
+        "venn",
+        "venn diagram",
+        "intersection",
+        "overlapping circles"
+      ],
+      "canvases": [
+        {
+          "name": "Overlap",
+          "size": [
+            816,
+            622
+          ],
+          "projection": "flat",
+          "layers": [
+            "Venn",
+            "Words",
+            "Bought"
+          ]
+        }
+      ],
+      "stencils": [
+        {
+          "id": "parts.title",
+          "name": "Title",
+          "library": "Containers and frames"
+        },
+        {
+          "id": "frames.subtitle",
+          "name": "Subtitle",
+          "library": "Containers and frames"
+        }
+      ],
+      "connections": 0,
+      "plays": false,
+      "binds": false
+    }
+  ]
+}

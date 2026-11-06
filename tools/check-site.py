@@ -137,6 +137,8 @@ MANIFEST = [
     "apps/diagrove/guide/index.html",
     "apps/diagrove/tutorials/index.html",
     "apps/diagrove/how-to/index.html",
+    "apps/diagrove/templates/index.html",
+    "apps/diagrove/articles/index.html",
     *(f"games/smalti/privacy-{s}.html" for s in (
         "de", "es", "fr", "it", "ja", "ko", "pl", "pt-br", "ru", "tr", "zh-hans",
     )),
@@ -1435,6 +1437,19 @@ def check_dayfolio_templates() -> None:
         fail(f"dayfolio templates: {problem}")
 
 
+def check_diagrove_templates() -> None:
+    """Diagrove's template gallery is what tools/diagrove-templates.py makes from content/diagrove/templates/ (the
+    app's templates, read with its --app step, and the site's notes on them) and the pictures beside the pages."""
+    name = "diagrove_templates"
+    if name not in sys.modules:
+        spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("diagrove-templates.py"))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    for problem in sys.modules[name].check(ROOT):
+        fail(f"diagrove templates: {problem}")
+
+
 def png_size(data: bytes) -> tuple[int, int] | None:
     if data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
         return None
@@ -1515,6 +1530,7 @@ def main() -> int:
         check_diagrove,
         check_diagrove_pages,
         check_diagrove_app,
+        check_diagrove_templates,
         check_press_kit,
     ):
         check()
