@@ -429,15 +429,18 @@ def _start(page: str, catalog: Catalog, t: Template) -> List[str]:
         "<li>Choose White or Ink at <strong>Paper</strong>. On the Mac, double-click the template, or select it and "
         "click <strong>Create</strong>; on iPad, tap it.</li>",
         "</ol>",
-        f"<p>A new document opens, named “{name}”, then “{name} 2” for the next. It has no history to undo, so you "
-        "start clean. On iPad it’s saved as a file straight away.</p>",
+        # TemplateDocumentName: a blank template's Document stays Untitled; any other takes the template's name,
+        # numbered past the names already open.
+        ("<p>A new, untitled document opens" if t.blank else
+         f"<p>A new document opens, named “{name}”, or “{name} 2” when one of that name is already open")
+        + ". It has no history to undo, so you start clean. On iPad it’s saved as a file straight away.</p>",
     ]
     if t.search_words:
         steps.append(f"<p>The gallery’s search finds it by its name and its line, and also by "
                      f"{listing([f'“{_esc(w)}”' for w in t.search_words])}.</p>")
     if t.blank:
         steps.append("<p>On the Mac, <strong>File › New diagram</strong> (Command-N) and <strong>New isometric "
-                     "diagram</strong> make the blank ones straight away.</p>")
+                     "diagram</strong> (Control-Command-N) make the blank ones straight away.</p>")
     steps.append(f"<p>From Terminal, with the <code>diagrove</code> command-line tool:</p>\n<pre><code>"
                  f"diagrove new --template {t.id} -o {t.slug}.diagrove\n"
                  f"diagrove new --template {t.id} --paper dark -o {t.slug}-ink.diagrove</code></pre>\n"

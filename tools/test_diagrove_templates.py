@@ -242,7 +242,7 @@ class TemplatePageTests(unittest.TestCase):
         self.assertIn("Shift-Command-N", words)
         self.assertIn("Choose a template", words)
         self.assertIn("diagrove new --template flowchart --paper dark", words)
-        self.assertIn("Flowchart 2", words)
+        self.assertIn("named “Flowchart”, or “Flowchart 2” when one of that name is already open", words)
 
     def test_it_links_its_category_related_templates_the_guide_and_the_app_box(self):
         page = self.page
@@ -257,6 +257,13 @@ class TemplatePageTests(unittest.TestCase):
         page = self.pages[BLANK]
         self.assertNotIn("<figure", page)
         self.assertIn("empty", visible(page).lower())
+
+    def test_a_blank_template_makes_an_untitled_document_and_names_the_new_diagram_commands(self):
+        words = visible(self.pages[BLANK])
+        self.assertIn("A new, untitled document opens", words)
+        self.assertNotIn("named “Blank diagram”", words)
+        self.assertIn("File › New diagram (Command-N)", words)
+        self.assertIn("New isometric diagram (Control-Command-N)", words)
 
     def test_json_ld_names_the_breadcrumbs(self):
         blocks = {b["@type"]: b for b in tb.jsonld(self.page)}
