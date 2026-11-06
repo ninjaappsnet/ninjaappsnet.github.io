@@ -80,7 +80,7 @@ Adding Fraud check laid the flow out again around the new step. Whenever shapes 
 
 The sheet’s subtitle says what you’ll get, including the PNG’s size in pixels.
 
-![The export sheet for Checkout: a preview of the checkout flow, Format set to PNG image, Area set to Just the drawing and Scale 2×, under the subtitle Saves “Diagram” as a PNG picture, 460 × 1,160 px.](export-png.webp "The subtitle gives the PNG’s size in pixels.")
+![The export sheet for Checkout: a preview of the checkout flow, Purpose set to Slide or document, Format set to PNG image, Area set to Just the drawing and Scale 2×, under the subtitle Saves the canvas “Diagram” as a PNG image, 460 × 1,160 px.](export-png.webp "The subtitle gives the PNG’s size in pixels.")
 
 ## Where to go next
 
