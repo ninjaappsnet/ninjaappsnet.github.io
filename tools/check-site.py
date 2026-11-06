@@ -73,6 +73,10 @@ Checks:
      are held; tools/publish.py publishes none of them. Once released, none
      may be noindex. Its product page's JSON-LD names Diagrove for macOS and
      iPadOS, with no offers while it has no price and no ratings or reviews.
+ 25. Diagrove's template gallery (apps/diagrove/templates/) is what
+     tools/diagrove-templates.py makes from content/diagrove/templates/ (the
+     app's templates, read with its --app step, and the site's notes) and the
+     pictures beside the pages.
 
 Warnings are printed and do not fail the check.
 """

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Linked into a local build of the diagrove command-line tool (README, Diagrove pages, Template gallery) so it
+     shows the app's words in British English, as this site writes. An unbundled tool otherwise takes only "en". -->
+<plist version="1.0"><dict>
+<key>CFBundleIdentifier</key><string>net.ninjaapps.site.diagrove-cli-en-gb</string>
+<key>CFBundleDevelopmentRegion</key><string>en-GB</string>
+<key>CFBundleAllowMixedLocalizations</key><true/>
+<key>CFBundleLocalizations</key><array><string>en-GB</string></array>
+</dict></plist>
