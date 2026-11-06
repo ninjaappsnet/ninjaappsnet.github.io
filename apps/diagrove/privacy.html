@@ -53,100 +53,221 @@
 <section class="page">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Diagrove</a></nav>
   <h1 class="page-title">Privacy Policy</h1>
-  <p class="effective">VERSION 1.0 — EFFECTIVE ON PUBLICATION (DRAFT)</p>
+  <p class="effective">VERSION 1.0 — EFFECTIVE 2026-11-06</p>
   <div class="prose">
 
-    <p><strong>The short version: Diagrove collects nothing.</strong> There is no account, no analytics and no tracking. Your documents stay where you save them, the AI runs on your device, and nothing you draw or type is sent to us. The only network requests Diagrove makes are the ones you set up yourself: a binding that reads JSON from a web address you typed, and a link you open in Play mode.</p>
+    <p><strong>The short version: Diagrove collects nothing.</strong> There is no account, no analytics, no advertising and no tracking, and nothing you draw or type reaches us. Your documents are files you keep where you choose, on your Mac or iPad or in your own iCloud Drive. The AI runs on your device. Diagrove goes on the network only when you ask it to read live data from a web address in a diagram, and then it talks to that server, not to us.</p>
 
-    <p>This policy covers Diagrove for Mac and for iPad, and the <code>diagrove</code> command-line tool. Diagrove is made by NinjaApps, a trading name of cetin.info, the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. Diagrove gives us none.</p>
+    <p>This policy covers Diagrove for Mac, Diagrove for iPad and the <code>diagrove</code> command-line tool for the Mac. The two apps share the same code and the same data practices; where they differ, it says so.</p>
+
+    <p>Diagrove is made by NinjaApps, a trading name of cetin.info — the sole-trader business of Ahmet Cetin, operating from Poland. For the purposes of the GDPR, that business would be the data controller for any personal data the app processed. Diagrove gives us none.</p>
 
     <nav class="toc" aria-label="On this page">
       <p class="toc-title">ON THIS PAGE</p>
       <ul>
         <li><a href="#what-it-does-not-do">What the app does not do</a></li>
-        <li><a href="#where-it-lives">What stays on your device</a></li>
-        <li><a href="#ai">The prompt bar and on-device AI</a></li>
-        <li><a href="#network">What goes over the network</a></li>
+        <li><a href="#where-it-lives">Where your documents live</a></li>
+        <li><a href="#remembered">What Diagrove remembers on your device</a></li>
+        <li><a href="#icloud">iCloud Drive</a></li>
+        <li><a href="#network">Live data and the network</a></li>
         <li><a href="#diagnostics">Diagnostic reports</a></li>
-        <li><a href="#sharing">Sharing, Shortcuts and Dayfolio</a></li>
+        <li><a href="#pictures">Pictures, files and what is inside them</a></li>
+        <li><a href="#camera">Camera</a></li>
+        <li><a href="#sketch">Apple Pencil, Sketch mode and reading sketches</a></li>
+        <li><a href="#ai">On-device AI and Writing Tools</a></li>
+        <li><a href="#siri-shortcuts">Siri and Shortcuts</a></li>
+        <li><a href="#links">Diagrove links</a></li>
+        <li><a href="#scripting">Apple Events and scripting (Mac)</a></li>
+        <li><a href="#thumbnails">Thumbnails</a></li>
+        <li><a href="#pasteboard">Copy, paste and drag and drop</a></li>
+        <li><a href="#sharing">Share, Print and Send to Dayfolio</a></li>
+        <li><a href="#exports">Exports and the web player</a></li>
         <li><a href="#cli">The command-line tool</a></li>
-        <li><a href="#apple">Apple’s services</a></li>
+        <li><a href="#apple-services">Apple services the app talks to</a></li>
         <li><a href="#website">Our website</a></li>
-        <li><a href="#children">Children</a></li>
         <li><a href="#choices">Your choices, and deleting your data</a></li>
-        <li><a href="#changes">Changes to this policy</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#version-history">Version history</a></li>
       </ul>
     </nav>
 
     <h2 id="what-it-does-not-do">What the app does not do</h2>
     <ul>
-      <li>No accounts and no sign-in. There is nothing to sign up for.</li>
-      <li>No advertising, no advertising identifiers and no tracking. The app’s privacy manifests declare no tracking, no tracking domains and no collected data types.</li>
-      <li>No analytics, and no crash-reporting service. Reports of crashes and slowdowns stay on your device (see <a href="#diagnostics">Diagnostic reports</a>).</li>
-      <li>No servers of ours. There is nowhere for your documents to be sent, so we receive none of them: not your diagrams, not what is written in them, not what you type in the prompt bar.</li>
+      <li>No accounts, no sign-in, no email addresses, no passwords, no profiles.</li>
+      <li>No advertising and no advertising identifiers. Diagrove contains no advertising SDK.</li>
+      <li>No analytics, no crash-reporting service and no tracking, across this app or any other. Reports of crashes and slowdowns stay on your device unless you send them to us (see <a href="#diagnostics">Diagnostic reports</a>).</li>
+      <li>No third-party SDKs. The apps are built from Apple’s frameworks and our own code.</li>
+      <li>No servers of ours. There is nowhere for your documents to be sent, so we receive none of them: not your diagrams, not the words in them, not what you type in the prompt bar.</li>
+      <li>No update checks, and nothing that calls home.</li>
+      <li>No permissions to ask for. Diagrove does not ask for access to your camera, microphone, photo library, location, contacts, calendar or notifications.</li>
+      <li>No Spotlight index and no Handoff: Diagrove adds nothing to Spotlight and offers nothing to Handoff.</li>
     </ul>
-    <p>In the App Store, Diagrove’s privacy label is “Data Not Collected”.</p>
+    <p>The app’s privacy manifests declare no tracking, no tracking domains and no collected data, and Diagrove’s App Store privacy answer is “Data Not Collected”.</p>
 
-    <h2 id="where-it-lives">What stays on your device</h2>
+    <h2 id="where-it-lives">Where your documents live</h2>
+    <p>A Diagrove document is a <code>.diagrove</code> file that you save where you choose: on your Mac, on your iPad, in iCloud Drive or with another file provider. It holds your canvases and everything on them, as you made them:</p>
     <ul>
-      <li><strong>Documents.</strong> A Diagrove document is a <code>.diagrove</code> file that you save where you choose: on your Mac or iPad, or in iCloud Drive. It holds your canvases and everything on them, the pictures you added, the stencils it uses, and the JSON files you put in it for bindings.</li>
-      <li><strong>Your stencil libraries.</strong> The stencils you save are kept in the app’s own storage area on your device, and in the library files you export.</li>
-      <li><strong>Settings.</strong> Diagrove remembers a few choices on the device: whether the Welcome window and the prompt bar guide show at startup, the paper for new diagrams, your favourite and recent stencils, recent colours, and how the sidebar and inspector are laid out.</li>
+      <li>the words in your shapes and lines, and the document’s variables;</li>
+      <li>the pictures you added, and a copy of every stencil the document uses;</li>
+      <li>bindings, with the web addresses and shortcut names they read, and any JSON file you chose to keep in the document;</li>
+      <li>actions, such as the links a graphic opens in Play mode;</li>
+      <li>a small picture of the first canvas, <code>preview.png</code>, which the Finder, Files and Quick Look show as its thumbnail.</li>
     </ul>
-    <p>Diagrove is sandboxed by macOS and iPadOS. It opens only the documents and files you choose, and pictures come in through the system’s photo and file pickers, which hand over only what you pick. Diagrove asks for no access to your photo library, contacts, location, camera or microphone.</p>
-
-    <h2 id="ai">The prompt bar and on-device AI</h2>
-    <p>The prompt bar draws and changes diagrams from what you type. Diagrove reads your words with its own English parser on the device, and, where Apple Intelligence is on, with Apple’s on-device model through the Foundation Models framework. Both run on your Mac or iPad. Neither sends your words, your diagram or the answer to us or to Apple. Turning a sketch, a photo or a scan into a diagram also happens on the device.</p>
-    <p>Diagrove 1.0 has no option to use an AI service in the cloud.</p>
-
-    <h2 id="network">What goes over the network</h2>
-    <p>Diagrove makes a network request only in these two cases, both started by you:</p>
+    <p>A document does not record who made it or on which device. Pictures are stored under names made from their content, so a picture’s original file name is not kept. Anyone you give a document to can see all of it, including its preview, its pictures and the addresses its bindings read.</p>
+    <p>Diagrove also keeps a few things of its own in the app’s storage on your device. They are not synced, not shared with other apps and never sent to us:</p>
     <ul>
-      <li><strong>A binding that reads JSON from a web address.</strong> When you give a graphic a binding whose source is JSON at a web address, Diagrove fetches that address straight from your device: when Play mode starts, while Show live data is on, and every 30 seconds while either lasts. The request goes to the server you named, as any web request does, with your device’s IP address. Diagrove adds nothing about you to it, and keeps what comes back only for drawing the live values. We are not in between and never see it.</li>
-      <li><strong>A link you open in Play mode.</strong> A graphic’s Open link action hands the link to your browser or the app that opens it. Diagrove doesn’t fetch it.</li>
+      <li><strong>Your templates.</strong> Each document you save with <strong>File › Save as template…</strong> is kept as a whole copy, pictures included, with its name, its line and a picture for the gallery.</li>
+      <li><strong>Your libraries.</strong> The stencils you save, as <code>.diagrovestencils</code> files.</li>
+      <li><strong>Pictures of stencils,</strong> in a cache, so the Stencils sidebar opens quickly.</li>
+      <li><strong>Diagnostic reports,</strong> as described below.</li>
     </ul>
-    <p>A document never connects to anything by itself in edit mode, and Diagrove makes no other network requests: no update checks, no telemetry, nothing that calls home.</p>
+    <p>On the Mac, Diagrove is sandboxed by macOS: it opens only the documents and files you choose. Stored data may be included in your device’s backups, such as iCloud Backup or Time Machine, the same way any app’s data is; diagnostic reports are left out of them. We cannot see any of it.</p>
+
+    <h2 id="remembered">What Diagrove remembers on your device</h2>
+    <p>Diagrove keeps its settings in its own preferences on each device. They stay on that device and are never sent anywhere. Most are choices about how the app looks:</p>
+    <ul>
+      <li>the switches in Settings: <strong>Show the Welcome window when Diagrove opens</strong>, <strong>Show the prompt bar guide when Diagrove opens</strong> and <strong>New diagrams start on</strong>;</li>
+      <li>your favourite and recent stencils, your recent colours, which stencil libraries are folded, how the sidebar and inspector are laid out, and whether rulers and guides show;</li>
+      <li>which Getting started steps you have done, by name only, and whether you hid it;</li>
+      <li>the layout you last chose for a sketch, and, on the iPad, whether you have drawn with an Apple Pencil in Diagrove.</li>
+    </ul>
+    <p>A few remember where your documents are:</p>
+    <ul>
+      <li><strong>The export sheet</strong> remembers the choice you made the last time you exported each document, for up to the 50 documents you exported most recently. It knows each one by its location on your device, the folder path and file name, and keeps the date of that export with it.</li>
+      <li><strong>On the iPad,</strong> Diagrove remembers the last document you opened, as a bookmark to its file, so that a new diagram from a template or <strong>Describe a diagram</strong> goes beside it.</li>
+      <li><strong>Recent documents.</strong> On the Mac, macOS keeps the list behind <strong>File › Open Recent</strong>, and the Welcome window reads it to show each document’s name, folder and when it last changed. On the iPad, the Recents beside your documents are the Files app’s.</li>
+    </ul>
+
+    <h2 id="icloud">iCloud Drive</h2>
+    <p>Diagrove has its own folder in iCloud Drive, called Diagrove. A document you save in iCloud Drive is kept in your own Apple Account and opens on your other Macs and iPads signed in to it. On the iPad, a new diagram made from a template or with <strong>Describe a diagram</strong> goes beside the last document you opened; if there is none, it goes into iCloud Drive › Diagrove when iCloud Drive is on, and otherwise into On My iPad › Diagrove.</p>
+    <p>iCloud Drive is Apple’s service. Apple encrypts your files in transit and on its servers, and if you have Advanced Data Protection turned on, iCloud Drive is end-to-end encrypted. Diagrove doesn’t run a server of its own and has no access to your iCloud. Your templates and your libraries are not synced through iCloud in version 1.0. Apple’s <a href="https://www.apple.com/legal/privacy/">privacy policy</a> and iCloud terms govern that storage.</p>
+
+    <h2 id="network">Live data and the network</h2>
+    <p>A binding lets a graphic show a value from outside the document. Most bindings never touch the network: a document variable, a JSON file kept inside the document, or a shortcut’s output. One kind does: a binding to <strong>JSON from a web address</strong>.</p>
+    <p>That address is part of the document. It may be one you typed, or one in a document someone else made, in which case the request goes to the server they chose. Diagrove reads only <code>https</code> addresses, and only when you start it:</p>
+    <ul>
+      <li>when you press <strong>Play</strong>, or switch on <strong>Show live data</strong> in the inspector, and then every 30 seconds while either lasts;</li>
+      <li>when you choose <strong>Load now</strong> in the inspector’s Data section, or <strong>Refresh live data</strong> or <strong>Retry</strong> in Play mode.</li>
+    </ul>
+    <p>Opening a document never reads it, and the reading stops when you stop playing, switch Show live data off or close the window. A read that fails gives up after 20 seconds and keeps the last good value; Diagrove tries again on the next 30-second read or when you choose Retry.</p>
+    <p>The request goes straight from your device to that server, as a web request from any app would. We are not in between and never see it. What the server receives:</p>
+    <ul>
+      <li>your device’s IP address, as with any connection;</li>
+      <li>the headers the system adds to every request: Diagrove’s name and build number and your system’s version (the user agent), and your preferred languages;</li>
+      <li>any cookie that server has set. If it sets one, the system keeps it in Diagrove’s storage on your device and sends it back with later reads from that server, so the server can recognise your device from one read to the next; a cookie set to last is kept after you quit Diagrove.</li>
+    </ul>
+    <p>What comes back is used for the drawing, in memory, and is not saved in the document. The system may also keep a copy of the server’s answer in Diagrove’s cache folder on your device. What the server does with your request is up to whoever runs it, under their own privacy policy.</p>
+    <p>Diagrove opens other things only when you choose them, and hands each to the app that handles it, without fetching anything itself:</p>
+    <ul>
+      <li>a graphic’s <strong>Open link</strong> action in Play mode, which opens the link in your browser or the app it belongs to;</li>
+      <li>a graphic’s <strong>Run shortcut</strong> action, and a binding to a shortcut, which run the shortcut you named in Apple’s Shortcuts app. Shortcut bindings run when Play mode starts, and when you refresh or run them. A shortcut can do anything it was built to do, including going on the network; that is up to the shortcut. Its output comes back to Diagrove and is kept in memory only;</li>
+      <li>the Help menu’s pages, the command-line tool’s download page and the licences in About Diagrove, which open in your browser;</li>
+      <li>the settings Diagrove points you to, such as Apple Intelligence or Automation.</li>
+    </ul>
 
     <h2 id="diagnostics">Diagnostic reports</h2>
-    <p>Your Mac or iPad hands Diagrove reports about crashes, hangs and slowdowns through Apple’s MetricKit, about a day after they happen. Diagrove keeps them in its own storage area on the device for 30 days, up to 10 MB, and then deletes them. They are left out of your device’s backups. They describe the app’s state, such as where in its code a crash happened and how much memory or energy it used. They contain no documents and nothing you typed.</p>
-    <p>Diagrove never sends these reports. If you want help with a problem, you can choose to send them to us: on the Mac with Help › Show diagnostic reports, which shows the files in the Finder for you to attach to an email, and on the iPad with Help › Share diagnostic reports…, which opens the share sheet. What you send is used only to fix the problem you wrote about, and deleted when it is solved. Diagrove also writes failures, such as a document that couldn’t be opened, to the system’s log on your device, with file names and paths kept private.</p>
+    <p>Your Mac or iPad hands Diagrove reports through Apple’s MetricKit, about a day after the time they cover: reports of crashes, hangs, heavy disk writes and CPU exceptions, and a summary of each day’s performance, such as memory and energy use. Diagrove keeps them in its own storage on the device for 30 days, up to 10 MB in all, and then deletes the oldest. They are left out of your device’s backups.</p>
+    <p>They describe how the app ran, such as where in its code a crash happened. Apple’s format also names your device’s model, your system’s version, Diagrove’s version and your region setting. They contain no documents and nothing you typed.</p>
+    <p>Diagrove never sends them. If you want help with a problem, you can choose to send them to us: on the Mac with <strong>Help › Show diagnostic reports</strong>, which shows the files in the Finder for you to attach to an email, and on the iPad with <strong>Help › Share diagnostic reports…</strong>, which opens the share sheet. What you send is used only to solve the problem you wrote about, and deleted when it is solved.</p>
+    <p>Diagrove also writes failures, such as a document that couldn’t be opened or a web address that couldn’t be read, to the system’s log on your device. The log entry says what failed; file names, paths, web addresses and the names you gave things are marked private, so the system doesn’t show them.</p>
 
-    <h2 id="sharing">Sharing, Shortcuts and Dayfolio</h2>
+    <h2>Permissions and system features</h2>
+    <p>Diagrove asks for no permissions. It uses these system features only when you do, and none of what follows is sent to us.</p>
+
+    <h3 id="pictures">Pictures, files and what is inside them</h3>
+    <p>You add pictures through the system’s own choosers, which run outside the app and hand Diagrove only what you pick: the open panel on the Mac, and on the iPad the photo picker (<strong>Picture from Photos…</strong>) and the Files picker. Pictures you drag in or paste are only the ones you drag or paste. Diagrove can’t see the rest of your photo library or your files.</p>
+    <p>A picture is kept in your document exactly as it came, up to 50 MB and 100 megapixels. That includes whatever information is stored inside it, such as the place a photo was taken, the camera that took it and when. Diagrove does not remove it. It goes wherever the document goes: into iCloud Drive, into templates you save, into documents you share or send, and into some exports (see <a href="#exports">Exports and the web player</a>). If you don’t want to share where a photo was taken, remove its location before you add it, for example in the Photos app.</p>
+
+    <h3 id="camera">Camera</h3>
+    <p>Diagrove doesn’t use your device’s camera. On the Mac, <strong>File › Import from iPhone or iPad</strong> is the system’s Continuity Camera: your iPhone or iPad takes the photo or scan, and the system hands Diagrove the picture, which is then treated as any other picture.</p>
+
+    <h3 id="sketch">Apple Pencil, Sketch mode and reading sketches</h3>
+    <p>On the iPad, Sketch mode lets you draw over the canvas with Apple Pencil or a finger. The ink is never saved in the document: each canvas keeps its own while the window is open, and it is gone when you close it. <strong>Turn into diagram</strong> reads the ink and puts shapes and lines in its place.</p>
+    <p>On the Mac, <strong>New diagram from sketch or photo…</strong> and <strong>Turn into diagram…</strong> read a picture of a diagram drawn on paper, a whiteboard or a tablet. Only the shapes, lines and words Diagrove finds go into your document, not the picture you chose, unless it was already in it.</p>
+    <p>Both read the words in your sketch with Apple’s Vision text recognition, on your device. Nothing is sent anywhere.</p>
+
+    <h3 id="ai">On-device AI and Writing Tools</h3>
+    <p>The prompt bar draws and changes diagrams from what you type. Diagrove reads your words with its own parser on the device and, where Apple Intelligence is on, with Apple’s on-device model through the Foundation Models framework. Both run on your Mac or iPad: your words, your diagram and the answer are not sent to us or to any server of ours. On a device without Apple Intelligence, the parser does the work. Diagrove 1.0 has no option to use an AI service in the cloud.</p>
+    <p>Separately, Diagrove leaves the system’s Writing Tools available in its text, as most apps do: the words on the canvas, the prompt bar and the inspector’s fields. Writing Tools are Apple’s, and Diagrove does not use them itself. Some of their operations can send the text you chose to Apple’s servers, through Private Cloud Compute, or, if you have turned on the ChatGPT extension in your device’s settings and choose it, to OpenAI. Nothing reaches us either way. If you want your words to stay on your device, don’t use Writing Tools on text in Diagrove.</p>
+
+    <h3 id="siri-shortcuts">Siri and Shortcuts</h3>
+    <p>Diagrove offers two actions to Siri and Shortcuts on the Mac and the iPad. <strong>Create Diagram from Text</strong> opens Diagrove and draws a new diagram from the text it is given, on your device, as the prompt bar does; nothing is saved until you save it. <strong>Export Canvas as Image</strong> turns the first canvas of a document you give it into a PNG, PDF or SVG file and hands it back to your shortcut. When you use them by voice, Siri turns your speech into words under Apple’s terms, and Diagrove receives only the words. How Siri and Shortcuts treat what you say and the results is covered by Apple’s privacy policy; none of it comes to us.</p>
+
+    <h3 id="links">Diagrove links</h3>
+    <p>A link such as <code>diagrove://new?text=…</code>, from a shortcut, another app or a web page, opens a new diagram drawn from the text it carries, up to 20,000 characters. It only makes a new, unsaved document: a link can’t open, read, change or send your existing documents. Diagrove’s other links are the ones Shortcuts uses to hand a shortcut’s output back to the diagram that asked for it.</p>
+
+    <h3 id="scripting">Apple Events and scripting (Mac)</h3>
+    <p>On the Mac, Diagrove can be scripted with Apple Events. A script or an app you allow can read the documents open in Diagrove, including their names, where their files are and the words in them, and can change them, one undo step at a time. The <code>diagrove</code> command-line tool’s <code>--live</code> option works this way. macOS asks you before any other app controls Diagrove for the first time, and you can change your answer in System Settings › Privacy &amp; Security › Automation. This happens on your Mac only.</p>
+
+    <h3 id="thumbnails">Thumbnails</h3>
+    <p>Diagrove’s thumbnail extension draws the picture the Finder, the open panels and the Files app show for a <code>.diagrove</code> file, from the document’s own <code>preview.png</code>. It runs on your device, reads only the file the system asks about, and makes no network requests.</p>
+
+    <h3 id="pasteboard">Copy, paste and drag and drop</h3>
+    <p>When you copy or cut graphics, Diagrove puts them on the system pasteboard, as Diagrove’s own data and, on the Mac, as a PDF and a PNG picture for other apps; copying Diagrove text puts plain text there. Diagrove reads the pasteboard only when you paste, and takes only what you drag onto it. With Universal Clipboard, the system can make what you copy available on your other devices signed in to your Apple Account; that is Apple’s feature, under Apple’s terms.</p>
+
+    <h3 id="sharing">Share, Print and Send to Dayfolio</h3>
     <ul>
-      <li><strong>Export and share.</strong> When you export a picture, a PDF, an SVG or a web player, or share a document, the file goes where you choose through the system’s save panel or share sheet. Diagrove doesn’t send it anywhere else.</li>
-      <li><strong>Send to Dayfolio</strong> hands a picture of the drawing and the document to the share sheet, for Dayfolio or anywhere else you choose.</li>
-      <li><strong>Shortcuts.</strong> A graphic’s Run shortcut action, and a binding to a shortcut’s output, run a shortcut you named, through Apple’s Shortcuts. What that shortcut does is up to it.</li>
-      <li><strong>The web player</strong> you export plays from its own files, with no request to us. Bindings in it read JSON from the addresses you set, as in the app.</li>
+      <li><strong>Share…</strong> hands the document to the system’s share sheet, and <strong>Print…</strong> to the system’s print panel. Where it goes from there, by AirDrop, Mail, Messages, a printer or another app, is your choice.</li>
+      <li><strong>Send to Dayfolio</strong> appears only when Dayfolio, our work journal, is installed. To know, Diagrove asks the system: on the Mac whether an app with Dayfolio’s identifier is installed, and on the iPad whether Dayfolio’s link can be opened. The answer stays on your device. It hands the share sheet the document, zipped, and a picture of the current canvas, with Dayfolio first; you choose where they go. Diagrove writes the two files to its temporary folder for the share sheet, and removes them the next time you use Send to Dayfolio, once an hour has passed.</li>
     </ul>
 
-    <h2 id="cli">The command-line tool</h2>
-    <p>The <code>diagrove</code> command-line tool, a separate download for the Mac, reads and writes only the files you name, on your Mac. Its MCP server talks only to the AI assistant that started it, on the same Mac, over standard input and output. What you then send to that assistant’s service is between you and its maker, under its own privacy policy. With <code>--live</code>, the tool edits a document open in Diagrove through Apple Events, on the same Mac, and macOS asks you first. Installing it with Homebrew downloads it from GitHub, under GitHub’s and Homebrew’s own policies.</p>
+    <h2 id="exports">Exports and the web player</h2>
+    <p>You can export a canvas as a PNG, PDF or SVG file, and, on the Mac, a web player: a folder that plays the diagram in a browser. These files are written only where you choose to put them, and they are ordinary files that anyone who can open them can read.</p>
+    <ul>
+      <li>A PNG export is a new picture of the canvas, drawn by Diagrove.</li>
+      <li>An SVG export and a web player keep the pictures in them as they are, where browsers can show them as they are: PNG, JPEG and GIF pictures that stand upright, and in the web player WebP too, keep their own bytes, including any location or camera details inside them. Other pictures are drawn again first, which leaves those details out.</li>
+      <li>A web player holds the whole document, as in its <code>.diagrove</code> file: the words, the pictures, the links its graphics open and the web addresses its bindings read.</li>
+    </ul>
+    <p>A web player makes no request to us. It loads only its own files, uses your system’s fonts, and has no analytics. When it plays a diagram with a binding to a web address, the browser reads that address when the page opens and every 30 seconds while the page is in view, without cookies, and the server receives what a browser sends with any request, such as your IP address. The first time the page tells someone at phone width how to pan, it remembers that it did in their browser’s storage, so it says it once. Where you put the folder, and who can see it there, is up to you.</p>
 
-    <h2 id="apple">Apple’s services</h2>
-    <p>Diagrove is distributed through the App Store, and Apple handles its download, purchase and updates. iCloud Drive keeps the documents you save there in your own Apple Account. Apple may collect information about downloads, and, if you have chosen in your device’s settings to share analytics with app developers, about crashes and use. That is Apple’s collection, under <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>. Diagrove contains no code that sends such reports, and we have no access to your documents through Apple.</p>
+    <h2 id="cli">The command-line tool</h2>
+    <p>The <code>diagrove</code> command-line tool is a separate download for the Mac, outside the App Store. It makes no network requests and sends nothing to us.</p>
+    <ul>
+      <li>It reads and writes only the files you name, on your Mac. With <code>--app-libraries</code> it also reads the stencil libraries the Mac app keeps, and macOS may ask you to allow it.</li>
+      <li><code>diagrove mcp</code> is an MCP server. It talks only to the AI assistant that started it, on the same Mac, over standard input and output, and puts the pictures it draws into a temporary folder unless you name another. Whatever that assistant then sends to its own service is between you and its maker, under its privacy policy.</li>
+      <li><code>diagrove skill install</code> writes the diagrove skill’s text files into <code>~/.claude/skills/diagrove</code>, or a folder you name.</li>
+      <li><code>--live</code> edits a document open in Diagrove through Apple Events, on the same Mac, after macOS asks you (see <a href="#scripting">Apple Events and scripting</a>).</li>
+      <li>Downloading it from GitHub, or installing it with Homebrew, which downloads it from GitHub, is covered by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a> and by Homebrew’s own policy, not by us.</li>
+    </ul>
+
+    <h2 id="apple-services">Apple services the app talks to</h2>
+    <ul>
+      <li><strong>iCloud Drive</strong> — for the documents you save there, in your own Apple Account, as described above.</li>
+      <li><strong>Foundation Models</strong> — the on-device model behind the prompt bar, where Apple Intelligence is on.</li>
+      <li><strong>Vision and PencilKit</strong> — reading the words in a sketch, and Sketch mode’s ink on the iPad, on your device.</li>
+      <li><strong>MetricKit</strong> — the diagnostic reports kept on your device.</li>
+      <li><strong>Siri, Shortcuts, Writing Tools, Continuity Camera, Universal Clipboard, the share sheet and printing</strong> — system features, used only when you use them, under Apple’s privacy policy.</li>
+      <li><strong>The App Store</strong> — Apple handles Diagrove’s download, purchase and updates. We never see your payment details, and the app itself makes no purchases. Apple may collect information about downloads and, if you have chosen in your device’s settings to share analytics with app developers, about crashes and use, and make it available to us in App Store Connect. That is Apple’s collection, under <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>; Diagrove contains no code that sends such reports, and we have no access to your documents through Apple.</li>
+    </ul>
 
     <h2 id="website">Our website</h2>
-    <p>The app connects to this website only when you open one of its pages from the Help menu, in your browser. The website itself is hosted on GitHub Pages, behind Cloudflare; GitHub logs visitor IP addresses for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a>, and we have no access to those logs and keep none of our own. The site has no analytics, no cookies and no trackers.</p>
+    <p>The app does not connect to this website, except when you choose to open one of its pages, for example from the Help menu, in your browser. The website is hosted on GitHub Pages and served through Cloudflare. Both handle visitors’ IP addresses to deliver the site and keep it secure: GitHub under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a>, and Cloudflare under <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare’s privacy policy</a>. We have no access to GitHub’s logs, and we keep no logs of our own. The site has no analytics, no cookies and no trackers; it remembers only your choice of a light or dark theme, in your browser’s storage.</p>
 
     <h2 id="children">Children</h2>
-    <p>Diagrove is a tool for drawing diagrams and is not directed at children. It collects no data from anyone, including children.</p>
+    <p>Diagrove is a tool for drawing diagrams and is not directed at children. It collects no data from anyone, including children, and it has no account, no chat and nothing shared with other people through us.</p>
 
     <h2 id="choices">Your choices, and deleting your data</h2>
     <ul>
-      <li><strong>Documents and stencil libraries you exported:</strong> they are ordinary files that you can move, copy or delete.</li>
-      <li><strong>Diagnostic reports:</strong> they delete themselves after 30 days. On the Mac, Help › Show diagnostic reports shows the folder, and you can delete them at once.</li>
-      <li><strong>Everything else</strong> (settings, your stencils, the reports) is in the app’s storage area. On the Mac it is the folder Library/Containers/net.ninjaapps.apps.diagrove in your home folder; moving the app to the Trash may leave it behind, so delete it too if you want nothing left. On the iPad, deleting the app deletes it, and your documents stay in Files.</li>
+      <li><strong>Live data</strong> — don’t play a diagram or show live data if you don’t want Diagrove to read its web addresses. You can see each binding’s address in the inspector’s Data section first, and remove the binding.</li>
+      <li><strong>Documents, exports and libraries you exported</strong> — they are ordinary files that you can move, copy or delete.</li>
+      <li><strong>Your templates and your libraries</strong> — delete them in the template gallery and the Stencils sidebar; they go to the Trash.</li>
+      <li><strong>Diagnostic reports</strong> — they delete themselves after 30 days. On the Mac, <strong>Help › Show diagnostic reports</strong> shows the folder, and you can delete them at once.</li>
+      <li><strong>Recent documents</strong> — on the Mac, <strong>File › Open Recent › Clear Menu</strong>.</li>
+      <li><strong>Scripting</strong> — take back another app’s access in System Settings › Privacy &amp; Security › Automation.</li>
+      <li><strong>Everything else</strong> (settings, the export sheet’s memory, cookies and cached answers from live data, the reports, your templates and libraries) is in the app’s storage. On the Mac it is the folder Library/<wbr>Containers/<wbr>net.ninjaapps.apps.diagrove in your home folder; moving the app to the Trash may leave it behind, so delete it too if you want nothing left. On the iPad, deleting the app deletes it, and your documents stay in Files.</li>
+      <li><strong>The command-line tool</strong> — delete the <code>diagrove</code> file, or run <code>brew uninstall diagrove</code>, and delete <code>~/.claude/skills/diagrove</code> if you installed the skill.</li>
+      <li><strong>Refunds</strong> — refunds are Apple’s decision, at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</li>
     </ul>
 
     <h2>Your rights under the GDPR</h2>
-    <p>The GDPR gives you rights of access, rectification, erasure, restriction, portability and objection over personal data a controller holds about you. We hold none: there is no account to look up, no identifier we could search on, and no database. If you send us an email, and diagnostic reports with it, we keep them only as long as it takes to answer, and you can ask us to delete them at any time.</p>
+    <p>The GDPR gives you rights of access, rectification, erasure, restriction, portability and objection over personal data a controller holds about you. We hold none: there is no account to look up, no identifier we could search on, and no database. Your documents are yours, on your devices and in your own iCloud Drive, and you can already read, change, export and delete them there. If you send us an email, and diagnostic reports with it, we keep them only as long as it takes to answer, and you can ask us to delete them at any time.</p>
     <p>You can raise a concern with us at <a href="mailto:support@ninjaapps.net">support@ninjaapps.net</a>, or lodge a complaint with the Polish supervisory authority, the Urząd Ochrony Danych Osobowych (UODO), at <a href="https://uodo.gov.pl">uodo.gov.pl</a>.</p>
 
     <h2 id="changes">Changes to this policy</h2>
-    <p>Each version of this policy carries a version number and an effective date, and both change whenever the substance does. We do not edit a published version in place; a change means a new one, and the earlier versions stay readable.</p>
+    <p>Each version of this policy carries a version number and an effective date, and both change whenever the substance does. We do not edit a published version in place; a change means a new one, and the earlier versions stay readable below. Material changes are called out in the release notes of the version that makes them true.</p>
+
+    <h2 id="version-history">Version history</h2>
     <ul>
-      <li><strong>Version 1.0</strong>, effective on the day it is published — the first version, for Diagrove 1.0 for Mac and iPad and the <code>diagrove</code> command-line tool.</li>
+      <li><strong>Version 1.0, effective 2026-11-06</strong> — this version, the first. It covers Diagrove 1.0 for Mac and iPad and the <code>diagrove</code> command-line tool.</li>
     </ul>
 
     <h2 id="contact">Contact</h2>
