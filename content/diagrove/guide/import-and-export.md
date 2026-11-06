@@ -23,7 +23,7 @@ On the Mac you choose where to save, and a notice names the file, such as Export
 
 Copy works too: a selection you copy carries a PDF and a PNG of itself, so you can paste it straight into a document, a slide or a message.
 
-![The export sheet over the Flowchart template: a preview of the bike repair flowchart, Format set to PNG image, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels.](export-sheet-mac.webp "File › Export… set to a PNG image.")
+![The export sheet over the Flowchart template: a preview of the bike repair flowchart, Purpose set to Slide or document, Format set to PNG image for slides and messages, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels.](export-sheet-mac.webp "File › Export… set to a PNG image.")
 
 ## Print
 

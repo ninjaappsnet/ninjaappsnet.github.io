@@ -87,4 +87,4 @@ Dayfolio doesn’t show diagrams inside its entries yet, so today a host action 
 
 Choose **Done**, or press Esc, to close it. Nothing in the preview changes your document.
 
-![The Preview as embed sheet on iPad in the dark appearance over the App screen template, its Podcast row given an Ask the host app action: Show set to Just the drawing, Width set to Phone, the two phone screens in the preview, and two rows under The app receives: startTimer · project=Podcast from a tap on the Podcast row, and a tap on the background.](embed-preview-ipad.webp "Preview as embed on iPad, with what the app receives.")
+![The Preview as embed sheet on iPad in the dark appearance over the App screen template, its Podcast row given a Send to the app it’s embedded in action: Show set to Just the drawing, Width set to Phone, the two phone screens in the preview, and two rows under The app receives: startTimer · project=Podcast from a tap on the Podcast row, and a tap on the background.](embed-preview-ipad.webp "Preview as embed on iPad, with what the app receives.")

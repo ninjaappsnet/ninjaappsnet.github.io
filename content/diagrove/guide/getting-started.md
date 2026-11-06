@@ -32,7 +32,7 @@ Once you have documents, the right side has two tabs, **Recent** and **Templates
 
 To see the Welcome window again, choose **Window › Welcome to Diagrove** (Shift-Command-1). Turn off *Show this window when Diagrove opens* if you’d rather start with a new blank diagram.
 
-![The Welcome window on the Mac: the Diagrove picture and version, New diagram, New isometric diagram, Describe a diagram and Open, six starter templates with Flowchart chosen, Paper set to White and the Create button.](welcome-mac.webp "The Welcome window on first run, with Flowchart chosen.")
+![The Welcome window on the Mac: the Diagrove picture and version, New diagram, New isometric diagram, Describe a diagram and Open, the Getting started card at 0 of 4 with Next: Make a diagram, six starter templates with Flowchart chosen, All templates…, Paper set to White and the Create button.](welcome-mac.webp "The Welcome window on first run, with Flowchart chosen.")
 
 ## Start on the iPad
 

@@ -65,19 +65,25 @@
 
 <p>Choose <strong>File › Export…</strong> (Shift-Command-E), or click <strong>Export</strong> in the toolbar. The sheet shows a preview and says what it will save.</p>
 
-<ul><li><strong>Format</strong>: <strong>PNG image</strong>, <strong>PDF document</strong>, <strong>SVG drawing</strong>, and on the Mac <strong>Web player</strong>.</li><li><strong>Area</strong>: <strong>Whole canvas</strong>, paper and all, or <strong>Just the drawing</strong> with a small margin.</li><li>For PNG, <strong>Scale</strong> is 1×, 2× or 3×, and <strong>Transparent background</strong> leaves out the paper.</li><li>For PDF in a document with two or more canvases, <strong>Every canvas, one page each</strong> puts the whole document in one file.</li></ul>
+<ul><li><strong>Purpose</strong>, under the preview, sets the rows below for a common job: <strong>Slide or document</strong> (a PNG at 2×), <strong>Print</strong> (a PDF, a page per canvas) or <strong>Web</strong> (an SVG drawing). You can still change any row.</li><li><strong>Format</strong>: <strong>PNG image</strong>, <strong>PDF document</strong>, <strong>SVG drawing</strong>, and on the Mac <strong>Web player</strong>. Each says what it’s for.</li><li><strong>Area</strong>: <strong>Whole canvas</strong>, paper and all, or <strong>Just the drawing</strong> with a small margin.</li><li>For PNG, <strong>Scale</strong> is 1×, 2× or 3×, and <strong>Transparent background</strong> leaves out the paper.</li><li>For PDF in a document with two or more canvases, <strong>Every canvas, one page each</strong> puts the whole document in one file.</li></ul>
 
-<p>On the Mac you choose where to save. On iPad, choose <strong>Save to Files…</strong> or <strong>Share</strong>.</p>
+<p>The sheet remembers your last choices for each document.</p>
+
+<p>On the Mac you choose where to save, and a notice names the file, such as Exported “Bike repair.png”, with <strong>Show in Finder</strong> and <strong>Open</strong>. On iPad, choose <strong>Save to Files…</strong> or <strong>Share</strong>.</p>
 
 <p>Copy works too: a selection you copy carries a PDF and a PNG of itself, so you can paste it straight into a document, a slide or a message.</p>
 
-<figure class="figure figure-landscape figure-wide figure-window"><img src="export-sheet-mac.webp" alt="The export sheet over the Flowchart template: a preview of the bike repair flowchart, Format set to PNG image, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels." width="1920" height="1200" loading="lazy"><figcaption>File › Export… set to a PNG image.</figcaption></figure>
+<figure class="figure figure-landscape figure-wide figure-window"><img src="export-sheet-mac.webp" alt="The export sheet over the Flowchart template: a preview of the bike repair flowchart, Purpose set to Slide or document, Format set to PNG image for slides and messages, Area set to Just the drawing, Scale 2×, Transparent background off, and the subtitle giving the picture’s size in pixels." width="1920" height="1200" loading="lazy"><figcaption>File › Export… set to a PNG image.</figcaption></figure>
+
+<h2 id="print">Print</h2>
+
+<p>On the Mac, choose <strong>File › Print…</strong> (Command-P), and <strong>File › Page Setup…</strong> for the paper. On iPad, choose <strong>Print…</strong> in the toolbar’s Export menu. Each canvas prints on a page of its own, scaled to fit, and layers whose <strong>Printable</strong> is off are left out. A wide first canvas prints in landscape.</p>
 
 <h2 id="the-web-player-mac">The Web player (Mac)</h2>
 
 <p>Choose <strong>Web player</strong> as the format and Diagrove saves a folder that plays the document in any browser: open its <code>index.html</code>. Every canvas is drawn as it is in the app, actions work, <strong>Back</strong> and a canvas menu move between canvases, and variables and <a href="../bindings/">bindings</a> that read JSON work as they do in Play mode. It needs no server; it works opened from your disk.</p>
 
-<ul><li>Under <strong>More options</strong>, <strong>Include a desktop app project</strong> adds a Tauri project beside the player, to build into a desktop app. Building it needs Tauri and Rust.</li><li>To put the player on a web page of your own, show <code>index.html</code> in an <code>iframe</code>. Adding <code>?chrome=0</code> to its address leaves out the player’s own controls.</li><li>A graphic with an <strong>Ask the host app</strong> action hands it to the page around the player. See <a href="../play-mode-and-actions/">Play mode and actions</a>.</li></ul>
+<ul><li>Under <strong>More options</strong>, <strong>Include a desktop app project</strong> adds a Tauri project beside the player, to build into a desktop app. Building it needs Tauri and Rust.</li><li>To put the player on a web page of your own, show <code>index.html</code> in an <code>iframe</code>. Adding <code>?chrome=0</code> to its address leaves out the player’s own controls.</li><li>A graphic with a <strong>Send to the app it’s embedded in</strong> action hands it to the page around the player. See <a href="../play-mode-and-actions/">Play mode and actions</a>.</li></ul>
 
 <p>The Web player is on the Mac only in Diagrove 1.0. The iPad exports PNG, PDF and SVG.</p>
 
@@ -115,7 +121,7 @@
 
 <p>A photo of a whiteboard, a paper sketch or a screenshot of a drawn diagram can become shapes and connected lines.</p>
 
-<ol><li>Choose <strong>File › New diagram from sketch or photo…</strong> for a new document, or <strong>Insert › Diagram from sketch or photo…</strong> to add to this one. A picture already on the canvas has <strong>Turn into diagram…</strong> in its context menu and in the inspector’s Picture section.</li><li>Choose the picture, or drop it on the sheet. To take one with your iPhone, choose <strong>File › Import from iPhone or iPad</strong> while the sheet is open.</li><li>The sheet, <strong>Turn your sketch into a diagram</strong>, shows your picture beside the diagram Diagrove read from it. Under <strong>Layout</strong>, choose <strong>Keep my layout</strong> to keep things where you drew them, or <strong>Tidy</strong> to have them arranged for you.</li><li>Click <strong>Insert</strong>.</li></ol>
+<ol><li>Choose <strong>File › New diagram from sketch or photo…</strong> for a new document, or <strong>Insert › Diagram from sketch or photo…</strong> to add to this one. A picture already on the canvas has <strong>Turn into diagram…</strong> in its context menu and in the inspector’s Picture section.</li><li>Choose the picture, or drop it on the sheet. To take one with your iPhone, choose <strong>File › Import from iPhone or iPad</strong> while the sheet is open.</li><li>The sheet, <strong>Turn your sketch into a diagram</strong>, shows your picture beside the diagram Diagrove read from it. Under <strong>Layout</strong>, choose <strong>Keep my layout</strong> to keep things where you drew them, or <strong>Auto-arrange</strong> to have them arranged for you.</li><li>Click <strong>Insert</strong>.</li></ol>
 
 <p>Diagrove reads the picture on your Mac; nothing is sent anywhere. It looks for closed outlines and lines between them, so a photo taken straight on, with dark lines on a light background, reads best. Shapes it was unsure of are dashed on your picture.</p>
 
