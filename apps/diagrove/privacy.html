@@ -152,10 +152,9 @@
     <p>The request goes straight from your device to that server, as a web request from any app would. We are not in between and never see it. What the server receives:</p>
     <ul>
       <li>your device’s IP address, as with any connection;</li>
-      <li>the headers the system adds to every request: Diagrove’s name and build number and your system’s version (the user agent), and your preferred languages;</li>
-      <li>any cookie that server has set. If it sets one, the system keeps it in Diagrove’s storage on your device and sends it back with later reads from that server, so the server can recognise your device from one read to the next; a cookie set to last is kept after you quit Diagrove.</li>
+      <li>the headers the system adds to every request: Diagrove’s name and build number and your system’s version (the user agent), and your preferred languages.</li>
     </ul>
-    <p>What comes back is used for the drawing, in memory, and is not saved in the document. The system may also keep a copy of the server’s answer in Diagrove’s cache folder on your device. What the server does with your request is up to whoever runs it, under their own privacy policy.</p>
+    <p>Nothing else. Diagrove reads live data without cookies: it sends none and keeps none a server tries to set, so the server can’t recognise your device from one read to the next by a cookie. It also keeps no cache and no stored passwords for these reads. What comes back is used for the drawing, in memory, and is not saved in the document or anywhere else on your device. What the server does with your request is up to whoever runs it, under their own privacy policy.</p>
     <p>Diagrove opens other things only when you choose them, and hands each to the app that handles it, without fetching anything itself:</p>
     <ul>
       <li>a graphic’s <strong>Open link</strong> action in Play mode, which opens the link in your browser or the app it belongs to;</li>
@@ -253,7 +252,7 @@
       <li><strong>Diagnostic reports</strong> — they delete themselves after 30 days. On the Mac, <strong>Help › Show diagnostic reports</strong> shows the folder, and you can delete them at once.</li>
       <li><strong>Recent documents</strong> — on the Mac, <strong>File › Open Recent › Clear Menu</strong>.</li>
       <li><strong>Scripting</strong> — take back another app’s access in System Settings › Privacy &amp; Security › Automation.</li>
-      <li><strong>Everything else</strong> (settings, the export sheet’s memory, cookies and cached answers from live data, the reports, your templates and libraries) is in the app’s storage. On the Mac it is the folder Library/<wbr>Containers/<wbr>net.ninjaapps.apps.diagrove in your home folder; moving the app to the Trash may leave it behind, so delete it too if you want nothing left. On the iPad, deleting the app deletes it, and your documents stay in Files.</li>
+      <li><strong>Everything else</strong> (settings, the export sheet’s memory, the reports, your templates and libraries) is in the app’s storage. On the Mac it is the folder Library/<wbr>Containers/<wbr>net.ninjaapps.apps.diagrove in your home folder; moving the app to the Trash may leave it behind, so delete it too if you want nothing left. On the iPad, deleting the app deletes it, and your documents stay in Files.</li>
       <li><strong>The command-line tool</strong> — delete the <code>diagrove</code> file, or run <code>brew uninstall diagrove</code>, and delete <code>~/.claude/skills/diagrove</code> if you installed the skill.</li>
       <li><strong>Refunds</strong> — refunds are Apple’s decision, at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</li>
     </ul>
